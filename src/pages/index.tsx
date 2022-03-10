@@ -1,18 +1,18 @@
-import { Flex, Img, Link } from '@chakra-ui/react';
-import type { NextPage } from 'next';
-import { DividerOr } from '../components/Form/DividerOr';
-import { FormWrapper } from '../components/Form/FormWrapper';
-import { Input } from '../components/Form/Input';
-import { LoginButtonWithGoogle } from '../components/Form/LoginButtonWithGoogle';
-import { Header } from '../components/Header';
-import NextLink from 'next/link';
-import { Button } from '../components/Form/Button';
+import { Flex, Img, Link } from "@chakra-ui/react";
+import type { NextPage } from "next";
+import { DividerOr } from "../components/Form/DividerOr";
+import { FormWrapper } from "../components/Form/FormWrapper";
+import { Input } from "../components/Form/Input";
+import { LoginButtonWithGoogle } from "../components/Form/LoginButtonWithGoogle";
+import { Header } from "../components/Header";
+import NextLink from "next/link";
+import { Button } from "../components/Form/Button";
 
 const Login: NextPage = () => {
   return (
     <Flex h='100vh' direction='column'>
       <Header />
-      <Flex px='10' gap='10' align='center' flex='1'>
+      <Flex px='10' gap='10' align='center' flex='1' justify='space-between'>
         <Img h='350px' src='/images/man_entering_img.svg' alt='Ilustração de login' />
         <FormWrapper>
           <LoginButtonWithGoogle />

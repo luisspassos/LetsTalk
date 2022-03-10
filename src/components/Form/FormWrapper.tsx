@@ -1,5 +1,5 @@
-import { FormControl } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { FormControl } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
 type FormWrapperProps = {
   children: ReactNode;
@@ -7,7 +7,7 @@ type FormWrapperProps = {
 
 export function FormWrapper({ children }: FormWrapperProps) {
   return (
-    <FormControl as='form' bg='gray.200' borderRadius='5' p='10'>
+    <FormControl maxW='600px' as='form' bg='gray.200' borderRadius='5' p='10'>
       {children}
     </FormControl>
   );
