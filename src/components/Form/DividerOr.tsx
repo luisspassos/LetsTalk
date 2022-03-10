@@ -6,8 +6,7 @@ export function DividerOr() {
       align='center'
       gap='3'
       color='gray.400'
-      mt='15px'
-      mb='20px'
+      my='15px'
       fontSize='18px'
       _before={{
         content: '""',

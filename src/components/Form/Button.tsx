@@ -5,5 +5,9 @@ type ButtonProps = {
 } & ChakraButtonProps;
 
 export function Button({ text, ...rest }: ButtonProps) {
-  return <ChakraButton {...rest}>{text}</ChakraButton>;
+  return (
+    <ChakraButton fontSize='17px' bg='gray.400' color='gray.50' w='100%' h='49px' {...rest}>
+      {text}
+    </ChakraButton>
+  );
 }
