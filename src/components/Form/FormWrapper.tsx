@@ -6,5 +6,9 @@ type FormWrapperProps = {
 };
 
 export function FormWrapper({ children }: FormWrapperProps) {
-  return <FormControl as='form'>{children}</FormControl>;
+  return (
+    <FormControl as='form' bg='gray.200' borderRadius='5' p='10'>
+      {children}
+    </FormControl>
+  );
 }
