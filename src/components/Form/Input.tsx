@@ -1,4 +1,9 @@
-import { FormLabel, InputGroup, Input as ChakraInput, InputProps as ChakraInputProps } from "@chakra-ui/react";
+import {
+  FormLabel,
+  InputGroup,
+  Input as ChakraInput,
+  InputProps as ChakraInputProps,
+} from '@chakra-ui/react';
 
 type InputProps = {
   label: string;

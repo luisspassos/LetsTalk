@@ -14,16 +14,39 @@ const Login: NextPage = () => {
     <Flex mx='auto' maxW={1400} h='100vh' direction='column'>
       <Header />
       <Flex px='10' gap='90px' align='center' flex='1' justify='center'>
-        <Img d={{ base: 'none', xl: 'block' }} h='350px' src='/images/man_entering_img.svg' alt='Ilustração de login' />
+        <Img
+          d={{ base: 'none', xl: 'block' }}
+          h='350px'
+          src='/images/man_entering_img.svg'
+          alt='Ilustração de login'
+        />
         <FormWrapper>
           <LoginButtonWithGoogle />
           <DividerOr />
           <Stack spacing={2}>
-            <Input type='email' id='email' label='Email' name='email' placeholder='Email...' />
-            <Input type='password' id='password' label='Senha' name='password' placeholder='Senha...' />
+            <Input
+              type='email'
+              id='email'
+              label='Email'
+              name='email'
+              placeholder='Email...'
+            />
+            <Input
+              type='password'
+              id='password'
+              label='Senha'
+              name='password'
+              placeholder='Senha...'
+            />
           </Stack>
           <NextLink href='/esqueci-minha-senha' passHref>
-            <Link mt='6px' mb='12px' fontSize='15px' color='gray.400' d='inline-block'>
+            <Link
+              mt='6px'
+              mb='12px'
+              fontSize='15px'
+              color='gray.400'
+              d='inline-block'
+            >
               Esqueci minha senha
             </Link>
           </NextLink>

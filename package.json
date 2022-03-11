@@ -14,6 +14,7 @@
     "@emotion/styled": "^11",
     "@fontsource/poppins": "^4.5.2",
     "@fontsource/roboto": "^4.5.3",
+    "firebase": "^9.6.8",
     "framer-motion": "^6",
     "next": "12.1.0",
     "react": "17.0.2",
@@ -26,6 +27,8 @@
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.3",
     "eslint-plugin-unused-imports": "^2.0.0",
     "typescript": "4.6.2"
   }

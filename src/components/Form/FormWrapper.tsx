@@ -7,7 +7,13 @@ type FormWrapperProps = {
 
 export function FormWrapper({ children }: FormWrapperProps) {
   return (
-    <FormControl maxW='500px' as='form' bg='gray.200' borderRadius='5' p='10'>
+    <FormControl
+      maxW='450px'
+      as='form'
+      bg='gray.200'
+      borderRadius='5'
+      p={{ base: '6', sm: '10' }}
+    >
       {children}
     </FormControl>
   );
