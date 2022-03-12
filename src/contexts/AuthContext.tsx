@@ -45,19 +45,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     password: null,
   } as FirebaseErrorType);
 
-  function handleResetFirebaseEmailValidation() {
+  const handleResetFirebaseEmailValidation = useCallback(() => {
     setFirebaseError((prevState) => ({
       ...prevState,
       email: null,
     }));
-  }
+  }, []);
 
-  function handleResetFirebasePasswordValidation() {
+  const handleResetFirebasePasswordValidation = useCallback(() => {
     setFirebaseError((prevState) => ({
       ...prevState,
       password: null,
     }));
-  }
+  }, []);
 
   const signInWithGoogle = useCallback(async () => {
     try {
