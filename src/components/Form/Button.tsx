@@ -11,6 +11,11 @@ export function Button({ text, ...rest }: ButtonProps) {
   return (
     <ChakraButton
       transition='0.2s'
+      _disabled={{
+        bg: 'gray.400',
+        cursor: 'not-allowed',
+        filter: 'brightness(1)',
+      }}
       _active={{ bg: 'gray.400' }}
       _hover={{ bg: 'gray.400', filter: 'brightness(0.9)' }}
       fontSize={{ base: '15px', sm: '17px' }}

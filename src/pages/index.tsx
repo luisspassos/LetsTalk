@@ -9,19 +9,36 @@ import NextLink from 'next/link';
 import { Button } from '../components/Form/Button';
 import { RegistrationLink } from '../components/Form/RegistrationLink';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useAuth } from '../contexts/AuthContext';
 
-type FormData = {
+type SignInFormData = {
   email: string;
   password: string;
 };
+
+const signInFormSchema = yup.object().shape({
+  email: yup
+    .string()
+    .trim()
+    .required('E-mail obrigatório')
+    .email('E-mail inválido'),
+  password: yup.string().required('Senha obrigatória'),
+});
 
 const Login: NextPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
-  const onSubmit = handleSubmit((data) => console.log(data));
+    formState: { errors, isSubmitting },
+  } = useForm<SignInFormData>({
+    resolver: yupResolver(signInFormSchema),
+  });
+
+  const { signInWithEmailAndPassword } = useAuth();
+
+  const handleSignIn = handleSubmit(signInWithEmailAndPassword);
 
   return (
     <Flex mx='auto' maxW={1400} h='100vh' direction='column'>
@@ -33,7 +50,7 @@ const Login: NextPage = () => {
           src='/images/man_entering_img.svg'
           alt='Ilustração de login'
         />
-        <FormWrapper onSubmit={onSubmit}>
+        <FormWrapper onSubmit={handleSignIn}>
           <LoginButtonWithGoogle />
           <DividerOr />
           <Stack spacing={2}>
@@ -43,6 +60,7 @@ const Login: NextPage = () => {
               label='Email'
               placeholder='Email...'
               {...register('email')}
+              error={errors.email}
             />
             <Input
               type='password'
@@ -50,6 +68,7 @@ const Login: NextPage = () => {
               label='Senha'
               placeholder='Senha...'
               {...register('password')}
+              error={errors.password}
             />
           </Stack>
           <NextLink href='/esqueci-minha-senha' passHref>
@@ -63,7 +82,7 @@ const Login: NextPage = () => {
               Esqueci minha senha
             </Link>
           </NextLink>
-          <Button type='submit' text='ENTRAR' />
+          <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
 
           <RegistrationLink />
         </FormWrapper>
