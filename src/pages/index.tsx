@@ -8,8 +8,21 @@ import { Header } from '../components/Header';
 import NextLink from 'next/link';
 import { Button } from '../components/Form/Button';
 import { RegistrationLink } from '../components/Form/RegistrationLink';
+import { useForm } from 'react-hook-form';
+
+type FormData = {
+  email: string;
+  password: string;
+};
 
 const Login: NextPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+  const onSubmit = handleSubmit((data) => console.log(data));
+
   return (
     <Flex mx='auto' maxW={1400} h='100vh' direction='column'>
       <Header />
@@ -20,7 +33,7 @@ const Login: NextPage = () => {
           src='/images/man_entering_img.svg'
           alt='Ilustração de login'
         />
-        <FormWrapper>
+        <FormWrapper onSubmit={onSubmit}>
           <LoginButtonWithGoogle />
           <DividerOr />
           <Stack spacing={2}>
@@ -28,15 +41,15 @@ const Login: NextPage = () => {
               type='email'
               id='email'
               label='Email'
-              name='email'
               placeholder='Email...'
+              {...register('email')}
             />
             <Input
               type='password'
               id='password'
               label='Senha'
-              name='password'
               placeholder='Senha...'
+              {...register('password')}
             />
           </Stack>
           <NextLink href='/esqueci-minha-senha' passHref>
@@ -50,7 +63,7 @@ const Login: NextPage = () => {
               Esqueci minha senha
             </Link>
           </NextLink>
-          <Button text='ENTRAR' />
+          <Button type='submit' text='ENTRAR' />
 
           <RegistrationLink />
         </FormWrapper>
