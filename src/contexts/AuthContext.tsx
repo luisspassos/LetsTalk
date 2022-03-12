@@ -68,6 +68,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         Router.push('/conversas');
       }
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err);
     }
   }, []);

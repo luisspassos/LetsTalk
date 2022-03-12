@@ -1,7 +1,9 @@
 {
+  "parser": "@typescript-eslint/parser",
   "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["unused-imports", "prettier"],
+  "plugins": ["unused-imports", "prettier", "@typescript-eslint"],
   "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
     "no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
@@ -13,9 +15,6 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "react/jsx-first-prop-new-line": [2, "multiline"],
-    "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "multiline" }],
-    "react/jsx-indent-props": [2, 2],
-    "react/jsx-closing-bracket-location": [2, "tag-aligned"]
+    "no-console": "warn"
   }
 }
