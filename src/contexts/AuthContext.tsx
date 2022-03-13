@@ -43,17 +43,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const signInWithEmailAndPassword = useCallback(
     async ({ email, password }: SignInData) => {
-      try {
-        const { user } = await FirebaseSignInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+      const { user } = await FirebaseSignInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-        if (user) {
-          Router.push('/conversas');
-        }
-      } catch (err) {}
+      if (user) {
+        Router.push('/conversas');
+      }
     },
     []
   );

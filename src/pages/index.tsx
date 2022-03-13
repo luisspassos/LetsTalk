@@ -13,11 +13,20 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
+import { FirebaseError } from 'firebase/app';
 
 type SignInFormData = {
   email: string;
   password: string;
 };
+
+type FormFirebaseError = Record<
+  string,
+  {
+    type: 'email' | 'password';
+    message: string;
+  }
+>;
 
 const signInFormSchema = yup.object().shape({
   email: yup
@@ -32,6 +41,7 @@ const Login: NextPage = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<SignInFormData>({
     resolver: yupResolver(signInFormSchema),
@@ -40,8 +50,28 @@ const Login: NextPage = () => {
   const { signInWithEmailAndPassword } = useAuth();
 
   const handleSignIn = handleSubmit(async (data) => {
-    const response = await signInWithEmailAndPassword(data);
-    console.log(response);
+    try {
+      await signInWithEmailAndPassword(data);
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        const errors: FormFirebaseError = {
+          'auth/user-not-found': {
+            type: 'email',
+            message: 'Este usuário não existe',
+          },
+          'auth/wrong-password': {
+            type: 'password',
+            message: 'Senha incorreta',
+          },
+        };
+
+        const error = errors[err.code];
+
+        setError(error.type, {
+          message: error.message,
+        });
+      }
+    }
   });
 
   return (
