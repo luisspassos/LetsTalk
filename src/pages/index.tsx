@@ -14,7 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
 import { FirebaseError } from 'firebase/app';
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 type SignInFormData = {
   email: string;
@@ -50,7 +50,7 @@ const Login: NextPage = () => {
 
   const { signInWithEmailAndPassword } = useAuth();
 
-  const handleSignIn = useCallback(
+  const handleSignIn = useMemo(
     () =>
       handleSubmit(async (data) => {
         try {

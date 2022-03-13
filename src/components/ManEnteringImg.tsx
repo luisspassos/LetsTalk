@@ -1,6 +1,7 @@
 import { Img } from '@chakra-ui/react';
+import { memo } from 'react';
 
-export function ManEnteringImg() {
+function ManEnteringImgComponent() {
   return (
     <Img
       d={{ base: 'none', xl: 'block' }}
@@ -10,3 +11,5 @@ export function ManEnteringImg() {
     />
   );
 }
+
+export const ManEnteringImg = memo(ManEnteringImgComponent);
