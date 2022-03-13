@@ -2,13 +2,12 @@ import {
   Button as ChakraButton,
   ButtonProps as ChakraButtonProps,
 } from '@chakra-ui/react';
-import { memo } from 'react';
 
 type ButtonProps = {
   text: string;
 } & ChakraButtonProps;
 
-function ButtonComponent({ text, ...rest }: ButtonProps) {
+export function Button({ text, ...rest }: ButtonProps) {
   return (
     <ChakraButton
       transition='0.2s'
@@ -30,10 +29,3 @@ function ButtonComponent({ text, ...rest }: ButtonProps) {
     </ChakraButton>
   );
 }
-
-export const Button = memo(
-  ButtonComponent,
-  (prevProps: ButtonProps, nextProps: ButtonProps) => {
-    return prevProps.isLoading === nextProps.isLoading;
-  }
-);

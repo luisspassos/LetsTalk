@@ -1,12 +1,12 @@
 import { Button, Icon } from '@chakra-ui/react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Router from 'next/router';
-import { memo } from 'react';
+import { useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../../services/firebase';
 
-function LoginButtonWithGoogleComponent() {
-  const signInWithGoogle = async () => {
+export function LoginButtonWithGoogle() {
+  const signInWithGoogle = useCallback(async () => {
     try {
       const googleProvider = new GoogleAuthProvider();
       const { user } = await signInWithPopup(auth, googleProvider);
@@ -18,7 +18,7 @@ function LoginButtonWithGoogleComponent() {
       // eslint-disable-next-line no-console
       console.error(err);
     }
-  };
+  }, []);
 
   return (
     <Button
@@ -42,5 +42,3 @@ function LoginButtonWithGoogleComponent() {
     </Button>
   );
 }
-
-export const LoginButtonWithGoogle = memo(LoginButtonWithGoogleComponent);

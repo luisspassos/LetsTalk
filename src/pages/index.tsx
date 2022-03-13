@@ -14,6 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
 import { FirebaseError } from 'firebase/app';
+import { useCallback } from 'react';
 
 type SignInFormData = {
   email: string;
@@ -49,30 +50,34 @@ const Login: NextPage = () => {
 
   const { signInWithEmailAndPassword } = useAuth();
 
-  const handleSignIn = handleSubmit(async (data) => {
-    try {
-      await signInWithEmailAndPassword(data);
-    } catch (err) {
-      if (err instanceof FirebaseError) {
-        const errors: FormFirebaseError = {
-          'auth/user-not-found': {
-            type: 'email',
-            message: 'Este usuário não existe',
-          },
-          'auth/wrong-password': {
-            type: 'password',
-            message: 'Senha incorreta',
-          },
-        };
+  const handleSignIn = useCallback(
+    () =>
+      handleSubmit(async (data) => {
+        try {
+          await signInWithEmailAndPassword(data);
+        } catch (err) {
+          if (err instanceof FirebaseError) {
+            const errors: FormFirebaseError = {
+              'auth/user-not-found': {
+                type: 'email',
+                message: 'Este usuário não existe',
+              },
+              'auth/wrong-password': {
+                type: 'password',
+                message: 'Senha incorreta',
+              },
+            };
 
-        const error = errors[err.code];
+            const error = errors[err.code];
 
-        setError(error.type, {
-          message: error.message,
-        });
-      }
-    }
-  });
+            setError(error.type, {
+              message: error.message,
+            });
+          }
+        }
+      }),
+    [handleSubmit, setError, signInWithEmailAndPassword]
+  );
 
   return (
     <Flex mx='auto' maxW={1400} h='100vh' direction='column'>
