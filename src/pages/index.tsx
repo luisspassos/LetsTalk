@@ -1,4 +1,4 @@
-import { Flex, Img, Link, Stack } from '@chakra-ui/react';
+import { Flex, Link, Stack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
+import { ManEnteringImg } from '../components/ManEnteringImg';
 
 type SignInFormData = {
   email: string;
@@ -52,12 +53,7 @@ const Login: NextPage = () => {
     <Flex mx='auto' maxW={1400} h='100vh' direction='column'>
       <Header />
       <Flex px='10' gap='90px' align='center' flex='1' justify='center'>
-        <Img
-          d={{ base: 'none', xl: 'block' }}
-          h='350px'
-          src='/images/man_entering_img.svg'
-          alt='Ilustração de login'
-        />
+        <ManEnteringImg />
         <FormWrapper onSubmit={handleSignIn}>
           <LoginButtonWithGoogle />
           <DividerOr />
