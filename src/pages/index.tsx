@@ -37,12 +37,7 @@ const Login: NextPage = () => {
     resolver: yupResolver(signInFormSchema),
   });
 
-  const {
-    signInWithEmailAndPassword,
-    firebaseError,
-    handleResetFirebaseEmailValidation,
-    handleResetFirebasePasswordValidation,
-  } = useAuth();
+  const { signInWithEmailAndPassword } = useAuth();
 
   const handleSignIn = handleSubmit(async (data) => {
     const response = await signInWithEmailAndPassword(data);
@@ -63,24 +58,16 @@ const Login: NextPage = () => {
               id='email'
               label='Email'
               placeholder='Email...'
-              {...register('email', {
-                onChange: firebaseError.email
-                  ? () => handleResetFirebaseEmailValidation()
-                  : () => {},
-              })}
-              error={errors.email ?? firebaseError.email}
+              {...register('email')}
+              error={errors.email}
             />
             <Input
               type='password'
               id='password'
               label='Senha'
               placeholder='Senha...'
-              {...register('password', {
-                onChange: firebaseError.password
-                  ? () => handleResetFirebasePasswordValidation()
-                  : () => {},
-              })}
-              error={errors.password ?? firebaseError.password}
+              {...register('password')}
+              error={errors.password}
             />
           </Stack>
           <NextLink href='/esqueci-minha-senha' passHref>

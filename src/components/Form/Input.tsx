@@ -7,12 +7,11 @@ import {
 } from '@chakra-ui/react';
 import { forwardRef, LegacyRef } from 'react';
 import { FieldError } from 'react-hook-form';
-import { SignInErrorObject } from '../../types';
 
 type InputProps = {
   label: string;
   id: string;
-  error: FieldError | SignInErrorObject | null;
+  error: FieldError | undefined;
 } & ChakraInputProps;
 
 export const Input = forwardRef(
