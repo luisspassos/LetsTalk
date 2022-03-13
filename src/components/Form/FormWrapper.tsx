@@ -14,6 +14,7 @@ export function FormWrapper({ children, ...rest }: FormWrapperProps) {
       bg='gray.200'
       borderRadius='5'
       p={{ base: '6', sm: '10' }}
+      noValidate
     >
       {children}
     </FormControl>

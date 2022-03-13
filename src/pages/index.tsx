@@ -64,7 +64,9 @@ const Login: NextPage = () => {
               label='Email'
               placeholder='Email...'
               {...register('email', {
-                onChange: () => handleResetFirebaseEmailValidation(),
+                onChange: firebaseError.email
+                  ? () => handleResetFirebaseEmailValidation()
+                  : () => {},
               })}
               error={errors.email ?? firebaseError.email}
             />
@@ -74,7 +76,9 @@ const Login: NextPage = () => {
               label='Senha'
               placeholder='Senha...'
               {...register('password', {
-                onChange: () => handleResetFirebasePasswordValidation(),
+                onChange: firebaseError.password
+                  ? () => handleResetFirebasePasswordValidation()
+                  : () => {},
               })}
               error={errors.password ?? firebaseError.password}
             />
