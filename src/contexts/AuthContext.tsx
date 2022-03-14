@@ -1,10 +1,4 @@
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword as FirebaseSignInWithEmailAndPassword,
-} from 'firebase/auth';
 import { createContext, ReactNode, useCallback, useContext } from 'react';
-import { auth } from '../services/firebase';
 import Router from 'next/router';
 
 type AuthProviderProps = {
@@ -17,7 +11,6 @@ type SignInData = {
 };
 
 type AuthContextData = {
-  signInWithGoogle: () => Promise<void>;
   signInWithEmailAndPassword: ({
     email,
     password,
@@ -27,22 +20,13 @@ type AuthContextData = {
 const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const signInWithGoogle = useCallback(async () => {
-    try {
-      const googleProvider = new GoogleAuthProvider();
-      const { user } = await signInWithPopup(auth, googleProvider);
-
-      if (user) {
-        Router.push('/conversas');
-      }
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
-    }
-  }, []);
-
   const signInWithEmailAndPassword = useCallback(
     async ({ email, password }: SignInData) => {
+      const { signInWithEmailAndPassword: FirebaseSignInWithEmailAndPassword } =
+        await import('firebase/auth');
+
+      const { auth } = await import('../services/firebase');
+
       const { user } = await FirebaseSignInWithEmailAndPassword(
         auth,
         email,
@@ -59,7 +43,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <AuthContext.Provider
       value={{
-        signInWithGoogle,
         signInWithEmailAndPassword,
       }}
     >

@@ -1,13 +1,16 @@
 import { Button, Icon } from '@chakra-ui/react';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import Router from 'next/router';
 import { memo, useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { auth } from '../../services/firebase';
+import Router from 'next/router';
 
 function LoginButtonWithGoogleComponent() {
-  const signInWithGoogle = useCallback(async () => {
+  const handleSignInWithGoogle = useCallback(async () => {
     try {
+      const { auth } = await import('../../services/firebase');
+      const { GoogleAuthProvider, signInWithPopup } = await import(
+        'firebase/auth'
+      );
+
       const googleProvider = new GoogleAuthProvider();
       const { user } = await signInWithPopup(auth, googleProvider);
 
@@ -36,7 +39,7 @@ function LoginButtonWithGoogleComponent() {
       fontSize={{ base: '15px', sm: '18px' }}
       justifyContent='start'
       leftIcon={<Icon as={FcGoogle} fontSize={{ base: '28px', sm: '32px' }} />}
-      onClick={signInWithGoogle}
+      onClick={handleSignInWithGoogle}
     >
       Entrar com o Google
     </Button>

@@ -13,7 +13,6 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
-import { FirebaseError } from 'firebase/app';
 import { useMemo } from 'react';
 
 type SignInFormData = {
@@ -56,6 +55,8 @@ const Login: NextPage = () => {
         try {
           await signInWithEmailAndPassword(data);
         } catch (err) {
+          const { FirebaseError } = await import('firebase/app');
+
           if (err instanceof FirebaseError) {
             const errors: FormFirebaseError = {
               'auth/user-not-found': {
