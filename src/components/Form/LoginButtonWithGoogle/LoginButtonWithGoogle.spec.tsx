@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { LoginButtonWithGoogle } from '.';
 
+jest;
+
 describe('LoginButtonWithGoogle component', () => {
   it('renders correctly', () => {
     render(<LoginButtonWithGoogle />);
