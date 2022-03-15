@@ -6,7 +6,7 @@ import Router from 'next/router';
 function LoginButtonWithGoogleComponent() {
   const handleSignInWithGoogle = useCallback(async () => {
     try {
-      const { auth } = await import('../../services/firebase');
+      const { auth } = await import('../../../services/firebase');
       const { GoogleAuthProvider, signInWithPopup } = await import(
         'firebase/auth'
       );

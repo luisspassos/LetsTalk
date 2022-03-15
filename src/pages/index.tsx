@@ -4,7 +4,7 @@ import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
 import { LoginButtonWithGoogle } from '../components/Form/LoginButtonWithGoogle';
-import { Header } from '../components/Header';
+import { Header } from '../components/Form/Header';
 import NextLink from 'next/link';
 import { Button } from '../components/Form/Button';
 import { RegistrationLink } from '../components/Form/RegistrationLink';
