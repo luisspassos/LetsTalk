@@ -2,14 +2,12 @@ import { Button, Icon } from '@chakra-ui/react';
 import { memo, useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import Router from 'next/router';
+import { auth } from '../../../services/firebase';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 function LoginButtonWithGoogleComponent() {
   const handleSignInWithGoogle = useCallback(async () => {
     try {
-      const { GoogleAuthProvider, signInWithPopup } = await import(
-        'firebase/auth'
-      );
-      const { auth } = await import('../../../services/firebase');
       const googleProvider = new GoogleAuthProvider();
 
       const { user } = await signInWithPopup(auth, googleProvider);
