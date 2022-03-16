@@ -1,26 +1,26 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { LoginButtonWithGoogle } from '.';
+import firebaseAuth from 'firebase/auth';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
-import { auth } from '../../../services/firebase';
-import { GoogleAuthProvider } from 'firebase/auth';
 
 jest.mock('next/router');
+
 jest.mock('../../../services/firebase', () => {
-  return {
-    auth: auth,
+  const auth = {
+    name: '[DEFAULT]',
   };
+
+  return { auth };
 });
 
 jest.mock('firebase/auth', () => {
-  return {
-    signInWithPopup() {
-      return {
-        user: 'fake-user',
-      };
-    },
-    GoogleAuthProvider: GoogleAuthProvider,
-  };
+  const GoogleAuthProvider = jest.fn();
+  const signInWithPopup = jest.fn().mockResolvedValueOnce({
+    user: 'fake-user',
+  });
+
+  return { GoogleAuthProvider, signInWithPopup };
 });
 
 describe('LoginButtonWithGoogle component', () => {
@@ -44,6 +44,8 @@ describe('LoginButtonWithGoogle component', () => {
 
     fireEvent.click(loginButtonWithGoogle);
 
-    expect(pushMock).toHaveBeenCalledWith('/conversas');
+    expect(firebaseAuth.GoogleAuthProvider).toBeCalledTimes(1);
+    expect(firebaseAuth.signInWithPopup).toBeCalledTimes(1);
+    expect(pushMock).toBeCalledWith('/conversas');
   });
 });
