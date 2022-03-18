@@ -8,12 +8,10 @@ import { auth } from '../../../services/firebase';
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();
 
-  console.log(auth);
-
   async function handleSignInWithGoogle() {
     const googleProvider = new GoogleAuthProvider();
 
-    const { user } = await signInWithPopup(auth, googleProvider);
+    await signInWithPopup(auth, googleProvider);
     router.push('/conversas');
   }
 
