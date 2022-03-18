@@ -1,7 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { useRouter } from 'next/router';
 import { LoginButtonWithGoogle } from '.';
 import { mocked } from 'jest-mock';
+import { useRouter } from 'next/router';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../../services/firebase';
 
 jest.mock('next/router');
 
@@ -14,7 +16,9 @@ jest.mock('../../../services/firebase', () => {
 jest.mock('firebase/auth', () => {
   return {
     GoogleAuthProvider: jest.fn(),
-    signInWithPopup: jest.fn(),
+    signInWithPopup: jest.fn().mockResolvedValue({
+      user: 'fake-user',
+    }),
   };
 });
 
@@ -25,7 +29,7 @@ describe('LoginButtonWithGoogle component', () => {
     expect(screen.getByText('Entrar com o Google')).toBeInTheDocument();
   });
 
-  it('redirects to the conversations page if the user is logged in', () => {
+  it('redirects to the conversations page if the user is logged in', async () => {
     const useRouterMocked = mocked(useRouter);
     const pushMock = jest.fn();
 
@@ -39,6 +43,9 @@ describe('LoginButtonWithGoogle component', () => {
 
     fireEvent.click(loginButtonWithGoogle);
 
+    await import('firebase/auth');
+    await import('../../../services/firebase');
+    await signInWithPopup(auth, new GoogleAuthProvider());
     expect(pushMock).toHaveBeenCalledWith('/conversas');
   });
 });

@@ -1,37 +1,28 @@
 import { Button, Icon } from '@chakra-ui/react';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../../../services/firebase';
 
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();
 
-  async function handleSignInWithGoogle() {
-    
+  const handleSignInWithGoogle = useCallback(async () => {
+    try {
+      const { GoogleAuthProvider, signInWithPopup } = await import(
+        'firebase/auth'
+      );
+      const { auth } = await import('../../../services/firebase');
       const googleProvider = new GoogleAuthProvider();
 
       const { user } = await signInWithPopup(auth, googleProvider);
-
-    await signInWithPopup(auth, googleProvider);
-    router.push('/conversas');
-  
-
-  // const handleSignInWithGoogle = useCallback(async () => {
-  //   try {
-  //     Router.push('/conversas');
-  //     const googleProvider = new GoogleAuthProvider();
-
-  //     const { user } = await signInWithPopup(auth, googleProvider);
-
-  //     if (user) {
-  //     }
-  //   } catch (err) {
-  //     // eslint-disable-next-line no-console
-  //     console.error(err);
-  //   }
-  // }, []);
+      if (user) {
+        router.push('/conversas');
+      }
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err);
+    }
+  }, [router]);
 
   return (
     <Button
