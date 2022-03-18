@@ -14,9 +14,7 @@ jest.mock('../../../services/firebase', () => {
 jest.mock('firebase/auth', () => {
   return {
     GoogleAuthProvider: jest.fn(),
-    signInWithPopup: jest.fn().mockResolvedValue({
-      user: 'fake-user',
-    }),
+    signInWithPopup: jest.fn(),
   };
 });
 
@@ -27,7 +25,7 @@ describe('LoginButtonWithGoogle component', () => {
     expect(screen.getByText('Entrar com o Google')).toBeInTheDocument();
   });
 
-  it('redirects to the conversations page if the user is logged in', async () => {
+  it('redirects to the conversations page if the user is logged in', () => {
     const useRouterMocked = mocked(useRouter);
     const pushMock = jest.fn();
 
@@ -41,6 +39,6 @@ describe('LoginButtonWithGoogle component', () => {
 
     fireEvent.click(loginButtonWithGoogle);
 
-    expect(pushMock).toHaveBeenCalled();
+    expect(pushMock).toHaveBeenCalledWith('/conversas');
   });
 });

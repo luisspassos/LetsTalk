@@ -9,16 +9,14 @@ function LoginButtonWithGoogleComponent() {
   const router = useRouter();
 
   async function handleSignInWithGoogle() {
-    try {
+    
       const googleProvider = new GoogleAuthProvider();
 
       const { user } = await signInWithPopup(auth, googleProvider);
 
-      console.log(user);
-    } finally {
-      router.push('/conversas');
-    }
-  }
+    await signInWithPopup(auth, googleProvider);
+    router.push('/conversas');
+  
 
   // const handleSignInWithGoogle = useCallback(async () => {
   //   try {
