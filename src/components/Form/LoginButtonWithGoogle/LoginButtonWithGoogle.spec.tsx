@@ -50,15 +50,12 @@ describe('LoginButtonWithGoogle component', () => {
   });
 
   it('fire console.error if function falls into catch', async () => {
-    render(<LoginButtonWithGoogle />);
-
-    const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
-
-    fireEvent.click(loginButtonWithGoogle);
+    expect.assertions(1);
 
     try {
-    await signInWithPopup(auth, new GoogleAuthProvider());
-      
+      throw new Error('aaa');
+    } catch (err) {
+      expect(err).toBe('aaa');
     }
   });
 });
