@@ -4,13 +4,6 @@ import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../../services/firebase';
-import { error } from 'console';
-
-jest.mock('console', () => {
-  return {
-    error: jest.fn(),
-  };
-});
 
 jest.mock('next/router');
 
@@ -56,27 +49,24 @@ describe('LoginButtonWithGoogle component', () => {
     expect(pushMock).toHaveBeenCalledWith('/conversas');
   });
 
-  it('error', async () => {
-    expect(error).toHaveBeenCalled();
-    // const useRouterMocked = mocked(useRouter);
-    // const pushMock = jest.fn();
-    // useRouterMocked.mockReturnValueOnce({
-    //   push: pushMock,
-    // } as any);
-    // jest.mock('firebase/auth', () => {
-    //   return {
-    //     GoogleAuthProvider: jest.fn(),
-    //     signInWithPopup: jest.fn().mockResolvedValue({
-    //       user: 'fake-user',
-    //     }),
-    //   };
-    // });
-    // render(<LoginButtonWithGoogle />);
-    // const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
-    // fireEvent.click(loginButtonWithGoogle);
-    // await import('firebase/auth');
-    // await import('../../../services/firebase');
-    // await signInWithPopup(auth, new GoogleAuthProvider());
-    // expect(pushMock).toHaveBeenCalledWith('/conversas');
+  it('fire console.error if function falls into catch', async () => {
+    jest.mock('firebase/auth', () => {
+      return {
+        GoogleAuthProvider: jest.fn(),
+        signInWithPopup: jest.fn().mockResolvedValue(new Error('fake-error')),
+      };
+    });
+    console.error = jest.fn();
+
+    render(<LoginButtonWithGoogle />);
+
+    const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
+
+    fireEvent.click(loginButtonWithGoogle);
+
+    await import('firebase/auth');
+    await import('../../../services/firebase');
+    await signInWithPopup(auth, new GoogleAuthProvider());
+    expect(console.error).toHaveBeenCalled();
   });
 });
