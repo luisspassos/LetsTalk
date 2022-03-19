@@ -8,6 +8,7 @@ function LoginButtonWithGoogleComponent() {
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {
+      console.error('adasda');
       const { GoogleAuthProvider, signInWithPopup } = await import(
         'firebase/auth'
       );
