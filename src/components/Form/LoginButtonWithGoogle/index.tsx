@@ -18,6 +18,8 @@ function LoginButtonWithGoogleComponent() {
       if (user) {
         router.push('/conversas');
       }
+
+      return 'GG';
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);
