@@ -1,9 +1,8 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { LoginButtonWithGoogle } from '.';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '../../../services/firebase';
+import { signInWithPopup } from 'firebase/auth';
 
 jest.mock('next/router');
 
@@ -35,10 +34,7 @@ describe('LoginButtonWithGoogle component', () => {
 
     fireEvent.click(loginButtonWithGoogle);
 
-    await import('firebase/auth');
-    await import('../../../services/firebase');
-    await signInWithPopup(auth, new GoogleAuthProvider());
-    expect(pushMock).toHaveBeenCalledWith('/conversas');
+    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/conversas'));
   });
 
   it('fire console.error if function handleSignInWithGoogle falls into catch', async () => {
@@ -50,14 +46,6 @@ describe('LoginButtonWithGoogle component', () => {
 
     fireEvent.click(loginButtonWithGoogle);
 
-    expect.assertions(1);
-
-    await import('firebase/auth');
-    await import('../../../services/firebase');
-    try {
-      await signInWithPopup(auth, new GoogleAuthProvider());
-    } catch (err) {
-      expect(console.error).toHaveBeenCalled();
-    }
+    await waitFor(() => expect(console.error).toHaveBeenCalled());
   });
 });
