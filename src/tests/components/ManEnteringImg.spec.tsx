@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ManEnteringImg } from '.';
+import { ManEnteringImg } from '../../components/ManEnteringImg';
 
 describe('Button component', () => {
   it('renders correctly', () => {

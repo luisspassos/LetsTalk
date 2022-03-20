@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { DividerOr } from '.';
+import { DividerOr } from '../../../components/Form/DividerOr';
 
 describe('DividerOr component', () => {
   it('renders correctly', () => {

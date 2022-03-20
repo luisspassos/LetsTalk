@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { LoginButtonWithGoogle } from '.';
+import { LoginButtonWithGoogle } from '../../../components/Form/LoginButtonWithGoogle';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
 import { signInWithPopup } from 'firebase/auth';

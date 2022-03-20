@@ -11,7 +11,7 @@ function LoginButtonWithGoogleComponent() {
       const { GoogleAuthProvider, signInWithPopup } = await import(
         'firebase/auth'
       );
-      const { auth } = await import('../../../services/firebase');
+      const { auth } = await import('../../services/firebase');
       const googleProvider = new GoogleAuthProvider();
 
       const { user } = await signInWithPopup(auth, googleProvider);

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Input } from '.';
+import { Input } from '../../../components/Form/Input';
 
 describe('Input component', () => {
   it('renders correctly', () => {
