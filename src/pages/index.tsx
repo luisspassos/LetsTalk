@@ -14,6 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
 import { useMemo } from 'react';
+import { useRouter } from 'next/router';
 
 type SignInFormData = {
   email: string;
@@ -47,13 +48,19 @@ const Login: NextPage = () => {
     resolver: yupResolver(signInFormSchema),
   });
 
+  const router = useRouter();
+
   const { signInWithEmailAndPassword } = useAuth();
 
   const handleSignIn = useMemo(
     () =>
       handleSubmit(async (data) => {
         try {
-          await signInWithEmailAndPassword(data);
+          const { user } = await signInWithEmailAndPassword(data);
+
+          if (user) {
+            router.push('/conversas');
+          }
         } catch (err) {
           const { FirebaseError } = await import('firebase/app');
 
@@ -77,7 +84,7 @@ const Login: NextPage = () => {
           }
         }
       }),
-    [handleSubmit, setError, signInWithEmailAndPassword]
+    [handleSubmit, setError, signInWithEmailAndPassword, router]
   );
 
   return (

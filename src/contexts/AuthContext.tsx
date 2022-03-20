@@ -1,5 +1,5 @@
+import { UserCredential } from 'firebase/auth';
 import { createContext, ReactNode, useCallback, useContext } from 'react';
-import Router from 'next/router';
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -14,7 +14,7 @@ type AuthContextData = {
   signInWithEmailAndPassword: ({
     email,
     password,
-  }: SignInData) => Promise<void>;
+  }: SignInData) => Promise<UserCredential>;
 };
 
 const AuthContext = createContext({} as AuthContextData);
@@ -27,15 +27,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const { auth } = await import('../services/firebase');
 
-      const { user } = await FirebaseSignInWithEmailAndPassword(
+      const loginResult = await FirebaseSignInWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-      if (user) {
-        Router.push('/conversas');
-      }
+      return loginResult;
     },
     []
   );
