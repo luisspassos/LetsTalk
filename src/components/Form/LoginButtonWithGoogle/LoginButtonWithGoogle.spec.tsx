@@ -38,6 +38,7 @@ describe('LoginButtonWithGoogle component', () => {
   });
 
   it('fire console.error if function handleSignInWithGoogle falls into catch', async () => {
+    // eslint-disable-next-line no-console
     console.error = jest.fn();
 
     render(<LoginButtonWithGoogle />);
@@ -46,6 +47,7 @@ describe('LoginButtonWithGoogle component', () => {
 
     fireEvent.click(loginButtonWithGoogle);
 
+    // eslint-disable-next-line no-console
     await waitFor(() => expect(console.error).toHaveBeenCalled());
   });
 });

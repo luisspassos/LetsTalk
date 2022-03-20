@@ -1,7 +1,12 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["unused-imports", "prettier", "@typescript-eslint"],
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
+  ],
+  "plugins": ["unused-imports", "prettier", "@typescript-eslint", "jest"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "off",
     "no-unused-vars": "off",

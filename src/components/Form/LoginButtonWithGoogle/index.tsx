@@ -15,11 +15,11 @@ function LoginButtonWithGoogleComponent() {
       const googleProvider = new GoogleAuthProvider();
 
       const { user } = await signInWithPopup(auth, googleProvider);
+
+      /* istanbul ignore else */
       if (user) {
         router.push('/conversas');
       }
-
-      return 'GG';
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);
