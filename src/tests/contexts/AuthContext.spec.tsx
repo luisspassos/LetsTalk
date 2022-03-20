@@ -1,5 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { AuthProvider } from '../../contexts/AuthContext';
+import { AuthProvider, AuthProviderProps } from '../../contexts/AuthContext';
+
+jest.mock('../../contexts/AuthContext', () => {
+  return {
+    AuthProvider: ({ children }: AuthProviderProps): JSX.Element => {
+      return <>{children}</>;
+    },
+  };
+});
 
 describe('Auth context', () => {
   it('renders correctly', () => {

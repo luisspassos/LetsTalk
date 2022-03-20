@@ -1,7 +1,7 @@
 import { UserCredential } from 'firebase/auth';
 import { createContext, ReactNode, useCallback, useContext } from 'react';
 
-type AuthProviderProps = {
+export type AuthProviderProps = {
   children: ReactNode;
 };
 
