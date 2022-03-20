@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { Button } from '.';
+import { Header } from '.';
 
 describe('Button component', () => {
   it('renders correctly', () => {
-    render(<Button text='Entrar' />);
+    render(<Header />);
 
-    expect(screen.getByText('Entrar')).toBeInTheDocument();
+    expect(screen.getByAltText("Let's Talk")).toBeInTheDocument();
   });
 });

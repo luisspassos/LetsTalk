@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import { forwardRef, LegacyRef } from 'react';
 import { FieldError } from 'react-hook-form';
-import { InputError } from './InputError';
+import { InputError } from '../InputError';
 
 type InputProps = {
   label: string;
@@ -25,7 +25,7 @@ export const Input = forwardRef(
           {label}
         </FormLabel>
         <ChakraInput ref={ref} h='49px' bg='white' id={id} {...rest} />
-        {!!error?.message && <InputError message={error.message} />}
+        <InputError message={error?.message ?? 'Erro'} />
       </FormControl>
     );
   }
