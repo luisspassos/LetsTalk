@@ -1,5 +1,18 @@
-import { render, screen } from '@testing-library/react';
-import { AuthProvider } from '../../contexts/AuthContext';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { AuthProvider, AuthContext } from '../../contexts/AuthContext';
+import Login from '../../pages/index';
+
+jest.mock('../../services/firebase', () => {
+  return {
+    auth: jest.fn(),
+  };
+});
+
+jest.mock('firebase/auth', () => {
+  return {
+    signInWithEmailAndPassword: jest.fn(),
+  };
+});
 
 describe('Auth context', () => {
   it('renders correctly', () => {
@@ -12,17 +25,20 @@ describe('Auth context', () => {
     expect(screen.getByText('component')).toBeInTheDocument();
   });
 
-  jest.mock('../../contexts/AuthContext', () => {
-    return {
-      useAuth() {
-        return {
-          signInWithEmailAndPassword: jest
-            .fn()
-            .mockReturnValue('fake-login-result'),
-        };
-      },
-    };
-  });
+  it('signInWithEmailAndPassword is running', async () => {
+    const contextCallback = jest.fn();
+    render(
+      <AuthProvider>
+        <Login />
+        <AuthContext.Consumer>{contextCallback}</AuthContext.Consumer>
+      </AuthProvider>
+    );
 
-  it('signInWithEmailAndPassword is running', async () => {});
+    const loginButton = screen.getByText('ENTRAR');
+    fireEvent.click(loginButton);
+
+    expect(contextCallback.mock.calls[0][0]).toEqual({
+      signInWithEmailAndPassword: contextCallback.mock.calls[0][0],
+    });
+  });
 });
