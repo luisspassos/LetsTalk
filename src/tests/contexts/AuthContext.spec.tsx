@@ -1,13 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { AuthProvider, AuthProviderProps } from '../../contexts/AuthContext';
-
-jest.mock('../../contexts/AuthContext', () => {
-  return {
-    AuthProvider: ({ children }: AuthProviderProps): JSX.Element => {
-      return <>{children}</>;
-    },
-  };
-});
+import { AuthProvider } from '../../contexts/AuthContext';
 
 describe('Auth context', () => {
   it('renders correctly', () => {
@@ -18,6 +10,18 @@ describe('Auth context', () => {
     );
 
     expect(screen.getByText('component')).toBeInTheDocument();
+  });
+
+  jest.mock('../../contexts/AuthContext', () => {
+    return {
+      useAuth() {
+        return {
+          signInWithEmailAndPassword: jest
+            .fn()
+            .mockReturnValue('fake-login-result'),
+        };
+      },
+    };
   });
 
   it('signInWithEmailAndPassword is running', async () => {});
