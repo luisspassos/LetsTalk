@@ -128,5 +128,30 @@ describe('Login page', () => {
     });
   });
 
-  it('fall into catch', () => {});
+  it('trigger error message if user not found', async () => {
+    const signInWithEmailAndPassword = jest.fn();
+
+    render(
+      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
+        <Login />
+      </AuthContext.Provider>
+    );
+
+    const loginButton = screen.getByText('ENTRAR');
+    const emailInput = screen.getByLabelText('Email');
+    const passwordInput = screen.getByLabelText('Senha');
+
+    fireEvent.change(emailInput, {
+      target: { value: 'email@gmail.com' },
+    });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+
+    await act(async () => {
+      fireEvent.click(loginButton);
+    });
+
+    screen.debug();
+
+    expect(screen.getByText('Este usuário não existe')).toBeInTheDocument();
+  });
 });
