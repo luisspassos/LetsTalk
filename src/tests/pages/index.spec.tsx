@@ -195,13 +195,12 @@ describe('Login page', () => {
     );
   });
 
-  it('the enter button should render a spinner when clicking it', () => {
+  it('the enter button should render a spinner when clicking it', async () => {
     render(<Login />);
 
     const loginButton = screen.getByText('ENTRAR');
 
     fireEvent.click(loginButton);
-
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 });
