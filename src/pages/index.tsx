@@ -124,7 +124,7 @@ const Login: NextPage = () => {
               Esqueci minha senha
             </Link>
           </NextLink>
-          <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
+          <Button isLoading={true} type='submit' text='ENTRAR' />
 
           <RegistrationLink />
         </FormWrapper>

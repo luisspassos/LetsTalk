@@ -4,6 +4,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { act } from 'react-dom/test-utils';
 import { useRouter } from 'next/router';
 import { mocked } from 'jest-mock';
+import { FirebaseError } from 'firebase/app';
 
 jest.mock('next/router');
 
@@ -129,7 +130,9 @@ describe('Login page', () => {
   });
 
   it('trigger error message if user not found', async () => {
-    const signInWithEmailAndPassword = jest.fn();
+    const signInWithEmailAndPassword = jest.fn(() => {
+      throw new FirebaseError('auth/user-not-found', 'error-message');
+    });
 
     render(
       <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
@@ -150,8 +153,55 @@ describe('Login page', () => {
       fireEvent.click(loginButton);
     });
 
-    screen.debug();
+    expect(
+      await screen.findByText('Este usuário não existe')
+    ).toBeInTheDocument();
+  });
 
-    expect(screen.getByText('Este usuário não existe')).toBeInTheDocument();
+  it('trigger error if password is wrong', async () => {
+    const signInWithEmailAndPassword = jest.fn(() => {
+      throw new FirebaseError('auth/wrong-password', 'error-message');
+    });
+
+    render(
+      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
+        <Login />
+      </AuthContext.Provider>
+    );
+
+    const loginButton = screen.getByText('ENTRAR');
+    const emailInput = screen.getByLabelText('Email');
+    const passwordInput = screen.getByLabelText('Senha');
+
+    fireEvent.change(emailInput, {
+      target: { value: 'email@gmail.com' },
+    });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+
+    await act(async () => {
+      fireEvent.click(loginButton);
+    });
+
+    expect(await screen.findByText('Senha incorreta')).toBeInTheDocument();
+  });
+
+  it('there should be a forgot-my-password link to take you to the "esqueci-minha-senha" route', () => {
+    render(<Login />);
+
+    const forgotMyPasswordLink = screen.getByText('Esqueci minha senha');
+    expect(forgotMyPasswordLink.closest('a')).toHaveAttribute(
+      'href',
+      '/esqueci-minha-senha'
+    );
+  });
+
+  it('the enter button should render a spinner when clicking it', () => {
+    render(<Login />);
+
+    const loginButton = screen.getByText('ENTRAR');
+
+    fireEvent.click(loginButton);
+
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 });
