@@ -196,11 +196,27 @@ describe('Login page', () => {
   });
 
   it('the enter button should render a spinner when clicking it', async () => {
-    render(<Login />);
+    const signInWithEmailAndPassword = jest.fn(
+      () => new Promise((res) => setTimeout(res, 100))
+    );
+
+    render(
+      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
+        <Login />
+      </AuthContext.Provider>
+    );
 
     const loginButton = screen.getByText('ENTRAR');
+    const emailInput = screen.getByLabelText('Email');
+    const passwordInput = screen.getByLabelText('Senha');
 
-    fireEvent.click(loginButton);
+    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+
+    await act(async () => {
+      fireEvent.click(loginButton);
+    });
+
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 });
