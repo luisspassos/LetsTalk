@@ -62,7 +62,6 @@ const Login: NextPage = () => {
             router.push('/conversas');
           }
         } catch (err) {
-          console.error(err);
           const { FirebaseError } = await import('firebase/app');
 
           if (err instanceof FirebaseError) {

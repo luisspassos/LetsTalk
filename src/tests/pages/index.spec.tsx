@@ -128,5 +128,27 @@ describe('Login page', () => {
     });
   });
 
-  it('fall into catch', () => {});
+  it('fall into catch', async () => {
+    console.error = jest.fn();
+    const signInWithEmailAndPassword = jest.fn();
+
+    render(
+      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
+        <Login />
+      </AuthContext.Provider>
+    );
+
+    const loginButton = screen.getByText('ENTRAR');
+    const emailInput = screen.getByLabelText('Email');
+    const passwordInput = screen.getByLabelText('Senha');
+
+    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+
+    await act(async () => {
+      fireEvent.click(loginButton);
+    });
+
+    expect(console.error).toHaveBeenCalled();
+  });
 });
