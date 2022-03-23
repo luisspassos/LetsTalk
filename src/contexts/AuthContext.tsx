@@ -1,5 +1,5 @@
 import { UserCredential } from 'firebase/auth';
-import { createContext, ReactNode, useCallback, useContext } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 
 export type AuthProviderProps = {
   children: ReactNode;
@@ -19,25 +19,25 @@ type AuthContextData = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export function AuthProvider({ children }: AuthProviderProps) {
-  const signInWithEmailAndPassword = useCallback(
-    async ({ email, password }: SignInData) => {
-      const { signInWithEmailAndPassword: FirebaseSignInWithEmailAndPassword } =
-        await import('firebase/auth');
+export const signInWithEmailAndPassword = async ({
+  email,
+  password,
+}: SignInData) => {
+  const { signInWithEmailAndPassword: FirebaseSignInWithEmailAndPassword } =
+    await import('firebase/auth');
 
-      const { auth } = await import('../services/firebase');
+  const { auth } = await import('../services/firebase');
 
-      const loginResult = await FirebaseSignInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      return loginResult;
-    },
-    []
+  const loginResult = await FirebaseSignInWithEmailAndPassword(
+    auth,
+    email,
+    password
   );
 
+  return loginResult;
+};
+
+export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <AuthContext.Provider
       value={{

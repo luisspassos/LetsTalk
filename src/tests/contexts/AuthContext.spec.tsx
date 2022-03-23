@@ -1,7 +1,16 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { AuthContext, AuthProvider } from '../../contexts/AuthContext';
-import Login from '../../pages/index';
-import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
+import {
+  AuthProvider,
+  signInWithEmailAndPassword,
+} from '../../contexts/AuthContext';
+import { signInWithEmailAndPassword as FirebaseSignInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../services/firebase';
+
+jest.mock('../../services/firebase', () => {
+  return {
+    auth: jest.fn(),
+  };
+});
 
 jest.mock('firebase/auth', () => {
   return {
@@ -20,24 +29,16 @@ describe('Auth context', () => {
     expect(screen.getByText('component')).toBeInTheDocument();
   });
 
-  it('must execute FirebaseSignInWithEmailAndPassword function', async () => {
-    const signInWithEmailAndPassword = jest.fn();
-
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
-        <Login />
-      </AuthContext.Provider>
-    );
-
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
+  it('should return login result', async () => {
+    await signInWithEmailAndPassword({
+      email: 'email@gmail.com',
+      password: '123456',
     });
+
+    expect(FirebaseSignInWithEmailAndPassword).toHaveBeenCalledWith(
+      auth,
+      'email@gmail.com',
+      '123456'
+    );
   });
 });
