@@ -5,9 +5,6 @@ import {
 } from '../../contexts/AuthContext';
 import { signInWithEmailAndPassword as FirebaseSignInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../services/firebase';
-import { mocked } from 'jest-mock';
-
-jest.mock('../../contexts/AuthContext');
 
 jest.mock('../../services/firebase', () => {
   return {
@@ -17,7 +14,9 @@ jest.mock('../../services/firebase', () => {
 
 jest.mock('firebase/auth', () => {
   return {
-    signInWithEmailAndPassword: jest.fn(),
+    signInWithEmailAndPassword: jest.fn().mockResolvedValueOnce({
+      user: 'fake-user',
+    }),
   };
 });
 
@@ -33,12 +32,6 @@ describe('Auth context', () => {
   });
 
   it('should return login result', async () => {
-    const signInWithEmailAndPasswordMocked = mocked(signInWithEmailAndPassword);
-
-    signInWithEmailAndPasswordMocked.mockResolvedValueOnce({
-      user: 'fake-user',
-    } as any);
-
     const loginResult = await signInWithEmailAndPassword({
       email: 'email@gmail.com',
       password: '123456',
@@ -49,5 +42,7 @@ describe('Auth context', () => {
       'email@gmail.com',
       '123456'
     );
+
+    expect(loginResult).toStrictEqual({ user: 'fake-user' });
   });
 });
