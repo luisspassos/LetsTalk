@@ -1,3 +1,7 @@
+import { FormTitle } from '../components/FormTItle';
+
 export default function IForgotMyPassword() {
-  return <h1>Recuperar senha</h1>;
+  return (
+    <FormTitle text='Envie seu email para recuperar sua senha'></FormTitle>
+  );
 }
