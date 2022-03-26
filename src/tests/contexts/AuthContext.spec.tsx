@@ -2,8 +2,12 @@ import { render, screen } from '@testing-library/react';
 import {
   AuthProvider,
   signInWithEmailAndPassword,
+  sendEmailToRecoverPassword,
 } from '../../contexts/AuthContext';
-import { signInWithEmailAndPassword as FirebaseSignInWithEmailAndPassword } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword as FirebaseSignInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
 import { auth } from '../../services/firebase';
 
 jest.mock('../../services/firebase', () => {
@@ -17,6 +21,7 @@ jest.mock('firebase/auth', () => {
     signInWithEmailAndPassword: jest.fn().mockResolvedValueOnce({
       user: 'fake-user',
     }),
+    sendPasswordResetEmail: jest.fn(),
   };
 });
 
@@ -31,7 +36,7 @@ describe('Auth context', () => {
     expect(screen.getByText('component')).toBeInTheDocument();
   });
 
-  it('should return login result', async () => {
+  it('signInWithEmailAndPassword function should return login result', async () => {
     const loginResult = await signInWithEmailAndPassword({
       email: 'email@gmail.com',
       password: '123456',
@@ -44,5 +49,14 @@ describe('Auth context', () => {
     );
 
     expect(loginResult).toStrictEqual({ user: 'fake-user' });
+  });
+
+  it('sendEmailToRecoverPassword function should run sendPasswordResetEmail from firebase', async () => {
+    await sendEmailToRecoverPassword({ email: 'email@gmail.com' });
+
+    expect(sendPasswordResetEmail).toHaveBeenCalledWith(
+      auth,
+      'email@gmail.com'
+    );
   });
 });

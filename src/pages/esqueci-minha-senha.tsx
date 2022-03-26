@@ -1,16 +1,16 @@
-import { Center } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { BackLink } from '../components/BackLink';
 import { Button } from '../components/Form/Button';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
-import { FormTitle } from '../components/FormTItle';
+import { FormTitle } from '../components/Form/FormTitle';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
 import { useUnknownErrorToast } from '../hooks/Toasts/useUnknownErrorToast';
 import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
+import { CenterForm } from '../components/Form/CenterForm';
 
 type emailFormData = {
   email: string;
@@ -94,7 +94,7 @@ export default function IForgotMyPassword() {
   );
 
   return (
-    <Center p='2rem' h='100vh' flexDir='column'>
+    <CenterForm>
       <FormTitle mb='1rem' text='Envie seu email para recuperar sua senha' />
       <FormWrapper onSubmit={handleSendEmail}>
         <Input
@@ -113,6 +113,6 @@ export default function IForgotMyPassword() {
         />
       </FormWrapper>
       <BackLink text='Voltar' route='/' mt='1rem' />
-    </Center>
+    </CenterForm>
   );
 }
