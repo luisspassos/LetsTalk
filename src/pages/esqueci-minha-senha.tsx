@@ -9,8 +9,8 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
-import { useUnknownErrorToast } from '../hooks/useUnknownErrorToast';
-import { useSuccessToast } from '../hooks/useSuccessToast';
+import { useUnknownErrorToast } from '../hooks/Toasts/useUnknownErrorToast';
+import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
 
 type emailFormData = {
   email: string;
@@ -61,7 +61,6 @@ export default function IForgotMyPassword() {
           const { FirebaseError } = await import('firebase/app');
 
           if (err instanceof FirebaseError) {
-            console.log(err.code);
             const errors: FormFirebaseError = {
               'auth/user-not-found': {
                 type: 'email',

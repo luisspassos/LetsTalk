@@ -2,7 +2,7 @@ import { Button, Icon } from '@chakra-ui/react';
 import { memo, useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
-import { useUnknownErrorToast } from '../../hooks/useUnknownErrorToast';
+import { useUnknownErrorToast } from '../../hooks/Toasts/useUnknownErrorToast';
 
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();

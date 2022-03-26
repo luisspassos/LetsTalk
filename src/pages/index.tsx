@@ -15,7 +15,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { useUnknownErrorToast } from '../hooks/useUnknownErrorToast';
+import { useUnknownErrorToast } from '../hooks/Toasts/useUnknownErrorToast';
 
 type SignInFormData = {
   email: string;
