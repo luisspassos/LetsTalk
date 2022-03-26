@@ -50,4 +50,20 @@ describe('LoginButtonWithGoogle component', () => {
     // eslint-disable-next-line no-console
     await waitFor(() => expect(console.error).toHaveBeenCalled());
   });
+
+  it('fire error toast if function handleSignInWithGoogle falls into catch', async () => {
+    signInWithPopupMocked.mockImplementationOnce(() => {
+      throw new Error('fake-error');
+    });
+
+    render(<LoginButtonWithGoogle />);
+
+    const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
+
+    fireEvent.click(loginButtonWithGoogle);
+
+    expect(
+      screen.getByText('Ocorreu um erro desconhecido')
+    ).toBeInTheDocument();
+  });
 });

@@ -29,7 +29,10 @@ export const AuthContext = createContext({} as AuthContextData);
 export const sendEmailToRecoverPassword = async ({
   email,
 }: SendEmailToRecoverPasswordData) => {
-  console.log(email);
+  const { auth } = await import('../services/firebase');
+
+  const { sendPasswordResetEmail } = await import('firebase/auth');
+  await sendPasswordResetEmail(auth, email);
 };
 
 export const signInWithEmailAndPassword = async ({

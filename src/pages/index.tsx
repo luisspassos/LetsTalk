@@ -15,6 +15,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
+import { useUnknownErrorToast } from '../hooks/useUnknownErrorToast';
 
 type SignInFormData = {
   email: string;
@@ -52,6 +53,8 @@ const Login: NextPage = () => {
 
   const { signInWithEmailAndPassword } = useAuth();
 
+  const unknownErrorToast = useUnknownErrorToast();
+
   const handleSignIn = useMemo(
     () =>
       handleSubmit(async (data) => {
@@ -78,13 +81,23 @@ const Login: NextPage = () => {
 
             const error = errors[err.code];
 
-            setError(error.type, {
-              message: error.message,
-            });
+            if (!error) {
+              unknownErrorToast();
+            } else {
+              setError(error.type, {
+                message: error.message,
+              });
+            }
           }
         }
       }),
-    [handleSubmit, setError, signInWithEmailAndPassword, router]
+    [
+      handleSubmit,
+      setError,
+      signInWithEmailAndPassword,
+      router,
+      unknownErrorToast,
+    ]
   );
 
   return (

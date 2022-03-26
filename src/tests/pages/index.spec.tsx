@@ -19,7 +19,7 @@ describe('Login page', () => {
     const signInWithEmailAndPassword = jest.fn();
 
     render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
+      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
         <Login />
       </AuthContext.Provider>
     );
@@ -82,7 +82,7 @@ describe('Login page', () => {
     });
 
     render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
+      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
         <Login />
       </AuthContext.Provider>
     );
@@ -105,7 +105,7 @@ describe('Login page', () => {
     const signInWithEmailAndPassword = jest.fn();
 
     render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
+      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
         <Login />
       </AuthContext.Provider>
     );
@@ -135,7 +135,7 @@ describe('Login page', () => {
     });
 
     render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
+      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
         <Login />
       </AuthContext.Provider>
     );
@@ -164,7 +164,7 @@ describe('Login page', () => {
     });
 
     render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword }}>
+      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
         <Login />
       </AuthContext.Provider>
     );
@@ -218,5 +218,32 @@ describe('Login page', () => {
     });
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
+  });
+
+  it('fire error toast if function handleSignInWithGoogle falls into catch', async () => {
+    const signInWithEmailAndPassword = jest.fn(() => {
+      throw new FirebaseError('unknow-error', 'unknow-error');
+    });
+
+    render(
+      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
+        <Login />
+      </AuthContext.Provider>
+    );
+
+    const loginButton = screen.getByText('ENTRAR');
+    const emailInput = screen.getByLabelText('Email');
+    const passwordInput = screen.getByLabelText('Senha');
+
+    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password' } });
+
+    await act(async () => {
+      fireEvent.click(loginButton);
+    });
+
+    expect(
+      screen.getByText('Ocorreu um erro desconhecido')
+    ).toBeInTheDocument();
   });
 });

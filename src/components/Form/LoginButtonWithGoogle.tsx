@@ -2,9 +2,11 @@ import { Button, Icon } from '@chakra-ui/react';
 import { memo, useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
+import { useUnknownErrorToast } from '../../hooks/useUnknownErrorToast';
 
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();
+  const unknowErrorToast = useUnknownErrorToast();
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {
@@ -21,10 +23,14 @@ function LoginButtonWithGoogleComponent() {
         router.push('/conversas');
       }
     } catch (err) {
+      const { FirebaseError } = await import('firebase/app');
+
+      if (!(err instanceof FirebaseError)) unknowErrorToast();
+
       // eslint-disable-next-line no-console
       console.error(err);
     }
-  }, [router]);
+  }, [router, unknowErrorToast]);
 
   return (
     <Button
