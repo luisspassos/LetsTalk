@@ -3,22 +3,26 @@
     background-color: #f9f9f9;
     max-width: 800px;
     padding: 20px;
-    color: #101010;
+    margin: 0 auto;
+    background-image: linear-gradient(#f9f9f9, #f9f9f9);
   "
 >
-  <img
-    src="https://i.imgur.com/HiLUxm8.png"
-    alt="Let's Talk"
-    style="height: 45px; margin: 0 auto; display: block"
-  />
-
-  <p>Olá,</p>
-  <p>
-    Clique neste link para redefinir a senha de login no app %APP_NAME% com sua
-    conta %EMAIL%.
-  </p>
-  <p><a href="%LINK%">%LINK%</a></p>
-  <p>Se você não solicitou a redefinição da sua senha, ignore este e-mail.</p>
-  <p>Obrigado,</p>
-  <p>Equipe do app %APP_NAME%</p>
+  <div style="background-color: #f9f9f9; mix-blend-mode: screen;">
+    <div style="background-color: #f9f9f9; mix-blend-mode: difference;">
+      <img
+        src="https://i.imgur.com/HiLUxm8.png"
+        alt="Let's Talk"
+        style="height: 40px; margin: 0 auto; display: block"
+      />
+      <p style="color: #F00;">Olá,</p>
+      <p>
+        Clique neste link para redefinir a senha de login no app %APP_NAME% com sua
+        conta %EMAIL%.
+      </p>
+      <p><a href="%LINK%">%LINK%</a></p>
+      <p>Se você não solicitou a redefinição da sua senha, ignore este e-mail.</p>
+      <p>Obrigado,</p>
+      <p>Equipe do app %APP_NAME%</p>
+    </div>
+  </div>
 </div>

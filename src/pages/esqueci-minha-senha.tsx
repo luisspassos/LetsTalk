@@ -61,10 +61,15 @@ export default function IForgotMyPassword() {
           const { FirebaseError } = await import('firebase/app');
 
           if (err instanceof FirebaseError) {
+            console.log(err.code);
             const errors: FormFirebaseError = {
               'auth/user-not-found': {
                 type: 'email',
                 message: 'Este usuário não existe',
+              },
+              'auth/too-many-requests': {
+                type: 'email',
+                message: 'Tente novamente mais tarde',
               },
             };
 
