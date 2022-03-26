@@ -222,7 +222,7 @@ describe('Login page', () => {
 
   it('fire error toast if function handleSignInWithGoogle falls into catch', async () => {
     const signInWithEmailAndPassword = jest.fn(() => {
-      throw new FirebaseError('unknow-error', 'unknow-error');
+      throw new FirebaseError('unknown-error', 'unknown-error');
     });
 
     render(
