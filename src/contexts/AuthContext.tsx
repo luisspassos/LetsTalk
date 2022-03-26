@@ -10,14 +10,27 @@ type SignInData = {
   password: string;
 };
 
+type SendEmailToRecoverPasswordData = {
+  email: string;
+};
+
 type AuthContextData = {
   signInWithEmailAndPassword: ({
     email,
     password,
   }: SignInData) => Promise<UserCredential>;
+  sendEmailToRecoverPassword: ({
+    email,
+  }: SendEmailToRecoverPasswordData) => Promise<void>;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
+
+export const sendEmailToRecoverPassword = async ({
+  email,
+}: SendEmailToRecoverPasswordData) => {
+  console.log(email);
+};
 
 export const signInWithEmailAndPassword = async ({
   email,
@@ -42,6 +55,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={{
         signInWithEmailAndPassword,
+        sendEmailToRecoverPassword,
       }}
     >
       {children}

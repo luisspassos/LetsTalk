@@ -11,7 +11,7 @@ import { InputError } from './InputError';
 type InputProps = {
   label: string;
   id: string;
-  error: FieldError | undefined;
+  error?: FieldError;
 } & ChakraInputProps;
 
 export const Input = forwardRef(
