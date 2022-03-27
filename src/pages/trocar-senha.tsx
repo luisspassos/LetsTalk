@@ -12,6 +12,8 @@ import { useMemo } from 'react';
 import { GetServerSideProps } from 'next';
 import { verifyPasswordResetCode } from 'firebase/auth';
 import { auth } from '../services/firebase';
+import { useRouter } from 'next/router';
+import { useErrorToast } from '../hooks/Toasts/useErrorToast';
 
 type changePasswordFormData = {
   password: string;
@@ -36,19 +38,32 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isSubmitting },
   } = useForm<changePasswordFormData>({
     resolver: yupResolver(changePasswordFormSchema),
   });
 
+  const router = useRouter();
+
+  const errorToast = useErrorToast(
+    'Ocorreu um erro ao mudar a senha',
+    'Tente reenviar o email para verificar a senha novamente'
+  );
+
   const handleChangePassword = useMemo(
     () =>
-      handleSubmit(({ password }) => {
+      handleSubmit(async ({ password }) => {
         try {
-        } catch (err) {}
+          const { confirmPasswordReset } = await import('firebase/auth');
+
+          await confirmPasswordReset(auth, actionCode, password);
+
+          router.push('/?success=passwordreset');
+        } catch {
+          errorToast();
+        }
       }),
-    [handleSubmit]
+    [handleSubmit, actionCode, router, errorToast]
   );
 
   return (

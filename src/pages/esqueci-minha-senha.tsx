@@ -45,10 +45,10 @@ export default function IForgotMyPassword() {
   const { sendEmailToRecoverPassword } = useAuth();
 
   const unknownErrorToast = useErrorToast();
-  const successToast = useSuccessToast({
-    title: 'Email enviado',
-    description: 'Cheque seu email para redefinir sua senha',
-  });
+  const successToast = useSuccessToast(
+    'Email enviado',
+    'Cheque seu email para redefinir sua senha'
+  );
 
   const handleSendEmail = useMemo(
     () =>

@@ -16,6 +16,7 @@ import { ManEnteringImg } from '../components/ManEnteringImg';
 import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useErrorToast } from '../hooks/Toasts/useErrorToast';
+import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
 
 type SignInFormData = {
   email: string;
@@ -55,20 +56,33 @@ const Login: NextPage = () => {
 
   const unknownErrorToast = useErrorToast();
 
-  const passwordResetErrorToast = useErrorToast(
-    'Ocorreu um erro ao validar o código de redefinição de senha',
-    'Tente novamente.'
-  );
+  const passwordResetToast = {
+    error: useErrorToast(
+      'Ocorreu um erro ao validar o código de redefinição de senha',
+      'Tente novamente.'
+    ),
+    success: useSuccessToast('Senha atualizada com sucesso'),
+  };
+
+  const { error, success } = router.query;
 
   useEffect(() => {
-    const { error } = router.query;
+    if (error || success) router.replace('/');
+  }, [error, router, success]);
 
-    if (error) router.replace('/');
-
+  // errors
+  useEffect(() => {
     if (error === 'passwordreset') {
       passwordResetErrorToast();
     }
-  }, [router, passwordResetErrorToast]);
+  }, [passwordResetErrorToast, error]);
+
+  // successes
+  useEffect(() => {
+    if (success === 'passwordreset') {
+      passwordResetErrorToast();
+    }
+  }, [passwordResetErrorToast, success]);
 
   const handleSignIn = useMemo(
     () =>

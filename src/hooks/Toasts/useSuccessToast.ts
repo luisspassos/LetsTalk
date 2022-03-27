@@ -1,11 +1,11 @@
 import { useToast } from '@chakra-ui/react';
 
-type useSuccessToastParams = {
-  title: string;
-  description?: string;
-};
+type useSuccessToastParam = string | undefined;
 
-export function useSuccessToast({ description, title }: useSuccessToastParams) {
+export function useSuccessToast(
+  title: useSuccessToastParam = undefined,
+  description: useSuccessToastParam = undefined
+) {
   const toast = useToast();
 
   const successToast = () =>
