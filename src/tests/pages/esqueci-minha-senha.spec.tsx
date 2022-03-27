@@ -3,6 +3,7 @@ import IForgotMyPassword from '../../pages/esqueci-minha-senha';
 import { AuthContext } from '../../contexts/AuthContext';
 import { act } from 'react-dom/test-utils';
 import { FirebaseError } from 'firebase/app';
+import { spinnerTimeout } from '../utils/spinnerTimeout';
 
 const sendEmailToRecoverPassword = jest.fn();
 
@@ -138,9 +139,7 @@ describe('IForgotMyPassword page', () => {
   });
 
   it('the enter button should render a spinner when clicking it', async () => {
-    const sendEmailToRecoverPassword = jest.fn(
-      () => new Promise((res) => setTimeout(res, 100))
-    );
+    const sendEmailToRecoverPassword = jest.fn(spinnerTimeout);
 
     render(
       <AuthContext.Provider value={{ sendEmailToRecoverPassword } as any}>

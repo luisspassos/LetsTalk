@@ -5,6 +5,7 @@ import { act } from 'react-dom/test-utils';
 import { mocked } from 'jest-mock';
 import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'next/router';
+import { spinnerTimeout } from '../utils/spinnerTimeout';
 
 jest.mock('next/router');
 
@@ -199,9 +200,7 @@ describe('Login page', () => {
   });
 
   it('the enter button should render a spinner when clicking it', async () => {
-    const signInWithEmailAndPassword = jest.fn(
-      () => new Promise((res) => setTimeout(res, 100))
-    );
+    const signInWithEmailAndPassword = jest.fn(spinnerTimeout);
 
     render(
       <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
