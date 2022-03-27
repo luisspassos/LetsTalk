@@ -2,11 +2,11 @@ import { Button, Icon } from '@chakra-ui/react';
 import { memo, useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
-import { useUnknownErrorToast } from '../../hooks/Toasts/useUnknownErrorToast';
+import { useErrorToast } from '../../hooks/Toasts/useErrorToast';
 
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();
-  const unknowErrorToast = useUnknownErrorToast();
+  const unknowErrorToast = useErrorToast();
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {

@@ -2,11 +2,21 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Login from '../../pages/index';
 import { AuthContext } from '../../contexts/AuthContext';
 import { act } from 'react-dom/test-utils';
-import { useRouter } from 'next/router';
 import { mocked } from 'jest-mock';
 import { FirebaseError } from 'firebase/app';
+import { useRouter } from 'next/router';
 
 jest.mock('next/router');
+
+const useRouterMocked = mocked(useRouter);
+const pushMock = jest.fn();
+const replaceRouterMock = jest.fn();
+
+useRouterMocked.mockReturnValue({
+  push: pushMock,
+  query: { error: undefined },
+  replace: replaceRouterMock,
+} as any);
 
 describe('Login page', () => {
   it('renders correctly', () => {
@@ -70,13 +80,6 @@ describe('Login page', () => {
   });
 
   it('should redirect user to login page if he is logged in', async () => {
-    const useRouterMocked = mocked(useRouter);
-    const pushMock = jest.fn();
-
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-    } as any);
-
     const signInWithEmailAndPassword = jest.fn().mockReturnValue({
       user: 'fake-user',
     });
@@ -245,5 +248,33 @@ describe('Login page', () => {
     expect(
       screen.getByText('Ocorreu um erro desconhecido')
     ).toBeInTheDocument();
+  });
+
+  it('should throw an error toast if there is password reset error in the url', () => {
+    useRouterMocked.mockReturnValueOnce({
+      push: pushMock,
+      query: { error: 'passwordreset' },
+      replace: replaceRouterMock,
+    } as any);
+
+    render(<Login />);
+
+    expect(
+      screen.getByText(
+        'Ocorreu um erro ao validar o código de redefinição de senha'
+      )
+    ).toBeInTheDocument();
+  });
+
+  it('must clear the url if there is an error parameter in it', () => {
+    useRouterMocked.mockReturnValueOnce({
+      push: pushMock,
+      query: { error: 'fake-error' },
+      replace: replaceRouterMock,
+    } as any);
+
+    render(<Login />);
+
+    expect(replaceRouterMock).toHaveBeenCalledWith('/');
   });
 });

@@ -8,10 +8,18 @@ import { Input } from '../components/Form/Input';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useMemo } from 'react';
+import { GetServerSideProps } from 'next';
+import { verifyPasswordResetCode } from 'firebase/auth';
+import { auth } from '../services/firebase';
 
 type changePasswordFormData = {
   password: string;
   password_confirmation: string;
+};
+
+type ChangePasswordProps = {
+  actionCode: string;
 };
 
 const changePasswordFormSchema = yup.object().shape({
@@ -24,7 +32,7 @@ const changePasswordFormSchema = yup.object().shape({
     .oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais'),
 });
 
-export default function ChangePassword() {
+export default function ChangePassword({ actionCode }: ChangePasswordProps) {
   const {
     register,
     handleSubmit,
@@ -34,7 +42,14 @@ export default function ChangePassword() {
     resolver: yupResolver(changePasswordFormSchema),
   });
 
-  const handleChangePassword = () => {};
+  const handleChangePassword = useMemo(
+    () =>
+      handleSubmit(({ password }) => {
+        try {
+        } catch (err) {}
+      }),
+    [handleSubmit]
+  );
 
   return (
     <CenterForm>
@@ -71,3 +86,23 @@ export default function ChangePassword() {
     </CenterForm>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const actionCode = query.oobCode as string;
+
+  try {
+    await verifyPasswordResetCode(auth, actionCode);
+    return {
+      props: {
+        actionCode: actionCode,
+      },
+    };
+  } catch {
+    return {
+      redirect: {
+        destination: '/?error=passwordreset',
+        permanent: false,
+      },
+    };
+  }
+};

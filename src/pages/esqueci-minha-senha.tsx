@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
-import { useUnknownErrorToast } from '../hooks/Toasts/useUnknownErrorToast';
+import { useErrorToast } from '../hooks/Toasts/useErrorToast';
 import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
 import { CenterForm } from '../components/Form/CenterForm';
 
@@ -44,7 +44,7 @@ export default function IForgotMyPassword() {
 
   const { sendEmailToRecoverPassword } = useAuth();
 
-  const unknownErrorToast = useUnknownErrorToast();
+  const unknownErrorToast = useErrorToast();
   const successToast = useSuccessToast({
     title: 'Email enviado',
     description: 'Cheque seu email para redefinir sua senha',

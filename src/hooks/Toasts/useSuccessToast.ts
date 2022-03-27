@@ -13,7 +13,7 @@ export function useSuccessToast({ description, title }: useSuccessToastParams) {
       title: title,
       description: description,
       status: 'success',
-      duration: 5000,
+      duration: 6000,
       isClosable: true,
       position: 'top-right',
     });

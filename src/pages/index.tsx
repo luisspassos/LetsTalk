@@ -13,9 +13,9 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { useUnknownErrorToast } from '../hooks/Toasts/useUnknownErrorToast';
+import { useErrorToast } from '../hooks/Toasts/useErrorToast';
 
 type SignInFormData = {
   email: string;
@@ -53,7 +53,22 @@ const Login: NextPage = () => {
 
   const { signInWithEmailAndPassword } = useAuth();
 
-  const unknownErrorToast = useUnknownErrorToast();
+  const unknownErrorToast = useErrorToast();
+
+  const passwordResetErrorToast = useErrorToast(
+    'Ocorreu um erro ao validar o código de redefinição de senha',
+    'Tente novamente.'
+  );
+
+  useEffect(() => {
+    const { error } = router.query;
+
+    if (error) router.replace('/');
+
+    if (error === 'passwordreset') {
+      passwordResetErrorToast();
+    }
+  }, [router, passwordResetErrorToast]);
 
   const handleSignIn = useMemo(
     () =>
