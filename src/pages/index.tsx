@@ -55,34 +55,33 @@ const Login: NextPage = () => {
   const { signInWithEmailAndPassword } = useAuth();
 
   const unknownErrorToast = useErrorToast();
+  const passwordResetErrorToast = useErrorToast(
+    'Ocorreu um erro ao validar o código de redefinição de senha',
+    'Tente novamente.'
+  );
+  const passwordResetSuccessToast = useSuccessToast(
+    'Senha atualizada com sucesso'
+  );
 
-  const passwordResetToast = {
-    error: useErrorToast(
-      'Ocorreu um erro ao validar o código de redefinição de senha',
-      'Tente novamente.'
-    ),
-    success: useSuccessToast('Senha atualizada com sucesso'),
-  };
-
-  const { error, success } = router.query;
+  const { error: errorParam, success: successParam } = router.query;
 
   useEffect(() => {
-    if (error || success) router.replace('/');
-  }, [error, router, success]);
+    if (errorParam || successParam) router.replace('/');
+  }, [errorParam, router, successParam]);
 
   // errors
   useEffect(() => {
-    if (error === 'passwordreset') {
+    if (errorParam === 'passwordreset') {
       passwordResetErrorToast();
     }
-  }, [passwordResetErrorToast, error]);
+  }, [errorParam, passwordResetErrorToast]);
 
   // successes
   useEffect(() => {
-    if (success === 'passwordreset') {
-      passwordResetErrorToast();
+    if (successParam === 'passwordreset') {
+      passwordResetSuccessToast();
     }
-  }, [passwordResetErrorToast, success]);
+  }, [passwordResetSuccessToast, successParam]);
 
   const handleSignIn = useMemo(
     () =>
