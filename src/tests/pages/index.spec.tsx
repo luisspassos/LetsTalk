@@ -266,7 +266,7 @@ describe('Login page', () => {
     ).toBeInTheDocument();
   });
 
-  it('must clear the url if there is an error parameter in it', () => {
+  it('must clear the url if there is an error or success parameter in it', () => {
     useRouterMocked.mockReturnValueOnce({
       push: pushMock,
       query: { error: 'fake-error' },
@@ -276,5 +276,19 @@ describe('Login page', () => {
     render(<Login />);
 
     expect(replaceRouterMock).toHaveBeenCalledWith('/');
+  });
+
+  it('should throw an success toast if there is password reset success in the url', () => {
+    useRouterMocked.mockReturnValueOnce({
+      push: pushMock,
+      query: { success: 'passwordreset' },
+      replace: replaceRouterMock,
+    } as any);
+
+    render(<Login />);
+
+    expect(
+      screen.getByText('Senha atualizada com sucesso')
+    ).toBeInTheDocument();
   });
 });
