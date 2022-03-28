@@ -1,4 +1,5 @@
 import { useToast } from '@chakra-ui/react';
+import { toastConfig } from './toastConfig';
 
 export function useErrorToast(
   title = 'Ocorreu um erro desconhecido',
@@ -7,14 +8,7 @@ export function useErrorToast(
   const toast = useToast();
 
   const errorToast = () =>
-    toast({
-      title: title,
-      description: description,
-      status: 'error',
-      duration: 6000,
-      isClosable: true,
-      position: 'top-right',
-    });
+    toast(toastConfig({ title, description, status: 'error' }));
 
   return errorToast;
 }

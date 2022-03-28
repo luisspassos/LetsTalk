@@ -1,4 +1,5 @@
 import { useToast } from '@chakra-ui/react';
+import { toastConfig } from './toastConfig';
 
 type useSuccessToastParam = string | undefined;
 
@@ -9,14 +10,7 @@ export function useSuccessToast(
   const toast = useToast();
 
   const successToast = () =>
-    toast({
-      title: title,
-      description: description,
-      status: 'success',
-      duration: 6000,
-      isClosable: true,
-      position: 'top-right',
-    });
+    toast(toastConfig({ title, description, status: 'success' }));
 
   return successToast;
 }

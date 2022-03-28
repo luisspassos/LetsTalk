@@ -1,5 +1,5 @@
-import { Flex, Link, Stack } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import { Link, Stack } from '@chakra-ui/react';
+import type { GetServerSideProps } from 'next';
 import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
@@ -17,6 +17,11 @@ import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useErrorToast } from '../hooks/Toasts/useErrorToast';
 import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
+import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
+import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
+import { applyActionCode } from 'firebase/auth';
+import { auth } from '../services/firebase';
+import { useWarningToast } from '../hooks/Toasts/useWarningToast';
 
 type SignInFormData = {
   email: string;
@@ -31,6 +36,11 @@ type FormFirebaseError = Record<
   }
 >;
 
+type LoginProps = {
+  actionCode: string;
+  mode: string;
+};
+
 const signInFormSchema = yup.object().shape({
   email: yup
     .string()
@@ -40,7 +50,7 @@ const signInFormSchema = yup.object().shape({
   password: yup.string().required('Senha obrigatória'),
 });
 
-const Login: NextPage = () => {
+const Login = ({ actionCode, mode }: LoginProps) => {
   const {
     register,
     handleSubmit,
@@ -62,21 +72,55 @@ const Login: NextPage = () => {
   const passwordResetSuccessToast = useSuccessToast(
     'Senha atualizada com sucesso'
   );
+  const emailVerificationErrorToast = useErrorToast(
+    'Ocorreu um erro ao verificar o email',
+    'Tente reenviar o email novamente'
+  );
+  const emailVerificationSuccessToast = useSuccessToast(
+    'Email verificado com sucesso'
+  );
+  const emailVerificationWarningToast = useWarningToast(
+    'Seu email não foi verificado!',
+    'Enviamos um email de verificação para você.'
+  );
 
-  const { error: errorParam, success: successParam } = router.query;
+  const {
+    error: errorParam,
+    success: successParam,
+    mode: modeParam,
+  } = router.query;
 
   useEffect(() => {
-    if (errorParam || successParam) router.replace('/');
-  }, [errorParam, router, successParam]);
+    if (errorParam || successParam || modeParam) router.replace('/');
+  }, [errorParam, router, successParam, modeParam]);
 
-  // errors
+  // verify email
+  useEffect(() => {
+    if (mode === 'verifyEmail') {
+      try {
+        (async () => {
+          await applyActionCode(auth, actionCode);
+          emailVerificationSuccessToast();
+        })();
+      } catch {
+        emailVerificationErrorToast();
+      }
+    }
+  }, [
+    mode,
+    emailVerificationErrorToast,
+    actionCode,
+    emailVerificationSuccessToast,
+  ]);
+
+  // errors toasts
   useEffect(() => {
     if (errorParam === 'passwordreset') {
       passwordResetErrorToast();
     }
   }, [errorParam, passwordResetErrorToast]);
 
-  // successes
+  // successes toasts
   useEffect(() => {
     if (successParam === 'passwordreset') {
       passwordResetSuccessToast();
@@ -89,10 +133,17 @@ const Login: NextPage = () => {
         try {
           const { user } = await signInWithEmailAndPassword(data);
 
-          if (user) {
-            router.push('/conversas');
+          if (!user.emailVerified) {
+            const { sendEmailVerification } = await import('firebase/auth');
+
+            if (auth.currentUser) await sendEmailVerification(auth.currentUser);
+            emailVerificationWarningToast();
+            return;
           }
+
+          router.push('/conversas');
         } catch (err) {
+          console.error(err);
           const { FirebaseError } = await import('firebase/app');
 
           if (err instanceof FirebaseError) {
@@ -125,13 +176,14 @@ const Login: NextPage = () => {
       signInWithEmailAndPassword,
       router,
       unknownErrorToast,
+      emailVerificationWarningToast,
     ]
   );
 
   return (
-    <Flex mx='auto' maxW={1400} h='100vh' direction='column'>
+    <AuthPageWrapper>
       <Header />
-      <Flex px='10' gap='90px' align='center' flex='1' justify='center'>
+      <AuthContentPageWrapper gap='90px'>
         <ManEnteringImg />
         <FormWrapper onSubmit={handleSignIn}>
           <LoginButtonWithGoogle />
@@ -169,9 +221,29 @@ const Login: NextPage = () => {
 
           <RegistrationLink />
         </FormWrapper>
-      </Flex>
-    </Flex>
+      </AuthContentPageWrapper>
+    </AuthPageWrapper>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { mode, oobCode } = query;
+
+  if (mode === 'resetPassword') {
+    return {
+      redirect: {
+        destination: `/trocar-senha/?oobCode=${oobCode}`,
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      mode: mode ?? null,
+      actionCode: oobCode ?? null,
+    },
+  };
 };
 
 export default Login;
