@@ -7,14 +7,18 @@ import { Button } from '../components/Form/Button';
 
 export default function Register() {
   return (
-    <>
+    <Flex mx='auto' maxW={1400} h='100vh' direction='column'>
       <Header />
-      <Flex>
+      <Flex px='10' gap='150px' align='center' flex='1' justify='center'>
         <Stack color='blue.900'>
           <Heading as='h1'>
-            Mais de 200 mil usuários já estão conversando!
+            Mais de 200 mil usuários já
+            <br /> estão conversando!
           </Heading>
-          <Text>Junte-se e converse com outras pessoas!</Text>
+          <Text fontSize='1.4rem'>
+            Junte-se e converse com outras
+            <br /> pessoas!
+          </Text>
           <BackLink text='Fazer login' route='/' />
         </Stack>
         <FormWrapper>
@@ -35,6 +39,6 @@ export default function Register() {
           <Button text='CADASTRAR' type='submit' />
         </FormWrapper>
       </Flex>
-    </>
+    </Flex>
   );
 }
