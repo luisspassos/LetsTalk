@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Register from '../../pages/cadastro';
 import { act } from 'react-dom/test-utils';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { updateProfile } from 'firebase/auth';
 
 jest.mock('../../services/firebase', () => {
   return {
@@ -11,7 +11,11 @@ jest.mock('../../services/firebase', () => {
 
 jest.mock('firebase/auth', () => {
   return {
-    createUserWithEmailAndPassword: jest.fn(),
+    createUserWithEmailAndPassword() {
+      return {
+        user: 'fake-user',
+      };
+    },
     sendEmailVerification: jest.fn(),
     updateProfile: jest.fn(),
   };
@@ -43,6 +47,10 @@ describe('cadastro page', () => {
       fireEvent.click(registerButton);
     });
 
-    expect(createUserWithEmailAndPassword).toHaveBeenCalled();
+    expect(updateProfile).toHaveBeenCalledWith('fake-user', {
+      displayName: 'John Doe',
+    });
   });
+
+  it('should trigger error messages if inputs are empty');
 });
