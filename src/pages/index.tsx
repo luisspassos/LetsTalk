@@ -19,9 +19,9 @@ import { useErrorToast } from '../hooks/Toasts/useErrorToast';
 import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
 import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
 import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
-import { applyActionCode } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import { useWarningToast } from '../hooks/Toasts/useWarningToast';
+import { applyActionCode } from 'firebase/auth';
 
 type SignInFormData = {
   email: string;
@@ -97,14 +97,14 @@ const Login = ({ actionCode, mode }: LoginProps) => {
   // verify email
   useEffect(() => {
     if (mode === 'verifyEmail') {
-      try {
-        (async () => {
+      (async () => {
+        try {
           await applyActionCode(auth, actionCode);
           emailVerificationSuccessToast();
-        })();
-      } catch {
-        emailVerificationErrorToast();
-      }
+        } catch {
+          emailVerificationErrorToast();
+        }
+      })();
     }
   }, [
     mode,
@@ -143,7 +143,6 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 
           router.push('/conversas');
         } catch (err) {
-          console.error(err);
           const { FirebaseError } = await import('firebase/app');
 
           if (err instanceof FirebaseError) {

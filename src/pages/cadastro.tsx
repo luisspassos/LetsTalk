@@ -62,15 +62,26 @@ export default function Register() {
 
   const handleRegister = useMemo(
     () =>
-      handleSubmit(async ({ email, password }) => {
+      handleSubmit(async ({ email, password, name }) => {
         try {
           const { auth } = await import('../services/firebase');
-          const { createUserWithEmailAndPassword, sendEmailVerification } =
-            await import('firebase/auth');
+          const {
+            createUserWithEmailAndPassword,
+            sendEmailVerification,
+            updateProfile,
+          } = await import('firebase/auth');
 
-          await createUserWithEmailAndPassword(auth, email, password);
+          const { user } = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
 
-          if (auth.currentUser) await sendEmailVerification(auth.currentUser);
+          await updateProfile(user, {
+            displayName: name,
+          });
+
+          await sendEmailVerification(user);
           successToastWhenRegistering();
         } catch (err) {
           const { FirebaseError } = await import('firebase/app');

@@ -14,12 +14,15 @@ export function BackLink({ route, text, ...rest }: BackLinkProps) {
         boxShadow={0}
         {...rest}
         color='gray.400'
-        d='flex'
         alignItems='center'
         gap='.3rem'
+        d='inline-flex'
+        w='min-content'
       >
         <Icon fontSize='1.5rem' as={BiArrowBack} />
-        <Text fontSize='1.4rem'>{text}</Text>
+        <Text whiteSpace='nowrap' fontSize='1.4rem'>
+          {text}
+        </Text>
       </Link>
     </NextLink>
   );
