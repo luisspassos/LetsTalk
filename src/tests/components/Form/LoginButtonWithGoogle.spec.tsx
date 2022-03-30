@@ -6,30 +6,28 @@ import { signInWithPopup } from 'firebase/auth';
 
 jest.mock('next/router');
 
+const useRouterMocked = mocked(useRouter);
+const pushMock = jest.fn();
+
+useRouterMocked.mockReturnValueOnce({
+  push: pushMock,
+} as any);
+
 jest.mock('firebase/auth');
 const signInWithPopupMocked = mocked(signInWithPopup);
 
-describe('LoginButtonWithGoogle component', () => {
-  it('renders correctly', () => {
-    render(<LoginButtonWithGoogle />);
+signInWithPopupMocked.mockImplementation(() => ({ user: 'fake-user' } as any));
 
+describe('LoginButtonWithGoogle component', () => {
+  beforeEach(() => {
+    render(<LoginButtonWithGoogle />);
+  });
+
+  it('renders correctly', () => {
     expect(screen.getByText('Entrar com o Google')).toBeInTheDocument();
   });
 
   it('redirects to the conversations page if the user is logged in', async () => {
-    const useRouterMocked = mocked(useRouter);
-    const pushMock = jest.fn();
-
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-    } as any);
-
-    signInWithPopupMocked.mockImplementationOnce(
-      () => ({ user: 'fake-user' } as any)
-    );
-
-    render(<LoginButtonWithGoogle />);
-
     const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
 
     fireEvent.click(loginButtonWithGoogle);
@@ -40,8 +38,6 @@ describe('LoginButtonWithGoogle component', () => {
   it('fire console.error if function handleSignInWithGoogle falls into catch', async () => {
     // eslint-disable-next-line no-console
     console.error = jest.fn();
-
-    render(<LoginButtonWithGoogle />);
 
     const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
 
@@ -56,14 +52,12 @@ describe('LoginButtonWithGoogle component', () => {
       throw new Error('fake-error');
     });
 
-    render(<LoginButtonWithGoogle />);
-
     const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
 
     fireEvent.click(loginButtonWithGoogle);
 
     expect(
-      screen.getByText('Ocorreu um erro desconhecido')
+      screen.getAllByText('Ocorreu um erro desconhecido')[0]
     ).toBeInTheDocument();
   });
 });

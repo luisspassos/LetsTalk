@@ -7,6 +7,9 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '../../services/firebase';
+import { mocked } from 'jest-mock';
+import { FirebaseError } from 'firebase/app';
+import { spinnerTimeout } from '../utils/spinnerTimeout';
 
 jest.mock('../../services/firebase', () => {
   return {
@@ -14,15 +17,17 @@ jest.mock('../../services/firebase', () => {
   };
 });
 
-jest.mock('firebase/auth', () => {
-  return {
-    createUserWithEmailAndPassword: jest.fn().mockReturnValue({
-      user: 'fake-user',
-    }),
-    sendEmailVerification: jest.fn(),
-    updateProfile: jest.fn(),
-  };
-});
+jest.mock('firebase/auth');
+
+const createUserWithEmailAndPasswordMocked = mocked(
+  createUserWithEmailAndPassword
+);
+mocked(sendEmailVerification);
+mocked(updateProfile);
+
+createUserWithEmailAndPasswordMocked.mockResolvedValue({
+  user: 'fake-user',
+} as any);
 
 describe('cadastro page', () => {
   beforeEach(() => {
@@ -51,6 +56,15 @@ describe('cadastro page', () => {
     });
     await act(async () => {
       fireEvent.click(registerButton);
+    });
+  }
+
+  function fireFirebaseErrorWhenRegistering({
+    errorCode = 'fake-errorCode',
+    errorMessage = 'error-message',
+  } = {}) {
+    createUserWithEmailAndPasswordMocked.mockImplementationOnce(() => {
+      throw new FirebaseError(errorCode, errorMessage);
     });
   }
 
@@ -119,5 +133,41 @@ describe('cadastro page', () => {
     ).toBeInTheDocument();
   });
 
-  it('if the email is already being used, it should trigger an error message', () => {});
+  it('if the email is already being used, it should trigger an error message', async () => {
+    fireFirebaseErrorWhenRegistering({
+      errorCode: 'auth/email-already-in-use',
+    });
+
+    await fillInTheInputsAndPressTheButton();
+
+    expect(
+      screen.getByText('Este email já está sendo usado')
+    ).toBeInTheDocument();
+  });
+
+  it('if the error is unknown when registering, it should trigger a toast', async () => {
+    fireFirebaseErrorWhenRegistering();
+
+    await fillInTheInputsAndPressTheButton();
+
+    expect(
+      screen.getByText('Ocorreu um erro desconhecido')
+    ).toBeInTheDocument();
+  });
+
+  it('there must be a link with the text "Fazer login" and with the route "/"', () => {
+    const signInLink = screen.getByText('Fazer login');
+
+    expect(signInLink.closest('a')).toHaveAttribute('href', '/');
+  });
+
+  it('the register button should render a spinner when clicking it', async () => {
+    createUserWithEmailAndPasswordMocked.mockImplementationOnce(
+      spinnerTimeout as any
+    );
+
+    await fillInTheInputsAndPressTheButton();
+
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
+  });
 });
