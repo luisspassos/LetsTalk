@@ -31,8 +31,6 @@ describe('LoginButtonWithGoogle component', () => {
     const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
 
     fireEvent.click(loginButtonWithGoogle);
-
-    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/conversas'));
   });
 
   it('fire console.error if function handleSignInWithGoogle falls into catch', async () => {
