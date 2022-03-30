@@ -2,21 +2,30 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { LoginButtonWithGoogle } from '../../../components/Form/LoginButtonWithGoogle';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+
+jest.mock('../../../services/firebase', () => {
+  return {
+    auth: 'fake-auth',
+  };
+});
 
 jest.mock('next/router');
 
 const useRouterMocked = mocked(useRouter);
 const pushMock = jest.fn();
 
-useRouterMocked.mockReturnValueOnce({
+useRouterMocked.mockReturnValue({
   push: pushMock,
 } as any);
 
 jest.mock('firebase/auth');
 const signInWithPopupMocked = mocked(signInWithPopup);
+mocked(GoogleAuthProvider);
 
-signInWithPopupMocked.mockImplementation(() => ({ user: 'fake-user' } as any));
+signInWithPopupMocked.mockResolvedValue({
+  user: 'fake-user',
+} as any);
 
 describe('LoginButtonWithGoogle component', () => {
   beforeEach(() => {
@@ -31,6 +40,8 @@ describe('LoginButtonWithGoogle component', () => {
     const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
 
     fireEvent.click(loginButtonWithGoogle);
+
+    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/conversas'));
   });
 
   it('fire console.error if function handleSignInWithGoogle falls into catch', async () => {
