@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { Header } from '../../components/Header';
 
-describe('Button component', () => {
+describe('Header component', () => {
   it('renders correctly', () => {
     render(<Header />);
 

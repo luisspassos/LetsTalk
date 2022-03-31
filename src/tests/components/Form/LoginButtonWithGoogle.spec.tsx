@@ -27,6 +27,12 @@ signInWithPopupMocked.mockResolvedValue({
   user: 'fake-user',
 } as any);
 
+function pressTheButton() {
+  const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
+
+  fireEvent.click(loginButtonWithGoogle);
+}
+
 describe('LoginButtonWithGoogle component', () => {
   beforeEach(() => {
     render(<LoginButtonWithGoogle />);
@@ -37,23 +43,9 @@ describe('LoginButtonWithGoogle component', () => {
   });
 
   it('redirects to the conversations page if the user is logged in', async () => {
-    const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
-
-    fireEvent.click(loginButtonWithGoogle);
+    pressTheButton();
 
     await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/conversas'));
-  });
-
-  it('fire console.error if function handleSignInWithGoogle falls into catch', async () => {
-    // eslint-disable-next-line no-console
-    console.error = jest.fn();
-
-    const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
-
-    fireEvent.click(loginButtonWithGoogle);
-
-    // eslint-disable-next-line no-console
-    await waitFor(() => expect(console.error).toHaveBeenCalled());
   });
 
   it('fire error toast if function handleSignInWithGoogle falls into catch', async () => {
@@ -61,12 +53,10 @@ describe('LoginButtonWithGoogle component', () => {
       throw new Error('fake-error');
     });
 
-    const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
-
-    fireEvent.click(loginButtonWithGoogle);
+    pressTheButton();
 
     expect(
-      screen.getAllByText('Ocorreu um erro desconhecido')[0]
+      await screen.findByText('Ocorreu um erro desconhecido')
     ).toBeInTheDocument();
   });
 });

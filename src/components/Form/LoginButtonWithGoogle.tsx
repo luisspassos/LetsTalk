@@ -6,7 +6,7 @@ import { useErrorToast } from '../../hooks/Toasts/useErrorToast';
 
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();
-  const unknowErrorToast = useErrorToast();
+  const unknownErrorToast = useErrorToast();
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {
@@ -23,14 +23,9 @@ function LoginButtonWithGoogleComponent() {
         router.push('/conversas');
       }
     } catch (err) {
-      const { FirebaseError } = await import('firebase/app');
-
-      if (!(err instanceof FirebaseError)) unknowErrorToast();
-
-      // eslint-disable-next-line no-console
-      console.error(err);
+      unknownErrorToast();
     }
-  }, [router, unknowErrorToast]);
+  }, [router, unknownErrorToast]);
 
   return (
     <Button

@@ -8,8 +8,9 @@ import { useRouter } from 'next/router';
 import { spinnerTimeout } from '../utils/spinnerTimeout';
 import { applyActionCode, sendEmailVerification } from 'firebase/auth';
 
-jest.mock('firebase/auth');
+const signInWithEmailAndPassword = jest.fn();
 
+jest.mock('firebase/auth');
 const applyActionCodeMocked = mocked(applyActionCode);
 
 jest.mock('next/router');
@@ -31,32 +32,53 @@ useRouterMocked.mockReturnValue({
   replace: replaceRouterMock,
 } as any);
 
+function renderLoginPage({ mode = '', actionCode = '' } = {}) {
+  render(
+    <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
+      <Login mode={mode} actionCode={actionCode} />
+    </AuthContext.Provider>
+  );
+}
+
+async function fillInTheInputsAndPressTheButton({
+  email = 'email@gmail.com',
+  password = 'password',
+} = {}) {
+  const loginButton = screen.getByText('ENTRAR');
+  const emailInput = screen.getByLabelText('Email');
+  const passwordInput = screen.getByLabelText('Senha');
+
+  fireEvent.change(emailInput, { target: { value: email } });
+  fireEvent.change(passwordInput, { target: { value: password } });
+
+  await act(async () => {
+    fireEvent.click(loginButton);
+  });
+}
+
+function mockReturnFromUseRouter(queryObj: {
+  error?: string;
+  success?: string;
+  mode?: string;
+}) {
+  useRouterMocked.mockReturnValueOnce({
+    push: pushMock,
+    query: { ...queryObj },
+    replace: replaceRouterMock,
+  } as any);
+}
+
 describe('Login page', () => {
   it('renders correctly', () => {
-    render(<Login mode='fake-mode' actionCode='fake-actionCode' />);
+    renderLoginPage();
 
     expect(screen.getByText('Entrar com o Google')).toBeInTheDocument();
   });
 
   it('check if function signInWithEmailAndPassword is running if inputs are filled in correctly', async () => {
-    const signInWithEmailAndPassword = jest.fn();
+    renderLoginPage();
 
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
-        <Login mode='' actionCode='fake-actionCode' />
-      </AuthContext.Provider>
-    );
-
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
-    });
+    await fillInTheInputsAndPressTheButton();
 
     expect(signInWithEmailAndPassword).toHaveBeenCalledWith({
       email: 'email@gmail.com',
@@ -65,7 +87,7 @@ describe('Login page', () => {
   });
 
   it('show empty input error messages', async () => {
-    render(<Login mode='' actionCode='fake-actionCode' />);
+    renderLoginPage();
 
     const loginButton = screen.getByText('ENTRAR');
 
@@ -78,67 +100,34 @@ describe('Login page', () => {
   });
 
   it('should show invalid email message if it is', async () => {
-    render(<Login mode='' actionCode='fake-actionCode' />);
+    renderLoginPage();
 
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-
-    fireEvent.change(emailInput, { target: { value: 'email' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
+    await fillInTheInputsAndPressTheButton({
+      email: 'email',
     });
 
     expect(screen.getByText('E-mail inválido')).toBeInTheDocument();
   });
 
   it('should redirect user to login page if he is logged in', async () => {
-    const signInWithEmailAndPassword = jest.fn().mockReturnValueOnce({
+    signInWithEmailAndPassword.mockReturnValueOnce({
       user: {
         emailVerified: true,
       },
     });
 
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
-        <Login mode='' actionCode='fake-actionCode' />
-      </AuthContext.Provider>
-    );
+    renderLoginPage();
 
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
-    });
+    await fillInTheInputsAndPressTheButton();
 
     expect(pushMock).toHaveBeenCalledWith('/conversas');
   });
 
   it('must run .trim() on email', async () => {
-    const signInWithEmailAndPassword = jest.fn();
+    renderLoginPage();
 
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
-        <Login mode='' actionCode='fake-actionCode' />
-      </AuthContext.Provider>
-    );
-
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, {
-      target: { value: '   email@gmail.com   ' },
-    });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
+    await fillInTheInputsAndPressTheButton({
+      email: '   email@gmail.com      ',
     });
 
     expect(signInWithEmailAndPassword).toHaveBeenCalledWith({
@@ -148,28 +137,13 @@ describe('Login page', () => {
   });
 
   it('trigger error message if user not found', async () => {
-    const signInWithEmailAndPassword = jest.fn(() => {
+    signInWithEmailAndPassword.mockImplementationOnce(() => {
       throw new FirebaseError('auth/user-not-found', 'error-message');
     });
 
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
-        <Login mode='' actionCode='fake-actionCode' />
-      </AuthContext.Provider>
-    );
+    renderLoginPage();
 
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, {
-      target: { value: 'email@gmail.com' },
-    });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
-    });
+    await fillInTheInputsAndPressTheButton();
 
     expect(
       await screen.findByText('Este usuário não existe')
@@ -177,34 +151,19 @@ describe('Login page', () => {
   });
 
   it('trigger error if password is wrong', async () => {
-    const signInWithEmailAndPassword = jest.fn(() => {
+    signInWithEmailAndPassword.mockImplementationOnce(() => {
       throw new FirebaseError('auth/wrong-password', 'error-message');
     });
 
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
-        <Login mode='' actionCode='fake-actionCode' />
-      </AuthContext.Provider>
-    );
+    renderLoginPage();
 
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, {
-      target: { value: 'email@gmail.com' },
-    });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
-    });
+    await fillInTheInputsAndPressTheButton();
 
     expect(await screen.findByText('Senha incorreta')).toBeInTheDocument();
   });
 
   it('there should be a forgot-my-password link to take you to the "esqueci-minha-senha" route', () => {
-    render(<Login mode='' actionCode='fake-actionCode' />);
+    renderLoginPage();
 
     const forgotMyPasswordLink = screen.getByText('Esqueci minha senha');
     expect(forgotMyPasswordLink.closest('a')).toHaveAttribute(
@@ -214,49 +173,23 @@ describe('Login page', () => {
   });
 
   it('the enter button should render a spinner when clicking it', async () => {
-    const signInWithEmailAndPassword = jest.fn(spinnerTimeout);
+    signInWithEmailAndPassword.mockImplementationOnce(spinnerTimeout);
 
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
-        <Login mode='' actionCode='fake-actionCode' />
-      </AuthContext.Provider>
-    );
+    renderLoginPage();
 
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
-    });
+    await fillInTheInputsAndPressTheButton();
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('fire error toast if function handleSignInWithGoogle falls into catch', async () => {
-    const signInWithEmailAndPassword = jest.fn(() => {
+    signInWithEmailAndPassword.mockImplementationOnce(() => {
       throw new FirebaseError('unknown-error', 'unknown-error');
     });
 
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
-        <Login mode='' actionCode='fake-actionCode' />
-      </AuthContext.Provider>
-    );
+    renderLoginPage();
 
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
-    });
+    await fillInTheInputsAndPressTheButton();
 
     expect(
       screen.getByText('Ocorreu um erro desconhecido')
@@ -264,13 +197,9 @@ describe('Login page', () => {
   });
 
   it('should throw an error toast if there is password reset error in the url', () => {
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { error: 'passwordreset' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ error: 'passwordreset' });
 
-    render(<Login mode='' actionCode='fake-actionCode' />);
+    renderLoginPage();
 
     expect(
       screen.getByText(
@@ -280,23 +209,15 @@ describe('Login page', () => {
   });
 
   it('must clear the url if there is an error or success parameter in it', () => {
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { error: 'fake-error' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ error: 'fake-error' });
 
-    render(<Login mode='' actionCode='fake-actionCode' />);
+    renderLoginPage();
 
     expect(replaceRouterMock).toHaveBeenCalledWith('/');
   });
 
   it('should throw an success toast if there is password reset success in the url', () => {
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { success: 'passwordreset' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ success: 'passwordreset' });
 
     render(<Login mode='' actionCode='fake-actionCode' />);
 
@@ -306,13 +227,9 @@ describe('Login page', () => {
   });
 
   it('should throw an error toast if there is a password reset error in the url', () => {
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { error: 'passwordreset' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ error: 'passwordreset' });
 
-    render(<Login mode='' actionCode='fake-actionCode' />);
+    renderLoginPage();
 
     expect(
       screen.getAllByText(
@@ -326,13 +243,11 @@ describe('Login page', () => {
       throw new Error('fake-error');
     });
 
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { mode: 'verifyEmail' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ mode: 'verifyEmail' });
 
-    render(<Login mode='verifyEmail' actionCode='fake-actionCode' />);
+    renderLoginPage({
+      mode: 'verifyEmail',
+    });
 
     expect(
       screen.getByText('Ocorreu um erro ao verificar o email')
@@ -346,7 +261,9 @@ describe('Login page', () => {
       replace: replaceRouterMock,
     } as any);
 
-    render(<Login mode='verifyEmail' actionCode='fake-actionCode' />);
+    renderLoginPage({
+      mode: 'verifyEmail',
+    });
 
     expect(
       await screen.findByText('Email verificado com sucesso')
@@ -354,28 +271,15 @@ describe('Login page', () => {
   });
 
   it('should trigger a warning message if the email has not yet been verified', async () => {
-    const signInWithEmailAndPassword = jest.fn().mockReturnValueOnce({
+    signInWithEmailAndPassword.mockReturnValueOnce({
       user: {
         emailVerified: false,
       },
     });
 
-    render(
-      <AuthContext.Provider value={{ signInWithEmailAndPassword } as any}>
-        <Login mode='' actionCode='fake-actionCode' />
-      </AuthContext.Provider>
-    );
+    renderLoginPage();
 
-    const loginButton = screen.getByText('ENTRAR');
-    const emailInput = screen.getByLabelText('Email');
-    const passwordInput = screen.getByLabelText('Senha');
-
-    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password' } });
-
-    await act(async () => {
-      fireEvent.click(loginButton);
-    });
+    await fillInTheInputsAndPressTheButton();
 
     expect(sendEmailVerification).toHaveBeenCalledWith('fake-user');
     expect(
@@ -390,7 +294,9 @@ describe('Login page', () => {
       replace: replaceRouterMock,
     } as any);
 
-    render(<Login mode='verifyEmail' actionCode='fake-actionCode' />);
+    renderLoginPage({
+      mode: 'verifyEmail',
+    });
 
     expect(replaceRouterMock).toHaveBeenCalledWith('/');
   });
@@ -402,7 +308,9 @@ describe('Login page', () => {
       replace: replaceRouterMock,
     } as any);
 
-    render(<Login mode='verifyEmail' actionCode='fake-actionCode' />);
+    renderLoginPage({
+      mode: 'verifyEmail',
+    });
 
     expect(replaceRouterMock).toHaveBeenCalledWith('/');
   });
@@ -414,7 +322,9 @@ describe('Login page', () => {
       replace: replaceRouterMock,
     } as any);
 
-    render(<Login mode='verifyEmail' actionCode='fake-actionCode' />);
+    renderLoginPage({
+      mode: 'verifyEmail',
+    });
 
     expect(replaceRouterMock).toHaveBeenCalledWith('/');
   });

@@ -7,31 +7,38 @@ import { spinnerTimeout } from '../utils/spinnerTimeout';
 
 const sendEmailToRecoverPassword = jest.fn();
 
-describe('IForgotMyPassword page', () => {
-  it('renders correctly', () => {
-    render(<IForgotMyPassword />);
+async function fillInInputAndPressTheButton({
+  email = 'email@gmail.com',
+} = {}) {
+  const sendButton = screen.getByText('ENVIAR');
+  const emailInput = screen.getByLabelText('Email');
 
+  fireEvent.change(emailInput, {
+    target: { value: email },
+  });
+
+  await act(async () => {
+    fireEvent.click(sendButton);
+  });
+}
+
+describe('IForgotMyPassword page', () => {
+  beforeEach(() => {
+    render(
+      <AuthContext.Provider value={{ sendEmailToRecoverPassword } as any}>
+        <IForgotMyPassword />
+      </AuthContext.Provider>
+    );
+  });
+
+  it('renders correctly', () => {
     expect(
       screen.getByText('Envie seu email para recuperar sua senha')
     ).toBeInTheDocument();
   });
 
   it('must run .trim() on email', async () => {
-    render(
-      <AuthContext.Provider value={{ sendEmailToRecoverPassword } as any}>
-        <IForgotMyPassword />
-      </AuthContext.Provider>
-    );
-
-    const sendButton = screen.getByText('ENVIAR');
-    const emailInput = screen.getByLabelText('Email');
-
-    fireEvent.change(emailInput, {
-      target: { value: '      email@gmail.com ' },
-    });
-    await act(async () => {
-      fireEvent.click(sendButton);
-    });
+    await fillInInputAndPressTheButton({ email: ' email@gmail.com      ' });
 
     expect(sendEmailToRecoverPassword).toHaveBeenCalledWith({
       email: 'email@gmail.com',
@@ -41,120 +48,33 @@ describe('IForgotMyPassword page', () => {
   it('should issue a success toast if the email was sent', async () => {
     sendEmailToRecoverPassword.mockResolvedValueOnce('fake-return');
 
-    render(
-      <AuthContext.Provider value={{ sendEmailToRecoverPassword } as any}>
-        <IForgotMyPassword />
-      </AuthContext.Provider>
-    );
-
-    const sendButton = screen.getByText('ENVIAR');
-    const emailInput = screen.getByLabelText('Email');
-
-    fireEvent.change(emailInput, {
-      target: { value: 'email@gmail.com' },
-    });
-
-    await act(async () => {
-      fireEvent.click(sendButton);
-    });
+    await fillInInputAndPressTheButton();
 
     expect(screen.getAllByText('Email enviado')[0]).toBeInTheDocument();
   });
 
-  it('trigger error message if user not found', async () => {
-    sendEmailToRecoverPassword.mockImplementationOnce(() => {
-      throw new FirebaseError('auth/user-not-found', 'error-message');
-    });
+  it.each`
+    error_code                  | test_message
+    ${'auth/user-not-found'}    | ${'Este usuário não existe'}
+    ${'auth/too-many-requests'} | ${'Tente novamente mais tarde'}
+    ${'unknown error'}          | ${'Ocorreu um erro desconhecido'}
+  `(
+    'throws an error if it is $error_code',
+    async ({ error_code, test_message }) => {
+      sendEmailToRecoverPassword.mockImplementationOnce(() => {
+        throw new FirebaseError(error_code, 'error-message');
+      });
 
-    render(
-      <AuthContext.Provider value={{ sendEmailToRecoverPassword } as any}>
-        <IForgotMyPassword />
-      </AuthContext.Provider>
-    );
+      await fillInInputAndPressTheButton();
 
-    const sendButton = screen.getByText('ENVIAR');
-    const emailInput = screen.getByLabelText('Email');
-
-    fireEvent.change(emailInput, {
-      target: { value: 'email@gmail.com' },
-    });
-
-    await act(async () => {
-      fireEvent.click(sendButton);
-    });
-
-    expect(screen.getByText('Este usuário não existe')).toBeInTheDocument();
-  });
-
-  it('trigger error message if have many requests', async () => {
-    sendEmailToRecoverPassword.mockImplementationOnce(() => {
-      throw new FirebaseError('auth/too-many-requests', 'error-message');
-    });
-
-    render(
-      <AuthContext.Provider value={{ sendEmailToRecoverPassword } as any}>
-        <IForgotMyPassword />
-      </AuthContext.Provider>
-    );
-
-    const sendButton = screen.getByText('ENVIAR');
-    const emailInput = screen.getByLabelText('Email');
-
-    fireEvent.change(emailInput, {
-      target: { value: 'email@gmail.com' },
-    });
-
-    await act(async () => {
-      fireEvent.click(sendButton);
-    });
-
-    expect(screen.getByText('Tente novamente mais tarde')).toBeInTheDocument();
-  });
-
-  it('trigger error message if he is unknown', async () => {
-    sendEmailToRecoverPassword.mockImplementationOnce(() => {
-      throw new FirebaseError('unknown error', 'error-message');
-    });
-
-    render(
-      <AuthContext.Provider value={{ sendEmailToRecoverPassword } as any}>
-        <IForgotMyPassword />
-      </AuthContext.Provider>
-    );
-
-    const sendButton = screen.getByText('ENVIAR');
-    const emailInput = screen.getByLabelText('Email');
-
-    fireEvent.change(emailInput, {
-      target: { value: 'email@gmail.com' },
-    });
-
-    await act(async () => {
-      fireEvent.click(sendButton);
-    });
-
-    expect(
-      screen.getByText('Ocorreu um erro desconhecido')
-    ).toBeInTheDocument();
-  });
+      expect(screen.getByText(test_message)).toBeInTheDocument();
+    }
+  );
 
   it('the enter button should render a spinner when clicking it', async () => {
-    const sendEmailToRecoverPassword = jest.fn(spinnerTimeout);
+    sendEmailToRecoverPassword.mockImplementationOnce(spinnerTimeout);
 
-    render(
-      <AuthContext.Provider value={{ sendEmailToRecoverPassword } as any}>
-        <IForgotMyPassword />
-      </AuthContext.Provider>
-    );
-
-    const sendButton = screen.getByText('ENVIAR');
-    const emailInput = screen.getByLabelText('Email');
-
-    fireEvent.change(emailInput, { target: { value: 'email@gmail.com' } });
-
-    await act(async () => {
-      fireEvent.click(sendButton);
-    });
+    await fillInInputAndPressTheButton();
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
