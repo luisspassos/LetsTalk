@@ -68,6 +68,17 @@ function mockReturnFromUseRouter(queryObj: {
   } as any);
 }
 
+async function getServerSidePropsResult() {
+  const result = await getServerSideProps({
+    query: {
+      mode: 'fake-mode',
+      oobCode: undefined,
+    },
+  } as any);
+
+  return result;
+}
+
 describe('Login page', () => {
   it('renders correctly', () => {
     renderLoginPage();
@@ -255,11 +266,7 @@ describe('Login page', () => {
   });
 
   it('should trigger an success toast if there is an email verification', async () => {
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { mode: 'verifyEmail' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ mode: 'verifyEmail' });
 
     renderLoginPage({
       mode: 'verifyEmail',
@@ -288,11 +295,7 @@ describe('Login page', () => {
   });
 
   it('must clear the url if there is an error parameter in the url', () => {
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { error: 'fake-error' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ error: 'fake-error' });
 
     renderLoginPage({
       mode: 'verifyEmail',
@@ -302,11 +305,7 @@ describe('Login page', () => {
   });
 
   it('must clear the url if there is an success parameter in the url', () => {
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { success: 'fake-success' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ success: 'fake-success' });
 
     renderLoginPage({
       mode: 'verifyEmail',
@@ -316,11 +315,7 @@ describe('Login page', () => {
   });
 
   it('must clear the url if there is an mode parameter in the url', () => {
-    useRouterMocked.mockReturnValueOnce({
-      push: pushMock,
-      query: { mode: 'fake-mode' },
-      replace: replaceRouterMock,
-    } as any);
+    mockReturnFromUseRouter({ mode: 'fake-mode' });
 
     renderLoginPage({
       mode: 'verifyEmail',
