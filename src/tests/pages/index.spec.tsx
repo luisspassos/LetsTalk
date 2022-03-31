@@ -302,34 +302,37 @@ describe('Login page', () => {
     ).toBeInTheDocument();
   });
 
-  it('must clear the url if there is an error parameter in the url', () => {
-    mockReturnFromUseRouter({ error: 'fake-error' });
+  const parametersInTheUrl = [
+    {
+      name: 'error',
+      param: {
+        error: 'fake-error',
+      },
+    },
+    {
+      name: 'success',
+      param: {
+        success: 'fake-success',
+      },
+    },
+    {
+      name: 'mode',
+      param: {
+        mode: 'fake-mode',
+      },
+    },
+  ];
 
-    renderLoginPage({
-      mode: 'verifyEmail',
+  parametersInTheUrl.forEach(({ name, param }) => {
+    it(`must clear the url if there is an ${name} parameter in the url`, () => {
+      mockReturnFromUseRouter({ ...param });
+
+      renderLoginPage({
+        mode: 'verifyEmail',
+      });
+
+      expect(replaceRouterMock).toHaveBeenCalledWith('/');
     });
-
-    expect(replaceRouterMock).toHaveBeenCalledWith('/');
-  });
-
-  it('must clear the url if there is an success parameter in the url', () => {
-    mockReturnFromUseRouter({ success: 'fake-success' });
-
-    renderLoginPage({
-      mode: 'verifyEmail',
-    });
-
-    expect(replaceRouterMock).toHaveBeenCalledWith('/');
-  });
-
-  it('must clear the url if there is an mode parameter in the url', () => {
-    mockReturnFromUseRouter({ mode: 'fake-mode' });
-
-    renderLoginPage({
-      mode: 'verifyEmail',
-    });
-
-    expect(replaceRouterMock).toHaveBeenCalledWith('/');
   });
 
   it('must redirect the user to the page to change the password if there is the resetPassword parameter in the url', async () => {
