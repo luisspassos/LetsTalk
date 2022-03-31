@@ -7,7 +7,6 @@ import { useErrorToast } from '../../hooks/Toasts/useErrorToast';
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();
   const unknownErrorToast = useErrorToast();
-
   const handleSignInWithGoogle = useCallback(async () => {
     try {
       const { GoogleAuthProvider, signInWithPopup } = await import(

@@ -68,11 +68,19 @@ function mockReturnFromUseRouter(queryObj: {
   } as any);
 }
 
-async function getServerSidePropsResult() {
+async function getServerSidePropsResult(
+  {
+    mode,
+    oobCode,
+  }: {
+    mode?: string;
+    oobCode?: string;
+  } = {} as any
+) {
   const result = await getServerSideProps({
     query: {
-      mode: 'fake-mode',
-      oobCode: undefined,
+      mode: mode,
+      oobCode: oobCode,
     },
   } as any);
 
@@ -325,12 +333,10 @@ describe('Login page', () => {
   });
 
   it('must redirect the user to the page to change the password if there is the resetPassword parameter in the url', async () => {
-    const result = await getServerSideProps({
-      query: {
-        mode: 'resetPassword',
-        oobCode: 'fake-oobCode',
-      },
-    } as any);
+    const result = await getServerSidePropsResult({
+      mode: 'resetPassword',
+      oobCode: 'fake-oobCode',
+    });
 
     expect(result).toEqual({
       redirect: {
@@ -341,12 +347,10 @@ describe('Login page', () => {
   });
 
   it('getServerSideProps should return mode and actionCode', async () => {
-    const result = await getServerSideProps({
-      query: {
-        mode: 'fake-mode',
-        oobCode: 'fake-oobCode',
-      },
-    } as any);
+    const result = await getServerSidePropsResult({
+      mode: 'fake-mode',
+      oobCode: 'fake-oobCode',
+    });
 
     expect(result).toEqual({
       props: {
@@ -356,33 +360,12 @@ describe('Login page', () => {
     });
   });
 
-  it('mode in getServerSideProps should return null if its original value is undefined', async () => {
-    const result = await getServerSideProps({
-      query: {
-        mode: undefined,
-        oobCode: 'fake-oobCode',
-      },
-    } as any);
+  it('mode and actionCode must return null if their original values ​​are undefined', async () => {
+    const result = await getServerSidePropsResult();
 
     expect(result).toEqual({
       props: {
         mode: null,
-        actionCode: 'fake-oobCode',
-      },
-    });
-  });
-
-  it('actionCode in getServerSideProps should return null if its original value is undefined', async () => {
-    const result = await getServerSideProps({
-      query: {
-        mode: 'fake-mode',
-        oobCode: undefined,
-      },
-    } as any);
-
-    expect(result).toEqual({
-      props: {
-        mode: 'fake-mode',
         actionCode: null,
       },
     });
