@@ -10,8 +10,8 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
-import { useErrorToast } from '../hooks/Toasts/useErrorToast';
-import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
+import { unknownErrorToast } from '../utils/Toasts/unknownErrorToast';
+import { toast } from '../utils/Toasts/toast';
 
 type FormFirebaseError = Record<
   string,
@@ -54,11 +54,12 @@ export default function Register() {
     resolver: yupResolver(registrationFormSchema),
   });
 
-  const unknownErrorToast = useErrorToast();
-  const successToastWhenRegistering = useSuccessToast(
-    'Cadastrado com sucesso',
-    'Acesse seu email e verifique sua conta para fazer login'
-  );
+  const successToastWhenRegistering = () =>
+    toast({
+      title: 'Cadastrado com sucesso',
+      description: 'Acesse seu email e verifique sua conta para fazer login',
+      status: 'success',
+    });
 
   const handleRegister = useMemo(
     () =>
@@ -106,7 +107,7 @@ export default function Register() {
           }
         }
       }),
-    [handleSubmit, setError, unknownErrorToast, successToastWhenRegistering]
+    [handleSubmit, setError]
   );
 
   return (

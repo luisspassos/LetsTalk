@@ -8,9 +8,9 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
-import { useErrorToast } from '../hooks/Toasts/useErrorToast';
-import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
 import { CenterForm } from '../components/Form/CenterForm';
+import { unknownErrorToast } from '../utils/Toasts/unknownErrorToast';
+import { toast } from '../utils/Toasts/toast';
 
 type emailFormData = {
   email: string;
@@ -44,11 +44,12 @@ export default function IForgotMyPassword() {
 
   const { sendEmailToRecoverPassword } = useAuth();
 
-  const unknownErrorToast = useErrorToast();
-  const successToast = useSuccessToast(
-    'Email enviado',
-    'Cheque seu email para redefinir sua senha'
-  );
+  const successToast = () =>
+    toast({
+      title: 'Email enviado',
+      description: 'Cheque seu email para redefinir sua senha',
+      status: 'success',
+    });
 
   const handleSendEmail = useMemo(
     () =>
@@ -84,13 +85,7 @@ export default function IForgotMyPassword() {
           }
         }
       }),
-    [
-      handleSubmit,
-      sendEmailToRecoverPassword,
-      setError,
-      unknownErrorToast,
-      successToast,
-    ]
+    [handleSubmit, sendEmailToRecoverPassword, setError]
   );
 
   return (

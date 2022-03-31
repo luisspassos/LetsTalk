@@ -15,13 +15,12 @@ import { useAuth } from '../contexts/AuthContext';
 import { ManEnteringImg } from '../components/ManEnteringImg';
 import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { useErrorToast } from '../hooks/Toasts/useErrorToast';
-import { useSuccessToast } from '../hooks/Toasts/useSuccessToast';
 import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
 import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
 import { auth } from '../services/firebase';
-import { useWarningToast } from '../hooks/Toasts/useWarningToast';
 import { applyActionCode } from 'firebase/auth';
+import { unknownErrorToast } from '../utils/Toasts/unknownErrorToast';
+import { toast } from '../utils/Toasts/toast';
 
 type SignInFormData = {
   email: string;
@@ -64,25 +63,40 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 
   const { signInWithEmailAndPassword } = useAuth();
 
-  const unknownErrorToast = useErrorToast();
-  const passwordResetErrorToast = useErrorToast(
-    'Ocorreu um erro ao validar o código de redefinição de senha',
-    'Tente novamente.'
-  );
-  const passwordResetSuccessToast = useSuccessToast(
-    'Senha atualizada com sucesso'
-  );
-  const emailVerificationErrorToast = useErrorToast(
-    'Ocorreu um erro ao verificar o email',
-    'Tente reenviar o email novamente'
-  );
-  const emailVerificationSuccessToast = useSuccessToast(
-    'Email verificado com sucesso'
-  );
-  const emailVerificationWarningToast = useWarningToast(
-    'Seu email não foi verificado!',
-    'Enviamos um email de verificação para você.'
-  );
+  const toasts = {
+    emailVerification: {
+      error: () =>
+        toast({
+          status: 'error',
+          title: 'Ocorreu um erro ao verificar o email',
+          description: 'Tente reenviar o email novamente',
+        }),
+      success: () =>
+        toast({
+          status: 'success',
+          title: 'Email verificado com sucesso',
+        }),
+      warning: () =>
+        toast({
+          status: 'warning',
+          title: 'Seu email não foi verificado!',
+          description: 'Enviamos um email de verificação para você.',
+        }),
+    },
+    passwordReset: {
+      error: () =>
+        toast({
+          status: 'error',
+          title: 'Ocorreu um erro ao validar o código de redefinição de senha',
+          description: 'Tente novamente.',
+        }),
+      success: () =>
+        toast({
+          status: 'success',
+          title: 'Senha atualizada com sucesso',
+        }),
+    },
+  };
 
   const {
     error: errorParam,
@@ -100,32 +114,27 @@ const Login = ({ actionCode, mode }: LoginProps) => {
       (async () => {
         try {
           await applyActionCode(auth, actionCode);
-          emailVerificationSuccessToast();
+          toasts.emailVerification.success();
         } catch {
-          emailVerificationErrorToast();
+          toasts.emailVerification.error();
         }
       })();
     }
-  }, [
-    mode,
-    emailVerificationErrorToast,
-    actionCode,
-    emailVerificationSuccessToast,
-  ]);
+  }, [mode, actionCode, toasts.emailVerification]);
 
   // errors toasts
   useEffect(() => {
     if (errorParam === 'passwordreset') {
-      passwordResetErrorToast();
+      toasts.passwordReset.error();
     }
-  }, [errorParam, passwordResetErrorToast]);
+  }, [errorParam, toasts.passwordReset]);
 
   // successes toasts
   useEffect(() => {
     if (successParam === 'passwordreset') {
-      passwordResetSuccessToast();
+      toasts.passwordReset.success();
     }
-  }, [passwordResetSuccessToast, successParam]);
+  }, [successParam, toasts.passwordReset]);
 
   const handleSignIn = useMemo(
     () =>
@@ -137,7 +146,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
             const { sendEmailVerification } = await import('firebase/auth');
 
             if (auth.currentUser) await sendEmailVerification(auth.currentUser);
-            emailVerificationWarningToast();
+            toasts.emailVerification.warning();
             return;
           }
 
@@ -174,8 +183,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
       setError,
       signInWithEmailAndPassword,
       router,
-      unknownErrorToast,
-      emailVerificationWarningToast,
+      toasts.emailVerification,
     ]
   );
 

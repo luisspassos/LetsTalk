@@ -3,7 +3,7 @@ import IForgotMyPassword from '../../pages/esqueci-minha-senha';
 import { AuthContext } from '../../contexts/AuthContext';
 import { act } from 'react-dom/test-utils';
 import { FirebaseError } from 'firebase/app';
-import { spinnerTimeout } from '../utils/spinnerTimeout';
+import { spinnerTimeout } from '../functionalities/spinnerTimeout';
 
 const sendEmailToRecoverPassword = jest.fn();
 

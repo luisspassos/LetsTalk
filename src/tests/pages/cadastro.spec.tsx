@@ -9,7 +9,7 @@ import {
 import { auth } from '../../services/firebase';
 import { mocked } from 'jest-mock';
 import { FirebaseError } from 'firebase/app';
-import { spinnerTimeout } from '../utils/spinnerTimeout';
+import { spinnerTimeout } from '../functionalities/spinnerTimeout';
 
 jest.mock('../../services/firebase', () => {
   return {

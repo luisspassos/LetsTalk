@@ -13,7 +13,7 @@ import { GetServerSideProps } from 'next';
 import { verifyPasswordResetCode } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import { useRouter } from 'next/router';
-import { useErrorToast } from '../hooks/Toasts/useErrorToast';
+import { toast } from '../utils/Toasts/toast';
 
 type changePasswordFormData = {
   password: string;
@@ -45,10 +45,13 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
 
   const router = useRouter();
 
-  const errorToast = useErrorToast(
-    'Ocorreu um erro ao mudar a senha',
-    'Tente reenviar o email para verificar a senha novamente'
-  );
+  const errorToast = () => {
+    toast({
+      status: 'error',
+      title: 'Ocorreu um erro ao mudar a senha',
+      description: 'Tente reenviar o email para verificar a senha novamente',
+    });
+  };
 
   const handleChangePassword = useMemo(
     () =>
@@ -63,7 +66,7 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
           errorToast();
         }
       }),
-    [handleSubmit, actionCode, router, errorToast]
+    [handleSubmit, actionCode, router]
   );
 
   return (
