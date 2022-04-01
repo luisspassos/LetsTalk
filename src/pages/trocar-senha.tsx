@@ -34,6 +34,14 @@ const changePasswordFormSchema = yup.object().shape({
     .oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais'),
 });
 
+export const errorToastWhenChangingPassword = () => {
+  toast({
+    status: 'error',
+    title: 'Ocorreu um erro ao mudar a senha',
+    description: 'Tente reenviar o email para verificar a senha novamente',
+  });
+};
+
 export default function ChangePassword({ actionCode }: ChangePasswordProps) {
   const {
     register,
@@ -45,14 +53,6 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
 
   const router = useRouter();
 
-  const errorToast = () => {
-    toast({
-      status: 'error',
-      title: 'Ocorreu um erro ao mudar a senha',
-      description: 'Tente reenviar o email para verificar a senha novamente',
-    });
-  };
-
   const handleChangePassword = useMemo(
     () =>
       handleSubmit(async ({ password }) => {
@@ -63,7 +63,7 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
 
           router.push('/?success=passwordreset');
         } catch {
-          errorToast();
+          errorToastWhenChangingPassword();
         }
       }),
     [handleSubmit, actionCode, router]

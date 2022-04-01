@@ -44,6 +44,13 @@ const registrationFormSchema = yup.object().shape({
     .oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais'),
 });
 
+export const successToastWhenRegistering = () =>
+  toast({
+    title: 'Cadastrado com sucesso',
+    description: 'Acesse seu email e verifique sua conta para fazer login',
+    status: 'success',
+  });
+
 export default function Register() {
   const {
     register,
@@ -53,13 +60,6 @@ export default function Register() {
   } = useForm<RegistrationFormData>({
     resolver: yupResolver(registrationFormSchema),
   });
-
-  const successToastWhenRegistering = () =>
-    toast({
-      title: 'Cadastrado com sucesso',
-      description: 'Acesse seu email e verifique sua conta para fazer login',
-      status: 'success',
-    });
 
   const handleRegister = useMemo(
     () =>
@@ -115,7 +115,7 @@ export default function Register() {
       <Header />
       <AuthContentPageWrapper gap='150px'>
         <Stack color='blue.900' spacing='20px' d={{ base: 'none', xl: 'flex' }}>
-          <Heading as='h1'>
+          <Heading as='h1' fontWeight={700}>
             Mais de 200 mil usuários já
             <br /> estão conversando!
           </Heading>

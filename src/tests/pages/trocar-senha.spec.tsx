@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
 import { confirmPasswordReset, verifyPasswordResetCode } from 'firebase/auth';
-import { spinnerTimeout } from '../functionalities/spinnerTimeout';
+import { spinnerTimeout } from '../test_utils/spinnerTimeout';
 
 jest.mock('next/router');
 const useRouterMocked = mocked(useRouter);

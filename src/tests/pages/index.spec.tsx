@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils';
 import { mocked } from 'jest-mock';
 import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'next/router';
-import { spinnerTimeout } from '../functionalities/spinnerTimeout';
+import { spinnerTimeout } from '../test_utils/spinnerTimeout';
 import { applyActionCode, sendEmailVerification } from 'firebase/auth';
 
 const signInWithEmailAndPassword = jest.fn();

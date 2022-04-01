@@ -32,6 +32,13 @@ const emailFormSchema = yup.object().shape({
     .email('E-mail inválido'),
 });
 
+export const successToastWhenSendingToEmailToChangePassword = () =>
+  toast({
+    title: 'Email enviado',
+    description: 'Cheque seu email para redefinir sua senha',
+    status: 'success',
+  });
+
 export default function IForgotMyPassword() {
   const {
     register,
@@ -44,20 +51,13 @@ export default function IForgotMyPassword() {
 
   const { sendEmailToRecoverPassword } = useAuth();
 
-  const successToast = () =>
-    toast({
-      title: 'Email enviado',
-      description: 'Cheque seu email para redefinir sua senha',
-      status: 'success',
-    });
-
   const handleSendEmail = useMemo(
     () =>
       handleSubmit(async (data) => {
         try {
           await sendEmailToRecoverPassword(data);
 
-          successToast();
+          successToastWhenSendingToEmailToChangePassword();
         } catch (err) {
           const { FirebaseError } = await import('firebase/app');
 
