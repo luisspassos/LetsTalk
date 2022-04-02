@@ -1,9 +1,4 @@
-import {
-  Link,
-  Stack,
-  usePrefersReducedMotion,
-  keyframes,
-} from '@chakra-ui/react';
+import { Link, Stack } from '@chakra-ui/react';
 import type { GetServerSideProps } from 'next';
 import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
@@ -89,19 +84,7 @@ const signInFormSchema = yup.object().shape({
   password: yup.string().required('Senha obrigatória'),
 });
 
-const fadeIn = keyframes`
-  from { transform: translateX(50px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-`;
-
 const Login = ({ actionCode, mode }: LoginProps) => {
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const animation = useMemo(
-    () => (prefersReducedMotion ? undefined : `${fadeIn} 0.5s`),
-    [prefersReducedMotion]
-  );
-
   const {
     register,
     handleSubmit,
@@ -201,7 +184,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
   return (
     <AuthPageWrapper>
       <Header />
-      <AuthContentPageWrapper gap='90px' animation={animation}>
+      <AuthContentPageWrapper gap='90px'>
         <ManEnteringImg />
         <FormWrapper onSubmit={handleSignIn}>
           <LoginButtonWithGoogle />

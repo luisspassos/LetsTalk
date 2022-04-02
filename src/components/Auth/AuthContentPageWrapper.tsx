@@ -1,5 +1,6 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
 import { ReactNode } from 'react';
+import { useFadeInAnimation } from '../../hooks/useFadeInAnimation';
 
 type AuthContentPageWrapper = {
   children: ReactNode;
@@ -9,8 +10,17 @@ export function AuthContentPageWrapper({
   children,
   ...rest
 }: AuthContentPageWrapper) {
+  const { showFadeInAnimation } = useFadeInAnimation();
+
   return (
-    <Flex {...rest} px='10' align='center' flex='1' justify='center'>
+    <Flex
+      {...rest}
+      px='10'
+      align='center'
+      flex='1'
+      justify='center'
+      animation={showFadeInAnimation}
+    >
       {children}
     </Flex>
   );

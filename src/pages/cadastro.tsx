@@ -1,11 +1,5 @@
 import { Header } from '../components/Header';
-import {
-  Stack,
-  Heading,
-  Text,
-  keyframes,
-  usePrefersReducedMotion,
-} from '@chakra-ui/react';
+import { Stack, Heading, Text } from '@chakra-ui/react';
 import { BackLink } from '../components/BackLink';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
@@ -57,19 +51,7 @@ export const successToastWhenRegistering = () =>
     status: 'success',
   });
 
-const fadeIn = keyframes`
-  from { transform: translateX(50px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-`;
-
 export default function Register() {
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const animation = useMemo(
-    () => (prefersReducedMotion ? undefined : `${fadeIn} 0.5s`),
-    [prefersReducedMotion]
-  );
-
   const {
     register,
     handleSubmit,
@@ -131,7 +113,7 @@ export default function Register() {
   return (
     <AuthPageWrapper>
       <Header />
-      <AuthContentPageWrapper gap='150px' animation={animation}>
+      <AuthContentPageWrapper gap='150px'>
         <Stack color='blue.900' spacing='20px' d={{ base: 'none', xl: 'flex' }}>
           <Heading as='h1' fontWeight={700}>
             Mais de 200 mil usuários já
