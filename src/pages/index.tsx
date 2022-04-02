@@ -1,4 +1,10 @@
-import { Link, Stack } from '@chakra-ui/react';
+import {
+  Link,
+  Stack,
+  usePrefersReducedMotion,
+  keyframes,
+  Flex,
+} from '@chakra-ui/react';
 import type { GetServerSideProps } from 'next';
 import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
@@ -84,7 +90,19 @@ const signInFormSchema = yup.object().shape({
   password: yup.string().required('Senha obrigatória'),
 });
 
+const fadeIn = keyframes`
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+`;
+
 const Login = ({ actionCode, mode }: LoginProps) => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const animation = useMemo(
+    () => (prefersReducedMotion ? undefined : `${fadeIn} 0.5s`),
+    [prefersReducedMotion]
+  );
+
   const {
     register,
     handleSubmit,
@@ -184,44 +202,46 @@ const Login = ({ actionCode, mode }: LoginProps) => {
   return (
     <AuthPageWrapper>
       <Header />
-      <AuthContentPageWrapper gap='90px'>
-        <ManEnteringImg />
-        <FormWrapper onSubmit={handleSignIn}>
-          <LoginButtonWithGoogle />
-          <DividerOr />
-          <Stack spacing={2}>
-            <Input
-              type='email'
-              id='email'
-              label='Email'
-              placeholder='Email...'
-              {...register('email')}
-              error={errors.email}
-            />
-            <Input
-              type='password'
-              id='password'
-              label='Senha'
-              placeholder='Senha...'
-              {...register('password')}
-              error={errors.password}
-            />
-          </Stack>
-          <NextLink href='/esqueci-minha-senha' passHref>
-            <Link
-              mt='6px'
-              mb='12px'
-              fontSize='15px'
-              color='gray.400'
-              d='inline-block'
-            >
-              Esqueci minha senha
-            </Link>
-          </NextLink>
-          <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
+      <AuthContentPageWrapper>
+        <Flex gap='90px' align='center' animation={animation}>
+          <ManEnteringImg />
+          <FormWrapper onSubmit={handleSignIn}>
+            <LoginButtonWithGoogle />
+            <DividerOr />
+            <Stack spacing={2}>
+              <Input
+                type='email'
+                id='email'
+                label='Email'
+                placeholder='Email...'
+                {...register('email')}
+                error={errors.email}
+              />
+              <Input
+                type='password'
+                id='password'
+                label='Senha'
+                placeholder='Senha...'
+                {...register('password')}
+                error={errors.password}
+              />
+            </Stack>
+            <NextLink href='/esqueci-minha-senha' passHref>
+              <Link
+                mt='6px'
+                mb='12px'
+                fontSize='15px'
+                color='gray.400'
+                d='inline-block'
+              >
+                Esqueci minha senha
+              </Link>
+            </NextLink>
+            <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
 
-          <RegistrationLink />
-        </FormWrapper>
+            <RegistrationLink />
+          </FormWrapper>
+        </Flex>
       </AuthContentPageWrapper>
     </AuthPageWrapper>
   );
