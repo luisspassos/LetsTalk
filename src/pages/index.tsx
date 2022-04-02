@@ -3,7 +3,6 @@ import {
   Stack,
   usePrefersReducedMotion,
   keyframes,
-  Flex,
 } from '@chakra-ui/react';
 import type { GetServerSideProps } from 'next';
 import { DividerOr } from '../components/Form/DividerOr';
@@ -202,46 +201,44 @@ const Login = ({ actionCode, mode }: LoginProps) => {
   return (
     <AuthPageWrapper>
       <Header />
-      <AuthContentPageWrapper>
-        <Flex gap='90px' align='center' animation={animation}>
-          <ManEnteringImg />
-          <FormWrapper onSubmit={handleSignIn}>
-            <LoginButtonWithGoogle />
-            <DividerOr />
-            <Stack spacing={2}>
-              <Input
-                type='email'
-                id='email'
-                label='Email'
-                placeholder='Email...'
-                {...register('email')}
-                error={errors.email}
-              />
-              <Input
-                type='password'
-                id='password'
-                label='Senha'
-                placeholder='Senha...'
-                {...register('password')}
-                error={errors.password}
-              />
-            </Stack>
-            <NextLink href='/esqueci-minha-senha' passHref>
-              <Link
-                mt='6px'
-                mb='12px'
-                fontSize='15px'
-                color='gray.400'
-                d='inline-block'
-              >
-                Esqueci minha senha
-              </Link>
-            </NextLink>
-            <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
+      <AuthContentPageWrapper gap='90px' animation={animation}>
+        <ManEnteringImg />
+        <FormWrapper onSubmit={handleSignIn}>
+          <LoginButtonWithGoogle />
+          <DividerOr />
+          <Stack spacing={2}>
+            <Input
+              type='email'
+              id='email'
+              label='Email'
+              placeholder='Email...'
+              {...register('email')}
+              error={errors.email}
+            />
+            <Input
+              type='password'
+              id='password'
+              label='Senha'
+              placeholder='Senha...'
+              {...register('password')}
+              error={errors.password}
+            />
+          </Stack>
+          <NextLink href='/esqueci-minha-senha' passHref>
+            <Link
+              mt='6px'
+              mb='12px'
+              fontSize='15px'
+              color='gray.400'
+              d='inline-block'
+            >
+              Esqueci minha senha
+            </Link>
+          </NextLink>
+          <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
 
-            <RegistrationLink />
-          </FormWrapper>
-        </Flex>
+          <RegistrationLink />
+        </FormWrapper>
       </AuthContentPageWrapper>
     </AuthPageWrapper>
   );
