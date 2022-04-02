@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BackLink } from '../components/BackLink';
 import { Button } from '../components/Form/Button';
 import { FormWrapper } from '../components/Form/FormWrapper';
@@ -11,7 +11,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { CenterForm } from '../components/Form/CenterForm';
 import { unknownErrorToast } from '../utils/Toasts/unknownErrorToast';
 import { toast } from '../utils/Toasts/toast';
-import { SlideFade } from '@chakra-ui/react';
+import { Flex, keyframes, usePrefersReducedMotion } from '@chakra-ui/react';
+import { NextRouter, useRouter } from 'next/router';
 
 type emailFormData = {
   email: string;
@@ -24,6 +25,10 @@ type FormFirebaseError = Record<
     message: string;
   }
 >;
+
+type NextRouterType = {
+  components: any;
+} & NextRouter;
 
 const emailFormSchema = yup.object().shape({
   email: yup
@@ -40,7 +45,29 @@ export const successToastWhenSendingToEmailToChangePassword = () =>
     status: 'success',
   });
 
+const fadeIn = keyframes`
+  from { transform: translateX(50px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+`;
+
 export default function IForgotMyPassword() {
+  const [enableAnimation, setEnableAnimation] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const animation = useMemo(
+    () => (prefersReducedMotion ? undefined : `${fadeIn} 0.5s`),
+    [prefersReducedMotion]
+  );
+
+  const router = useRouter() as NextRouterType;
+  const routerComponents = router.components;
+
+  useEffect(() => {
+    if (Object.keys(routerComponents).length > 2) {
+      setEnableAnimation(true);
+    }
+  }, [routerComponents]);
+
   const {
     register,
     handleSubmit,
@@ -91,18 +118,10 @@ export default function IForgotMyPassword() {
 
   return (
     <CenterForm>
-      <SlideFade
-        transition={{
-          default: { duration: 3000 },
-        }}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-        in
-        offsetX={50}
-        offsetY={0}
+      <Flex
+        direction='column'
+        align='center'
+        animation={enableAnimation ? animation : undefined}
       >
         <FormTitle mb='1rem' text='Envie seu email para recuperar sua senha' />
         <FormWrapper onSubmit={handleSendEmail}>
@@ -122,7 +141,7 @@ export default function IForgotMyPassword() {
           />
         </FormWrapper>
         <BackLink text='Voltar' route='/' mt='1rem' />
-      </SlideFade>
+      </Flex>
     </CenterForm>
   );
 }
