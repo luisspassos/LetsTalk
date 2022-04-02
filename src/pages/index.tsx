@@ -40,6 +40,41 @@ type LoginProps = {
   mode: string;
 };
 
+export const toasts = {
+  emailVerification: {
+    error: () =>
+      toast({
+        status: 'error',
+        title: 'Ocorreu um erro ao verificar o email',
+        description: 'Tente reenviar o email novamente',
+      }),
+    success: () =>
+      toast({
+        status: 'success',
+        title: 'Email verificado com sucesso',
+      }),
+    warning: () =>
+      toast({
+        status: 'warning',
+        title: 'Seu email não foi verificado!',
+        description: 'Enviamos um email de verificação para você.',
+      }),
+  },
+  passwordReset: {
+    error: () =>
+      toast({
+        status: 'error',
+        title: 'Ocorreu um erro ao validar o código de redefinição de senha',
+        description: 'Tente novamente.',
+      }),
+    success: () =>
+      toast({
+        status: 'success',
+        title: 'Senha atualizada com sucesso',
+      }),
+  },
+};
+
 const signInFormSchema = yup.object().shape({
   email: yup
     .string()
@@ -63,41 +98,6 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 
   const { signInWithEmailAndPassword } = useAuth();
 
-  const toasts = {
-    emailVerification: {
-      error: () =>
-        toast({
-          status: 'error',
-          title: 'Ocorreu um erro ao verificar o email',
-          description: 'Tente reenviar o email novamente',
-        }),
-      success: () =>
-        toast({
-          status: 'success',
-          title: 'Email verificado com sucesso',
-        }),
-      warning: () =>
-        toast({
-          status: 'warning',
-          title: 'Seu email não foi verificado!',
-          description: 'Enviamos um email de verificação para você.',
-        }),
-    },
-    passwordReset: {
-      error: () =>
-        toast({
-          status: 'error',
-          title: 'Ocorreu um erro ao validar o código de redefinição de senha',
-          description: 'Tente novamente.',
-        }),
-      success: () =>
-        toast({
-          status: 'success',
-          title: 'Senha atualizada com sucesso',
-        }),
-    },
-  };
-
   const {
     error: errorParam,
     success: successParam,
@@ -120,21 +120,21 @@ const Login = ({ actionCode, mode }: LoginProps) => {
         }
       })();
     }
-  }, [mode, actionCode, toasts.emailVerification]);
+  }, [mode, actionCode]);
 
   // errors toasts
   useEffect(() => {
     if (errorParam === 'passwordreset') {
       toasts.passwordReset.error();
     }
-  }, [errorParam, toasts.passwordReset]);
+  }, [errorParam]);
 
   // successes toasts
   useEffect(() => {
     if (successParam === 'passwordreset') {
       toasts.passwordReset.success();
     }
-  }, [successParam, toasts.passwordReset]);
+  }, [successParam]);
 
   const handleSignIn = useMemo(
     () =>
@@ -178,13 +178,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
           }
         }
       }),
-    [
-      handleSubmit,
-      setError,
-      signInWithEmailAndPassword,
-      router,
-      toasts.emailVerification,
-    ]
+    [handleSubmit, setError, signInWithEmailAndPassword, router]
   );
 
   return (

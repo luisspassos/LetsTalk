@@ -5,5 +5,9 @@ export type InputErrorProps = {
 };
 
 export function InputError({ message }: InputErrorProps) {
-  return <FormErrorMessage mt='3px'>{message}</FormErrorMessage>;
+  return (
+    <FormErrorMessage mt='3px' color='red.600'>
+      {message}
+    </FormErrorMessage>
+  );
 }

@@ -11,6 +11,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { CenterForm } from '../components/Form/CenterForm';
 import { unknownErrorToast } from '../utils/Toasts/unknownErrorToast';
 import { toast } from '../utils/Toasts/toast';
+import { SlideFade } from '@chakra-ui/react';
 
 type emailFormData = {
   email: string;
@@ -90,24 +91,38 @@ export default function IForgotMyPassword() {
 
   return (
     <CenterForm>
-      <FormTitle mb='1rem' text='Envie seu email para recuperar sua senha' />
-      <FormWrapper onSubmit={handleSendEmail}>
-        <Input
-          {...register('email')}
-          error={errors.email}
-          id='email'
-          type='email'
-          label='Email'
-          placeholder='Coloque seu email'
-        />
-        <Button
-          isLoading={isSubmitting}
-          type='submit'
-          text='ENVIAR'
-          mt='.5rem'
-        />
-      </FormWrapper>
-      <BackLink text='Voltar' route='/' mt='1rem' />
+      <SlideFade
+        transition={{
+          default: { duration: 3000 },
+        }}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+        in
+        offsetX={50}
+        offsetY={0}
+      >
+        <FormTitle mb='1rem' text='Envie seu email para recuperar sua senha' />
+        <FormWrapper onSubmit={handleSendEmail}>
+          <Input
+            {...register('email')}
+            error={errors.email}
+            id='email'
+            type='email'
+            label='Email'
+            placeholder='Coloque seu email'
+          />
+          <Button
+            isLoading={isSubmitting}
+            type='submit'
+            text='ENVIAR'
+            mt='.5rem'
+          />
+        </FormWrapper>
+        <BackLink text='Voltar' route='/' mt='1rem' />
+      </SlideFade>
     </CenterForm>
   );
 }
