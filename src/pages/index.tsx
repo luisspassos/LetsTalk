@@ -18,9 +18,10 @@ import { useRouter } from 'next/router';
 import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
 import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
 import { auth } from '../services/firebase';
-import { auth as adminAuth } from '../services/adminFirebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
+import serviceAccount from '../../serviceAccount-letstalk.json';
+import admin from 'firebase-admin';
 import nookies from 'nookies';
 
 type SignInFormData = {
@@ -234,12 +235,23 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const { token } = nookies.get(ctx);
-  const user = await adminAuth.verifyIdToken(token);
-
-  console.log(user);
+  const cookies = nookies.get(ctx);
 
   const { mode, oobCode } = ctx.query;
+
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+
+    try {
+      const token = await admin.auth().verifyIdToken(cookies.token);
+      const { uid, email } = token;
+      console.log(email);
+    } catch {
+      console.log('não tem usuario logado');
+    }
+  }
 
   if (mode === 'resetPassword') {
     return {
