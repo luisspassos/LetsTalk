@@ -18,10 +18,9 @@ import { useRouter } from 'next/router';
 import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
 import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
 import { auth } from '../services/firebase';
-import { auth as adminAuth } from '../services/adminFirebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
-import nookies from 'nookies';
+import { applicationDefaultCalled } from '../services/adminFirebase';
 
 type SignInFormData = {
   email: string;
@@ -234,12 +233,8 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const { token } = nookies.get(ctx);
-  const user = await adminAuth.verifyIdToken(token);
-
-  console.log(user);
-
   const { mode, oobCode } = ctx.query;
+  console.log(applicationDefaultCalled.getAccessToken());
 
   if (mode === 'resetPassword') {
     return {

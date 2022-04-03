@@ -1,16 +1,5 @@
-import {
-  initializeApp as adminInitializeApp,
-  applicationDefault,
-} from 'firebase-admin/app';
+import { applicationDefault } from 'firebase-admin/app';
 
-import { getAuth } from 'firebase-admin/auth';
+const applicationDefaultCalled = applicationDefault();
 
-adminInitializeApp({
-  credential: applicationDefault(),
-});
-
-const auth = getAuth();
-
-export { auth };
-
-// baixar json do admin
+export { applicationDefaultCalled };
