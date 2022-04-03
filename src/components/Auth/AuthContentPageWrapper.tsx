@@ -1,6 +1,6 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { useFadeInAnimation } from '../../hooks/useFadeInAnimation';
+import { useFadeInAnimation } from '../../contexts/FadeInAnimationContext';
 
 type AuthContentPageWrapper = {
   children: ReactNode;
