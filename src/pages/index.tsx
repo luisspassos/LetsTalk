@@ -20,7 +20,7 @@ import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrappe
 import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
-import serviceAccount from '../../serviceAccount-letstalk.json';
+import serviceAccount from '../../../../../Downloads/serviceAccount-letstalk.json';
 import admin from 'firebase-admin';
 import nookies from 'nookies';
 
@@ -241,7 +241,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   if (!admin.apps.length) {
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
+      credential: admin.credential.cert(serviceAccount as any),
     });
 
     try {
