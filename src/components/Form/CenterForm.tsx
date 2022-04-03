@@ -1,6 +1,6 @@
 import { Center, CenterProps } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { useFadeInAnimation } from '../../hooks/useFadeInAnimation';
+import { useFadeInAnimation } from '../../contexts/FadeInAnimationContext';
 
 type CenterFormProps = {
   children: ReactNode;

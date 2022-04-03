@@ -1,5 +1,5 @@
 import { Link, Stack } from '@chakra-ui/react';
-import type { GetServerSideProps } from 'next';
+import type { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
@@ -18,8 +18,10 @@ import { useRouter } from 'next/router';
 import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
 import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
 import { auth } from '../services/firebase';
+import { auth as adminAuth } from '../services/adminFirebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
+import nookies from 'nookies';
 
 type SignInFormData = {
   email: string;
@@ -229,8 +231,15 @@ const Login = ({ actionCode, mode }: LoginProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { mode, oobCode } = query;
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const { token } = nookies.get(ctx);
+  const user = await adminAuth.verifyIdToken(token);
+
+  console.log(user);
+
+  const { mode, oobCode } = ctx.query;
 
   if (mode === 'resetPassword') {
     return {

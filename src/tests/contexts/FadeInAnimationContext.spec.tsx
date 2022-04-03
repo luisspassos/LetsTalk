@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { AuthContentPageWrapper } from '../../components/Auth/AuthContentPageWrapper';
+import { FadeInAnimationProvider } from '../../contexts/FadeInAnimationContext';
 
 jest.mock('next/router', () => {
   return {
@@ -11,12 +12,14 @@ jest.mock('next/router', () => {
   };
 });
 
-describe('fadeInAnimation hook', () => {
+describe('fadeInAnimation context', () => {
   it('should return the animation if the route that was accessed was through a link', () => {
     render(
-      <AuthContentPageWrapper>
-        <div>component</div>
-      </AuthContentPageWrapper>
+      <FadeInAnimationProvider>
+        <AuthContentPageWrapper>
+          <div>component</div>
+        </AuthContentPageWrapper>
+      </FadeInAnimationProvider>
     );
 
     const component = screen.getByText('component');
