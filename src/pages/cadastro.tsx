@@ -10,7 +10,6 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
-import { unknownErrorToast } from '../utils/Toasts/unknownErrorToast';
 import { toast } from '../utils/Toasts/toast';
 
 type FormFirebaseError = Record<
@@ -98,6 +97,9 @@ export default function Register() {
             const error = errors[err.code];
 
             if (!error) {
+              const { unknownErrorToast } = await import(
+                '../utils/Toasts/unknownErrorToast'
+              );
               unknownErrorToast();
             } else {
               setError(error.type, {

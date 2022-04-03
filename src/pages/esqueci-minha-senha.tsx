@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
 import { CenterForm } from '../components/Form/CenterForm';
-import { unknownErrorToast } from '../utils/Toasts/unknownErrorToast';
 import { toast } from '../utils/Toasts/toast';
 import { Box } from '@chakra-ui/react';
 
@@ -77,6 +76,9 @@ export default function IForgotMyPassword() {
             const error = errors[err.code];
 
             if (!error) {
+              const { unknownErrorToast } = await import(
+                '../utils/Toasts/unknownErrorToast'
+              );
               unknownErrorToast();
             } else {
               setError(error.type, {

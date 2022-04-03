@@ -2,7 +2,6 @@ import { Button, Icon } from '@chakra-ui/react';
 import { memo, useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
-import { unknownErrorToast } from '../../utils/Toasts/unknownErrorToast';
 
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();
@@ -21,6 +20,9 @@ function LoginButtonWithGoogleComponent() {
         router.push('/conversas');
       }
     } catch (err) {
+      const { unknownErrorToast } = await import(
+        '../../utils/Toasts/unknownErrorToast'
+      );
       unknownErrorToast();
     }
   }, [router]);

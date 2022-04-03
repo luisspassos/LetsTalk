@@ -19,7 +19,6 @@ import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
 import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
 import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
-import { unknownErrorToast } from '../utils/Toasts/unknownErrorToast';
 import { toast } from '../utils/Toasts/toast';
 
 type SignInFormData = {
@@ -169,6 +168,9 @@ const Login = ({ actionCode, mode }: LoginProps) => {
             const error = errors[err.code];
 
             if (!error) {
+              const { unknownErrorToast } = await import(
+                '../utils/Toasts/unknownErrorToast'
+              );
               unknownErrorToast();
             } else {
               setError(error.type, {
