@@ -30,6 +30,7 @@ useRouterMocked.mockReturnValue({
   push: pushMock,
   query: { error: undefined },
   replace: replaceRouterMock,
+  components: {},
 } as any);
 
 function renderLoginPage({ mode = '', actionCode = '' } = {}) {

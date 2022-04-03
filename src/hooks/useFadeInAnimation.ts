@@ -1,5 +1,4 @@
-import { usePrefersReducedMotion } from '@chakra-ui/react';
-import { keyframes } from '@emotion/react';
+import { usePrefersReducedMotion, keyframes } from '@chakra-ui/react';
 import { NextRouter, useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -16,13 +15,14 @@ export function useFadeInAnimation() {
   const router = useRouter() as NextRouterType;
   const routerComponents = router.components;
 
+  const [enableAnimation, setEnableAnimation] = useState(false);
+
   useEffect(() => {
     if (Object.keys(routerComponents).length > 2) {
       setEnableAnimation(true);
     }
   }, [routerComponents]);
 
-  const [enableAnimation, setEnableAnimation] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const animation = useMemo(

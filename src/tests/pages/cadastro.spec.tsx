@@ -11,6 +11,16 @@ import { mocked } from 'jest-mock';
 import { FirebaseError } from 'firebase/app';
 import { spinnerTimeout } from '../test_utils/spinnerTimeout';
 
+jest.mock('next/router', () => {
+  return {
+    useRouter() {
+      return {
+        components: {},
+      };
+    },
+  };
+});
+
 jest.mock('../../services/firebase', () => {
   return {
     auth: 'fake-auth',

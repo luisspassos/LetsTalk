@@ -5,6 +5,16 @@ import { act } from 'react-dom/test-utils';
 import { FirebaseError } from 'firebase/app';
 import { spinnerTimeout } from '../test_utils/spinnerTimeout';
 
+jest.mock('next/router', () => {
+  return {
+    useRouter() {
+      return {
+        components: {},
+      };
+    },
+  };
+});
+
 const sendEmailToRecoverPassword = jest.fn();
 
 async function fillInInputAndPressTheButton({

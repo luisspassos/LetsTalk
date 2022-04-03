@@ -12,6 +12,7 @@ const pushMock = jest.fn();
 
 useRouterMocked.mockReturnValue({
   push: pushMock,
+  components: {},
 } as any);
 
 jest.mock('firebase/auth');
