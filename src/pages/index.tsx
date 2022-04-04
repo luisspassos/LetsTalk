@@ -20,9 +20,8 @@ import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrappe
 import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
-import serviceAccount from '../../../../../Downloads/serviceAccount-letstalk.json';
-import admin from 'firebase-admin';
 import nookies from 'nookies';
+import { firebaseAdmin } from '../services/firebaseAdmin';
 
 type SignInFormData = {
   email: string;
@@ -239,18 +238,28 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const { mode, oobCode } = ctx.query;
 
-  if (!admin.apps.length) {
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount as any),
-    });
-
-    try {
-      const token = await admin.auth().verifyIdToken(cookies.token);
-      const { uid, email } = token;
-      console.log(email);
-    } catch {
-      console.log('não tem usuario logado');
+  function ObjectIsEmpty(obj: object) {
+    for (let prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+        return false;
+      }
     }
+    return JSON.stringify(obj) === JSON.stringify({});
+  }
+
+  try {
+    const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    if (user && ObjectIsEmpty(ctx.query)) {
+      return {
+        redirect: {
+          destination: '/conversas',
+          permanent: false,
+        },
+      };
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
   }
 
   if (mode === 'resetPassword') {

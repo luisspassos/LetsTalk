@@ -15,6 +15,12 @@ jest.mock('next/router', () => {
   };
 });
 
+jest.mock('../../services/firebase', () => {
+  return {
+    auth: 'fake-auth',
+  };
+});
+
 const sendEmailToRecoverPassword = jest.fn();
 
 async function fillInInputAndPressTheButton({
@@ -45,6 +51,29 @@ describe('IForgotMyPassword page', () => {
     expect(
       screen.getByText('Envie seu email para recuperar sua senha')
     ).toBeInTheDocument();
+  });
+
+  const invalidEmailMessages = [
+    {
+      test_title:
+        'there must be a mandatory email message if it is not entered',
+      email: '',
+      message: 'E-mail obrigatório',
+    },
+    {
+      test_title: 'should display an invalid email message',
+      email: 'email',
+      message: 'E-mail inválido',
+    },
+  ];
+
+  invalidEmailMessages.forEach(({ email, message, test_title }) => {
+    // eslint-disable-next-line jest/valid-title
+    it(test_title, async () => {
+      await fillInInputAndPressTheButton({ email });
+
+      expect(screen.getByText(message)).toBeInTheDocument();
+    });
   });
 
   it('must run .trim() on email', async () => {

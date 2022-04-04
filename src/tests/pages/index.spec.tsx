@@ -10,6 +10,20 @@ import { applyActionCode, sendEmailVerification } from 'firebase/auth';
 
 const signInWithEmailAndPassword = jest.fn();
 
+jest.mock('../../services/firebaseAdmin', () => {
+  return {
+    firebaseAdmin: {
+      auth() {
+        return {
+          verifyIdToken() {
+            return 'fake-user';
+          },
+        };
+      },
+    },
+  };
+});
+
 jest.mock('firebase/auth');
 const applyActionCodeMocked = mocked(applyActionCode);
 
@@ -371,6 +385,17 @@ describe('Login page', () => {
       props: {
         mode: null,
         actionCode: null,
+      },
+    });
+  });
+
+  it('should redirect the user to the conversations page if there is one connected', async () => {
+    const result = await getServerSideProps({ query: {} } as any);
+
+    expect(result).toStrictEqual({
+      redirect: {
+        destination: '/conversas',
+        permanent: false,
       },
     });
   });
