@@ -9,10 +9,21 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../../services/firebase';
+import nookies from 'nookies';
+
+jest.mock('nookies', () => {
+  return {
+    set: jest.fn(),
+  };
+});
 
 jest.mock('../../services/firebase', () => {
   return {
-    auth: jest.fn(),
+    auth: {
+      onIdTokenChanged(callback: () => void) {
+        callback();
+      },
+    },
   };
 });
 
@@ -26,13 +37,15 @@ jest.mock('firebase/auth', () => {
 });
 
 describe('Auth context', () => {
-  it('renders correctly', () => {
+  beforeEach(() => {
     render(
       <AuthProvider>
         <div>component</div>
       </AuthProvider>
     );
+  });
 
+  it('renders correctly', () => {
     expect(screen.getByText('component')).toBeInTheDocument();
   });
 
@@ -58,5 +71,11 @@ describe('Auth context', () => {
       auth,
       'email@gmail.com'
     );
+  });
+
+  it("if there is no user connected, you must reset the token's cookie and set the user state to null", () => {
+    expect(nookies.set).toHaveBeenCalledWith(undefined, 'token', '', {
+      path: '/',
+    });
   });
 });

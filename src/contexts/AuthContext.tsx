@@ -67,6 +67,7 @@ export const signInWithEmailAndPassword = async ({
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
 
+  // token listener
   useEffect(() => {
     return auth.onIdTokenChanged(async (user) => {
       if (!user) {
@@ -80,6 +81,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     });
   }, []);
 
+  // token refresh every 10 min
   useEffect(() => {
     const handle = setInterval(async () => {
       const user = auth.currentUser;
