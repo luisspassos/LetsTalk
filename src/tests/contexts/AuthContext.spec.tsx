@@ -10,6 +10,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../services/firebase';
 import nookies from 'nookies';
+import Conversations from '../../pages/conversas';
 
 jest.mock('nookies', () => {
   return {
@@ -20,9 +21,14 @@ jest.mock('nookies', () => {
 jest.mock('../../services/firebase', () => {
   return {
     auth: {
-      onIdTokenChanged(callback: () => void) {
-        callback();
-      },
+      onIdTokenChanged: jest
+        .fn()
+        .mockImplementationOnce((callback: () => void) => {
+          callback();
+        })
+        .mockImplementationOnce((callback: (user: string) => void) => {
+          callback('fake-user');
+        }),
     },
   };
 });
@@ -40,13 +46,13 @@ describe('Auth context', () => {
   beforeEach(() => {
     render(
       <AuthProvider>
-        <div>component</div>
+        <Conversations />
       </AuthProvider>
     );
   });
 
   it('renders correctly', () => {
-    expect(screen.getByText('component')).toBeInTheDocument();
+    expect(screen.getByText('Conversations')).toBeInTheDocument();
   });
 
   it('signInWithEmailAndPassword function should return login result', async () => {
@@ -74,6 +80,13 @@ describe('Auth context', () => {
   });
 
   it("if there is no user connected, you must reset the token's cookie and set the user state to null", () => {
+    expect(screen.queryByText('email@gmail.com')).not.toBeInTheDocument();
+    expect(nookies.set).toHaveBeenCalledWith(undefined, 'token', '', {
+      path: '/',
+    });
+  });
+
+  it("if any user is connected, you must set the user's state and set his token in the cookies", () => {
     expect(nookies.set).toHaveBeenCalledWith(undefined, 'token', '', {
       path: '/',
     });

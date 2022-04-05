@@ -1,9 +1,16 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
+import { useAuth } from '../contexts/AuthContext';
 import { firebaseAdmin } from '../services/firebaseAdmin';
 
 export default function Conversations() {
-  return <h1>Conversations</h1>;
+  const { user } = useAuth();
+  return (
+    <div>
+      <h1>Conversations</h1>
+      {user && <h1>{user.email}</h1>}
+    </div>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async (
