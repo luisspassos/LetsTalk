@@ -11,6 +11,7 @@ import {
 import { auth } from '../../services/firebase';
 import nookies from 'nookies';
 import Conversations from '../../pages/conversas';
+import { act } from 'react-dom/test-utils';
 
 jest.mock('nookies', () => {
   return {
@@ -26,9 +27,19 @@ jest.mock('../../services/firebase', () => {
         .mockImplementationOnce((callback: () => void) => {
           callback();
         })
-        .mockImplementationOnce((callback: (user: string) => void) => {
-          callback('fake-user');
-        }),
+        .mockImplementation(
+          (
+            callback: (user: {
+              getIdToken: () => string;
+              email: string;
+            }) => void
+          ) => {
+            callback({
+              getIdToken: () => 'fake-token',
+              email: 'email@gmail.com',
+            });
+          }
+        ),
     },
   };
 });
@@ -43,12 +54,28 @@ jest.mock('firebase/auth', () => {
 });
 
 describe('Auth context', () => {
-  beforeEach(() => {
-    render(
-      <AuthProvider>
-        <Conversations />
-      </AuthProvider>
-    );
+  beforeEach(async () => {
+    await act(async () => {
+      render(
+        <AuthProvider>
+          <Conversations />
+        </AuthProvider>
+      );
+    });
+  });
+
+  it("if there is no user connected, you must reset the token's cookie and set the user state to null", () => {
+    expect(screen.queryByText('email@gmail.com')).not.toBeInTheDocument();
+    expect(nookies.set).toHaveBeenCalledWith(undefined, 'token', '', {
+      path: '/',
+    });
+  });
+
+  it("if any user is connected, you must set the user's state and set his token in the cookies", async () => {
+    expect(await screen.findByText('email@gmail.com')).toBeInTheDocument();
+    expect(nookies.set).toHaveBeenCalledWith(undefined, 'token', 'fake-token', {
+      path: '/',
+    });
   });
 
   it('renders correctly', () => {
@@ -77,18 +104,5 @@ describe('Auth context', () => {
       auth,
       'email@gmail.com'
     );
-  });
-
-  it("if there is no user connected, you must reset the token's cookie and set the user state to null", () => {
-    expect(screen.queryByText('email@gmail.com')).not.toBeInTheDocument();
-    expect(nookies.set).toHaveBeenCalledWith(undefined, 'token', '', {
-      path: '/',
-    });
-  });
-
-  it("if any user is connected, you must set the user's state and set his token in the cookies", () => {
-    expect(nookies.set).toHaveBeenCalledWith(undefined, 'token', '', {
-      path: '/',
-    });
   });
 });

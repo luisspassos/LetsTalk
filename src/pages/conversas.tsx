@@ -1,7 +1,4 @@
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import nookies from 'nookies';
 import { useAuth } from '../contexts/AuthContext';
-import { firebaseAdmin } from '../services/firebaseAdmin';
 
 export default function Conversations() {
   const { user } = useAuth();
@@ -13,27 +10,27 @@ export default function Conversations() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  try {
-    const cookies = nookies.get(ctx);
-    const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+// export const getServerSideProps: GetServerSideProps = async (
+//   ctx: GetServerSidePropsContext
+// ) => {
+//   try {
+//     const cookies = nookies.get(ctx);
+//     const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
 
-    if (user) {
-      return {
-        props: {},
-      };
-    }
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
-  }
+//     if (user) {
+//       return {
+//         props: {},
+//       };
+//     }
+//   } catch (err) {
+//     // eslint-disable-next-line no-console
+//     console.log(err);
+//   }
 
-  return {
-    redirect: {
-      destination: '/',
-      permanent: false,
-    },
-  };
-};
+//   return {
+//     redirect: {
+//       destination: '/',
+//       permanent: false,
+//     },
+//   };
+// };
