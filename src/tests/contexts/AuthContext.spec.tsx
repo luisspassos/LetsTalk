@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import {
   AuthProvider,
   signInWithEmailAndPassword,
@@ -12,6 +12,10 @@ import { auth } from '../../services/firebase';
 import nookies from 'nookies';
 import Conversations from '../../pages/conversas';
 import { act } from 'react-dom/test-utils';
+import { mocked } from 'jest-mock';
+
+jest.useFakeTimers();
+jest.spyOn(global, 'setInterval');
 
 jest.mock('nookies', () => {
   return {
@@ -22,27 +26,24 @@ jest.mock('nookies', () => {
 jest.mock('../../services/firebase', () => {
   return {
     auth: {
-      onIdTokenChanged: jest
-        .fn()
-        .mockImplementationOnce((callback: () => void) => {
-          callback();
-        })
-        .mockImplementation(
-          (
-            callback: (user: {
-              getIdToken: () => string;
-              email: string;
-            }) => void
-          ) => {
-            callback({
-              getIdToken: () => 'fake-token',
-              email: 'email@gmail.com',
-            });
-          }
-        ),
+      onIdTokenChanged: jest.fn(),
+      currentUser: {
+        getIdToken: jest.fn(),
+      },
     },
   };
 });
+
+const onIdTokenChangedMock = mocked(auth.onIdTokenChanged);
+
+onIdTokenChangedMock.mockImplementation(((
+  callback: (user: { getIdToken: () => string; email: string }) => void
+) => {
+  callback({
+    getIdToken: () => 'fake-token',
+    email: 'email@gmail.com',
+  });
+}) as any);
 
 jest.mock('firebase/auth', () => {
   return {
@@ -53,18 +54,30 @@ jest.mock('firebase/auth', () => {
   };
 });
 
+async function renderConversationsPage() {
+  await act(async () => {
+    render(
+      <AuthProvider>
+        <Conversations />
+      </AuthProvider>
+    );
+  });
+}
+
 describe('Auth context', () => {
   beforeEach(async () => {
-    await act(async () => {
-      render(
-        <AuthProvider>
-          <Conversations />
-        </AuthProvider>
-      );
-    });
+    await renderConversationsPage();
   });
 
-  it("if there is no user connected, you must reset the token's cookie and set the user state to null", () => {
+  it("if there is no user connected, you must reset the token's cookie and set the user state to null", async () => {
+    cleanup();
+
+    onIdTokenChangedMock.mockImplementationOnce(((callback: () => void) => {
+      callback();
+    }) as any);
+
+    await renderConversationsPage();
+
     expect(screen.queryByText('email@gmail.com')).not.toBeInTheDocument();
     expect(nookies.set).toHaveBeenCalledWith(undefined, 'token', '', {
       path: '/',
@@ -104,5 +117,14 @@ describe('Auth context', () => {
       auth,
       'email@gmail.com'
     );
+  });
+
+  it("must start an interval that every 10 min updates the user's token", () => {
+    jest.runOnlyPendingTimers();
+    expect(setInterval).toHaveBeenLastCalledWith(
+      expect.any(Function),
+      10 * 60 * 1000 /* 10 minutes */
+    );
+    expect(auth.currentUser?.getIdToken).toHaveBeenCalledWith(true);
   });
 });
