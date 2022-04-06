@@ -3,13 +3,13 @@ import { IconButton as ChakraIconButton } from '@chakra-ui/react';
 import { Tooltip } from '../Tooltip';
 
 type IconButtonProps = {
-  ariaLabel: string;
+  label: string;
   Icon: IconType;
 };
 
-export function IconButton({ ariaLabel, Icon }: IconButtonProps) {
+export function IconButton({ label, Icon }: IconButtonProps) {
   return (
-    <Tooltip label={ariaLabel} ariaLabel={ariaLabel}>
+    <Tooltip label={label} aria-label={label}>
       <ChakraIconButton
         w='40px'
         fontSize='30px'
@@ -24,7 +24,7 @@ export function IconButton({ ariaLabel, Icon }: IconButtonProps) {
         _active={{
           bg: 'whiteAlpha.500',
         }}
-        aria-label={ariaLabel}
+        aria-label={label}
         icon={<Icon />}
       />
     </Tooltip>

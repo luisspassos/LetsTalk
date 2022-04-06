@@ -6,6 +6,10 @@ import { IconButton } from './IconButton';
 import { Tooltip } from '../Tooltip';
 
 export function Sidebar() {
+  function handleCopyUsername(username: string) {
+    navigator.clipboard.writeText(username);
+  }
+
   return (
     <Flex
       bg='gray.500'
@@ -16,19 +20,20 @@ export function Sidebar() {
       py='20px'
     >
       <Box>
-        <Tooltip label='Luis#1234' ariaLabel='Copiar nome de usuário'>
+        <Tooltip label='Copiar nome de usuário'>
           <Avatar
             cursor='pointer'
             name='Luís Passos'
             src='https://github.com/luisspassos.png'
+            onClick={() => handleCopyUsername('Luis#1234')}
           />
         </Tooltip>
         <VStack spacing='15px' mt='30px'>
-          <IconButton Icon={MdMessage} ariaLabel='Mensagens' />
-          <IconButton Icon={BsGear} ariaLabel='Configurações' />
+          <IconButton Icon={MdMessage} label='Mensagens' />
+          <IconButton Icon={BsGear} label='Configurações' />
         </VStack>
       </Box>
-      <IconButton Icon={ImExit} ariaLabel='Sair' />
+      <IconButton Icon={ImExit} label='Sair' />
     </Flex>
   );
 }
