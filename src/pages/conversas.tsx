@@ -1,14 +1,24 @@
 import { Flex } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
-import { Sidebar } from '../components/Conversations/Sidebar';
+import { Configurations } from '../components/Configurations';
+import { Conversations } from '../components/Conversations';
+import { Sidebar } from '../components/Sidebar';
+import { useTab } from '../contexts/TabContext';
 import { firebaseAdmin } from '../services/firebaseAdmin';
 
-export default function Conversations() {
+export default function ConversationsPage() {
+  const { tab } = useTab();
+
+  const CurrentTab = {
+    conversations: Conversations,
+    configurations: Configurations,
+  }[tab];
+
   return (
     <Flex h='100vh'>
       <Sidebar />
-      <p>Conversations</p>
+      <CurrentTab />
     </Flex>
   );
 }

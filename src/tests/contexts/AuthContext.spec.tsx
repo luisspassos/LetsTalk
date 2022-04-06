@@ -10,7 +10,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '../../services/firebase';
 import nookies from 'nookies';
-import Conversations from '../../pages/conversas';
+import ConversationsPage from '../../pages/conversas';
 import { act } from 'react-dom/test-utils';
 import { mocked } from 'jest-mock';
 
@@ -58,7 +58,7 @@ async function renderConversationsPage() {
   await act(async () => {
     render(
       <AuthProvider>
-        <Conversations />
+        <ConversationsPage />
       </AuthProvider>
     );
   });

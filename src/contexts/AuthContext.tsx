@@ -23,6 +23,7 @@ type SendEmailToRecoverPasswordData = {
 };
 
 type AuthContextData = {
+  signOut: () => Promise<void>;
   signInWithEmailAndPassword: ({
     email,
     password,
@@ -36,6 +37,13 @@ type AuthContextData = {
 type UserType = User | null;
 
 export const AuthContext = createContext({} as AuthContextData);
+
+export const signOut = async () => {
+  const { auth } = await import('../services/firebase');
+  const { signOut } = await import('firebase/auth');
+
+  await signOut(auth);
+};
 
 export const sendEmailToRecoverPassword = async ({
   email,
@@ -96,6 +104,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       value={{
         signInWithEmailAndPassword,
         sendEmailToRecoverPassword,
+        signOut,
         user,
       }}
     >
