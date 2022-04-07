@@ -33,9 +33,15 @@ type AuthContextData = {
     email,
   }: SendEmailToRecoverPasswordData) => Promise<void>;
   user: UserType;
+  setUsername: ({ user, name }: SetUsernameParams) => Promise<void>;
 };
 
 type UserType = User | null;
+
+type SetUsernameParams = {
+  user: User;
+  name: string;
+};
 
 export const AuthContext = createContext({} as AuthContextData);
 
@@ -48,7 +54,7 @@ export const getCurrentUserId = async () => {
     increment: incrementId,
     updateDoc,
   } = await import('firebase/firestore');
-  const currentUserIdRef = doc(db, 'conversations', 'current_user_id');
+  const currentUserIdRef = doc(db, 'users', 'current_user_id');
 
   await updateDoc(currentUserIdRef, {
     id: incrementId(1),
@@ -59,6 +65,16 @@ export const getCurrentUserId = async () => {
   const id = currentUserIdSnap.data()?.id;
 
   return id;
+};
+
+export const setUsername = async ({ user, name }: SetUsernameParams) => {
+  const { updateProfile } = await import('firebase/auth');
+
+  const id = await getCurrentUserId();
+
+  await updateProfile(user, {
+    displayName: `${name}#${id}`,
+  });
 };
 
 export const signOut = async () => {
@@ -125,6 +141,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <AuthContext.Provider
       value={{
+        setUsername,
         getCurrentUserId,
         signInWithEmailAndPassword,
         sendEmailToRecoverPassword,

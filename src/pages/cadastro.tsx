@@ -29,7 +29,11 @@ type RegistrationFormData = {
 };
 
 const registrationFormSchema = yup.object().shape({
-  name: yup.string().trim().required('Nome obrigatório'),
+  name: yup
+    .string()
+    .trim()
+    .required('Nome obrigatório')
+    .matches(/^(?!.*#).*$/, 'O nome não pode conter #'),
   email: yup
     .string()
     .trim()
@@ -61,18 +65,15 @@ export default function Register() {
     resolver: yupResolver(registrationFormSchema),
   });
 
-  const { getCurrentUserId } = useAuth();
+  const { setUsername } = useAuth();
 
   const handleRegister = useMemo(
     () =>
       handleSubmit(async ({ email, password, name }) => {
         try {
           const { auth } = await import('../services/firebase');
-          const {
-            createUserWithEmailAndPassword,
-            sendEmailVerification,
-            updateProfile,
-          } = await import('firebase/auth');
+          const { createUserWithEmailAndPassword, sendEmailVerification } =
+            await import('firebase/auth');
 
           const { user } = await createUserWithEmailAndPassword(
             auth,
@@ -80,11 +81,7 @@ export default function Register() {
             password
           );
 
-          const id = await getCurrentUserId();
-
-          await updateProfile(user, {
-            displayName: `${name}#${id}`,
-          });
+          await setUsername({ user, name });
 
           await sendEmailVerification(user);
           successToastWhenRegistering();
@@ -114,7 +111,7 @@ export default function Register() {
           }
         }
       }),
-    [handleSubmit, setError, getCurrentUserId]
+    [handleSubmit, setError, setUsername]
   );
 
   return (

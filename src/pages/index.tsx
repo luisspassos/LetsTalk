@@ -249,7 +249,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   try {
     const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-    if (user && ObjectIsEmpty(ctx.query)) {
+    if (user.email_verified && ObjectIsEmpty(ctx.query)) {
       return {
         redirect: {
           destination: '/conversas',

@@ -8,17 +8,13 @@ export function Avatar() {
   const { user } = useAuth();
 
   const username = user?.displayName ?? '';
-  const [name] = username.split('#');
-
-  console.log(user);
 
   function handleCopyUsername(username: string) {
     setCopiedUsername(true);
     navigator.clipboard.writeText(username);
   }
-  // fazer esse ngc do nome no google button
-  // ver verificação de email no getserversideprops
   // renderizar user no getServerSideProps XDDD
+  // react query
   return (
     <Tooltip
       bg={copiedUsername ? 'green.500' : undefined}
@@ -30,7 +26,6 @@ export function Avatar() {
     >
       <ChakraAvatar
         cursor='pointer'
-        name={name}
         src={user?.photoURL ?? undefined}
         onClick={() => handleCopyUsername(username)}
       />

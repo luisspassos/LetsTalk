@@ -2,21 +2,31 @@ import { Button, Icon } from '@chakra-ui/react';
 import { memo, useCallback } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
+import { useAuth } from '../../contexts/AuthContext';
 
 function LoginButtonWithGoogleComponent() {
   const router = useRouter();
+  const { setUsername } = useAuth();
+
   const handleSignInWithGoogle = useCallback(async () => {
     try {
-      const { GoogleAuthProvider, signInWithPopup } = await import(
-        'firebase/auth'
-      );
+      const { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } =
+        await import('firebase/auth');
       const { auth } = await import('../../services/firebase');
       const googleProvider = new GoogleAuthProvider();
 
-      const { user } = await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      const { user } = result;
+      const name = user.displayName ?? 'Usuário';
 
       /* istanbul ignore else */
-      if (user) {
+      if (result) {
+        const additionalUserInfo = getAdditionalUserInfo(result);
+
+        if (additionalUserInfo?.isNewUser) {
+          await setUsername({ user, name });
+        }
+
         router.push('/conversas');
       }
     } catch (err) {
@@ -25,7 +35,7 @@ function LoginButtonWithGoogleComponent() {
       );
       unknownErrorToast();
     }
-  }, [router]);
+  }, [router, setUsername]);
 
   return (
     <Button
