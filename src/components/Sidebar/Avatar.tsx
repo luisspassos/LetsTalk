@@ -7,25 +7,32 @@ export function Avatar() {
   const [copiedUsername, setCopiedUsername] = useState(false);
   const { user } = useAuth();
 
+  const username = user?.displayName ?? '';
+  const [name] = username.split('#');
+
+  console.log(user);
+
   function handleCopyUsername(username: string) {
     setCopiedUsername(true);
     navigator.clipboard.writeText(username);
   }
-
+  // fazer esse ngc do nome no google button
+  // ver verificação de email no getserversideprops
+  // renderizar user no getServerSideProps XDDD
   return (
     <Tooltip
       bg={copiedUsername ? 'green.500' : undefined}
       label={
-        copiedUsername ? 'Copiado!' : 'Copiar nome de usuário | username#1234'
+        copiedUsername ? 'Copiado!' : `Copiar nome de usuário | ${username}`
       }
       closeOnClick={false}
       onClose={() => setCopiedUsername(false)}
     >
       <ChakraAvatar
         cursor='pointer'
-        name='Luís Passos'
+        name={name}
         src={user?.photoURL ?? undefined}
-        onClick={() => handleCopyUsername('Luis#1234')}
+        onClick={() => handleCopyUsername(username)}
       />
     </Tooltip>
   );

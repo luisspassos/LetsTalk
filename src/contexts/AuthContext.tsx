@@ -23,6 +23,7 @@ type SendEmailToRecoverPasswordData = {
 };
 
 type AuthContextData = {
+  getCurrentUserId: () => Promise<number>;
   signOut: () => Promise<void>;
   signInWithEmailAndPassword: ({
     email,
@@ -37,6 +38,28 @@ type AuthContextData = {
 type UserType = User | null;
 
 export const AuthContext = createContext({} as AuthContextData);
+
+export const getCurrentUserId = async () => {
+  const { db } = await import('../services/firebase');
+
+  const {
+    doc,
+    getDoc,
+    increment: incrementId,
+    updateDoc,
+  } = await import('firebase/firestore');
+  const currentUserIdRef = doc(db, 'conversations', 'current_user_id');
+
+  await updateDoc(currentUserIdRef, {
+    id: incrementId(1),
+  });
+
+  const currentUserIdSnap = await getDoc(currentUserIdRef);
+
+  const id = currentUserIdSnap.data()?.id;
+
+  return id;
+};
 
 export const signOut = async () => {
   const { auth } = await import('../services/firebase');
@@ -102,6 +125,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <AuthContext.Provider
       value={{
+        getCurrentUserId,
         signInWithEmailAndPassword,
         sendEmailToRecoverPassword,
         signOut,

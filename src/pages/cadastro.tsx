@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { toast } from '../utils/Toasts/toast';
+import { useAuth } from '../contexts/AuthContext';
 
 type FormFirebaseError = Record<
   string,
@@ -60,6 +61,8 @@ export default function Register() {
     resolver: yupResolver(registrationFormSchema),
   });
 
+  const { getCurrentUserId } = useAuth();
+
   const handleRegister = useMemo(
     () =>
       handleSubmit(async ({ email, password, name }) => {
@@ -77,8 +80,10 @@ export default function Register() {
             password
           );
 
+          const id = await getCurrentUserId();
+
           await updateProfile(user, {
-            displayName: name,
+            displayName: `${name}#${id}`,
           });
 
           await sendEmailVerification(user);
@@ -109,7 +114,7 @@ export default function Register() {
           }
         }
       }),
-    [handleSubmit, setError]
+    [handleSubmit, setError, getCurrentUserId]
   );
 
   return (
