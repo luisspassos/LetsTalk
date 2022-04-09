@@ -7,13 +7,12 @@ export function Avatar() {
   const [copiedUsername, setCopiedUsername] = useState(false);
   const { user } = useAuth();
 
-  const username = user?.displayName ?? '';
+  const username: string = user?.name;
 
   function handleCopyUsername(username: string) {
     setCopiedUsername(true);
     navigator.clipboard.writeText(username);
   }
-  // renderizar user no getServerSideProps XDDD
   // react query
   return (
     <Tooltip
@@ -26,7 +25,7 @@ export function Avatar() {
     >
       <ChakraAvatar
         cursor='pointer'
-        src={user?.photoURL ?? undefined}
+        src={user?.picture ?? undefined}
         onClick={() => handleCopyUsername(username)}
       />
     </Tooltip>

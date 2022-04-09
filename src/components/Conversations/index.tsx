@@ -1,3 +1,5 @@
+import { ConversationsList } from './ConversationsList';
+
 export function Conversations() {
-  return <p>Conversations</p>;
+  return <ConversationsList />;
 }

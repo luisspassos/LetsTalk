@@ -2,12 +2,14 @@ import { User, UserCredential } from 'firebase/auth';
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from 'react';
 import { auth } from '../services/firebase';
 import nookies from 'nookies';
+import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 
 export type AuthProviderProps = {
   children: ReactNode;
@@ -34,9 +36,10 @@ type AuthContextData = {
   }: SendEmailToRecoverPasswordData) => Promise<void>;
   user: UserType;
   setUsername: ({ user, name }: SetUsernameParams) => Promise<void>;
+  fillUser: (newUser: DecodedIdToken) => void;
 };
 
-type UserType = User | null;
+type UserType = DecodedIdToken | null;
 
 type SetUsernameParams = {
   user: User;
@@ -114,15 +117,17 @@ export const signInWithEmailAndPassword = async ({
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
 
+  const fillUser = useCallback((newUser: DecodedIdToken) => {
+    setUser(newUser);
+  }, []);
+
   // token listener
   useEffect(() => {
     return auth.onIdTokenChanged(async (user) => {
       if (!user) {
-        setUser(null);
         nookies.set(undefined, 'token', '', { path: '/' });
       } else {
         const token = await user.getIdToken();
-        setUser(user);
         nookies.set(undefined, 'token', token, { path: '/' });
       }
     });
@@ -143,6 +148,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       value={{
         setUsername,
         getCurrentUserId,
+        fillUser,
         signInWithEmailAndPassword,
         sendEmailToRecoverPassword,
         signOut,
