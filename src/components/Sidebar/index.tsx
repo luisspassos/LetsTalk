@@ -1,6 +1,6 @@
 import { Box, Flex, VStack } from '@chakra-ui/react';
-import { MdMessage } from 'react-icons/md';
-import { BsGear } from 'react-icons/bs';
+import { MdMessage, MdOutlineMessage } from 'react-icons/md';
+import { BsGear, BsGearFill } from 'react-icons/bs';
 import { ImExit } from 'react-icons/im';
 import { IconButton } from './IconButton';
 import { Avatar } from './Avatar';
@@ -19,6 +19,9 @@ export function Sidebar() {
     router.push('/');
   }, [signOut, router]);
 
+  const isConversations = tab === 'conversations';
+  const isConfigurations = tab === 'configurations';
+
   return (
     <Flex
       bg='gray.500'
@@ -33,14 +36,14 @@ export function Sidebar() {
         <VStack spacing='15px' mt='30px'>
           <IconButton
             anyFunction={() => handleChangeTab('conversations')}
-            isFocused={tab === 'conversations'}
-            Icon={MdMessage}
+            isFocused={isConversations}
+            Icon={isConversations ? MdMessage : MdOutlineMessage}
             label='Mensagens'
           />
           <IconButton
             anyFunction={() => handleChangeTab('configurations')}
-            isFocused={tab === 'configurations'}
-            Icon={BsGear}
+            isFocused={isConfigurations}
+            Icon={isConfigurations ? BsGearFill : BsGear}
             label='Configurações'
           />
         </VStack>
