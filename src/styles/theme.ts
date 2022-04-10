@@ -9,6 +9,13 @@ export const theme = extendTheme({
     bold: 600,
   },
   colors: {
+    blueAlpha: {
+      900: '#1d243490',
+      700: '#1d243470',
+    },
+    grayAlpha: {
+      500: '#646C7720',
+    },
     gray: {
       50: '#f9f9f9',
       200: '#d8dce7',

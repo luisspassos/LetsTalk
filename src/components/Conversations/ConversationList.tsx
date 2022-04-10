@@ -5,13 +5,16 @@ import { ConversationDivider } from './Conversation/ConversationDivider';
 import { Divider } from './Divider';
 import { SearchInput } from './SearchInput';
 
-export function ConversationsList() {
+export function ConversationList() {
+  const arr = [1, 2, 3, 4, 5, 6, 7];
+
   return (
-    <Flex bg='gray.200' p='25px' pb='0' direction='column'>
+    <Flex w='335px' bg='gray.200' p='25px' pb='0' direction='column'>
       <Button
         fontSize='23px'
         fontWeight={400}
-        variant='ghost'
+        color='gray.900'
+        variant='link'
         leftIcon={<Icon as={IoMdAdd} fontSize='35px' />}
         justifyContent='start'
         pl='3px'
@@ -20,34 +23,34 @@ export function ConversationsList() {
       </Button>
       <Divider />
       <SearchInput />
-      <Heading as='h1' fontWeight={400} fontSize='30px'>
+      <Heading as='h1' fontWeight={400} fontSize='30px' mb='13px'>
         Conversas
       </Heading>
+
       <VStack
         sx={{
           '&::-webkit-scrollbar': {
-            width: '8px',
+            width: '12px',
             backgroundColor: `transparent`,
-            opacity: 0,
           },
           '&::-webkit-scrollbar-thumb': {
-            backgroundColor: `rgba(0,0,0)`,
-            opacity: 0.4,
+            boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-700)',
+            border: 'solid 3px transparent',
+            transition: '0.2s',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-900)',
           },
         }}
         overflowY='auto'
-        pb='25px'
+        pb='10px'
         mx='-25px'
+        spacing={0}
       >
-        <ConversationDivider />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
+        <ConversationDivider position='sticky' top={0} left={0} mt={0} />
+        {arr.map((el, i) => (
+          <Conversation key={el} arr={arr} index={i} />
+        ))}
       </VStack>
     </Flex>
   );

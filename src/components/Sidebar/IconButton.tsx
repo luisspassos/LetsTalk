@@ -16,7 +16,7 @@ export function IconButton({
   isFocused,
 }: IconButtonProps) {
   return (
-    <Tooltip label={label} aria-label={label}>
+    <Tooltip ariaLabel={label} label={label} aria-label={label}>
       <ChakraIconButton
         bg={isFocused ? 'whiteAlpha.400' : undefined}
         w='40px'

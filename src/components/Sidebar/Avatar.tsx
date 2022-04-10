@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Tooltip } from '../Tooltip';
-import { Avatar as ChakraAvatar } from '@chakra-ui/react';
+import { Avatar as ChakraAvatar, Text } from '@chakra-ui/react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export function Avatar() {
@@ -18,7 +18,18 @@ export function Avatar() {
     <Tooltip
       bg={copiedUsername ? 'green.500' : undefined}
       label={
-        copiedUsername ? 'Copiado!' : `Copiar nome de usuário | ${username}`
+        copiedUsername ? (
+          'Copiado!'
+        ) : (
+          <Text isTruncated maxW='400px'>
+            Copiar nome de usuário | {username}
+          </Text>
+        )
+      }
+      ariaLabel={
+        copiedUsername
+          ? 'Usuário copiado'
+          : `Copiar Nome de usuário. ${username}`
       }
       closeOnClick={false}
       onClose={() => setCopiedUsername(false)}

@@ -2,11 +2,12 @@ import {
   Tooltip as ChakraTooltip,
   TooltipProps as ChakraTooltipProps,
 } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 type TooltipProps = {
   children: ReactNode;
-  label: string;
+  label: ReactElement | string;
+  ariaLabel: string;
 } & ChakraTooltipProps;
 
 export function Tooltip({ children, label, ...rest }: TooltipProps) {
@@ -17,7 +18,7 @@ export function Tooltip({ children, label, ...rest }: TooltipProps) {
       hasArrow
       placement='right'
       label={label}
-      aria-label={label}
+      aria-label={label.toString()}
       {...rest}
     >
       {children}

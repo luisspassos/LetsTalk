@@ -3,7 +3,7 @@ import { FiSearch } from 'react-icons/fi';
 
 export function SearchInput() {
   return (
-    <InputGroup alignItems='center' justifyContent='center' mb='14px'>
+    <InputGroup alignItems='center' justifyContent='center' mb='17px'>
       <InputLeftElement h='100%' pointerEvents='none' fontSize='23px' pl='10px'>
         <Icon as={FiSearch} />
       </InputLeftElement>
