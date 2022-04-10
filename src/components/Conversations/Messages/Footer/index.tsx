@@ -8,12 +8,30 @@ export function Footer() {
   return (
     <Box mt='auto'>
       <Divider />
-      <Flex as='footer' h='80px' align='center' justify='center'>
+      <Flex as='footer' h='80px' align='center' justify='start' pl='10px'>
         <MessageInput />
-        <Tooltip ariaLabel='Gravar áudio' label='Gravar áudio' placement='top'>
+        <Tooltip
+          hasArrow={false}
+          ariaLabel='Gravar áudio'
+          label='Gravar áudio'
+          placement='top'
+        >
           <IconButton
+            fontSize='22px'
+            w='45px'
+            h='45px'
+            borderRadius='15px'
+            ml='15px'
+            color='white'
+            bg='blue.900'
             aria-label='Gravar áudio'
             icon={<Icon as={AiFillAudio} />}
+            _hover={{
+              bg: 'blue.900',
+            }}
+            _active={{
+              bg: 'blueAlpha.900',
+            }}
           />
         </Tooltip>
       </Flex>

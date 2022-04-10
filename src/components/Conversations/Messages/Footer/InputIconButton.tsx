@@ -18,9 +18,17 @@ export function InputIconButton({
   ...rest
 }: InputIconButtonProps) {
   return (
-    <Tooltip placement='top' ariaLabel={ariaLabel} label={ariaLabel}>
+    <Tooltip
+      hasArrow={false}
+      placement='top'
+      ariaLabel={ariaLabel}
+      label={ariaLabel}
+    >
       <InputRightElement {...rest} h='100%'>
         <IconButton
+          w='35px'
+          h='35px'
+          minWidth={0}
           fontSize='25px'
           variant='ghost'
           aria-label={ariaLabel}
