@@ -5,12 +5,15 @@ import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { InputIconButton } from './InputIconButton';
 
 export function MessageInput() {
-  const [scrollHeight, setScrollHeight] = useState<number | undefined>(0);
+  const [scrollHeight, setScrollHeight] = useState<number | string | undefined>(
+    0
+  );
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    console.log(textareaRef.current?.scrollHeight);
+    setScrollHeight('auto');
+    setScrollHeight(`${textareaRef.current?.scrollHeight}px`);
   }, [scrollHeight]);
 
   return (
@@ -20,11 +23,7 @@ export function MessageInput() {
         borderColor='blueAlpha.700'
         bg='white'
         fontFamily='Roboto'
-        h={
-          textareaRef.current?.scrollHeight >= 200
-            ? '200px'
-            : textareaRef.current?.scrollHeight + 'px'
-        }
+        h={textareaRef.current?.scrollHeight >= 200 ? '200px' : scrollHeight}
         minH='45px'
         py='11.75px'
         borderRadius='15px'
@@ -41,16 +40,21 @@ export function MessageInput() {
           setScrollHeight(textareaRef.current?.scrollHeight);
           console.log(textareaRef.current?.scrollHeight);
         }}
-        pr='93px'
+        pr='103px'
+        sx={{
+          '&::-webkit-scrollbar-thumb': {
+            borderWidth: '9px 3px',
+          },
+        }}
       />
       <InputIconButton
-        mr='46px'
+        mr='56px'
         ariaLabel='Emojis'
         Icon={MdOutlineEmojiEmotions}
       />
 
       <InputIconButton
-        mr='5px'
+        mr='15px'
         ariaLabel='Enviar arquivo'
         Icon={AiOutlinePaperClip}
       />

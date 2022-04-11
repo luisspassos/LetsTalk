@@ -28,23 +28,7 @@ export default function ConversationsPage({ user }: ConversationsPageProps) {
   }[tab];
 
   return (
-    <Flex
-      sx={{
-        '::-webkit-scrollbar': {
-          width: '12px',
-          backgroundColor: `transparent`,
-        },
-        '::-webkit-scrollbar-thumb': {
-          boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-700)',
-          border: 'solid 3px transparent',
-          transition: '0.2s',
-        },
-        '::-webkit-scrollbar-thumb:hover': {
-          boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-900)',
-        },
-      }}
-      h='100vh'
-    >
+    <Flex h='100vh'>
       <Sidebar />
       <CurrentTab />
     </Flex>

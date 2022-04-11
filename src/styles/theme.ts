@@ -39,6 +39,17 @@ export const theme = extendTheme({
         bg: 'gray.50',
         color: 'gray.900',
       },
+      '*::-webkit-scrollbar': {
+        width: '12px',
+        backgroundColor: `transparent`,
+      },
+      '*::-webkit-scrollbar-thumb': {
+        boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-700)',
+        border: 'solid 3px transparent',
+      },
+      '*::-webkit-scrollbar-thumb:hover': {
+        boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-900)',
+      },
     },
   },
 });
