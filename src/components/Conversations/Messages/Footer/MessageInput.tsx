@@ -12,6 +12,10 @@ export function MessageInput() {
         borderColor='blueAlpha.700'
         bg='white'
         fontFamily='Roboto'
+        h='45px'
+        minH='0'
+        py={0}
+        pt='11.75px'
         borderRadius='15px'
         placeholder='Sua mensagem...'
         _hover={{
