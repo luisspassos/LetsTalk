@@ -27,26 +27,7 @@ export function ConversationList() {
         Conversas
       </Heading>
 
-      <VStack
-        sx={{
-          '&::-webkit-scrollbar': {
-            width: '12px',
-            backgroundColor: `transparent`,
-          },
-          '&::-webkit-scrollbar-thumb': {
-            boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-700)',
-            border: 'solid 3px transparent',
-            transition: '0.2s',
-          },
-          '&::-webkit-scrollbar-thumb:hover': {
-            boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-900)',
-          },
-        }}
-        overflowY='auto'
-        pb='10px'
-        mx='-25px'
-        spacing={0}
-      >
+      <VStack overflowY='auto' pb='10px' mx='-25px' spacing={0}>
         <ConversationDivider position='sticky' top={0} left={0} mt={0} />
         {arr.map((el, i) => (
           <Conversation key={el} arr={arr} index={i} />

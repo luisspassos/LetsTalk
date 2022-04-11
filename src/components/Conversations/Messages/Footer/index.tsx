@@ -8,7 +8,14 @@ export function Footer() {
   return (
     <Box mt='auto'>
       <Divider />
-      <Flex as='footer' h='80px' align='center' justify='start' pl='10px'>
+      <Flex
+        as='footer'
+        py='15px'
+        minH='80px'
+        align='center'
+        justify='start'
+        pl='10px'
+      >
         <MessageInput />
         <Tooltip
           hasArrow={false}
