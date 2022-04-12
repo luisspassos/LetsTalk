@@ -1,20 +1,32 @@
 import { Textarea, InputGroup } from '@chakra-ui/react';
-import { ChangeEvent, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { AiOutlinePaperClip } from 'react-icons/ai';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { InputIconButton } from './InputIconButton';
 
 export function MessageInput() {
-  const [message, setMessage] = useState('');
-  const [scrollHeight, setScrollHeight] = useState('');
-  const [textareaHeight, setTextareaHeight] = useState<string>('45px');
+  const txHeight = 46;
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  function handleAdjustTextareaSize(e: ChangeEvent<HTMLTextAreaElement>) {
-    const newScrollHeight = `${e.target.scrollHeight}px`;
+  // max length 1000
 
-    setTextareaHeight('auto');
-    setTextareaHeight(newScrollHeight);
-    setScrollHeight(newScrollHeight);
+  useEffect(() => {
+    if (textareaRef.current.value === '') {
+      textareaRef.current.setAttribute(
+        'style',
+        'height:' + txHeight + 'px;overflow-y:hidden;'
+      );
+    } else {
+      textareaRef.current.setAttribute(
+        'style',
+        'height:' + textareaRef.current.scrollHeight + 'px;overflow-y:hidden;'
+      );
+    }
+  }, []);
+
+  function onInput() {
+    textareaRef.current.style.height = 'auto';
+    textareaRef.current.style.height = textareaRef.current?.scrollHeight + 'px';
   }
 
   return (
@@ -24,25 +36,22 @@ export function MessageInput() {
         borderColor='blueAlpha.700'
         bg='white'
         fontFamily='Roboto'
-        h={message === '' ? textareaHeight : scrollHeight}
+        h='45px'
         py='11.75px'
-        value={message}
-        borderRadius='15px'
         overflowY='hidden'
+        borderRadius='15px'
         rows={1}
+        ref={textareaRef}
         placeholder='Sua mensagem...'
         _hover={{
           borderColor: 'blueAlpha.700',
         }}
+        onChange={onInput}
         pr='103px'
         sx={{
           '&::-webkit-scrollbar-thumb': {
             borderWidth: '9px 3px',
           },
-        }}
-        onChange={(e) => {
-          handleAdjustTextareaSize(e);
-          setMessage(e.target.value);
         }}
       />
       <InputIconButton

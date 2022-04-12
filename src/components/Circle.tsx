@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 
 type CircleProps = {
   children: ReactNode;
-  w: string;
+  w?: string;
 } & ChakraCircleProps;
 
 export function Circle({ children, ...props }: CircleProps) {

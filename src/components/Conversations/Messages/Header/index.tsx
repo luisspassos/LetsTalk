@@ -14,7 +14,13 @@ import { Divider } from '../Divider';
 export function Header() {
   return (
     <>
-      <Flex as='header' justify='space-between' h='85px' align='center'>
+      <Flex
+        flexShrink={0}
+        as='header'
+        justify='space-between'
+        h='85px'
+        align='center'
+      >
         <Flex align='center' gap='18px'>
           <Avatar w='55px' h='55px' src='https://github.com/luisspassos.png' />
           <VStack align='start' spacing={0}>
