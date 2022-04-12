@@ -41,7 +41,7 @@ export function Message({ isYourMessage }: MessageProps) {
           bg={isYourMessage ? 'gray.200' : 'gray.300'}
           wordBreak='break-word'
         >
-          sei la
+          a
         </Text>
       </Flex>
       <Text fontSize='15px' color='gray.900' opacity='80%' as='time'>

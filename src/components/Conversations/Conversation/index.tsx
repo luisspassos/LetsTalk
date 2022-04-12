@@ -47,15 +47,14 @@ export function Conversation({ arr, index }: ConversationProps) {
               19:48
             </Text>
             <Circle
-              p='1px'
+              px='3px'
               minW='19.5px'
               h='19.5px'
-              lineHeight='19.5px'
               fontSize='13px'
               color='white'
               bg='gray.500'
             >
-              999
+              9
             </Circle>
           </VStack>
         </Flex>
