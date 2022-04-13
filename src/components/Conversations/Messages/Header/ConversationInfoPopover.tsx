@@ -11,17 +11,13 @@ import { ReactNode } from 'react';
 
 type ConversationInfoPopoverProps = {
   children: ReactNode;
-  isOpen: boolean;
-  onClose: () => void;
 };
 
 export function ConversationInfoPopover({
   children,
-  isOpen,
-  onClose,
 }: ConversationInfoPopoverProps) {
   return (
-    <Popover closeOnBlur={false} isOpen={isOpen} onClose={onClose} isLazy>
+    <Popover closeOnBlur={false} isLazy>
       <PopoverTrigger>{children}</PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />

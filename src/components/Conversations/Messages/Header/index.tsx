@@ -1,21 +1,23 @@
 import {
   Avatar,
+  Box,
   Flex,
   Heading,
-  Icon,
-  IconButton,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
   Text,
-  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import { IoEllipsisVerticalSharp } from 'react-icons/io5';
 import { Tooltip } from '../../../Tooltip';
 import { Divider } from '../Divider';
-import { ConversationInfoPopover } from './ConversationInfoPopover';
+import { ConversationInfoIconButton } from './ConversationInfoIconButton';
 
 export function Header() {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-
   return (
     <>
       <Flex
@@ -43,21 +45,30 @@ export function Header() {
             </Text>
           </VStack>
         </Flex>
-        <ConversationInfoPopover isOpen={isOpen} onClose={onClose}>
+        <Popover closeOnBlur={false} isLazy>
           <Tooltip
             ariaLabel='Informações da conversa'
             label='Informações da conversa'
             placement='bottom-start'
           >
-            <IconButton
-              aria-label='Informações da conversa'
-              fontSize='30px'
-              icon={<Icon as={IoEllipsisVerticalSharp} />}
-              variant='ghost'
-              onClick={onOpen}
-            />
+            <Box display='inline-block'>
+              <PopoverTrigger>
+                <Box display='inline-block'>
+                  <ConversationInfoIconButton />
+                </Box>
+              </PopoverTrigger>
+            </Box>
           </Tooltip>
-        </ConversationInfoPopover>
+
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader>Confirmation!</PopoverHeader>
+            <PopoverBody>
+              Are you sure you want to have that milkshake?
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
       </Flex>
       <Divider />
     </>
