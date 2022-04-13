@@ -3,6 +3,7 @@ import {
   InputProps as ChakraInputProps,
   Input as ChakraInput,
   FormControl,
+  FormLabelProps,
 } from '@chakra-ui/react';
 import { forwardRef, LegacyRef } from 'react';
 import { FieldError } from 'react-hook-form';
@@ -12,19 +13,27 @@ type InputProps = {
   label: string;
   id: string;
   error?: FieldError;
-} & ChakraInputProps;
+  inputProps?: ChakraInputProps;
+  labelProps?: FormLabelProps;
+};
 
 export const Input = forwardRef(
   (
-    { error, label, id, ...rest }: InputProps,
+    { error, label, id, inputProps, labelProps }: InputProps,
     ref: LegacyRef<HTMLInputElement> | undefined
   ) => {
     return (
       <FormControl isInvalid={!!error} flexDirection='column'>
-        <FormLabel mb='0' fontSize='17px' color='gray.400' htmlFor={id}>
+        <FormLabel
+          {...labelProps}
+          mb='0'
+          fontSize='17px'
+          color='gray.400'
+          htmlFor={id}
+        >
           {label}
         </FormLabel>
-        <ChakraInput ref={ref} h='49px' bg='white' id={id} {...rest} />
+        <ChakraInput ref={ref} h='49px' bg='white' id={id} {...inputProps} />
         <InputError message={error?.message ?? 'Erro'} />
       </FormControl>
     );

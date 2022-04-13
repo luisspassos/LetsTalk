@@ -3,15 +3,13 @@ import {
   Flex,
   FormControl,
   FormHelperText,
-  FormLabel,
   Heading,
+  HStack,
   Icon,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalHeader,
   ModalOverlay,
   useDisclosure,
   VStack,
@@ -21,6 +19,8 @@ import { Conversation } from './Conversation';
 import { ConversationDivider } from './Conversation/ConversationDivider';
 import { Divider } from './Divider';
 import { SearchInput } from './SearchInput';
+import { Input } from '../Form/Input';
+import { ModalTitle } from '../Modal/ModalTitle';
 
 export function ConversationList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,21 +55,44 @@ export function ConversationList() {
           ))}
         </VStack>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Adicionar contato</ModalHeader>
+          <ModalTitle text='Adicionar contato' />
           <ModalCloseButton />
-          <ModalBody>
-            <FormControl>
-              <FormLabel>Usuário</FormLabel>
-              <Input placeholder='Insira um usuário, exemplo: usuário#2348' />
-              <FormHelperText>
+          <ModalBody pb='20px'>
+            <FormControl
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+              flexDirection='column'
+            >
+              <Input
+                id='username'
+                label='Usuário'
+                inputProps={{
+                  placeholder: 'Insira um usuário, exemplo: usuario#1234',
+                  h: '45px',
+                }}
+              />
+              <FormHelperText color='gray.900'>
                 O nome de usuário com ID pode ser encontrado nas configurações
-                ou clicando na sua foto no barra ao lado.
+                ou clicando na sua foto na barra ao lado.
               </FormHelperText>
-              <Button>Cancelar</Button>
-              <Button>Adicionar</Button>
+              <HStack mt='12px' spacing='10px'>
+                <Button colorScheme='red' variant='outline'>
+                  Cancelar
+                </Button>
+                <Button
+                  bg='gray.900'
+                  color='gray.50'
+                  _hover={{
+                    bg: 'gray.400',
+                  }}
+                >
+                  Adicionar
+                </Button>
+              </HStack>
             </FormControl>
           </ModalBody>
         </ModalContent>

@@ -79,8 +79,10 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
             {...register('password')}
             error={errors.password}
             label='Nova senha'
-            placeholder='Coloque sua nova senha...'
-            type='password'
+            inputProps={{
+              placeholder: 'Coloque sua nova senha...',
+              type: 'password',
+            }}
           />
           <Input
             id='confirmNewPassword'
