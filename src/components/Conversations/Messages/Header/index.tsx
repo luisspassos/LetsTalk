@@ -10,6 +10,7 @@ import {
 import { IoEllipsisVerticalSharp } from 'react-icons/io5';
 import { Tooltip } from '../../../Tooltip';
 import { Divider } from '../Divider';
+import { ConversationPopover } from './ConversationPopover';
 
 export function Header() {
   return (
@@ -44,12 +45,14 @@ export function Header() {
           label='Informações da conversa'
           placement='bottom-start'
         >
-          <IconButton
-            aria-label='Informações da conversa'
-            fontSize='30px'
-            icon={<Icon as={IoEllipsisVerticalSharp} />}
-            variant='ghost'
-          />
+          <ConversationPopover>
+            <IconButton
+              aria-label='Informações da conversa'
+              fontSize='30px'
+              icon={<Icon as={IoEllipsisVerticalSharp} />}
+              variant='ghost'
+            />
+          </ConversationPopover>
         </Tooltip>
       </Flex>
       <Divider />
