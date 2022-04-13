@@ -100,9 +100,11 @@ export default function IForgotMyPassword() {
             {...register('email')}
             error={errors.email}
             id='email'
-            type='email'
+            inputProps={{
+              placeholder: 'Coloque seu email',
+              type: 'email',
+            }}
             label='Email'
-            placeholder='Coloque seu email'
           />
           <Button
             isLoading={isSubmitting}

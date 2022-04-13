@@ -195,18 +195,22 @@ const Login = ({ actionCode, mode }: LoginProps) => {
           <DividerOr />
           <Stack spacing={2}>
             <Input
-              type='email'
+              inputProps={{
+                type: 'email',
+                placeholder: 'Email...',
+              }}
               id='email'
               label='Email'
-              placeholder='Email...'
               {...register('email')}
               error={errors.email}
             />
             <Input
-              type='password'
+              inputProps={{
+                placeholder: 'Senha...',
+                type: 'password',
+              }}
               id='password'
               label='Senha'
-              placeholder='Senha...'
               {...register('password')}
               error={errors.password}
             />

@@ -2,7 +2,6 @@ import {
   Button,
   Flex,
   FormControl,
-  FormHelperText,
   Heading,
   HStack,
   Icon,
@@ -21,6 +20,7 @@ import { Divider } from './Divider';
 import { SearchInput } from './SearchInput';
 import { Input } from '../Form/Input';
 import { ModalTitle } from '../Modal/ModalTitle';
+import { ConfirmButton } from '../Modal/ConfirmButton';
 
 export function ConversationList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -73,25 +73,22 @@ export function ConversationList() {
                 inputProps={{
                   placeholder: 'Insira um usuário, exemplo: usuario#1234',
                   h: '45px',
+                  borderColor: 'blueAlpha.900',
                 }}
+                labelProps={{
+                  color: 'gray.900',
+                  opacity: 1,
+                  fontSize: '16px',
+                }}
+                helperText='O nome de usuário com ID pode ser encontrado nas configurações ou
+                clicando na foto na barra ao lado.'
               />
-              <FormHelperText color='gray.900'>
-                O nome de usuário com ID pode ser encontrado nas configurações
-                ou clicando na sua foto na barra ao lado.
-              </FormHelperText>
+
               <HStack mt='12px' spacing='10px'>
                 <Button colorScheme='red' variant='outline'>
                   Cancelar
                 </Button>
-                <Button
-                  bg='gray.900'
-                  color='gray.50'
-                  _hover={{
-                    bg: 'gray.400',
-                  }}
-                >
-                  Adicionar
-                </Button>
+                <ConfirmButton text='Adicionar' />
               </HStack>
             </FormControl>
           </ModalBody>

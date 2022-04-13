@@ -134,31 +134,39 @@ export default function Register() {
             <Input
               label='Email'
               id='email'
-              type='email'
-              placeholder='Email...'
+              inputProps={{
+                type: 'email',
+                placeholder: 'Email...',
+              }}
               {...register('email')}
               error={errors.email}
             />
             <Input
               label='Nome'
               id='username'
-              placeholder='Nome...'
+              inputProps={{
+                placeholder: 'Nome...',
+              }}
               {...register('name')}
               error={errors.name}
             />
             <Input
               label='Senha'
               id='password'
-              type='password'
-              placeholder='Senha...'
+              inputProps={{
+                type: 'password',
+                placeholder: 'Senha...',
+              }}
               {...register('password')}
               error={errors.password}
             />
             <Input
               label='Confirmar senha'
               id='confirmPassword'
-              type='password'
-              placeholder='Confirme sua senha...'
+              inputProps={{
+                placeholder: 'Confirme sua senha...',
+                type: 'password',
+              }}
               {...register('password_confirmation')}
               error={errors.password_confirmation}
             />

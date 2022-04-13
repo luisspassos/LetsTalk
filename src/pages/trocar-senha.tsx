@@ -87,10 +87,12 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
           <Input
             id='confirmNewPassword'
             error={errors.password_confirmation}
-            type='password'
             {...register('password_confirmation')}
             label='Confirme sua senha'
-            placeholder='Confirme sua nova senha...'
+            inputProps={{
+              type: 'password',
+              placeholder: 'Confirme sua nova senha...',
+            }}
           />
         </Stack>
 
