@@ -3,13 +3,7 @@ import {
   Flex,
   FormControl,
   Heading,
-  HStack,
   Icon,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalOverlay,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
@@ -19,8 +13,8 @@ import { ConversationDivider } from './Conversation/ConversationDivider';
 import { Divider } from './Divider';
 import { SearchInput } from './SearchInput';
 import { Input } from '../Form/Input';
-import { ModalTitle } from '../Modal/ModalTitle';
-import { ConfirmButton } from '../Modal/ConfirmButton';
+import { ModalWrapper } from '../Modal/ModalWrapper';
+import { Buttons } from '../Modal/Buttons';
 
 export function ConversationList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,45 +49,36 @@ export function ConversationList() {
           ))}
         </VStack>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalTitle text='Adicionar contato' />
-          <ModalCloseButton />
-          <ModalBody pb='20px'>
-            <FormControl
-              display='flex'
-              alignItems='center'
-              justifyContent='center'
-              flexDirection='column'
-            >
-              <Input
-                id='username'
-                label='Usuário'
-                inputProps={{
-                  placeholder: 'Insira um usuário, exemplo: usuario#1234',
-                  h: '45px',
-                  borderColor: 'blueAlpha.900',
-                }}
-                labelProps={{
-                  color: 'gray.900',
-                  opacity: 1,
-                  fontSize: '16px',
-                }}
-                helperText='O nome de usuário com ID pode ser encontrado nas configurações ou
+      <ModalWrapper
+        isOpen={isOpen}
+        onClose={onClose}
+        modalTitle='Adicionar contato'
+      >
+        <FormControl
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          flexDirection='column'
+        >
+          <Input
+            id='username'
+            label='Usuário'
+            inputProps={{
+              placeholder: 'Insira um usuário, exemplo: usuario#1234',
+              h: '45px',
+              borderColor: 'blueAlpha.900',
+            }}
+            labelProps={{
+              color: 'gray.900',
+              opacity: 1,
+              fontSize: '16px',
+            }}
+            helperText='O nome de usuário com ID pode ser encontrado nas configurações ou
                 clicando na foto na barra ao lado.'
-              />
-
-              <HStack mt='12px' spacing='10px'>
-                <Button colorScheme='red' variant='outline'>
-                  Cancelar
-                </Button>
-                <ConfirmButton text='Adicionar' />
-              </HStack>
-            </FormControl>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+          />
+          <Buttons confirmButtonText='Adicionar' />
+        </FormControl>
+      </ModalWrapper>
     </>
   );
 }

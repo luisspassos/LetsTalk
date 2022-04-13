@@ -51,10 +51,11 @@ export function Conversation({ arr, index }: ConversationProps) {
               minW='19.5px'
               h='19.5px'
               fontSize='13px'
+              lineHeight='1px'
               color='white'
               bg='gray.500'
             >
-              9
+              2
             </Circle>
           </VStack>
         </Flex>
