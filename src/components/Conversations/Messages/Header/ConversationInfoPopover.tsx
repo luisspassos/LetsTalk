@@ -9,13 +9,19 @@ import {
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-type ConversationPopoverProps = {
+type ConversationInfoPopoverProps = {
   children: ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
 };
 
-export function ConversationPopover({ children }: ConversationPopoverProps) {
+export function ConversationInfoPopover({
+  children,
+  isOpen,
+  onClose,
+}: ConversationInfoPopoverProps) {
   return (
-    <Popover>
+    <Popover closeOnBlur={false} isOpen={isOpen} onClose={onClose} isLazy>
       <PopoverTrigger>{children}</PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />

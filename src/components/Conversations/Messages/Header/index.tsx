@@ -5,14 +5,17 @@ import {
   Icon,
   IconButton,
   Text,
+  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
 import { IoEllipsisVerticalSharp } from 'react-icons/io5';
 import { Tooltip } from '../../../Tooltip';
 import { Divider } from '../Divider';
-import { ConversationPopover } from './ConversationPopover';
+import { ConversationInfoPopover } from './ConversationInfoPopover';
 
 export function Header() {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
     <>
       <Flex
@@ -40,20 +43,21 @@ export function Header() {
             </Text>
           </VStack>
         </Flex>
-        <Tooltip
-          ariaLabel='Informações da conversa'
-          label='Informações da conversa'
-          placement='bottom-start'
-        >
-          <ConversationPopover>
+        <ConversationInfoPopover isOpen={isOpen} onClose={onClose}>
+          <Tooltip
+            ariaLabel='Informações da conversa'
+            label='Informações da conversa'
+            placement='bottom-start'
+          >
             <IconButton
               aria-label='Informações da conversa'
               fontSize='30px'
               icon={<Icon as={IoEllipsisVerticalSharp} />}
               variant='ghost'
+              onClick={onOpen}
             />
-          </ConversationPopover>
-        </Tooltip>
+          </Tooltip>
+        </ConversationInfoPopover>
       </Flex>
       <Divider />
     </>
