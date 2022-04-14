@@ -31,7 +31,9 @@ export function Header() {
           <VStack align='start' spacing={0}>
             <Heading
               maxW='700px'
-              isTruncated
+              textOverflow='ellipsis'
+              whiteSpace='nowrap'
+              overflow='hidden'
               as='h3'
               fontSize='17px'
               fontWeight={400}
