@@ -1,12 +1,20 @@
 import { Flex } from '@chakra-ui/react';
+import { Loading } from '../Loading';
 import { ConversationList } from './ConversationList';
 import { Messages } from './Messages';
+import { AddContactModal } from './Modals/AddContactModal';
+import { BlockUserModal } from './Modals/BlockUserModal';
 
 export function Conversations() {
   return (
-    <Flex flex='1'>
-      <ConversationList />
-      <Messages />
-    </Flex>
+    <>
+      <BlockUserModal />
+      <AddContactModal />
+      <Loading />
+      <Flex flex='1'>
+        <ConversationList />
+        <Messages />
+      </Flex>
+    </>
   );
 }

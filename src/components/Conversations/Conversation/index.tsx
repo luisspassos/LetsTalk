@@ -1,4 +1,5 @@
 import { Avatar, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import { useLoading } from '../../../contexts/LoadingContext';
 import { Circle } from '../../Circle';
 import { ConversationDivider } from './ConversationDivider';
 
@@ -9,6 +10,7 @@ type ConversationProps = {
 
 export function Conversation({ arr, index }: ConversationProps) {
   const lastItem = index === arr.length - 1;
+  const { changeLoadingState } = useLoading();
 
   return (
     <>
@@ -26,7 +28,11 @@ export function Conversation({ arr, index }: ConversationProps) {
           bg: 'grayAlpha.500',
         }}
       >
-        <Avatar src='https://github.com/luisspassos.png' mr='10px' />
+        <Avatar
+          onLoad={() => changeLoadingState(false)}
+          src='https://github.com/luisspassos.png'
+          mr='10px'
+        />
         <Flex justify='space-between' flex='1'>
           <VStack spacing={0} alignItems='start'>
             <Heading maxW='165px' isTruncated fontSize='17px' fontWeight={400}>

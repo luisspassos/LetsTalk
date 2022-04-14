@@ -13,7 +13,7 @@ export function Avatar() {
     setCopiedUsername(true);
     navigator.clipboard.writeText(username);
   }
-  // react query
+
   return (
     <Tooltip
       bg={copiedUsername ? 'green.500' : undefined}

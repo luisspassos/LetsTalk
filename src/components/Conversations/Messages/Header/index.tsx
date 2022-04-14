@@ -4,18 +4,14 @@ import {
   Flex,
   Heading,
   Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
   PopoverTrigger,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import { Tooltip } from '../../../Tooltip';
 import { Divider } from '../Divider';
-import { ConversationInfoIconButton } from './ConversationInfoIconButton';
+import { ConversationInfoIconButton } from './ConversationInfo/IconButton';
+import { ConversationInfoPopover } from './ConversationInfo/Popover';
 
 export function Header() {
   return (
@@ -45,7 +41,7 @@ export function Header() {
             </Text>
           </VStack>
         </Flex>
-        <Popover closeOnBlur={false} isLazy>
+        <Popover placement='bottom-start' isLazy>
           <Tooltip
             ariaLabel='Informações da conversa'
             label='Informações da conversa'
@@ -60,14 +56,7 @@ export function Header() {
             </Box>
           </Tooltip>
 
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverHeader>Confirmation!</PopoverHeader>
-            <PopoverBody>
-              Are you sure you want to have that milkshake?
-            </PopoverBody>
-          </PopoverContent>
+          <ConversationInfoPopover />
         </Popover>
       </Flex>
       <Divider />
