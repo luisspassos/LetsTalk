@@ -8,12 +8,15 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { useRef } from 'react';
 import { Tooltip } from '../../../Tooltip';
 import { Divider } from '../Divider';
 import { ConversationInfoIconButton } from './ConversationInfo/IconButton';
 import { ConversationInfoPopover } from './ConversationInfo/Popover';
 
 export function Header() {
+  const popoverInitialFocusRef = useRef(null);
+
   return (
     <>
       <Flex
@@ -41,7 +44,11 @@ export function Header() {
             </Text>
           </VStack>
         </Flex>
-        <Popover placement='bottom-start' isLazy>
+        <Popover
+          initialFocusRef={popoverInitialFocusRef}
+          placement='bottom-start'
+          isLazy
+        >
           <Tooltip
             ariaLabel='Informações da conversa'
             label='Informações da conversa'
@@ -56,7 +63,7 @@ export function Header() {
             </Box>
           </Tooltip>
 
-          <ConversationInfoPopover />
+          <ConversationInfoPopover ref={popoverInitialFocusRef} />
         </Popover>
       </Flex>
       <Divider />

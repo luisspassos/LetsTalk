@@ -1,11 +1,18 @@
 import { FormControl } from '@chakra-ui/react';
 import { Input } from '../../Form/Input';
-import { Buttons } from '../../Modal/Buttons';
+import { Buttons } from '../../Modal/Button/Buttons';
 import { ModalWrapper } from '../../Modal/ModalWrapper';
+import { useAddContactModal } from '../../../contexts/Modal/AddContactModalContext';
 
 export function AddContactModal() {
+  const { isOpen, onClose } = useAddContactModal();
+
   return (
-    <ModalWrapper modalTitle='Adicionar contato'>
+    <ModalWrapper
+      isOpen={isOpen}
+      onClose={onClose}
+      modalTitle='Adicionar contato'
+    >
       <FormControl
         display='flex'
         alignItems='center'

@@ -2,6 +2,6 @@ import { createModalContext } from './createModalContext';
 
 const { ModalProvider, useModal } = createModalContext();
 
-export const BlockUserModalProvider = ModalProvider;
+export const AddContactModalProvider = ModalProvider;
 
-export const useBlockUserModal = useModal;
+export const useAddContactModal = useModal;

@@ -1,7 +1,7 @@
-import { Heading, Icon } from '@chakra-ui/react';
+import { Flex, Heading, Icon } from '@chakra-ui/react';
 import { BiBlock } from 'react-icons/bi';
 import { useBlockUserModal } from '../../../contexts/Modal/BlockUserModalContext';
-import { Buttons } from '../../Modal/Buttons';
+import { DangerousActionButtons } from '../../Modal/Button/DangerousActionButtons';
 import { ModalWrapper } from '../../Modal/ModalWrapper';
 
 export function BlockUserModal() {
@@ -9,9 +9,13 @@ export function BlockUserModal() {
 
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose}>
-      <Icon as={BiBlock} />
-      <Heading>Você deseja bloquear Guilherme?</Heading>
-      <Buttons confirmButtonText='Bloquear' />
+      <Flex direction='column' align='center' gap='10px'>
+        <Icon color='red.600' fontSize='7xl' as={BiBlock} />
+        <Heading textAlign='center' fontSize='22px' fontWeight={400}>
+          Você deseja bloquear Guilherme?
+        </Heading>
+        <DangerousActionButtons confirmButtonText='Bloquear' />
+      </Flex>
     </ModalWrapper>
   );
 }

@@ -10,10 +10,11 @@ import {
   PopoverHeader,
   Text,
 } from '@chakra-ui/react';
+import { forwardRef } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { BlockUserButton } from './BlockUser/Button';
 
-export function ConversationInfoPopover() {
+export const ConversationInfoPopover = forwardRef((_, ref) => {
   return (
     <PopoverContent maxW='270px'>
       <PopoverCloseButton />
@@ -28,10 +29,16 @@ export function ConversationInfoPopover() {
           <InputLeftElement pointerEvents='none'>
             <Icon as={FiSearch} />
           </InputLeftElement>
-          <Input variant='flushed' placeholder='Pesquisar na conversa' />
+          <Input
+            ref={ref}
+            variant='flushed'
+            placeholder='Pesquisar na conversa'
+          />
         </InputGroup>
         <BlockUserButton />
       </PopoverBody>
     </PopoverContent>
   );
-}
+});
+
+ConversationInfoPopover.displayName = 'ConversationInfoPopover';

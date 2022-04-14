@@ -1,10 +1,10 @@
-import { Button } from '@chakra-ui/react';
+import { Button, ButtonProps } from '@chakra-ui/react';
 
 type ConfirmButtonProps = {
   text: string;
-};
+} & ButtonProps;
 
-export function ConfirmButton({ text }: ConfirmButtonProps) {
+export function ConfirmButton({ text, ...rest }: ConfirmButtonProps) {
   return (
     <Button
       bg='blue.900'
@@ -13,6 +13,7 @@ export function ConfirmButton({ text }: ConfirmButtonProps) {
       _hover={{
         filter: 'brightness(1.1)',
       }}
+      {...rest}
     >
       {text}
     </Button>

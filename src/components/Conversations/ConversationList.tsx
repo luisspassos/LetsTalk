@@ -1,5 +1,6 @@
 import { Button, Flex, Heading, Icon, VStack } from '@chakra-ui/react';
 import { IoMdAdd } from 'react-icons/io';
+import { useAddContactModal } from '../../contexts/Modal/AddContactModalContext';
 import { Conversation } from './Conversation';
 import { ConversationDivider } from './Conversation/ConversationDivider';
 import { Divider } from './Divider';
@@ -7,6 +8,8 @@ import { SearchInput } from './SearchInput';
 
 export function ConversationList() {
   const arr = [1, 2, 3, 4, 5, 6, 7];
+
+  const { onOpen } = useAddContactModal();
 
   return (
     <>
@@ -19,6 +22,7 @@ export function ConversationList() {
           leftIcon={<Icon as={IoMdAdd} fontSize='35px' />}
           justifyContent='start'
           pl='3px'
+          onClick={onOpen}
         >
           Adicionar contato
         </Button>
