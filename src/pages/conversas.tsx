@@ -28,10 +28,12 @@ export default function ConversationsPage({ user }: ConversationsPageProps) {
   }[tab];
 
   return (
-    <Flex h='100vh'>
-      <Sidebar />
-      <CurrentTab />
-    </Flex>
+    <>
+      <Flex h='100vh'>
+        <Sidebar />
+        <CurrentTab />
+      </Flex>
+    </>
   );
 }
 

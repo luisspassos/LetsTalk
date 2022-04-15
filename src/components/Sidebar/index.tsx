@@ -28,7 +28,7 @@ export function Sidebar() {
       direction='column'
       justify='space-between'
       align='center'
-      px='15px'
+      px={['11px', '13px', '15px']}
       py='20px'
     >
       <Box>

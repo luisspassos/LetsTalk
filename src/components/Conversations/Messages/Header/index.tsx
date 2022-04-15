@@ -23,17 +23,21 @@ export function Header() {
         flexShrink={0}
         as='header'
         justify='space-between'
+        minW={0}
         h='85px'
+        minH={0}
         align='center'
       >
-        <Flex align='center' gap='18px'>
+        <Flex minW={0} align='center' gap='18px'>
           <Avatar w='55px' h='55px' src='https://github.com/luisspassos.png' />
-          <VStack align='start' spacing={0}>
+
+          <VStack minW={0} align='start' spacing={0}>
             <Heading
+              w='100%'
               maxW='700px'
               textOverflow='ellipsis'
-              whiteSpace='nowrap'
               overflow='hidden'
+              whiteSpace='nowrap'
               as='h3'
               fontSize='17px'
               fontWeight={400}

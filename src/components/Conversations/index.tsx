@@ -11,7 +11,7 @@ export function Conversations() {
       <BlockUserModal />
       <AddContactModal />
       <Loading />
-      <Flex flex='1'>
+      <Flex flex='1' minW={0}>
         <ConversationList />
         <Messages />
       </Flex>

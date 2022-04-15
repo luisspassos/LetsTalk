@@ -5,7 +5,7 @@ import { Main } from './Main';
 
 export function Messages() {
   return (
-    <Flex flex='1' direction='column' px='20px'>
+    <Flex flex='1' minW={0} direction='column' px='20px'>
       <Header />
       <Main />
       <Footer />
