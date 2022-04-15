@@ -6,18 +6,33 @@ type MessageProps = {
 
 export function Message({ isYourMessage }: MessageProps) {
   const triangle = {
-    display: 'block',
-    content: '""',
-    w: 0,
-    h: 0,
-    borderLeft: '20px solid transparent',
-    borderRight: '20px solid transparent',
-    borderBottom: `20px solid var(--chakra-colors-gray-${
-      isYourMessage ? '200' : '300'
-    })`,
-    borderRadius: '4px',
-    mr: !isYourMessage ? '-20px' : undefined,
-    ml: isYourMessage ? '-20px' : undefined,
+    values: {
+      borderRadius: '4px',
+    },
+    styles: {
+      display: 'block',
+      content: '""',
+      w: 0,
+      h: 0,
+      borderLeft: [
+        '14px solid transparent',
+        '17px solid transparent',
+        '20px solid transparent',
+      ],
+      borderRight: [
+        '14px solid transparent',
+        '17px solid transparent',
+        '20px solid transparent',
+      ],
+      borderBottom: `20px solid var(--chakra-colors-gray-${
+        isYourMessage ? '200' : '300'
+      })`,
+      get borderRadius() {
+        return triangle.values.borderRadius;
+      },
+      mr: !isYourMessage ? '-20px' : undefined,
+      ml: isYourMessage ? '-20px' : undefined,
+    },
   };
 
   return (
@@ -30,8 +45,8 @@ export function Message({ isYourMessage }: MessageProps) {
     >
       <Flex
         align='end'
-        _before={!isYourMessage ? triangle : undefined}
-        _after={isYourMessage ? triangle : undefined}
+        _before={!isYourMessage ? triangle.styles : undefined}
+        _after={isYourMessage ? triangle.styles : undefined}
       >
         <Text
           fontFamily='Roboto'

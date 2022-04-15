@@ -6,7 +6,7 @@ type ConversationDividerProps = ChakraDividerProps;
 export function ConversationDivider({ ...props }: ConversationDividerProps) {
   return (
     <Divider
-      w='calc(100% - 50px)'
+      w={['calc(100% - 38px)', 'calc(100% - 44px)', 'calc(100% - 50px)']}
       borderBottomWidth='1px'
       opacity='40%'
       mb={0}

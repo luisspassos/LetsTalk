@@ -16,8 +16,7 @@ export function ConversationList() {
       <Flex
         w={['265px', '295px', '335px']}
         bg='gray.200'
-        p={['19px', '22px', '25px']}
-        pb='0'
+        p={['19px 19px 0', '22px 22px 0', '25px 25px 0']}
         direction='column'
       >
         <Button
@@ -37,12 +36,17 @@ export function ConversationList() {
           as='h1'
           fontWeight={400}
           fontSize={['22px', '26px', '30px']}
-          mb='13px'
+          mb={['7px', '10px', '13px']}
         >
           Conversas
         </Heading>
 
-        <VStack overflowY='auto' pb='10px' mx='-25px' spacing={0}>
+        <VStack
+          overflowY='auto'
+          pb={['6px', '8px', '10px']}
+          mx={['-19px', '-22px', '-25px']}
+          spacing={0}
+        >
           <ConversationDivider position='sticky' top={0} left={0} mt={0} />
           {arr.map((el, i) => (
             <Conversation key={el} arr={arr} index={i} />

@@ -6,10 +6,10 @@ export function Main() {
     <Stack
       overflow='auto'
       as='main'
-      py='20px'
-      pr='20px'
-      mr='-20px'
-      spacing='10px'
+      py={['14px', '17px', '20px']}
+      pr={['14px', '17px', '20px']}
+      mr={['-14px', '-17px', '-20px']}
+      spacing={['6px', '8px', '10px']}
     >
       <Message />
       <Message isYourMessage />

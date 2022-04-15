@@ -11,8 +11,8 @@ export function Divider({ ...props }: DividerProps) {
       borderColor='blue.900'
       opacity='15%'
       borderBottomWidth='2px'
-      mt='10px'
-      mb='18px'
+      mt={['6px', '8px', '10px']}
+      mb={['14px', '16px', '18px']}
       {...props}
     />
   );

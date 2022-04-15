@@ -24,12 +24,16 @@ export function Header() {
         as='header'
         justify='space-between'
         minW={0}
-        h='85px'
+        h={['55px', '70px', '85px'] + 'px'}
         minH={0}
         align='center'
       >
-        <Flex minW={0} align='center' gap='18px'>
-          <Avatar w='55px' h='55px' src='https://github.com/luisspassos.png' />
+        <Flex minW={0} align='center' gap={['12px', '15px', '18px']}>
+          <Avatar
+            w={['42px', '47px', '55px']}
+            h={['42px', '47px', '55px']}
+            src='https://github.com/luisspassos.png'
+          />
 
           <VStack minW={0} align='start' spacing={0}>
             <Heading
@@ -39,13 +43,13 @@ export function Header() {
               overflow='hidden'
               whiteSpace='nowrap'
               as='h3'
-              fontSize='17px'
+              fontSize={['15px', '16px', '17px']}
               fontWeight={400}
             >
               Guilherme DE CASTRO DE CASTRO DE CASTRO DE CASTRO DE CASTRO DE
               CASTRO DE CASTRO DE CASTRO DE CASTRO
             </Heading>
-            <Text as='time' fontSize='14px' opacity='80%'>
+            <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
               Hoje ás 19:48
             </Text>
           </VStack>
