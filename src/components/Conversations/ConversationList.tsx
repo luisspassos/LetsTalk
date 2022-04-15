@@ -36,7 +36,7 @@ export function ConversationList() {
         <Heading
           as='h1'
           fontWeight={400}
-          fontSize={['24px', '27px', '30px']}
+          fontSize={['22px', '26px', '30px']}
           mb='13px'
         >
           Conversas
