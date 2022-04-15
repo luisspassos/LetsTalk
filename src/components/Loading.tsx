@@ -18,6 +18,7 @@ export function Loading() {
         alignItems='center'
         justifyContent='center'
         px='25px'
+        spacing={['12px', '18px']}
       >
         <Image
           h={['40px', '50px', '60px']}

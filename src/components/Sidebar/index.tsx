@@ -29,11 +29,14 @@ export function Sidebar() {
       justify='space-between'
       align='center'
       px={['11px', '13px', '15px']}
-      py='20px'
+      py={['16px', '18px', '20px']}
     >
       <Box>
         <Avatar />
-        <VStack spacing='15px' mt='30px'>
+        <VStack
+          spacing={['11px', '13px', '15px']}
+          mt={['22px', '26px', '30px']}
+        >
           <IconButton
             anyFunction={() => handleChangeTab('conversations')}
             isFocused={isConversations}

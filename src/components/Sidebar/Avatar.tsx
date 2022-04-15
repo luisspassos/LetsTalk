@@ -19,22 +19,24 @@ export function Avatar() {
       bg={copiedUsername ? 'green.500' : undefined}
       label={
         copiedUsername ? (
-          'Copiado!'
+          'Nome de usuário copiado!'
         ) : (
-          <Text isTruncated maxW='400px'>
+          <Text isTruncated maxW={['300px', '350px', '400px']}>
             Copiar nome de usuário | {username}
           </Text>
         )
       }
       ariaLabel={
         copiedUsername
-          ? 'Usuário copiado'
+          ? 'Nome de usuário copiado!'
           : `Copiar Nome de usuário. ${username}`
       }
       closeOnClick={false}
       onClose={() => setCopiedUsername(false)}
     >
       <ChakraAvatar
+        w={['40px', '42px', '48px']}
+        h={['40px', '42px', '48px']}
         cursor='pointer'
         src={user?.picture ?? undefined}
         onClick={() => handleCopyUsername(username)}

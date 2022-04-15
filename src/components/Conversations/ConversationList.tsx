@@ -13,22 +13,32 @@ export function ConversationList() {
 
   return (
     <>
-      <Flex w='335px' bg='gray.200' p='25px' pb='0' direction='column'>
+      <Flex
+        w={['265px', '295px', '335px']}
+        bg='gray.200'
+        p={['19px', '22px', '25px']}
+        pb='0'
+        direction='column'
+      >
         <Button
-          fontSize='23px'
+          fontSize={['17px', '20px', '23px']}
           fontWeight={400}
           color='gray.900'
           variant='link'
-          leftIcon={<Icon as={IoMdAdd} fontSize='35px' />}
+          leftIcon={<Icon as={IoMdAdd} fontSize={['27px', '32px', '35px']} />}
           justifyContent='start'
-          pl='3px'
           onClick={onOpen}
         >
           Adicionar contato
         </Button>
         <Divider />
         <SearchInput />
-        <Heading as='h1' fontWeight={400} fontSize='30px' mb='13px'>
+        <Heading
+          as='h1'
+          fontWeight={400}
+          fontSize={['24px', '27px', '30px']}
+          mb='13px'
+        >
           Conversas
         </Heading>
 

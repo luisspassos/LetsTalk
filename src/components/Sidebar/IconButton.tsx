@@ -19,12 +19,14 @@ export function IconButton({
     <Tooltip ariaLabel={label} label={label} aria-label={label}>
       <ChakraIconButton
         bg={isFocused ? 'whiteAlpha.400' : undefined}
-        w='40px'
-        fontSize='30px'
+        w={['34px', '37px', '40px']}
+        h={['34px', '37px', '40px']}
+        fontSize={['26px', '28px', '30px']}
         d='flex'
         justifyContent='center'
         alignItems='center'
         color='white'
+        minW='0'
         variant='ghost'
         _hover={{
           bg: 'whiteAlpha.400',
