@@ -7,31 +7,40 @@ type MessageProps = {
 export function Message({ isYourMessage }: MessageProps) {
   const triangle = {
     values: {
-      borderRadius: '4px',
+      sizes: ['14px', '17px', '20px'],
+      get negativeSizes() {
+        return this.sizes.map((size) => `-${size}`);
+      },
+      get transparentBorder() {
+        return this.sizes.map((size) => `${size} solid transparent`);
+      },
     },
     styles: {
       display: 'block',
       content: '""',
       w: 0,
       h: 0,
-      borderLeft: [
-        '14px solid transparent',
-        '17px solid transparent',
-        '20px solid transparent',
-      ],
-      borderRight: [
-        '14px solid transparent',
-        '17px solid transparent',
-        '20px solid transparent',
-      ],
-      borderBottom: `20px solid var(--chakra-colors-gray-${
-        isYourMessage ? '200' : '300'
-      })`,
-      get borderRadius() {
-        return triangle.values.borderRadius;
+      get borderLeft() {
+        return triangle.values.transparentBorder;
       },
-      mr: !isYourMessage ? '-20px' : undefined,
-      ml: isYourMessage ? '-20px' : undefined,
+      get borderRight() {
+        return triangle.values.transparentBorder;
+      },
+      get borderBottom() {
+        return triangle.values.sizes.map(
+          (size) =>
+            `${size} solid var(--chakra-colors-gray-${
+              isYourMessage ? '200' : '300'
+            })`
+        );
+      },
+      borderRadius: '4px',
+      get mr() {
+        return !isYourMessage ? triangle.values.negativeSizes : undefined;
+      },
+      get ml() {
+        return isYourMessage ? triangle.values.negativeSizes : undefined;
+      },
     },
   };
 
@@ -39,7 +48,7 @@ export function Message({ isYourMessage }: MessageProps) {
     <Stack
       alignSelf={isYourMessage ? 'end' : undefined}
       display='inline-flex'
-      maxW='400px'
+      maxW={['240px', '300px', '400px']}
       spacing='3px'
       align={isYourMessage ? 'end' : undefined}
     >
@@ -51,15 +60,21 @@ export function Message({ isYourMessage }: MessageProps) {
         <Text
           fontFamily='Roboto'
           borderRadius='7px'
-          py='10px'
-          px='15px'
+          py={['6px', '8px', '10px']}
+          px={['11px', '13px', '15px']}
+          fontSize={['14px', '15px', '16px']}
           bg={isYourMessage ? 'gray.200' : 'gray.300'}
           wordBreak='break-word'
         >
-          a
+          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         </Text>
       </Flex>
-      <Text fontSize='15px' color='gray.900' opacity='80%' as='time'>
+      <Text
+        fontSize={['13px', '14px', '15px']}
+        color='gray.900'
+        opacity='80%'
+        as='time'
+      >
         Hoje, 13:30.
       </Text>
     </Stack>

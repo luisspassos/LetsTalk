@@ -10,11 +10,11 @@ export function Footer() {
       <Divider />
       <Flex
         as='footer'
-        py='15px'
-        minH='80px'
+        py={['11px', '13px', '15px']}
+        minH={['50px', '65px', '80px']}
         align='center'
         justify='start'
-        pl='10px'
+        pl={['6px', '8px', '10px']}
       >
         <MessageInput />
         <Tooltip
@@ -24,11 +24,12 @@ export function Footer() {
           placement='top'
         >
           <IconButton
-            fontSize='22px'
-            w='45px'
-            h='45px'
-            borderRadius='15px'
-            ml='15px'
+            flexShrink={0}
+            fontSize={['18px', '20px', '22px']}
+            w={['39px', '42px', '45px']}
+            h={['39px', '42px', '45px']}
+            borderRadius={['11px', '13px', '15px']}
+            ml={['11px', '13px', '15px']}
             color='white'
             bg='blue.900'
             aria-label='Gravar áudio'

@@ -35,11 +35,12 @@ export function MessageInput() {
         borderColor='blueAlpha.700'
         bg='white'
         fontFamily='Roboto'
-        h='45px'
-        py='11.75px'
+        h={['39px', '42px', '45px']}
+        py={['9.75px', '10.5px', '11.25px']}
         overflowY='hidden'
-        borderRadius='15px'
+        borderRadius={['11px', '13px', '15px']}
         rows={1}
+        fontSize={['14px', '15px', '16px']}
         placeholder='Sua mensagem...'
         _placeholderShown={{
           textOverflow: 'ellipsis',
@@ -52,7 +53,7 @@ export function MessageInput() {
         _hover={{
           borderColor: 'blueAlpha.700',
         }}
-        pr='103px'
+        pr={['73px', '83px', '103px']}
         sx={{
           '&::-webkit-scrollbar-thumb': {
             borderWidth: '9px 3px',
@@ -60,13 +61,13 @@ export function MessageInput() {
         }}
       />
       <InputIconButton
-        mr='56px'
+        mr={['34px', '44px', '56px']}
         ariaLabel='Emojis'
         Icon={MdOutlineEmojiEmotions}
       />
 
       <InputIconButton
-        mr='15px'
+        mr={['5px', '10px', '15px']}
         ariaLabel='Enviar arquivo'
         Icon={AiOutlinePaperClip}
       />

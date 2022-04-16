@@ -24,7 +24,7 @@ export function Header() {
         as='header'
         justify='space-between'
         minW={0}
-        h={['55px', '70px', '85px'] + 'px'}
+        h={['55px', '70px', '85px']}
         minH={0}
         align='center'
       >

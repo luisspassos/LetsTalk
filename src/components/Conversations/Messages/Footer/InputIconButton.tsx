@@ -26,10 +26,10 @@ export function InputIconButton({
     >
       <InputRightElement {...rest} h='100%'>
         <IconButton
-          w='35px'
-          h='35px'
+          w={['29px', '32px', '35px']}
+          h={['29px', '32px', '35px']}
           minWidth={0}
-          fontSize='25px'
+          fontSize={['21px', '23px', '25px']}
           variant='ghost'
           aria-label={ariaLabel}
           icon={<ChakraIcon as={Icon} />}
