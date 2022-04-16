@@ -3,9 +3,23 @@ import { Input } from '../../Form/Input';
 import { Buttons } from '../../Modal/Button/Buttons';
 import { ModalWrapper } from '../../Modal/ModalWrapper';
 import { useAddContactModal } from '../../../contexts/Modal/AddContactModalContext';
+import { db } from '../../../services/firebase';
+import { useAuth } from '../../../contexts/AuthContext';
 
 export function AddContactModal() {
   const { isOpen, onClose } = useAddContactModal();
+  const { user } = useAuth();
+
+  async function handleAddContact() {
+    const contactName = 'Luís#1234';
+    const { setDoc, doc } = await import('firebase/firestore');
+
+    if (user?.uid) {
+      await setDoc(doc(db, 'conversations', user?.uid), {
+        contactName,
+      });
+    }
+  }
 
   return (
     <ModalWrapper

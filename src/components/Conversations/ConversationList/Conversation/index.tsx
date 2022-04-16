@@ -1,6 +1,6 @@
 import { Avatar, Flex, Heading, Text, VStack } from '@chakra-ui/react';
-import { useLoading } from '../../../contexts/LoadingContext';
-import { Circle } from '../../Circle';
+import { useLoading } from '../../../../contexts/LoadingContext';
+import { Circle } from '../../../Circle';
 import { ConversationDivider } from './ConversationDivider';
 
 type ConversationProps = {

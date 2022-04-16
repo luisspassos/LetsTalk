@@ -82,8 +82,8 @@ export default function Register() {
           );
 
           await setUsername({ user, name });
-
           await sendEmailVerification(user);
+
           successToastWhenRegistering();
         } catch (err) {
           const { FirebaseError } = await import('firebase/app');

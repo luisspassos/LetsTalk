@@ -28,6 +28,7 @@ export function Header() {
         h={['55px', '70px', '85px']}
         minH={0}
         align='center'
+        gap='9px'
       >
         <Flex minW={0} align='center' gap={['12px', '15px', '18px']}>
           <ConversationsSwitchButton />
