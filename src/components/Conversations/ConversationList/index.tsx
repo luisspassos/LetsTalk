@@ -15,16 +15,24 @@ import { Divider } from '../Divider';
 import { AddContactButton } from './AddContactButton';
 import { SearchInput } from './SearchInput';
 
+function ComponenteOne() {
+  return (
+    <p>aaaaaaaaaaaaaaaaaa</p>
+  )
+}
+
+function ComponenteTwo() {
+  return (
+    <p>bbbbbbbbbbbbbb</p>
+  )
+}
+
 export function ConversationList() {
   const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const Variant = useBreakpointValue({
-    base: function a() {
-      return <p>asidjaiusdisaojdiosajdiosjadijasdij</p>;
-    },
-    md: function a() {
-      return <p>asidjaiusdisaojdiosajdiosjadijasdij</p>;
-    },
+    base: ,
+    md: ,
   });
 
   const { isOpen, onClose } = useConversationsTab();
