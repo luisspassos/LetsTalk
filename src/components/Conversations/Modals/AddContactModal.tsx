@@ -8,19 +8,26 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { unknownErrorToast } from '../../../utils/Toasts/unknownErrorToast';
+import { firebaseAdmin } from '../../../services/firebaseAdmin';
 
 type AddContactFormData = {
-  username: string;
+  contactName: string;
 };
 
 const addContactFormSchema = yup.object().shape({
-  username: yup.string().trim().required('Usuário obrigatório'),
+  contactName: yup.string().trim().required('Usuário obrigatório'),
   // .matches(),
 });
-
 export function AddContactModal() {
+  useEffect(() => {
+    (async () => {
+      const users = await firebaseAdmin.auth().listUsers(Infinity);
+      console.log(users);
+    })();
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -34,8 +41,7 @@ export function AddContactModal() {
 
   const handleAddContact = useMemo(
     () =>
-      handleSubmit(async () => {
-        const contactName = 'Ana#1234';
+      handleSubmit(async ({ contactName }) => {
         const { setDoc, doc } = await import('firebase/firestore');
 
         if (user?.uid) {
@@ -64,11 +70,11 @@ export function AddContactModal() {
         flexDirection='column'
       >
         <Input
-          id='username'
+          id='contactName'
           label='Usuário'
-          error={errors.username}
+          error={errors.contactName}
           inputProps={{
-            ...register('username'),
+            ...register('contactName'),
             placeholder: 'Insira um usuário, exemplo: usuario#1234',
             h: ['39px', '42px', '45px'],
             borderColor: 'blueAlpha.900',

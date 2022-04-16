@@ -18,6 +18,10 @@ export function ConfirmButton({ text, ...rest }: ConfirmButtonProps) {
         bg: 'blue.900',
         filter: 'brightness(1.1)',
       }}
+      _disabled={{
+        bg: 'blue.900',
+        cursor: 'default',
+      }}
       {...rest}
     >
       {text}
