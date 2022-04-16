@@ -198,10 +198,10 @@ const Login = ({ actionCode, mode }: LoginProps) => {
               inputProps={{
                 type: 'email',
                 placeholder: 'Email...',
+                ...register('email'),
               }}
               id='email'
               label='Email'
-              {...register('email')}
               error={errors.email}
             />
             <Input

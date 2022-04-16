@@ -5,21 +5,51 @@ import { ModalWrapper } from '../../Modal/ModalWrapper';
 import { useAddContactModal } from '../../../contexts/Modal/AddContactModalContext';
 import { db } from '../../../services/firebase';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useMemo } from 'react';
+import { unknownErrorToast } from '../../../utils/Toasts/unknownErrorToast';
+
+type AddContactFormData = {
+  username: string;
+};
+
+const addContactFormSchema = yup.object().shape({
+  username: yup.string().trim().required('Usuário obrigatório'),
+  // .matches(),
+});
 
 export function AddContactModal() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<AddContactFormData>({
+    resolver: yupResolver(addContactFormSchema),
+  });
+
   const { isOpen, onClose } = useAddContactModal();
   const { user } = useAuth();
 
-  async function handleAddContact() {
-    const contactName = 'Luís#1234';
-    const { setDoc, doc } = await import('firebase/firestore');
+  const handleAddContact = useMemo(
+    () =>
+      handleSubmit(async () => {
+        const contactName = 'Ana#1234';
+        const { setDoc, doc } = await import('firebase/firestore');
 
-    if (user?.uid) {
-      await setDoc(doc(db, 'conversations', user?.uid), {
-        contactName,
-      });
-    }
-  }
+        if (user?.uid) {
+          try {
+            await setDoc(doc(db, 'conversations', user?.uid), {
+              contactName,
+            });
+          } catch {
+            unknownErrorToast();
+          }
+        }
+      }),
+    [handleSubmit, user?.uid]
+  );
 
   return (
     <ModalWrapper
@@ -36,7 +66,9 @@ export function AddContactModal() {
         <Input
           id='username'
           label='Usuário'
+          error={errors.username}
           inputProps={{
+            ...register('username'),
             placeholder: 'Insira um usuário, exemplo: usuario#1234',
             h: ['39px', '42px', '45px'],
             borderColor: 'blueAlpha.900',
@@ -53,6 +85,7 @@ export function AddContactModal() {
         <Buttons
           confirmButtonProps={{
             onClick: handleAddContact,
+            isLoading: isSubmitting,
           }}
           confirmButtonText='Adicionar'
         />
