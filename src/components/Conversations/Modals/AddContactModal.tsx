@@ -50,7 +50,12 @@ export function AddContactModal() {
           helperText='O nome de usuário com ID pode ser encontrado nas configurações ou
             clicando na foto na barra ao lado.'
         />
-        <Buttons confirmButtonText='Adicionar' />
+        <Buttons
+          confirmButtonProps={{
+            onClick: handleAddContact,
+          }}
+          confirmButtonText='Adicionar'
+        />
       </FormControl>
     </ModalWrapper>
   );

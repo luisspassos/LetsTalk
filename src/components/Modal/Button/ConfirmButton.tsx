@@ -14,6 +14,10 @@ export function ConfirmButton({ text, ...rest }: ConfirmButtonProps) {
       _hover={{
         filter: 'brightness(1.1)',
       }}
+      _active={{
+        bg: 'blue.900',
+        filter: 'brightness(1.1)',
+      }}
       {...rest}
     >
       {text}

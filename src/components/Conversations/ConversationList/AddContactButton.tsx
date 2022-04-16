@@ -8,7 +8,7 @@ export function AddContactButton() {
   return (
     <Button
       w='min'
-      pr='2px'
+      pr='4px'
       fontSize={['17px', '20px', '23px']}
       fontWeight={400}
       color='gray.900'
