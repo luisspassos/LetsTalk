@@ -7,6 +7,7 @@ type ConversationsTabProviderProps = {
 
 type ConversationsTabContextType = {
   onToggle: () => void;
+  onClose: () => void;
   isOpen: boolean;
 };
 
@@ -17,12 +18,12 @@ export const ConversationsTabContext = createContext(
 export function ConversationsTabProvider({
   children,
 }: ConversationsTabProviderProps) {
-  const { onToggle, isOpen } = useDisclosure({
+  const { onToggle, isOpen, onClose } = useDisclosure({
     defaultIsOpen: true,
   });
 
   return (
-    <ConversationsTabContext.Provider value={{ onToggle, isOpen }}>
+    <ConversationsTabContext.Provider value={{ onToggle, isOpen, onClose }}>
       {children}
     </ConversationsTabContext.Provider>
   );
