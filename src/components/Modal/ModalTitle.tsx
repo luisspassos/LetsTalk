@@ -5,5 +5,9 @@ type ModalTitleProps = {
 };
 
 export function ModalTitle({ text }: ModalTitleProps) {
-  return <ModalHeader pb='8px'>{text}</ModalHeader>;
+  return (
+    <ModalHeader fontSize={['18px', '19px', '20px']} pb={['4px', '6px', '8px']}>
+      {text}
+    </ModalHeader>
+  );
 }

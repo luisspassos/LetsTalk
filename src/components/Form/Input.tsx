@@ -27,6 +27,7 @@ export const Input = forwardRef(
     return (
       <FormControl isInvalid={!!error} flexDirection='column'>
         <FormLabel
+          display='inline-block'
           mb='0'
           fontSize='17px'
           color='gray.400'
@@ -39,7 +40,12 @@ export const Input = forwardRef(
         <InputError message={error?.message ?? 'Erro'} />
 
         {helperText && (
-          <FormHelperText color='gray.900'>{helperText}</FormHelperText>
+          <FormHelperText
+            fontSize={['12.5px', '13px', '14px']}
+            color='gray.900'
+          >
+            {helperText}
+          </FormHelperText>
         )}
       </FormControl>
     );

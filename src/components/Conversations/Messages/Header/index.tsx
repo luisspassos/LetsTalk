@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   Flex,
-  Heading,
   Popover,
   PopoverTrigger,
   Text,
@@ -11,8 +10,10 @@ import {
 import { useRef } from 'react';
 import { Tooltip } from '../../../Tooltip';
 import { Divider } from '../Divider';
+import { ContactName } from './ContactName';
 import { ConversationInfoIconButton } from './ConversationInfo/IconButton';
 import { ConversationInfoPopover } from './ConversationInfo/Popover';
+import { ConversationsSwitchButton } from './ConversationsSwitchButton';
 
 export function Header() {
   const popoverInitialFocusRef = useRef(null);
@@ -29,6 +30,8 @@ export function Header() {
         align='center'
       >
         <Flex minW={0} align='center' gap={['12px', '15px', '18px']}>
+          <ConversationsSwitchButton />
+
           <Avatar
             w={['42px', '47px', '55px']}
             h={['42px', '47px', '55px']}
@@ -36,19 +39,7 @@ export function Header() {
           />
 
           <VStack minW={0} align='start' spacing={0}>
-            <Heading
-              w='100%'
-              maxW='700px'
-              textOverflow='ellipsis'
-              overflow='hidden'
-              whiteSpace='nowrap'
-              as='h3'
-              fontSize={['15px', '16px', '17px']}
-              fontWeight={400}
-            >
-              Guilherme DE CASTRO DE CASTRO DE CASTRO DE CASTRO DE CASTRO DE
-              CASTRO DE CASTRO DE CASTRO DE CASTRO
-            </Heading>
+            <ContactName />
             <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
               Hoje ás 19:48
             </Text>

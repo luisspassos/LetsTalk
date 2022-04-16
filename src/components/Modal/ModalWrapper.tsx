@@ -24,7 +24,7 @@ export function ModalWrapper({
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent mx='10px'>
         {modalTitle && <ModalTitle text={modalTitle} />}
         <ModalCloseButton />
         <ModalBody pb='20px'>{children}</ModalBody>

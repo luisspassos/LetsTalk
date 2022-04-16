@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from '@chakra-ui/react';
+import { ButtonProps } from '@chakra-ui/react';
+import { Button } from '.';
 
 type ConfirmButtonProps = {
   text: string;

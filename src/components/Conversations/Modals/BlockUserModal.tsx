@@ -9,9 +9,13 @@ export function BlockUserModal() {
 
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose}>
-      <Flex direction='column' align='center' gap='10px'>
-        <Icon color='red.600' fontSize='7xl' as={BiBlock} />
-        <Heading textAlign='center' fontSize='22px' fontWeight={400}>
+      <Flex direction='column' align='center' gap={['6px', '8px', '10px']}>
+        <Icon color='red.600' fontSize={['6xl', null, '7xl']} as={BiBlock} />
+        <Heading
+          textAlign='center'
+          fontSize={['16px', '19px', '22px']}
+          fontWeight={400}
+        >
           Você deseja bloquear Guilherme?
         </Heading>
         <DangerousActionButtons confirmButtonText='Bloquear' />

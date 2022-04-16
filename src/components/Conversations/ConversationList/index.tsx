@@ -1,35 +1,26 @@
-import { Button, Flex, Heading, Icon, VStack } from '@chakra-ui/react';
-import { IoMdAdd } from 'react-icons/io';
-import { useAddContactModal } from '../../contexts/Modal/AddContactModalContext';
-import { Conversation } from './Conversation';
-import { ConversationDivider } from './Conversation/ConversationDivider';
-import { Divider } from './Divider';
+import { Flex, Heading, VStack } from '@chakra-ui/react';
+import { useConversationsTab } from '../../../contexts/ConversationsTabContext';
+import { Conversation } from '../Conversation';
+import { ConversationDivider } from '../Conversation/ConversationDivider';
+import { Divider } from '../Divider';
+import { AddContactButton } from './AddContactButton';
 import { SearchInput } from './SearchInput';
 
 export function ConversationList() {
   const arr = [1, 2, 3, 4, 5, 6, 7];
 
-  const { onOpen } = useAddContactModal();
+  const { isOpen } = useConversationsTab();
 
   return (
     <>
       <Flex
+        display={isOpen ? 'flex' : 'none'}
         w={['265px', '295px', '335px']}
         bg='gray.200'
         p={['19px 19px 0', '22px 22px 0', '25px 25px 0']}
         direction='column'
       >
-        <Button
-          fontSize={['17px', '20px', '23px']}
-          fontWeight={400}
-          color='gray.900'
-          variant='link'
-          leftIcon={<Icon as={IoMdAdd} fontSize={['27px', '32px', '35px']} />}
-          justifyContent='start'
-          onClick={onOpen}
-        >
-          Adicionar contato
-        </Button>
+        <AddContactButton />
         <Divider />
         <SearchInput />
         <Heading

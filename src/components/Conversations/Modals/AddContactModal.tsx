@@ -24,13 +24,14 @@ export function AddContactModal() {
           label='Usuário'
           inputProps={{
             placeholder: 'Insira um usuário, exemplo: usuario#1234',
-            h: '45px',
+            h: ['39px', '42px', '45px'],
             borderColor: 'blueAlpha.900',
+            fontSize: ['14px', '15px', '16px'],
           }}
           labelProps={{
             color: 'gray.900',
             opacity: 1,
-            fontSize: '16px',
+            fontSize: ['15px', '15.5px', '16px'],
           }}
           helperText='O nome de usuário com ID pode ser encontrado nas configurações ou
             clicando na foto na barra ao lado.'
