@@ -72,8 +72,11 @@ export default function Register() {
       handleSubmit(async ({ email, password, name }) => {
         try {
           const { auth } = await import('../services/firebase');
-          const { createUserWithEmailAndPassword, sendEmailVerification } =
-            await import('firebase/auth');
+          const {
+            createUserWithEmailAndPassword,
+            sendEmailVerification,
+            linkWithCredential,
+          } = await import('firebase/auth');
 
           const { user } = await createUserWithEmailAndPassword(
             auth,
@@ -83,6 +86,7 @@ export default function Register() {
 
           await sendEmailVerification(user);
           await setUsername({ user, name });
+          await linkWithCredential(user);
 
           successToastWhenRegistering();
         } catch (err) {
