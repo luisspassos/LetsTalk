@@ -1,15 +1,36 @@
-import { Button, Icon } from '@chakra-ui/react';
-import { memo, useCallback } from 'react';
+import {
+  Button,
+  Icon,
+  keyframes,
+  usePrefersReducedMotion,
+} from '@chakra-ui/react';
+import { memo, useCallback, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
+import { BiLoaderAlt } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../contexts/AuthContext';
 
 function LoginButtonWithGoogleComponent() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
   const { setUsername } = useAuth();
 
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const loaderAnimation = keyframes`
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+    `;
+
+  const showLoaderAnimation = prefersReducedMotion
+    ? undefined
+    : `${loaderAnimation} .7s linear infinite`;
+
   const handleSignInWithGoogle = useCallback(async () => {
     try {
+      setIsLoading(true);
+
       const { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } =
         await import('firebase/auth');
       const { auth } = await import('../../services/firebase');
@@ -28,9 +49,15 @@ function LoginButtonWithGoogleComponent() {
           await setUsername({ user, name });
         }
 
-        router.push('/conversas');
+        await router.push('/conversas');
+
+        setIsLoading(false);
       }
     } catch (err) {
+      setIsLoading(false);
+      const error = String(err);
+      if (error.includes('popup-closed-by-user')) return;
+
       const { unknownErrorToast } = await import(
         '../../utils/Toasts/unknownErrorToast'
       );
@@ -40,7 +67,8 @@ function LoginButtonWithGoogleComponent() {
 
   return (
     <Button
-      height='initial'
+      maxH='48px'
+      h='100%'
       whiteSpace='initial'
       py='6px'
       borderWidth={2}
@@ -55,6 +83,15 @@ function LoginButtonWithGoogleComponent() {
       justifyContent='start'
       leftIcon={<Icon as={FcGoogle} fontSize={{ base: '28px', sm: '32px' }} />}
       onClick={handleSignInWithGoogle}
+      isLoading={isLoading}
+      loadingText='Entrar com o Google'
+      spinner={
+        <Icon
+          as={BiLoaderAlt}
+          animation={showLoaderAnimation}
+          fontSize={{ base: '28px', sm: '32px' }}
+        />
+      }
     >
       Entrar com o Google
     </Button>
