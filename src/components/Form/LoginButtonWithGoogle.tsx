@@ -10,12 +10,15 @@ function LoginButtonWithGoogleComponent() {
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {
-      const { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } =
+      const { GoogleAuthProvider, linkWithPopup, getAdditionalUserInfo } =
         await import('firebase/auth');
       const { auth } = await import('../../services/firebase');
       const googleProvider = new GoogleAuthProvider();
 
-      const result = await signInWithPopup(auth, googleProvider);
+      const result = await linkWithPopup(
+        auth.currentUser ?? null,
+        googleProvider
+      );
       const { user } = result;
       const name = user.displayName ?? 'Usuário';
 
