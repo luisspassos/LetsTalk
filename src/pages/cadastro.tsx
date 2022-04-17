@@ -81,8 +81,8 @@ export default function Register() {
             password
           );
 
-          await setUsername({ user, name });
           await sendEmailVerification(user);
+          await setUsername({ user, name });
 
           successToastWhenRegistering();
         } catch (err) {
@@ -137,8 +137,8 @@ export default function Register() {
               inputProps={{
                 type: 'email',
                 placeholder: 'Email...',
+                ...register('email'),
               }}
-              {...register('email')}
               error={errors.email}
             />
             <Input
@@ -146,8 +146,8 @@ export default function Register() {
               id='username'
               inputProps={{
                 placeholder: 'Nome...',
+                ...register('name'),
               }}
-              {...register('name')}
               error={errors.name}
             />
             <Input
@@ -156,8 +156,8 @@ export default function Register() {
               inputProps={{
                 type: 'password',
                 placeholder: 'Senha...',
+                ...register('password'),
               }}
-              {...register('password')}
               error={errors.password}
             />
             <Input
@@ -166,8 +166,8 @@ export default function Register() {
               inputProps={{
                 placeholder: 'Confirme sua senha...',
                 type: 'password',
+                ...register('password_confirmation'),
               }}
-              {...register('password_confirmation')}
               error={errors.password_confirmation}
             />
             <Button isLoading={isSubmitting} text='CADASTRAR' type='submit' />

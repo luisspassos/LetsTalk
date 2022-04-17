@@ -208,10 +208,10 @@ const Login = ({ actionCode, mode }: LoginProps) => {
               inputProps={{
                 placeholder: 'Senha...',
                 type: 'password',
+                ...register('password'),
               }}
               id='password'
               label='Senha'
-              {...register('password')}
               error={errors.password}
             />
           </Stack>

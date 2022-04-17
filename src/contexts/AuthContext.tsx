@@ -10,6 +10,7 @@ import {
 import { auth } from '../services/firebase';
 import nookies from 'nookies';
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
+import { arrayUnion } from 'firebase/firestore';
 
 export type AuthProviderProps = {
   children: ReactNode;
@@ -72,17 +73,28 @@ export const getCurrentUserId = async () => {
 
 export const setUsername = async ({ user, name }: SetUsernameParams) => {
   const { updateProfile } = await import('firebase/auth');
-  const { setDoc, doc } = await import('firebase/firestore');
+  const { updateDoc, doc, getDoc, setDoc } = await import('firebase/firestore');
   const { db } = await import('../services/firebase');
 
   const id = await getCurrentUserId();
-
   const username = `${name}#${id}`;
+
+  const allUsersRef = doc(db, 'users', 'allUsers');
+  const allUsersSnap = await getDoc(allUsersRef);
+
+  const addUserToArray = {
+    arr: arrayUnion(username),
+  };
 
   await updateProfile(user, {
     displayName: username,
   });
-  await setDoc(doc(db, 'users', 'allUsers'), []);
+
+  if (allUsersSnap.exists()) {
+    await updateDoc(allUsersRef, addUserToArray);
+  } else {
+    await setDoc(allUsersRef, addUserToArray);
+  }
 };
 
 export const signOut = async () => {

@@ -8,9 +8,8 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { unknownErrorToast } from '../../../utils/Toasts/unknownErrorToast';
-import { firebaseAdmin } from '../../../services/firebaseAdmin';
 
 type AddContactFormData = {
   contactName: string;
@@ -21,13 +20,6 @@ const addContactFormSchema = yup.object().shape({
   // .matches(),
 });
 export function AddContactModal() {
-  useEffect(() => {
-    (async () => {
-      const users = await firebaseAdmin.auth().listUsers(Infinity);
-      console.log(users);
-    })();
-  }, []);
-
   const {
     register,
     handleSubmit,
