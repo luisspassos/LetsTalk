@@ -76,10 +76,10 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
         <Stack spacing='.3rem'>
           <Input
             id='newPassword'
-            {...register('password')}
             error={errors.password}
             label='Nova senha'
             inputProps={{
+              ...register('password'),
               placeholder: 'Coloque sua nova senha...',
               type: 'password',
             }}
@@ -87,9 +87,9 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
           <Input
             id='confirmNewPassword'
             error={errors.password_confirmation}
-            {...register('password_confirmation')}
             label='Confirme sua senha'
             inputProps={{
+              ...register('password_confirmation'),
               type: 'password',
               placeholder: 'Confirme sua nova senha...',
             }}

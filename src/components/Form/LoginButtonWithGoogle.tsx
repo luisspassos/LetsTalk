@@ -16,7 +16,9 @@ function LoginButtonWithGoogleComponent() {
       const googleProvider = new GoogleAuthProvider();
 
       const result = await signInWithPopup(auth, googleProvider);
+
       const { user } = result;
+
       const name = user.displayName ?? 'Usuário';
 
       if (result) {

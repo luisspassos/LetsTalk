@@ -97,12 +97,12 @@ export default function IForgotMyPassword() {
         <FormTitle mb='1rem' text='Envie seu email para recuperar sua senha' />
         <FormWrapper onSubmit={handleSendEmail}>
           <Input
-            {...register('email')}
             error={errors.email}
             id='email'
             inputProps={{
               placeholder: 'Coloque seu email',
               type: 'email',
+              ...register('email'),
             }}
             label='Email'
           />
