@@ -72,12 +72,17 @@ export const getCurrentUserId = async () => {
 
 export const setUsername = async ({ user, name }: SetUsernameParams) => {
   const { updateProfile } = await import('firebase/auth');
+  const { setDoc, doc } = await import('firebase/firestore');
+  const { db } = await import('../services/firebase');
 
   const id = await getCurrentUserId();
 
+  const username = `${name}#${id}`;
+
   await updateProfile(user, {
-    displayName: `${name}#${id}`,
+    displayName: username,
   });
+  await setDoc(doc(db, 'users', 'allUsers'), []);
 };
 
 export const signOut = async () => {
