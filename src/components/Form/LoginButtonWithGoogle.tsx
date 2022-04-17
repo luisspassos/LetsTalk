@@ -22,9 +22,9 @@ function LoginButtonWithGoogleComponent() {
       if (result) {
         const additionalUserInfo = getAdditionalUserInfo(result);
 
-        // if (additionalUserInfo?.isNewUser) {
-        await setUsername({ user, name });
-        // }
+        if (additionalUserInfo?.isNewUser) {
+          await setUsername({ user, name });
+        }
 
         router.push('/conversas');
       }

@@ -38,6 +38,7 @@ type AuthContextData = {
   user: UserType;
   setUsername: ({ user, name }: SetUsernameParams) => Promise<void>;
   fillUser: (newUser: DecodedIdToken) => void;
+  refreshToken: () => Promise<void>;
 };
 
 type UserType = DecodedIdToken | null;
@@ -48,6 +49,11 @@ type SetUsernameParams = {
 };
 
 export const AuthContext = createContext({} as AuthContextData);
+
+export const refreshToken = async () => {
+  const user = auth.currentUser;
+  if (user) await user.getIdToken(true);
+};
 
 export const getCurrentUserId = async () => {
   const { db } = await import('../services/firebase');
@@ -71,13 +77,9 @@ export const getCurrentUserId = async () => {
   return id;
 };
 
-export const setUsername = async ({ user, name }: SetUsernameParams) => {
-  const { updateProfile } = await import('firebase/auth');
+export const addUsernameInDb = async (username: string) => {
   const { updateDoc, doc, getDoc, setDoc } = await import('firebase/firestore');
   const { db } = await import('../services/firebase');
-
-  const id = await getCurrentUserId();
-  const username = `${name}#${id}`;
 
   const allUsersRef = doc(db, 'users', 'allUsers');
   const allUsersSnap = await getDoc(allUsersRef);
@@ -86,15 +88,26 @@ export const setUsername = async ({ user, name }: SetUsernameParams) => {
     arr: arrayUnion(username),
   };
 
-  await updateProfile(user, {
-    displayName: username,
-  });
-
   if (allUsersSnap.exists()) {
     await updateDoc(allUsersRef, addUserToArray);
   } else {
     await setDoc(allUsersRef, addUserToArray);
   }
+};
+
+export const setUsername = async ({ user, name }: SetUsernameParams) => {
+  const { updateProfile } = await import('firebase/auth');
+
+  const id = await getCurrentUserId();
+  const username = `${name}#${id}`;
+
+  await updateProfile(user, {
+    displayName: username,
+  });
+
+  await refreshToken();
+
+  await addUsernameInDb(username);
 };
 
 export const signOut = async () => {
@@ -153,8 +166,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // token refresh every 10 min
   useEffect(() => {
     const handle = setInterval(async () => {
-      const user = auth.currentUser;
-      if (user) await user.getIdToken(true);
+      await refreshToken();
     }, 10 * 60 * 1000 /* 10 minutes */);
 
     return () => clearInterval(handle);
@@ -163,6 +175,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <AuthContext.Provider
       value={{
+        refreshToken,
         setUsername,
         getCurrentUserId,
         fillUser,
