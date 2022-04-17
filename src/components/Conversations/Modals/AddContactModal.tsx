@@ -3,21 +3,17 @@ import { Input } from '../../Form/Input';
 import { Buttons } from '../../Modal/Button/Buttons';
 import { ModalWrapper } from '../../Modal/ModalWrapper';
 import { useAddContactModal } from '../../../contexts/Modal/AddContactModalContext';
-import { db } from '../../../services/firebase';
-import { useAuth } from '../../../contexts/AuthContext';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMemo } from 'react';
-import { unknownErrorToast } from '../../../utils/Toasts/unknownErrorToast';
 
 type AddContactFormData = {
   contactName: string;
 };
-
+// Qualquer caracter menos #, e que seja maior que 0
 const addContactFormSchema = yup.object().shape({
-  contactName: yup.string().trim().required('Usuário obrigatório'),
-  // .matches(),
+  contactName: yup.string().trim().required('Usuário obrigatório').matches(/a/),
 });
 export function AddContactModal() {
   const {
@@ -29,24 +25,10 @@ export function AddContactModal() {
   });
 
   const { isOpen, onClose } = useAddContactModal();
-  const { user } = useAuth();
 
   const handleAddContact = useMemo(
-    () =>
-      handleSubmit(async ({ contactName }) => {
-        const { setDoc, doc } = await import('firebase/firestore');
-
-        if (user?.uid) {
-          try {
-            await setDoc(doc(db, 'conversations', user?.uid), {
-              contactName,
-            });
-          } catch {
-            unknownErrorToast();
-          }
-        }
-      }),
-    [handleSubmit, user?.uid]
+    () => handleSubmit(async () => {}),
+    [handleSubmit]
   );
 
   return (

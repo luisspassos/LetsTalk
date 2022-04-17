@@ -151,7 +151,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
             return;
           }
 
-          router.push('/conversas');
+          await router.push('/conversas');
         } catch (err) {
           const { FirebaseError } = await import('firebase/app');
 

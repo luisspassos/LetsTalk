@@ -10,7 +10,7 @@ type TooltipProps = {
   ariaLabel: string;
 } & ChakraTooltipProps;
 
-export function Tooltip({ children, label, ...rest }: TooltipProps) {
+export function Tooltip({ children, label, ariaLabel, ...rest }: TooltipProps) {
   return (
     <ChakraTooltip
       maxW='auto'
@@ -18,7 +18,7 @@ export function Tooltip({ children, label, ...rest }: TooltipProps) {
       hasArrow
       placement='right'
       label={label}
-      aria-label={label.toString()}
+      aria-label={ariaLabel}
       {...rest}
     >
       {children}

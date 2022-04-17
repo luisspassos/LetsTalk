@@ -4,7 +4,7 @@ import {
   keyframes,
   usePrefersReducedMotion,
 } from '@chakra-ui/react';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { BiLoaderAlt } from 'react-icons/bi';
 import { useRouter } from 'next/router';
@@ -12,6 +12,14 @@ import { useAuth } from '../../contexts/AuthContext';
 
 function LoginButtonWithGoogleComponent() {
   const [isLoading, setIsLoading] = useState(false);
+
+  function clearIsLoadingState() {
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    return clearIsLoadingState;
+  }, []);
 
   const router = useRouter();
   const { setUsername } = useAuth();
@@ -50,11 +58,8 @@ function LoginButtonWithGoogleComponent() {
         }
 
         await router.push('/conversas');
-
-        setIsLoading(false);
       }
     } catch (err) {
-      setIsLoading(false);
       const error = String(err);
       if (error.includes('popup-closed-by-user')) return;
 
@@ -62,6 +67,8 @@ function LoginButtonWithGoogleComponent() {
         '../../utils/Toasts/unknownErrorToast'
       );
       unknownErrorToast();
+    } finally {
+      setIsLoading(false);
     }
   }, [router, setUsername]);
 
