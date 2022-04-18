@@ -11,9 +11,16 @@ import { useMemo } from 'react';
 type AddContactFormData = {
   contactName: string;
 };
-// Qualquer caracter menos #, e que seja maior que 0
+
 const addContactFormSchema = yup.object().shape({
-  contactName: yup.string().trim().required('Usuário obrigatório').matches(/a/),
+  contactName: yup
+    .string()
+    .trim()
+    .required('Usuário obrigatório')
+    .matches(
+      /[^#]#\d{4}/, // so pode ter uma # e apenas 4 numeros
+      'O usuário deve seguir este formato: usuario#1234'
+    ),
 });
 export function AddContactModal() {
   const {
