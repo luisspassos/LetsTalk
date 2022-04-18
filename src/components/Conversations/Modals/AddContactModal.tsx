@@ -18,7 +18,7 @@ const addContactFormSchema = yup.object().shape({
     .trim()
     .required('Usuário obrigatório')
     .matches(
-      /[^#]#\d{4}/, // so pode ter uma # e apenas 4 numeros
+      /[^#]#(\d{4})$/, // so pode ter uma # e apenas 4 numeros
       'O usuário deve seguir este formato: usuario#1234'
     ),
 });
