@@ -116,7 +116,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
         try {
           await applyActionCode(auth, actionCode);
           toasts.emailVerification.success();
-        } catch {
+        } catch (err) {
           toasts.emailVerification.error();
         }
       })();

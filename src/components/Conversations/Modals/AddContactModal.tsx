@@ -14,7 +14,10 @@ type AddContactFormData = {
 };
 
 type AllUsersResponse = {
-  arr: string[];
+  arr: {
+    username: string;
+    uid: string;
+  }[];
 };
 
 const addContactFormSchema = yup.object().shape({
@@ -40,7 +43,7 @@ export function AddContactModal() {
   const { isOpen, onClose } = useAddContactModal();
   const { user } = useAuth();
 
-  const username: string = user?.name;
+  const username = user?.username as string;
 
   const handleAddContact = useMemo(
     () =>
@@ -54,15 +57,40 @@ export function AddContactModal() {
 
           const { arr: users } = allUsersSnap.data() as AllUsersResponse;
 
-          if (users.includes(contactName) && contactName !== username) {
-            alert('Usuário encontrado');
+          const contact = users.find(
+            ({ username }) => username === contactName
+          );
+
+          if (contact && contactName !== username) {
+            const { arrayUnion, updateDoc, setDoc } = await import(
+              'firebase/firestore'
+            );
+
+            const userRef = doc(db, 'conversations', username);
+            const userSnap = await getDoc(userRef);
+
+            const addContactToArray = {
+              contacts: arrayUnion(contact.uid),
+            };
+
+            if (userSnap.exists()) {
+              updateDoc(userRef, addContactToArray);
+            } else {
+              setDoc(userRef, addContactToArray);
+            }
           } else {
             setError('contactName', {
               message:
                 'Não foi possível adicionar este usuário, talvez ele não exista',
             });
           }
-        } catch {}
+        } catch {
+          const { unknownErrorToast } = await import(
+            '../../../utils/Toasts/unknownErrorToast'
+          );
+
+          unknownErrorToast();
+        }
       }),
     [handleSubmit, setError, username]
   );

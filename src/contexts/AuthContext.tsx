@@ -10,7 +10,6 @@ import {
 import { auth } from '../services/firebase';
 import nookies from 'nookies';
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
-import { arrayUnion } from 'firebase/firestore';
 
 export type AuthProviderProps = {
   children: ReactNode;
@@ -25,6 +24,8 @@ type SendEmailToRecoverPasswordData = {
   email: string;
 };
 
+type AddUsernameInDbFunc = (username: string, uid: string) => Promise<void>;
+
 type AuthContextData = {
   getCurrentUserId: () => Promise<number>;
   signOut: () => Promise<void>;
@@ -36,12 +37,20 @@ type AuthContextData = {
     email,
   }: SendEmailToRecoverPasswordData) => Promise<void>;
   user: UserType;
-  setUsername: ({ user, name }: SetUsernameParams) => Promise<void>;
-  fillUser: (newUser: DecodedIdToken) => void;
+  setUsername: ({
+    user,
+    name,
+  }: SetUsernameParams) => Promise<{ username: string }>;
+  fillUser: (newUser: TokenUser) => void;
   refreshToken: () => Promise<void>;
+  addUsernameInDb: AddUsernameInDbFunc;
 };
 
-type UserType = DecodedIdToken | null;
+type TokenUser = {
+  username: string;
+} & DecodedIdToken;
+
+type UserType = TokenUser | null;
 
 type SetUsernameParams = {
   user: User;
@@ -77,15 +86,20 @@ export const getCurrentUserId = async () => {
   return id;
 };
 
-export const addUsernameInDb = async (username: string) => {
-  const { updateDoc, doc, getDoc, setDoc } = await import('firebase/firestore');
+export const addUsernameInDb: AddUsernameInDbFunc = async (username, uid) => {
+  const { updateDoc, doc, getDoc, setDoc, arrayUnion } = await import(
+    'firebase/firestore'
+  );
   const { db } = await import('../services/firebase');
 
   const allUsersRef = doc(db, 'users', 'allUsers');
   const allUsersSnap = await getDoc(allUsersRef);
 
   const addUserToArray = {
-    arr: arrayUnion(username),
+    arr: arrayUnion({
+      username,
+      uid,
+    }),
   };
 
   if (allUsersSnap.exists()) {
@@ -107,7 +121,7 @@ export const setUsername = async ({ user, name }: SetUsernameParams) => {
 
   await refreshToken();
 
-  await addUsernameInDb(username);
+  return { username };
 };
 
 export const signOut = async () => {
@@ -147,7 +161,7 @@ export const signInWithEmailAndPassword = async ({
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
 
-  const fillUser = useCallback((newUser: DecodedIdToken) => {
+  const fillUser = useCallback((newUser: TokenUser) => {
     setUser(newUser);
   }, []);
 
@@ -183,6 +197,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         sendEmailToRecoverPassword,
         signOut,
         user,
+        addUsernameInDb,
       }}
     >
       {children}

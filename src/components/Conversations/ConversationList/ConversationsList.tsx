@@ -5,11 +5,28 @@ import { ConversationDivider } from './Conversation/ConversationDivider';
 import { Divider } from '../Divider';
 import { AddContactButton } from './AddContactButton';
 import { SearchInput } from './SearchInput';
+import { useEffect } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../../services/firebase';
+import { useAuth } from '../../../contexts/AuthContext';
 
 export function ConversationListComponent() {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
   const { isOpen } = useConversationsTab();
+  const { user } = useAuth();
+
+  const username = user?.username as string;
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, 'conversations', username), (doc) => {
+      console.log(doc.data());
+    });
+
+    return () => {
+      unsub();
+    };
+  }, [username]);
+
+  const arr = [1, 2, 3, 4];
 
   return (
     <Flex

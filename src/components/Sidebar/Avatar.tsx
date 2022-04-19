@@ -5,9 +5,9 @@ import { useAuth } from '../../contexts/AuthContext';
 
 export function Avatar() {
   const [copiedUsername, setCopiedUsername] = useState(false);
-  const { user } = useAuth();
 
-  const username: string = user?.name;
+  const { user } = useAuth();
+  const username = user?.username as string;
 
   function handleCopyUsername(username: string) {
     setCopiedUsername(true);
