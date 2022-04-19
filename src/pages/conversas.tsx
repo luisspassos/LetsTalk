@@ -9,7 +9,7 @@ import { Conversations } from '../components/Conversations';
 import { Sidebar } from '../components/Sidebar';
 import { useAuth } from '../contexts/AuthContext';
 import { useTab } from '../contexts/TabContext';
-import { auth, db } from '../services/firebase';
+import { db } from '../services/firebase';
 import { firebaseAdmin } from '../services/firebaseAdmin';
 
 type ContactsIdType = string[] | undefined;
@@ -61,8 +61,7 @@ export const getServerSideProps: GetServerSideProps = async (
     const userSnap = await getDoc(userRef);
 
     const contactsId = userSnap.data()?.contacts as ContactsIdType;
-
-    const contacts = contactsId?.map((id) => );
+    const;
 
     if (user) {
       return {
