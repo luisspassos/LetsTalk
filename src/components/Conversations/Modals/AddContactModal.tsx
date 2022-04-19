@@ -12,13 +12,17 @@ type AddContactFormData = {
   contactName: string;
 };
 
+type AllUsersResponse = {
+  arr: string[];
+};
+
 const addContactFormSchema = yup.object().shape({
   contactName: yup
     .string()
     .trim()
     .required('Usuário obrigatório')
     .matches(
-      /[^#]#(\d{4})$/, // so pode ter uma # e apenas 4 numeros
+      /^([^#])([^#]*#\d+)$/,
       'O usuário deve seguir este formato: usuario#1234'
     ),
 });
@@ -26,6 +30,7 @@ export function AddContactModal() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<AddContactFormData>({
     resolver: yupResolver(addContactFormSchema),
@@ -34,8 +39,25 @@ export function AddContactModal() {
   const { isOpen, onClose } = useAddContactModal();
 
   const handleAddContact = useMemo(
-    () => handleSubmit(async () => {}),
-    [handleSubmit]
+    () =>
+      handleSubmit(async ({ contactName }) => {
+        try {
+          const { doc, getDoc } = await import('firebase/firestore');
+          const { db } = await import('../../../services/firebase');
+
+          const allUsersRef = doc(db, 'users', 'allUsers');
+          const allUsersSnap = await getDoc(allUsersRef);
+
+          const { arr: users } = allUsersSnap.data() as AllUsersResponse;
+
+          if (users.includes(contactName)) {
+            alert('Usuário encontrado');
+          } else {
+            setError();
+          }
+        } catch {}
+      }),
+    [handleSubmit, setError]
   );
 
   return (
@@ -73,6 +95,9 @@ export function AddContactModal() {
           confirmButtonProps={{
             onClick: handleAddContact,
             isLoading: isSubmitting,
+          }}
+          cancelButtonProps={{
+            onClick: onClose,
           }}
           confirmButtonText='Adicionar'
         />
