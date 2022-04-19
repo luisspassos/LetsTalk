@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMemo } from 'react';
+import { useAuth } from '../../../contexts/AuthContext';
 
 type AddContactFormData = {
   contactName: string;
@@ -37,6 +38,9 @@ export function AddContactModal() {
   });
 
   const { isOpen, onClose } = useAddContactModal();
+  const { user } = useAuth();
+
+  const username: string = user?.name;
 
   const handleAddContact = useMemo(
     () =>
@@ -50,14 +54,17 @@ export function AddContactModal() {
 
           const { arr: users } = allUsersSnap.data() as AllUsersResponse;
 
-          if (users.includes(contactName)) {
+          if (users.includes(contactName) && contactName !== username) {
             alert('Usuário encontrado');
           } else {
-            setError();
+            setError('contactName', {
+              message:
+                'Não foi possível adicionar este usuário, talvez ele não exista',
+            });
           }
         } catch {}
       }),
-    [handleSubmit, setError]
+    [handleSubmit, setError, username]
   );
 
   return (
