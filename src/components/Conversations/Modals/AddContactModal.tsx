@@ -7,9 +7,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMemo } from 'react';
+import { useAuth } from '../../../contexts/AuthContext';
 
 type AddContactFormData = {
   contactName: string;
+};
+
+type AllUsersResponse = {
+  arr: string[];
 };
 
 const addContactFormSchema = yup.object().shape({
@@ -18,8 +23,7 @@ const addContactFormSchema = yup.object().shape({
     .trim()
     .required('Usuário obrigatório')
     .matches(
-      // regex das # [^#]*#[^#]*
-      /[^#]#(\d+)$/, // so pode ter uma # e apenas 4 numeros
+      /^([^#])([^#]*#\d+)$/,
       'O usuário deve seguir este formato: usuario#1234'
     ),
 });
@@ -27,16 +31,40 @@ export function AddContactModal() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<AddContactFormData>({
     resolver: yupResolver(addContactFormSchema),
   });
 
   const { isOpen, onClose } = useAddContactModal();
+  const { user } = useAuth();
+
+  const username: string = user?.name;
 
   const handleAddContact = useMemo(
-    () => handleSubmit(async () => {}),
-    [handleSubmit]
+    () =>
+      handleSubmit(async ({ contactName }) => {
+        try {
+          const { doc, getDoc } = await import('firebase/firestore');
+          const { db } = await import('../../../services/firebase');
+
+          const allUsersRef = doc(db, 'users', 'allUsers');
+          const allUsersSnap = await getDoc(allUsersRef);
+
+          const { arr: users } = allUsersSnap.data() as AllUsersResponse;
+
+          if (users.includes(contactName) && contactName !== username) {
+            alert('Usuário encontrado');
+          } else {
+            setError('contactName', {
+              message:
+                'Não foi possível adicionar este usuário, talvez ele não exista',
+            });
+          }
+        } catch {}
+      }),
+    [handleSubmit, setError, username]
   );
 
   return (
@@ -74,6 +102,9 @@ export function AddContactModal() {
           confirmButtonProps={{
             onClick: handleAddContact,
             isLoading: isSubmitting,
+          }}
+          cancelButtonProps={{
+            onClick: onClose,
           }}
           confirmButtonText='Adicionar'
         />
