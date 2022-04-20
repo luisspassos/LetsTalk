@@ -9,9 +9,7 @@ import { useConversations } from '../../../contexts/ConversationsContext';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
-  const { conversations } = useConversations();
-
-  const arr = [1, 2, 3, 4];
+  const { conversations, numberOfConversations } = useConversations();
 
   return (
     <Flex
@@ -40,8 +38,14 @@ export function ConversationListComponent() {
         spacing={0}
       >
         <ConversationDivider position='sticky' top={0} left={0} mt={0} />
-        {arr.map((el, i) => (
-          <Conversation key={el} arr={arr} index={i} />
+        {conversations.map(({ uid, name, photoURL }, i) => (
+          <Conversation
+            key={uid}
+            index={i}
+            numberOfConversations={numberOfConversations}
+            name={name}
+            photoURL={photoURL}
+          />
         ))}
       </VStack>
     </Flex>

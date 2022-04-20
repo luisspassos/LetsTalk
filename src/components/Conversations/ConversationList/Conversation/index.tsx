@@ -4,12 +4,19 @@ import { Circle } from '../../../Circle';
 import { ConversationDivider } from './ConversationDivider';
 
 type ConversationProps = {
-  arr: number[];
+  name: string;
+  photoURL: string | null;
   index: number;
+  numberOfConversations: number;
 };
 
-export function Conversation({ arr, index }: ConversationProps) {
-  const lastItem = index === arr.length - 1;
+export function Conversation({
+  name,
+  photoURL,
+  index,
+  numberOfConversations,
+}: ConversationProps) {
+  const lastItem = index === numberOfConversations - 1;
   const { changeLoadingState } = useLoading();
 
   return (
@@ -32,7 +39,7 @@ export function Conversation({ arr, index }: ConversationProps) {
           w={['40px', '44px', '48px']}
           h={['40px', '44px', '48px']}
           onLoad={() => changeLoadingState(false)}
-          src='https://github.com/luisspassos.png'
+          src={photoURL ?? undefined}
           mr='10px'
         />
         <Flex justify='space-between' flex='1'>
@@ -43,7 +50,7 @@ export function Conversation({ arr, index }: ConversationProps) {
               fontSize={['14px', '16px', '17px']}
               fontWeight={400}
             >
-              Guilherme De Castro Alves
+              {name}
             </Heading>
             <Text
               as='small'

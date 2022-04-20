@@ -9,7 +9,7 @@ import {
 export type ConversationsType = {
   uid: string;
   photoURL: string | null;
-  name: string | undefined;
+  name: string;
 }[];
 
 type ConversationsProviderProps = {
@@ -19,6 +19,7 @@ type ConversationsProviderProps = {
 type ConversationsContextType = {
   conversations: ConversationsType;
   changeConversationsState: (conversations: ConversationsType) => void;
+  numberOfConversations: number;
 };
 
 export const ConversationsContext = createContext(
@@ -30,6 +31,8 @@ export function ConversationsProvider({
 }: ConversationsProviderProps) {
   const [conversations, setConversations] = useState<ConversationsType>([]);
 
+  const numberOfConversations = conversations.length;
+
   const changeConversationsState = useCallback(
     (conversations: ConversationsType) => {
       setConversations(conversations);
@@ -39,7 +42,7 @@ export function ConversationsProvider({
 
   return (
     <ConversationsContext.Provider
-      value={{ changeConversationsState, conversations }}
+      value={{ changeConversationsState, conversations, numberOfConversations }}
     >
       {children}
     </ConversationsContext.Provider>
