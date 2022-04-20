@@ -43,7 +43,7 @@ export function AddContactModal() {
   const { isOpen, onClose } = useAddContactModal();
   const { user } = useAuth();
 
-  const username = user?.username as string;
+  const username = user?.username;
 
   const handleAddContact = useMemo(
     () =>
@@ -61,7 +61,7 @@ export function AddContactModal() {
             ({ username }) => username === contactName
           );
 
-          if (contact && contactName !== username) {
+          if (username && contact && contactName !== username) {
             const { arrayUnion, updateDoc, setDoc } = await import(
               'firebase/firestore'
             );

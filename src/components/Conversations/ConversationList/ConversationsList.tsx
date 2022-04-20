@@ -5,9 +5,11 @@ import { ConversationDivider } from './Conversation/ConversationDivider';
 import { Divider } from '../Divider';
 import { AddContactButton } from './AddContactButton';
 import { SearchInput } from './SearchInput';
+import { useConversations } from '../../../contexts/ConversationsContext';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
+  const { conversations } = useConversations();
 
   const arr = [1, 2, 3, 4];
 

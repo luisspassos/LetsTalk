@@ -8,26 +8,29 @@ import { LoadingProvider } from '../contexts/LoadingContext';
 import { BlockUserModalProvider } from '../contexts/Modal/BlockUserModalContext';
 import { AddContactModalProvider } from '../contexts/Modal/AddContactModalContext';
 import { ConversationsTabProvider } from '../contexts/ConversationsTabContext';
+import { ConversationsProvider } from '../contexts/ConversationsContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ConversationsTabProvider>
-      <AddContactModalProvider>
-        <BlockUserModalProvider>
-          <LoadingProvider>
-            <TabProvider>
-              <FadeInAnimationProvider>
-                <AuthProvider>
-                  <ChakraProvider theme={theme}>
-                    <Component {...pageProps} />
-                  </ChakraProvider>
-                </AuthProvider>
-              </FadeInAnimationProvider>
-            </TabProvider>
-          </LoadingProvider>
-        </BlockUserModalProvider>
-      </AddContactModalProvider>
-    </ConversationsTabProvider>
+    <ConversationsProvider>
+      <ConversationsTabProvider>
+        <AddContactModalProvider>
+          <BlockUserModalProvider>
+            <LoadingProvider>
+              <TabProvider>
+                <FadeInAnimationProvider>
+                  <AuthProvider>
+                    <ChakraProvider theme={theme}>
+                      <Component {...pageProps} />
+                    </ChakraProvider>
+                  </AuthProvider>
+                </FadeInAnimationProvider>
+              </TabProvider>
+            </LoadingProvider>
+          </BlockUserModalProvider>
+        </AddContactModalProvider>
+      </ConversationsTabProvider>
+    </ConversationsProvider>
   );
 }
 

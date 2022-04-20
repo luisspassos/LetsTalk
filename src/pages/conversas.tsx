@@ -8,6 +8,10 @@ import { Configurations } from '../components/Configurations';
 import { Conversations } from '../components/Conversations';
 import { Sidebar } from '../components/Sidebar';
 import { useAuth } from '../contexts/AuthContext';
+import {
+  ConversationsType,
+  useConversations,
+} from '../contexts/ConversationsContext';
 import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
 import { firebaseAdmin } from '../services/firebaseAdmin';
@@ -16,11 +20,16 @@ type ContactsIdType = string[] | undefined;
 
 type ConversationsPageProps = {
   user: DecodedIdToken;
+  conversationsFormatted: ConversationsType;
 };
 
-export default function ConversationsPage({ user }: ConversationsPageProps) {
+export default function ConversationsPage({
+  user,
+  conversationsFormatted,
+}: ConversationsPageProps) {
   const { tab } = useTab();
   const { fillUser, addUsernameInDb } = useAuth();
+  const { changeConversationsState } = useConversations();
 
   useEffect(() => {
     const username = user?.name;
@@ -31,7 +40,15 @@ export default function ConversationsPage({ user }: ConversationsPageProps) {
     });
 
     addUsernameInDb(username, user.uid);
-  }, [fillUser, user, addUsernameInDb]);
+
+    changeConversationsState(conversationsFormatted);
+  }, [
+    fillUser,
+    user,
+    addUsernameInDb,
+    changeConversationsState,
+    conversationsFormatted,
+  ]);
 
   const CurrentTab = {
     conversations: Conversations,
@@ -60,13 +77,33 @@ export const getServerSideProps: GetServerSideProps = async (
     const userRef = doc(db, 'conversations', user?.name);
     const userSnap = await getDoc(userRef);
 
-    const contactsId = userSnap.data()?.contacts as ContactsIdType;
-    const;
+    const conversationsId = userSnap.data()?.contacts as ContactsIdType;
+    const conversationsIdInObjs = conversationsId?.map((id) => ({
+      uid: id,
+    }));
 
     if (user) {
+      if (conversationsIdInObjs) {
+        const conversations = await auth.getUsers(conversationsIdInObjs);
+        const conversationsFormatted = conversations.users.map(
+          ({ displayName, photoURL, uid }) => ({
+            uid,
+            photoURL: photoURL ?? null,
+            name: displayName?.split('#')[0],
+          })
+        );
+
+        return {
+          props: {
+            conversationsFormatted,
+            user,
+          },
+        };
+      }
+
       return {
         props: {
-          contactsId,
+          conversationsFormatted: null,
           user,
         },
       };
