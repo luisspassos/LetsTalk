@@ -74,9 +74,9 @@ export function AddContactModal() {
             };
 
             if (userSnap.exists()) {
-              updateDoc(userRef, addContactToArray);
+              await updateDoc(userRef, addContactToArray);
             } else {
-              setDoc(userRef, addContactToArray);
+              await setDoc(userRef, addContactToArray);
             }
           } else {
             setError('contactName', {

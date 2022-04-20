@@ -1,17 +1,26 @@
-import { auth } from '../services/firebaseAdmin';
+import { api } from '../services/api';
 
 export type ConversationsIdType = string[] | undefined;
+
+type ConversationUsersResponse = {
+  users: {
+    displayName: string;
+    photoURL: string | undefined;
+    uid: string;
+  }[];
+};
 
 export async function formatConversations(
   conversationsId: ConversationsIdType
 ) {
-  const conversationsIdInObjs = conversationsId?.map((id) => ({
-    uid: id,
-  }));
+  const conversationsIdFormatted = conversationsId?.join(',');
 
-  if (conversationsIdInObjs) {
-    const conversationUsers = (await auth.getUsers(conversationsIdInObjs))
-      .users;
+  if (conversationsIdFormatted) {
+    const conversationUsers = (
+      await api.get<ConversationUsersResponse>(
+        `getUsers?usersId=${conversationsIdFormatted}`
+      )
+    ).data.users;
 
     const conversationsFormatted = conversationUsers.map(
       ({ displayName, photoURL, uid }) => ({
@@ -20,14 +29,12 @@ export async function formatConversations(
         name: String(displayName?.split('#')[0]),
       })
     );
-
     return conversationsFormatted;
   }
 
   return [];
 }
 
-// onSnapshot
-// ver foco na modal
 // react query
 // tela de loading
+// juntar contextos de conversations

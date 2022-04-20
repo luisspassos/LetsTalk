@@ -12,7 +12,7 @@ type LoadingContextType = {
 export const LoadingContext = createContext({} as LoadingContextType);
 
 export function LoadingProvider({ children }: LoadingProviderProps) {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   function changeLoadingState(boolean: boolean) {
     setIsActive(boolean);

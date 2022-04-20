@@ -62,16 +62,24 @@ export function ConversationsProvider({
           if (initState) {
             initState = false;
           } else {
-            const conversationsId = doc.data()
-              ?.conversationsId as ConversationsIdType;
+            const updateConversations = async (
+              conversationsId: ConversationsIdType
+            ) => {
+              const { formatConversations } = await import(
+                '../utils/formatConversations'
+              );
 
-            (async () => {
               const conversationsFormatted = await formatConversations(
                 conversationsId
               );
 
               setConversations(conversationsFormatted);
-            })();
+            };
+
+            const conversationsId = doc.data()
+              ?.conversationsId as ConversationsIdType;
+
+            updateConversations(conversationsId);
           }
         }
       );
