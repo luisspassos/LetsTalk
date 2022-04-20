@@ -70,7 +70,7 @@ export function AddContactModal() {
             const userSnap = await getDoc(userRef);
 
             const addContactToArray = {
-              contacts: arrayUnion(contact.uid),
+              conversationsId: arrayUnion(contact.uid),
             };
 
             if (userSnap.exists()) {

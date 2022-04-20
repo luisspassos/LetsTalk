@@ -1,10 +1,16 @@
+import { doc, onSnapshot } from 'firebase/firestore';
 import {
   createContext,
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
+  useMemo,
   useState,
 } from 'react';
+import { db } from '../services/firebase';
+import { ConversationsIdType } from '../utils/formatConversations';
+import { useAuth } from './AuthContext';
 
 export type ConversationsType = {
   uid: string;
@@ -31,7 +37,12 @@ export function ConversationsProvider({
 }: ConversationsProviderProps) {
   const [conversations, setConversations] = useState<ConversationsType>([]);
 
-  const numberOfConversations = conversations.length;
+  const { user } = useAuth();
+
+  const numberOfConversations = useMemo(
+    () => conversations.length,
+    [conversations.length]
+  );
 
   const changeConversationsState = useCallback(
     (conversations: ConversationsType) => {
@@ -39,6 +50,37 @@ export function ConversationsProvider({
     },
     []
   );
+
+  // update conversation list
+  useEffect(() => {
+    if (user) {
+      let initState = true;
+
+      const unsub = onSnapshot(
+        doc(db, 'conversations', user.username),
+        (doc) => {
+          if (initState) {
+            initState = false;
+          } else {
+            const conversationsId = doc.data()
+              ?.conversationsId as ConversationsIdType;
+
+            (async () => {
+              const conversationsFormatted = await formatConversations(
+                conversationsId
+              );
+
+              setConversations(conversationsFormatted);
+            })();
+          }
+        }
+      );
+
+      return () => {
+        unsub();
+      };
+    }
+  }, [user]);
 
   return (
     <ConversationsContext.Provider

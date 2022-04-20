@@ -14,9 +14,11 @@ import {
 } from '../contexts/ConversationsContext';
 import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
-import { firebaseAdmin } from '../services/firebaseAdmin';
-
-type ContactsIdType = string[] | undefined;
+import { auth } from '../services/firebaseAdmin';
+import {
+  ConversationsIdType,
+  formatConversations,
+} from '../utils/formatConversations';
 
 type ConversationsPageProps = {
   user: DecodedIdToken;
@@ -69,41 +71,21 @@ export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
   try {
-    const auth = firebaseAdmin.auth();
-
     const cookies = nookies.get(ctx);
     const user = await auth.verifyIdToken(cookies.token);
 
     const userRef = doc(db, 'conversations', user?.name);
     const userSnap = await getDoc(userRef);
 
-    const conversationsId = userSnap.data()?.contacts as ContactsIdType;
-    const conversationsIdInObjs = conversationsId?.map((id) => ({
-      uid: id,
-    }));
+    const conversationsId = userSnap.data()
+      ?.conversationsId as ConversationsIdType;
+
+    const conversationsFormatted = await formatConversations(conversationsId);
 
     if (user) {
-      if (conversationsIdInObjs) {
-        const conversations = await auth.getUsers(conversationsIdInObjs);
-        const conversationsFormatted = conversations.users.map(
-          ({ displayName, photoURL, uid }) => ({
-            uid,
-            photoURL: photoURL ?? null,
-            name: displayName?.split('#')[0],
-          })
-        );
-
-        return {
-          props: {
-            conversationsFormatted,
-            user,
-          },
-        };
-      }
-
       return {
         props: {
-          conversationsFormatted: [],
+          conversationsFormatted,
           user,
         },
       };

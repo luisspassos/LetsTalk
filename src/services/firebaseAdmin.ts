@@ -20,4 +20,6 @@ if (!firebaseAdmin.apps.length) {
   });
 }
 
-export { firebaseAdmin };
+const auth = firebaseAdmin.auth();
+
+export { firebaseAdmin, auth };

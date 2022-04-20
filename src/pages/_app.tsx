@@ -12,25 +12,25 @@ import { ConversationsProvider } from '../contexts/ConversationsContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ConversationsProvider>
-      <ConversationsTabProvider>
-        <AddContactModalProvider>
-          <BlockUserModalProvider>
-            <LoadingProvider>
-              <TabProvider>
-                <FadeInAnimationProvider>
-                  <AuthProvider>
+    <AuthProvider>
+      <ConversationsProvider>
+        <ConversationsTabProvider>
+          <AddContactModalProvider>
+            <BlockUserModalProvider>
+              <LoadingProvider>
+                <TabProvider>
+                  <FadeInAnimationProvider>
                     <ChakraProvider theme={theme}>
                       <Component {...pageProps} />
                     </ChakraProvider>
-                  </AuthProvider>
-                </FadeInAnimationProvider>
-              </TabProvider>
-            </LoadingProvider>
-          </BlockUserModalProvider>
-        </AddContactModalProvider>
-      </ConversationsTabProvider>
-    </ConversationsProvider>
+                  </FadeInAnimationProvider>
+                </TabProvider>
+              </LoadingProvider>
+            </BlockUserModalProvider>
+          </AddContactModalProvider>
+        </ConversationsTabProvider>
+      </ConversationsProvider>
+    </AuthProvider>
   );
 }
 
