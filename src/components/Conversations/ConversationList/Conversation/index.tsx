@@ -1,7 +1,10 @@
-import { Avatar, Flex, Heading, Text, VStack } from '@chakra-ui/react';
-import { useLoading } from '../../../../contexts/LoadingContext';
-import { Circle } from '../../../Circle';
+import { Flex, VStack } from '@chakra-ui/react';
 import { ConversationDivider } from './ConversationDivider';
+import { Avatar } from './Avatar';
+import { Name } from './Name';
+import { LastMessage } from './LastMessage';
+import { LastMessageTime } from './LastMessageTime';
+import { NumberOfUnreadMessages } from './NumberOfUnreadMessages';
 
 type ConversationProps = {
   name: string;
@@ -17,7 +20,6 @@ export function Conversation({
   numberOfConversations,
 }: ConversationProps) {
   const lastItem = index === numberOfConversations - 1;
-  const { changeLoadingState } = useLoading();
 
   return (
     <>
@@ -35,48 +37,15 @@ export function Conversation({
           bg: 'grayAlpha.500',
         }}
       >
-        <Avatar
-          w={['40px', '44px', '48px']}
-          h={['40px', '44px', '48px']}
-          onLoad={() => changeLoadingState(false)}
-          src={photoURL ?? undefined}
-          mr='10px'
-        />
+        <Avatar photoURL={photoURL ?? undefined} />
         <Flex justify='space-between' flex='1'>
           <VStack spacing={['-1px', '-0.5px', 0]} alignItems='start'>
-            <Heading
-              maxW={['125px', '145px', '165px']}
-              isTruncated
-              fontSize={['14px', '16px', '17px']}
-              fontWeight={400}
-            >
-              {name}
-            </Heading>
-            <Text
-              as='small'
-              maxW={['125px', '145px', '165px']}
-              isTruncated
-              fontSize={['12px', '13px', '14px']}
-              opacity='90%'
-            >
-              ta bommmmmmmmm
-            </Text>
+            <Name text={name} />
+            <LastMessage text='ta bommmmmmmmmmmmmm' />
           </VStack>
           <VStack spacing={['1px', '1.5px', '2px']} h='100%' align='end'>
-            <Text as='time' fontSize={['11px', '12px', '13px']} opacity='80%'>
-              19:48
-            </Text>
-            <Circle
-              px={['1px', '2px', '3px']}
-              minW={['13.5px', '16.5px', '19.5px']}
-              h={['13.5px', '16.5px', '19.5px']}
-              fontSize={['9px', '11px', '13px']}
-              lineHeight='1px'
-              color='white'
-              bg='gray.500'
-            >
-              2
-            </Circle>
+            <LastMessageTime text='19:48' />
+            <NumberOfUnreadMessages number={2} />
           </VStack>
         </Flex>
       </Flex>

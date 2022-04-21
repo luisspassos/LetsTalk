@@ -8,6 +8,7 @@ export function Empty() {
       maxH={['150px', '200px', '250px']}
       src='/images/messages.svg'
       alt='Vázio'
+      draggable={false}
     />
   );
 }

@@ -6,10 +6,26 @@ import { Divider } from '../Divider';
 import { AddContactButton } from './AddContactButton';
 import { SearchInput } from './SearchInput';
 import { useConversations } from '../../../contexts/ConversationsContext';
+import { useCallback, useState } from 'react';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
-  const { conversations, numberOfConversations } = useConversations();
+  const { conversations } = useConversations();
+
+  const [conversationSearch, setConversationSearch] = useState('');
+
+  const changeConversationSearchState = useCallback(
+    (conversationSearch: string) => {
+      setConversationSearch(conversationSearch);
+    },
+    []
+  );
+
+  const fetchedConversations = conversations.filter(({ name }) =>
+    name.includes(conversationSearch.trim())
+  );
+
+  const numberOfConversations = fetchedConversations.length;
 
   return (
     <Flex
@@ -22,7 +38,9 @@ export function ConversationListComponent() {
     >
       <AddContactButton />
       <Divider />
-      <SearchInput />
+      <SearchInput
+        changeConversationSearchState={changeConversationSearchState}
+      />
       <Heading
         as='h1'
         fontWeight={400}
@@ -38,7 +56,7 @@ export function ConversationListComponent() {
         spacing={0}
       >
         <ConversationDivider position='sticky' top={0} left={0} mt={0} />
-        {conversations.map(({ uid, name, photoURL }, i) => (
+        {fetchedConversations.map(({ uid, name, photoURL }, i) => (
           <Conversation
             key={uid}
             index={i}

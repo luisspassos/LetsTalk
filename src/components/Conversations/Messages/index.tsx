@@ -6,7 +6,7 @@ import { Main } from './Main';
 export function Messages() {
   return (
     <Flex
-      maxW='1200px'
+      maxW='1100px'
       mx='auto'
       flex='1'
       minW={0}

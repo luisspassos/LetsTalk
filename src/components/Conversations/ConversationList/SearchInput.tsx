@@ -1,7 +1,13 @@
 import { Icon, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { FiSearch } from 'react-icons/fi';
 
-export function SearchInput() {
+type SearchInputProps = {
+  changeConversationSearchState: (conversationSearch: string) => void;
+};
+
+export function SearchInput({
+  changeConversationSearchState,
+}: SearchInputProps) {
   return (
     <InputGroup
       alignItems='center'
@@ -24,6 +30,7 @@ export function SearchInput() {
         placeholder='Pesquisar conversa...'
         boxShadow='sm'
         pl={['39px', '42px', '45px']}
+        onChange={(e) => changeConversationSearchState(e.target.value)}
       />
     </InputGroup>
   );

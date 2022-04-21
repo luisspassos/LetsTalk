@@ -1,6 +1,5 @@
 import { Flex } from '@chakra-ui/react';
 import { useConversations } from '../../contexts/ConversationsContext';
-import { Loading } from '../Loading';
 import { ConversationList } from './ConversationList';
 import { Empty } from './Empty';
 import { Messages } from './Messages';
@@ -16,7 +15,6 @@ export function Conversations() {
     <>
       <BlockUserModal />
       <AddContactModal />
-      {existConversations && <Loading />}
       <Flex flex='1' minW={0}>
         <ConversationList />
         {existConversations ? <Messages /> : <Empty />}

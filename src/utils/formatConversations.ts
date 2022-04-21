@@ -34,7 +34,3 @@ export async function formatConversations(
 
   return [];
 }
-
-// react query
-// tela de loading
-// juntar contextos de conversations

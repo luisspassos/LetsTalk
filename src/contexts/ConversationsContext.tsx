@@ -92,7 +92,11 @@ export function ConversationsProvider({
 
   return (
     <ConversationsContext.Provider
-      value={{ changeConversationsState, conversations, numberOfConversations }}
+      value={{
+        changeConversationsState,
+        conversations,
+        numberOfConversations,
+      }}
     >
       {children}
     </ConversationsContext.Provider>

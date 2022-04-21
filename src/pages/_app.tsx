@@ -4,7 +4,6 @@ import { theme } from '../styles/theme';
 import { AuthProvider } from '../contexts/AuthContext';
 import { FadeInAnimationProvider } from '../contexts/FadeInAnimationContext';
 import { TabProvider } from '../contexts/TabContext';
-import { LoadingProvider } from '../contexts/LoadingContext';
 import { BlockUserModalProvider } from '../contexts/Modal/BlockUserModalContext';
 import { AddContactModalProvider } from '../contexts/Modal/AddContactModalContext';
 import { ConversationsTabProvider } from '../contexts/ConversationsTabContext';
@@ -17,15 +16,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ConversationsTabProvider>
           <AddContactModalProvider>
             <BlockUserModalProvider>
-              <LoadingProvider>
-                <TabProvider>
-                  <FadeInAnimationProvider>
-                    <ChakraProvider theme={theme}>
-                      <Component {...pageProps} />
-                    </ChakraProvider>
-                  </FadeInAnimationProvider>
-                </TabProvider>
-              </LoadingProvider>
+              <TabProvider>
+                <FadeInAnimationProvider>
+                  <ChakraProvider theme={theme}>
+                    <Component {...pageProps} />
+                  </ChakraProvider>
+                </FadeInAnimationProvider>
+              </TabProvider>
             </BlockUserModalProvider>
           </AddContactModalProvider>
         </ConversationsTabProvider>
