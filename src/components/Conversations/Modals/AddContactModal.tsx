@@ -62,21 +62,19 @@ export function AddContactModal() {
           );
 
           if (username && contact && contactName !== username) {
-            const { arrayUnion, updateDoc, setDoc } = await import(
-              'firebase/firestore'
-            );
+            const { updateDoc, setDoc } = await import('firebase/firestore');
 
             const userRef = doc(db, 'conversations', username);
             const userSnap = await getDoc(userRef);
 
-            const addContactToArray = {
-              conversationsId: arrayUnion(contact.uid),
+            const contactObj = {
+              [contact.uid]: {},
             };
 
             if (userSnap.exists()) {
-              await updateDoc(userRef, addContactToArray);
+              await updateDoc(userRef, contactObj);
             } else {
-              await setDoc(userRef, addContactToArray);
+              await setDoc(userRef, contactObj);
             }
           } else {
             setError('contactName', {

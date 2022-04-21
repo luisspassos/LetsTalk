@@ -8,6 +8,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { FirebaseConversationsIdType } from '../pages/conversas';
 import { db } from '../services/firebase';
 import { ConversationsIdType } from '../utils/formatConversations';
 import { useAuth } from './AuthContext';
@@ -76,8 +77,9 @@ export function ConversationsProvider({
               setConversations(conversationsFormatted);
             };
 
-            const conversationsId = doc.data()
-              ?.conversationsId as ConversationsIdType;
+            const conversationsId = Object.keys(
+              (doc.data() as FirebaseConversationsIdType) ?? {}
+            );
 
             updateConversations(conversationsId);
           }

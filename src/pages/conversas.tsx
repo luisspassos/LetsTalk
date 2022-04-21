@@ -15,15 +15,14 @@ import {
 import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
 import { auth } from '../services/firebaseAdmin';
-import {
-  ConversationsIdType,
-  formatConversations,
-} from '../utils/formatConversations';
+import { formatConversations } from '../utils/formatConversations';
 
 type ConversationsPageProps = {
   user: DecodedIdToken;
   conversationsFormatted: ConversationsType;
 };
+
+export type FirebaseConversationsIdType = Record<string, {}> | undefined;
 
 export default function ConversationsPage({
   user,
@@ -74,11 +73,12 @@ export const getServerSideProps: GetServerSideProps = async (
     const cookies = nookies.get(ctx);
     const user = await auth.verifyIdToken(cookies.token);
 
-    const userRef = doc(db, 'conversations', user?.name);
-    const userSnap = await getDoc(userRef);
+    const userConversationsRef = doc(db, 'conversations', user?.name);
+    const userConversationsSnap = await getDoc(userConversationsRef);
 
-    const conversationsId = userSnap.data()
-      ?.conversationsId as ConversationsIdType;
+    const conversationsId = Object.keys(
+      (userConversationsSnap.data() as FirebaseConversationsIdType) ?? {}
+    );
 
     const conversationsFormatted = await formatConversations(conversationsId);
 
