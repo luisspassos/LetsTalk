@@ -37,6 +37,7 @@ export function Header() {
             w={['42px', '47px', '55px']}
             h={['42px', '47px', '55px']}
             src='https://github.com/luisspassos.png'
+            ignoreFallback
           />
 
           <VStack minW={0} align='start' spacing={0}>
