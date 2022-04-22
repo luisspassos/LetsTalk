@@ -21,9 +21,9 @@ export function ConversationListComponent() {
     []
   );
 
-  const fetchedConversations = conversations
-    .filter(({ name }) => name.includes(conversationSearch.trim()))
-    .reverse();
+  const fetchedConversations = conversations.filter(({ name }) =>
+    name.includes(conversationSearch.trim())
+  );
 
   const numberOfConversations = fetchedConversations.length;
 

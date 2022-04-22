@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/react';
+import { getAdditionalUserInfo } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
@@ -18,6 +19,7 @@ import {
   getConversations,
   UserConversationsDataType,
 } from '../utils/getConversations';
+import { auth as authFront } from '../services/firebase';
 
 type ConversationsPageProps = {
   user: TokenUser;
@@ -31,10 +33,14 @@ export default function ConversationsPage({
   const { tab } = useTab();
   const { fillUser, addUsernameInDb } = useAuth();
   const { changeConversationsState } = useConversations();
-
+  // ver esse ngc de usuario novo
+  // ver sort no arary de conversas
+  // colocar last messages
   useEffect(() => {
     fillUser(user);
-
+    if (authFront.currentUser) {
+      console.log(getAdditionalUserInfo(authFront.currentUser));
+    }
     addUsernameInDb(user.username, user.uid);
 
     changeConversationsState(conversations);

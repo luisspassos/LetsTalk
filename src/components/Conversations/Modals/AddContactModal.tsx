@@ -68,7 +68,9 @@ export function AddContactModal() {
             const userSnap = await getDoc(userRef);
 
             const contactObj = {
-              [contact.uid]: {},
+              [contact.uid]: {
+                updated: Date.now(),
+              },
             };
 
             if (userSnap.exists()) {
