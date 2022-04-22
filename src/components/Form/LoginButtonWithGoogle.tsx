@@ -22,7 +22,7 @@ function LoginButtonWithGoogleComponent() {
   }, []);
 
   const router = useRouter();
-  const { setUsername } = useAuth();
+  const { setUsername, addUsernameInDb } = useAuth();
 
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -53,8 +53,9 @@ function LoginButtonWithGoogleComponent() {
       if (result) {
         const additionalUserInfo = getAdditionalUserInfo(result);
 
-        if (additionalUserInfo?.isNewUser) {
+        if (additionalUserInfo?.isNewUser && user.displayName) {
           await setUsername({ user, name });
+          await addUsernameInDb(user.displayName, user.uid);
         }
 
         await router.push('/conversas');
@@ -70,7 +71,7 @@ function LoginButtonWithGoogleComponent() {
     } finally {
       setIsLoading(false);
     }
-  }, [router, setUsername]);
+  }, [router, setUsername, addUsernameInDb]);
 
   return (
     <Button

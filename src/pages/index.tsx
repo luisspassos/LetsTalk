@@ -97,7 +97,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 
   const router = useRouter();
 
-  const { signInWithEmailAndPassword } = useAuth();
+  const { signInWithEmailAndPassword, addUsernameInDb } = useAuth();
 
   const {
     error: errorParam,
@@ -141,7 +141,9 @@ const Login = ({ actionCode, mode }: LoginProps) => {
     () =>
       handleSubmit(async (data) => {
         try {
-          const { user } = await signInWithEmailAndPassword(data);
+          const loginResult = await signInWithEmailAndPassword(data);
+
+          const { user } = loginResult;
 
           if (!user.emailVerified) {
             const { sendEmailVerification } = await import('firebase/auth');
@@ -149,6 +151,13 @@ const Login = ({ actionCode, mode }: LoginProps) => {
             if (auth.currentUser) await sendEmailVerification(auth.currentUser);
             toasts.emailVerification.warning();
             return;
+          }
+
+          const { getAdditionalUserInfo } = await import('firebase/auth');
+          const isNewUser = getAdditionalUserInfo(loginResult)?.isNewUser;
+
+          if (user.displayName && isNewUser) {
+            await addUsernameInDb(user.displayName, user.uid);
           }
 
           await router.push('/conversas');
@@ -182,7 +191,13 @@ const Login = ({ actionCode, mode }: LoginProps) => {
           }
         }
       }),
-    [handleSubmit, setError, signInWithEmailAndPassword, router]
+    [
+      handleSubmit,
+      setError,
+      signInWithEmailAndPassword,
+      router,
+      addUsernameInDb,
+    ]
   );
 
   return (
