@@ -39,7 +39,7 @@ export default function ConversationsPage({
   useEffect(() => {
     fillUser(user);
     if (authFront.currentUser) {
-      console.log(getAdditionalUserInfo(authFront.currentUser));
+      console.log(getAdditionalUserInfo());
     }
     addUsernameInDb(user.username, user.uid);
 
