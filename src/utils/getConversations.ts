@@ -2,9 +2,11 @@ export type UserConversationsDataType =
   | Record<
       string,
       {
-        messages: {
-          message: string;
-        }[];
+        messages:
+          | {
+              message: string;
+            }[]
+          | undefined;
       }
     >
   | undefined;
@@ -34,7 +36,7 @@ export async function getConversations(
   ).data.users;
 
   const lastMessages = conversationUsersId.map(
-    (id) => userConversationsData[id].messages.pop()?.message
+    (id) => userConversationsData[id].messages?.pop()?.message
   );
 
   const conversations = conversationUsers.map(

@@ -9,10 +9,11 @@ import {
   useState,
 } from 'react';
 import { db } from '../services/firebase';
-// import {
-//   ConversationsIdType,
-//   FirebaseConversationsIdType,
-// } from '../utils/formatConversations';
+import {
+  getConversations,
+  UserConversationsDataType,
+} from '../utils/getConversations';
+
 import { useAuth } from './AuthContext';
 
 export type ConversationsType = {
@@ -58,31 +59,28 @@ export function ConversationsProvider({
   // update conversation list
   useEffect(() => {
     if (user) {
-      let initState = true;
+      let ignoreOnSnapshot = true;
 
       const unsub = onSnapshot(
         doc(db, 'conversations', user.username),
-        (doc) => {
-          if (initState) {
-            initState = false;
+        (userConversationsDoc) => {
+          if (ignoreOnSnapshot) {
+            ignoreOnSnapshot = false;
           } else {
-            const updateConversations = async () =>
-              // conversationsId: ConversationsIdType
-              {
-                // const { formatConversations } = await import(
-                //   '../utils/formatConversations'
-                // );
-                // const conversationsFormatted = await formatConversations(
-                //   conversationsId
-                // );
-                // setConversations([]);
-              };
+            const updateConversations = async (
+              userConversationsDocData: UserConversationsDataType
+            ) => {
+              const conversations = await getConversations(
+                userConversationsDocData
+              );
 
-            // const conversationsId = Object.keys(
-            //   (doc.data() as FirebaseConversationsIdType) ?? {}
-            // );
+              setConversations(conversations);
+            };
 
-            // updateConversations(conversationsId);
+            const userConversationsDocData =
+              userConversationsDoc.data() as UserConversationsDataType;
+
+            updateConversations(userConversationsDocData);
           }
         }
       );
