@@ -29,18 +29,27 @@ export default function ConversationsPage({
   conversations,
 }: ConversationsPageProps) {
   const { tab } = useTab();
-  const { fillUser } = useAuth();
+  const { fillUser, addUsernameInDb } = useAuth();
   const { changeConversationsState } = useConversations();
 
+  // ver loading nas outras pags
   // ver trem de mensagem do login with google
-  // ver esse ngc de usuario novo
   // ver sort no arary de conversas
   // colocar last messages
+  // ver video do reninx
   useEffect(() => {
     fillUser(user);
 
+    addUsernameInDb(user.username, user.uid);
+
     changeConversationsState(conversations);
-  }, [fillUser, user, changeConversationsState, conversations]);
+  }, [
+    fillUser,
+    user,
+    changeConversationsState,
+    conversations,
+    addUsernameInDb,
+  ]);
 
   const CurrentTab = {
     conversations: Conversations,

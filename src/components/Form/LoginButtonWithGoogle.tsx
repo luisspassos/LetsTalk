@@ -22,7 +22,7 @@ function LoginButtonWithGoogleComponent() {
   }, []);
 
   const router = useRouter();
-  const { setUsername, addUsernameInDb } = useAuth();
+  const { setUsername } = useAuth();
 
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -39,8 +39,9 @@ function LoginButtonWithGoogleComponent() {
     try {
       setIsLoading(true);
 
-      const { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } =
-        await import('firebase/auth');
+      const { GoogleAuthProvider, signInWithPopup } = await import(
+        'firebase/auth'
+      );
       const { auth } = await import('../../services/firebase');
       const googleProvider = new GoogleAuthProvider();
 
@@ -51,11 +52,12 @@ function LoginButtonWithGoogleComponent() {
       const name = user.displayName ?? 'Usuário';
 
       if (result) {
+        const { getAdditionalUserInfo } = await import('firebase/auth');
+
         const additionalUserInfo = getAdditionalUserInfo(result);
 
-        if (additionalUserInfo?.isNewUser && user.displayName) {
+        if (additionalUserInfo?.isNewUser) {
           await setUsername({ user, name });
-          await addUsernameInDb(user.displayName, user.uid);
         }
 
         await router.push('/conversas');
@@ -71,7 +73,7 @@ function LoginButtonWithGoogleComponent() {
     } finally {
       setIsLoading(false);
     }
-  }, [router, setUsername, addUsernameInDb]);
+  }, [router, setUsername]);
 
   return (
     <Button

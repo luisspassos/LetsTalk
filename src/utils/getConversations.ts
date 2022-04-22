@@ -2,6 +2,7 @@ export type UserConversationsDataType =
   | Record<
       string,
       {
+        updated: number;
         messages:
           | {
               message: string;
@@ -18,7 +19,6 @@ type ConversationUsersResponse = {
     uid: string;
   }[];
 };
-
 export async function getConversations(
   userConversationsData: UserConversationsDataType
 ) {
@@ -35,18 +35,20 @@ export async function getConversations(
     )
   ).data.users;
 
-  const lastMessages = conversationUsersId.map(
-    (id) => userConversationsData[id].messages?.pop()?.message
-  );
+  const databaseData = conversationUsersId.map((id) => ({
+    lastMessage: userConversationsData[id].messages?.pop()?.message,
+    updated: userConversationsData[id].updated,
+  }));
 
-  const conversations = conversationUsers.map(
-    ({ displayName, photoURL, uid }, i) => ({
+  const conversations = conversationUsers
+    .map(({ displayName, photoURL, uid }, i) => ({
       uid,
       photoURL: photoURL ?? null,
       name: String(displayName?.split('#')[0]),
-      lastMessage: lastMessages[i] ?? '',
-    })
-  );
+      lastMessage: databaseData[i].lastMessage ?? '',
+      updated: databaseData[i].updated,
+    }))
+    .sort((a, b) => a.updated - b.updated);
 
   return conversations;
 }

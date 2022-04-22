@@ -57,6 +57,13 @@ type SetUsernameParams = {
   name: string;
 };
 
+type AllUsersDataType = {
+  arr: {
+    uid: string;
+    username: string;
+  }[];
+};
+
 export const AuthContext = createContext({} as AuthContextData);
 
 export const refreshToken = async () => {
@@ -102,8 +109,16 @@ export const addUsernameInDb: AddUsernameInDbFunc = async (username, uid) => {
     }),
   };
 
+  const allUsersSnapData = allUsersSnap.data() as AllUsersDataType;
+
   if (allUsersSnap.exists()) {
-    await updateDoc(allUsersRef, addUserToArray);
+    const userExists = allUsersSnapData.arr.some(
+      ({ username: firebaseUsername }) => firebaseUsername === username
+    );
+
+    if (!userExists) {
+      await updateDoc(allUsersRef, addUserToArray);
+    }
   } else {
     await setDoc(allUsersRef, addUserToArray);
   }
