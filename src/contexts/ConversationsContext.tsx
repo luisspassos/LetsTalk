@@ -8,15 +8,18 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { FirebaseConversationsIdType } from '../pages/conversas';
 import { db } from '../services/firebase';
-import { ConversationsIdType } from '../utils/formatConversations';
+// import {
+//   ConversationsIdType,
+//   FirebaseConversationsIdType,
+// } from '../utils/formatConversations';
 import { useAuth } from './AuthContext';
 
 export type ConversationsType = {
   uid: string;
   photoURL: string | null;
   name: string;
+  lastMessage: string;
 }[];
 
 type ConversationsProviderProps = {
@@ -63,25 +66,23 @@ export function ConversationsProvider({
           if (initState) {
             initState = false;
           } else {
-            const updateConversations = async (
-              conversationsId: ConversationsIdType
-            ) => {
-              const { formatConversations } = await import(
-                '../utils/formatConversations'
-              );
+            const updateConversations = async () =>
+              // conversationsId: ConversationsIdType
+              {
+                // const { formatConversations } = await import(
+                //   '../utils/formatConversations'
+                // );
+                // const conversationsFormatted = await formatConversations(
+                //   conversationsId
+                // );
+                // setConversations([]);
+              };
 
-              const conversationsFormatted = await formatConversations(
-                conversationsId
-              );
+            // const conversationsId = Object.keys(
+            //   (doc.data() as FirebaseConversationsIdType) ?? {}
+            // );
 
-              setConversations(conversationsFormatted);
-            };
-
-            const conversationsId = Object.keys(
-              (doc.data() as FirebaseConversationsIdType) ?? {}
-            );
-
-            updateConversations(conversationsId);
+            // updateConversations(conversationsId);
           }
         }
       );

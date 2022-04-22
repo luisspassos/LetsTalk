@@ -1,5 +1,4 @@
 import { Flex } from '@chakra-ui/react';
-import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 import { doc, getDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
@@ -7,7 +6,7 @@ import { useEffect } from 'react';
 import { Configurations } from '../components/Configurations';
 import { Conversations } from '../components/Conversations';
 import { Sidebar } from '../components/Sidebar';
-import { useAuth } from '../contexts/AuthContext';
+import { TokenUser, useAuth } from '../contexts/AuthContext';
 import {
   ConversationsType,
   useConversations,
@@ -15,40 +14,36 @@ import {
 import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
 import { auth } from '../services/firebaseAdmin';
-import { formatConversations } from '../utils/formatConversations';
+import {
+  getConversations,
+  UserConversationsDataType,
+} from '../utils/getConversations';
 
 type ConversationsPageProps = {
-  user: DecodedIdToken;
-  conversationsFormatted: ConversationsType;
+  user: TokenUser;
+  conversations: ConversationsType;
 };
-
-export type FirebaseConversationsIdType = Record<string, {}> | undefined;
 
 export default function ConversationsPage({
   user,
-  conversationsFormatted,
+  conversations,
 }: ConversationsPageProps) {
   const { tab } = useTab();
   const { fillUser, addUsernameInDb } = useAuth();
   const { changeConversationsState } = useConversations();
 
   useEffect(() => {
-    const username = user?.name;
+    fillUser(user);
 
-    fillUser({
-      username,
-      ...user,
-    });
+    addUsernameInDb(user.username, user.uid);
 
-    addUsernameInDb(username, user.uid);
-
-    changeConversationsState(conversationsFormatted);
+    changeConversationsState(conversations);
   }, [
     fillUser,
     user,
     addUsernameInDb,
     changeConversationsState,
-    conversationsFormatted,
+    conversations,
   ]);
 
   const CurrentTab = {
@@ -76,17 +71,21 @@ export const getServerSideProps: GetServerSideProps = async (
     const userConversationsRef = doc(db, 'conversations', user?.name);
     const userConversationsSnap = await getDoc(userConversationsRef);
 
-    const conversationsId = Object.keys(
-      (userConversationsSnap.data() as FirebaseConversationsIdType) ?? {}
-    );
+    const userConversationsSnapData =
+      userConversationsSnap.data() as UserConversationsDataType;
 
-    const conversationsFormatted = await formatConversations(conversationsId);
+    const conversations = await getConversations(userConversationsSnapData);
 
     if (user) {
+      const newUser = {
+        ...user,
+        username: user.name,
+      };
+
       return {
         props: {
-          conversationsFormatted,
-          user,
+          conversations,
+          user: newUser,
         },
       };
     }

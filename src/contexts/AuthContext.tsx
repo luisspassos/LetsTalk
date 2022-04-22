@@ -46,7 +46,7 @@ type AuthContextData = {
   addUsernameInDb: AddUsernameInDbFunc;
 };
 
-type TokenUser = {
+export type TokenUser = {
   username: string;
 } & DecodedIdToken;
 
