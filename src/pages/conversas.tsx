@@ -34,9 +34,6 @@ export default function ConversationsPage({
 
   // ver loading nas outras pags
   // ver trem de mensagem do login with google
-  // ver sort no arary de conversas
-  // colocar last messages
-  // ver video do reninx
   useEffect(() => {
     fillUser(user);
 

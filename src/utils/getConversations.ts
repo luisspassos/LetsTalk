@@ -36,7 +36,7 @@ export async function getConversations(
   ).data.users;
 
   const databaseData = conversationUsersId.map((id) => ({
-    lastMessage: userConversationsData[id].messages?.pop()?.message,
+    lastMessage: userConversationsData[id].messages?.pop()?.message ?? '',
     updated: userConversationsData[id].updated,
   }));
 
@@ -45,10 +45,11 @@ export async function getConversations(
       uid,
       photoURL: photoURL ?? null,
       name: String(displayName?.split('#')[0]),
-      lastMessage: databaseData[i].lastMessage ?? '',
+      lastMessage: databaseData[i].lastMessage,
       updated: databaseData[i].updated,
     }))
-    .sort((a, b) => a.updated - b.updated);
+    .sort((a, b) => a.updated - b.updated)
+    .reverse();
 
   return conversations;
 }

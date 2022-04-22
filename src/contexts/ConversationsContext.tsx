@@ -21,6 +21,7 @@ export type ConversationsType = {
   photoURL: string | null;
   name: string;
   lastMessage: string;
+  updated: number;
 }[];
 
 type ConversationsProviderProps = {
