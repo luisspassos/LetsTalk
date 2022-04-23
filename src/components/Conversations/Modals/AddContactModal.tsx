@@ -78,6 +78,8 @@ export function AddContactModal() {
             } else {
               await setDoc(userRef, contactObj);
             }
+
+            onClose();
           } else {
             setError('contactName', {
               message:
@@ -92,7 +94,7 @@ export function AddContactModal() {
           unknownErrorToast();
         }
       }),
-    [handleSubmit, setError, username]
+    [handleSubmit, setError, username, onClose]
   );
 
   return (
