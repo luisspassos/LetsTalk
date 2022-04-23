@@ -61,7 +61,7 @@ export function Conversation({
           bg: 'grayAlpha.500',
         }}
       >
-        <Avatar photoURL={photoURL ?? undefined} />
+        <Avatar photoURL={photoURL} />
         <Flex justify='space-between' flex='1'>
           <VStack
             spacing={['-1px', '-0.5px', 0]}

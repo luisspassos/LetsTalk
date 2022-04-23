@@ -1,7 +1,7 @@
 import { Avatar as ChakraAvatar } from '@chakra-ui/react';
 
 type AvatarProps = {
-  photoURL: string | undefined;
+  photoURL: string | null;
 };
 
 export function Avatar({ photoURL }: AvatarProps) {
@@ -9,7 +9,7 @@ export function Avatar({ photoURL }: AvatarProps) {
     <ChakraAvatar
       w={['40px', '44px', '48px']}
       h={['40px', '44px', '48px']}
-      src={photoURL}
+      src={photoURL ?? undefined}
       mr='10px'
       ignoreFallback
     />

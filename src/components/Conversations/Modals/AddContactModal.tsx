@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMemo } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
+import { UserConversationsDataType } from '../../../utils/getConversations';
 
 type AddContactFormData = {
   contactName: string;
@@ -35,6 +36,7 @@ export function AddContactModal() {
     register,
     handleSubmit,
     setError,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<AddContactFormData>({
     resolver: yupResolver(addContactFormSchema),
@@ -66,12 +68,24 @@ export function AddContactModal() {
 
             const userRef = doc(db, 'conversations', username);
             const userSnap = await getDoc(userRef);
+            const userSnapData = userSnap.data() as UserConversationsDataType;
+
+            const contactExists = Object.keys(userSnapData ?? {}).includes(
+              contact.uid
+            );
 
             const contactObj = {
               [contact.uid]: {
                 updatedAt: Date.now(),
               },
             };
+
+            if (contactExists) {
+              setError('contactName', {
+                message: 'Este contato já existe',
+              });
+              return;
+            }
 
             if (userSnap.exists()) {
               await updateDoc(userRef, contactObj);
@@ -80,6 +94,7 @@ export function AddContactModal() {
             }
 
             onClose();
+            reset();
           } else {
             setError('contactName', {
               message:
@@ -94,7 +109,7 @@ export function AddContactModal() {
           unknownErrorToast();
         }
       }),
-    [handleSubmit, setError, username, onClose]
+    [handleSubmit, setError, username, onClose, reset]
   );
 
   return (

@@ -7,6 +7,8 @@ export async function redirectToConversationsPage(
 ) {
   const cookies = nookies.get(ctx);
 
+  if (!cookies.token) return;
+
   function ObjectIsEmpty(obj: object) {
     for (let prop in obj) {
       if (obj.hasOwnProperty(prop)) {

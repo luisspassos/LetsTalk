@@ -14,6 +14,7 @@ import { toast } from '../utils/Toasts/toast';
 import { useAuth } from '../contexts/AuthContext';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
+import nookies from 'nookies';
 
 type FormFirebaseError = Record<
   string,
@@ -183,13 +184,13 @@ export default function Register() {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
+  const cookies = nookies.get(ctx);
+
+  if (!cookies.token) return { props: {} };
+
   const redirectionToConversations = await redirectToConversationsPage(ctx);
 
-  if (redirectionToConversations) {
-    return redirectionToConversations;
-  }
+  if (redirectionToConversations) return redirectionToConversations;
 
-  return {
-    props: {},
-  };
+  return { props: {} };
 };
