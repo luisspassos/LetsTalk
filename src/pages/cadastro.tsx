@@ -12,6 +12,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { toast } from '../utils/Toasts/toast';
 import { useAuth } from '../contexts/AuthContext';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
 
 type FormFirebaseError = Record<
   string,
@@ -177,3 +179,17 @@ export default function Register() {
     </AuthPageWrapper>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const redirectionToConversations = await redirectToConversationsPage(ctx);
+
+  if (redirectionToConversations) {
+    return redirectionToConversations;
+  }
+
+  return {
+    props: {},
+  };
+};

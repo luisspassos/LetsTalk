@@ -20,8 +20,7 @@ import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrappe
 import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
-import nookies from 'nookies';
-import { firebaseAdmin } from '../services/firebaseAdmin';
+import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
 
 type SignInFormData = {
   email: string;
@@ -240,32 +239,12 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const cookies = nookies.get(ctx);
-
   const { mode, oobCode } = ctx.query;
 
-  function ObjectIsEmpty(obj: object) {
-    for (let prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-        return false;
-      }
-    }
-    return JSON.stringify(obj) === JSON.stringify({});
-  }
+  const redirectionToConversations = await redirectToConversationsPage(ctx);
 
-  try {
-    const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-    if (user.email_verified && ObjectIsEmpty(ctx.query)) {
-      return {
-        redirect: {
-          destination: '/conversas',
-          permanent: false,
-        },
-      };
-    }
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
+  if (redirectionToConversations) {
+    return redirectionToConversations;
   }
 
   if (mode === 'resetPassword') {

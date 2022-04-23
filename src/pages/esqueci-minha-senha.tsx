@@ -11,6 +11,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { CenterForm } from '../components/Form/CenterForm';
 import { toast } from '../utils/Toasts/toast';
 import { Box } from '@chakra-ui/react';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
 
 type emailFormData = {
   email: string;
@@ -118,3 +120,17 @@ export default function IForgotMyPassword() {
     </Box>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const redirectionToConversations = await redirectToConversationsPage(ctx);
+
+  if (redirectionToConversations) {
+    return redirectionToConversations;
+  }
+
+  return {
+    props: {},
+  };
+};

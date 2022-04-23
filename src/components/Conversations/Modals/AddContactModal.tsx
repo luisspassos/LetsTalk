@@ -69,7 +69,7 @@ export function AddContactModal() {
 
             const contactObj = {
               [contact.uid]: {
-                updated: Date.now(),
+                updatedAt: Date.now(),
               },
             };
 

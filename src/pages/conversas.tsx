@@ -32,8 +32,6 @@ export default function ConversationsPage({
   const { fillUser, addUsernameInDb } = useAuth();
   const { changeConversationsState } = useConversations();
 
-  // ver loading nas outras pags
-  // ver trem de mensagem do login with google
   useEffect(() => {
     fillUser(user);
 
