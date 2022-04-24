@@ -36,7 +36,7 @@ export function AddContactModal() {
     register,
     handleSubmit,
     setError,
-    reset,
+    reset: resetForm,
     formState: { errors, isSubmitting },
   } = useForm<AddContactFormData>({
     resolver: yupResolver(addContactFormSchema),
@@ -94,7 +94,7 @@ export function AddContactModal() {
             }
 
             onClose();
-            reset();
+            resetForm();
           } else {
             setError('contactName', {
               message:
@@ -109,7 +109,7 @@ export function AddContactModal() {
           unknownErrorToast();
         }
       }),
-    [handleSubmit, setError, username, onClose, reset]
+    [handleSubmit, setError, username, onClose, resetForm]
   );
 
   return (
