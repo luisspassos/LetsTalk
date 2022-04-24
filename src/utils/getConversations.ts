@@ -1,13 +1,18 @@
+export type MessagesType =
+  | {
+      id: string;
+      contactMessage: boolean;
+      message: string;
+      createdAt: number;
+    }[]
+  | undefined;
+
 export type UserConversationsDataType =
   | Record<
       string,
       {
         updatedAt: number;
-        messages:
-          | {
-              message: string;
-            }[]
-          | undefined;
+        messages: MessagesType;
       }
     >
   | undefined;
@@ -19,6 +24,7 @@ type ConversationUsersResponse = {
     uid: string;
   }[];
 };
+
 export async function getConversations(
   userConversationsData: UserConversationsDataType
 ) {
@@ -35,10 +41,17 @@ export async function getConversations(
     )
   ).data.users;
 
-  const databaseData = conversationUsersId.map((id) => ({
-    lastMessage: userConversationsData[id].messages?.pop()?.message ?? '',
-    updatedAt: userConversationsData[id].updatedAt,
-  }));
+  const databaseData = conversationUsersId.map((id) => {
+    const messages = userConversationsData[id].messages;
+    const lastMessage = messages ? messages[messages.length - 1].message : '';
+    const updatedAt = userConversationsData[id].updatedAt;
+
+    return {
+      messages,
+      lastMessage,
+      updatedAt,
+    };
+  });
 
   const conversations = conversationUsers
     .map(({ displayName, photoURL, uid }, i) => ({
@@ -47,6 +60,7 @@ export async function getConversations(
       name: String(displayName?.split('#')[0]),
       lastMessage: databaseData[i].lastMessage,
       updatedAt: databaseData[i].updatedAt,
+      messages: databaseData[i].messages,
     }))
     .sort((a, b) => a.updatedAt - b.updatedAt)
     .reverse();

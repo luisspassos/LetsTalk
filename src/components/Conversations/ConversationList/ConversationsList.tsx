@@ -21,7 +21,7 @@ export function ConversationListComponent() {
     []
   );
 
-  const fetchedConversations = conversations.filter(({ name }) =>
+  const fetchedConversations = conversations.data.filter(({ name }) =>
     name.includes(conversationSearch.trim())
   );
 

@@ -1,7 +1,14 @@
 import { Stack } from '@chakra-ui/react';
+import { useConversations } from '../../../../contexts/ConversationsContext';
 import { Message } from './Message';
 
 export function Main() {
+  const {
+    currentConversation: {
+      data: { messages },
+    },
+  } = useConversations();
+
   return (
     <Stack
       overflow='auto'
@@ -11,9 +18,9 @@ export function Main() {
       mr={['-14px', '-17px', '-20px']}
       spacing={['6px', '8px', '10px']}
     >
-      <Message />
-      <Message isYourMessage />
-      <Message isYourMessage />
+      {messages?.map(({ message, id, contactMessage }) => (
+        <Message key={id} isYourMessage={!contactMessage} text={message} />
+      ))}
     </Stack>
   );
 }

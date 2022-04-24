@@ -7,7 +7,9 @@ import { AddContactModal } from './Modals/AddContactModal';
 import { BlockUserModal } from './Modals/BlockUserModal';
 
 export function Conversations() {
-  const { numberOfConversations } = useConversations();
+  const {
+    conversations: { numberOfConversations },
+  } = useConversations();
 
   const existConversations = numberOfConversations > 0;
 

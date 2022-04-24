@@ -2,9 +2,10 @@ import { Text, Stack, Flex } from '@chakra-ui/react';
 
 type MessageProps = {
   isYourMessage?: boolean;
+  text: string;
 };
 
-export function Message({ isYourMessage }: MessageProps) {
+export function Message({ isYourMessage, text }: MessageProps) {
   const triangle = {
     values: {
       sizes: ['14px', '17px', '20px'],
@@ -66,7 +67,7 @@ export function Message({ isYourMessage }: MessageProps) {
           bg={isYourMessage ? 'gray.200' : 'gray.300'}
           wordBreak='break-word'
         >
-          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          {text}
         </Text>
       </Flex>
       <Text

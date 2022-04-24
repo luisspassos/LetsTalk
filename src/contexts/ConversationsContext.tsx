@@ -11,27 +11,38 @@ import {
 import { db } from '../services/firebase';
 import {
   getConversations,
+  MessagesType,
   UserConversationsDataType,
 } from '../utils/getConversations';
 
 import { useAuth } from './AuthContext';
 
-export type ConversationsType = {
+type ConversationType = {
   uid: string;
   photoURL: string | null;
   name: string;
   lastMessage: string;
   updatedAt: number;
-}[];
+  messages: MessagesType;
+};
+
+export type ConversationsType = ConversationType[];
 
 type ConversationsProviderProps = {
   children: ReactNode;
 };
 
 type ConversationsContextType = {
-  conversations: ConversationsType;
-  changeConversationsState: (conversations: ConversationsType) => void;
-  numberOfConversations: number;
+  conversations: {
+    changeConversationsState: (conversations: ConversationsType) => void;
+    data: ConversationsType;
+    numberOfConversations: number;
+  };
+  currentConversation: {
+    index: number;
+    data: ConversationType;
+    changeCurrentConversationIndex: (index: number) => void;
+  };
 };
 
 export const ConversationsContext = createContext(
@@ -42,6 +53,7 @@ export function ConversationsProvider({
   children,
 }: ConversationsProviderProps) {
   const [conversations, setConversations] = useState<ConversationsType>([]);
+  const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
 
   const { user } = useAuth();
 
@@ -55,6 +67,15 @@ export function ConversationsProvider({
       setConversations(conversations);
     },
     []
+  );
+
+  const changeCurrentConversationIndex = useCallback((index: number) => {
+    setCurrentConversationIndex(index);
+  }, []);
+
+  const currentConversation = useMemo(
+    () => conversations[currentConversationIndex],
+    [conversations, currentConversationIndex]
   );
 
   // update conversation list
@@ -95,9 +116,16 @@ export function ConversationsProvider({
   return (
     <ConversationsContext.Provider
       value={{
-        changeConversationsState,
-        conversations,
-        numberOfConversations,
+        conversations: {
+          changeConversationsState,
+          data: conversations,
+          numberOfConversations,
+        },
+        currentConversation: {
+          index: currentConversationIndex,
+          data: currentConversation,
+          changeCurrentConversationIndex,
+        },
       }}
     >
       {children}

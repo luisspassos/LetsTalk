@@ -30,7 +30,9 @@ export default function ConversationsPage({
 }: ConversationsPageProps) {
   const { tab } = useTab();
   const { fillUser, addUsernameInDb } = useAuth();
-  const { changeConversationsState } = useConversations();
+  const {
+    conversations: { changeConversationsState },
+  } = useConversations();
 
   useEffect(() => {
     fillUser(user);
