@@ -1,6 +1,10 @@
 import { Heading } from '@chakra-ui/react';
 
-export function ContactName() {
+type ContactNameProps = {
+  text: string;
+};
+
+export function ContactName({ text }: ContactNameProps) {
   return (
     <Heading
       w='100%'
@@ -12,8 +16,7 @@ export function ContactName() {
       fontSize={['15px', '16px', '17px']}
       fontWeight={400}
     >
-      Guilherme DE CASTRO DE CASTRO DE CASTRO DE CASTRO DE CASTRO DE CASTRO DE
-      CASTRO DE CASTRO DE CASTRO
+      {text}
     </Heading>
   );
 }

@@ -5,7 +5,9 @@ import { Name } from './Name';
 import { LastMessage } from './LastMessage';
 import { LastMessageTime } from './LastMessageTime';
 import { NumberOfUnreadMessages } from './NumberOfUnreadMessages';
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useMessages } from '../../../../contexts/MessageContext';
+import { useConversations } from '../../../../contexts/ConversationsContext';
 
 type ConversationProps = {
   data: {
@@ -23,7 +25,18 @@ export function Conversation({
   index,
   numberOfConversations,
 }: ConversationProps) {
+  const [isSelected, setIsSelected] = useState(false);
+
   const lastItem = index === numberOfConversations - 1;
+
+  const { messageData, changeMessageDataState } = useMessages();
+  const { conversations } = useConversations();
+
+  useEffect(() => {
+    const selectedConversation = messageData?.name === name;
+
+    setIsSelected(selectedConversation);
+  }, [messageData?.name, name]);
 
   const updatedAtFormatted = useMemo(() => {
     function formatUpdateAt() {
@@ -45,6 +58,20 @@ export function Conversation({
     return formatUpdateAt();
   }, [updatedAt]);
 
+  const handleSelectConversation = useCallback(
+    (index: number) => {
+      const { photoURL, name: contactName } = conversations[index];
+
+      if (messageData?.name === name) return;
+
+      changeMessageDataState({
+        name: contactName,
+        photoURL,
+      });
+    },
+    [changeMessageDataState, conversations, messageData?.name, name]
+  );
+
   return (
     <>
       <Flex
@@ -56,10 +83,11 @@ export function Conversation({
         flexShrink='0'
         cursor='pointer'
         transition='0.2s'
-        bg={index === 0 ? 'grayAlpha.500' : undefined}
+        bg={isSelected ? 'grayAlpha.500' : undefined}
         _hover={{
           bg: 'grayAlpha.500',
         }}
+        onClick={() => handleSelectConversation(index)}
       >
         <Avatar photoURL={photoURL} />
         <Flex justify='space-between' flex='1'>

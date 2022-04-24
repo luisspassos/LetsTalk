@@ -8,6 +8,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useRef } from 'react';
+import { useMessages } from '../../../../contexts/MessageContext';
 import { Tooltip } from '../../../Tooltip';
 import { Divider } from '../Divider';
 import { ContactName } from './ContactName';
@@ -17,6 +18,8 @@ import { ConversationsSwitchButton } from './ConversationsSwitchButton';
 
 export function Header() {
   const popoverInitialFocusRef = useRef(null);
+
+  const { messageData } = useMessages();
 
   return (
     <>
@@ -34,14 +37,14 @@ export function Header() {
           <ConversationsSwitchButton />
 
           <Avatar
-            w={['42px', '47px', '55px']}
-            h={['42px', '47px', '55px']}
-            src='https://github.com/luisspassos.png'
+            w={['42px', '47px', '52px']}
+            h={['42px', '47px', '52px']}
+            src={messageData?.photoURL ?? undefined}
             ignoreFallback
           />
 
           <VStack minW={0} align='start' spacing={0}>
-            <ContactName />
+            <ContactName text={messageData?.name ?? ''} />
             <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
               Hoje ás 19:48
             </Text>

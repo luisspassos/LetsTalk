@@ -4,6 +4,7 @@ import {
   useState,
   useContext,
   useEffect,
+  useCallback,
 } from 'react';
 import { useConversations } from './ConversationsContext';
 
@@ -18,6 +19,7 @@ type MessageDataType = {
 
 type MessageContextType = {
   messageData: MessageDataType | undefined;
+  changeMessageDataState: (messageData: MessageDataType) => void;
 };
 
 export const MessageContext = createContext({} as MessageContextType);
@@ -26,6 +28,10 @@ export function MessageProvider({ children }: MessageProviderProps) {
   const [messageData, setMessageData] = useState<MessageDataType>();
 
   const { conversations } = useConversations();
+
+  const changeMessageDataState = useCallback((messageData: MessageDataType) => {
+    setMessageData(messageData);
+  }, []);
 
   useEffect(() => {
     const [lastConversation] = conversations;
@@ -37,13 +43,13 @@ export function MessageProvider({ children }: MessageProviderProps) {
   }, [conversations]);
 
   return (
-    <MessageContext.Provider value={{ messageData }}>
+    <MessageContext.Provider value={{ messageData, changeMessageDataState }}>
       {children}
     </MessageContext.Provider>
   );
 }
 
-export function useMessage() {
+export function useMessages() {
   const data = useContext(MessageContext);
 
   return data;
