@@ -68,17 +68,11 @@ export function AddContactModal() {
 
             const userRef = doc(db, 'conversations', username);
             const userSnap = await getDoc(userRef);
-            const userSnapData = userSnap.data() as UserConversationsDataType;
+            const userSnapData =
+              (userSnap.data() as UserConversationsDataType) ?? {};
 
-            const contactExists = Object.keys(userSnapData ?? {}).includes(
-              contact.uid
-            );
-
-            const contactObj = {
-              [contact.uid]: {
-                updatedAt: Date.now(),
-              },
-            };
+            const contactUids = Object.keys(userSnapData);
+            const contactExists = contactUids.includes(contact.uid);
 
             if (contactExists) {
               setError('contactName', {
@@ -86,6 +80,12 @@ export function AddContactModal() {
               });
               return;
             }
+
+            const contactObj = {
+              [contact.uid]: {
+                updatedAt: Date.now(),
+              },
+            };
 
             if (userSnap.exists()) {
               await updateDoc(userRef, contactObj);

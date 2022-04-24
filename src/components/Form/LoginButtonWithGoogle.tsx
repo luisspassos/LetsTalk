@@ -1,12 +1,6 @@
-import {
-  Button,
-  Icon,
-  keyframes,
-  usePrefersReducedMotion,
-} from '@chakra-ui/react';
+import { Button, Icon, Spinner } from '@chakra-ui/react';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { BiLoaderAlt } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -23,17 +17,6 @@ function LoginButtonWithGoogleComponent() {
 
   const router = useRouter();
   const { setUsername } = useAuth();
-
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const loaderAnimation = keyframes`
-      0% { transform: rotate(0deg) }
-      100% { transform: rotate(360deg) }
-    `;
-
-  const showLoaderAnimation = prefersReducedMotion
-    ? undefined
-    : `${loaderAnimation} .7s linear infinite`;
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {
@@ -96,10 +79,9 @@ function LoginButtonWithGoogleComponent() {
       isLoading={isLoading}
       loadingText='Entrar com o Google'
       spinner={
-        <Icon
-          as={BiLoaderAlt}
-          animation={showLoaderAnimation}
-          fontSize={{ base: '28px', sm: '32px' }}
+        <Spinner
+          w={{ base: '28px', sm: '32px' }}
+          h={{ base: '28px', sm: '32px' }}
         />
       }
     >
