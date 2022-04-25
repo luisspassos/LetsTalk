@@ -1,11 +1,38 @@
 import { Text, Stack, Flex } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 type MessageProps = {
   isYourMessage?: boolean;
-  text: string;
+  data: {
+    text: string;
+    createdAt: number;
+  };
 };
 
-export function Message({ isYourMessage, text }: MessageProps) {
+export function Message({
+  isYourMessage,
+  data: { text, createdAt },
+}: MessageProps) {
+  useEffect(() => {
+    let createdAtFormatted = '';
+
+    const isToday = Date.now() - createdAt < 86400000;
+
+    const [date, hours] = new Date(createdAt)
+      .toLocaleString('pt-br')
+      .split(' ');
+
+    const hoursFormatted = hours.slice(0, 5);
+
+    if (isToday) {
+      createdAtFormatted = `Hoje, ${hoursFormatted}.`;
+    } else {
+      createdAtFormatted = `${date}, ${hoursFormatted}`;
+    }
+
+    console.log(createdAtFormatted);
+  }, [createdAt]);
+
   const triangle = {
     values: {
       sizes: ['14px', '17px', '20px'],

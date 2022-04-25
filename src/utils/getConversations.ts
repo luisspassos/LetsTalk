@@ -25,6 +25,10 @@ type ConversationUsersResponse = {
   }[];
 };
 
+// ver loading do login button
+// ver formatação de dados direto na requisição
+// ver se da pra reaproveitar função de converter horario
+
 export async function getConversations(
   userConversationsData: UserConversationsDataType
 ) {

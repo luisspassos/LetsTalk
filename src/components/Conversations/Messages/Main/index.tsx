@@ -18,8 +18,12 @@ export function Main() {
       mr={['-14px', '-17px', '-20px']}
       spacing={['6px', '8px', '10px']}
     >
-      {messages?.map(({ message, id, contactMessage }) => (
-        <Message key={id} isYourMessage={!contactMessage} text={message} />
+      {messages?.map(({ message, id, contactMessage, createdAt }) => (
+        <Message
+          key={id}
+          isYourMessage={!contactMessage}
+          data={{ createdAt, text: message }}
+        />
       ))}
     </Stack>
   );
