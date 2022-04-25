@@ -37,14 +37,27 @@ export function Conversation({
     function formatUpdateAt() {
       let updatedAtFormatted = '';
 
-      const updatedAtDate = new Date(updatedAt).toLocaleString('pt-br');
-      const isToday = Date.now() - updatedAt < 86400000; // (86400000) one day in milliseconds
-      const [date, hours] = updatedAtDate.split(' ');
+      const updatedAtDate = new Date(updatedAt);
 
-      if (isToday) {
-        updatedAtFormatted = hours.slice(0, 5);
-      } else {
+      const updatedAtDatePtBr = updatedAtDate.toLocaleString('pt-br');
+
+      function isYesterday(date: Date) {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        if (yesterday.toDateString() === date.toDateString()) {
+          return true;
+        }
+
+        return false;
+      }
+
+      const [date, hours] = updatedAtDatePtBr.split(' ');
+
+      if (isYesterday(updatedAtDate)) {
         updatedAtFormatted = date;
+      } else {
+        updatedAtFormatted = hours.slice(0, 5);
       }
 
       return updatedAtFormatted;

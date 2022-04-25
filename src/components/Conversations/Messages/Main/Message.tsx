@@ -1,5 +1,6 @@
 import { Text, Stack, Flex } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useMemo } from 'react';
+import { useDate } from '../../../../hooks/useDate';
 
 type MessageProps = {
   isYourMessage?: boolean;
@@ -13,25 +14,18 @@ export function Message({
   isYourMessage,
   data: { text, createdAt },
 }: MessageProps) {
-  useEffect(() => {
-    let createdAtFormatted = '';
+  const {
+    dateInArray: [date, hours],
+    isYesterday,
+  } = useDate(new Date(createdAt));
 
-    const isToday = Date.now() - createdAt < 86400000;
-
-    const [date, hours] = new Date(createdAt)
-      .toLocaleString('pt-br')
-      .split(' ');
-
-    const hoursFormatted = hours.slice(0, 5);
-
-    if (isToday) {
-      createdAtFormatted = `Hoje, ${hoursFormatted}.`;
+  const createdAtFormatted = useMemo(() => {
+    if (isYesterday) {
+      return `${date}, ${hours}.`;
     } else {
-      createdAtFormatted = `${date}, ${hoursFormatted}`;
+      return `Hoje, ${hours}.`;
     }
-
-    console.log(createdAtFormatted);
-  }, [createdAt]);
+  }, [isYesterday, date, hours]);
 
   const triangle = {
     values: {
@@ -103,7 +97,7 @@ export function Message({
         opacity='80%'
         as='time'
       >
-        Hoje, 13:30.
+        {createdAtFormatted}
       </Text>
     </Stack>
   );

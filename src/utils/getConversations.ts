@@ -28,6 +28,9 @@ type ConversationUsersResponse = {
 // ver loading do login button
 // ver formatação de dados direto na requisição
 // ver se da pra reaproveitar função de converter horario
+// ver tamanho da box da conversa
+// ver recebimento de dados
+// formatar data da conversa
 
 export async function getConversations(
   userConversationsData: UserConversationsDataType
