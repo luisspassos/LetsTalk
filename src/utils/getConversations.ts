@@ -1,9 +1,12 @@
+import { formatDate } from './formatDate';
+
 export type MessagesType =
   | {
       id: string;
       contactMessage: boolean;
       message: string;
       createdAt: number;
+      createdAtFormatted: string;
     }[]
   | undefined;
 
@@ -25,13 +28,7 @@ type ConversationUsersResponse = {
   }[];
 };
 
-// ver loading do login button
 // ver formatação de dados direto na requisição
-// ver se da pra reaproveitar função de converter horario
-// ver tamanho da box da conversa
-// ver recebimento de dados
-// formatar data da conversa
-
 export async function getConversations(
   userConversationsData: UserConversationsDataType
 ) {
@@ -53,9 +50,44 @@ export async function getConversations(
     const lastMessage = messages ? messages[messages.length - 1].message : '';
     const updatedAt = userConversationsData[id].updatedAt;
 
+    function formatCreatedAt(createdAt: number) {
+      const {
+        dateInArray: [date, hours],
+        isToday,
+      } = formatDate(new Date(createdAt));
+
+      if (isToday) {
+        return `Hoje, ${hours}.`;
+      } else {
+        return `${date}, ${hours}.`;
+      }
+    }
+
+    function formatUpdatedAt() {
+      const {
+        dateInArray: [date, hours],
+        isToday,
+      } = formatDate(new Date(updatedAt));
+
+      if (isToday) {
+        return hours;
+      } else {
+        return date;
+      }
+    }
+
+    const messagesFormatted = messages?.map((message) => ({
+      ...message,
+      createdAtFormatted: formatCreatedAt(message.createdAt),
+      createdAt: message.createdAt,
+    }));
+
+    const updatedAtFormatted = formatUpdatedAt();
+
     return {
-      messages,
+      messages: messagesFormatted,
       lastMessage,
+      updatedAtFormatted,
       updatedAt,
     };
   });
@@ -67,6 +99,7 @@ export async function getConversations(
       name: String(displayName?.split('#')[0]),
       lastMessage: databaseData[i].lastMessage,
       updatedAt: databaseData[i].updatedAt,
+      updatedAtFormatted: databaseData[i].updatedAtFormatted,
       messages: databaseData[i].messages,
     }))
     .sort((a, b) => a.updatedAt - b.updatedAt)

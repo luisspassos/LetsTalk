@@ -60,8 +60,7 @@ function LoginButtonWithGoogleComponent() {
 
   return (
     <Button
-      maxH='48px'
-      h='100%'
+      h='48px'
       whiteSpace='initial'
       py='6px'
       borderWidth={2}
@@ -72,18 +71,13 @@ function LoginButtonWithGoogleComponent() {
       variant='outline'
       borderColor='blue.900'
       gap='5px'
-      fontSize={{ base: '15px', sm: '18px' }}
+      fontSize={{ base: '17px', sm: '18px' }}
       justifyContent='start'
-      leftIcon={<Icon as={FcGoogle} fontSize={{ base: '28px', sm: '32px' }} />}
+      leftIcon={<Icon as={FcGoogle} fontSize={['28px', '32px']} />}
       onClick={handleSignInWithGoogle}
       isLoading={isLoading}
       loadingText='Entrar com o Google'
-      spinner={
-        <Spinner
-          w={{ base: '28px', sm: '32px' }}
-          h={{ base: '28px', sm: '32px' }}
-        />
-      }
+      spinner={<Spinner w='15px' h='15px' />}
     >
       Entrar com o Google
     </Button>

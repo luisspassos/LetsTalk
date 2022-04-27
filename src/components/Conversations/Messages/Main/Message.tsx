@@ -1,12 +1,10 @@
 import { Text, Stack, Flex } from '@chakra-ui/react';
-import { useMemo } from 'react';
-import { useDate } from '../../../../hooks/useDate';
 
 type MessageProps = {
   isYourMessage?: boolean;
   data: {
     text: string;
-    createdAt: number;
+    createdAt: string;
   };
 };
 
@@ -14,19 +12,6 @@ export function Message({
   isYourMessage,
   data: { text, createdAt },
 }: MessageProps) {
-  const {
-    dateInArray: [date, hours],
-    isYesterday,
-  } = useDate(new Date(createdAt));
-
-  const createdAtFormatted = useMemo(() => {
-    if (isYesterday) {
-      return `${date}, ${hours}.`;
-    } else {
-      return `Hoje, ${hours}.`;
-    }
-  }, [isYesterday, date, hours]);
-
   const triangle = {
     values: {
       sizes: ['14px', '17px', '20px'],
@@ -97,7 +82,7 @@ export function Message({
         opacity='80%'
         as='time'
       >
-        {createdAtFormatted}
+        {createdAt}
       </Text>
     </Stack>
   );

@@ -5,7 +5,6 @@ import { Name } from './Name';
 import { LastMessage } from './LastMessage';
 import { LastMessageTime } from './LastMessageTime';
 import { NumberOfUnreadMessages } from './NumberOfUnreadMessages';
-import { useMemo } from 'react';
 import { useConversations } from '../../../../contexts/ConversationsContext';
 
 type ConversationProps = {
@@ -13,14 +12,14 @@ type ConversationProps = {
     name: string;
     photoURL: string | null;
     lastMessage: string;
-    updatedAt: number;
+    updatedAtFormatted: string;
   };
   index: number;
   numberOfConversations: number;
 };
 
 export function Conversation({
-  data: { name, photoURL, lastMessage, updatedAt },
+  data: { name, photoURL, lastMessage, updatedAtFormatted },
   index,
   numberOfConversations,
 }: ConversationProps) {
@@ -32,39 +31,6 @@ export function Conversation({
       changeCurrentConversationIndex,
     },
   } = useConversations();
-
-  const updatedAtFormatted = useMemo(() => {
-    function formatUpdateAt() {
-      let updatedAtFormatted = '';
-
-      const updatedAtDate = new Date(updatedAt);
-
-      const updatedAtDatePtBr = updatedAtDate.toLocaleString('pt-br');
-
-      function isYesterday(date: Date) {
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        if (yesterday.toDateString() === date.toDateString()) {
-          return true;
-        }
-
-        return false;
-      }
-
-      const [date, hours] = updatedAtDatePtBr.split(' ');
-
-      if (isYesterday(updatedAtDate)) {
-        updatedAtFormatted = date;
-      } else {
-        updatedAtFormatted = hours.slice(0, 5);
-      }
-
-      return updatedAtFormatted;
-    }
-
-    return formatUpdateAt();
-  }, [updatedAt]);
 
   return (
     <>

@@ -23,6 +23,7 @@ type ConversationType = {
   name: string;
   lastMessage: string;
   updatedAt: number;
+  updatedAtFormatted: string;
   messages: MessagesType;
 };
 
