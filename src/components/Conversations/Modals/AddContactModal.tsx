@@ -8,7 +8,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMemo } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
-import { UserConversationsDataType } from '../../../utils/getConversations';
 
 type AddContactFormData = {
   contactName: string;
@@ -68,30 +67,32 @@ export function AddContactModal() {
 
             const userRef = doc(db, 'conversations', username);
             const userSnap = await getDoc(userRef);
-            const userSnapData =
-              (userSnap.data() as UserConversationsDataType) ?? {};
 
-            const contactUids = Object.keys(userSnapData);
-            const contactExists = contactUids.includes(contact.uid);
+            setDoc(userRef, undefined);
+            // const userSnapData =
+            //   (userSnap.data() as UserConversationsDataType) ?? {};
 
-            if (contactExists) {
-              setError('contactName', {
-                message: 'Este contato já existe',
-              });
-              return;
-            }
+            // const contactUids = Object.keys(userSnapData);
+            // const contactExists = contactUids.includes(contact.uid);
 
-            const contactObj = {
-              [contact.uid]: {
-                updatedAt: Date.now(),
-              },
-            };
+            // if (contactExists) {
+            //   setError('contactName', {
+            //     message: 'Este contato já existe',
+            //   });
+            //   return;
+            // }
 
-            if (userSnap.exists()) {
-              await updateDoc(userRef, contactObj);
-            } else {
-              await setDoc(userRef, contactObj);
-            }
+            // const contactObj = {
+            //   [contact.uid]: {
+            //     updatedAt: Date.now(),
+            //   },
+            // };
+
+            // if (userSnap.exists()) {
+            //   await updateDoc(userRef, contactObj);
+            // } else {
+            //   await setDoc(userRef, contactObj);
+            // }
 
             onClose();
             resetForm();

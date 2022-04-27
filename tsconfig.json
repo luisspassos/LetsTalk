@@ -19,3 +19,6 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
+
+// ver loading no logout
+// reformular db
