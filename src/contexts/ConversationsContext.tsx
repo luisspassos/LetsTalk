@@ -17,16 +17,18 @@ import {
 
 import { useAuth } from './AuthContext';
 
-type ConversationType = {
-  uid: string;
-  photoURL: string | null;
-  name: string;
-  lastMessage: string;
-  updatedAt: number;
-  updatedAtFormatted: string;
-  messages: MessagesType | null;
-  unreadMessages: number;
-};
+type ConversationType =
+  | {
+      uid: string;
+      photoURL: string | null;
+      name: string;
+      lastMessage: string;
+      updatedAt: number;
+      updatedAtFormatted: string;
+      messages: MessagesType | null;
+      unreadMessages: number;
+    }
+  | undefined;
 
 export type ConversationsType = ConversationType[];
 
@@ -71,14 +73,45 @@ export function ConversationsProvider({
     []
   );
 
-  const changeCurrentConversationIndex = useCallback((index: number) => {
-    setCurrentConversationIndex(index);
-  }, []);
-
   const currentConversation = useMemo(
     () => conversations[currentConversationIndex],
     [conversations, currentConversationIndex]
   );
+
+  const changeCurrentConversationIndex = useCallback(async (index: number) => {
+    setCurrentConversationIndex(index);
+  }, []);
+
+  // clear unread messages in db
+  useEffect(() => {
+    (async () => {
+      if (!currentConversation?.uid) return;
+
+      setConversations((prevConversations) => {
+        return prevConversations.map((conversation) => {
+          if (conversation?.uid === currentConversation.uid) {
+            return {
+              ...conversation,
+              unreadMessages: 0,
+            };
+          }
+
+          return conversation;
+        });
+      });
+
+      const { updateDoc, doc } = await import('firebase/firestore');
+      const { db } = await import('../services/firebase');
+
+      if (!user?.username) return;
+
+      const conversationRef = doc(db, 'conversations', user?.username);
+
+      updateDoc(conversationRef, {
+        [`${currentConversation.uid}.unreadMessages`]: 0,
+      });
+    })();
+  }, [currentConversation?.uid, user?.username]);
 
   // update conversation list
   useEffect(() => {
