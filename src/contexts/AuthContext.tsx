@@ -57,6 +57,13 @@ type SetUsernameParams = {
   name: string;
 };
 
+type AllUsersDataType = {
+  arr: {
+    uid: string;
+    username: string;
+  }[];
+};
+
 export const AuthContext = createContext({} as AuthContextData);
 
 export const refreshToken = async () => {
@@ -87,17 +94,34 @@ export const getCurrentUserId = async () => {
 };
 
 export const addUsernameInDb: AddUsernameInDbFunc = async (username, uid) => {
-  const { doc, getDoc, setDoc } = await import('firebase/firestore');
+  const { updateDoc, doc, getDoc, setDoc, arrayUnion } = await import(
+    'firebase/firestore'
+  );
   const { db } = await import('../services/firebase');
 
-  const usernameRef = doc(db, 'users', username);
-  const usernameSnap = await getDoc(usernameRef);
+  const allUsersRef = doc(db, 'users', 'allUsers');
+  const allUsersSnap = await getDoc(allUsersRef);
 
-  if (usernameSnap.exists()) return;
+  const addUserToArray = {
+    arr: arrayUnion({
+      username,
+      uid,
+    }),
+  };
 
-  await setDoc(usernameRef, {
-    uid,
-  });
+  const allUsersSnapData = allUsersSnap.data() as AllUsersDataType;
+
+  if (allUsersSnap.exists()) {
+    const userExists = allUsersSnapData.arr.some(
+      ({ username: firebaseUsername }) => firebaseUsername === username
+    );
+
+    if (!userExists) {
+      await updateDoc(allUsersRef, addUserToArray);
+    }
+  } else {
+    await setDoc(allUsersRef, addUserToArray);
+  }
 };
 
 export const setUsername = async ({ user, name }: SetUsernameParams) => {

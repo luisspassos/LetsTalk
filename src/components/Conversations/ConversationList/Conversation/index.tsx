@@ -6,6 +6,7 @@ import { LastMessage } from './LastMessage';
 import { LastMessageTime } from './LastMessageTime';
 import { NumberOfUnreadMessages } from './NumberOfUnreadMessages';
 import { useConversations } from '../../../../contexts/ConversationsContext';
+import { useMemo } from 'react';
 
 type ConversationProps = {
   data: {
@@ -13,17 +14,21 @@ type ConversationProps = {
     photoURL: string | null;
     lastMessage: string;
     updatedAtFormatted: string;
+    unreadMessages: number;
   };
   index: number;
   numberOfConversations: number;
 };
 
 export function Conversation({
-  data: { name, photoURL, lastMessage, updatedAtFormatted },
+  data: { name, photoURL, lastMessage, updatedAtFormatted, unreadMessages },
   index,
   numberOfConversations,
 }: ConversationProps) {
   const lastItem = index === numberOfConversations - 1;
+  const unreadMessagesFormatted = useMemo(() => {
+    return unreadMessages > 999 ? '999+' : unreadMessages;
+  }, [unreadMessages]);
 
   const {
     currentConversation: {
@@ -61,7 +66,9 @@ export function Conversation({
           </VStack>
           <VStack spacing={['1px', '1.5px', '2px']} h='100%' align='end'>
             <LastMessageTime text={updatedAtFormatted} />
-            <NumberOfUnreadMessages number={2} />
+            {unreadMessages && (
+              <NumberOfUnreadMessages number={unreadMessagesFormatted} />
+            )}
           </VStack>
         </Flex>
       </Flex>

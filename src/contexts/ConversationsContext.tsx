@@ -24,7 +24,8 @@ type ConversationType = {
   lastMessage: string;
   updatedAt: number;
   updatedAtFormatted: string;
-  messages: MessagesType;
+  messages: MessagesType | null;
+  unreadMessages: number;
 };
 
 export type ConversationsType = ConversationType[];

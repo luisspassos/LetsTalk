@@ -8,9 +8,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useMemo } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
+import { UserConversationsDataType } from '../../../utils/getConversations';
 
 type AddContactFormData = {
   contactName: string;
+};
+
+type AllUsersResponse = {
+  arr: {
+    username: string;
+    uid: string;
+  }[];
 };
 
 const addContactFormSchema = yup.object().shape({
@@ -46,30 +54,48 @@ export function AddContactModal() {
           const { doc, getDoc } = await import('firebase/firestore');
           const { db } = await import('../../../services/firebase');
 
-          const contactUserRef = doc(db, 'users', contactName);
-          const contactUserSnap = await getDoc(contactUserRef);
-          const contactExists = contactUserSnap.exists();
+          const allUsersRef = doc(db, 'users', 'allUsers');
+          const allUsersSnap = await getDoc(allUsersRef);
 
-          if (username && contactExists && contactName !== username) {
-            const { setDoc } = await import('firebase/firestore');
+          const { arr: users } = allUsersSnap.data() as AllUsersResponse;
 
-            const contactRef = doc(
-              db,
-              'conversations',
-              username,
-              'messages',
-              contactName
-            );
-            const contactSnap = await getDoc(contactRef);
+          const contact = users.find(
+            ({ username }) => username === contactName
+          );
 
-            if (contactSnap.exists()) {
+          if (username && contact && contactName !== username) {
+            const { updateDoc, setDoc } = await import('firebase/firestore');
+
+            const userRef = doc(db, 'conversations', username);
+            const userSnap = await getDoc(userRef);
+            const userSnapData =
+              (userSnap.data() as UserConversationsDataType) ?? {};
+
+            const contactUids = Object.keys(userSnapData);
+            const contactExists = contactUids.includes(contact.uid);
+
+            if (contactExists) {
               setError('contactName', {
                 message: 'Este contato já existe',
               });
               return;
             }
 
-            setDoc(contactRef, {});
+            // atualizar updatedAt e unreadMessages
+            // ver lentidão ao adicionar o contato em produção
+
+            const contactObj = {
+              [contact.uid]: {
+                updatedAt: Date.now(),
+                unreadMessages: 0,
+              },
+            };
+
+            if (userSnap.exists()) {
+              await updateDoc(userRef, contactObj);
+            } else {
+              await setDoc(userRef, contactObj);
+            }
 
             onClose();
             resetForm();
