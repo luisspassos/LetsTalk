@@ -53,22 +53,21 @@ export function AddContactModal() {
           const { doc, getDoc } = await import('firebase/firestore');
           const { db } = await import('../../../services/firebase');
 
-          const allUsersRef = doc(db, 'users', 'allUsers');
-          const allUsersSnap = await getDoc(allUsersRef);
-
-          const { arr: users } = allUsersSnap.data() as AllUsersResponse;
-
-          const contact = users.find(
-            ({ username }) => username === contactName
-          );
-
-          if (username && contact && contactName !== username) {
+          if (username && contactName !== username) {
             const { updateDoc, setDoc } = await import('firebase/firestore');
 
-            const userRef = doc(db, 'conversations', username);
-            const userSnap = await getDoc(userRef);
+            const contactRef = doc(
+              db,
+              'conversations',
+              username,
+              'messages',
+              contactName
+            );
+            const userSnap = await getDoc(contactRef);
 
-            setDoc(userRef, undefined);
+            setDoc(contactRef, {
+              messages: [],
+            });
             // const userSnapData =
             //   (userSnap.data() as UserConversationsDataType) ?? {};
 
