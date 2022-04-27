@@ -13,13 +13,6 @@ type AddContactFormData = {
   contactName: string;
 };
 
-type AllUsersResponse = {
-  arr: {
-    username: string;
-    uid: string;
-  }[];
-};
-
 const addContactFormSchema = yup.object().shape({
   contactName: yup
     .string()
@@ -53,8 +46,12 @@ export function AddContactModal() {
           const { doc, getDoc } = await import('firebase/firestore');
           const { db } = await import('../../../services/firebase');
 
-          if (username && contactName !== username) {
-            const { updateDoc, setDoc } = await import('firebase/firestore');
+          const contactUserRef = doc(db, 'users', contactName);
+          const contactUserSnap = await getDoc(contactUserRef);
+          const contactExists = contactUserSnap.exists();
+
+          if (username && contactExists && contactName !== username) {
+            const { setDoc } = await import('firebase/firestore');
 
             const contactRef = doc(
               db,
@@ -63,35 +60,16 @@ export function AddContactModal() {
               'messages',
               contactName
             );
-            const userSnap = await getDoc(contactRef);
+            const contactSnap = await getDoc(contactRef);
 
-            setDoc(contactRef, {
-              messages: [],
-            });
-            // const userSnapData =
-            //   (userSnap.data() as UserConversationsDataType) ?? {};
+            if (contactSnap.exists()) {
+              setError('contactName', {
+                message: 'Este contato já existe',
+              });
+              return;
+            }
 
-            // const contactUids = Object.keys(userSnapData);
-            // const contactExists = contactUids.includes(contact.uid);
-
-            // if (contactExists) {
-            //   setError('contactName', {
-            //     message: 'Este contato já existe',
-            //   });
-            //   return;
-            // }
-
-            // const contactObj = {
-            //   [contact.uid]: {
-            //     updatedAt: Date.now(),
-            //   },
-            // };
-
-            // if (userSnap.exists()) {
-            //   await updateDoc(userRef, contactObj);
-            // } else {
-            //   await setDoc(userRef, contactObj);
-            // }
+            setDoc(contactRef, {});
 
             onClose();
             resetForm();
