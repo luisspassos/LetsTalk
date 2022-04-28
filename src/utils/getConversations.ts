@@ -15,7 +15,6 @@ export type UserConversationsDataType =
       string,
       {
         updatedAt: number;
-        unreadMessages: number;
         messages: MessagesType;
       }
     >
@@ -29,6 +28,7 @@ type ConversationUsersResponse = {
   }[];
 };
 
+// ver formatação de dados direto na requisição
 export async function getConversations(
   userConversationsData: UserConversationsDataType
 ) {
@@ -47,9 +47,8 @@ export async function getConversations(
 
   const databaseData = conversationUsersId.map((id) => {
     const messages = userConversationsData[id].messages;
-    const updatedAt = userConversationsData[id].updatedAt;
-    const unreadMessages = userConversationsData[id].unreadMessages;
     const lastMessage = messages ? messages[messages.length - 1].message : '';
+    const updatedAt = userConversationsData[id].updatedAt;
 
     function formatCreatedAt(createdAt: number) {
       const {
@@ -90,7 +89,6 @@ export async function getConversations(
       lastMessage,
       updatedAtFormatted,
       updatedAt,
-      unreadMessages,
     };
   });
 
@@ -102,8 +100,7 @@ export async function getConversations(
       lastMessage: databaseData[i].lastMessage,
       updatedAt: databaseData[i].updatedAt,
       updatedAtFormatted: databaseData[i].updatedAtFormatted,
-      unreadMessages: databaseData[i].unreadMessages,
-      messages: databaseData[i].messages ?? null,
+      messages: databaseData[i].messages,
     }))
     .sort((a, b) => a.updatedAt - b.updatedAt)
     .reverse();

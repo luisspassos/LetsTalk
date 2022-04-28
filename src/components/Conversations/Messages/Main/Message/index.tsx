@@ -1,4 +1,6 @@
-import { Text, Stack, Flex } from '@chakra-ui/react';
+import { Stack, Flex } from '@chakra-ui/react';
+import { CreatedAt } from './CreatedAt';
+import { MessageText } from './MessageText';
 
 type MessageProps = {
   isYourMessage?: boolean;
@@ -64,26 +66,9 @@ export function Message({
         _before={!isYourMessage ? triangle.styles : undefined}
         _after={isYourMessage ? triangle.styles : undefined}
       >
-        <Text
-          fontFamily='Roboto'
-          borderRadius='7px'
-          py={['6px', '8px', '10px']}
-          px={['11px', '13px', '15px']}
-          fontSize={['14px', '15px', '16px']}
-          bg={isYourMessage ? 'gray.200' : 'gray.300'}
-          wordBreak='break-word'
-        >
-          {text}
-        </Text>
+        <MessageText text={text} isYourMessage={isYourMessage} />
       </Flex>
-      <Text
-        fontSize={['13px', '14px', '15px']}
-        color='gray.900'
-        opacity='80%'
-        as='time'
-      >
-        {createdAt}
-      </Text>
+      <CreatedAt text={createdAt} />
     </Stack>
   );
 }

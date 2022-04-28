@@ -6,7 +6,6 @@ import { LastMessage } from './LastMessage';
 import { LastMessageTime } from './LastMessageTime';
 import { NumberOfUnreadMessages } from './NumberOfUnreadMessages';
 import { useConversations } from '../../../../contexts/ConversationsContext';
-import { useEffect, useMemo } from 'react';
 
 type ConversationProps = {
   data: {
@@ -14,63 +13,24 @@ type ConversationProps = {
     photoURL: string | null;
     lastMessage: string;
     updatedAtFormatted: string;
-    unreadMessages: number;
   };
   index: number;
   numberOfConversations: number;
 };
 
 export function Conversation({
-  data: { name, photoURL, lastMessage, updatedAtFormatted, unreadMessages },
+  data: { name, photoURL, lastMessage, updatedAtFormatted },
   index,
   numberOfConversations,
 }: ConversationProps) {
   const lastItem = index === numberOfConversations - 1;
-  const unreadMessagesFormatted = useMemo(() => {
-    return unreadMessages > 999 ? '999+' : unreadMessages;
-  }, [unreadMessages]);
 
   const {
-    conversations: { data: conversations, changeConversationsState },
     currentConversation: {
-      data: currentConversation,
       index: currentConversationIndex,
       changeCurrentConversationIndex,
-      clearUnreadMessages,
     },
   } = useConversations();
-
-  const isCurrentTab = useMemo(
-    () => index === currentConversationIndex,
-    [currentConversationIndex, index]
-  );
-
-  useEffect(() => {
-    if (isCurrentTab) {
-      clearUnreadMessages();
-    }
-  }, [currentConversation?.unreadMessages, isCurrentTab, clearUnreadMessages]);
-
-  useEffect(() => {
-    if (!conversations[index]?.messages) return;
-
-    const prevConversations = [...conversations];
-
-    changeConversationsState(
-      prevConversations.map((conversation, i) => {
-        if (index === i && conversation?.uid) {
-          return {
-            ...conversation,
-            updatedAtFormatted:
-              conversation.messages?.pop()?.createdAtFormatted ??
-              conversation.updatedAtFormatted,
-          };
-        }
-
-        return conversation;
-      })
-    );
-  }, [conversations, index, changeConversationsState]);
 
   return (
     <>
@@ -83,7 +43,7 @@ export function Conversation({
         flexShrink='0'
         cursor='pointer'
         transition='0.2s'
-        bg={isCurrentTab ? 'grayAlpha.500' : undefined}
+        bg={index === currentConversationIndex ? 'grayAlpha.500' : undefined}
         _hover={{
           bg: 'grayAlpha.500',
         }}
@@ -101,9 +61,7 @@ export function Conversation({
           </VStack>
           <VStack spacing={['1px', '1.5px', '2px']} h='100%' align='end'>
             <LastMessageTime text={updatedAtFormatted} />
-            {unreadMessages && !isCurrentTab && (
-              <NumberOfUnreadMessages number={unreadMessagesFormatted} />
-            )}
+            <NumberOfUnreadMessages number={2} />
           </VStack>
         </Flex>
       </Flex>

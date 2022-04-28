@@ -38,9 +38,13 @@ export function FadeInAnimationProvider({
   const [enableAnimation, setEnableAnimation] = useState(false);
 
   useEffect(() => {
-    if (Object.keys(routerComponents).length > 2) {
-      setEnableAnimation(true);
+    function checkIfThePageWasCalledFromARedirect() {
+      if (Object.keys(routerComponents).length > 2) {
+        setEnableAnimation(true);
+      }
     }
+
+    checkIfThePageWasCalledFromARedirect();
   }, [routerComponents]);
 
   const prefersReducedMotion = usePrefersReducedMotion();

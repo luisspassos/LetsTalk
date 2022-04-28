@@ -1,7 +1,7 @@
 import { Circle } from '../../../Circle';
 
 type NumberOfUnreadMessagesProps = {
-  number: number | '999+';
+  number: number;
 };
 
 export function NumberOfUnreadMessages({

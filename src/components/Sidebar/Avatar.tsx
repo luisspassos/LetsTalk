@@ -40,6 +40,7 @@ export function Avatar() {
         cursor='pointer'
         src={user?.picture ?? undefined}
         onClick={() => handleCopyUsername(username ? username : '')}
+        ignoreFallback
       />
     </Tooltip>
   );
