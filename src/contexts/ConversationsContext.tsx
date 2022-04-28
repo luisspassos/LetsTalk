@@ -46,6 +46,7 @@ type ConversationsContextType = {
     index: number;
     data: ConversationType;
     changeCurrentConversationIndex: (index: number) => void;
+    clearUnreadMessages: () => Promise<void>;
   };
 };
 
@@ -82,36 +83,37 @@ export function ConversationsProvider({
     setCurrentConversationIndex(index);
   }, []);
 
-  // clear unread messages in db
+  const clearUnreadMessages = useCallback(async () => {
+    if (!currentConversation?.uid) return;
+
+    setConversations((prevConversations) => {
+      return prevConversations.map((conversation) => {
+        if (conversation?.uid === currentConversation.uid) {
+          return {
+            ...conversation,
+            unreadMessages: 0,
+          };
+        }
+
+        return conversation;
+      });
+    });
+
+    const { updateDoc, doc } = await import('firebase/firestore');
+    const { db } = await import('../services/firebase');
+
+    if (!user?.username) return;
+
+    const conversationRef = doc(db, 'conversations', user?.username);
+
+    updateDoc(conversationRef, {
+      [`${currentConversation.uid}.unreadMessages`]: 0,
+    });
+  }, [user?.username, currentConversation?.uid]);
+
   useEffect(() => {
-    (async () => {
-      if (!currentConversation?.uid) return;
-
-      setConversations((prevConversations) => {
-        return prevConversations.map((conversation) => {
-          if (conversation?.uid === currentConversation.uid) {
-            return {
-              ...conversation,
-              unreadMessages: 0,
-            };
-          }
-
-          return conversation;
-        });
-      });
-
-      const { updateDoc, doc } = await import('firebase/firestore');
-      const { db } = await import('../services/firebase');
-
-      if (!user?.username) return;
-
-      const conversationRef = doc(db, 'conversations', user?.username);
-
-      updateDoc(conversationRef, {
-        [`${currentConversation.uid}.unreadMessages`]: 0,
-      });
-    })();
-  }, [currentConversation?.uid, user?.username]);
+    clearUnreadMessages();
+  }, [currentConversation?.uid, user?.username, clearUnreadMessages]);
 
   // update conversation list
   useEffect(() => {
@@ -160,6 +162,7 @@ export function ConversationsProvider({
           index: currentConversationIndex,
           data: currentConversation,
           changeCurrentConversationIndex,
+          clearUnreadMessages,
         },
       }}
     >

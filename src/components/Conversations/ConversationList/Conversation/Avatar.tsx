@@ -11,7 +11,6 @@ export function Avatar({ photoURL }: AvatarProps) {
       h={['40px', '44px', '48px']}
       src={photoURL ?? undefined}
       mr='10px'
-      ignoreFallback
     />
   );
 }

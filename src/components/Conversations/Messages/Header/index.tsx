@@ -39,12 +39,11 @@ export function Header() {
           <Avatar
             w={['42px', '47px', '52px']}
             h={['42px', '47px', '52px']}
-            src={currentConversation.data.photoURL ?? undefined}
-            ignoreFallback
+            src={currentConversation.data?.photoURL ?? undefined}
           />
 
           <VStack minW={0} align='start' spacing={0}>
-            <ContactName text={currentConversation.data.name} />
+            <ContactName text={currentConversation.data?.name ?? ''} />
             <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
               Hoje ás 19:48
             </Text>
