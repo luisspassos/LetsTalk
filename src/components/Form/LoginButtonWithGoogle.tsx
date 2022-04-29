@@ -78,6 +78,12 @@ function LoginButtonWithGoogleComponent() {
       isLoading={isLoading}
       loadingText='Entrar com o Google'
       spinner={<Spinner w='15px' h='15px' />}
+      _hover={{
+        backgroundColor: 'gray.100',
+        _disabled: {
+          backgroundColor: 'white',
+        },
+      }}
     >
       Entrar com o Google
     </Button>

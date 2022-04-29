@@ -75,9 +75,9 @@ export const getCurrentUserId = async () => {
     setDoc,
   } = await import('firebase/firestore');
   const currentUserIdRef = doc(db, 'users', 'current_user_id');
-  const currentUserIdSnap = await getDoc(currentUserIdRef);
+  const currentUserIdSnap = async () => await getDoc(currentUserIdRef);
 
-  if (currentUserIdSnap.exists()) {
+  if ((await currentUserIdSnap()).exists()) {
     await updateDoc(currentUserIdRef, {
       id: incrementId(1),
     });
@@ -87,9 +87,7 @@ export const getCurrentUserId = async () => {
     });
   }
 
-  const id: number = currentUserIdSnap.data()?.id;
-  console.log(id);
-  console.log(await (await getDoc(currentUserIdRef)).data()?.id);
+  const id: number = (await currentUserIdSnap()).data()?.id;
 
   return id;
 };

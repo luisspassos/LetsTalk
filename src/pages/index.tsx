@@ -21,6 +21,7 @@ import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
 import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
+import Head from 'next/head';
 
 type SignInFormData = {
   email: string;
@@ -187,52 +188,57 @@ const Login = ({ actionCode, mode }: LoginProps) => {
   );
 
   return (
-    <AuthPageWrapper>
-      <Header />
-      <AuthContentPageWrapper gap='90px'>
-        <ManEnteringImg />
-        <FormWrapper onSubmit={handleSignIn}>
-          <LoginButtonWithGoogle />
-          <DividerOr />
-          <Stack spacing={2}>
-            <Input
-              inputProps={{
-                type: 'email',
-                placeholder: 'Email...',
-                ...register('email'),
-              }}
-              id='email'
-              label='Email'
-              error={errors.email}
-            />
-            <Input
-              inputProps={{
-                placeholder: 'Senha...',
-                type: 'password',
-                ...register('password'),
-              }}
-              id='password'
-              label='Senha'
-              error={errors.password}
-            />
-          </Stack>
-          <NextLink href='/esqueci-minha-senha' passHref>
-            <Link
-              mt='6px'
-              mb='12px'
-              fontSize='15px'
-              color='gray.400'
-              d='inline-block'
-            >
-              Esqueci minha senha
-            </Link>
-          </NextLink>
-          <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
+    <>
+      <Head>
+        <title>Login | Let&apos;s Talk</title>
+      </Head>
+      <AuthPageWrapper>
+        <Header />
+        <AuthContentPageWrapper gap='90px'>
+          <ManEnteringImg />
+          <FormWrapper onSubmit={handleSignIn}>
+            <LoginButtonWithGoogle />
+            <DividerOr />
+            <Stack spacing={2}>
+              <Input
+                inputProps={{
+                  type: 'email',
+                  placeholder: 'Email...',
+                  ...register('email'),
+                }}
+                id='email'
+                label='Email'
+                error={errors.email}
+              />
+              <Input
+                inputProps={{
+                  placeholder: 'Senha...',
+                  type: 'password',
+                  ...register('password'),
+                }}
+                id='password'
+                label='Senha'
+                error={errors.password}
+              />
+            </Stack>
+            <NextLink href='/esqueci-minha-senha' passHref>
+              <Link
+                mt='6px'
+                mb='12px'
+                fontSize='15px'
+                color='gray.400'
+                d='inline-block'
+              >
+                Esqueci minha senha
+              </Link>
+            </NextLink>
+            <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
 
-          <RegistrationLink />
-        </FormWrapper>
-      </AuthContentPageWrapper>
-    </AuthPageWrapper>
+            <RegistrationLink />
+          </FormWrapper>
+        </AuthContentPageWrapper>
+      </AuthPageWrapper>
+    </>
   );
 };
 
