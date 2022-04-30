@@ -4,19 +4,6 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link
-          rel='shortcut icon'
-          href='./favicon_light_scheme.svg'
-          type='image/x-icon'
-          id='favicon_light_scheme'
-        />
-        <link
-          rel='shortcut icon'
-          href='./favicon_dark_scheme.svg'
-          type='image/x-icon'
-          id='favicon_dark_scheme'
-        />
-
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
           rel='preconnect'
