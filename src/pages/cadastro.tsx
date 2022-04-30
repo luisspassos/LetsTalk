@@ -15,6 +15,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
 import nookies from 'nookies';
+import { PageTitle } from '../components/PageTitle';
 
 type FormFirebaseError = Record<
   string,
@@ -118,66 +119,73 @@ export default function Register() {
   );
 
   return (
-    <AuthPageWrapper>
-      <Header />
-      <AuthContentPageWrapper gap='150px'>
-        <Stack color='blue.900' spacing='20px' d={{ base: 'none', xl: 'flex' }}>
-          <Heading as='h1' fontWeight={700}>
-            Mais de 200 mil usuários já
-            <br /> estão conversando!
-          </Heading>
-          <Text fontSize='1.4rem'>
-            Junte-se e converse com outras
-            <br /> pessoas!
-          </Text>
-          <BackLink text='Fazer login' route='/' />
-        </Stack>
-        <FormWrapper onSubmit={handleRegister}>
-          <Stack spacing='10px'>
-            <Input
-              label='Email'
-              id='email'
-              inputProps={{
-                type: 'email',
-                placeholder: 'Email...',
-                ...register('email'),
-              }}
-              error={errors.email}
-            />
-            <Input
-              label='Nome'
-              id='username'
-              inputProps={{
-                placeholder: 'Nome...',
-                ...register('name'),
-              }}
-              error={errors.name}
-            />
-            <Input
-              label='Senha'
-              id='password'
-              inputProps={{
-                type: 'password',
-                placeholder: 'Senha...',
-                ...register('password'),
-              }}
-              error={errors.password}
-            />
-            <Input
-              label='Confirmar senha'
-              id='confirmPassword'
-              inputProps={{
-                placeholder: 'Confirme sua senha...',
-                type: 'password',
-                ...register('password_confirmation'),
-              }}
-              error={errors.password_confirmation}
-            />
-            <Button isLoading={isSubmitting} text='CADASTRAR' type='submit' />
+    <>
+      <PageTitle pageName='Cadastro' />
+      <AuthPageWrapper>
+        <Header />
+        <AuthContentPageWrapper gap='150px'>
+          <Stack
+            color='blue.900'
+            spacing='20px'
+            d={{ base: 'none', xl: 'flex' }}
+          >
+            <Heading as='h1' fontWeight={700}>
+              Mais de 200 mil usuários já
+              <br /> estão conversando!
+            </Heading>
+            <Text fontSize='1.4rem'>
+              Junte-se e converse com outras
+              <br /> pessoas!
+            </Text>
+            <BackLink text='Fazer login' route='/' />
           </Stack>
-        </FormWrapper>
-      </AuthContentPageWrapper>
-    </AuthPageWrapper>
+          <FormWrapper onSubmit={handleRegister}>
+            <Stack spacing='10px'>
+              <Input
+                label='Email'
+                id='email'
+                inputProps={{
+                  type: 'email',
+                  placeholder: 'Email...',
+                  ...register('email'),
+                }}
+                error={errors.email}
+              />
+              <Input
+                label='Nome'
+                id='username'
+                inputProps={{
+                  placeholder: 'Nome...',
+                  ...register('name'),
+                }}
+                error={errors.name}
+              />
+              <Input
+                label='Senha'
+                id='password'
+                inputProps={{
+                  type: 'password',
+                  placeholder: 'Senha...',
+                  ...register('password'),
+                }}
+                error={errors.password}
+              />
+              <Input
+                label='Confirmar senha'
+                id='confirmPassword'
+                inputProps={{
+                  placeholder: 'Confirme sua senha...',
+                  type: 'password',
+                  ...register('password_confirmation'),
+                }}
+                error={errors.password_confirmation}
+              />
+              <Button isLoading={isSubmitting} text='CADASTRAR' type='submit' />
+            </Stack>
+          </FormWrapper>
+        </AuthContentPageWrapper>
+      </AuthPageWrapper>
+    </>
   );
 }
 

@@ -14,6 +14,7 @@ import { verifyPasswordResetCode } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import { useRouter } from 'next/router';
 import { toast } from '../utils/Toasts/toast';
+import { PageTitle } from '../components/PageTitle';
 
 type changePasswordFormData = {
   password: string;
@@ -70,42 +71,45 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
   );
 
   return (
-    <CenterForm>
-      <FormTitle mb='1rem' text='Trocar sua senha' />
-      <FormWrapper onSubmit={handleChangePassword}>
-        <Stack spacing='.3rem'>
-          <Input
-            id='newPassword'
-            error={errors.password}
-            label='Nova senha'
-            inputProps={{
-              ...register('password'),
-              placeholder: 'Coloque sua nova senha...',
-              type: 'password',
-            }}
-          />
-          <Input
-            id='confirmNewPassword'
-            error={errors.password_confirmation}
-            label='Confirme sua senha'
-            inputProps={{
-              ...register('password_confirmation'),
-              type: 'password',
-              placeholder: 'Confirme sua nova senha...',
-            }}
-          />
-        </Stack>
+    <>
+      <PageTitle pageName='Trocar senha' />
+      <CenterForm>
+        <FormTitle mb='1rem' text='Trocar sua senha' />
+        <FormWrapper onSubmit={handleChangePassword}>
+          <Stack spacing='.3rem'>
+            <Input
+              id='newPassword'
+              error={errors.password}
+              label='Nova senha'
+              inputProps={{
+                ...register('password'),
+                placeholder: 'Coloque sua nova senha...',
+                type: 'password',
+              }}
+            />
+            <Input
+              id='confirmNewPassword'
+              error={errors.password_confirmation}
+              label='Confirme sua senha'
+              inputProps={{
+                ...register('password_confirmation'),
+                type: 'password',
+                placeholder: 'Confirme sua nova senha...',
+              }}
+            />
+          </Stack>
 
-        <Button
-          isLoading={isSubmitting}
-          text='REDEFINIR'
-          mt='.7rem'
-          type='submit'
-        />
-      </FormWrapper>
+          <Button
+            isLoading={isSubmitting}
+            text='REDEFINIR'
+            mt='.7rem'
+            type='submit'
+          />
+        </FormWrapper>
 
-      <BackLink text='Voltar' route='/' mt='1rem' />
-    </CenterForm>
+        <BackLink text='Voltar' route='/' mt='1rem' />
+      </CenterForm>
+    </>
   );
 }
 

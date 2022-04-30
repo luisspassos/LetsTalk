@@ -1,3 +1,10 @@
+import { PageTitle } from '../PageTitle';
+
 export function Configurations() {
-  return <p>Configurations</p>;
+  return (
+    <>
+      <PageTitle pageName='Configurações' />
+      <p>Configurations</p>
+    </>
+  );
 }

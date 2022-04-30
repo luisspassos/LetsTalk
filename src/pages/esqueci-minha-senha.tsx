@@ -14,6 +14,7 @@ import { Box } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
 import nookies from 'nookies';
+import { PageTitle } from '../components/PageTitle';
 
 type emailFormData = {
   email: string;
@@ -95,30 +96,36 @@ export default function IForgotMyPassword() {
   );
 
   return (
-    <Box overflowX='hidden'>
-      <CenterForm>
-        <FormTitle mb='1rem' text='Envie seu email para recuperar sua senha' />
-        <FormWrapper onSubmit={handleSendEmail}>
-          <Input
-            error={errors.email}
-            id='email'
-            inputProps={{
-              placeholder: 'Coloque seu email',
-              type: 'email',
-              ...register('email'),
-            }}
-            label='Email'
+    <>
+      <PageTitle pageName='Esqueci minha senha' />
+      <Box overflowX='hidden'>
+        <CenterForm>
+          <FormTitle
+            mb='1rem'
+            text='Envie seu email para recuperar sua senha'
           />
-          <Button
-            isLoading={isSubmitting}
-            type='submit'
-            text='ENVIAR'
-            mt='.5rem'
-          />
-        </FormWrapper>
-        <BackLink text='Voltar' route='/' mt='1rem' />
-      </CenterForm>
-    </Box>
+          <FormWrapper onSubmit={handleSendEmail}>
+            <Input
+              error={errors.email}
+              id='email'
+              inputProps={{
+                placeholder: 'Coloque seu email',
+                type: 'email',
+                ...register('email'),
+              }}
+              label='Email'
+            />
+            <Button
+              isLoading={isSubmitting}
+              type='submit'
+              text='ENVIAR'
+              mt='.5rem'
+            />
+          </FormWrapper>
+          <BackLink text='Voltar' route='/' mt='1rem' />
+        </CenterForm>
+      </Box>
+    </>
   );
 }
 

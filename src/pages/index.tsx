@@ -21,7 +21,7 @@ import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
 import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
-import Head from 'next/head';
+import { PageTitle } from '../components/PageTitle';
 
 type SignInFormData = {
   email: string;
@@ -189,9 +189,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 
   return (
     <>
-      <Head>
-        <title>Login | Let&apos;s Talk</title>
-      </Head>
+      <PageTitle pageName='Login' />
       <AuthPageWrapper>
         <Header />
         <AuthContentPageWrapper gap='90px'>

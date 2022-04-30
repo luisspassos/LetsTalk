@@ -1,3 +1,6 @@
 # TODO
 
-- Ver favicon e titulos das paginas
+- ver temas do favicon
+- ver pwa
+- ver destaque de cores nas paginas
+- ver fallback para imagens
