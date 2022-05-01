@@ -1,5 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
-import { Divider } from '../Divider';
+import { Divider } from '../../../Divider';
 import { MessageInput } from './MessageInput';
 import { RecordButtonAudio } from './RecordButtonAudio';
 
