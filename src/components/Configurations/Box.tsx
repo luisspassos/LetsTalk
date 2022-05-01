@@ -8,8 +8,18 @@ type BoxProps = {
 
 export function Box({ title, children }: BoxProps) {
   return (
-    <ChakraBox>
-      <Heading as='h1'>{title}</Heading>
+    <ChakraBox
+      p='30px'
+      boxShadow='md'
+      borderRadius='20px'
+      w='100%'
+      h='85%'
+      bg='white'
+      maxW='500px'
+    >
+      <Heading fontSize='23px' as='h1'>
+        {title}
+      </Heading>
       {children}
     </ChakraBox>
   );
