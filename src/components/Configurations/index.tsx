@@ -7,6 +7,7 @@ import { Button } from './Button';
 import { FaPencilAlt } from 'react-icons/fa';
 import {
   RiDeleteBin2Line,
+  RiFileCopy2Line,
   RiImageEditFill,
   RiLockPasswordLine,
 } from 'react-icons/ri';
@@ -25,6 +26,7 @@ export function Configurations() {
           <Avatar />
           <Divider />
           <ButtonStack>
+            <Button text='Copiar nome de perfil' leftIcon={RiFileCopy2Line} />
             <Button text='Editar nome de perfil' leftIcon={FaPencilAlt} />
             <Button text='Editar foto de perfil' leftIcon={RiImageEditFill} />
             <Button text='Convidar para conversar' leftIcon={FiShare2} />
