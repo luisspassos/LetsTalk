@@ -16,6 +16,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
 import nookies from 'nookies';
 import { PageTitle } from '../components/PageTitle';
+import { regexs } from '../utils/regexs';
 
 type FormFirebaseError = Record<
   string,
@@ -37,7 +38,7 @@ const registrationFormSchema = yup.object().shape({
     .string()
     .trim()
     .required('Nome obrigatório')
-    .matches(/^(?!.*#).*$/, 'O nome não pode conter #'),
+    .matches(regexs.cannotContainHashtag, 'O nome não pode conter #'),
   email: yup
     .string()
     .trim()

@@ -6,4 +6,4 @@
 - ver tamanho do texto do nome nas configurações
 - ver lazy loading das modais
 - ver troca de pagina entre conversas e configurações (testar)
-- isolar regexs
+- colocar modalInput na modal de adicionar contato

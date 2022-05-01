@@ -1,13 +1,13 @@
-import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldError, UseFormRegister } from 'react-hook-form';
 import { Input } from '../Form/Input';
 
 type ModalInputProps = {
   id: string;
   label: string;
   error: FieldError | undefined;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<any>;
   placeholder: string;
-  helperText: string | undefined;
+  helperText?: string;
 };
 
 export function ModalInput({

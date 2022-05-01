@@ -8,6 +8,7 @@ import { useMemo } from 'react';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { UserInput } from './UserInput';
 import { ModalFormControl } from '../../../Modal/ModalFormControl';
+import { regexs } from '../../../../utils/regexs';
 
 export type AddContactFormData = {
   contactName: string;
@@ -19,7 +20,7 @@ const addContactFormSchema = yup.object().shape({
     .trim()
     .required('Usuário obrigatório')
     .matches(
-      /^([^#])([^#]*#\d+)$/,
+      regexs.fullUsername,
       'O usuário deve seguir este formato: usuario#1234'
     ),
 });
