@@ -1,4 +1,3 @@
-import { FormControl } from '@chakra-ui/react';
 import { Buttons } from '../../../Modal/Button/Buttons';
 import { ModalWrapper } from '../../../Modal/ModalWrapper';
 import { useAddContactModal } from '../../../../contexts/Modal/AddContactModalContext';
@@ -8,6 +7,7 @@ import * as yup from 'yup';
 import { useMemo } from 'react';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { UserInput } from './UserInput';
+import { ModalFormControl } from '../../../Modal/ModalFormControl';
 
 export type AddContactFormData = {
   contactName: string;
@@ -96,12 +96,7 @@ export function AddContactModal() {
       onClose={onClose}
       modalTitle='Adicionar contato'
     >
-      <FormControl
-        display='flex'
-        alignItems='center'
-        justifyContent='center'
-        flexDirection='column'
-      >
+      <ModalFormControl>
         <UserInput errors={errors} register={register} />
         <Buttons
           confirmButtonProps={{
@@ -113,7 +108,7 @@ export function AddContactModal() {
           }}
           confirmButtonText='Adicionar'
         />
-      </FormControl>
+      </ModalFormControl>
     </ModalWrapper>
   );
 }

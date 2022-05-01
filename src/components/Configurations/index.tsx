@@ -3,42 +3,41 @@ import { Divider } from '../Divider';
 import { PageTitle } from '../PageTitle';
 import { Avatar } from './Avatar';
 import { Box } from './Box';
-import { Button } from './Button';
-import { FaPencilAlt } from 'react-icons/fa';
-import {
-  RiDeleteBin2Line,
-  RiFileCopy2Line,
-  RiImageEditFill,
-  RiLockPasswordLine,
-} from 'react-icons/ri';
-import { FiShare2 } from 'react-icons/fi';
-import { ButtonStack } from './ButtonStack';
-import { HiOutlineMail } from 'react-icons/hi';
-import { ImExit } from 'react-icons/im';
+import { ButtonStack } from './Buttons/ButtonStack';
 import { ThemeSelect } from './ThemeSelect';
+import { CopyUsernameButton } from './Buttons/CopyUsernameButton';
+import { EditUsernameButton } from './Buttons/EditUsernameButton';
+import { EditProfilePhotoButton } from './Buttons/EditProfilePhotoButton';
+import { InviteToChatButton } from './Buttons/InviteToChatButton';
+import { SwitchEmailButton } from './Buttons/SwitchEmailButton';
+import { ChangePasswordButton } from './Buttons/ChangePasswordButton';
+import { DeleteAccountButton } from './Buttons/DeleteAccountButton';
+import { ExitButton } from './Buttons/ExitButton';
+import { RenameUsernameModal } from './Modals/RenameUsernameModal';
 
 export function Configurations() {
   return (
     <>
+      <RenameUsernameModal />
       <PageTitle pageName='Configurações' />
       <Flex flex='1' align='center' justify='center' gap='80px'>
         <Box title='Configurações de perfil'>
           <Avatar />
           <Divider />
           <ButtonStack>
-            <Button text='Copiar nome de perfil' leftIcon={RiFileCopy2Line} />
-            <Button text='Editar nome de perfil' leftIcon={FaPencilAlt} />
-            <Button text='Editar foto de perfil' leftIcon={RiImageEditFill} />
-            <Button text='Convidar para conversar' leftIcon={FiShare2} />
+            <CopyUsernameButton />
+            <EditUsernameButton />
+            <EditProfilePhotoButton />
+            <InviteToChatButton />
           </ButtonStack>
         </Box>
         <Box title='Configurações de conta'>
           <ThemeSelect />
           <ButtonStack>
-            <Button text='Trocar email' leftIcon={HiOutlineMail} />
-            <Button text='Trocar senha' leftIcon={RiLockPasswordLine} />
-            <Button text='Deletar conta' leftIcon={RiDeleteBin2Line} />
-            <Button text='Sair' leftIcon={ImExit} />
+            <SwitchEmailButton />
+            <ChangePasswordButton />
+            <DeleteAccountButton />
+            <ExitButton />
           </ButtonStack>
         </Box>
       </Flex>

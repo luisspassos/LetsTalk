@@ -7,3 +7,5 @@
 - molhar planta
 - ver lazy loading das modais
 - ver troca de pagina entre conversas e configurações (testar)
+- ver se da pra componentizar esse formControl da modal e input
+- isolar regexs
