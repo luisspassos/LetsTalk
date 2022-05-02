@@ -1,13 +1,19 @@
 import { Heading } from '@chakra-ui/react';
 
-export function BlockUserModalTitle() {
+type DangerousActionModalTitleProps = {
+  text: string;
+};
+
+export function DangerousActionModalTitle({
+  text,
+}: DangerousActionModalTitleProps) {
   return (
     <Heading
       textAlign='center'
       fontSize={['16px', '19px', '22px']}
       fontWeight={400}
     >
-      Você deseja bloquear Guilherme?
+      {text}
     </Heading>
   );
 }

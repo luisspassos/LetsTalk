@@ -31,7 +31,7 @@ export function ChangePasswordModal() {
   });
 
   return (
-    <ModalWrapper isOpen={true} onClose={() => {}} modalTitle='Trocar senha'>
+    <ModalWrapper isOpen={false} onClose={() => {}} modalTitle='Trocar senha'>
       <ModalFormControl>
         <Stack spacing='12px'>
           <ModalInput

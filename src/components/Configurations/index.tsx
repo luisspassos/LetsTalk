@@ -16,10 +16,12 @@ import { ExitButton } from './Buttons/ExitButton';
 import { RenameUsernameModal } from './Modals/RenameUsernameModal';
 import { ChangeEmailModal } from './Modals/ChangeEmailModal';
 import { ChangePasswordModal } from './Modals/ChangePasswordModal';
+import { DeleteAccountModal } from './Modals/DeleteAccountModal';
 
 export function Configurations() {
   return (
     <>
+      <DeleteAccountModal />
       <ChangePasswordModal />
       <ChangeEmailModal />
       <RenameUsernameModal />

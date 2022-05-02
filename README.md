@@ -8,3 +8,14 @@
 - ver troca de pagina entre conversas e configurações (testar)
 - ver responsividade da pagina de configurações
 - ver nome do site no login do google
+- ver flex das modais de ação perigosa
+- ver loading ao dar logout
+- ver env do link atual: (se ta na vercel ou em dev)
+- deslogar usuario ao deletar a conta em todas as abas abertas
+
+# NEXT PROJECT
+
+- Mobile First
+- Componentes todos em pastas
+- ver REMS no chakra pra melhor responsividade
+- Fazer my template next js
