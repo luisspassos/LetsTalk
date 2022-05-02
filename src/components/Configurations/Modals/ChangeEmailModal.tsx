@@ -7,11 +7,11 @@ import { regexs } from '../../../utils/regexs';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-type RenameUsernameFormData = {
+type ChangeEmailFormData = {
   name: string;
 };
 
-const RenameUsernameFormSchema = yup.object().shape({
+const ChangeEmailFormSchema = yup.object().shape({
   contactName: yup
     .string()
     .trim()
@@ -19,29 +19,26 @@ const RenameUsernameFormSchema = yup.object().shape({
     .matches(regexs.cannotContainHashtag, 'O nome não pode conter #'),
 });
 
-export function RenameUsernameModal() {
+export function ChangeEmailModal() {
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<RenameUsernameFormData>({
-    resolver: yupResolver(RenameUsernameFormSchema),
+  } = useForm<ChangeEmailFormData>({
+    resolver: yupResolver(ChangeEmailFormSchema),
   });
 
   return (
-    <ModalWrapper
-      isOpen={false}
-      onClose={() => {}}
-      modalTitle='Trocar nome de usuário'
-    >
+    <ModalWrapper isOpen={false} onClose={() => {}} modalTitle='Trocar email'>
       <ModalFormControl>
         <ModalInput
-          id='name'
-          label='Nome'
-          placeholder='Coloque seu novo nome'
+          id='email'
+          label='Novo Email'
+          placeholder='Digite seu novo email'
           error={errors.name}
           register={register}
+          type='email'
         />
         <Buttons confirmButtonText='Trocar' />
       </ModalFormControl>

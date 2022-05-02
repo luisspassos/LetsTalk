@@ -1,3 +1,4 @@
+import { InputProps } from '@chakra-ui/react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 import { Input } from '../Form/Input';
 
@@ -8,7 +9,7 @@ type ModalInputProps = {
   register: UseFormRegister<any>;
   placeholder: string;
   helperText?: string;
-};
+} & InputProps;
 
 export function ModalInput({
   error,
@@ -17,6 +18,7 @@ export function ModalInput({
   register,
   helperText,
   placeholder,
+  ...rest
 }: ModalInputProps) {
   return (
     <Input
@@ -29,6 +31,7 @@ export function ModalInput({
         h: ['39px', '42px', '45px'],
         borderColor: 'blueAlpha.900',
         fontSize: ['14px', '15px', '16px'],
+        ...rest,
       }}
       labelProps={{
         color: 'gray.900',

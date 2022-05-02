@@ -14,10 +14,14 @@ import { ChangePasswordButton } from './Buttons/ChangePasswordButton';
 import { DeleteAccountButton } from './Buttons/DeleteAccountButton';
 import { ExitButton } from './Buttons/ExitButton';
 import { RenameUsernameModal } from './Modals/RenameUsernameModal';
+import { ChangeEmailModal } from './Modals/ChangeEmailModal';
+import { ChangePasswordModal } from './Modals/ChangePasswordModal';
 
 export function Configurations() {
   return (
     <>
+      <ChangePasswordModal />
+      <ChangeEmailModal />
       <RenameUsernameModal />
       <PageTitle pageName='Configurações' />
       <Flex flex='1' align='center' justify='center' gap='80px'>

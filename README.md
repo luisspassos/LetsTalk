@@ -6,4 +6,5 @@
 - ver tamanho do texto do nome nas configurações
 - ver lazy loading das modais
 - ver troca de pagina entre conversas e configurações (testar)
-- colocar modalInput na modal de adicionar contato
+- ver responsividade da pagina de configurações
+- ver nome do site no login do google

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="49" viewBox="0 0 46 49">
+  <g id="Grupo_27" data-name="Grupo 27" transform="translate(-373 268)">
+    <g id="Grupo_25" data-name="Grupo 25" transform="translate(26 105)">
+      <path id="Icon_material-message" data-name="Icon material-message" d="M44.4,3H7.6A4.752,4.752,0,0,0,3.023,7.9L3,52l9.2-9.8H44.4A4.771,4.771,0,0,0,49,37.3V7.9A4.771,4.771,0,0,0,44.4,3ZM39.8,32.4H12.2V27.5H39.8Zm0-7.35H12.2v-4.9H39.8Zm0-7.35H12.2V12.8H39.8Z" transform="translate(344 -376)" fill="#fff"/>
+      <g id="Grupo_26" data-name="Grupo 26" transform="translate(351 -371)">
+        <rect id="Retângulo_39" data-name="Retângulo 39" width="39.535" height="35" fill="#fff"/>
+      </g>
+    </g>
+    <path id="Icon_material-message-2" data-name="Icon material-message" d="M42.6,3H7.4A4.394,4.394,0,0,0,3.022,7.4L3,47l8.8-8.8H42.6A4.413,4.413,0,0,0,47,33.8V7.4A4.413,4.413,0,0,0,42.6,3ZM38.2,29.4H11.8V25H38.2Zm0-6.6H11.8V18.4H38.2Zm0-6.6H11.8V11.8H38.2Z" transform="translate(371 -269)" fill="#1d2434"/>
+  </g>
+</svg>
