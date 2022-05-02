@@ -1,13 +1,13 @@
-import { useCallback } from 'react';
 import { RiLockPasswordLine } from 'react-icons/ri';
+import { useChangePasswordModal } from '../../../contexts/Modal/ChangePasswordModalContext';
 import { Button } from './Button';
 
 export function ChangePasswordButton() {
-  const handleOpenModal = useCallback(() => {}, []);
+  const { onOpen } = useChangePasswordModal();
 
   return (
     <Button
-      onClick={handleOpenModal}
+      onClick={onOpen}
       text='Trocar senha'
       leftIcon={RiLockPasswordLine}
     />

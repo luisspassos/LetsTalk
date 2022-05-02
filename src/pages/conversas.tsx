@@ -55,7 +55,7 @@ export default function ConversationsPage({
 
   return (
     <>
-      <Flex h='100vh'>
+      <Flex minH='100vh'>
         <Sidebar />
         <CurrentTab />
       </Flex>

@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { regexs } from '../../../utils/regexs';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useChangeEmailModal } from '../../../contexts/Modal/ChangeEmailModalContext';
 
 type ChangeEmailFormData = {
   name: string;
@@ -20,6 +21,8 @@ const ChangeEmailFormSchema = yup.object().shape({
 });
 
 export function ChangeEmailModal() {
+  const { isOpen, onClose } = useChangeEmailModal();
+
   const {
     register,
     handleSubmit,
@@ -30,7 +33,7 @@ export function ChangeEmailModal() {
   });
 
   return (
-    <ModalWrapper isOpen={false} onClose={() => {}} modalTitle='Trocar email'>
+    <ModalWrapper isOpen={isOpen} onClose={onClose} modalTitle='Trocar email'>
       <ModalFormControl>
         <ModalInput
           id='email'
@@ -40,7 +43,12 @@ export function ChangeEmailModal() {
           register={register}
           type='email'
         />
-        <Buttons confirmButtonText='Trocar' />
+        <Buttons
+          cancelButtonProps={{
+            onClick: onClose,
+          }}
+          confirmButtonText='Trocar'
+        />
       </ModalFormControl>
     </ModalWrapper>
   );

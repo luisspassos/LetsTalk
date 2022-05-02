@@ -1,15 +1,11 @@
-import { useCallback } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
+import { useChangeEmailModal } from '../../../contexts/Modal/ChangeEmailModalContext';
 import { Button } from './Button';
 
 export function SwitchEmailButton() {
-  const handleOpenModal = useCallback(() => {}, []);
+  const { onOpen } = useChangeEmailModal();
 
   return (
-    <Button
-      onClick={handleOpenModal}
-      text='Trocar email'
-      leftIcon={HiOutlineMail}
-    />
+    <Button onClick={onOpen} text='Trocar email' leftIcon={HiOutlineMail} />
   );
 }

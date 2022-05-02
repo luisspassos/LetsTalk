@@ -12,10 +12,11 @@ export function Box({ title, children }: BoxProps) {
       p='30px'
       boxShadow='md'
       borderRadius='20px'
-      w='100%'
-      h='85%'
+      minH='530px'
       bg='white'
-      maxW='500px'
+      flex='1'
+      minW='300px'
+      maxW='450px'
     >
       <Heading fontSize='23px' as='h1'>
         {title}

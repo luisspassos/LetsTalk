@@ -7,6 +7,7 @@ import { regexs } from '../../../utils/regexs';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack } from '@chakra-ui/react';
+import { useChangePasswordModal } from '../../../contexts/Modal/ChangePasswordModalContext';
 
 type ChangePasswordFormData = {
   name: string;
@@ -21,6 +22,8 @@ const ChangePasswordFormSchema = yup.object().shape({
 });
 
 export function ChangePasswordModal() {
+  const { isOpen, onClose } = useChangePasswordModal();
+
   const {
     register,
     handleSubmit,
@@ -31,7 +34,7 @@ export function ChangePasswordModal() {
   });
 
   return (
-    <ModalWrapper isOpen={false} onClose={() => {}} modalTitle='Trocar senha'>
+    <ModalWrapper isOpen={isOpen} onClose={onClose} modalTitle='Trocar senha'>
       <ModalFormControl>
         <Stack spacing='12px'>
           <ModalInput
@@ -51,7 +54,12 @@ export function ChangePasswordModal() {
             type='password'
           />
         </Stack>
-        <Buttons confirmButtonText='Trocar' />
+        <Buttons
+          cancelButtonProps={{
+            onClick: onClose,
+          }}
+          confirmButtonText='Trocar'
+        />
       </ModalFormControl>
     </ModalWrapper>
   );

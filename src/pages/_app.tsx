@@ -10,6 +10,8 @@ import { ConversationsTabProvider } from '../contexts/ConversationsTabContext';
 import { ConversationsProvider } from '../contexts/ConversationsContext';
 import { RenameUsernameModalProvider } from '../contexts/Modal/RenameUsernameModalContext';
 import { DeleteAccountModalProvider } from '../contexts/Modal/DeleteAccountModalContext';
+import { ChangePasswordModalProvider } from '../contexts/Modal/ChangePasswordModalContext';
+import { ChangeEmailModalProvider } from '../contexts/Modal/ChangeEmailModalContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -20,13 +22,17 @@ function MyApp({ Component, pageProps }: AppProps) {
             <BlockUserModalProvider>
               <RenameUsernameModalProvider>
                 <DeleteAccountModalProvider>
-                  <TabProvider>
-                    <FadeInAnimationProvider>
-                      <ChakraProvider theme={theme}>
-                        <Component {...pageProps} />
-                      </ChakraProvider>
-                    </FadeInAnimationProvider>
-                  </TabProvider>
+                  <ChangePasswordModalProvider>
+                    <ChangeEmailModalProvider>
+                      <TabProvider>
+                        <FadeInAnimationProvider>
+                          <ChakraProvider theme={theme}>
+                            <Component {...pageProps} />
+                          </ChakraProvider>
+                        </FadeInAnimationProvider>
+                      </TabProvider>
+                    </ChangeEmailModalProvider>
+                  </ChangePasswordModalProvider>
                 </DeleteAccountModalProvider>
               </RenameUsernameModalProvider>
             </BlockUserModalProvider>

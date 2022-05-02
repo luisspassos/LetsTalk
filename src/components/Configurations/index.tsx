@@ -26,7 +26,14 @@ export function Configurations() {
       <ChangeEmailModal />
       <RenameUsernameModal />
       <PageTitle pageName='Configurações' />
-      <Flex flex='1' align='center' justify='center' gap='80px'>
+      <Flex
+        wrap='wrap'
+        p='20px'
+        flex='1'
+        align='center'
+        justify='center'
+        gap='min(max(5%,20px), 80px)'
+      >
         <Box title='Configurações de perfil'>
           <Avatar />
           <Divider />

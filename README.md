@@ -3,7 +3,6 @@
 - ver pwa
 - ver destaque de cores nas paginas
 - ver fallback para imagens
-- ver tamanho do texto do nome nas configurações
 - ver lazy loading das modais
 - ver troca de pagina entre conversas e configurações (testar)
 - ver responsividade da pagina de configurações
@@ -14,6 +13,7 @@
 - fazer tema se adaptar ao color preference
 - ver esticamento dos toasts XD
 - obviamente fazer o readme
+- não esquecer de fazer responsivo das modais na aba de configurações
 
 # NEXT PROJECT
 
