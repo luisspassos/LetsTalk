@@ -1,15 +1,11 @@
-import { useCallback } from 'react';
 import { RiDeleteBin2Line } from 'react-icons/ri';
+import { useDeleteAccountModal } from '../../../contexts/Modal/DeleteAccountModalContext';
 import { Button } from './Button';
 
 export function DeleteAccountButton() {
-  const handleOpenModal = useCallback(() => {}, []);
+  const { onOpen } = useDeleteAccountModal();
 
   return (
-    <Button
-      onClick={handleOpenModal}
-      text='Deletar conta'
-      leftIcon={RiDeleteBin2Line}
-    />
+    <Button onClick={onOpen} text='Deletar conta' leftIcon={RiDeleteBin2Line} />
   );
 }

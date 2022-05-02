@@ -10,6 +10,7 @@ import { regexs } from '../../../../utils/regexs';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WarningText } from './WarningText';
+import { useDeleteAccountModal } from '../../../../contexts/Modal/DeleteAccountModalContext';
 
 type PasswordFormData = {
   name: string;
@@ -24,6 +25,8 @@ const PasswordFormSchema = yup.object().shape({
 });
 
 export function DeleteAccountModal() {
+  const { isOpen, onClose } = useDeleteAccountModal();
+
   const {
     register,
     handleSubmit,
@@ -34,9 +37,9 @@ export function DeleteAccountModal() {
   });
 
   return (
-    <ModalWrapper isOpen={false} onClose={() => {}}>
+    <ModalWrapper isOpen={isOpen} onClose={onClose}>
       <Flex direction='column' align='center'>
-        <Stack spacing='5px' align='center' mb='8px'>
+        <Stack spacing='5px' align='center' mb='14px'>
           <DangerousActionIcon Icon={RiDeleteBin2Line} />
           <DangerousActionModalTitle text='Você deseja excluir sua conta?' />
         </Stack>
@@ -48,7 +51,12 @@ export function DeleteAccountModal() {
           register={register}
           type='password'
         />
-        <DangerousActionButtons confirmButtonText='Deletar' />
+        <DangerousActionButtons
+          cancelButtonProps={{
+            onClick: onClose,
+          }}
+          confirmButtonText='Deletar'
+        />
         <WarningText />
       </Flex>
     </ModalWrapper>

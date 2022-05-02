@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { regexs } from '../../../utils/regexs';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRenameUsernameModal } from '../../../contexts/Modal/RenameUsernameModalContext';
 
 type RenameUsernameFormData = {
   name: string;
@@ -20,6 +21,8 @@ const RenameUsernameFormSchema = yup.object().shape({
 });
 
 export function RenameUsernameModal() {
+  const { isOpen, onClose } = useRenameUsernameModal();
+
   const {
     register,
     handleSubmit,
@@ -31,8 +34,8 @@ export function RenameUsernameModal() {
 
   return (
     <ModalWrapper
-      isOpen={false}
-      onClose={() => {}}
+      isOpen={isOpen}
+      onClose={onClose}
       modalTitle='Trocar nome de usuário'
     >
       <ModalFormControl>
@@ -43,7 +46,12 @@ export function RenameUsernameModal() {
           error={errors.name}
           register={register}
         />
-        <Buttons confirmButtonText='Trocar' />
+        <Buttons
+          cancelButtonProps={{
+            onClick: onClose,
+          }}
+          confirmButtonText='Trocar'
+        />
       </ModalFormControl>
     </ModalWrapper>
   );

@@ -8,6 +8,8 @@ import { BlockUserModalProvider } from '../contexts/Modal/BlockUserModalContext'
 import { AddContactModalProvider } from '../contexts/Modal/AddContactModalContext';
 import { ConversationsTabProvider } from '../contexts/ConversationsTabContext';
 import { ConversationsProvider } from '../contexts/ConversationsContext';
+import { RenameUsernameModalProvider } from '../contexts/Modal/RenameUsernameModalContext';
+import { DeleteAccountModalProvider } from '../contexts/Modal/DeleteAccountModalContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,13 +18,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ConversationsTabProvider>
           <AddContactModalProvider>
             <BlockUserModalProvider>
-              <TabProvider>
-                <FadeInAnimationProvider>
-                  <ChakraProvider theme={theme}>
-                    <Component {...pageProps} />
-                  </ChakraProvider>
-                </FadeInAnimationProvider>
-              </TabProvider>
+              <RenameUsernameModalProvider>
+                <DeleteAccountModalProvider>
+                  <TabProvider>
+                    <FadeInAnimationProvider>
+                      <ChakraProvider theme={theme}>
+                        <Component {...pageProps} />
+                      </ChakraProvider>
+                    </FadeInAnimationProvider>
+                  </TabProvider>
+                </DeleteAccountModalProvider>
+              </RenameUsernameModalProvider>
             </BlockUserModalProvider>
           </AddContactModalProvider>
         </ConversationsTabProvider>

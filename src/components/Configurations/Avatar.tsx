@@ -20,16 +20,19 @@ export function Avatar() {
         src='https://github.com/luisspassos.png'
         size='lg'
       />
-      <Stack spacing={0} overflowX='hidden'>
+      <Stack spacing={0}>
         <Text
           whiteSpace='nowrap'
+          overflow='hidden'
+          textOverflow='ellipsis'
           fontSize='18px'
           lineHeight='20px'
           fontWeight='600'
           as='strong'
           title='luis'
+          maxW='366px'
         >
-          luissssssssssssssssssssssssssssssssssssssssssssssssssssss
+          luis
         </Text>
         <Text color='blackAlpha.800' fontSize='14px' as='small'>
           #9837

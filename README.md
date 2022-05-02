@@ -12,7 +12,8 @@
 - ver env do link atual: (se ta na vercel ou em dev)
 - deslogar usuario ao deletar a conta em todas as abas abertas
 - fazer tema se adaptar ao color preference
-- ver esticamente dos toasts XD
+- ver esticamento dos toasts XD
+- obviamente fazer o readme
 
 # NEXT PROJECT
 
