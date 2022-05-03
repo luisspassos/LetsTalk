@@ -6,5 +6,5 @@ type ButtonStack = {
 };
 
 export function ButtonStack({ children }: ButtonStack) {
-  return <Stack mt='20px'>{children}</Stack>;
+  return <Stack mt={['14px', '17px', '20px']}>{children}</Stack>;
 }

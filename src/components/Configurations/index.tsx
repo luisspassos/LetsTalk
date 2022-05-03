@@ -32,7 +32,10 @@ export function Configurations() {
         flex='1'
         align='center'
         justify='center'
-        gap='min(max(5%,20px), 80px)'
+        columnGap='min(5%, 80px)'
+        rowGap='30px'
+        overflow='auto'
+        h='100vh'
       >
         <Box title='Configurações de perfil'>
           <Avatar />
