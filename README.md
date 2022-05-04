@@ -16,7 +16,6 @@
 - fazer testes do jest
 - otimizar aplicação
 - tipar next response do getUsers
-- comprar papel higienico e pao amanha
 - fazer eslint colocar parentes no return direto quando tiver apenas um elemento
 
 # NEXT PROJECT
