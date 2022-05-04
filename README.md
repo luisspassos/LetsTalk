@@ -15,7 +15,6 @@
 - colocar transition no avatar (testar)
 - fazer testes do jest
 - otimizar aplicação
-- tipar next response do getUsers
 - fazer eslint colocar parentes no return direto quando tiver apenas um elemento
 
 # NEXT PROJECT

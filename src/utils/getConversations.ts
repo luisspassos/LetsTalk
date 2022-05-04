@@ -28,7 +28,6 @@ type ConversationUsersResponse = {
   }[];
 };
 
-// ver formatação de dados direto na requisição
 export async function getConversations(
   userConversationsData: UserConversationsDataType
 ) {

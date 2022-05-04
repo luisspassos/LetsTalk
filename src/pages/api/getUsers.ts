@@ -1,9 +1,12 @@
+import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { auth } from '../../services/firebaseAdmin';
 
+type ResponseData = UserRecord[] | unknown;
+
 export default async function getUsers(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<ResponseData>
 ) {
   try {
     const { usersId } = req.query;
