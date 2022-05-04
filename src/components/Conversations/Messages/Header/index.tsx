@@ -40,7 +40,6 @@ export function Header() {
             w={['42px', '47px', '52px']}
             h={['42px', '47px', '52px']}
             src={currentConversation.data.photoURL ?? undefined}
-            ignoreFallback
           />
 
           <VStack minW={0} align='start' spacing={0}>

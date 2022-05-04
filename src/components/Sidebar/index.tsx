@@ -6,18 +6,10 @@ import { IconButton } from './IconButton';
 import { Avatar } from './Avatar';
 import { useTab } from '../../contexts/TabContext';
 import { useAuth } from '../../contexts/AuthContext';
-import { useCallback } from 'react';
-import { useRouter } from 'next/router';
 
 export function Sidebar() {
   const { handleChangeTab, tab } = useTab();
   const { signOut } = useAuth();
-  const router = useRouter();
-
-  const handleSignOut = useCallback(async () => {
-    await signOut();
-    router.push('/');
-  }, [signOut, router]);
 
   const isConversations = tab === 'conversations';
   const isConfigurations = tab === 'configurations';
@@ -51,11 +43,7 @@ export function Sidebar() {
           />
         </VStack>
       </Box>
-      <IconButton
-        anyFunction={() => handleSignOut()}
-        Icon={ImExit}
-        label='Sair'
-      />
+      <IconButton anyFunction={() => signOut()} Icon={ImExit} label='Sair' />
     </Flex>
   );
 }

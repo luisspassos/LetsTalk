@@ -57,6 +57,9 @@ export const theme = extendTheme(
         '*::-webkit-scrollbar-thumb:hover': {
           boxShadow: 'inset 0 0 10px 10px var(--chakra-colors-blueAlpha-900)',
         },
+        '#chakra-toast-manager-top-right': {
+          alignItems: 'end',
+        },
       },
     },
   }

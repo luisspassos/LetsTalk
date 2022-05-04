@@ -10,6 +10,7 @@ import {
 import { auth } from '../services/firebase';
 import nookies from 'nookies';
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
+import { useRouter } from 'next/router';
 
 export type AuthProviderProps = {
   children: ReactNode;
@@ -121,13 +122,6 @@ export const setUsername = async ({ user, name }: SetUsernameParams) => {
   return { username };
 };
 
-export const signOut = async () => {
-  const { auth } = await import('../services/firebase');
-  const { signOut } = await import('firebase/auth');
-
-  await signOut(auth);
-};
-
 export const sendEmailToRecoverPassword = async ({
   email,
 }: SendEmailToRecoverPasswordData) => {
@@ -157,10 +151,19 @@ export const signInWithEmailAndPassword = async ({
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
+  const router = useRouter();
 
   const fillUser = useCallback((newUser: TokenUser) => {
     setUser(newUser);
   }, []);
+
+  const signOut = async () => {
+    const { auth } = await import('../services/firebase');
+    const { signOut } = await import('firebase/auth');
+
+    signOut(auth);
+    router.push('/');
+  };
 
   useEffect(() => {
     function tokenListener() {
