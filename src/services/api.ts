@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const currentUrl = process.env.NEXT_PUBLIC_CURRENT_URL;
+
 export const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: `${currentUrl}/api`,
 });

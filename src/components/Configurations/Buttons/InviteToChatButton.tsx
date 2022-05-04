@@ -13,7 +13,12 @@ export const successToastWhenCopying = () =>
 
 export function InviteToChatButton() {
   const handleOpenModal = useCallback(() => {
-    navigator.clipboard.writeText('http://localhost:3000/');
+    const currentUrl = process.env.NEXT_PUBLIC_CURRENT_URL;
+
+    if (!currentUrl) return;
+
+    navigator.clipboard.writeText(currentUrl);
+
     successToastWhenCopying();
   }, []);
 

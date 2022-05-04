@@ -10,7 +10,7 @@ export function DangerousActionModalTitle({
   return (
     <Heading
       textAlign='center'
-      fontSize={['16px', '19px', '22px']}
+      fontSize={['18px', '20px', '22px']}
       fontWeight={400}
     >
       {text}

@@ -12,10 +12,13 @@ import { Option } from './Option';
 
 export function ThemeSelect() {
   return (
-    <HStack mt='15px'>
-      <Text>Tema: </Text>
-      <Menu isLazy>
+    <HStack mt={['9px', '12px', '15px']}>
+      <Text fontSize={['15px', '15.5px', '16px']}>Tema: </Text>
+      <Menu>
         <MenuButton
+          w={['114px', '119px', '124px']}
+          h={['30px', '35px', '40px']}
+          px={['10px', '13px', '16px']}
           _active={{
             bgColor: 'gray.100',
           }}
@@ -24,10 +27,10 @@ export function ThemeSelect() {
         >
           <HStack>
             <Icon as={BiSun} />
-            <Text>Claro</Text>
+            <Text fontSize={['14px', '15px', '16px']}>Claro</Text>
           </HStack>
         </MenuButton>
-        <MenuList>
+        <MenuList minW={0} w={['184px', '204px', '224px']}>
           <Option text='Claro' icon={BiSun} />
           <Option text='Escuro' icon={BiMoon} />
         </MenuList>

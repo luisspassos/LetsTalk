@@ -16,7 +16,14 @@ import { ExitButton } from './Buttons/ExitButton';
 import { RenameUsernameModal } from './Modals/RenameUsernameModal';
 import { ChangeEmailModal } from './Modals/ChangeEmailModal';
 import { ChangePasswordModal } from './Modals/ChangePasswordModal';
-import { DeleteAccountModal } from './Modals/DeleteAccountModal';
+import dynamic from 'next/dynamic';
+// import { DeleteAccountModal } from './Modals/DeleteAccountModal';
+
+const DeleteAccountModal = dynamic(async () => {
+  const { DeleteAccountModal } = await import('./Modals/DeleteAccountModal');
+
+  return DeleteAccountModal;
+});
 
 export function Configurations() {
   return (

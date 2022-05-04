@@ -11,7 +11,7 @@ export function Option({ icon, text }: OptionProps) {
     <MenuItem>
       <HStack>
         <Icon as={icon} />
-        <Text>{text}</Text>
+        <Text fontSize={['14px', '15px', '16px']}>{text}</Text>
       </HStack>
     </MenuItem>
   );

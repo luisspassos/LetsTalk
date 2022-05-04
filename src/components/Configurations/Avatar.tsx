@@ -18,14 +18,15 @@ export function Avatar() {
       <ChakraAvatar
         boxShadow={`1px 1px 8px 2px ${blackAlpha500}`}
         src='https://github.com/luisspassos.png'
-        size='lg'
+        w={['54px', '59px', '64px']}
+        h={['54px', '59px', '64px']}
       />
       <Stack spacing={0}>
         <Text
           whiteSpace='nowrap'
           overflow='hidden'
           textOverflow='ellipsis'
-          fontSize='18px'
+          fontSize={['16px', '17px', '18px']}
           lineHeight='20px'
           fontWeight='600'
           as='strong'
@@ -34,7 +35,11 @@ export function Avatar() {
         >
           luis
         </Text>
-        <Text color='blackAlpha.800' fontSize='14px' as='small'>
+        <Text
+          color='blackAlpha.800'
+          fontSize={['12px', '13px', '14px']}
+          as='small'
+        >
           #9837
         </Text>
       </Stack>

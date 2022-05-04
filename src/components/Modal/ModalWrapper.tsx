@@ -8,7 +8,7 @@ import {
 import { ReactNode } from 'react';
 import { ModalTitle } from './ModalTitle';
 
-type ModalWrapper = {
+type ModalWrapperProps = {
   isOpen: boolean;
   onClose: () => void;
   modalTitle?: string;
@@ -20,7 +20,7 @@ export function ModalWrapper({
   isOpen,
   onClose,
   modalTitle,
-}: ModalWrapper) {
+}: ModalWrapperProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />

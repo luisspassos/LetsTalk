@@ -3,17 +3,21 @@
 - ver pwa
 - ver destaque de cores nas paginas
 - ver fallback para imagens
-- ver lazy loading das modais
+- ver lazy loading das modais, menus e etc
 - ver troca de pagina entre conversas e configurações (testar)
-- ver responsividade da pagina de configurações
 - ver nome do site no login do google
 - ver loading ao dar logout
-- ver env do link atual: (se ta na vercel ou em dev)
 - deslogar usuario ao deletar a conta em todas as abas abertas
 - fazer tema se adaptar ao color preference
 - ver esticamento dos toasts XD
 - obviamente fazer o readme
-- não esquecer de fazer responsivo das modais na aba de configurações
+- testar toda a aplicação em produção
+- colocar transition no avatar (testar)
+- fazer testes do jest
+- otimizar aplicação
+- tipar next response do getUsers
+- comprar papel higienico e pao amanha
+- fazer eslint colocar parentes no return direto quando tiver apenas um elemento
 
 # NEXT PROJECT
 

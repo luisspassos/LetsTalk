@@ -36,7 +36,7 @@ export function ChangePasswordModal() {
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose} modalTitle='Trocar senha'>
       <ModalFormControl>
-        <Stack spacing='12px'>
+        <Stack spacing={['8px', '10px', '12px']}>
           <ModalInput
             id='password'
             label='Novo Senha'

@@ -53,7 +53,6 @@ export function Header() {
         <Popover
           initialFocusRef={popoverInitialFocusRef}
           placement='bottom-start'
-          isLazy
         >
           <Tooltip
             ariaLabel='Informações da conversa'
