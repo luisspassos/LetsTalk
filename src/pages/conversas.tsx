@@ -91,10 +91,7 @@ export const getServerSideProps: GetServerSideProps = async (
         },
       };
     }
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
-  }
+  } catch {}
 
   return {
     redirect: {
