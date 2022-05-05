@@ -9,6 +9,7 @@
 - testar toda a aplicação em produção
 - fazer testes do jest
 - otimizar aplicação
+- ver trem do bundle analyzer
 
 # NEXT PROJECT
 

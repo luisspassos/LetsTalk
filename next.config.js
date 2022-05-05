@@ -4,10 +4,6 @@ const nextConfig = {
 };
 const withPlugins = require('next-compose-plugins');
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 
