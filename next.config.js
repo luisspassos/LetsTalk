@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
 };
+const withPlugins = require('next-compose-plugins');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -10,12 +11,16 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 
-module.exports = withPWA({
-  pwa: {
-    dest: 'public',
-    runtimeCaching,
-  },
-});
-
-module.exports = withBundleAnalyzer({});
-module.exports = nextConfig;
+module.exports = withPlugins([
+  nextConfig,
+  [
+    withPWA,
+    {
+      pwa: {
+        dest: 'public',
+        runtimeCaching,
+      },
+    },
+  ],
+  [withBundleAnalyzer, {}],
+]);

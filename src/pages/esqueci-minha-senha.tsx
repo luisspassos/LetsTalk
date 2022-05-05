@@ -16,7 +16,7 @@ import { redirectToConversationsPage } from '../utils/redirectToConversationsPag
 import nookies from 'nookies';
 import { PageTitle } from '../components/PageTitle';
 
-type emailFormData = {
+type EmailFormData = {
   email: string;
 };
 
@@ -49,7 +49,7 @@ export default function IForgotMyPassword() {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<emailFormData>({
+  } = useForm<EmailFormData>({
     resolver: yupResolver(emailFormSchema),
   });
 
