@@ -29,19 +29,23 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         <link rel='manifest' href='/manifest.json' />
         <link
-          href='/icons/favicon-16x16.png'
+          href='./favicon.svg'
           rel='icon'
-          type='image/png'
+          type='image/svg+xml'
           sizes='16x16'
         />
         <link
-          href='/icons/favicon-32x32.png'
+          href='./favicon.svg'
           rel='icon'
-          type='image/png'
+          type='image/svg+xml'
           sizes='32x32'
         />
-        <link rel='apple-touch-icon' href='/apple-icon.png'></link>
-        <meta name='theme-color' content='#317EFB' />
+        <link
+          rel='apple-touch-icon'
+          href='./favicon.svg'
+          type='image/svg+xml'
+        />
+        <meta name='theme-color' content='#1d2434' />
       </Head>
       <AuthProvider>
         <ConversationsProvider>
