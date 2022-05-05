@@ -4,8 +4,6 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <meta name='description' content='Entre e converse com seus amigos!' />
-        <link rel='manifest' href='/manifest.json' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
           rel='preconnect'
