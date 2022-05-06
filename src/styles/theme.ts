@@ -1,4 +1,9 @@
-import { extendTheme, withDefaultProps } from '@chakra-ui/react';
+import { extendTheme, ThemeConfig, withDefaultProps } from '@chakra-ui/react';
+
+const themeConfig: ThemeConfig = {
+  initialColorMode: 'system',
+  useSystemColorMode: true,
+};
 
 export const theme = extendTheme(
   withDefaultProps({
@@ -62,5 +67,6 @@ export const theme = extendTheme(
         },
       },
     },
+    ...themeConfig,
   }
 );

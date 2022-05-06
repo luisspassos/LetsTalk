@@ -15,6 +15,13 @@ export default function Document() {
           rel='stylesheet'
         />
         <link rel='shortcut icon' href='./favicon.svg' type='image/x-icon' />
+
+        <meta
+          name='description'
+          content='Entre e converse com os seus amigos!'
+        />
+
+        <link rel='manifest' href='/manifest.json' />
       </Head>
       <body>
         <Main />
