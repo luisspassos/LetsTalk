@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import { colors } from '../styles/colors';
 
 export default function Document() {
   return (
@@ -19,6 +20,18 @@ export default function Document() {
         <meta
           name='description'
           content='Entre e converse com os seus amigos!'
+        />
+
+        <meta
+          name='theme-color'
+          media='(prefers-color-scheme: light)'
+          content={colors.gray[50]}
+        />
+
+        <meta
+          name='theme-color'
+          media='(prefers-color-scheme: dark)'
+          content={colors.blue[900]}
         />
 
         <link rel='manifest' href='/manifest.json' />

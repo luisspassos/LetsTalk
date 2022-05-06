@@ -1,4 +1,5 @@
 import { extendTheme, ThemeConfig, withDefaultProps } from '@chakra-ui/react';
+import { colors } from './colors';
 
 const themeConfig: ThemeConfig = {
   initialColorMode: 'system',
@@ -20,31 +21,7 @@ export const theme = extendTheme(
     fontWeights: {
       bold: 600,
     },
-    colors: {
-      blueAlpha: {
-        900: '#1d243490',
-        700: '#1d243470',
-      },
-      grayAlpha: {
-        500: '#646C7720',
-      },
-      gray: {
-        50: '#f9f9f9',
-        200: '#d8dce7',
-        300: '#afb9c5',
-        400: '#525f6f',
-        500: '#646C77',
-        800: '#202020',
-        900: '#101010',
-      },
-      blue: {
-        900: '#1d2434',
-      },
-      red: {
-        300: '#f37871',
-        600: '#b03340',
-      },
-    },
+    colors,
     styles: {
       global: {
         body: {
