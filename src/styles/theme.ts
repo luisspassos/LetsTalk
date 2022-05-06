@@ -1,7 +1,11 @@
 import { extendTheme, ThemeConfig, withDefaultProps } from '@chakra-ui/react';
 import { colors } from './colors';
 
-const themeConfig: ThemeConfig = {
+type GlobalStyleProps = {
+  colorMode: 'light' | 'dark';
+};
+
+export const themeConfig: ThemeConfig = {
   initialColorMode: 'system',
   useSystemColorMode: true,
 };
@@ -23,9 +27,9 @@ export const theme = extendTheme(
     },
     colors,
     styles: {
-      global: {
+      global: (props: GlobalStyleProps) => ({
         body: {
-          bg: 'gray.50',
+          bg: props.colorMode === 'dark' ? 'blue.900' : 'gray.50',
           color: 'gray.900',
         },
         '*::-webkit-scrollbar': {
@@ -42,7 +46,7 @@ export const theme = extendTheme(
         '#chakra-toast-manager-top-right': {
           alignItems: 'end',
         },
-      },
+      }),
     },
     ...themeConfig,
   }

@@ -6,11 +6,22 @@ import {
   Button,
   HStack,
   Text,
+  useColorMode,
 } from '@chakra-ui/react';
 import { BiChevronDown, BiMoon, BiSun } from 'react-icons/bi';
 import { Option } from './Option';
 
 export function ThemeSelect() {
+  const { colorMode, setColorMode } = useColorMode();
+
+  function handleChangeThemeToLight() {
+    setColorMode('light');
+  }
+
+  function handleChangeThemeToDark() {
+    setColorMode('dark');
+  }
+
   return (
     <HStack mt={['9px', '12px', '15px']}>
       <Text fontSize={['15px', '15.5px', '16px']}>Tema: </Text>
@@ -26,13 +37,23 @@ export function ThemeSelect() {
           rightIcon={<Icon as={BiChevronDown} />}
         >
           <HStack>
-            <Icon as={BiSun} />
-            <Text fontSize={['14px', '15px', '16px']}>Claro</Text>
+            <Icon as={colorMode === 'light' ? BiSun : BiMoon} />
+            <Text fontSize={['14px', '15px', '16px']}>
+              {colorMode === 'light' ? 'Claro' : 'Escuro'}
+            </Text>
           </HStack>
         </MenuButton>
         <MenuList minW={0} w={['184px', '204px', '224px']}>
-          <Option text='Claro' icon={BiSun} />
-          <Option text='Escuro' icon={BiMoon} />
+          <Option
+            onClick={handleChangeThemeToLight}
+            text='Claro'
+            icon={BiSun}
+          />
+          <Option
+            onClick={handleChangeThemeToDark}
+            text='Escuro'
+            icon={BiMoon}
+          />
         </MenuList>
       </Menu>
     </HStack>
