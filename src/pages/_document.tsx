@@ -16,6 +16,12 @@ export default function Document() {
           rel='stylesheet'
         />
         <link rel='shortcut icon' href='./favicon.svg' type='image/x-icon' />
+        <link
+          rel='apple-touch-icon'
+          href='./images/pwa-icons/apple-touch-icon.png'
+        />
+
+        <link rel='manifest' href='./manifest.json' />
 
         <meta
           name='description'
@@ -33,8 +39,6 @@ export default function Document() {
           media='(prefers-color-scheme: dark)'
           content={colors.blue[900]}
         />
-
-        <link rel='manifest' href='/manifest.json' />
       </Head>
       <body>
         <Main />
