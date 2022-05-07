@@ -4,7 +4,6 @@ import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
 import { LoginButtonWithGoogle } from '../components/Form/LoginButtonWithGoogle';
-import { Header } from '../components/Header';
 import NextLink from 'next/link';
 import { Button } from '../components/Form/Button';
 import { RegistrationLink } from '../components/Form/RegistrationLink';
@@ -22,6 +21,7 @@ import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
 import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
 import { PageTitle } from '../components/PageTitle';
+import { Header } from '../components/Header';
 
 type SignInFormData = {
   email: string;
@@ -39,6 +39,7 @@ type FormFirebaseError = Record<
 type LoginProps = {
   actionCode: string;
   mode: string;
+  colorMode: string;
 };
 
 export const toasts = {

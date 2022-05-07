@@ -1,4 +1,4 @@
-import { Button, Icon, Spinner } from '@chakra-ui/react';
+import { Button, Icon, Spinner, useColorModeValue } from '@chakra-ui/react';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
@@ -64,9 +64,9 @@ function LoginButtonWithGoogleComponent() {
       whiteSpace='initial'
       py='6px'
       borderWidth={2}
-      color='blue.900'
+      color={useColorModeValue('blue.900', 'gray.50')}
       fontWeight='400'
-      bg='white'
+      bg={useColorModeValue('white', 'gray.800')}
       w='100%'
       variant='outline'
       borderColor='blue.900'

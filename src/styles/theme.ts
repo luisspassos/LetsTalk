@@ -1,8 +1,13 @@
-import { extendTheme, ThemeConfig, withDefaultProps } from '@chakra-ui/react';
+import {
+  ColorMode,
+  extendTheme,
+  ThemeConfig,
+  withDefaultProps,
+} from '@chakra-ui/react';
 import { colors } from './colors';
 
 type GlobalStyleProps = {
-  colorMode: 'light' | 'dark';
+  colorMode: ColorMode;
 };
 
 export const themeConfig: ThemeConfig = {
