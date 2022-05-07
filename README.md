@@ -7,7 +7,6 @@
 - testar toda a aplicação em produção
 - fazer testes do jest
 - otimizar aplicação
-- testar direito essa conversation list
 - ver backlink na pagina de cadastro
 - ver responsividade direito
 - ver regras do firebase

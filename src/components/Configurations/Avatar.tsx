@@ -27,12 +27,13 @@ export function Avatar() {
         w={['54px', '59px', '64px']}
         h={['54px', '59px', '64px']}
       />
-      <Stack spacing={0}>
+      <Stack minW={0} spacing={0}>
         <Text
           whiteSpace='nowrap'
           overflow='hidden'
           textOverflow='ellipsis'
           maxW='316px'
+          w='100%'
           fontSize={['16px', '17px', '18px']}
           lineHeight='20px'
           fontWeight='600'

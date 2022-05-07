@@ -1,6 +1,11 @@
 import { Header } from '../components/Header';
-import { Stack, Heading, Text, useColorModeValue } from '@chakra-ui/react';
-import { BackLink } from '../components/BackLink';
+import {
+  Stack,
+  Heading,
+  Text,
+  useColorModeValue,
+  Show,
+} from '@chakra-ui/react';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
 import { Button } from '../components/Form/Button';
@@ -17,6 +22,7 @@ import { redirectToConversationsPage } from '../utils/redirectToConversationsPag
 import nookies from 'nookies';
 import { PageTitle } from '../components/PageTitle';
 import { regexs } from '../utils/regexs';
+import { LoginLink } from '../components/Auth/LoginLink';
 
 type FormFirebaseError = Record<
   string,
@@ -138,52 +144,61 @@ export default function Register() {
               Junte-se e converse com outras
               <br /> pessoas!
             </Text>
-            <BackLink text='Fazer login' route='/' />
+            <LoginLink />
           </Stack>
-          <FormWrapper onSubmit={handleRegister}>
-            <Stack spacing='10px'>
-              <Input
-                label='Email'
-                id='email'
-                inputProps={{
-                  type: 'email',
-                  placeholder: 'Email...',
-                  ...register('email'),
-                }}
-                error={errors.email}
-              />
-              <Input
-                label='Nome'
-                id='username'
-                inputProps={{
-                  placeholder: 'Nome...',
-                  ...register('name'),
-                }}
-                error={errors.name}
-              />
-              <Input
-                label='Senha'
-                id='password'
-                inputProps={{
-                  type: 'password',
-                  placeholder: 'Senha...',
-                  ...register('password'),
-                }}
-                error={errors.password}
-              />
-              <Input
-                label='Confirmar senha'
-                id='confirmPassword'
-                inputProps={{
-                  placeholder: 'Confirme sua senha...',
-                  type: 'password',
-                  ...register('password_confirmation'),
-                }}
-                error={errors.password_confirmation}
-              />
-              <Button isLoading={isSubmitting} text='CADASTRAR' type='submit' />
-            </Stack>
-          </FormWrapper>
+          <Stack spacing='20px' align='center'>
+            <FormWrapper onSubmit={handleRegister}>
+              <Stack spacing='10px'>
+                <Input
+                  label='Email'
+                  id='email'
+                  inputProps={{
+                    type: 'email',
+                    placeholder: 'Email...',
+                    ...register('email'),
+                  }}
+                  error={errors.email}
+                />
+                <Input
+                  label='Nome'
+                  id='username'
+                  inputProps={{
+                    placeholder: 'Nome...',
+                    ...register('name'),
+                  }}
+                  error={errors.name}
+                />
+                <Input
+                  label='Senha'
+                  id='password'
+                  inputProps={{
+                    type: 'password',
+                    placeholder: 'Senha...',
+                    ...register('password'),
+                  }}
+                  error={errors.password}
+                />
+                <Input
+                  label='Confirmar senha'
+                  id='confirmPassword'
+                  inputProps={{
+                    placeholder: 'Confirme sua senha...',
+                    type: 'password',
+                    ...register('password_confirmation'),
+                  }}
+                  error={errors.password_confirmation}
+                />
+                <Button
+                  isLoading={isSubmitting}
+                  text='CADASTRAR'
+                  type='submit'
+                />
+              </Stack>
+            </FormWrapper>
+            <Show below='xl'>
+              <LoginLink />
+            </Show>
+          </Stack>
         </AuthContentPageWrapper>
       </AuthPageWrapper>
     </>

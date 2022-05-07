@@ -71,7 +71,7 @@ function LoginButtonWithGoogleComponent() {
       variant='outline'
       borderColor={useColorModeValue('blue.900', 'gray.50')}
       gap='5px'
-      fontSize={{ base: '17px', sm: '18px' }}
+      fontSize={{ base: '16.5px', sm: '18px' }}
       justifyContent='start'
       leftIcon={<Icon as={FcGoogle} fontSize={['28px', '32px']} />}
       onClick={handleSignInWithGoogle}
