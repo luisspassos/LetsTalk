@@ -5,12 +5,66 @@ import { ConversationDivider } from './Conversation/ConversationDivider';
 import { Divider } from '../Divider';
 import { AddContactButton } from './AddContactButton';
 import { SearchInput } from './SearchInput';
-import { useConversations } from '../../../contexts/ConversationsContext';
 import { useCallback, useState } from 'react';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
-  const { conversations } = useConversations();
+  const conversations = [
+    {
+      uid: 'uid-1',
+      photoURL: 'https://github.com/luisspassos.png',
+      name: 'luis',
+      updatedAt: 1234567890,
+      updatedAtFormatted: '09:48',
+      lastMessage: 'seilaaaaaaaaaaaaa',
+      messages: [],
+    },
+    {
+      uid: 'uid-2',
+      photoURL: 'https://github.com/luisspassos.png',
+      name: 'luis',
+      updatedAt: 1234567890,
+      updatedAtFormatted: '09:48',
+      lastMessage: 'seilaaaaaaaaaaaaa',
+      messages: [],
+    },
+    {
+      uid: 'uid-3',
+      photoURL: 'https://github.com/luisspassos.png',
+      name: 'luis',
+      updatedAt: 1234567890,
+      updatedAtFormatted: '09:48',
+      lastMessage: 'seilaaaaaaaaaaaaa',
+      messages: [],
+    },
+    {
+      uid: 'uid-4',
+      photoURL: 'https://github.com/luisspassos.png',
+      name: 'luis',
+      updatedAt: 1234567890,
+      updatedAtFormatted: '09:48',
+      lastMessage: 'seilaaaaaaaaaaaaa',
+      messages: [],
+    },
+    {
+      uid: 'uid-5',
+      photoURL: 'https://github.com/luisspassos.png',
+      name: 'luis',
+      updatedAt: 1234567890,
+      updatedAtFormatted: '09:48',
+      lastMessage: 'seilaaaaaaaaaaaaa',
+      messages: [],
+    },
+    {
+      uid: 'uid-6',
+      photoURL: 'https://github.com/luisspassos.png',
+      name: 'luis',
+      updatedAt: 1234567890,
+      updatedAtFormatted: '09:48',
+      lastMessage: 'seilaaaaaaaaaaaaa',
+      messages: [],
+    },
+  ];
 
   const [conversationSearch, setConversationSearch] = useState('');
 
@@ -21,9 +75,7 @@ export function ConversationListComponent() {
     []
   );
 
-  const fetchedConversations = conversations.data.filter(({ name }) =>
-    name.includes(conversationSearch.trim())
-  );
+  const fetchedConversations = conversations;
 
   const numberOfConversations = fetchedConversations.length;
 

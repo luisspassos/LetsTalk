@@ -1,4 +1,4 @@
-import { Flex, VStack } from '@chakra-ui/react';
+import { Flex, useColorModeValue, VStack } from '@chakra-ui/react';
 import { ConversationDivider } from './ConversationDivider';
 import { Avatar } from './Avatar';
 import { Name } from './Name';
@@ -32,6 +32,8 @@ export function Conversation({
     },
   } = useConversations();
 
+  const bg = useColorModeValue('grayAlpha.500', 'whiteAlpha.100');
+
   return (
     <>
       <Flex
@@ -43,9 +45,9 @@ export function Conversation({
         flexShrink='0'
         cursor='pointer'
         transition='0.2s'
-        bg={index === currentConversationIndex ? 'grayAlpha.500' : undefined}
+        bg={index === 0 ? bg : undefined}
         _hover={{
-          bg: 'grayAlpha.500',
+          bg: bg,
         }}
         onClick={() => changeCurrentConversationIndex(index)}
       >

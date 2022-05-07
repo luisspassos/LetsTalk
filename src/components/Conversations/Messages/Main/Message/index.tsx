@@ -1,4 +1,4 @@
-import { Stack, Flex } from '@chakra-ui/react';
+import { Stack, Flex, useColorModeValue } from '@chakra-ui/react';
 import { CreatedAt } from './CreatedAt';
 import { MessageText } from './MessageText';
 
@@ -14,6 +14,11 @@ export function Message({
   isYourMessage,
   data: { text, createdAt },
 }: MessageProps) {
+  const bg = {
+    default: useColorModeValue('300', '500'),
+    isYourMessage: useColorModeValue('200', '400'),
+  };
+
   const triangle = {
     values: {
       sizes: ['14px', '17px', '20px'],
@@ -39,7 +44,7 @@ export function Message({
         return triangle.values.sizes.map(
           (size) =>
             `${size} solid var(--chakra-colors-gray-${
-              isYourMessage ? '200' : '300'
+              isYourMessage ? bg.isYourMessage : bg.default
             })`
         );
       },
@@ -66,7 +71,7 @@ export function Message({
         _before={!isYourMessage ? triangle.styles : undefined}
         _after={isYourMessage ? triangle.styles : undefined}
       >
-        <MessageText text={text} isYourMessage={isYourMessage} />
+        <MessageText bg={bg} text={text} isYourMessage={isYourMessage} />
       </Flex>
       <CreatedAt text={createdAt} />
     </Stack>

@@ -8,6 +8,7 @@
 - testar toda a aplicação em produção
 - fazer testes do jest
 - otimizar aplicação
+- testar direito essa conversation list
 
 # NEXT PROJECT
 

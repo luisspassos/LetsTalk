@@ -12,7 +12,7 @@ export function Conversations() {
     conversations: { numberOfConversations },
   } = useConversations();
 
-  const existConversations = numberOfConversations > 0;
+  const existConversations = 1 > 0;
 
   return (
     <>

@@ -1,9 +1,9 @@
-import { Icon, IconButton } from '@chakra-ui/react';
+import { Icon, IconButton, useColorModeValue } from '@chakra-ui/react';
 import { HiOutlineUsers, HiUsers } from 'react-icons/hi';
 import { useConversationsTab } from '../../../../contexts/ConversationsTabContext';
 import { Tooltip } from '../../../Tooltip';
 
-export function ConversationsSwitchButton() {
+export function ConversationsTabToggleButton() {
   const { onToggle, isOpen } = useConversationsTab();
 
   const icon = isOpen ? HiUsers : HiOutlineUsers;
@@ -17,9 +17,9 @@ export function ConversationsSwitchButton() {
       <IconButton
         variant='ghost'
         fontSize={['28px']}
-        color='gray.400'
+        color={useColorModeValue('gray.400', 'gray.200')}
         icon={<Icon as={icon} />}
-        aria-label='Botão de alterar aba de conversas'
+        aria-label='Botão de alternar aba de conversas'
         onClick={onToggle}
       />
     </Tooltip>

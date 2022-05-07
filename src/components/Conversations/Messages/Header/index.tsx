@@ -14,7 +14,7 @@ import { Divider } from '../../../Divider';
 import { ContactName } from './ContactName';
 import { ConversationInfoIconButton } from './ConversationInfo/IconButton';
 import { ConversationInfoPopover } from './ConversationInfo/Popover';
-import { ConversationsSwitchButton } from './ConversationsSwitchButton';
+import { ConversationsTabToggleButton } from './ConversationsTabToggleButton';
 
 export function Header() {
   const popoverInitialFocusRef = useRef(null);
@@ -34,16 +34,16 @@ export function Header() {
         gap='9px'
       >
         <Flex minW={0} align='center' gap={['12px', '15px', '18px']}>
-          <ConversationsSwitchButton />
+          <ConversationsTabToggleButton />
 
           <Avatar
             w={['42px', '47px', '52px']}
             h={['42px', '47px', '52px']}
-            src={currentConversation.data.photoURL ?? undefined}
+            src='https://github.com/luisspassos.png'
           />
 
           <VStack minW={0} align='start' spacing={0}>
-            <ContactName text={currentConversation.data.name} />
+            <ContactName text='Luis' />
             <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
               Hoje ás 19:48
             </Text>

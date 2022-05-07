@@ -1,4 +1,4 @@
-import { Textarea, InputGroup } from '@chakra-ui/react';
+import { Textarea, InputGroup, useColorModeValue } from '@chakra-ui/react';
 import { AiOutlinePaperClip } from 'react-icons/ai';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { InputIconButton } from './InputIconButton';
@@ -32,8 +32,8 @@ export function MessageInput() {
     <InputGroup maxW='750px'>
       <Textarea
         resize='none'
-        borderColor='blueAlpha.700'
-        bg='white'
+        borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
+        bg={useColorModeValue('white', 'gray.500')}
         fontFamily='Roboto'
         h={['39px', '42px', '45px']}
         py={['9.75px', '10.5px', '11.25px']}

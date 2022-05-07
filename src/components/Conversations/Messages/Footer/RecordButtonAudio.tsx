@@ -1,8 +1,10 @@
-import { Icon, IconButton } from '@chakra-ui/react';
+import { Icon, IconButton, useColorModeValue } from '@chakra-ui/react';
 import { Tooltip } from '../../../Tooltip';
 import { AiFillAudio } from 'react-icons/ai';
 
 export function RecordButtonAudio() {
+  const bg = useColorModeValue('blue.900', 'gray.400');
+
   return (
     <Tooltip
       hasArrow={false}
@@ -18,14 +20,14 @@ export function RecordButtonAudio() {
         borderRadius={['11px', '13px', '15px']}
         ml={['11px', '13px', '15px']}
         color='white'
-        bg='blue.900'
+        bg={bg}
         aria-label='Gravar áudio'
         icon={<Icon as={AiFillAudio} />}
         _hover={{
-          bg: 'blue.900',
+          bg: bg,
         }}
         _active={{
-          bg: 'blueAlpha.900',
+          bg: useColorModeValue('blueAlpha.900', 'gray.500'),
         }}
       />
     </Tooltip>
