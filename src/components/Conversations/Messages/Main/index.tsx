@@ -29,7 +29,7 @@ export function Main() {
       {messages?.map(({ message, id, contactMessage, createdAtFormatted }) => (
         <Message
           key={id}
-          isYourMessage={!contactMessage}
+          contactMessage={contactMessage}
           data={{ createdAt: createdAtFormatted, text: message }}
         />
       ))}

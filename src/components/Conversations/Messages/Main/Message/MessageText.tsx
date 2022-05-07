@@ -2,14 +2,14 @@ import { Text } from '@chakra-ui/react';
 
 type MessageTextProps = {
   text: string;
-  isYourMessage?: boolean;
+  contactMessage?: boolean;
   bg: {
     default: string;
-    isYourMessage: string;
+    contactMessage: string;
   };
 };
 
-export function MessageText({ text, isYourMessage, bg }: MessageTextProps) {
+export function MessageText({ text, contactMessage, bg }: MessageTextProps) {
   return (
     <Text
       fontFamily='Roboto'
@@ -17,7 +17,7 @@ export function MessageText({ text, isYourMessage, bg }: MessageTextProps) {
       py={['6px', '8px', '10px']}
       px={['11px', '13px', '15px']}
       fontSize={['14px', '15px', '16px']}
-      bg={isYourMessage ? `gray.${bg.isYourMessage}` : `gray.${bg.default}`}
+      bg={contactMessage ? `gray.${bg.contactMessage}` : `gray.${bg.default}`}
       wordBreak='break-word'
     >
       {text}

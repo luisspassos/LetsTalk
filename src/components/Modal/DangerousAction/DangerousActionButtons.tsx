@@ -1,4 +1,4 @@
-import { ButtonProps } from '@chakra-ui/react';
+import { ButtonProps, useColorModeValue } from '@chakra-ui/react';
 import { Buttons } from '../Button/Buttons';
 
 type DangerousActionButtonsProps = {
@@ -12,6 +12,8 @@ export function DangerousActionButtons({
   confirmButtonProps,
   cancelButtonProps,
 }: DangerousActionButtonsProps) {
+  const cancelButtonColor = useColorModeValue('blue.900', 'gray.50');
+
   return (
     <Buttons
       confirmButtonProps={{
@@ -19,8 +21,8 @@ export function DangerousActionButtons({
         ...confirmButtonProps,
       }}
       cancelButtonProps={{
-        borderColor: 'blue.900',
-        color: 'blue.900',
+        borderColor: cancelButtonColor,
+        color: cancelButtonColor,
         colorScheme: 'gray',
         ...cancelButtonProps,
       }}

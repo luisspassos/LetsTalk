@@ -1,4 +1,4 @@
-import { ButtonProps } from '@chakra-ui/react';
+import { ButtonProps, useColorModeValue } from '@chakra-ui/react';
 import { Button } from '.';
 
 type ConfirmButtonProps = {
@@ -6,20 +6,22 @@ type ConfirmButtonProps = {
 } & ButtonProps;
 
 export function ConfirmButton({ text, ...rest }: ConfirmButtonProps) {
+  const bg = useColorModeValue('blue.900', 'gray.400');
+
   return (
     <Button
-      bg='blue.900'
+      bg={bg}
       color='gray.50'
       transition='0.2s'
       _hover={{
         filter: 'brightness(1.1)',
       }}
       _active={{
-        bg: 'blue.900',
+        bg: bg,
         filter: 'brightness(1.1)',
       }}
       _disabled={{
-        bg: 'blue.900',
+        bg: bg,
         cursor: 'default',
       }}
       {...rest}

@@ -51,7 +51,7 @@ export function MessageInput() {
           whiteSpace: 'nowrap',
         }}
         _hover={{
-          borderColor: 'blueAlpha.700',
+          borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.700'),
         }}
         pr={['73px', '83px', '103px']}
         sx={{

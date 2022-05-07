@@ -1,4 +1,4 @@
-import { Box as ChakraBox, Heading } from '@chakra-ui/react';
+import { Box as ChakraBox, Heading, useColorModeValue } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 type BoxProps = {
@@ -13,7 +13,7 @@ export function Box({ title, children }: BoxProps) {
       boxShadow='md'
       borderRadius='20px'
       minH={['400px', '530px']}
-      bg='white'
+      bg={useColorModeValue('white', 'gray.400')}
       flex='1'
       minW={{ base: '200px', sm: '300px' }}
       maxW='450px'

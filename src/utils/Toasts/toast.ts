@@ -5,7 +5,7 @@ const chakraToast = createStandaloneToast({ theme });
 
 export function toast(config: UseToastOptions) {
   chakraToast({
-    duration: 6 * 100000 /* 6 seconds */,
+    duration: 6 * 1000 /* 6 seconds */,
     isClosable: true,
     position: 'top-right',
     ...config,

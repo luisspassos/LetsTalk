@@ -2,10 +2,10 @@ import { Flex, Heading, useColorModeValue, VStack } from '@chakra-ui/react';
 import { useConversationsTab } from '../../../contexts/ConversationsTabContext';
 import { Conversation } from './Conversation';
 import { ConversationDivider } from './Conversation/ConversationDivider';
-import { Divider } from '../Divider';
 import { AddContactButton } from './AddContactButton';
 import { SearchInput } from './SearchInput';
 import { useCallback, useState } from 'react';
+import { Divider } from '../Divider';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
@@ -84,9 +84,11 @@ export function ConversationListComponent() {
       display={isOpen ? 'flex' : 'none'}
       w={['265px', '295px', '335px']}
       h='100vh'
-      bg={useColorModeValue('gray.200', 'gray.400')}
+      bg={useColorModeValue('gray.200', 'blue.900')}
       p={['19px 19px 0', '22px 22px 0', '25px 25px 0']}
       direction='column'
+      borderRight={useColorModeValue(undefined, '1px solid')}
+      borderRightColor={useColorModeValue(undefined, 'whiteAlpha.500')}
     >
       <AddContactButton />
       <Divider />

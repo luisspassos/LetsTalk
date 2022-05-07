@@ -1,4 +1,4 @@
-import { InputProps } from '@chakra-ui/react';
+import { InputProps, useColorModeValue } from '@chakra-ui/react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 import { Input } from '../Form/Input';
 
@@ -34,7 +34,7 @@ export function ModalInput({
         ...rest,
       }}
       labelProps={{
-        color: 'gray.900',
+        color: useColorModeValue('gray.900', 'gray.50'),
         opacity: 1,
         fontSize: ['15px', '15.5px', '16px'],
       }}

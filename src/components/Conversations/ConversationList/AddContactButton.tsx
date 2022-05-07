@@ -16,6 +16,9 @@ export function AddContactButton() {
       leftIcon={<Icon as={IoMdAdd} fontSize={['27px', '32px', '35px']} />}
       justifyContent='start'
       onClick={onOpen}
+      _active={{
+        color: 'inherit',
+      }}
     >
       Adicionar contato
     </Button>

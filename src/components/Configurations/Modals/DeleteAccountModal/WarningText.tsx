@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import { Text, useColorModeValue } from '@chakra-ui/react';
 
 export function WarningText() {
   return (
@@ -6,7 +6,7 @@ export function WarningText() {
       mt='10px'
       fontSize={['14px', '14.5px', '15px']}
       as='small'
-      color='red.600'
+      color={useColorModeValue('red.600', 'gray.200')}
     >
       *Esta ação é irreversível
     </Text>

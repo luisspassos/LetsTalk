@@ -25,6 +25,8 @@ export const Input = forwardRef(
     { error, label, id, inputProps, labelProps, helperText }: InputProps,
     ref: LegacyRef<HTMLInputElement> | undefined
   ) => {
+    const helperTextColor = useColorModeValue('gray.900', 'gray.200');
+
     return (
       <FormControl isInvalid={!!error} flexDirection='column'>
         <FormLabel
@@ -49,7 +51,7 @@ export const Input = forwardRef(
         {helperText && (
           <FormHelperText
             fontSize={['12.5px', '13px', '14px']}
-            color='gray.900'
+            color={helperTextColor}
           >
             {helperText}
           </FormHelperText>

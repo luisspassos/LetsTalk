@@ -3,7 +3,7 @@ import { CreatedAt } from './CreatedAt';
 import { MessageText } from './MessageText';
 
 type MessageProps = {
-  isYourMessage?: boolean;
+  contactMessage?: boolean;
   data: {
     text: string;
     createdAt: string;
@@ -11,12 +11,12 @@ type MessageProps = {
 };
 
 export function Message({
-  isYourMessage,
+  contactMessage,
   data: { text, createdAt },
 }: MessageProps) {
   const bg = {
     default: useColorModeValue('300', '500'),
-    isYourMessage: useColorModeValue('200', '400'),
+    contactMessage: useColorModeValue('200', '400'),
   };
 
   const triangle = {
@@ -44,34 +44,34 @@ export function Message({
         return triangle.values.sizes.map(
           (size) =>
             `${size} solid var(--chakra-colors-gray-${
-              isYourMessage ? bg.isYourMessage : bg.default
+              contactMessage ? bg.contactMessage : bg.default
             })`
         );
       },
       borderRadius: '4px',
       get mr() {
-        return !isYourMessage ? triangle.values.negativeSizes : undefined;
+        return contactMessage ? triangle.values.negativeSizes : undefined;
       },
       get ml() {
-        return isYourMessage ? triangle.values.negativeSizes : undefined;
+        return !contactMessage ? triangle.values.negativeSizes : undefined;
       },
     },
   };
 
   return (
     <Stack
-      alignSelf={isYourMessage ? 'end' : undefined}
+      alignSelf={!contactMessage ? 'end' : undefined}
       display='inline-flex'
       maxW={['240px', '300px', '400px']}
       spacing='3px'
-      align={isYourMessage ? 'end' : undefined}
+      align={!contactMessage ? 'end' : undefined}
     >
       <Flex
         align='end'
-        _before={!isYourMessage ? triangle.styles : undefined}
-        _after={isYourMessage ? triangle.styles : undefined}
+        _before={contactMessage ? triangle.styles : undefined}
+        _after={!contactMessage ? triangle.styles : undefined}
       >
-        <MessageText bg={bg} text={text} isYourMessage={isYourMessage} />
+        <MessageText bg={bg} text={text} contactMessage={contactMessage} />
       </Flex>
       <CreatedAt text={createdAt} />
     </Stack>
