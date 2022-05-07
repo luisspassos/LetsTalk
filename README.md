@@ -10,6 +10,7 @@
 - testar direito essa conversation list
 - ver backlink na pagina de cadastro
 - ver responsividade direito
+- ver regras do firebase
 
 # NEXT PROJECT
 
