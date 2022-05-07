@@ -1,5 +1,5 @@
 import { Header } from '../components/Header';
-import { Stack, Heading, Text } from '@chakra-ui/react';
+import { Stack, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import { BackLink } from '../components/BackLink';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
@@ -126,7 +126,7 @@ export default function Register() {
         <Header />
         <AuthContentPageWrapper gap='150px'>
           <Stack
-            color='blue.900'
+            color={useColorModeValue('blue.900', 'gray.50')}
             spacing='20px'
             d={{ base: 'none', xl: 'flex' }}
           >

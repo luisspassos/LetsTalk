@@ -1,4 +1,4 @@
-import { FormErrorMessage } from '@chakra-ui/react';
+import { FormErrorMessage, useColorModeValue } from '@chakra-ui/react';
 
 export type InputErrorProps = {
   message: string;
@@ -6,7 +6,7 @@ export type InputErrorProps = {
 
 export function InputError({ message }: InputErrorProps) {
   return (
-    <FormErrorMessage mt='3px' color='red.600'>
+    <FormErrorMessage mt='3px' color={useColorModeValue('red.600', 'gray.50')}>
       {message}
     </FormErrorMessage>
   );

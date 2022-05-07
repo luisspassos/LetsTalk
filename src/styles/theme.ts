@@ -35,7 +35,11 @@ export const theme = extendTheme(
       global: (props: GlobalStyleProps) => ({
         body: {
           bg: props.colorMode === 'dark' ? 'blue.900' : 'gray.50',
-          color: 'gray.900',
+          color: props.colorMode === 'dark' ? 'gray.50' : 'gray.900',
+        },
+        '*::placeholder': {
+          color:
+            props.colorMode === 'dark' ? 'whiteAlpha.800' : 'blackAlpha.800',
         },
         '*::-webkit-scrollbar': {
           width: '12px',

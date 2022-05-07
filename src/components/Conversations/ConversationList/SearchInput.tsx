@@ -1,4 +1,10 @@
-import { Icon, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
+import {
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { FiSearch } from 'react-icons/fi';
 
 type SearchInputProps = {
@@ -26,7 +32,7 @@ export function SearchInput({
         fontSize={['14px', '15px', '16px']}
         borderRadius={['11px', '13px', '15px']}
         h={['40px', '44px', '48px']}
-        bg='white'
+        bg={useColorModeValue('white', 'gray.500')}
         placeholder='Pesquisar conversa...'
         boxShadow='sm'
         pl={['39px', '42px', '45px']}

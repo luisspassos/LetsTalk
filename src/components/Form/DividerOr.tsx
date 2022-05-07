@@ -1,16 +1,16 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
 
 export function DividerOr() {
   return (
     <Flex
       align='center'
       gap='3'
-      color='gray.400'
+      color={useColorModeValue('gray.400', 'gray.50')}
       my={['10px', '15px']}
       fontSize={['16px', '18px']}
       _before={{
         content: '""',
-        bg: 'gray.400',
+        bg: useColorModeValue('gray.400', 'gray.50'),
         h: '1px',
         w: '100%',
         d: 'block',
@@ -18,7 +18,7 @@ export function DividerOr() {
       }}
       _after={{
         content: '""',
-        bg: 'gray.400',
+        bg: useColorModeValue('gray.400', 'gray.50'),
         h: '1px',
         w: '100%',
         d: 'block',

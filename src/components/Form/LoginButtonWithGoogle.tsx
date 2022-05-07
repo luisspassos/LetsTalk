@@ -69,7 +69,7 @@ function LoginButtonWithGoogleComponent() {
       bg={useColorModeValue('white', 'gray.800')}
       w='100%'
       variant='outline'
-      borderColor='blue.900'
+      borderColor={useColorModeValue('blue.900', 'gray.50')}
       gap='5px'
       fontSize={{ base: '17px', sm: '18px' }}
       justifyContent='start'
@@ -78,10 +78,13 @@ function LoginButtonWithGoogleComponent() {
       isLoading={isLoading}
       loadingText='Entrar com o Google'
       spinner={<Spinner w='15px' h='15px' />}
+      _active={{
+        bgColor: useColorModeValue(undefined, 'blueAlpha.900'),
+      }}
       _hover={{
-        backgroundColor: 'gray.100',
+        backgroundColor: useColorModeValue('gray.100', 'gray.900'),
         _disabled: {
-          backgroundColor: 'white',
+          backgroundColor: useColorModeValue('white', 'gray.800'),
         },
       }}
     >

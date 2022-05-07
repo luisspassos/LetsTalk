@@ -1,10 +1,9 @@
-import { Link, Stack } from '@chakra-ui/react';
+import { Stack } from '@chakra-ui/react';
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
 import { LoginButtonWithGoogle } from '../components/Form/LoginButtonWithGoogle';
-import NextLink from 'next/link';
 import { Button } from '../components/Form/Button';
 import { RegistrationLink } from '../components/Form/RegistrationLink';
 import { useForm } from 'react-hook-form';
@@ -22,6 +21,7 @@ import { toast } from '../utils/Toasts/toast';
 import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
 import { PageTitle } from '../components/PageTitle';
 import { Header } from '../components/Header';
+import { ForgotMyPasswordLink } from '../components/Form/ForgotMyPasswordLink';
 
 type SignInFormData = {
   email: string;
@@ -220,17 +220,7 @@ const Login = ({ actionCode, mode }: LoginProps) => {
                 error={errors.password}
               />
             </Stack>
-            <NextLink href='/esqueci-minha-senha' passHref>
-              <Link
-                mt='6px'
-                mb='12px'
-                fontSize='15px'
-                color='gray.400'
-                d='inline-block'
-              >
-                Esqueci minha senha
-              </Link>
-            </NextLink>
+            <ForgotMyPasswordLink />
             <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
 
             <RegistrationLink />

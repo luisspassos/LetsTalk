@@ -1,5 +1,11 @@
 import NextLink from 'next/link';
-import { Link, Icon, Text, LinkProps } from '@chakra-ui/react';
+import {
+  Link,
+  Icon,
+  Text,
+  LinkProps,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { BiArrowBack } from 'react-icons/bi';
 
 type BackLinkProps = {
@@ -13,7 +19,7 @@ export function BackLink({ route, text, ...rest }: BackLinkProps) {
       <Link
         boxShadow={0}
         {...rest}
-        color='gray.400'
+        color={useColorModeValue('gray.400', 'gray.200')}
         alignItems='center'
         gap='.3rem'
         d='inline-flex'

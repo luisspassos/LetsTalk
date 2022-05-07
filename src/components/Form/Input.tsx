@@ -5,6 +5,7 @@ import {
   FormControl,
   FormLabelProps,
   FormHelperText,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { forwardRef, LegacyRef } from 'react';
 import { FieldError } from 'react-hook-form';
@@ -30,13 +31,19 @@ export const Input = forwardRef(
           display='inline-block'
           mb='0'
           fontSize='17px'
-          color='gray.400'
+          color={useColorModeValue('gray.400', 'gray.50')}
           htmlFor={id}
           {...labelProps}
         >
           {label}
         </FormLabel>
-        <ChakraInput ref={ref} h='49px' bg='white' id={id} {...inputProps} />
+        <ChakraInput
+          ref={ref}
+          h='49px'
+          bg={useColorModeValue('white', 'gray.500')}
+          id={id}
+          {...inputProps}
+        />
         <InputError message={error?.message ?? 'Erro'} />
 
         {helperText && (

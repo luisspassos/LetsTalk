@@ -1,4 +1,4 @@
-import { Flex, Heading, VStack } from '@chakra-ui/react';
+import { Flex, Heading, useColorModeValue, VStack } from '@chakra-ui/react';
 import { useConversationsTab } from '../../../contexts/ConversationsTabContext';
 import { Conversation } from './Conversation';
 import { ConversationDivider } from './Conversation/ConversationDivider';
@@ -32,7 +32,7 @@ export function ConversationListComponent() {
       display={isOpen ? 'flex' : 'none'}
       w={['265px', '295px', '335px']}
       h='100vh'
-      bg='gray.200'
+      bg={useColorModeValue('gray.200', 'gray.400')}
       p={['19px 19px 0', '22px 22px 0', '25px 25px 0']}
       direction='column'
     >
