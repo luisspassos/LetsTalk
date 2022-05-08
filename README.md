@@ -8,7 +8,6 @@
 - otimizar aplicação
 - ver responsividade direito
 - ver regras do firebase
-- ver piscada do tema
 - fazer tooltip ao fechar aba de conversas
 
 # NEXT PROJECT

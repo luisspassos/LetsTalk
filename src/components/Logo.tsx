@@ -11,9 +11,6 @@ export function Logo() {
           path: {
             fill: color,
             transform: 'translateX(267px) translateY(-3px)',
-            '@media only screen and (hover: none) and (pointer: coarse)': {
-              transform: 'translateX(247px) translateY(-3px)',
-            },
           },
           text: {
             fill: color,
