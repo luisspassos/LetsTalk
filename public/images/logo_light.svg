@@ -1,14 +1,37 @@
-<svg id="Logo" data-name="Logo" xmlns="http://www.w3.org/2000/svg" width="310" height="72" viewBox="0 0 310 72">
+<svg
+  id="Logo"
+  data-name="Logo"
+  xmlns="http://www.w3.org/2000/svg"
+  height="45"
+  viewBox="0 0 310 72"
+>
   <style>
     path {
-      fill: #FFF;
+      fill: #fff;
       transform: translateX(267px) translateY(-3px);
+    }
 
-      @media only screen and (hover: none) and (pointer: coarse) {
+    @media only screen and (hover: none) and (pointer: coarse) {
+      path {
         transform: translateX(247px) translateY(-3px);
       }
     }
   </style>
-  <text id="Let_s_Talk" data-name="Let&apos;s Talk" transform="translate(0 54)" fill="#FFF" font-size="51" font-family="Poppins-Bold, Poppins" font-weight="700" letter-spacing="0.04em"><tspan x="0" y="0">Let&apos;s Talk</tspan></text>
-  <path id="Icon_material-message" data-name="Icon material-message" d="M39,3H7A4,4,0,0,0,3.02,7L3,43l8-8H39a4.012,4.012,0,0,0,4-4V7A4.012,4.012,0,0,0,39,3ZM35,27H11V23H35Zm0-6H11V17H35Zm0-6H11V11H35Z" />
+  <text
+    id="Let_s_Talk"
+    data-name="Let's Talk"
+    transform="translate(0 54)"
+    fill="#FFF"
+    font-size="51"
+    font-family="Poppins-Bold, Poppins"
+    font-weight="700"
+    letter-spacing="0.04em"
+  >
+    <tspan x="0" y="0">Let&apos;s Talk</tspan>
+  </text>
+  <path
+    id="Icon_material-message"
+    data-name="Icon material-message"
+    d="M39,3H7A4,4,0,0,0,3.02,7L3,43l8-8H39a4.012,4.012,0,0,0,4-4V7A4.012,4.012,0,0,0,39,3ZM35,27H11V23H35Zm0-6H11V17H35Zm0-6H11V11H35Z"
+  />
 </svg>
