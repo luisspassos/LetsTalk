@@ -8,7 +8,7 @@
 - otimizar aplicação
 - ver responsividade direito
 - ver regras do firebase
-- testar modais da pagina de conversa e o resto
+- ver piscada do tema
 
 # NEXT PROJECT
 
