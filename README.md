@@ -11,7 +11,6 @@
 - ver piscada do tema
 - ver fontes em produção
 - fazer tooltip ao fechar aba de conversas
-- excluir svgs
 
 # NEXT PROJECT
 
