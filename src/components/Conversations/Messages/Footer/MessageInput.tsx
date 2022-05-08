@@ -35,7 +35,7 @@ export function MessageInput() {
         borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
         bg={useColorModeValue('white', 'blackAlpha.500')}
         fontFamily='Roboto'
-        h={['39px', '42px', '45px']}
+        h='45px'
         py={['9.75px', '10.5px', '11.25px']}
         overflowY='hidden'
         borderRadius={['11px', '13px', '15px']}

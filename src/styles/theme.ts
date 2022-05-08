@@ -49,7 +49,7 @@ export const theme = extendTheme(
             color: isDark ? 'whiteAlpha.800' : 'blackAlpha.800',
           },
           '*::-webkit-scrollbar': {
-            width: '12px',
+            width: ['8px', '10px', '12px'],
             backgroundColor: `transparent`,
           },
           '*::-webkit-scrollbar-thumb': {

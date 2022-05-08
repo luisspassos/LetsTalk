@@ -14,9 +14,9 @@ export function RecordButtonAudio() {
     >
       <IconButton
         flexShrink={0}
-        fontSize={['18px', '20px', '22px']}
-        w={['39px', '42px', '45px']}
-        h={['39px', '42px', '45px']}
+        fontSize='22px'
+        w='45px'
+        h='45px'
         borderRadius={['11px', '13px', '15px']}
         ml={['11px', '13px', '15px']}
         color='white'
