@@ -33,7 +33,7 @@ export function MessageInput() {
       <Textarea
         resize='none'
         borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
-        bg={useColorModeValue('white', 'gray.500')}
+        bg={useColorModeValue('white', 'blackAlpha.500')}
         fontFamily='Roboto'
         h={['39px', '42px', '45px']}
         py={['9.75px', '10.5px', '11.25px']}

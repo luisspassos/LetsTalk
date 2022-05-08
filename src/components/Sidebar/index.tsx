@@ -1,4 +1,4 @@
-import { Box, Flex, VStack } from '@chakra-ui/react';
+import { Box, Flex, useColorModeValue, VStack } from '@chakra-ui/react';
 import { MdMessage, MdOutlineMessage } from 'react-icons/md';
 import { BsGear, BsGearFill } from 'react-icons/bs';
 import { ImExit } from 'react-icons/im';
@@ -16,12 +16,14 @@ export function Sidebar() {
 
   return (
     <Flex
-      bg='gray.500'
+      bg={useColorModeValue('gray.500', 'blue.900')}
       direction='column'
       justify='space-between'
       align='center'
       px={['11px', '13px', '15px']}
       py={['16px', '18px', '20px']}
+      borderRight={useColorModeValue(undefined, '1px solid')}
+      borderRightColor={useColorModeValue(undefined, 'whiteAlpha.500')}
     >
       <Box>
         <Avatar />

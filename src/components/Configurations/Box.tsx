@@ -13,7 +13,7 @@ export function Box({ title, children }: BoxProps) {
       boxShadow='md'
       borderRadius='20px'
       minH={['400px', '530px']}
-      bg={useColorModeValue('white', 'gray.400')}
+      bg={useColorModeValue('white', 'blackAlpha.500')}
       flex='1'
       minW={{ base: '200px', sm: '300px' }}
       maxW='450px'
