@@ -9,7 +9,6 @@
 - ver responsividade direito
 - ver regras do firebase
 - ver piscada do tema
-- ver fontes em produção
 - fazer tooltip ao fechar aba de conversas
 
 # NEXT PROJECT
