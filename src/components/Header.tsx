@@ -7,11 +7,11 @@ export function Header() {
     <Box as='header' px={['8', '10']} pt={['4', '6']}>
       {colorModePreference && (
         <Image
-          h={['40px', '45px']}
-          w='193.75px'
+          // h={['40px', '45px']}
+          // w='193.75px'
           src={
             colorModePreference === 'dark'
-              ? '/images/logo_light.svg'
+              ? '/images/logo_light_png.png'
               : '/images/logo_dark.svg'
           }
           alt="Let's Talk"

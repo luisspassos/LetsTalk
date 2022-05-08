@@ -25,9 +25,6 @@ export default function Document() {
 
         <link rel='manifest' href='./manifest.json' />
 
-        <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
-        <meta name='viewport' content='viewport-fit=cover' />
-
         <meta
           name='description'
           content='Entre e converse com os seus amigos!'
