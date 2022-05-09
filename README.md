@@ -6,11 +6,7 @@
 - testar toda a aplicação em produção
 - fazer testes do jest
 - otimizar aplicação
-- ver responsividade direito
 - ver regras do firebase
-- fazer tooltip ao fechar aba de conversas
-- diminuir barra de scroll
-- aumentar o chat
 
 # NEXT PROJECT
 

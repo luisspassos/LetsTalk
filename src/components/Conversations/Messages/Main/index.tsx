@@ -1,21 +1,13 @@
 import { Stack } from '@chakra-ui/react';
+import { useConversations } from '../../../../contexts/ConversationsContext';
 import { Message } from './Message';
 
 export function Main() {
-  const messages = [
-    {
-      message: 'oiii',
-      id: 1,
-      contactMessage: true,
-      createdAtFormatted: 'Hoje às 19:47',
+  const {
+    currentConversation: {
+      data: { messages },
     },
-    {
-      message: 'oiii',
-      id: 2,
-      contactMessage: false,
-      createdAtFormatted: 'Hoje às 19:47',
-    },
-  ];
+  } = useConversations();
 
   return (
     <Stack
