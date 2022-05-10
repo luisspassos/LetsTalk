@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import {
   createContext,
   ReactNode,
@@ -9,11 +9,7 @@ import {
   useState,
 } from 'react';
 import { db } from '../services/firebase';
-import {
-  getConversations,
-  MessagesType,
-  UserConversationsDataType,
-} from '../utils/getConversations';
+import { getConversations } from '../utils/getConversations';
 
 import { useAuth } from './AuthContext';
 
@@ -21,10 +17,6 @@ type ConversationType = {
   uid: string;
   photoURL: string | null;
   name: string;
-  lastMessage: string;
-  updatedAt: number;
-  updatedAtFormatted: string;
-  messages: MessagesType;
 };
 
 export type ConversationsType = ConversationType[];
@@ -82,28 +74,20 @@ export function ConversationsProvider({
   // update conversation list
   useEffect(() => {
     if (user) {
-      let ignoreOnSnapshot = true;
+      let ignoreInitialOnSnapshot = true;
 
       const unsub = onSnapshot(
-        doc(db, 'conversations', user.username),
-        (userConversationsDoc) => {
-          if (ignoreOnSnapshot) {
-            ignoreOnSnapshot = false;
+        query(
+          collection(db, 'conversations'),
+          where('users', 'array-contains', user.uid)
+        ),
+        async (userConversationsDoc) => {
+          if (ignoreInitialOnSnapshot) {
+            ignoreInitialOnSnapshot = false;
           } else {
-            const updateConversations = async (
-              userConversationsDocData: UserConversationsDataType
-            ) => {
-              const conversations = await getConversations(
-                userConversationsDocData
-              );
+            const conversations = await getConversations(user.uid);
 
-              setConversations(conversations);
-            };
-
-            const userConversationsDocData =
-              userConversationsDoc.data() as UserConversationsDataType;
-
-            updateConversations(userConversationsDocData);
+            console.log(conversations);
           }
         }
       );

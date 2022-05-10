@@ -19,6 +19,8 @@ export function Tooltip({ children, label, ariaLabel, ...rest }: TooltipProps) {
       placement='right'
       label={label}
       aria-label={ariaLabel}
+      bgColor='gray.700'
+      color='gray.50'
       {...rest}
     >
       {children}

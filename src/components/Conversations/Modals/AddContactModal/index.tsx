@@ -14,6 +14,10 @@ export type AddContactFormData = {
   contactName: string;
 };
 
+type ContactUserData = {
+  uid: string;
+};
+
 const addContactFormSchema = yup.object().shape({
   contactName: yup
     .string()
@@ -38,8 +42,6 @@ export function AddContactModal() {
   const { isOpen, onClose } = useAddContactModal();
   const { user } = useAuth();
 
-  const username = user?.username;
-
   const handleAddContact = useMemo(
     () =>
       handleSubmit(async ({ contactName }) => {
@@ -49,28 +51,36 @@ export function AddContactModal() {
 
           const contactUserRef = doc(db, 'users', contactName);
           const contactUserSnap = await getDoc(contactUserRef);
+          const contactUserData = contactUserSnap.data() as ContactUserData;
+
           const contactExists = contactUserSnap.exists();
 
-          if (username && contactExists && contactName !== username) {
-            const { setDoc } = await import('firebase/firestore');
-
-            const contactRef = doc(
-              db,
-              'conversations',
-              username,
-              'messages',
-              contactName
+          if (
+            user?.username &&
+            contactExists &&
+            contactName !== user.username
+          ) {
+            const { addDoc, collection, query, where, getDocs } = await import(
+              'firebase/firestore'
             );
-            const contactSnap = await getDoc(contactRef);
 
-            if (contactSnap.exists()) {
+            const conversationsRef = collection(db, 'conversations');
+            const conversationRef = query(
+              conversationsRef,
+              where('users', '==', [user.uid, contactUserData.uid])
+            );
+            const conversationSnap = await getDocs(conversationRef);
+
+            if (!conversationSnap.empty) {
               setError('contactName', {
                 message: 'Este contato já existe',
               });
               return;
             }
 
-            setDoc(contactRef, {});
+            await addDoc(conversationsRef, {
+              users: [user.uid, contactUserData.uid],
+            });
 
             onClose();
             resetForm();
@@ -88,7 +98,7 @@ export function AddContactModal() {
           unknownErrorToast();
         }
       }),
-    [handleSubmit, setError, username, onClose, resetForm]
+    [handleSubmit, onClose, resetForm, setError, user?.username, user?.uid]
   );
 
   return (

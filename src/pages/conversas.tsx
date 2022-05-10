@@ -1,5 +1,4 @@
 import { Flex } from '@chakra-ui/react';
-import { doc, getDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
 import { useEffect } from 'react';
@@ -12,12 +11,8 @@ import {
   useConversations,
 } from '../contexts/ConversationsContext';
 import { useTab } from '../contexts/TabContext';
-import { db } from '../services/firebase';
 import { auth } from '../services/firebaseAdmin';
-import {
-  getConversations,
-  UserConversationsDataType,
-} from '../utils/getConversations';
+import { getConversations } from '../utils/getConversations';
 
 type ConversationsPageProps = {
   user: TokenUser;
@@ -70,13 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (
     const cookies = nookies.get(ctx);
     const user = await auth.verifyIdToken(cookies.token);
 
-    const userConversationsRef = doc(db, 'conversations', user?.name);
-    const userConversationsSnap = await getDoc(userConversationsRef);
-
-    const userConversationsSnapData =
-      userConversationsSnap.data() as UserConversationsDataType;
-
-    const conversations = await getConversations(userConversationsSnapData);
+    const conversations = await getConversations(user.uid);
 
     if (user) {
       const newUser = {

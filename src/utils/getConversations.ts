@@ -1,26 +1,8 @@
-import { formatDate } from './formatDate';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { api } from '../services/api';
+import { db } from '../services/firebase';
 
-export type MessagesType =
-  | {
-      id: string;
-      contactMessage: boolean;
-      message: string;
-      createdAt: number;
-      createdAtFormatted: string;
-    }[]
-  | undefined;
-
-export type UserConversationsDataType =
-  | Record<
-      string,
-      {
-        updatedAt: number;
-        messages: MessagesType;
-      }
-    >
-  | undefined;
-
-type ConversationUsersResponse = {
+type ContactsResponse = {
   users: {
     displayName: string;
     photoURL: string | undefined;
@@ -28,81 +10,30 @@ type ConversationUsersResponse = {
   }[];
 };
 
-export async function getConversations(
-  userConversationsData: UserConversationsDataType
-) {
-  if (!userConversationsData) return [];
+export async function getConversations(currentUserId: string) {
+  const conversationsRef = query(
+    collection(db, 'conversations'),
+    where('users', 'array-contains', currentUserId)
+  );
 
-  const { api } = await import('../services/api');
+  const conversationsSnap = await getDocs(conversationsRef);
 
-  const conversationUsersId = Object.keys(userConversationsData);
-  const conversationUsersIdFormatted = conversationUsersId.join(',');
+  if (conversationsSnap.empty) return [];
 
-  const conversationUsers = (
-    await api.get<ConversationUsersResponse>(
-      `getUsers?usersId=${conversationUsersIdFormatted}`
-    )
+  const contactsId = conversationsSnap.docs.map((doc) => doc.data().users[1]);
+  const contactsIdFormatted = contactsId.join(',');
+
+  const contactData = (
+    await api.get<ContactsResponse>(`getUsers?usersId=${contactsIdFormatted}`)
   ).data.users;
 
-  const databaseData = conversationUsersId.map((id) => {
-    const messages = userConversationsData[id].messages;
-    const lastMessage = messages ? messages[messages.length - 1].message : '';
-    const updatedAt = userConversationsData[id].updatedAt;
-
-    function formatCreatedAt(createdAt: number) {
-      const {
-        dateInArray: [date, hours],
-        isToday,
-      } = formatDate(new Date(createdAt));
-
-      if (isToday) {
-        return `Hoje, ${hours}.`;
-      } else {
-        return `${date}, ${hours}.`;
-      }
-    }
-
-    function formatUpdatedAt() {
-      const {
-        dateInArray: [date, hours],
-        isToday,
-      } = formatDate(new Date(updatedAt));
-
-      if (isToday) {
-        return hours;
-      } else {
-        return date;
-      }
-    }
-
-    const messagesFormatted = messages?.map((message) => ({
-      ...message,
-      createdAtFormatted: formatCreatedAt(message.createdAt),
-      createdAt: message.createdAt,
-    }));
-
-    const updatedAtFormatted = formatUpdatedAt();
-
-    return {
-      messages: messagesFormatted,
-      lastMessage,
-      updatedAtFormatted,
-      updatedAt,
-    };
-  });
-
-  const conversations = conversationUsers
-    .map(({ displayName, photoURL, uid }, i) => ({
-      uid,
+  const ContactDataFormatted = contactData.map(
+    ({ displayName, uid, photoURL }) => ({
+      name: displayName.split('#')[0],
       photoURL: photoURL ?? null,
-      name: String(displayName?.split('#')[0]),
-      lastMessage: databaseData[i].lastMessage,
-      updatedAt: databaseData[i].updatedAt,
-      updatedAtFormatted: databaseData[i].updatedAtFormatted,
-      messages: databaseData[i].messages,
-    }))
-    .sort((a, b) => a.updatedAt - b.updatedAt)
-    .reverse();
+      uid,
+    })
+  );
 
-  return conversations;
+  return ContactDataFormatted;
 }
