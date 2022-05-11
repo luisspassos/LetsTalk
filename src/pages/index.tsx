@@ -18,7 +18,7 @@ import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrappe
 import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
-import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
+import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
 import { Header } from '../components/Header';
 import { ForgotMyPasswordLink } from '../components/Form/ForgotMyPasswordLink';
@@ -48,7 +48,8 @@ export const toasts = {
       toast({
         status: 'error',
         title: 'Ocorreu um erro ao verificar o email',
-        description: 'Tente reenviar o email novamente',
+        description:
+          'Tente reenviar o email novamente logando com seu email e senha.',
       }),
     success: () =>
       toast({
@@ -236,10 +237,11 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const { mode, oobCode } = ctx.query;
 
-  const redirectionToConversations = await redirectToConversationsPage(ctx);
+  const redirectionToConversationsOrNot =
+    await redirectToConversationsPageOrNot(ctx);
 
-  if (redirectionToConversations) {
-    return redirectionToConversations;
+  if (redirectionToConversationsOrNot.redirect) {
+    return redirectionToConversationsOrNot;
   }
 
   if (mode === 'resetPassword') {

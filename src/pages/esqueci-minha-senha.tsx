@@ -12,8 +12,7 @@ import { CenterForm } from '../components/Form/CenterForm';
 import { toast } from '../utils/Toasts/toast';
 import { Box } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
-import nookies from 'nookies';
+import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
 
 type EmailFormData = {
@@ -132,17 +131,8 @@ export default function IForgotMyPassword() {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const cookies = nookies.get(ctx);
+  const redirectionToConversationsOrNot =
+    await redirectToConversationsPageOrNot(ctx);
 
-  if (!cookies.token) return { props: {} };
-
-  const redirectionToConversations = await redirectToConversationsPage(ctx);
-
-  if (redirectionToConversations) {
-    return redirectionToConversations;
-  }
-
-  return {
-    props: {},
-  };
+  return redirectionToConversationsOrNot;
 };

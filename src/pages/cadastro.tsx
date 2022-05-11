@@ -18,8 +18,7 @@ import { useMemo } from 'react';
 import { toast } from '../utils/Toasts/toast';
 import { useAuth } from '../contexts/AuthContext';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { redirectToConversationsPage } from '../utils/redirectToConversationsPage';
-import nookies from 'nookies';
+import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
 import { regexs } from '../utils/regexs';
 import { LoginLink } from '../components/Auth/LoginLink';
@@ -208,13 +207,8 @@ export default function Register() {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const cookies = nookies.get(ctx);
+  const redirectionToConversationsOrNot =
+    await redirectToConversationsPageOrNot(ctx);
 
-  if (!cookies.token) return { props: {} };
-
-  const redirectionToConversations = await redirectToConversationsPage(ctx);
-
-  if (redirectionToConversations) return redirectionToConversations;
-
-  return { props: {} };
+  return redirectionToConversationsOrNot;
 };

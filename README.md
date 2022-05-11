@@ -7,13 +7,8 @@
 - fazer testes do jest
 - otimizar aplicação
 - ver regras do firebase
-- trocar tag svg para box na logo
-- reenviar email de verificação se der erro
-- color dynamic no configurations
-- fazer onsnapshot
 - fazer env.example
-- testar se onSnapshot não é chamado globalmente
-- paginar esse onSnapshot
+- ver negocio sem nome no firebase dos googles
 
 # NEXT PROJECT
 

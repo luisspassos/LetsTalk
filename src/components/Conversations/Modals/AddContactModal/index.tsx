@@ -65,13 +65,16 @@ export function AddContactModal() {
             );
 
             const conversationsRef = collection(db, 'conversations');
+
+            const conversationUsersId = [user.uid, contactUserData.uid];
+
             const conversationRef = query(
               conversationsRef,
-              where('users', '==', [user.uid, contactUserData.uid])
+              where('users', '==', conversationUsersId)
             );
-            const conversationSnap = await getDocs(conversationRef);
+            const conversationSnap = async () => await getDocs(conversationRef);
 
-            if (!conversationSnap.empty) {
+            if (!(await conversationSnap()).empty) {
               setError('contactName', {
                 message: 'Este contato já existe',
               });
@@ -79,7 +82,20 @@ export function AddContactModal() {
             }
 
             await addDoc(conversationsRef, {
-              users: [user.uid, contactUserData.uid],
+              users: conversationUsersId,
+            });
+
+            const conversationDocumentId = (await conversationSnap()).docs[0]
+              .id;
+
+            conversationUsersId.forEach((id) => {
+              const conversationDocumentRef = doc(
+                db,
+                'conversations',
+                conversationDocumentId,
+                'usersInformation',
+                id
+              );
             });
 
             onClose();

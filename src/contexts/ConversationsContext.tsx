@@ -8,8 +8,12 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { api } from '../services/api';
 import { db } from '../services/firebase';
-import { getConversations } from '../utils/getConversations';
+import {
+  ContactsResponse,
+  ConversationUsersId,
+} from '../utils/getConversations';
 
 import { useAuth } from './AuthContext';
 
@@ -85,9 +89,23 @@ export function ConversationsProvider({
           if (ignoreInitialOnSnapshot) {
             ignoreInitialOnSnapshot = false;
           } else {
-            const conversations = await getConversations(user.uid);
+            const conversationUsersId = userConversationsDoc
+              .docChanges()[0]
+              .doc.data().users as ConversationUsersId;
 
-            console.log(conversations);
+            const contactId = conversationUsersId.find((id) => id !== user.uid);
+
+            const contactData = (
+              await api.get<ContactsResponse>(`getUsers?usersId=${contactId}`)
+            ).data.users[0];
+
+            const conversation = {
+              name: contactData.displayName.split('#')[0],
+              photoURL: contactData.photoURL ?? null,
+              uid: contactData.uid,
+            };
+
+            setConversations((prevState) => [conversation, ...prevState]);
           }
         }
       );

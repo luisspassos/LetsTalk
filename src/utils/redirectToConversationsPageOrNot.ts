@@ -2,12 +2,15 @@ import { GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
 import { firebaseAdmin } from '../services/firebaseAdmin';
 
-export async function redirectToConversationsPage(
+export async function redirectToConversationsPageOrNot(
   ctx: GetServerSidePropsContext
 ) {
-  const cookies = nookies.get(ctx);
+  const props = {
+    props: {},
+    redirect: undefined,
+  };
 
-  if (!cookies.token) return;
+  const cookies = nookies.get(ctx);
 
   function ObjectIsEmpty(obj: object) {
     for (let prop in obj) {
@@ -32,8 +35,9 @@ export async function redirectToConversationsPage(
         },
       };
     }
+
+    return props;
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.log(err);
+    return props;
   }
 }
