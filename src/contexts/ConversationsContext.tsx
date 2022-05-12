@@ -1,10 +1,4 @@
-import {
-  collection,
-  getDoc,
-  onSnapshot,
-  query,
-  where,
-} from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import {
   createContext,
   ReactNode,
@@ -96,8 +90,6 @@ export function ConversationsProvider({
           if (ignoreInitialOnSnapshot) {
             ignoreInitialOnSnapshot = false;
           } else {
-            const { doc } = await import('firebase/firestore');
-
             const userConversationDocData =
               userConversationsDoc.docChanges()[0].doc;
 
@@ -105,23 +97,6 @@ export function ConversationsProvider({
               .users as ConversationUsersId;
 
             const contactId = conversationUsersId.find((id) => id !== user.uid);
-
-            if (!contactId) return;
-
-            const { formatContactsUpdatedAt } = await import(
-              '../utils/formatDate'
-            );
-
-            const contactInformationRef = doc(
-              db,
-              'conversations',
-              userConversationDocData.id,
-              'usersInformation',
-              contactId
-            );
-
-            const contactInformationSnap = await getDoc(contactInformationRef);
-            const contactInformation = contactInformationSnap.data();
 
             const contactData = (
               await api.get<ContactsResponse>(`getUsers?usersId=${contactId}`)
@@ -131,7 +106,7 @@ export function ConversationsProvider({
               name: contactData.displayName.split('#')[0],
               photoURL: contactData.photoURL ?? null,
               uid: contactData.uid,
-              updatedAt: formatContactsUpdatedAt(contactInformation?.updatedAt),
+              updatedAt: '19:48',
             };
 
             setConversations((prevState) => [conversation, ...prevState]);
