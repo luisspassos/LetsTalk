@@ -14,3 +14,16 @@ export function formatDate(date: Date) {
 
   return { dateInArray, isToday: isToday() };
 }
+
+export function formatContactsUpdatedAt(updatedAt: number) {
+  const {
+    dateInArray: [date, hours],
+    isToday,
+  } = formatDate(new Date(updatedAt));
+
+  if (isToday) {
+    return hours;
+  } else {
+    return date;
+  }
+}

@@ -58,7 +58,7 @@ export function ConversationListComponent() {
         spacing={0}
       >
         <ConversationDivider position='sticky' top={0} left={0} mt={0} />
-        {fetchedConversations.map(({ uid, name, photoURL }, i) => (
+        {fetchedConversations.map(({ uid, name, photoURL, updatedAt }, i) => (
           <Conversation
             key={uid}
             index={i}
@@ -66,6 +66,7 @@ export function ConversationListComponent() {
             data={{
               name,
               photoURL,
+              updatedAt,
             }}
           />
         ))}

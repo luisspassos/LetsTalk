@@ -81,6 +81,8 @@ export function AddContactModal() {
               return;
             }
 
+            const { setDoc } = await import('firebase/firestore');
+
             await addDoc(conversationsRef, {
               users: conversationUsersId,
             });
@@ -88,15 +90,21 @@ export function AddContactModal() {
             const conversationDocumentId = (await conversationSnap()).docs[0]
               .id;
 
-            conversationUsersId.forEach((id) => {
-              const conversationDocumentRef = doc(
-                db,
-                'conversations',
-                conversationDocumentId,
-                'usersInformation',
-                id
-              );
-            });
+            await Promise.all(
+              conversationUsersId.map((id) => {
+                const conversationDocumentRef = doc(
+                  db,
+                  'conversations',
+                  conversationDocumentId,
+                  'usersInformation',
+                  id
+                );
+
+                return setDoc(conversationDocumentRef, {
+                  updatedAt: Date.now(),
+                });
+              })
+            );
 
             onClose();
             resetForm();
@@ -106,7 +114,7 @@ export function AddContactModal() {
                 'Não foi possível adicionar este usuário, talvez ele não exista',
             });
           }
-        } catch {
+        } catch (err) {
           const { unknownErrorToast } = await import(
             '../../../../utils/Toasts/unknownErrorToast'
           );

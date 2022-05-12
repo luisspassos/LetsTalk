@@ -1,4 +1,10 @@
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import {
+  collection,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+} from 'firebase/firestore';
 import {
   createContext,
   ReactNode,
@@ -21,6 +27,7 @@ type ConversationType = {
   uid: string;
   photoURL: string | null;
   name: string;
+  updatedAt: string;
 };
 
 export type ConversationsType = ConversationType[];
@@ -89,11 +96,32 @@ export function ConversationsProvider({
           if (ignoreInitialOnSnapshot) {
             ignoreInitialOnSnapshot = false;
           } else {
-            const conversationUsersId = userConversationsDoc
-              .docChanges()[0]
-              .doc.data().users as ConversationUsersId;
+            const { doc } = await import('firebase/firestore');
+
+            const userConversationDocData =
+              userConversationsDoc.docChanges()[0].doc;
+
+            const conversationUsersId = userConversationDocData.data()
+              .users as ConversationUsersId;
 
             const contactId = conversationUsersId.find((id) => id !== user.uid);
+
+            if (!contactId) return;
+
+            const { formatContactsUpdatedAt } = await import(
+              '../utils/formatDate'
+            );
+
+            const contactInformationRef = doc(
+              db,
+              'conversations',
+              userConversationDocData.id,
+              'usersInformation',
+              contactId
+            );
+
+            const contactInformationSnap = await getDoc(contactInformationRef);
+            const contactInformation = contactInformationSnap.data();
 
             const contactData = (
               await api.get<ContactsResponse>(`getUsers?usersId=${contactId}`)
@@ -103,6 +131,7 @@ export function ConversationsProvider({
               name: contactData.displayName.split('#')[0],
               photoURL: contactData.photoURL ?? null,
               uid: contactData.uid,
+              updatedAt: formatContactsUpdatedAt(contactInformation?.updatedAt),
             };
 
             setConversations((prevState) => [conversation, ...prevState]);
