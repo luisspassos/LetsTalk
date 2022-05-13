@@ -6,6 +6,7 @@ import { LastMessage } from './LastMessage';
 import { LastMessageTime } from './LastMessageTime';
 import { NumberOfUnreadMessages } from './NumberOfUnreadMessages';
 import { useConversations } from '../../../../contexts/ConversationsContext';
+import { useCallback } from 'react';
 
 type ConversationProps = {
   data: {
@@ -26,12 +27,19 @@ export function Conversation({
 
   const {
     currentConversation: {
-      index: currentConversationIndex,
+      data: currentConversation,
       changeCurrentConversationIndex,
     },
+    conversations: { data: conversations },
   } = useConversations();
 
   const bg = useColorModeValue('grayAlpha.500', 'whiteAlpha.100');
+
+  const handleChangeCurrentConversation = useCallback(() => {
+    changeCurrentConversationIndex(
+      conversations.findIndex((conversation) => conversation.name === name)
+    );
+  }, [changeCurrentConversationIndex, conversations, name]);
 
   return (
     <>
@@ -44,11 +52,11 @@ export function Conversation({
         flexShrink='0'
         cursor='pointer'
         transition='0.2s'
-        bg={index === currentConversationIndex ? bg : undefined}
+        bg={name === currentConversation.name ? bg : undefined}
         _hover={{
           bg: bg,
         }}
-        onClick={() => changeCurrentConversationIndex(index)}
+        onClick={handleChangeCurrentConversation}
       >
         <Avatar photoURL={photoURL} />
         <Flex justify='space-between' flex='1'>

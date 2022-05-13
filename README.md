@@ -10,8 +10,7 @@
 - fazer env.example
 - ver negocio sem nome no firebase dos googles
 - testar se ao adicionar um contato, o contato recebe na hora o contatado
-- padronizar getconversations e conversations context
-- tentar usar every no getConversations
+- ver conversation list desaparecendo
 
 # NEXT PROJECT
 

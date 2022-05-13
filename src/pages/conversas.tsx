@@ -26,7 +26,7 @@ export default function ConversationsPage({
   const { tab } = useTab();
   const { fillUser, addUsernameInDb } = useAuth();
   const {
-    conversations: { changeConversationsState },
+    conversations: { setConversations },
   } = useConversations();
 
   useEffect(() => {
@@ -34,14 +34,8 @@ export default function ConversationsPage({
 
     addUsernameInDb(user.username, user.uid);
 
-    changeConversationsState(conversations);
-  }, [
-    fillUser,
-    user,
-    changeConversationsState,
-    conversations,
-    addUsernameInDb,
-  ]);
+    setConversations(conversations);
+  }, [fillUser, user, setConversations, conversations, addUsernameInDb]);
 
   const CurrentTab = {
     conversations: Conversations,

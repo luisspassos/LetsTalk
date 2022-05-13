@@ -9,6 +9,8 @@ import { useAuth } from '../../../../contexts/AuthContext';
 import { UserInput } from './UserInput';
 import { ModalFormControl } from '../../../Modal/ModalFormControl';
 import { regexs } from '../../../../utils/regexs';
+import { ContactsResponse } from '../../../../utils/getConversations';
+import { useConversations } from '../../../../contexts/ConversationsContext';
 
 export type AddContactFormData = {
   contactName: string;
@@ -41,6 +43,9 @@ export function AddContactModal() {
 
   const { isOpen, onClose } = useAddContactModal();
   const { user } = useAuth();
+  const {
+    conversations: { setConversations },
+  } = useConversations();
 
   const handleAddContact = useMemo(
     () =>
@@ -90,6 +95,8 @@ export function AddContactModal() {
             const conversationDocumentId = (await conversationSnap()).docs[0]
               .id;
 
+            const updatedAt = Date.now();
+
             await Promise.all(
               conversationUsersId.map((id) => {
                 const conversationDocumentRef = doc(
@@ -101,11 +108,37 @@ export function AddContactModal() {
                 );
 
                 return setDoc(conversationDocumentRef, {
-                  updatedAt: Date.now(),
+                  updatedAt,
                 });
               })
             );
 
+            const addContactToConversationList = async () => {
+              const { api } = await import('../../../../services/api');
+              const { formatContactsUpdatedAt } = await import(
+                '../../../../utils/formatDate'
+              );
+
+              const { displayName, photoURL, uid } = (
+                await api.get<ContactsResponse>(
+                  `getUsers?usersId=${contactUserData.uid}`
+                )
+              ).data.users[0];
+
+              const contactDataFormatted = {
+                name: displayName.split('#')[0],
+                photoURL: photoURL ?? null,
+                uid,
+                updatedAt: formatContactsUpdatedAt(updatedAt),
+              };
+
+              setConversations((prevState) => [
+                contactDataFormatted,
+                ...prevState,
+              ]);
+            };
+
+            await addContactToConversationList();
             onClose();
             resetForm();
           } else {
@@ -122,7 +155,15 @@ export function AddContactModal() {
           unknownErrorToast();
         }
       }),
-    [handleSubmit, onClose, resetForm, setError, user?.username, user?.uid]
+    [
+      handleSubmit,
+      onClose,
+      resetForm,
+      setError,
+      user?.username,
+      user?.uid,
+      setConversations,
+    ]
   );
 
   return (

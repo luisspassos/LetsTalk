@@ -36,7 +36,7 @@ export async function getConversations(currentUserId: string) {
     const conversationUsersId = doc.data().users as ConversationUsersId;
 
     return conversationUsersId.find((id) => id !== currentUserId);
-  });
+  }) as string[];
 
   const contactsIdFormatted = contactsId.join(',');
 
@@ -47,7 +47,7 @@ export async function getConversations(currentUserId: string) {
         'conversations',
         id,
         'usersInformation',
-        contactsId[i] ?? ''
+        contactsId[i]
       );
 
       const contactsInformationSnap = getDoc(contactsInformationRef);
