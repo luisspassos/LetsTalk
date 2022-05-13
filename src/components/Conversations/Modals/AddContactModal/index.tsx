@@ -79,6 +79,8 @@ export function AddContactModal() {
             );
             const conversationSnap = async () => await getDocs(conversationRef);
 
+            console.log((await conversationSnap()).size);
+
             if (!(await conversationSnap()).empty) {
               setError('contactName', {
                 message: 'Este contato já existe',
@@ -90,6 +92,7 @@ export function AddContactModal() {
 
             await addDoc(conversationsRef, {
               users: conversationUsersId,
+              whoAdded: user.uid,
             });
 
             const conversationDocumentId = (await conversationSnap()).docs[0]
