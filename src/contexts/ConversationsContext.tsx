@@ -89,28 +89,29 @@ export function ConversationsProvider({
         async (userConversationsDoc) => {
           if (ignoreInitialOnSnapshot) {
             ignoreInitialOnSnapshot = false;
-          } else {
-            const userConversationDocData =
-              userConversationsDoc.docChanges()[0].doc;
-
-            const conversationUsersId = userConversationDocData.data()
-              .users as ConversationUsersId;
-
-            const contactId = conversationUsersId.find((id) => id !== user.uid);
-
-            const contactData = (
-              await api.get<ContactsResponse>(`getUsers?usersId=${contactId}`)
-            ).data.users[0];
-
-            const conversation = {
-              name: contactData.displayName.split('#')[0],
-              photoURL: contactData.photoURL ?? null,
-              uid: contactData.uid,
-              updatedAt: '19:48',
-            };
-
-            setConversations((prevState) => [conversation, ...prevState]);
+            return;
           }
+
+          const userConversationDocData =
+            userConversationsDoc.docChanges()[0].doc;
+
+          const conversationUsersId = userConversationDocData.data()
+            .users as ConversationUsersId;
+
+          const contactId = conversationUsersId.find((id) => id !== user.uid);
+
+          const contactData = (
+            await api.get<ContactsResponse>(`getUsers?usersId=${contactId}`)
+          ).data.users[0];
+
+          const conversation = {
+            name: contactData.displayName.split('#')[0],
+            photoURL: contactData.photoURL ?? null,
+            uid: contactData.uid,
+            updatedAt: '19:48',
+          };
+
+          setConversations((prevState) => [conversation, ...prevState]);
         }
       );
 
