@@ -23,10 +23,12 @@ type ContactUserData = {
   uid: string;
 };
 
-type ContactConversationDoc = {
-  whoAdded: string;
-  users: ConversationUsersId;
-};
+type ConversationDocWithContactData =
+  | {
+      users: ConversationUsersId;
+      usersParticipating: [string] | ConversationUsersId;
+    }
+  | undefined;
 
 const addContactFormSchema = yup.object().shape({
   contactName: yup
@@ -87,56 +89,28 @@ export function AddContactModal() {
             );
             const conversationSnap = async () => await getDocs(conversationRef);
 
-            const contactConversationDoc = (await conversationSnap()).docs.find(
-              (doc) => {
-                const docData = doc.data() as ContactConversationDoc;
+            const conversationDocWithContact = (
+              await conversationSnap()
+            ).docs.find((doc) => {
+              const docData = doc.data() as ConversationDocWithContactData;
 
-                return docData.users.includes(contactUserData.uid);
-              }
-            );
+              return docData?.users.includes(contactUserData.uid);
+            });
 
-            const contactConversationDocData =
-              contactConversationDoc?.data() as ContactConversationDoc;
+            const conversationDocWithContactData =
+              conversationDocWithContact?.data() as ConversationDocWithContactData;
 
-            const currentUserAdded =
-              contactConversationDocData.whoAdded === user.uid;
+            const contactExistsInConversationList =
+              conversationDocWithContactData?.usersParticipating.some(
+                (usersParticipating) => usersParticipating === user.uid
+              );
 
-            const existMessages;
-
-            if (contactConversationDoc) {
+            if (contactExistsInConversationList) {
               setError('contactName', {
                 message: 'Este contato já existe',
               });
               return;
             }
-
-            const { setDoc } = await import('firebase/firestore');
-
-            await addDoc(conversationsRef, {
-              users: conversationUsersId,
-              whoAdded: user.uid,
-            });
-
-            const conversationDocumentId = (await conversationSnap()).docs[0]
-              .id;
-
-            const updatedAt = Date.now();
-
-            await Promise.all(
-              conversationUsersId.map((id) => {
-                const conversationDocumentRef = doc(
-                  db,
-                  'conversations',
-                  conversationDocumentId,
-                  'usersInformation',
-                  id
-                );
-
-                return setDoc(conversationDocumentRef, {
-                  updatedAt,
-                });
-              })
-            );
 
             const addContactToConversationList = async () => {
               const { api } = await import('../../../../services/api');
@@ -161,11 +135,59 @@ export function AddContactModal() {
                 contactDataFormatted,
                 ...prevState,
               ]);
+
+              onClose();
+              resetForm();
             };
 
+            if (conversationDocWithContact?.exists) {
+              const { updateDoc, arrayUnion } = await import(
+                'firebase/firestore'
+              );
+
+              await updateDoc(conversationDocWithContact.ref, {
+                usersParticipating: arrayUnion(user.uid),
+              });
+
+              await addContactToConversationList();
+
+              return;
+            }
+
+            const { setDoc } = await import('firebase/firestore');
+
+            await addDoc(conversationsRef, {
+              users: conversationUsersId,
+              usersParticipating: [user.uid],
+            });
+
+            const updatedAt = Date.now();
+
+            const conversationDocumentId = (await conversationSnap()).docs.find(
+              (doc) => {
+                const docData = doc.data() as ConversationDocWithContactData;
+
+                return docData?.users.includes(contactUserData.uid);
+              }
+            )?.id;
+
+            await Promise.all(
+              conversationUsersId.map((id) => {
+                const conversationDocumentRef = doc(
+                  db,
+                  'conversations',
+                  String(conversationDocumentId),
+                  'usersInformation',
+                  id
+                );
+
+                return setDoc(conversationDocumentRef, {
+                  updatedAt,
+                });
+              })
+            );
+
             await addContactToConversationList();
-            onClose();
-            resetForm();
           } else {
             setError('contactName', {
               message:

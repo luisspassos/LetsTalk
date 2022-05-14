@@ -23,8 +23,7 @@ export type ConversationUsersId = [string, string];
 export async function getConversations(currentUserId: string) {
   const conversationsRef = query(
     collection(db, 'conversations'),
-    where('users', 'array-contains', currentUserId),
-    where('whoAdded', '==', currentUserId)
+    where('usersParticipating', 'array-contains', currentUserId)
   );
 
   const conversationsSnap = await getDocs(conversationsRef);
