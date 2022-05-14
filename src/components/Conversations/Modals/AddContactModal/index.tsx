@@ -9,7 +9,10 @@ import { useAuth } from '../../../../contexts/AuthContext';
 import { UserInput } from './UserInput';
 import { ModalFormControl } from '../../../Modal/ModalFormControl';
 import { regexs } from '../../../../utils/regexs';
-import { ContactsResponse } from '../../../../utils/getConversations';
+import {
+  ContactsResponse,
+  ConversationUsersId,
+} from '../../../../utils/getConversations';
 import { useConversations } from '../../../../contexts/ConversationsContext';
 
 export type AddContactFormData = {
@@ -18,6 +21,11 @@ export type AddContactFormData = {
 
 type ContactUserData = {
   uid: string;
+};
+
+type ContactConversationDoc = {
+  whoAdded: string;
+  users: ConversationUsersId;
 };
 
 const addContactFormSchema = yup.object().shape({
@@ -75,13 +83,27 @@ export function AddContactModal() {
 
             const conversationRef = query(
               conversationsRef,
-              where('users', '==', conversationUsersId)
+              where('users', 'array-contains', user.uid)
             );
             const conversationSnap = async () => await getDocs(conversationRef);
 
-            console.log((await conversationSnap()).size);
+            const contactConversationDoc = (await conversationSnap()).docs.find(
+              (doc) => {
+                const docData = doc.data() as ContactConversationDoc;
 
-            if (!(await conversationSnap()).empty) {
+                return docData.users.includes(contactUserData.uid);
+              }
+            );
+
+            const contactConversationDocData =
+              contactConversationDoc?.data() as ContactConversationDoc;
+
+            const currentUserAdded =
+              contactConversationDocData.whoAdded === user.uid;
+
+            const existMessages;
+
+            if (contactConversationDoc) {
               setError('contactName', {
                 message: 'Este contato já existe',
               });
