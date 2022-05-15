@@ -13,11 +13,9 @@ export const successToastWhenCopying = () =>
 export function CopyUsernameButton() {
   const { user } = useAuth();
   const handleCopyUsername = useCallback(() => {
-    if (!user?.username) return;
-
-    navigator.clipboard.writeText(user?.username);
+    navigator.clipboard.writeText(user.username);
     successToastWhenCopying();
-  }, [user?.username]);
+  }, [user.username]);
 
   return (
     <Button

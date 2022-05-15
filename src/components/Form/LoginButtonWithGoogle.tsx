@@ -32,7 +32,7 @@ function LoginButtonWithGoogleComponent() {
 
       const { user } = result;
 
-      const name = user.displayName ?? 'Usuário';
+      const name = user.displayName as string;
 
       if (result) {
         const { getAdditionalUserInfo } = await import('firebase/auth');

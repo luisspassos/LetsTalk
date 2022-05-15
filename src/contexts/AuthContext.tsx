@@ -42,16 +42,14 @@ type AuthContextData = {
     user,
     name,
   }: SetUsernameParams) => Promise<{ username: string }>;
-  fillUser: (newUser: TokenUser) => void;
+  fillUser: (newUser: UserType) => void;
   refreshToken: () => Promise<void>;
   addUsernameInDb: AddUsernameInDbFunc;
 };
 
-export type TokenUser = {
+export type UserType = {
   username: string;
 } & DecodedIdToken;
-
-type UserType = TokenUser | null;
 
 type SetUsernameParams = {
   user: User;
@@ -150,10 +148,10 @@ export const signInWithEmailAndPassword = async ({
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<UserType>(null);
+  const [user, setUser] = useState({} as UserType);
   const router = useRouter();
 
-  const fillUser = useCallback((newUser: TokenUser) => {
+  const fillUser = useCallback((newUser: UserType) => {
     setUser(newUser);
   }, []);
 
