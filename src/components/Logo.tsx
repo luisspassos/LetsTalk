@@ -5,6 +5,7 @@ export function Logo() {
 
   return (
     <Box
+      pointerEvents='none'
       sx={{
         '#Logo': {
           height: ['40px', '45px'],

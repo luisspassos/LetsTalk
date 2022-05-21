@@ -47,8 +47,6 @@ export default function ConversationsPage({
       setUserOnlineAt(Date.now());
     }
 
-    window.addEventListener('unload', unloadEvent);
-
     (async () => {
       fillUser(user);
 
@@ -57,11 +55,13 @@ export default function ConversationsPage({
       await addUsernameInDb(user.username, user.uid);
 
       setUserOnlineAt('now');
+
+      window.addEventListener('beforeunload', unloadEvent);
     })();
 
     return () => {
       setUserOnlineAt(Date.now());
-      // terminar de testar
+      window.removeEventListener('beforeunload', unloadEvent);
     };
   }, [
     fillUser,

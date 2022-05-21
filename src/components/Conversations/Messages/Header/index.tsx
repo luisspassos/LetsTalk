@@ -19,7 +19,7 @@ import { onSnapshot } from 'firebase/firestore';
 import { db } from '../../../../services/firebase';
 import { doc } from 'firebase/firestore';
 
-type OnlineAt = number | 'now' | '';
+type OnlineAt = number | 'now';
 
 type ContactDocumentData = {
   onlineAt: OnlineAt;
@@ -27,7 +27,7 @@ type ContactDocumentData = {
 };
 
 export function Header() {
-  const [onlineAt, setOnlineAt] = useState<OnlineAt>('');
+  const [onlineAt, setOnlineAt] = useState<OnlineAt>();
 
   const popoverInitialFocusRef = useRef(null);
 
