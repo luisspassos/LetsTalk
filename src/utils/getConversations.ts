@@ -8,17 +8,14 @@ import {
 } from 'firebase/firestore';
 import { api } from '../services/api';
 import { db } from '../services/firebase';
+import { ContactsResponse, ConversationUsersId } from '../types';
 import { formatContactsUpdatedAt } from './formatDate';
 
-export type ContactsResponse = {
-  users: {
-    displayName: string;
-    photoURL: string | undefined;
-    uid: string;
-  }[];
-};
-
-export type ConversationUsersId = [string, string];
+type MessageDoc =
+  | {
+      message: string;
+    }
+  | undefined;
 
 export async function getConversations(currentUserId: string) {
   const conversationsRef = query(
@@ -56,6 +53,22 @@ export async function getConversations(currentUserId: string) {
     })
   );
 
+  const messagesDocs = await Promise.all(
+    conversationDocumentsId.map((id) => {
+      const messagesRef = collection(db, 'conversations', id, 'messages');
+
+      const messagesSnap = getDocs(messagesRef);
+
+      return messagesSnap;
+    })
+  );
+
+  const lastMessages = messagesDocs.map((doc) => {
+    const docData = doc.docs.pop()?.data() as MessageDoc;
+
+    return docData?.message ?? '';
+  });
+
   const contactInformation = contactInformationDocs.map((doc) => ({
     updatedAt: formatContactsUpdatedAt(doc.data()?.updatedAt),
   }));
@@ -66,10 +79,12 @@ export async function getConversations(currentUserId: string) {
 
   const contactDataFormatted = contactData.map(
     ({ displayName, uid, photoURL }, i) => ({
-      name: displayName.split('#')[0],
-      photoURL: photoURL ?? null,
       uid,
+      photoURL: photoURL ?? null,
+      name: displayName.split('#')[0],
+      username: displayName,
       updatedAt: contactInformation[i].updatedAt,
+      lastMessage: lastMessages[i],
     })
   );
 

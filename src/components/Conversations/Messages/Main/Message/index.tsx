@@ -3,17 +3,12 @@ import { CreatedAt } from './CreatedAt';
 import { MessageText } from './MessageText';
 
 type MessageProps = {
-  contactMessage?: boolean;
-  data: {
-    text: string;
-    createdAt: string;
-  };
+  contactMessage: boolean;
+  message: string;
+  sentIn: string;
 };
 
-export function Message({
-  contactMessage,
-  data: { text, createdAt },
-}: MessageProps) {
+export function Message({ contactMessage, message, sentIn }: MessageProps) {
   const bg = {
     default: useColorModeValue('300', '500'),
     contactMessage: useColorModeValue('200', '400'),
@@ -71,9 +66,9 @@ export function Message({
         _before={contactMessage ? triangle.styles : undefined}
         _after={!contactMessage ? triangle.styles : undefined}
       >
-        <MessageText bg={bg} text={text} contactMessage={contactMessage} />
+        <MessageText bg={bg} text={message} contactMessage={contactMessage} />
       </Flex>
-      <CreatedAt text={createdAt} />
+      <CreatedAt text={sentIn} />
     </Stack>
   );
 }

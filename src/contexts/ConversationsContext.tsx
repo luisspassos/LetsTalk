@@ -13,7 +13,9 @@ type ConversationType = {
   uid: string;
   photoURL: string | null;
   name: string;
+  username: string;
   updatedAt: string;
+  lastMessage: string;
 };
 
 export type ConversationsType = ConversationType[];

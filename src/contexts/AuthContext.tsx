@@ -102,6 +102,7 @@ export const addUsernameInDb: AddUsernameInDbFunc = async (username, uid) => {
 
   await setDoc(usernameRef, {
     uid,
+    onlineAt: Date.now(),
   });
 };
 

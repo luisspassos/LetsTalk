@@ -7,7 +7,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useConversations } from '../../../../contexts/ConversationsContext';
 import { Tooltip } from '../../../Tooltip';
 import { Divider } from '../../../Divider';
@@ -15,11 +15,38 @@ import { ContactName } from './ContactName';
 import { ConversationInfoIconButton } from './ConversationInfo/IconButton';
 import { ConversationInfoPopover } from './ConversationInfo/Popover';
 import { ConversationsTabToggleButton } from './ConversationsTabToggleButton';
+import { onSnapshot } from 'firebase/firestore';
+import { db } from '../../../../services/firebase';
+import { doc } from 'firebase/firestore';
+
+type OnlineAt = number | 'now' | '';
+
+type ContactDocumentData = {
+  onlineAt: OnlineAt;
+  uid: string;
+};
 
 export function Header() {
+  const [onlineAt, setOnlineAt] = useState<OnlineAt>('');
+
   const popoverInitialFocusRef = useRef(null);
 
   const { currentConversation } = useConversations();
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      doc(db, 'users', currentConversation.data.username),
+      (doc) => {
+        const docData = doc.data() as ContactDocumentData;
+
+        setOnlineAt(docData.onlineAt);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+  }, [currentConversation.data.username]);
 
   return (
     <>
@@ -45,7 +72,7 @@ export function Header() {
           <VStack minW={0} align='start' spacing={0}>
             <ContactName text={currentConversation.data.name} />
             <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
-              Hoje ás 19:48
+              {onlineAt}
             </Text>
           </VStack>
         </Flex>

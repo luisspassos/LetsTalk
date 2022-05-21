@@ -58,18 +58,21 @@ export function ConversationListComponent() {
         spacing={0}
       >
         <ConversationDivider position='sticky' top={0} left={0} mt={0} />
-        {fetchedConversations.map(({ uid, name, photoURL, updatedAt }, i) => (
-          <Conversation
-            key={uid}
-            index={i}
-            numberOfConversations={numberOfConversations}
-            data={{
-              name,
-              photoURL,
-              updatedAt,
-            }}
-          />
-        ))}
+        {fetchedConversations.map(
+          ({ uid, name, photoURL, updatedAt, lastMessage }, i) => (
+            <Conversation
+              key={uid}
+              index={i}
+              numberOfConversations={numberOfConversations}
+              data={{
+                name,
+                photoURL,
+                updatedAt,
+                lastMessage,
+              }}
+            />
+          )
+        )}
       </VStack>
     </Flex>
   );

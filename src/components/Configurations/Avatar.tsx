@@ -6,6 +6,7 @@ import {
   useTheme,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useAuth } from '../../contexts/AuthContext';
 
 export function Avatar() {
   const {
@@ -13,6 +14,10 @@ export function Avatar() {
       blackAlpha: { [500]: blackAlpha500 },
     },
   } = useTheme();
+
+  const { user } = useAuth();
+
+  const [name, id] = user.username.split('#');
 
   return (
     <Flex
@@ -23,7 +28,7 @@ export function Avatar() {
     >
       <ChakraAvatar
         boxShadow={`1px 1px 8px 2px ${blackAlpha500}`}
-        src='https://github.com/luisspassos.png'
+        src={user.picture}
         w={['54px', '59px', '64px']}
         h={['54px', '59px', '64px']}
       />
@@ -38,16 +43,16 @@ export function Avatar() {
           lineHeight='20px'
           fontWeight='600'
           as='strong'
-          title='luis'
+          title={name}
         >
-          luissssssssssssssssssssssssssssssssssssssssss
+          {name}
         </Text>
         <Text
           color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
           fontSize={['12px', '13px', '14px']}
           as='small'
         >
-          #9837
+          #{id}
         </Text>
       </Stack>
     </Flex>

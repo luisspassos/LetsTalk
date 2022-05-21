@@ -13,13 +13,14 @@ type ConversationProps = {
     name: string;
     photoURL: string | null;
     updatedAt: string;
+    lastMessage: string;
   };
   index: number;
   numberOfConversations: number;
 };
 
 export function Conversation({
-  data: { name, photoURL, updatedAt },
+  data: { name, photoURL, updatedAt, lastMessage },
   index,
   numberOfConversations,
 }: ConversationProps) {
@@ -66,7 +67,7 @@ export function Conversation({
             justify='center'
           >
             <Name text={name} />
-            <LastMessage text='oiiiiiiiiiiiiiiiiiiiii' />
+            <LastMessage text={lastMessage} />
           </VStack>
           <VStack spacing={['1px', '1.5px', '2px']} h='100%' align='end'>
             <LastMessageTime text={updatedAt} />

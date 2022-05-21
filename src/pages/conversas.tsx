@@ -1,21 +1,23 @@
 import { Flex } from '@chakra-ui/react';
+import { doc, updateDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Configurations } from '../components/Configurations';
 import { Conversations } from '../components/Conversations';
 import { Sidebar } from '../components/Sidebar';
-import { TokenUser, useAuth } from '../contexts/AuthContext';
+import { UserType, useAuth } from '../contexts/AuthContext';
 import {
   ConversationsType,
   useConversations,
 } from '../contexts/ConversationsContext';
 import { useTab } from '../contexts/TabContext';
+import { db } from '../services/firebase';
 import { auth } from '../services/firebaseAdmin';
 import { getConversations } from '../utils/getConversations';
 
 type ConversationsPageProps = {
-  user: TokenUser;
+  user: UserType;
   conversations: ConversationsType;
 };
 
@@ -29,13 +31,46 @@ export default function ConversationsPage({
     conversations: { setConversations },
   } = useConversations();
 
+  const setUserOnlineAt = useCallback(
+    async (onlineAt: number | 'now') => {
+      const userRef = doc(db, 'users', user.username);
+
+      await updateDoc(userRef, {
+        onlineAt,
+      });
+    },
+    [user.username]
+  );
+
   useEffect(() => {
-    fillUser(user);
+    function unloadEvent() {
+      setUserOnlineAt(Date.now());
+    }
 
-    addUsernameInDb(user.username, user.uid);
+    window.addEventListener('unload', unloadEvent);
 
-    setConversations(conversations);
-  }, [fillUser, user, setConversations, conversations, addUsernameInDb]);
+    (async () => {
+      fillUser(user);
+
+      setConversations(conversations);
+
+      await addUsernameInDb(user.username, user.uid);
+
+      setUserOnlineAt('now');
+    })();
+
+    return () => {
+      setUserOnlineAt(Date.now());
+      // terminar de testar
+    };
+  }, [
+    fillUser,
+    user,
+    setConversations,
+    conversations,
+    addUsernameInDb,
+    setUserOnlineAt,
+  ]);
 
   const CurrentTab = {
     conversations: Conversations,
@@ -74,7 +109,9 @@ export const getServerSideProps: GetServerSideProps = async (
         },
       };
     }
-  } catch {}
+  } catch (err) {
+    console.log(err);
+  }
 
   return {
     redirect: {

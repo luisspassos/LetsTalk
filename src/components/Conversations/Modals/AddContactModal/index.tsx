@@ -9,11 +9,12 @@ import { useAuth } from '../../../../contexts/AuthContext';
 import { UserInput } from './UserInput';
 import { ModalFormControl } from '../../../Modal/ModalFormControl';
 import { regexs } from '../../../../utils/regexs';
+import { useConversations } from '../../../../contexts/ConversationsContext';
 import {
   ContactsResponse,
+  ConversationDocWithContactData,
   ConversationUsersId,
-} from '../../../../utils/getConversations';
-import { useConversations } from '../../../../contexts/ConversationsContext';
+} from '../../../../types';
 
 export type AddContactFormData = {
   contactName: string;
@@ -22,13 +23,6 @@ export type AddContactFormData = {
 type ContactUserData = {
   uid: string;
 };
-
-type ConversationDocWithContactData =
-  | {
-      users: ConversationUsersId;
-      usersParticipating: [string] | ConversationUsersId;
-    }
-  | undefined;
 
 type FullConversationDocData = {
   users: ConversationUsersId;

@@ -9,7 +9,8 @@
 - ver regras do firebase
 - fazer env.example
 - testar se ao adicionar um contato, o contato recebe na hora o contatado
-- ver conversation list desaparecendo
+- usar react hook query
+- ver responsivo da login page ao diminuir a tela
 
 # NEXT PROJECT
 
