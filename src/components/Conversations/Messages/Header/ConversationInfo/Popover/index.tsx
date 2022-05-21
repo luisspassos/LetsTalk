@@ -1,9 +1,5 @@
 import {
   HStack,
-  Icon,
-  Input,
-  InputGroup,
-  InputLeftElement,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
@@ -11,8 +7,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { ForwardedRef, forwardRef } from 'react';
-import { FiSearch } from 'react-icons/fi';
 import { BlockUserButton } from './BlockUser/Button';
+import { SearchInput } from './SearchInput';
 
 export const ConversationInfoPopover = forwardRef(
   (_, ref: ForwardedRef<HTMLInputElement>) => {
@@ -26,16 +22,7 @@ export const ConversationInfoPopover = forwardRef(
           </HStack>
         </PopoverHeader>
         <PopoverBody>
-          <InputGroup>
-            <InputLeftElement pointerEvents='none'>
-              <Icon as={FiSearch} />
-            </InputLeftElement>
-            <Input
-              ref={ref}
-              variant='flushed'
-              placeholder='Pesquisar na conversa'
-            />
-          </InputGroup>
+          <SearchInput ref={ref} />
           <BlockUserButton />
         </PopoverBody>
       </PopoverContent>

@@ -17,33 +17,36 @@ import { RenameUsernameModalProvider } from '../contexts/Modal/RenameUsernameMod
 import { DeleteAccountModalProvider } from '../contexts/Modal/DeleteAccountModalContext';
 import { ChangePasswordModalProvider } from '../contexts/Modal/ChangePasswordModalContext';
 import { ChangeEmailModalProvider } from '../contexts/Modal/ChangeEmailModalContext';
+import { SearchInConversationProvider } from '../contexts/SearchInConversationContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <ConversationsProvider>
-        <ConversationsTabProvider>
-          <AddContactModalProvider>
-            <BlockUserModalProvider>
-              <RenameUsernameModalProvider>
-                <DeleteAccountModalProvider>
-                  <ChangePasswordModalProvider>
-                    <ChangeEmailModalProvider>
-                      <TabProvider>
-                        <FadeInAnimationProvider>
-                          <ChakraProvider theme={theme}>
-                            <Component {...pageProps} />
-                          </ChakraProvider>
-                        </FadeInAnimationProvider>
-                      </TabProvider>
-                    </ChangeEmailModalProvider>
-                  </ChangePasswordModalProvider>
-                </DeleteAccountModalProvider>
-              </RenameUsernameModalProvider>
-            </BlockUserModalProvider>
-          </AddContactModalProvider>
-        </ConversationsTabProvider>
-      </ConversationsProvider>
+      <SearchInConversationProvider>
+        <ConversationsProvider>
+          <ConversationsTabProvider>
+            <AddContactModalProvider>
+              <BlockUserModalProvider>
+                <RenameUsernameModalProvider>
+                  <DeleteAccountModalProvider>
+                    <ChangePasswordModalProvider>
+                      <ChangeEmailModalProvider>
+                        <TabProvider>
+                          <FadeInAnimationProvider>
+                            <ChakraProvider theme={theme}>
+                              <Component {...pageProps} />
+                            </ChakraProvider>
+                          </FadeInAnimationProvider>
+                        </TabProvider>
+                      </ChangeEmailModalProvider>
+                    </ChangePasswordModalProvider>
+                  </DeleteAccountModalProvider>
+                </RenameUsernameModalProvider>
+              </BlockUserModalProvider>
+            </AddContactModalProvider>
+          </ConversationsTabProvider>
+        </ConversationsProvider>
+      </SearchInConversationProvider>
     </AuthProvider>
   );
 }

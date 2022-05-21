@@ -8,6 +8,7 @@ export function Messages() {
     <Flex
       maxW='1100px'
       mx='auto'
+      h='100vh'
       flex='1'
       minW={0}
       direction='column'
