@@ -27,3 +27,5 @@ export function formatContactsUpdatedAt(updatedAt: number) {
     return date;
   }
 }
+
+export function 
