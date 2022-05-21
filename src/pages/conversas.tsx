@@ -1,8 +1,8 @@
 import { Flex } from '@chakra-ui/react';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Configurations } from '../components/Configurations';
 import { Conversations } from '../components/Conversations';
 import { Sidebar } from '../components/Sidebar';
@@ -15,10 +15,16 @@ import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
 import { auth as adminAuth } from '../services/firebaseAdmin';
 import { getConversations } from '../utils/getConversations';
+import { OnlineAt } from '../types';
 
 type ConversationsPageProps = {
   user: UserType;
   conversations: ConversationsType;
+};
+
+type UserInfo = {
+  onlineAt: OnlineAt;
+  uid: string;
 };
 
 export default function ConversationsPage({
@@ -31,8 +37,13 @@ export default function ConversationsPage({
     conversations: { setConversations },
   } = useConversations();
 
+  const [
+    disableOnSnapshotOfUserInformation,
+    setDisableOnSnapshotOfUserInformation,
+  ] = useState(false);
+
   const setUserOnlineAt = useCallback(
-    async (onlineAt: number | 'now') => {
+    async (onlineAt: OnlineAt) => {
       const userRef = doc(db, 'users', user.username);
 
       await updateDoc(userRef, {
@@ -42,9 +53,25 @@ export default function ConversationsPage({
     [user.username]
   );
 
+  // leaves the user online if they have another tab open with the same account
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, 'users', user.username), (doc) => {
+      const { onlineAt } = doc.data() as UserInfo;
+
+      if (onlineAt === 'now' || disableOnSnapshotOfUserInformation) return;
+
+      setUserOnlineAt('now');
+    });
+
+    return () => {
+      unsub();
+    };
+  }, [user.username, setUserOnlineAt, disableOnSnapshotOfUserInformation]);
+
   useEffect(() => {
     function beforeUnloadEvent() {
       setUserOnlineAt(Date.now());
+      setDisableOnSnapshotOfUserInformation(true);
     }
 
     (async () => {
@@ -53,8 +80,6 @@ export default function ConversationsPage({
       setConversations(conversations);
 
       await addUsernameInDb(user.username, user.uid);
-
-      setUserOnlineAt('now');
 
       window.addEventListener('beforeunload', beforeUnloadEvent);
     })();

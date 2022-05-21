@@ -7,6 +7,12 @@ import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../types';
 import { Message } from './Message';
 
+type DbMessageData = {
+  author: string;
+  message: string;
+  sentIn: number;
+};
+
 type Message = {
   id: string;
   sentIn: string;
@@ -40,9 +46,33 @@ export function Main() {
         return docData?.users.includes(contact.uid);
       });
 
-      const currentConversationDocId = currentConversationDoc?.id;
+      const currentConversationDocId = currentConversationDoc?.id as string;
 
-      const messagesRef = collection(db, 'conversations');
+      const messagesRef = collection(
+        db,
+        'conversations',
+        currentConversationDocId,
+        'messages'
+      );
+
+      const messageDocs = await getDocs(messagesRef);
+
+      const { formatMessageSentIn } = await import(
+        '../../../../utils/formatDate'
+      );
+
+      const messagesFormatted = messageDocs.docs.map((message) => {
+        const messageData = message.data() as DbMessageData;
+
+        return {
+          id: message.id,
+          message: messageData.message,
+          contactMessage: messageData.author !== user.uid,
+          sentIn: formatMessageSentIn(messageData.sentIn),
+        };
+      });
+
+      setMessages(messagesFormatted);
     }
 
     getMessages();

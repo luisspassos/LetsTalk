@@ -46,3 +46,16 @@ export function formatContactOnlineAt(onlineAt: OnlineAt) {
     return `${date} ás ${hours}`;
   }
 }
+
+export function formatMessageSentIn(sentIn: number) {
+  const {
+    dateInArray: [date, hours],
+    isToday,
+  } = formatDate(new Date(sentIn));
+
+  if (isToday) {
+    return `Hoje, ${hours}.`;
+  } else {
+    return `${date}, ${hours}.`;
+  }
+}
