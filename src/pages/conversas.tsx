@@ -1,5 +1,4 @@
 import { Flex } from '@chakra-ui/react';
-import { onAuthStateChanged } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
@@ -14,7 +13,7 @@ import {
 } from '../contexts/ConversationsContext';
 import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
-import { auth } from '../services/firebaseAdmin';
+import { auth as adminAuth } from '../services/firebaseAdmin';
 import { getConversations } from '../utils/getConversations';
 
 type ConversationsPageProps = {
@@ -44,13 +43,7 @@ export default function ConversationsPage({
   );
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      console.log(user);
-    });
-  }, []);
-
-  useEffect(() => {
-    function unloadEvent() {
+    function beforeUnloadEvent() {
       setUserOnlineAt(Date.now());
     }
 
@@ -63,12 +56,12 @@ export default function ConversationsPage({
 
       setUserOnlineAt('now');
 
-      window.addEventListener('beforeunload', unloadEvent);
+      window.addEventListener('beforeunload', beforeUnloadEvent);
     })();
 
     return () => {
       setUserOnlineAt(Date.now());
-      window.removeEventListener('beforeunload', unloadEvent);
+      window.removeEventListener('beforeunload', beforeUnloadEvent);
     };
   }, [
     fillUser,
@@ -99,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   try {
     const cookies = nookies.get(ctx);
-    const user = await auth.verifyIdToken(cookies.token);
+    const user = await adminAuth.verifyIdToken(cookies.token);
 
     const conversations = await getConversations(user.uid);
 
