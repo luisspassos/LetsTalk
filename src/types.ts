@@ -14,3 +14,5 @@ export type ContactsResponse = {
     uid: string;
   }[];
 };
+
+export type OnlineAt = number | 'now';

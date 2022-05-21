@@ -1,3 +1,5 @@
+import { OnlineAt } from '../types';
+
 export function formatDate(date: Date) {
   function isToday() {
     const today = new Date();
@@ -28,4 +30,19 @@ export function formatContactsUpdatedAt(updatedAt: number) {
   }
 }
 
-export function 
+export function formatContactOnlineAt(onlineAt: OnlineAt) {
+  if (onlineAt === 'now') {
+    return 'online';
+  }
+
+  const {
+    dateInArray: [date, hours],
+    isToday,
+  } = formatDate(new Date(onlineAt));
+
+  if (isToday) {
+    return `Hoje ás ${hours}`;
+  } else {
+    return `${date} ás ${hours}`;
+  }
+}

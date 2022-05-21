@@ -18,8 +18,10 @@ import { ConversationsTabToggleButton } from './ConversationsTabToggleButton';
 import { onSnapshot } from 'firebase/firestore';
 import { db } from '../../../../services/firebase';
 import { doc } from 'firebase/firestore';
+import { OnlineAt } from '../../../../types';
+import { formatContactOnlineAt } from '../../../../utils/formatDate';
 
-type OnlineAt = number | 'now';
+type OnlineAtFormatted = string;
 
 type ContactDocumentData = {
   onlineAt: OnlineAt;
@@ -27,7 +29,7 @@ type ContactDocumentData = {
 };
 
 export function Header() {
-  const [onlineAt, setOnlineAt] = useState<OnlineAt>();
+  const [onlineAt, setOnlineAt] = useState<OnlineAtFormatted>();
 
   const popoverInitialFocusRef = useRef(null);
 
@@ -39,7 +41,9 @@ export function Header() {
       (doc) => {
         const docData = doc.data() as ContactDocumentData;
 
-        setOnlineAt(docData.onlineAt);
+        const onlineAtFormatted = formatContactOnlineAt(docData.onlineAt);
+
+        setOnlineAt(onlineAtFormatted);
       }
     );
 

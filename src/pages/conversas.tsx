@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/react';
+import { onAuthStateChanged } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
@@ -41,6 +42,12 @@ export default function ConversationsPage({
     },
     [user.username]
   );
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      console.log(user);
+    });
+  }, []);
 
   useEffect(() => {
     function unloadEvent() {
