@@ -40,7 +40,6 @@ export function Avatar() {
           maxW='316px'
           w='100%'
           fontSize={['16px', '17px', '18px']}
-          lineHeight='20px'
           fontWeight='600'
           as='strong'
           title={name}

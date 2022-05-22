@@ -7,7 +7,6 @@ import { useSearchInConversation } from '../../../../contexts/SearchInConversati
 import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../types';
 import { Message } from './Message';
-import {} from 'react-virtualized';
 
 type DbMessageData = {
   author: string;

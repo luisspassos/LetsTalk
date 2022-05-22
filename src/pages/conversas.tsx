@@ -55,7 +55,14 @@ export default function ConversationsPage({
 
   // leaves the user online if they have another tab open with the same account
   useEffect(() => {
+    let ignoreInitialOnSnapshot = true;
+
     const unsub = onSnapshot(doc(db, 'users', user.username), (doc) => {
+      if (ignoreInitialOnSnapshot) {
+        ignoreInitialOnSnapshot = false;
+        return;
+      }
+
       const { onlineAt } = doc.data() as UserInfo;
 
       if (onlineAt === 'now' || disableOnSnapshotOfUserInformation) return;

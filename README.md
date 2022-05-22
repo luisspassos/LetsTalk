@@ -11,6 +11,13 @@
 - testar se ao adicionar um contato, o contato recebe na hora o contatado
 - usar react hook query
 - ver destruição do cookie ao fechar o navegador
+- fazer desbloqueamento e bloqueamento do contato
+- deixar scroll no final
+- react virtual nas mensagens e na lista de conversas XD
+- ver infos ao adicionar contato
+- ver erro do online at ao entrar pela primeira vez
+- atualizar nome no contexto
+- ver se nome é atualizado na lista de conversas
 
 # NEXT PROJECT
 
