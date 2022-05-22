@@ -10,7 +10,7 @@
 - fazer env.example
 - testar se ao adicionar um contato, o contato recebe na hora o contatado
 - usar react hook query
-- ver responsivo da login page ao diminuir a tela
+- ver destruição do cookie ao fechar o navegador
 
 # NEXT PROJECT
 

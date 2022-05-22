@@ -43,7 +43,7 @@ export function formatContactOnlineAt(onlineAt: OnlineAt) {
   if (isToday) {
     return `Hoje ás ${hours}`;
   } else {
-    return `${date} ás ${hours}`;
+    return `online em ${date} ás ${hours}`;
   }
 }
 
