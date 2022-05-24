@@ -19,6 +19,8 @@
 - atualizar nome no contexto
 - ver se nome é atualizado na lista de conversas
 - ver tremedeira ao deixar usuario online
+- testar evento de unload em produção
+- nome duplicando no db ao usar aba anonima e a normal
 
 # NEXT PROJECT
 

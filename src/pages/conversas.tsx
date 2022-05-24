@@ -41,7 +41,7 @@ export default function ConversationsPage({
 
   const setUserOnlineAt = useCallback(
     async (onlineAt: OnlineAt, username: string) => {
-      if (!contextUser.username) return;
+      if (!user.username) return;
 
       const userRef = doc(db, 'users', username);
       const userSnap = await getDoc(userRef);
@@ -52,14 +52,14 @@ export default function ConversationsPage({
         onlineAt,
       });
     },
-    [contextUser.username]
+    [user.username]
   );
 
   // leaves the user online if they have another tab open with the same account
   useEffect(() => {
-    if (!contextUser.username) return;
+    if (!user.username) return;
 
-    const unsub = onSnapshot(doc(db, 'users', contextUser.username), (doc) => {
+    const unsub = onSnapshot(doc(db, 'users', user.username), (doc) => {
       const onlineAt = doc.data()?.onlineAt as OnlineAt;
       // verificar tipagem disso aq
 
@@ -75,18 +75,9 @@ export default function ConversationsPage({
     return () => {
       unsub();
     };
-  }, [
-    contextUser.username,
-    setUserOnlineAt,
-    disableOnSnapshotOfUserInformation,
-  ]);
+  }, [user.username, setUserOnlineAt, disableOnSnapshotOfUserInformation]);
 
   useEffect(() => {
-    function beforeUnloadEvent() {
-      setUserOnlineAt(Date.now(), contextUser.username);
-      setDisableOnSnapshotOfUserInformation(true);
-    }
-
     (async () => {
       if (!ignore) {
         fillUser(user);
@@ -97,13 +88,10 @@ export default function ConversationsPage({
 
         setIgnore(true);
       }
-
-      window.addEventListener('beforeunload', beforeUnloadEvent);
     })();
 
     return () => {
-      setUserOnlineAt(Date.now(), contextUser.username);
-      window.removeEventListener('beforeunload', beforeUnloadEvent);
+      setUserOnlineAt(Date.now(), user.username);
     };
   }, [
     fillUser,
@@ -113,8 +101,23 @@ export default function ConversationsPage({
     addUsernameInDb,
     setUserOnlineAt,
     ignore,
-    contextUser.username,
+    user.username,
   ]);
+
+  useEffect(() => {
+    async function beforeunloadEvent() {
+      setDisableOnSnapshotOfUserInformation(true);
+      await updateDoc(doc(db, 'users', user.username), {
+        onlineAt: Date.now(),
+      });
+    }
+
+    window.addEventListener('beforeunload', beforeunloadEvent);
+
+    return () => {
+      window.removeEventListener('beforeunload', beforeunloadEvent);
+    };
+  }, [user.username]);
 
   const CurrentTab = {
     conversations: Conversations,

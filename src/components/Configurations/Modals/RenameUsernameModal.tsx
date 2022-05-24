@@ -46,7 +46,9 @@ export function RenameUsernameModal() {
 
           if (!currentUser) return;
 
-          const { setDoc, doc, deleteDoc } = await import('firebase/firestore');
+          const { setDoc, doc, deleteDoc, updateDoc } = await import(
+            'firebase/firestore'
+          );
           const { updateProfile } = await import('firebase/auth');
           const { db } = await import('../../../services/firebase');
 
@@ -68,8 +70,6 @@ export function RenameUsernameModal() {
           await refreshToken();
 
           fillUser({ ...user, username: newName });
-
-          // fazer evento aqui
 
           onClose();
           resetForm();
