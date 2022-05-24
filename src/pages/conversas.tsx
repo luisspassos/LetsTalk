@@ -27,7 +27,7 @@ export default function ConversationsPage({
   conversations,
 }: ConversationsPageProps) {
   const { tab } = useTab();
-  const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
+  const { fillUser, addUsernameInDb } = useAuth();
   const {
     conversations: { setConversations },
   } = useConversations();
@@ -107,6 +107,11 @@ export default function ConversationsPage({
   useEffect(() => {
     async function beforeunloadEvent() {
       setDisableOnSnapshotOfUserInformation(true);
+
+      const doccc = await getDoc(doc(db, 'users', user.username));
+
+      if (!doccc.exists() || !doccc.data) return;
+
       await updateDoc(doc(db, 'users', user.username), {
         onlineAt: Date.now(),
       });

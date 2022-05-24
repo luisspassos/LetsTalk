@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
+import { updateDoc } from 'firebase/firestore';
 
 type RenameUsernameFormData = {
   name: string;
@@ -34,7 +35,7 @@ export function RenameUsernameModal() {
     resolver: yupResolver(RenameUsernameFormSchema),
   });
 
-  const { user, fillUser, refreshToken } = useAuth();
+  const { user, fillUser } = useAuth();
 
   const handleRenameUsername = useMemo(
     () =>
@@ -46,9 +47,7 @@ export function RenameUsernameModal() {
 
           if (!currentUser) return;
 
-          const { setDoc, doc, deleteDoc, updateDoc } = await import(
-            'firebase/firestore'
-          );
+          const { setDoc, doc, deleteDoc } = await import('firebase/firestore');
           const { updateProfile } = await import('firebase/auth');
           const { db } = await import('../../../services/firebase');
 
@@ -67,7 +66,11 @@ export function RenameUsernameModal() {
             displayName: newName,
           });
 
-          await refreshToken();
+          window.addEventListener('beforeunload', async () => {
+            await updateDoc(doc(db, 'users', newName), {
+              onlineAt: Date.now(),
+            });
+          });
 
           fillUser({ ...user, username: newName });
 
@@ -81,7 +84,7 @@ export function RenameUsernameModal() {
           unknownErrorToast();
         }
       }),
-    [handleSubmit, user, onClose, resetForm, fillUser, refreshToken]
+    [handleSubmit, user, onClose, resetForm, fillUser]
   );
 
   return (
