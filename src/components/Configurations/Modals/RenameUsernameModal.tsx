@@ -34,7 +34,7 @@ export function RenameUsernameModal() {
     resolver: yupResolver(RenameUsernameFormSchema),
   });
 
-  const { user, fillUser } = useAuth();
+  const { user, fillUser, refreshToken } = useAuth();
 
   const handleRenameUsername = useMemo(
     () =>
@@ -65,7 +65,11 @@ export function RenameUsernameModal() {
             displayName: newName,
           });
 
+          await refreshToken();
+
           fillUser({ ...user, username: newName });
+
+          // fazer evento aqui
 
           onClose();
           resetForm();
@@ -77,7 +81,7 @@ export function RenameUsernameModal() {
           unknownErrorToast();
         }
       }),
-    [handleSubmit, user, onClose, resetForm, fillUser]
+    [handleSubmit, user, onClose, resetForm, fillUser, refreshToken]
   );
 
   return (

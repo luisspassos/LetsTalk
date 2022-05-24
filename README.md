@@ -18,6 +18,7 @@
 - ver erro do online at ao entrar pela primeira vez
 - atualizar nome no contexto
 - ver se nome é atualizado na lista de conversas
+- ver tremedeira ao deixar usuario online
 
 # NEXT PROJECT
 

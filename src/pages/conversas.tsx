@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
 import { useCallback, useEffect, useState } from 'react';
@@ -22,20 +22,17 @@ type ConversationsPageProps = {
   conversations: ConversationsType;
 };
 
-type UserInfo = {
-  onlineAt: OnlineAt;
-  uid: string;
-};
-
 export default function ConversationsPage({
   user,
   conversations,
 }: ConversationsPageProps) {
   const { tab } = useTab();
-  const { fillUser, addUsernameInDb } = useAuth();
+  const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
   const {
     conversations: { setConversations },
   } = useConversations();
+
+  const [ignore, setIgnore] = useState(false);
 
   const [
     disableOnSnapshotOfUserInformation,
@@ -43,56 +40,69 @@ export default function ConversationsPage({
   ] = useState(false);
 
   const setUserOnlineAt = useCallback(
-    async (onlineAt: OnlineAt) => {
-      const userRef = doc(db, 'users', user.username);
+    async (onlineAt: OnlineAt, username: string) => {
+      if (!contextUser.username) return;
+
+      const userRef = doc(db, 'users', username);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) return;
 
       await updateDoc(userRef, {
         onlineAt,
       });
     },
-    [user.username]
+    [contextUser.username]
   );
 
   // leaves the user online if they have another tab open with the same account
   useEffect(() => {
-    let ignoreInitialOnSnapshot = true;
+    if (!contextUser.username) return;
 
-    const unsub = onSnapshot(doc(db, 'users', user.username), (doc) => {
-      if (ignoreInitialOnSnapshot) {
-        ignoreInitialOnSnapshot = false;
-        return;
-      }
+    const unsub = onSnapshot(doc(db, 'users', contextUser.username), (doc) => {
+      const onlineAt = doc.data()?.onlineAt as OnlineAt;
+      // verificar tipagem disso aq
 
-      const { onlineAt } = doc.data() as UserInfo;
+      if (!doc.data()) return;
+
+      const username = doc.id;
 
       if (onlineAt === 'now' || disableOnSnapshotOfUserInformation) return;
 
-      setUserOnlineAt('now');
+      setUserOnlineAt('now', username);
     });
 
     return () => {
       unsub();
     };
-  }, [user.username, setUserOnlineAt, disableOnSnapshotOfUserInformation]);
+  }, [
+    contextUser.username,
+    setUserOnlineAt,
+    disableOnSnapshotOfUserInformation,
+  ]);
 
   useEffect(() => {
     function beforeUnloadEvent() {
-      setUserOnlineAt(Date.now());
+      setUserOnlineAt(Date.now(), contextUser.username);
       setDisableOnSnapshotOfUserInformation(true);
     }
 
     (async () => {
-      fillUser(user);
+      if (!ignore) {
+        fillUser(user);
 
-      setConversations(conversations);
+        setConversations(conversations);
 
-      await addUsernameInDb(user.username, user.uid);
+        await addUsernameInDb(user.username, user.uid);
+
+        setIgnore(true);
+      }
 
       window.addEventListener('beforeunload', beforeUnloadEvent);
     })();
 
     return () => {
-      setUserOnlineAt(Date.now());
+      setUserOnlineAt(Date.now(), contextUser.username);
       window.removeEventListener('beforeunload', beforeUnloadEvent);
     };
   }, [
@@ -102,6 +112,8 @@ export default function ConversationsPage({
     conversations,
     addUsernameInDb,
     setUserOnlineAt,
+    ignore,
+    contextUser.username,
   ]);
 
   const CurrentTab = {
