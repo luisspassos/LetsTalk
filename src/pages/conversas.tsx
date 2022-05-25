@@ -12,7 +12,7 @@ import {
   useConversations,
 } from '../contexts/ConversationsContext';
 import { useTab } from '../contexts/TabContext';
-import { db } from '../services/firebase';
+import { auth, db } from '../services/firebase';
 import { auth as adminAuth } from '../services/firebaseAdmin';
 import { getConversations } from '../utils/getConversations';
 import { OnlineAt } from '../types';
@@ -123,6 +123,26 @@ export default function ConversationsPage({
       window.removeEventListener('beforeunload', beforeunloadEvent);
     };
   }, [user.username]);
+
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser?.displayName) return;
+
+    if (currentUser?.displayName !== user.username) {
+      fillUser({ ...user, username: currentUser?.displayName });
+    }
+  }, [user, fillUser]);
+
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+
+    if (!currentUser?.displayName) return;
+
+    return () => {
+      setUserOnlineAt(Date.now(), String(currentUser.displayName));
+    };
+  }, [setUserOnlineAt]);
 
   const CurrentTab = {
     conversations: Conversations,

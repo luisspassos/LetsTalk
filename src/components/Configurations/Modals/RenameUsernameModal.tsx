@@ -66,8 +66,8 @@ export function RenameUsernameModal() {
             displayName: newName,
           });
 
-          window.addEventListener('beforeunload', async () => {
-            await updateDoc(doc(db, 'users', newName), {
+          window.addEventListener('beforeunload', () => {
+            updateDoc(doc(db, 'users', newName), {
               onlineAt: Date.now(),
             });
           });
