@@ -25,7 +25,7 @@ export function ThemeSelect() {
 
   return (
     <HStack mt={['9px', '12px', '15px']}>
-      <Text fontSize={['15px', '15.5px', '16px']}>Tema: </Text>
+      <Text fontSize={['15px', '15.5px', '16px']}>Tema </Text>
       <Menu>
         <MenuButton
           w={['134px', '139px', '144px']}

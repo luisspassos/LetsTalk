@@ -6,6 +6,6 @@ export function DeleteAccountButton() {
   const { onOpen } = useDeleteAccountModal();
 
   return (
-    <Button onClick={onOpen} text='Deletar conta' leftIcon={RiDeleteBin2Line} />
+    <Button onClick={onOpen} text='Deletar conta' icon={RiDeleteBin2Line} />
   );
 }

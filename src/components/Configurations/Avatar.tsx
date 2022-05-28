@@ -17,7 +17,7 @@ export function Avatar() {
 
   const { user } = useAuth();
 
-  const [name, id] = user.username.split('#');
+  const username = user?.username.split('#');
 
   return (
     <Flex
@@ -28,7 +28,7 @@ export function Avatar() {
     >
       <ChakraAvatar
         boxShadow={`1px 1px 8px 2px ${blackAlpha500}`}
-        src={user.picture}
+        src={user?.picture}
         w={['54px', '59px', '64px']}
         h={['54px', '59px', '64px']}
       />
@@ -42,16 +42,16 @@ export function Avatar() {
           fontSize={['16px', '17px', '18px']}
           fontWeight='600'
           as='strong'
-          title={name}
+          title={username?.[0]}
         >
-          {name}
+          {username?.[0]}
         </Text>
         <Text
           color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
           fontSize={['12px', '13px', '14px']}
           as='small'
         >
-          #{id}
+          #{username?.[1]}
         </Text>
       </Stack>
     </Flex>

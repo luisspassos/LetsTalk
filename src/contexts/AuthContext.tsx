@@ -45,11 +45,14 @@ type AuthContextData = {
   fillUser: (newUser: UserType) => void;
   refreshToken: () => Promise<void>;
   addUsernameInDb: AddUsernameInDbFunc;
+  isLoggedInWithGoogle: boolean;
 };
 
-export type UserType = {
-  username: string;
-} & DecodedIdToken;
+export type UserType =
+  | ({
+      username: string;
+    } & DecodedIdToken)
+  | undefined;
 
 type SetUsernameParams = {
   user: User;
@@ -149,16 +152,27 @@ export const signInWithEmailAndPassword = async ({
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState({} as UserType);
+  const [user, setUser] = useState<UserType>();
   const router = useRouter();
 
   const fillUser = useCallback((newUser: UserType) => {
     setUser(newUser);
   }, []);
 
+  const isLoggedInWithGoogle =
+    user?.firebase?.sign_in_provider === 'google.com';
+
   const signOut = async () => {
-    const { auth } = await import('../services/firebase');
+    const { auth, db } = await import('../services/firebase');
     const { signOut } = await import('firebase/auth');
+    const { doc, updateDoc } = await import('firebase/firestore');
+
+    if (!user) return;
+
+    const userRef = doc(db, 'users', user.username);
+    updateDoc(userRef, {
+      onlineAt: Date.now(),
+    });
 
     signOut(auth);
     router.push('/');
@@ -203,6 +217,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         signOut,
         user,
         addUsernameInDb,
+        isLoggedInWithGoogle,
       }}
     >
       {children}

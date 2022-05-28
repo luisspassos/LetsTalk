@@ -15,13 +15,19 @@
 - deixar scroll no final
 - react virtual nas mensagens e na lista de conversas XD
 - ver infos ao adicionar contato
-- ver erro do online at ao entrar pela primeira vez
-- atualizar nome no contexto
 - ver se nome é atualizado na lista de conversas
-- ver tremedeira ao deixar usuario online
-- testar evento de unload em produção
 - nome duplicando no db ao usar aba anonima e a normal
 - ver box shadow estranho na modal
+- ver regras do storage
+- lidar com erros ao trocar foto de perfil
+- testar conversas depois que a conta for excluida
+- excluir foto no storage se usuario for excluido
+- desativar mecanismo de senha ao deletar a conta com o sign with google
+- ver lentidao ao trocar foto
+- ver lentidao ao excluir conta
+- ver lentidao ao sair
+- transformar funções de deletar em obj no deleteAccModal
+- tirar setUseronlineAt
 
 # NEXT PROJECT
 
@@ -31,3 +37,4 @@
 - Fazer my template next js
 - usar create pwa no proximo projeto
 - colocar atributo lang no html
+- fazer ações do db ou pagamento no api route

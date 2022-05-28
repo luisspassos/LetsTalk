@@ -5,5 +5,5 @@ import { Button } from './Button';
 export function ExitButton() {
   const { signOut } = useAuth();
 
-  return <Button onClick={signOut} text='Sair' leftIcon={ImExit} />;
+  return <Button onClick={signOut} text='Sair' icon={ImExit} />;
 }

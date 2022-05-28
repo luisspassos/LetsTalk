@@ -76,6 +76,24 @@ export const toasts = {
         title: 'Senha atualizada com sucesso',
       }),
   },
+  recoverEmail: {
+    error: async () => {
+      const { toast } = await import('../utils/Toasts/toast');
+
+      toast({
+        status: 'error',
+        title: 'Ocorreu um erro ao tentar recuperar seu email',
+      });
+    },
+    success: async () => {
+      const { toast } = await import('../utils/Toasts/toast');
+
+      toast({
+        status: 'success',
+        title: 'Seu email foi recuperado com sucesso!',
+      });
+    },
+  },
 };
 
 const signInFormSchema = yup.object().shape({
@@ -120,6 +138,23 @@ const Login = ({ actionCode, mode }: LoginProps) => {
           toasts.emailVerification.success();
         } catch (err) {
           toasts.emailVerification.error();
+        }
+      })();
+    }
+  }, [mode, actionCode]);
+
+  // recover email
+  useEffect(() => {
+    if (mode === 'recoverEmail') {
+      (async () => {
+        const { checkActionCode } = await import('firebase/auth');
+
+        try {
+          await checkActionCode(auth, actionCode);
+          await applyActionCode(auth, actionCode);
+          toasts.recoverEmail.success();
+        } catch {
+          toasts.recoverEmail.error();
         }
       })();
     }

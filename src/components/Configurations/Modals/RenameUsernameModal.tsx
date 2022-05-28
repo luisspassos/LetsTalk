@@ -8,8 +8,7 @@ import { regexs } from '../../../utils/regexs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
-import { updateDoc } from 'firebase/firestore';
+import { refreshToken, useAuth } from '../../../contexts/AuthContext';
 
 type RenameUsernameFormData = {
   name: string;
@@ -51,6 +50,8 @@ export function RenameUsernameModal() {
           const { updateProfile } = await import('firebase/auth');
           const { db } = await import('../../../services/firebase');
 
+          if (!user) return;
+
           const id = user.username.split('#')[1];
 
           const newName = `${name}#${id}`;
@@ -66,11 +67,7 @@ export function RenameUsernameModal() {
             displayName: newName,
           });
 
-          window.addEventListener('beforeunload', () => {
-            updateDoc(doc(db, 'users', newName), {
-              onlineAt: Date.now(),
-            });
-          });
+          await refreshToken();
 
           fillUser({ ...user, username: newName });
 

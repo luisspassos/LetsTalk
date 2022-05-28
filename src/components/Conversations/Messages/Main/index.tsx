@@ -109,6 +109,8 @@ export function Main() {
 
   useEffect(() => {
     async function getMessages() {
+      if (!user?.uid) return;
+
       const conversationsRef = query(
         collection(db, 'conversations'),
         where('usersParticipating', 'array-contains', user.uid)
@@ -154,7 +156,7 @@ export function Main() {
     }
 
     // getMessages();
-  }, [user.uid, contact.uid]);
+  }, [user?.uid, contact.uid]);
 
   return (
     <Stack

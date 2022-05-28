@@ -13,15 +13,17 @@ export const successToastWhenCopying = () =>
 export function CopyUsernameButton() {
   const { user } = useAuth();
   const handleCopyUsername = useCallback(() => {
+    if (!user?.username) return;
+
     navigator.clipboard.writeText(user.username);
     successToastWhenCopying();
-  }, [user.username]);
+  }, [user?.username]);
 
   return (
     <Button
       onClick={handleCopyUsername}
       text='Copiar nome de perfil'
-      leftIcon={RiFileCopy2Line}
+      icon={RiFileCopy2Line}
     />
   );
 }

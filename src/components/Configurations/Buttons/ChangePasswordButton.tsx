@@ -6,10 +6,6 @@ export function ChangePasswordButton() {
   const { onOpen } = useChangePasswordModal();
 
   return (
-    <Button
-      onClick={onOpen}
-      text='Trocar senha'
-      leftIcon={RiLockPasswordLine}
-    />
+    <Button onClick={onOpen} text='Trocar senha' icon={RiLockPasswordLine} />
   );
 }

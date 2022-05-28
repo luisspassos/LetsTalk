@@ -73,6 +73,8 @@ export function AddContactModal() {
 
           const contactExists = contactUserSnap.exists();
 
+          if (!user) return;
+
           if (!contactExists || contactName === user.username) {
             setError('contactName', {
               message:

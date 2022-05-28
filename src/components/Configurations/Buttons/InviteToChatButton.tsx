@@ -26,7 +26,7 @@ export function InviteToChatButton() {
     <Button
       onClick={handleOpenModal}
       text='Convidar para conversar'
-      leftIcon={FiShare2}
+      icon={FiShare2}
     />
   );
 }

@@ -17,8 +17,11 @@ import { RenameUsernameModal } from './Modals/RenameUsernameModal';
 import { ChangeEmailModal } from './Modals/ChangeEmailModal';
 import { ChangePasswordModal } from './Modals/ChangePasswordModal';
 import { DeleteAccountModal } from './Modals/DeleteAccountModal';
+import { useAuth } from '../../contexts/AuthContext';
 
 export function Configurations() {
+  const { isLoggedInWithGoogle } = useAuth();
+
   return (
     <>
       <DeleteAccountModal />
@@ -50,8 +53,12 @@ export function Configurations() {
         <Box title='Configurações de conta'>
           <ThemeSelect />
           <ButtonStack>
-            <SwitchEmailButton />
-            <ChangePasswordButton />
+            {!isLoggedInWithGoogle && (
+              <>
+                <SwitchEmailButton />
+                <ChangePasswordButton />
+              </>
+            )}
             <DeleteAccountButton />
             <ExitButton />
           </ButtonStack>

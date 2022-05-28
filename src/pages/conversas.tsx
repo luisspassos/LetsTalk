@@ -1,8 +1,9 @@
 import { Flex } from '@chakra-ui/react';
-import { doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/router';
 import nookies from 'nookies';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Configurations } from '../components/Configurations';
 import { Conversations } from '../components/Conversations';
 import { Sidebar } from '../components/Sidebar';
@@ -11,138 +12,114 @@ import {
   ConversationsType,
   useConversations,
 } from '../contexts/ConversationsContext';
+import { useOnlineAtEvents } from '../contexts/onlineAtEventsContext';
 import { useTab } from '../contexts/TabContext';
-import { auth, db } from '../services/firebase';
+import { db } from '../services/firebase';
 import { auth as adminAuth } from '../services/firebaseAdmin';
 import { getConversations } from '../utils/getConversations';
-import { OnlineAt } from '../types';
 
 type ConversationsPageProps = {
   user: UserType;
   conversations: ConversationsType;
 };
 
+function createLocationchangeEvent() {
+  let oldPushState = history.pushState;
+  history.pushState = function pushState() {
+    const args: any = arguments;
+    let ret = oldPushState.apply(this, args);
+    window.dispatchEvent(new Event('pushstate'));
+    window.dispatchEvent(new Event('locationchange'));
+    return ret;
+  };
+
+  let oldReplaceState = history.replaceState;
+  history.replaceState = function replaceState() {
+    const args: any = arguments;
+    let ret = oldReplaceState.apply(this, args);
+    window.dispatchEvent(new Event('replacestate'));
+    window.dispatchEvent(new Event('locationchange'));
+    return ret;
+  };
+
+  window.addEventListener('popstate', () => {
+    window.dispatchEvent(new Event('locationchange'));
+  });
+}
+
 export default function ConversationsPage({
   user,
   conversations,
 }: ConversationsPageProps) {
   const { tab } = useTab();
-  const { fillUser, addUsernameInDb } = useAuth();
+  const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
   const {
     conversations: { setConversations },
   } = useConversations();
+  const { takeUserOffline, takeUserOnline, setUserOnlineAt, clearAllEvents } =
+    useOnlineAtEvents();
 
-  const [ignore, setIgnore] = useState(false);
+  const router = useRouter();
 
-  const [
-    disableOnSnapshotOfUserInformation,
-    setDisableOnSnapshotOfUserInformation,
-  ] = useState(false);
+  const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
-  const setUserOnlineAt = useCallback(
-    async (onlineAt: OnlineAt, username: string) => {
-      if (!user.username) return;
-
-      const userRef = doc(db, 'users', username);
-      const userSnap = await getDoc(userRef);
-
-      if (!userSnap.exists()) return;
-
-      await updateDoc(userRef, {
-        onlineAt,
-      });
-    },
-    [user.username]
-  );
-
-  // leaves the user online if they have another tab open with the same account
   useEffect(() => {
-    if (!user.username) return;
+    fillUser(user);
+    setConversations(conversations);
+  }, [conversations, fillUser, setConversations, user]);
 
-    const unsub = onSnapshot(doc(db, 'users', user.username), (doc) => {
-      const onlineAt = doc.data()?.onlineAt as OnlineAt;
-      // verificar tipagem disso aq
+  useEffect(() => {
+    function checkIfUserAccHasBeenDeleted() {
+      if (!contextUser) return;
 
-      if (!doc.data()) return;
+      const unsub = onSnapshot(
+        doc(db, 'users', contextUser?.username),
+        (doc) => {
+          if (!doc.exists()) {
+            clearAllEvents();
+            router.push('/');
+          }
+        }
+      );
 
-      const username = doc.id;
+      return unsub;
+    }
 
-      if (onlineAt === 'now' || disableOnSnapshotOfUserInformation) return;
-
-      setUserOnlineAt('now', username);
-    });
+    const unsub = checkIfUserAccHasBeenDeleted();
 
     return () => {
-      unsub();
+      unsub && unsub();
     };
-  }, [user.username, setUserOnlineAt, disableOnSnapshotOfUserInformation]);
+  }, [contextUser, router, clearAllEvents]);
 
   useEffect(() => {
     (async () => {
-      if (!ignore) {
-        fillUser(user);
+      // it will only add the user in the db when starting the application
 
-        setConversations(conversations);
-
+      if (!ignoreAddingUserInDb && user) {
         await addUsernameInDb(user.username, user.uid);
-
-        setIgnore(true);
+        setIgnoreAddingUserInDb(true);
       }
+
+      setUserOnlineAt('now');
     })();
-
-    return () => {
-      setUserOnlineAt(Date.now(), user.username);
-    };
-  }, [
-    fillUser,
-    user,
-    setConversations,
-    conversations,
-    addUsernameInDb,
-    setUserOnlineAt,
-    ignore,
-    user.username,
-  ]);
+  }, [addUsernameInDb, ignoreAddingUserInDb, setUserOnlineAt, user]);
 
   useEffect(() => {
-    async function beforeunloadEvent() {
-      setDisableOnSnapshotOfUserInformation(true);
+    createLocationchangeEvent();
 
-      const doccc = await getDoc(doc(db, 'users', user.username));
-
-      if (!doccc.exists() || !doccc.data) return;
-
-      await updateDoc(doc(db, 'users', user.username), {
-        onlineAt: Date.now(),
-      });
+    for (let event of takeUserOffline.events) {
+      window.addEventListener(event, takeUserOffline.func);
     }
 
-    window.addEventListener('beforeunload', beforeunloadEvent);
-
-    return () => {
-      window.removeEventListener('beforeunload', beforeunloadEvent);
-    };
-  }, [user.username]);
-
-  useEffect(() => {
-    const currentUser = auth.currentUser;
-
-    if (!currentUser?.displayName) return;
-
-    if (currentUser?.displayName !== user.username) {
-      fillUser({ ...user, username: currentUser?.displayName });
+    for (let event of takeUserOnline.events) {
+      window.addEventListener(event, takeUserOnline.func);
     }
-  }, [user, fillUser]);
-
-  useEffect(() => {
-    const currentUser = auth.currentUser;
-
-    if (!currentUser?.displayName) return;
 
     return () => {
-      setUserOnlineAt(Date.now(), String(currentUser.displayName));
+      clearAllEvents();
     };
-  }, [setUserOnlineAt]);
+  }, [takeUserOnline, takeUserOffline, clearAllEvents]);
 
   const CurrentTab = {
     conversations: Conversations,

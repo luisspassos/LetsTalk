@@ -5,7 +5,5 @@ import { Button } from './Button';
 export function SwitchEmailButton() {
   const { onOpen } = useChangeEmailModal();
 
-  return (
-    <Button onClick={onOpen} text='Trocar email' leftIcon={HiOutlineMail} />
-  );
+  return <Button onClick={onOpen} text='Trocar email' icon={HiOutlineMail} />;
 }
