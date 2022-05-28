@@ -75,7 +75,10 @@ export default function ConversationsPage({
       const unsub = onSnapshot(
         doc(db, 'users', contextUser?.username),
         (doc) => {
+          console.log('ativou');
+          console.log(doc.exists());
           if (!doc.exists()) {
+            console.log('chegou aqui');
             clearAllEvents();
             router.push('/');
           }
