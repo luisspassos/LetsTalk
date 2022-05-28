@@ -12,7 +12,7 @@ import {
   ConversationsType,
   useConversations,
 } from '../contexts/ConversationsContext';
-import { useOnlineAtEvents } from '../contexts/onlineAtEventsContext';
+import { useOnlineAtEvents } from '../contexts/OnlineAtEventsContext';
 import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
 import { auth as adminAuth } from '../services/firebaseAdmin';

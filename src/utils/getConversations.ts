@@ -11,7 +11,7 @@ import { db } from '../services/firebase';
 import { ContactsResponse, ConversationUsersId } from '../types';
 import { formatContactsUpdatedAt } from './formatDate';
 
-type MessageDoc =
+export type MessageDoc =
   | {
       message: string;
     }

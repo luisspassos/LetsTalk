@@ -18,7 +18,7 @@ import { DeleteAccountModalProvider } from '../contexts/Modal/DeleteAccountModal
 import { ChangePasswordModalProvider } from '../contexts/Modal/ChangePasswordModalContext';
 import { ChangeEmailModalProvider } from '../contexts/Modal/ChangeEmailModalContext';
 import { SearchInConversationProvider } from '../contexts/SearchInConversationContext';
-import { OnlineAtEventsProvider } from '../contexts/onlineAtEventsContext';
+import { OnlineAtEventsProvider } from '../contexts/OnlineAtEventsContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

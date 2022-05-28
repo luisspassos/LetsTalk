@@ -15,6 +15,7 @@ import {
   ConversationDocWithContactData,
   ConversationUsersId,
 } from '../../../../types';
+import { MessageDoc } from '../../../../utils/getConversations';
 
 export type AddContactFormData = {
   contactName: string;
@@ -107,6 +108,8 @@ export function AddContactModal() {
             return docData?.users.includes(contactUserData.uid);
           });
 
+          const conversationDocWithContactId = conversationDocWithContact?.id;
+
           const conversationDocWithContactData =
             conversationDocWithContact?.data() as ConversationDocWithContactData;
 
@@ -128,6 +131,21 @@ export function AddContactModal() {
               '../../../../utils/formatDate'
             );
 
+            if (!conversationDocWithContactId) return;
+
+            const messagesRef = collection(
+              db,
+              'conversations',
+              conversationDocWithContactId,
+              'messages'
+            );
+
+            const messagesSnap = await getDocs(messagesRef);
+
+            const lastMessageDocData = messagesSnap.docs.pop()
+              ?.data as MessageDoc;
+            const lastMessage = lastMessageDocData?.message ?? '';
+
             const [{ displayName, photoURL, uid }] = (
               await api.get<ContactsResponse>(
                 `getUsers?usersId=${contactUserData.uid}`
@@ -136,9 +154,11 @@ export function AddContactModal() {
 
             const contactDataFormatted = {
               name: displayName.split('#')[0],
+              username: displayName,
               photoURL: photoURL ?? null,
               uid,
               updatedAt: formatContactsUpdatedAt(updatedAt),
+              lastMessage,
             };
 
             setConversations((prevState) => [

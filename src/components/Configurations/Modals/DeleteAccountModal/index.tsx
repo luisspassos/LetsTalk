@@ -12,7 +12,7 @@ import { WarningText } from './WarningText';
 import { useDeleteAccountModal } from '../../../../contexts/Modal/DeleteAccountModalContext';
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../../../../contexts/AuthContext';
-import { useOnlineAtEvents } from '../../../../contexts/onlineAtEventsContext';
+import { useOnlineAtEvents } from '../../../../contexts/OnlineAtEventsContext';
 
 type PasswordFormData = {
   password: string;
