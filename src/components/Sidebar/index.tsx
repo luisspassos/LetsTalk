@@ -11,9 +11,6 @@ export function Sidebar() {
   const { handleChangeTab, tab } = useTab();
   const { signOut } = useAuth();
 
-  const isConversations = tab === 'conversations';
-  const isConfigurations = tab === 'configurations';
-
   return (
     <Flex
       bg={useColorModeValue('gray.500', 'blue.900')}
@@ -24,6 +21,7 @@ export function Sidebar() {
       py={['16px', '18px', '20px']}
       borderRight={useColorModeValue(undefined, '1px solid')}
       borderRightColor={useColorModeValue(undefined, 'whiteAlpha.500')}
+      as='aside'
     >
       <Box>
         <Avatar />
@@ -33,14 +31,14 @@ export function Sidebar() {
         >
           <IconButton
             anyFunction={() => handleChangeTab('conversations')}
-            isFocused={isConversations}
-            Icon={isConversations ? MdMessage : MdOutlineMessage}
+            isFocused={tab === 'conversations'}
+            Icon={tab === 'conversations' ? MdMessage : MdOutlineMessage}
             label='Mensagens'
           />
           <IconButton
             anyFunction={() => handleChangeTab('configurations')}
-            isFocused={isConfigurations}
-            Icon={isConfigurations ? BsGearFill : BsGear}
+            isFocused={tab === 'configurations'}
+            Icon={tab === 'configurations' ? BsGearFill : BsGear}
             label='Configurações'
           />
         </VStack>

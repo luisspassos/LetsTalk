@@ -15,6 +15,7 @@ type ConversationProps = {
     updatedAt: string;
     lastMessage: string;
   };
+  conversationHeight: number;
   index: number;
   numberOfConversations: number;
 } & BoxProps;
@@ -23,6 +24,7 @@ export function Conversation({
   data: { name, photoURL, updatedAt, lastMessage },
   index,
   numberOfConversations,
+  conversationHeight,
   ...rest
 }: ConversationProps) {
   const lastItem = index === numberOfConversations - 1;
@@ -44,13 +46,21 @@ export function Conversation({
   }, [changeCurrentConversationIndex, conversations, name]);
 
   return (
-    <Flex direction='column' align='center' {...rest}>
+    <Flex
+      direction='column'
+      align='center'
+      pos='absolute'
+      top={0}
+      left={0}
+      w='100%'
+      {...rest}
+    >
       <Flex
         w='100%'
         px={['19px', '22px', '25px']}
         alignItems='center'
         py='7px'
-        h={['65px', '75px', '85px']}
+        h={`${conversationHeight}px`}
         flexShrink='0'
         cursor='pointer'
         transition='0.2s'

@@ -13,6 +13,7 @@ import { Divider } from '../Divider';
 import { useConversations } from '../../../contexts/ConversationsContext';
 import { useVirtual } from 'react-virtual';
 import { Conversation } from './Conversation';
+import { ConversationDivider } from './Conversation/ConversationDivider';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
@@ -27,18 +28,21 @@ export function ConversationListComponent() {
     []
   );
 
-  // const fetchedConversations = conversations.data.filter(({ name }) =>
-  //   name.includes(conversationSearch.trim())
-  // );
+  const fetchedConversations = conversations.data.filter(({ name }) =>
+    name.includes(conversationSearch.trim())
+  );
 
-  const measure = useBreakpointValue([65, 75, 85]) ?? 0;
+  const conversationHeight = useBreakpointValue([65, 75, 85]) ?? 0;
 
-  const parentRef = useRef<HTMLDivElement>(null);
+  const scrollBoxRef = useRef<HTMLDivElement>(null);
 
-  const rowVirtualizer = useVirtual({
-    size: 50,
-    parentRef,
-    estimateSize: useCallback(() => measure + 1, [measure]),
+  const conversationVirtualizer = useVirtual({
+    size: fetchedConversations.length,
+    parentRef: scrollBoxRef,
+    estimateSize: useCallback(
+      () => conversationHeight + 1,
+      [conversationHeight]
+    ),
   });
 
   return (
@@ -51,6 +55,7 @@ export function ConversationListComponent() {
       direction='column'
       borderRight={useColorModeValue(undefined, '1px solid')}
       borderRightColor={useColorModeValue(undefined, 'whiteAlpha.500')}
+      as='aside'
     >
       <AddContactButton />
       <Divider />
@@ -67,45 +72,42 @@ export function ConversationListComponent() {
       </Heading>
       <Box
         overflowY='auto'
-        ref={parentRef}
+        ref={scrollBoxRef}
         pb={['6px', '8px', '10px']}
         mx={['-19px', '-22px', '-25px']}
       >
-        <Box h={`${rowVirtualizer.totalSize}px`} w='100%' position='relative'>
-          {rowVirtualizer.virtualItems.map((virtualRow) => (
-            <Conversation
-              key={virtualRow.index}
-              index={virtualRow.index}
-              numberOfConversations={50}
-              data={{
-                name: 'Luís',
-                photoURL: 'https://github.com/luisspassos.png',
-                lastMessage: '',
-                updatedAt: '19:47',
-              }}
-              pos='absolute'
-              top={0}
-              left={0}
-              w='100%'
-              h={`${virtualRow.size}px`}
-              transform={`translateY(${virtualRow.start}px)`}
-            />
-          ))}
-          {/* {fetchedConversations.map(
-            ({ uid, name, photoURL, updatedAt, lastMessage }, i) => (
+        <ConversationDivider
+          position='sticky'
+          top={0}
+          left={0}
+          mt={0}
+          mx='auto'
+        />
+        <Box
+          h={`${conversationVirtualizer.totalSize}px`}
+          w='100%'
+          position='relative'
+        >
+          {conversationVirtualizer.virtualItems.map((virtualRow) => {
+            const conversation = fetchedConversations[virtualRow.index];
+
+            return (
               <Conversation
-                key={uid}
-                index={i}
-                numberOfConversations={numberOfConversations}
+                key={virtualRow.index}
+                index={virtualRow.index}
+                numberOfConversations={fetchedConversations.length}
+                conversationHeight={conversationHeight}
                 data={{
-                  name,
-                  photoURL,
-                  updatedAt,
-                  lastMessage,
+                  name: conversation.name,
+                  photoURL: conversation.photoURL,
+                  lastMessage: conversation.lastMessage,
+                  updatedAt: conversation.updatedAt,
                 }}
+                h={`${virtualRow.size}px`}
+                transform={`translateY(${virtualRow.start}px)`}
               />
-            )
-          )} */}
+            );
+          })}
         </Box>
       </Box>
     </Flex>

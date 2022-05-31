@@ -165,6 +165,7 @@ export function Main() {
       pr={['14px', '17px', '20px']}
       mr={['-14px', '-17px', '-20px']}
       spacing={['6px', '8px', '10px']}
+      as='section'
     >
       {messages.map(({ contactMessage, id, message, sentIn }) => (
         <Message

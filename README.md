@@ -20,8 +20,6 @@
 - fazer unread messages
 - pesquisar na conversa
 - ver bloqueamento na conversa
-- ver responsivo da lista de contatos
-- assimiliar height com do useVirtual com o height da conversation
 
 # NEXT PROJECT
 

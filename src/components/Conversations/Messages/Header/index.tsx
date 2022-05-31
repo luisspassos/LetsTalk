@@ -59,8 +59,8 @@ export function Header() {
         as='header'
         justify='space-between'
         minW={0}
-        h={['55px', '70px', '85px']}
-        minH={0}
+        minH={['55px', '70px', '85px']}
+        py='10px'
         align='center'
         gap='9px'
       >
