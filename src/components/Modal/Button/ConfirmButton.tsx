@@ -5,11 +5,19 @@ type ConfirmButtonProps = {
   text: string;
 } & ButtonProps;
 
-export function ConfirmButton({ text, ...rest }: ConfirmButtonProps) {
-  const bg = useColorModeValue('blue.900', 'gray.400');
+export function ConfirmButton({
+  text,
+  bg: propBg,
+  ...rest
+}: ConfirmButtonProps) {
+  const bg = useColorModeValue(
+    propBg ? propBg : 'blue.900',
+    propBg ? propBg : 'gray.400'
+  );
 
   return (
     <Button
+      textTransform='capitalize'
       bg={bg}
       color='gray.50'
       transition='0.2s'

@@ -4,6 +4,7 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { ModalTitle } from './ModalTitle';
@@ -24,7 +25,7 @@ export function ModalWrapper({
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
-      <ModalContent mx='10px'>
+      <ModalContent boxShadow={useColorModeValue('lg', 'md')} mx='10px'>
         {modalTitle && <ModalTitle text={modalTitle} />}
         <ModalCloseButton />
         <ModalBody pb='20px'>{children}</ModalBody>

@@ -41,7 +41,7 @@ export function formatContactOnlineAt(onlineAt: OnlineAt) {
   } = formatDate(new Date(onlineAt));
 
   if (isToday) {
-    return `Hoje ás ${hours}`;
+    return `online hoje ás ${hours}`;
   } else {
     return `online em ${date} ás ${hours}`;
   }

@@ -16,6 +16,7 @@ type ConversationType = {
   username: string;
   updatedAt: string;
   lastMessage: string;
+  isBlocked?: boolean;
 };
 
 export type ConversationsType = ConversationType[];

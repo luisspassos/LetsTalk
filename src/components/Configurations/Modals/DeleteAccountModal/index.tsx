@@ -12,7 +12,6 @@ import { WarningText } from './WarningText';
 import { useDeleteAccountModal } from '../../../../contexts/Modal/DeleteAccountModalContext';
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../../../../contexts/AuthContext';
-import { useOnlineAtEvents } from '../../../../contexts/OnlineAtEventsContext';
 
 type PasswordFormData = {
   password: string;
@@ -34,8 +33,7 @@ const PasswordFormSchema = yup.object().shape({
 
 export function DeleteAccountModal() {
   const { isOpen, onClose } = useDeleteAccountModal();
-  const { user, signInWithEmailAndPassword, isLoggedInWithGoogle, fillUser } =
-    useAuth();
+  const { user, signInWithEmailAndPassword, isLoggedInWithGoogle } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -53,8 +51,6 @@ export function DeleteAccountModal() {
   } = useForm<PasswordFormData>({
     resolver: yupResolver(PasswordFormSchema),
   });
-
-  const { clearAllEvents } = useOnlineAtEvents();
 
   const deleteAccount = useMemo(
     () => ({
@@ -90,13 +86,9 @@ export function DeleteAccountModal() {
           await deleteObject(userProfileAvatarRef);
         }
 
-        clearAllEvents();
-
         const userRef = doc(db, 'users', user.username);
 
         await deleteDoc(userRef);
-
-        fillUser(undefined);
       },
       get loginWithGoogle() {
         return async () => {
@@ -178,8 +170,6 @@ export function DeleteAccountModal() {
       setError,
       signInWithEmailAndPassword,
       user?.email,
-      fillUser,
-      clearAllEvents,
     ]
   );
 

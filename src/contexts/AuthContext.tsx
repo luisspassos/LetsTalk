@@ -185,7 +185,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           nookies.set(undefined, 'token', '', { path: '/' });
         } else {
           const token = await user.getIdToken();
-          nookies.set(undefined, 'token', token, { path: '/' });
+          nookies.set(undefined, 'token', token, {
+            path: '/',
+            maxAge: 60 * 60 /* 1 hour */,
+          });
         }
       });
     }
@@ -194,15 +197,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   useEffect(() => {
-    function tokenRefreshEvery10Min() {
+    function tokenRefreshEvery1Hour() {
       const handle = setInterval(async () => {
         await refreshToken();
-      }, 10 * 60 * 1000 /* 10 minutes */);
+      }, 60 * 60 * 1000 /* 1 hour */);
 
       return () => clearInterval(handle);
     }
 
-    return tokenRefreshEvery10Min();
+    return tokenRefreshEvery1Hour();
   }, []);
 
   return (

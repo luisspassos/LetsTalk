@@ -12,6 +12,7 @@ import {
   ConversationsType,
   useConversations,
 } from '../contexts/ConversationsContext';
+import { useDeleteAccountModal } from '../contexts/Modal/DeleteAccountModalContext';
 import { useOnlineAtEvents } from '../contexts/OnlineAtEventsContext';
 import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
@@ -51,15 +52,15 @@ export default function ConversationsPage({
   user,
   conversations,
 }: ConversationsPageProps) {
-  const { tab } = useTab();
+  const { tab, handleChangeTab } = useTab();
   const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
   const {
     conversations: { setConversations },
   } = useConversations();
   const { takeUserOffline, takeUserOnline, setUserOnlineAt, clearAllEvents } =
     useOnlineAtEvents();
-
   const router = useRouter();
+  const { onClose: closeDeleteAccModal } = useDeleteAccountModal();
 
   const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
@@ -72,15 +73,22 @@ export default function ConversationsPage({
     function checkIfUserAccHasBeenDeleted() {
       if (!contextUser) return;
 
+      let ignoreInitialOnSnapshot = true;
+
       const unsub = onSnapshot(
-        doc(db, 'users', contextUser?.username),
-        (doc) => {
-          console.log('ativou');
-          console.log(doc.exists());
+        doc(db, 'users', contextUser.username),
+        async (doc) => {
+          if (ignoreInitialOnSnapshot) {
+            ignoreInitialOnSnapshot = false;
+            return;
+          }
           if (!doc.exists()) {
-            console.log('chegou aqui');
+            nookies.destroy({}, 'token');
             clearAllEvents();
-            router.push('/');
+            await router.push('/');
+            fillUser(undefined);
+            closeDeleteAccModal();
+            handleChangeTab('conversations');
           }
         }
       );
@@ -93,7 +101,14 @@ export default function ConversationsPage({
     return () => {
       unsub && unsub();
     };
-  }, [contextUser, router, clearAllEvents]);
+  }, [
+    contextUser,
+    router,
+    clearAllEvents,
+    fillUser,
+    closeDeleteAccModal,
+    handleChangeTab,
+  ]);
 
   useEffect(() => {
     (async () => {

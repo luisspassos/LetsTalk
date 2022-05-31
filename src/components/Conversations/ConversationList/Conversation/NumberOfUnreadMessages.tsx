@@ -13,7 +13,7 @@ export function NumberOfUnreadMessages({
       minW={['13.5px', '16.5px', '19.5px']}
       h={['13.5px', '16.5px', '19.5px']}
       fontSize={['9px', '11px', '13px']}
-      lineHeight='1px'
+      lineHeight={['0px', '0.5px', '1px']}
       color='white'
       bg='gray.500'
     >

@@ -5,7 +5,7 @@ import { ConversationList } from './ConversationList';
 import { Empty } from './Empty';
 import { Messages } from './Messages';
 import { AddContactModal } from './Modals/AddContactModal';
-import { BlockUserModal } from './Modals/BlockUserModal';
+import { ToggleBlockUserModal } from './Modals/ToggleBlockUserModal';
 
 export function Conversations() {
   const {
@@ -17,7 +17,7 @@ export function Conversations() {
   return (
     <>
       <PageTitle pageName='Conversas' />
-      <BlockUserModal />
+      <ToggleBlockUserModal />
       <AddContactModal />
       <Flex flex='1' minW={0}>
         <ConversationList />

@@ -11,7 +11,7 @@ type ButtonProps = {
 export function Button({ children, ...rest }: ButtonProps) {
   return (
     <ChakraButton
-      w={['89px', '99px', '109px']}
+      w={['99px', '109px', '119px']}
       h={['36px', '38px', '40px']}
       fontSize={['14px', '15px', '16px']}
       {...rest}

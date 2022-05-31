@@ -15,7 +15,6 @@ import {
   ConversationDocWithContactData,
   ConversationUsersId,
 } from '../../../../types';
-import { MessageDoc } from '../../../../utils/getConversations';
 
 export type AddContactFormData = {
   contactName: string;
@@ -85,30 +84,21 @@ export function AddContactModal() {
             return;
           }
 
-          const { addDoc, collection, query, where, getDocs } = await import(
-            'firebase/firestore'
+          const { addDoc, collection } = await import('firebase/firestore');
+
+          const { getDocumentFromCurrentConversation } = await import(
+            '../../../../utils/getDocumentFromCurrentConversation'
           );
 
           const conversationsRef = collection(db, 'conversations');
 
           const conversationUsersId = [user.uid, contactUserData.uid];
 
-          const userConversationsRef = query(
-            conversationsRef,
-            where('users', 'array-contains', user.uid)
-          );
-          const userConversationsSnap = async () =>
-            await getDocs(userConversationsRef);
-
-          const conversationDocWithContact = (
-            await userConversationsSnap()
-          ).docs.find((doc) => {
-            const docData = doc.data() as ConversationDocWithContactData;
-
-            return docData?.users.includes(contactUserData.uid);
-          });
-
-          const conversationDocWithContactId = conversationDocWithContact?.id;
+          const { conversationDocWithContact, userConversationsSnap } =
+            await getDocumentFromCurrentConversation(
+              user.uid,
+              contactUserData.uid
+            );
 
           const conversationDocWithContactData =
             conversationDocWithContact?.data() as ConversationDocWithContactData;
@@ -131,21 +121,6 @@ export function AddContactModal() {
               '../../../../utils/formatDate'
             );
 
-            if (!conversationDocWithContactId) return;
-
-            const messagesRef = collection(
-              db,
-              'conversations',
-              conversationDocWithContactId,
-              'messages'
-            );
-
-            const messagesSnap = await getDocs(messagesRef);
-
-            const lastMessageDocData = messagesSnap.docs.pop()
-              ?.data as MessageDoc;
-            const lastMessage = lastMessageDocData?.message ?? '';
-
             const [{ displayName, photoURL, uid }] = (
               await api.get<ContactsResponse>(
                 `getUsers?usersId=${contactUserData.uid}`
@@ -158,7 +133,7 @@ export function AddContactModal() {
               photoURL: photoURL ?? null,
               uid,
               updatedAt: formatContactsUpdatedAt(updatedAt),
-              lastMessage,
+              lastMessage: '',
             };
 
             setConversations((prevState) => [

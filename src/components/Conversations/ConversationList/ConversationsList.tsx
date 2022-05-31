@@ -1,12 +1,18 @@
-import { Flex, Heading, useColorModeValue, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  useBreakpointValue,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { useConversationsTab } from '../../../contexts/ConversationsTabContext';
-import { Conversation } from './Conversation';
-import { ConversationDivider } from './Conversation/ConversationDivider';
 import { AddContactButton } from './AddContactButton';
 import { SearchInput } from './SearchInput';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Divider } from '../Divider';
 import { useConversations } from '../../../contexts/ConversationsContext';
+import { useVirtual } from 'react-virtual';
+import { Conversation } from './Conversation';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
@@ -21,11 +27,19 @@ export function ConversationListComponent() {
     []
   );
 
-  const fetchedConversations = conversations.data.filter(({ name }) =>
-    name.includes(conversationSearch.trim())
-  );
+  // const fetchedConversations = conversations.data.filter(({ name }) =>
+  //   name.includes(conversationSearch.trim())
+  // );
 
-  const numberOfConversations = fetchedConversations.length;
+  const measure = useBreakpointValue([65, 75, 85]) ?? 0;
+
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const rowVirtualizer = useVirtual({
+    size: 50,
+    parentRef,
+    estimateSize: useCallback(() => measure + 1, [measure]),
+  });
 
   return (
     <Flex
@@ -51,29 +65,49 @@ export function ConversationListComponent() {
       >
         Conversas
       </Heading>
-      <VStack
+      <Box
         overflowY='auto'
+        ref={parentRef}
         pb={['6px', '8px', '10px']}
         mx={['-19px', '-22px', '-25px']}
-        spacing={0}
       >
-        <ConversationDivider position='sticky' top={0} left={0} mt={0} />
-        {fetchedConversations.map(
-          ({ uid, name, photoURL, updatedAt, lastMessage }, i) => (
+        <Box h={`${rowVirtualizer.totalSize}px`} w='100%' position='relative'>
+          {rowVirtualizer.virtualItems.map((virtualRow) => (
             <Conversation
-              key={uid}
-              index={i}
-              numberOfConversations={numberOfConversations}
+              key={virtualRow.index}
+              index={virtualRow.index}
+              numberOfConversations={50}
               data={{
-                name,
-                photoURL,
-                updatedAt,
-                lastMessage,
+                name: 'Luís',
+                photoURL: 'https://github.com/luisspassos.png',
+                lastMessage: '',
+                updatedAt: '19:47',
               }}
+              pos='absolute'
+              top={0}
+              left={0}
+              w='100%'
+              h={`${virtualRow.size}px`}
+              transform={`translateY(${virtualRow.start}px)`}
             />
-          )
-        )}
-      </VStack>
+          ))}
+          {/* {fetchedConversations.map(
+            ({ uid, name, photoURL, updatedAt, lastMessage }, i) => (
+              <Conversation
+                key={uid}
+                index={i}
+                numberOfConversations={numberOfConversations}
+                data={{
+                  name,
+                  photoURL,
+                  updatedAt,
+                  lastMessage,
+                }}
+              />
+            )
+          )} */}
+        </Box>
+      </Box>
     </Flex>
   );
 }

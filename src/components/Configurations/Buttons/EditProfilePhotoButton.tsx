@@ -34,48 +34,56 @@ export function EditProfilePhotoButton() {
     window.addEventListener('focus', checkThatNoFilesHaveBeenSelected);
 
     fileInput.onchange = async (e) => {
-      const target = e.target as HTMLInputElement;
+      try {
+        const target = e.target as HTMLInputElement;
 
-      if (!target.files) return;
+        if (!target.files) return;
 
-      const file = target.files[0];
+        const file = target.files[0];
 
-      if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
-        errorToast();
-        return;
+        if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
+          errorToast();
+          return;
+        }
+
+        const { updateProfile } = await import('firebase/auth');
+        const { auth, storage } = await import('../../../services/firebase');
+        const { refreshToken } = await import('../../../contexts/AuthContext');
+        const { ref, uploadBytes, getDownloadURL } = await import(
+          'firebase/storage'
+        );
+
+        const currentUser = auth.currentUser;
+
+        if (!currentUser) return;
+
+        const usersProfileAvatarRef = ref(
+          storage,
+          `usersProfileAvatar/${currentUser.displayName}`
+        );
+
+        await uploadBytes(usersProfileAvatarRef, file);
+
+        const photoUrl = await getDownloadURL(usersProfileAvatarRef);
+
+        if (!user) return;
+
+        fillUser({ ...user, picture: photoUrl });
+
+        await updateProfile(currentUser, {
+          photoURL: photoUrl,
+        });
+
+        await refreshToken();
+
+        setLoading(false);
+      } catch {
+        const { unknownErrorToast } = await import(
+          '../../../utils/Toasts/unknownErrorToast'
+        );
+
+        unknownErrorToast();
       }
-
-      const { updateProfile } = await import('firebase/auth');
-      const { auth, storage } = await import('../../../services/firebase');
-      const { refreshToken } = await import('../../../contexts/AuthContext');
-      const { ref, uploadBytes, getDownloadURL } = await import(
-        'firebase/storage'
-      );
-
-      const currentUser = auth.currentUser;
-
-      if (!currentUser) return;
-
-      const usersProfileAvatarRef = ref(
-        storage,
-        `usersProfileAvatar/${currentUser.displayName}`
-      );
-
-      await uploadBytes(usersProfileAvatarRef, file);
-
-      const photoUrl = await getDownloadURL(usersProfileAvatarRef);
-
-      if (!user) return;
-
-      fillUser({ ...user, picture: photoUrl });
-
-      await updateProfile(currentUser, {
-        photoURL: photoUrl,
-      });
-
-      await refreshToken();
-
-      setLoading(false);
     };
 
     fileInput.click();
