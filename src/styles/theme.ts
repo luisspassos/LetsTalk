@@ -41,6 +41,9 @@ export const theme = extendTheme(
         };
 
         return {
+          '*': {
+            wordBreak: 'break-word',
+          },
           body: {
             bg: isDark ? 'blue.900' : 'gray.50',
             color: isDark ? 'gray.50' : 'gray.900',

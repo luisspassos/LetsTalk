@@ -10,12 +10,12 @@ export function CopyUsernameButton() {
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleCopyUsername = useCallback(() => {
-    navigator.clipboard.writeText(currentConversation.data.username);
+    navigator.clipboard.writeText(currentConversation.data?.username ?? '');
     setShowTooltip(true);
     setTimeout(() => {
       setShowTooltip(false);
     }, 2000);
-  }, [currentConversation.data.username]);
+  }, [currentConversation.data?.username]);
 
   return (
     <Tooltip

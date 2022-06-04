@@ -53,12 +53,12 @@ export function ToggleBlockUserModal() {
   );
 
   const getContactInfoRef = useCallback(async () => {
-    if (!user) return;
+    if (!user || !currentConversation.data?.uid) return;
 
     const { conversationDocWithContact } =
       await getDocumentFromCurrentConversation(
         user?.uid,
-        currentConversation.data.uid
+        currentConversation.data?.uid
       );
 
     const conversationDocWithContactId = conversationDocWithContact?.id;

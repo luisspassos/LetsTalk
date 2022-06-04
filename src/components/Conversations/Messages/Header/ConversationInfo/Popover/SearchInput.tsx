@@ -5,7 +5,7 @@ import { useSearchInConversation } from '../../../../../../contexts/SearchInConv
 
 export const SearchInput = forwardRef(
   (_, ref: ForwardedRef<HTMLInputElement>) => {
-    const { setSearchText } = useSearchInConversation();
+    const { setSearchText, searchText } = useSearchInConversation();
 
     return (
       <InputGroup>
@@ -17,6 +17,7 @@ export const SearchInput = forwardRef(
           variant='flushed'
           placeholder='Pesquisar na conversa'
           onChange={(e) => setSearchText(e.target.value)}
+          value={searchText}
         />
       </InputGroup>
     );

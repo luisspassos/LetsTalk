@@ -1,4 +1,4 @@
-import { Stack, Flex, useColorModeValue } from '@chakra-ui/react';
+import { useColorModeValue, Stack, Flex } from '@chakra-ui/react';
 import { CreatedAt } from './CreatedAt';
 import { MessageText } from './MessageText';
 
@@ -6,9 +6,15 @@ type MessageProps = {
   contactMessage: boolean;
   message: string;
   sentIn: string;
+  messageIndex: number;
 };
 
-export function Message({ contactMessage, message, sentIn }: MessageProps) {
+export function Message({
+  contactMessage,
+  message,
+  sentIn,
+  messageIndex,
+}: MessageProps) {
   const bg = {
     default: useColorModeValue('300', '500'),
     contactMessage: useColorModeValue('200', '400'),
@@ -56,9 +62,9 @@ export function Message({ contactMessage, message, sentIn }: MessageProps) {
   return (
     <Stack
       alignSelf={!contactMessage ? 'end' : undefined}
-      display='inline-flex'
-      maxW={['240px', '300px', '400px']}
+      display='flex'
       spacing='3px'
+      mt={messageIndex === 0 ? 0 : ['14px', '17px', '20px']}
       align={!contactMessage ? 'end' : undefined}
     >
       <Flex

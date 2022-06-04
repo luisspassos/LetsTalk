@@ -4,6 +4,7 @@ import {
   ReactNode,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 
@@ -24,6 +25,10 @@ export function SearchInConversationProvider({
   children,
 }: SearchInConversationProviderProps) {
   const [searchText, setSearchText] = useState('');
+
+  useEffect(() => {
+    setSearchText(searchText.trim().toLowerCase());
+  }, [searchText]);
 
   return (
     <SearchInConversationContext.Provider value={{ searchText, setSearchText }}>

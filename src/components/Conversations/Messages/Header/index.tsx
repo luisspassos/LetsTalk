@@ -20,6 +20,7 @@ import { db } from '../../../../services/firebase';
 import { doc } from 'firebase/firestore';
 import { OnlineAt } from '../../../../types';
 import { formatContactOnlineAt } from '../../../../utils/formatDate';
+import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 
 type OnlineAtFormatted = string;
 
@@ -34,8 +35,11 @@ export function Header() {
   const popoverInitialFocusRef = useRef(null);
 
   const { currentConversation } = useConversations();
+  const { isOpen, onClose } = useConversationPopover();
 
   useEffect(() => {
+    if (!currentConversation.data?.username) return;
+
     const unsub = onSnapshot(
       doc(db, 'users', currentConversation.data.username),
       (doc) => {
@@ -50,7 +54,7 @@ export function Header() {
     return () => {
       unsub();
     };
-  }, [currentConversation.data.username]);
+  }, [currentConversation.data?.username]);
 
   return (
     <>
@@ -70,11 +74,11 @@ export function Header() {
           <Avatar
             w={['42px', '47px', '52px']}
             h={['42px', '47px', '52px']}
-            src={currentConversation.data.photoURL ?? undefined}
+            src={currentConversation.data?.photoURL ?? undefined}
           />
 
           <VStack minW={0} align='start' spacing={0}>
-            <ContactName text={currentConversation.data.name} />
+            <ContactName text={currentConversation.data?.name ?? ''} />
             <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
               {onlineAt}
             </Text>
@@ -83,6 +87,8 @@ export function Header() {
         <Popover
           initialFocusRef={popoverInitialFocusRef}
           placement='bottom-start'
+          isOpen={isOpen}
+          onClose={onClose}
         >
           <Tooltip
             ariaLabel='Informações da conversa'

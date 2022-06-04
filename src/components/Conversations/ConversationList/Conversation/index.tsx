@@ -64,7 +64,7 @@ export function Conversation({
         flexShrink='0'
         cursor='pointer'
         transition='0.2s'
-        bg={name === currentConversation.name ? bg : undefined}
+        bg={name === currentConversation?.name ? bg : undefined}
         _hover={{
           bg: bg,
         }}

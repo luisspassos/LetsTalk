@@ -10,15 +10,10 @@
 - fazer env.example
 - testar se ao adicionar um contato, o contato recebe na hora o contatado
 - usar react hook query
-- fazer desbloqueamento e bloqueamento do contato
-- deixar scroll no final
-- react virtual nas mensagens e na lista de conversas XD
 - ver se nome é atualizado na lista de conversas
 - ver regras do storage
 - testar conversas depois que a conta for excluida
-- consertar tipagem do current conversation
 - fazer unread messages
-- pesquisar na conversa
 - ver bloqueamento na conversa
 
 # NEXT PROJECT

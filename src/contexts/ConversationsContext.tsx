@@ -33,7 +33,7 @@ type ConversationsContextType = {
   };
   currentConversation: {
     index: number;
-    data: ConversationType;
+    data: ConversationType | undefined;
     changeCurrentConversationIndex: (index: number) => void;
   };
 };

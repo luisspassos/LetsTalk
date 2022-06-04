@@ -6,8 +6,9 @@ import {
   PopoverHeader,
   Text,
 } from '@chakra-ui/react';
-import { ForwardedRef, forwardRef } from 'react';
+import { ForwardedRef, forwardRef, useEffect } from 'react';
 import { useConversations } from '../../../../../../contexts/ConversationsContext';
+import { useConversationPopover } from '../../../../../../contexts/ConversationPopoverContext';
 import { BlockUserButton } from './BlockUser/Button';
 import { CopyUsernameButton } from './CopyUsername/Button';
 import { SearchInput } from './SearchInput';
@@ -15,9 +16,25 @@ import { SearchInput } from './SearchInput';
 export const ConversationInfoPopover = forwardRef(
   (_, ref: ForwardedRef<HTMLInputElement>) => {
     const { currentConversation } = useConversations();
+    const { onOpen: openConversationPopover } = useConversationPopover();
 
-    const [contactName, contactId] =
-      currentConversation.data.username.split('#');
+    useEffect(() => {
+      function handleOpenPopoverWithKeys(event: KeyboardEvent) {
+        if (event.ctrlKey && event.code.includes('F')) {
+          event.preventDefault();
+
+          openConversationPopover();
+        }
+      }
+
+      window.addEventListener('keydown', handleOpenPopoverWithKeys);
+
+      return () => {
+        window.removeEventListener('keydown', handleOpenPopoverWithKeys);
+      };
+    }, [openConversationPopover]);
+
+    const contact = currentConversation.data?.username.split('#');
 
     return (
       <PopoverContent maxW='270px'>
@@ -30,9 +47,9 @@ export const ConversationInfoPopover = forwardRef(
               textOverflow='ellipsis'
               overflowX='hidden'
             >
-              {contactName}
+              {contact?.[0]}
             </Text>
-            <Text opacity='90%'>#{contactId}</Text>
+            <Text opacity='90%'>#{contact?.[1]}</Text>
           </HStack>
         </PopoverHeader>
         <PopoverBody>

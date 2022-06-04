@@ -12,7 +12,7 @@ export function BlockUserButton() {
 
   const action = useMemo(
     () =>
-      currentConversation.data.isBlocked
+      currentConversation.data?.isBlocked
         ? {
             icon: CgUnblock,
             text: 'Desbloquear contato',
@@ -21,7 +21,7 @@ export function BlockUserButton() {
             icon: BiBlock,
             text: 'Bloquear contato',
           },
-    [currentConversation.data.isBlocked]
+    [currentConversation.data?.isBlocked]
   );
 
   return (

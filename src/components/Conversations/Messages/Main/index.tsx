@@ -1,12 +1,14 @@
-import { Stack } from '@chakra-ui/react';
+import { Box, useBreakpointValue } from '@chakra-ui/react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useVirtual } from 'react-virtual';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { useConversations } from '../../../../contexts/ConversationsContext';
 import { useSearchInConversation } from '../../../../contexts/SearchInConversationContext';
 import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../types';
 import { Message } from './Message';
+import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 
 type DbMessageData = {
   author: string;
@@ -27,7 +29,7 @@ export function Main() {
       id: 'a',
       sentIn: '19:40',
       message:
-        'O que significa e por que é considerada uma arquitetura moderna de desenvolvimento web?',
+        'O que significa e REMIX por que é considerada uma arquitetura moderna de desenvolvimento web sexo',
       contactMessage: false,
     },
     {
@@ -95,6 +97,8 @@ export function Main() {
     },
   ]);
 
+  const [messages2, setMessages2] = useState<Message[]>();
+
   const { user } = useAuth();
 
   const {
@@ -102,10 +106,7 @@ export function Main() {
   } = useConversations();
 
   const { searchText } = useSearchInConversation();
-
-  useEffect(() => {
-    console.log(searchText);
-  }, [searchText]);
+  const { isOpen: conversationPopoverIsOpen } = useConversationPopover();
 
   useEffect(() => {
     async function getMessages() {
@@ -118,7 +119,7 @@ export function Main() {
 
       const conversationsSnap = await getDocs(conversationsRef);
 
-      if (conversationsSnap.empty) return;
+      if (conversationsSnap.empty || !contact?.uid) return;
 
       const currentConversationDoc = conversationsSnap.docs.find((doc) => {
         const docData = doc.data() as ConversationDocWithContactData;
@@ -152,29 +153,84 @@ export function Main() {
         };
       });
 
-      setMessages(messagesFormatted);
+      setMessages2(messagesFormatted);
     }
 
-    // getMessages();
-  }, [user?.uid, contact.uid]);
+    getMessages();
+  }, [user?.uid, contact?.uid]);
+
+  const scrollBoxRef = useRef<HTMLDivElement>(null);
+
+  const padding = useBreakpointValue([14, 17, 20]) ?? 0;
+
+  const messageVirtualizer = useVirtual({
+    size: messages.length,
+    parentRef: scrollBoxRef,
+    paddingEnd: padding,
+    paddingStart: padding,
+  });
+
+  const scrollToIndex = useCallback((index: number) => {
+    messageVirtualizer.scrollToIndex(index, {
+      align: 'center',
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!conversationPopoverIsOpen || !searchText) return;
+
+    function searchInConversation() {
+      const searchWordMessageIndex = messages.findIndex(({ message }) =>
+        message.toLowerCase().includes(searchText)
+      );
+
+      const conditions = {
+        searchTextNotFound: searchWordMessageIndex === -1,
+      };
+
+      if (conditions.searchTextNotFound) return;
+
+      scrollToIndex(searchWordMessageIndex);
+    }
+
+    searchInConversation();
+  }, [searchText, messages, conversationPopoverIsOpen, scrollToIndex]);
+
+  useEffect(() => {
+    scrollToIndex(10);
+  }, [messages2, scrollToIndex]);
 
   return (
-    <Stack
+    <Box
+      ref={scrollBoxRef}
       overflowY='auto'
-      py={['14px', '17px', '20px']}
       pr={['14px', '17px', '20px']}
       mr={['-14px', '-17px', '-20px']}
-      spacing={['6px', '8px', '10px']}
-      as='section'
     >
-      {messages.map(({ contactMessage, id, message, sentIn }) => (
-        <Message
-          contactMessage={contactMessage}
-          message={message}
-          key={id}
-          sentIn={sentIn}
-        />
-      ))}
-    </Stack>
+      <Box h={messageVirtualizer.totalSize} w='100%' pos='relative'>
+        {messageVirtualizer.virtualItems.map((virtualMessage) => {
+          const message = messages[virtualMessage.index];
+
+          return (
+            <Box
+              key={virtualMessage.index}
+              ref={virtualMessage.measureRef}
+              pos='absolute'
+              top={0}
+              left={0}
+              w='100%'
+              transform={`translateY(${virtualMessage.start}px)`}
+            >
+              <Message
+                messageIndex={virtualMessage.index}
+                contactMessage={message.contactMessage}
+                message={message.message}
+                sentIn={message.sentIn}
+              />
+            </Box>
+          );
+        })}
+      </Box>
+    </Box>
   );
 }
