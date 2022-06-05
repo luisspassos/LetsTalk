@@ -15,6 +15,8 @@
 - testar conversas depois que a conta for excluida
 - fazer unread messages
 - ver bloqueamento na conversa
+- ver bug do padding dnv testar EM PRODUÇÃO
+- testar eventos de onlineAt EM PRODUÇÃO
 
 # NEXT PROJECT
 

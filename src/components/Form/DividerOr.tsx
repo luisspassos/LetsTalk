@@ -8,6 +8,7 @@ export function DividerOr() {
       color={useColorModeValue('gray.400', 'gray.50')}
       my={['10px', '15px']}
       fontSize={['16px', '18px']}
+      wordBreak='normal'
       _before={{
         content: '""',
         bg: useColorModeValue('gray.400', 'gray.50'),

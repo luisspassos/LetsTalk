@@ -1,47 +1,48 @@
-import { Textarea, InputGroup, useColorModeValue } from '@chakra-ui/react';
+import { Textarea, useColorModeValue, Flex, HStack } from '@chakra-ui/react';
+import { FormEvent } from 'react';
 import { AiOutlinePaperClip } from 'react-icons/ai';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { InputIconButton } from './InputIconButton';
 
+type TextAreaSizeEvent = {
+  target: HTMLTextAreaElement;
+} & FormEvent<HTMLTextAreaElement>;
+
 export function MessageInput() {
-  // const txHeight = 46;
-  // const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const initialHeight = 45;
 
-  // // max length 1000
+  function handleTextAreaSize(e: TextAreaSizeEvent) {
+    e.target.style.height = 'inherit';
 
-  // useEffect(() => {
-  //   if (textareaRef.current.value === '') {
-  //     textareaRef.current.setAttribute(
-  //       'style',
-  //       'height:' + txHeight + 'px;overflow-y:hidden;'
-  //     );
-  //   } else {
-  //     textareaRef.current.setAttribute(
-  //       'style',
-  //       'height:' + textareaRef.current.scrollHeight + 'px;overflow-y:hidden;'
-  //     );
-  //   }
-  // }, []);
+    const scrollHeight = e.target.scrollHeight;
+    const textAreaHeight = Math.min(Math.max(scrollHeight, initialHeight), 199);
 
-  // function onInput() {
-  //   textareaRef.current.style.height = 'auto';
-  //   textareaRef.current.style.height = textareaRef.current?.scrollHeight + 'px';
-  // }
+    e.target.style.height = `${textAreaHeight}px`;
+    e.target.scrollTop = scrollHeight;
+
+    if (scrollHeight > 199) {
+      e.target.style.overflowY = 'visible';
+    } else {
+      e.target.style.overflowY = 'hidden';
+    }
+  }
 
   return (
-    <InputGroup maxW='750px'>
+    <Flex align='center' justify='end' flex='1' maxW='750px' pos='relative'>
       <Textarea
+        maxLength={1000}
+        onInput={handleTextAreaSize}
         resize='none'
+        overflowY='hidden'
+        h={`${initialHeight}px`}
         borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
         bg={useColorModeValue('white', 'blackAlpha.500')}
         fontFamily='Roboto'
-        h='45px'
-        py={['9.75px', '10.5px', '11.25px']}
-        overflowY='hidden'
+        pt='11.25px'
         borderRadius={['11px', '13px', '15px']}
         rows={1}
-        fontSize={['14px', '15px', '16px']}
         placeholder='Sua mensagem...'
+        pr={['73px', '83px', '103px']}
         _placeholderShown={{
           textOverflow: 'ellipsis',
         }}
@@ -53,24 +54,16 @@ export function MessageInput() {
         _hover={{
           borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.700'),
         }}
-        pr={['73px', '83px', '103px']}
         sx={{
           '&::-webkit-scrollbar-thumb': {
             borderWidth: '9px 3px',
           },
         }}
       />
-      <InputIconButton
-        mr={['34px', '44px', '56px']}
-        ariaLabel='Emojis'
-        Icon={MdOutlineEmojiEmotions}
-      />
-
-      <InputIconButton
-        mr={['5px', '10px', '15px']}
-        ariaLabel='Enviar arquivo'
-        Icon={AiOutlinePaperClip}
-      />
-    </InputGroup>
+      <HStack pos='absolute' spacing='5px' mr='10px' zIndex='1'>
+        <InputIconButton ariaLabel='Emojis' Icon={MdOutlineEmojiEmotions} />
+        <InputIconButton ariaLabel='Enviar arquivo' Icon={AiOutlinePaperClip} />
+      </HStack>
+    </Flex>
   );
 }
