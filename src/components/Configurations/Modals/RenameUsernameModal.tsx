@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
 import { refreshToken, useAuth } from '../../../contexts/AuthContext';
+import { useRenamingName } from '../../../contexts/RenamingNameContext';
 
 type RenameUsernameFormData = {
   name: string;
@@ -35,11 +36,14 @@ export function RenameUsernameModal() {
   });
 
   const { user, fillUser } = useAuth();
+  const { setRenamingName } = useRenamingName();
 
   const handleRenameUsername = useMemo(
     () =>
       handleSubmit(async ({ name }) => {
         try {
+          setRenamingName(true);
+
           const { auth } = await import('../../../services/firebase');
 
           const currentUser = auth.currentUser;
@@ -79,9 +83,11 @@ export function RenameUsernameModal() {
           );
 
           unknownErrorToast();
+        } finally {
+          setRenamingName(false);
         }
       }),
-    [handleSubmit, user, onClose, resetForm, fillUser]
+    [handleSubmit, user, onClose, resetForm, fillUser, setRenamingName]
   );
 
   return (

@@ -196,9 +196,19 @@ export function Main() {
     searchInConversation();
   }, [searchText, messages, conversationPopoverIsOpen, scrollToIndex]);
 
+  const [initial, setInitial] = useState(true);
+
   useEffect(() => {
-    scrollToIndex(10);
-  }, [messages2, scrollToIndex]);
+    if (initial) {
+      setTimeout(() => {
+        scrollToIndex(10);
+      }, 1);
+
+      setInitial(false);
+    } else {
+      scrollToIndex(10);
+    }
+  }, [messages2, scrollToIndex, initial]);
 
   return (
     <Box

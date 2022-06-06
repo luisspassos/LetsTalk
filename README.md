@@ -16,7 +16,10 @@
 - fazer unread messages
 - ver bloqueamento na conversa
 - ver bug do padding dnv testar EM PRODUÇÃO
-- testar eventos de onlineAt EM PRODUÇÃO
+- ver logout EM PRODUÇÃO
+- mudar cor do input error
+- ver coverage dos testes
+- ver onlineAt ficando online em outras contas
 
 # NEXT PROJECT
 

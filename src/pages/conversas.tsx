@@ -14,6 +14,7 @@ import {
 } from '../contexts/ConversationsContext';
 import { useDeleteAccountModal } from '../contexts/Modal/DeleteAccountModalContext';
 import { useOnlineAtEvents } from '../contexts/OnlineAtEventsContext';
+import { useRenamingName } from '../contexts/RenamingNameContext';
 import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
 import { auth as adminAuth } from '../services/firebaseAdmin';
@@ -61,6 +62,7 @@ export default function ConversationsPage({
     useOnlineAtEvents();
   const router = useRouter();
   const { onClose: closeDeleteAccModal } = useDeleteAccountModal();
+  const { renamingName } = useRenamingName();
 
   const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
@@ -82,7 +84,7 @@ export default function ConversationsPage({
             ignoreInitialOnSnapshot = false;
             return;
           }
-          if (!doc.exists()) {
+          if (!doc.exists() && !renamingName) {
             nookies.destroy({}, 'token');
             clearAllEvents();
             await router.push('/');
@@ -108,6 +110,7 @@ export default function ConversationsPage({
     fillUser,
     closeDeleteAccModal,
     handleChangeTab,
+    renamingName,
   ]);
 
   useEffect(() => {
