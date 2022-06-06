@@ -1,13 +1,23 @@
-import { IconButton, Icon as ChakraIcon } from '@chakra-ui/react';
+import {
+  IconButton,
+  Icon as ChakraIcon,
+  IconButtonProps as ChakraIconButtonProps,
+} from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { Tooltip } from '../../../Tooltip';
+import { Tooltip } from '../../../../Tooltip';
+
+type IconButtonProps = Omit<ChakraIconButtonProps, 'aria-label'>;
 
 type InputIconButtonProps = {
   ariaLabel: string;
   Icon: IconType;
-};
+} & IconButtonProps;
 
-export function InputIconButton({ ariaLabel, Icon }: InputIconButtonProps) {
+export function InputIconButton({
+  ariaLabel,
+  Icon,
+  ...rest
+}: InputIconButtonProps) {
   return (
     <Tooltip
       hasArrow={false}
@@ -23,6 +33,7 @@ export function InputIconButton({ ariaLabel, Icon }: InputIconButtonProps) {
         variant='ghost'
         aria-label={ariaLabel}
         icon={<ChakraIcon as={Icon} />}
+        {...rest}
       />
     </Tooltip>
   );

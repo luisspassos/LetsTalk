@@ -19,6 +19,7 @@
     "@hookform/resolvers": "^2.8.8",
     "@next/bundle-analyzer": "^12.1.0",
     "axios": "^0.26.1",
+    "emoji-picker-react": "^3.5.1",
     "firebase": "^9.6.8",
     "firebase-admin": "^10.0.2",
     "framer-motion": "^6",

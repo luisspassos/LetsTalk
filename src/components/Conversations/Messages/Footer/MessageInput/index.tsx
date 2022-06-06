@@ -1,8 +1,7 @@
 import { Textarea, useColorModeValue, Flex, HStack } from '@chakra-ui/react';
 import { FormEvent } from 'react';
-import { AiOutlinePaperClip } from 'react-icons/ai';
-import { MdOutlineEmojiEmotions } from 'react-icons/md';
-import { InputIconButton } from './InputIconButton';
+import { EmojiButton } from './EmojiButton';
+import { FileButton } from './FileButton';
 
 type TextAreaSizeEvent = {
   target: HTMLTextAreaElement;
@@ -61,8 +60,8 @@ export function MessageInput() {
         }}
       />
       <HStack pos='absolute' spacing='5px' mr='10px' zIndex='1'>
-        <InputIconButton ariaLabel='Emojis' Icon={MdOutlineEmojiEmotions} />
-        <InputIconButton ariaLabel='Enviar arquivo' Icon={AiOutlinePaperClip} />
+        <EmojiButton />
+        <FileButton />
       </HStack>
     </Flex>
   );
