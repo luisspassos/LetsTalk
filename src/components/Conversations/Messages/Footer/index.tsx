@@ -1,11 +1,13 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { Divider } from '../../../Divider';
 import { MessageInput } from './MessageInput';
+import { EmojiPicker } from './MessageInput/EmojiButton/EmojiPicker';
 import { RecordButtonAudio } from './RecordButtonAudio';
 
 export function Footer() {
   return (
     <Box mt='auto'>
+      <EmojiPicker />
       <Divider />
       <Flex
         as='footer'
@@ -14,6 +16,7 @@ export function Footer() {
         align='center'
         justify='start'
         pl={['6px', '8px', '10px']}
+        pos='relative'
       >
         <MessageInput />
         <RecordButtonAudio />

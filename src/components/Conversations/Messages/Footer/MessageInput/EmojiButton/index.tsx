@@ -1,19 +1,16 @@
-import { useCallback } from 'react';
+import { IoMdClose } from 'react-icons/io';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
+import { useToggleEmojiPicker } from '../../../../../../contexts/ToggleEmojiPickerContext';
 import { InputIconButton } from '../InputIconButton';
-import { EmojiPicker } from './EmojiPicker';
 
 export function EmojiButton() {
-  const handleToggleEmojiPicker = useCallback(() => {}, []);
+  const { onToggle, isOpen } = useToggleEmojiPicker();
 
   return (
-    <>
-      <InputIconButton
-        onClick={handleToggleEmojiPicker}
-        ariaLabel='Emojis'
-        Icon={MdOutlineEmojiEmotions}
-      />
-      <EmojiPicker />
-    </>
+    <InputIconButton
+      onClick={onToggle}
+      ariaLabel={isOpen ? 'Fechar emojis' : 'Emojis'}
+      Icon={isOpen ? IoMdClose : MdOutlineEmojiEmotions}
+    />
   );
 }

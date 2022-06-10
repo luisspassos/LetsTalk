@@ -20,7 +20,8 @@
 - mudar cor do input error
 - ver coverage dos testes
 - ver onlineAt ficando online em outras contas
-- testar emoji picker no celular
+- ver light mode do emoji picker
+- ver responsividade do emoji picker
 
 # NEXT PROJECT
 
