@@ -1,6 +1,10 @@
 import { Input } from '@chakra-ui/react';
 
-export function SearchInput() {
+type SearchInputProps = {
+  handleSearchEmoji: (search: string) => void;
+};
+
+export function SearchInput({ handleSearchEmoji }: SearchInputProps) {
   return (
     <Input
       placeholder='Pesquisar emoji'
@@ -11,6 +15,7 @@ export function SearchInput() {
       flexShrink={0}
       w='99.5%'
       mx='auto'
+      onChange={(e) => handleSearchEmoji(e.target.value)}
     />
   );
 }

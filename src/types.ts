@@ -16,3 +16,8 @@ export type ContactsResponse = {
 };
 
 export type OnlineAt = number | 'now';
+
+export type EmojiType = {
+  name: string;
+  emoji: string;
+};

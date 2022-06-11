@@ -22,6 +22,10 @@
 - ver onlineAt ficando online em outras contas
 - ver light mode do emoji picker
 - ver responsividade do emoji picker
+- ver alternativa para o Object.values
+- ver tradução de alguns emojis
+- fazer emojis recentes
+- ver loading do dynamic do emoji picker
 
 # NEXT PROJECT
 
