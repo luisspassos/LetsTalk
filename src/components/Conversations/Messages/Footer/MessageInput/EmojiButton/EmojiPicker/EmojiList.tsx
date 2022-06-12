@@ -8,7 +8,7 @@ type EmojiListProps = {
 
 export function EmojiList({ list, ...rest }: EmojiListProps) {
   return (
-    <Flex wrap='wrap' {...rest}>
+    <Flex as='ul' wrap='wrap' {...rest}>
       {list.map((emoji) => (
         <Emoji emoji={emoji.emoji} key={emoji.emoji} />
       ))}

@@ -7,7 +7,7 @@ type EmojiProps = {
 export function Emoji({ emoji }: EmojiProps) {
   return (
     <Text
-      as='span'
+      as='li'
       d='flex'
       alignItems='center'
       justifyContent='center'

@@ -26,6 +26,7 @@
 - ver tradução de alguns emojis
 - fazer emojis recentes
 - ver loading do dynamic do emoji picker
+- transformar componente do totalsize em componente e outro Box
 
 # NEXT PROJECT
 
