@@ -26,6 +26,7 @@
 - ver tradução de alguns emojis
 - fazer emojis recentes
 - ver loading do dynamic do emoji picker
+- ver aria label em emoji
 
 # NEXT PROJECT
 

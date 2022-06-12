@@ -24,7 +24,6 @@ type SearchedEmojis = {
   data: EmojiType[];
   isEmpty: boolean;
 };
-
 export function EmojiPicker() {
   const [categories, setCategories] = useState({
     data: [
@@ -36,7 +35,7 @@ export function EmojiPicker() {
       {
         icon: MdOutlineEmojiEmotions,
         name: 'Smileys e pessoas',
-        emojis: emojis['smileys-emotion'],
+        emojis: [...emojis['smileys-emotion'], ...emojis['people-body']],
       },
       {
         icon: RiBearSmileLine,
