@@ -1,5 +1,4 @@
 import {
-  Box,
   Flex,
   Heading,
   useBreakpointValue,
@@ -14,6 +13,8 @@ import { useConversations } from '../../../contexts/ConversationsContext';
 import { useVirtual } from 'react-virtual';
 import { Conversation } from './Conversation';
 import { ConversationDivider } from './Conversation/ConversationDivider';
+import { VirtualizedItemsListWrapper } from '../../Virtual/VirtualizedItemsListWrapper';
+import { ScrollableBoxOfVirtualizedItems } from '../../Virtual/ScrollableBoxOfVirtualizedItems';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
@@ -70,8 +71,7 @@ export function ConversationListComponent() {
       >
         Conversas
       </Heading>
-      <Box
-        overflowY='auto'
+      <ScrollableBoxOfVirtualizedItems
         ref={scrollBoxRef}
         pb={['6px', '8px', '10px']}
         mx={['-19px', '-22px', '-25px']}
@@ -83,10 +83,8 @@ export function ConversationListComponent() {
           mt={0}
           mx='auto'
         />
-        <Box
-          h={`${conversationVirtualizer.totalSize}px`}
-          w='100%'
-          position='relative'
+        <VirtualizedItemsListWrapper
+          totalSize={conversationVirtualizer.totalSize}
         >
           {conversationVirtualizer.virtualItems.map((virtualRow) => {
             const conversation = fetchedConversations[virtualRow.index];
@@ -108,8 +106,8 @@ export function ConversationListComponent() {
               />
             );
           })}
-        </Box>
-      </Box>
+        </VirtualizedItemsListWrapper>
+      </ScrollableBoxOfVirtualizedItems>
     </Flex>
   );
 }

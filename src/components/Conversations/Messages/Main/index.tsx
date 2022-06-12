@@ -9,6 +9,8 @@ import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../types';
 import { Message } from './Message';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
+import { VirtualizedItemsListWrapper } from '../../../Virtual/VirtualizedItemsListWrapper';
+import { ScrollableBoxOfVirtualizedItems } from '../../../Virtual/ScrollableBoxOfVirtualizedItems';
 
 type DbMessageData = {
   author: string;
@@ -274,13 +276,12 @@ export function Main() {
   }, [messages2, scrollToIndex, initial]);
 
   return (
-    <Box
+    <ScrollableBoxOfVirtualizedItems
       ref={scrollBoxRef}
-      overflowY='auto'
       pr={['14px', '17px', '20px']}
       mr={['-14px', '-17px', '-20px']}
     >
-      <Box h={messageVirtualizer.totalSize} w='100%' pos='relative'>
+      <VirtualizedItemsListWrapper totalSize={messageVirtualizer.totalSize}>
         {messageVirtualizer.virtualItems.map((virtualMessage) => {
           const message = messages[virtualMessage.index];
 
@@ -303,7 +304,7 @@ export function Main() {
             </Box>
           );
         })}
-      </Box>
-    </Box>
+      </VirtualizedItemsListWrapper>
+    </ScrollableBoxOfVirtualizedItems>
   );
 }
