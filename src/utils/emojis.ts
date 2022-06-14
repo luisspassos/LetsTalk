@@ -1020,223 +1020,223 @@ export const emojis = {
     },
     {
       emoji: '👨‍⚕️',
-      name: 'man health worker',
+      name: 'homem trabalhador de saúde',
     },
     {
       emoji: '👩‍⚕️',
-      name: 'woman health worker',
+      name: 'mulher trabalhadora de saúde',
     },
     {
       emoji: '🧑‍🎓',
-      name: 'student',
+      name: 'estudando',
     },
     {
       emoji: '👨‍🎓',
-      name: 'man student',
+      name: 'homem estudante',
     },
     {
       emoji: '👩‍🎓',
-      name: 'woman student',
+      name: 'mulher estudante',
     },
     {
       emoji: '🧑‍🏫',
-      name: 'teacher',
+      name: 'professor',
     },
     {
       emoji: '👨‍🏫',
-      name: 'man teacher',
+      name: 'professor',
     },
     {
       emoji: '👩‍🏫',
-      name: 'woman teacher',
+      name: 'professora',
     },
     {
       emoji: '🧑‍⚖️',
-      name: 'judge',
+      name: 'juíz',
     },
     {
       emoji: '👨‍⚖️',
-      name: 'man judge',
+      name: 'juíz',
     },
     {
       emoji: '👩‍⚖️',
-      name: 'woman judge',
+      name: 'juíza',
     },
     {
       emoji: '🧑‍🌾',
-      name: 'farmer',
+      name: 'fazendeiro',
     },
     {
       emoji: '👨‍🌾',
-      name: 'man farmer',
+      name: 'fazendeiro',
     },
     {
       emoji: '👩‍🌾',
-      name: 'woman farmer',
+      name: 'fazendeira',
     },
     {
       emoji: '🧑‍🍳',
-      name: 'cook',
+      name: 'cozinheiro',
     },
     {
       emoji: '👨‍🍳',
-      name: 'man cook',
+      name: 'cozinheiro',
     },
     {
       emoji: '👩‍🍳',
-      name: 'woman cook',
+      name: 'cozinheira',
     },
     {
       emoji: '🧑‍🔧',
-      name: 'mechanic',
+      name: 'mecânico',
     },
     {
       emoji: '👨‍🔧',
-      name: 'man mechanic',
+      name: 'mecânico',
     },
     {
       emoji: '👩‍🔧',
-      name: 'woman mechanic',
+      name: 'mecânica',
     },
     {
       emoji: '🧑‍🏭',
-      name: 'factory worker',
+      name: 'operário',
     },
     {
       emoji: '👨‍🏭',
-      name: 'man factory worker',
+      name: 'operário',
     },
     {
       emoji: '👩‍🏭',
-      name: 'woman factory worker',
+      name: 'operária',
     },
     {
       emoji: '🧑‍💼',
-      name: 'office worker',
+      name: 'trabalhador de escritório',
     },
     {
       emoji: '👨‍💼',
-      name: 'man office worker',
+      name: 'trabalhador de escritório',
     },
     {
       emoji: '👩‍💼',
-      name: 'woman office worker',
+      name: 'trabalhadora de escritório',
     },
     {
       emoji: '🧑‍🔬',
-      name: 'scientist',
+      name: 'cientista',
     },
     {
       emoji: '👨‍🔬',
-      name: 'man scientist',
+      name: 'homem cientista',
     },
     {
       emoji: '👩‍🔬',
-      name: 'woman scientist',
+      name: 'mulher cientista',
     },
     {
       emoji: '🧑‍💻',
-      name: 'technologist',
+      name: 'tecnólogo',
     },
     {
       emoji: '👨‍💻',
-      name: 'man technologist',
+      name: 'tecnólogo',
     },
     {
       emoji: '👩‍💻',
-      name: 'woman technologist',
+      name: 'tecnóloga',
     },
     {
       emoji: '🧑‍🎤',
-      name: 'singer',
+      name: 'cantor',
     },
     {
       emoji: '👨‍🎤',
-      name: 'man singer',
+      name: 'cantor',
     },
     {
       emoji: '👩‍🎤',
-      name: 'woman singer',
+      name: 'cantora',
     },
     {
       emoji: '🧑‍🎨',
-      name: 'artist',
+      name: 'artista',
     },
     {
       emoji: '👨‍🎨',
-      name: 'man artist',
+      name: 'homem artist',
     },
     {
       emoji: '👩‍🎨',
-      name: 'woman artist',
+      name: 'mulher artist',
     },
     {
       emoji: '🧑‍✈️',
-      name: 'pilot',
+      name: 'piloto',
     },
     {
       emoji: '👨‍✈️',
-      name: 'man pilot',
+      name: 'piloto',
     },
     {
       emoji: '👩‍✈️',
-      name: 'woman pilot',
+      name: 'pilota',
     },
     {
       emoji: '🧑‍🚀',
-      name: 'astronaut',
+      name: 'astronauta',
     },
     {
       emoji: '👨‍🚀',
-      name: 'man astronaut',
+      name: 'homem astronauta',
     },
     {
       emoji: '👩‍🚀',
-      name: 'woman astronaut',
+      name: 'mulher astronauta',
     },
     {
       emoji: '🧑‍🚒',
-      name: 'firefighter',
+      name: 'bombeiro',
     },
     {
       emoji: '👨‍🚒',
-      name: 'man firefighter',
+      name: 'bombeiro',
     },
     {
       emoji: '👩‍🚒',
-      name: 'woman firefighter',
+      name: 'bombeira',
     },
     {
       emoji: '👮',
-      name: 'police officer',
+      name: 'policial',
     },
     {
       emoji: '🕵️',
-      name: 'detective',
+      name: 'detetive',
     },
     {
       emoji: '🕵🏻',
-      name: 'detective: light skin tone',
+      name: 'detetive: tom de pele claro',
     },
     {
       emoji: '🕵🏼',
-      name: 'detective: medium-light skin tone',
+      name: 'detetive: tom de pele médio-claro',
     },
     {
       emoji: '🕵🏽',
-      name: 'detective: medium skin tone',
+      name: 'detetive: tom de pele médio',
     },
     {
       emoji: '🕵🏾',
-      name: 'detective: medium-dark skin tone',
+      name: 'detetive: pele morena escura',
     },
     {
       emoji: '🕵🏿',
-      name: 'detective: dark skin tone',
+      name: 'detetive: pele morena escura',
     },
     {
       emoji: '🕵️‍♂️',
-      name: 'man detective',
+      name: 'homem detetive',
     },
     {
       emoji: '🕵🏻‍♂️',
