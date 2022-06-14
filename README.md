@@ -27,6 +27,8 @@
 - fazer emojis recentes
 - ver loading do dynamic do emoji picker
 - ver aria label em emoji
+- ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
+- ver tag img no 👁️‍🗨️
 
 # NEXT PROJECT
 

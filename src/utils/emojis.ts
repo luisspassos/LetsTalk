@@ -2,223 +2,223 @@ export const emojis = {
   'smileys-emotion': [
     {
       emoji: '😀',
-      name: 'grinning face',
+      name: 'rosto sorridente',
     },
     {
       emoji: '😃',
-      name: 'grinning face with big eyes',
+      name: 'rosto sorridente com olhos grandes',
     },
     {
       emoji: '😄',
-      name: 'grinning face with smiling eyes',
+      name: 'rosto sorridente com olhos sorridentes',
     },
     {
       emoji: '😁',
-      name: 'beaming face with smiling eyes',
+      name: 'rosto radiante com olhos sorridentes',
     },
     {
       emoji: '😆',
-      name: 'grinning squinting face',
+      name: 'cara de estrabismo sorrindo',
     },
     {
       emoji: '😅',
-      name: 'grinning face with sweat',
+      name: 'rosto sorridente com suor',
     },
     {
       emoji: '🤣',
-      name: 'rolling on the floor laughing',
+      name: 'rolando de rir no chão',
     },
     {
       emoji: '😂',
-      name: 'face with tears of joy',
+      name: 'rosto com lágrimas de alegria',
     },
     {
       emoji: '🙂',
-      name: 'slightly smiling face',
+      name: 'rosto levemente sorridente',
     },
     {
       emoji: '🙃',
-      name: 'upside-down face',
+      name: 'rosto de cabeça para baixo',
     },
     {
       emoji: '😉',
-      name: 'winking face',
+      name: 'rosto piscando',
     },
     {
       emoji: '😊',
-      name: 'smiling face with smiling eyes',
+      name: 'rosto sorridente com olhos sorridentes',
     },
     {
       emoji: '😇',
-      name: 'smiling face with halo',
+      name: 'rosto sorridente com auréola',
     },
     {
       emoji: '🥰',
-      name: 'smiling face with hearts',
+      name: 'rosto sorridente com corações',
     },
     {
       emoji: '😍',
-      name: 'smiling face with heart-eyes',
+      name: 'rosto sorridente com olhos de coração',
     },
     {
       emoji: '🤩',
-      name: 'star-struck',
+      name: 'deslumbrado deslumbrada',
     },
     {
       emoji: '😘',
-      name: 'face blowing a kiss',
+      name: 'rosto mandando um beijo',
     },
     {
       emoji: '😗',
-      name: 'kissing face',
+      name: 'rosto de beijo',
     },
     {
       emoji: '☺️',
-      name: 'smiling face',
+      name: 'rosto sorridente',
     },
     {
       emoji: '😚',
-      name: 'kissing face with closed eyes',
+      name: 'rosto beijando com olhos fechados',
     },
     {
       emoji: '😙',
-      name: 'kissing face with smiling eyes',
+      name: 'rosto beijando com olhos sorridentes',
     },
     {
       emoji: '🥲',
-      name: 'smiling face with tear',
+      name: 'rosto sorridente com lágrima',
     },
     {
       emoji: '😋',
-      name: 'face savoring food',
+      name: 'rosto saboreando comida',
     },
     {
       emoji: '😛',
-      name: 'face with tongue',
+      name: 'rosto com língua',
     },
     {
       emoji: '😜',
-      name: 'winking face with tongue',
+      name: 'rosto piscando com língua',
     },
     {
       emoji: '🤪',
-      name: 'zany face',
+      name: 'rosto doido',
     },
     {
       emoji: '😝',
-      name: 'squinting face with tongue',
+      name: 'rosto apertado com língua',
     },
     {
       emoji: '🤑',
-      name: 'money-mouth face',
+      name: 'rosto de dinheiro',
     },
     {
       emoji: '🤗',
-      name: 'hugging face',
+      name: 'rosto abraçando',
     },
     {
       emoji: '🤭',
-      name: 'face with hand over mouth',
+      name: 'rosto com a mão na boca',
     },
     {
       emoji: '🤫',
-      name: 'shushing face',
+      name: 'rosto calado',
     },
     {
       emoji: '🤔',
-      name: 'thinking face',
+      name: 'rosto pensando',
     },
     {
       emoji: '🤐',
-      name: 'zipper-mouth face',
+      name: 'cara de zíper',
     },
     {
       emoji: '🤨',
-      name: 'face with raised eyebrow',
+      name: 'rosto com sobrancelha levantada',
     },
     {
       emoji: '😐',
-      name: 'neutral face',
+      name: 'rosto neutro',
     },
     {
       emoji: '😑',
-      name: 'expressionless face',
+      name: 'rosto sem expressão',
     },
     {
       emoji: '😶',
-      name: 'face without mouth',
+      name: 'rosto sem boca',
     },
     {
       emoji: '😏',
-      name: 'smirking face',
+      name: 'rosto sorrindo maliciosamente',
     },
     {
       emoji: '😒',
-      name: 'unamused face',
+      name: 'rosto sem graça',
     },
     {
       emoji: '🙄',
-      name: 'face with rolling eyes',
+      name: 'rosto com olhos rolando',
     },
     {
       emoji: '😬',
-      name: 'grimacing face',
+      name: 'careta',
     },
     {
       emoji: '🤥',
-      name: 'lying face',
+      name: 'rosto mentiroso',
     },
     {
       emoji: '😌',
-      name: 'relieved face',
+      name: 'rosto aliviado',
     },
     {
       emoji: '😔',
-      name: 'pensive face',
+      name: 'rosto pensativo',
     },
     {
       emoji: '😪',
-      name: 'sleepy face',
+      name: 'cara de sono',
     },
     {
       emoji: '🤤',
-      name: 'drooling face',
+      name: 'rosto babando',
     },
     {
       emoji: '😴',
-      name: 'sleeping face',
+      name: 'rosto dormindo',
     },
     {
       emoji: '😷',
-      name: 'face with medical mask',
+      name: 'rosto com uma máscara médica',
     },
     {
       emoji: '🤒',
-      name: 'face with thermometer',
+      name: 'rosto com termômetro',
     },
     {
       emoji: '🤕',
-      name: 'face with head-bandage',
+      name: 'rosto com bandagem',
     },
     {
       emoji: '🤢',
-      name: 'nauseated face',
+      name: 'rosto enjoado',
     },
     {
       emoji: '🤮',
-      name: 'face vomiting',
+      name: 'rosto vomitando',
     },
     {
       emoji: '🤧',
-      name: 'sneezing face',
+      name: 'rosto espirrando',
     },
     {
       emoji: '🥵',
-      name: 'hot face',
+      name: 'rosto quente',
     },
     {
       emoji: '🥶',
-      name: 'cold face',
+      name: 'rosto frio',
     },
     {
       emoji: '🥴',
@@ -226,171 +226,171 @@ export const emojis = {
     },
     {
       emoji: '😵',
-      name: 'dizzy face',
+      name: 'rosto morto',
     },
     {
       emoji: '🤯',
-      name: 'exploding head',
+      name: 'cabeça explodindo',
     },
     {
       emoji: '🤠',
-      name: 'cowboy hat face',
+      name: 'rosto com chapéu de cowbow',
     },
     {
       emoji: '🥳',
-      name: 'partying face',
+      name: 'rosto festejando',
     },
     {
       emoji: '🥸',
-      name: 'disguised face',
+      name: 'rosto disfarçado',
     },
     {
       emoji: '😎',
-      name: 'smiling face with sunglasses',
+      name: 'rosto sorridente com óculos de sol',
     },
     {
       emoji: '🤓',
-      name: 'nerd face',
+      name: 'rosto nerd',
     },
     {
       emoji: '🧐',
-      name: 'face with monocle',
+      name: 'rosto com monóculo',
     },
     {
       emoji: '😕',
-      name: 'confused face',
+      name: 'rosto confuso',
     },
     {
       emoji: '😟',
-      name: 'worried face',
+      name: 'rosto preocupado',
     },
     {
       emoji: '🙁',
-      name: 'slightly frowning face',
+      name: 'rosto ligeiramente carrancudo',
     },
     {
       emoji: '☹️',
-      name: 'frowning face',
+      name: 'rosto carrancudo',
     },
     {
       emoji: '😮',
-      name: 'face with open mouth',
+      name: 'rosto com a boca aberta',
     },
     {
       emoji: '😯',
-      name: 'hushed face',
+      name: 'rosto surpreso',
     },
     {
       emoji: '😲',
-      name: 'astonished face',
+      name: 'rosto muito surpreso',
     },
     {
       emoji: '😳',
-      name: 'flushed face',
+      name: 'rosto envergonhado',
     },
     {
       emoji: '🥺',
-      name: 'pleading face',
+      name: 'rosto suplicante',
     },
     {
       emoji: '😦',
-      name: 'frowning face with open mouth',
+      name: 'rosto carrancudo com a boca aberta',
     },
     {
       emoji: '😧',
-      name: 'anguished face',
+      name: 'rosto angustiado',
     },
     {
       emoji: '😨',
-      name: 'fearful face',
+      name: 'rosto de medo',
     },
     {
       emoji: '😰',
-      name: 'anxious face with sweat',
+      name: 'rosto ansioso com suor',
     },
     {
       emoji: '😥',
-      name: 'sad but relieved face',
+      name: 'rosto triste mas aliviado',
     },
     {
       emoji: '😢',
-      name: 'crying face',
+      name: 'rosto de choro',
     },
     {
       emoji: '😭',
-      name: 'loudly crying face',
+      name: 'rosto de choro alto',
     },
     {
       emoji: '😱',
-      name: 'face screaming in fear',
+      name: 'rosto gritando de medo',
     },
     {
       emoji: '😖',
-      name: 'confounded face',
+      name: 'rosto perturbado',
     },
     {
       emoji: '😣',
-      name: 'persevering face',
+      name: 'rosto perseverante',
     },
     {
       emoji: '😞',
-      name: 'disappointed face',
+      name: 'rosto desapontado',
     },
     {
       emoji: '😓',
-      name: 'downcast face with sweat',
+      name: 'rosto abatido com suor',
     },
     {
       emoji: '😩',
-      name: 'weary face',
+      name: 'rosto cansado',
     },
     {
       emoji: '😫',
-      name: 'tired face',
+      name: 'rosto farto',
     },
     {
       emoji: '🥱',
-      name: 'yawning face',
+      name: 'rosto bocejando',
     },
     {
       emoji: '😤',
-      name: 'face with steam from nose',
+      name: 'rosto com vapor do nariz',
     },
     {
       emoji: '😡',
-      name: 'pouting face',
+      name: 'rosto de beicinho',
     },
     {
       emoji: '😠',
-      name: 'angry face',
+      name: 'rosto bravo',
     },
     {
       emoji: '🤬',
-      name: 'face with symbols on mouth',
+      name: 'rosto com símbolos na boca',
     },
     {
       emoji: '😈',
-      name: 'smiling face with horns',
+      name: 'rosto sorridente com chifres',
     },
     {
       emoji: '👿',
-      name: 'angry face with horns',
+      name: 'rosto zangado com chifres',
     },
     {
       emoji: '💀',
-      name: 'skull',
+      name: 'caveira',
     },
     {
       emoji: '☠️',
-      name: 'skull and crossbones',
+      name: 'caveira e ossos cruzados',
     },
     {
       emoji: '💩',
-      name: 'pile of poo',
+      name: 'pilha de cocô',
     },
     {
       emoji: '🤡',
-      name: 'clown face',
+      name: 'rosto de palhaço',
     },
     {
       emoji: '👹',
@@ -402,7 +402,7 @@ export const emojis = {
     },
     {
       emoji: '👻',
-      name: 'ghost',
+      name: 'fantasma',
     },
     {
       emoji: '👽',
@@ -410,195 +410,195 @@ export const emojis = {
     },
     {
       emoji: '👾',
-      name: 'alien monster',
+      name: 'monstro alienígena',
     },
     {
       emoji: '🤖',
-      name: 'robot',
+      name: 'robô',
     },
     {
       emoji: '😺',
-      name: 'grinning cat',
+      name: 'gato sorridente',
     },
     {
       emoji: '😸',
-      name: 'grinning cat with smiling eyes',
+      name: 'gato sorridente com olhos sorridentes',
     },
     {
       emoji: '😹',
-      name: 'cat with tears of joy',
+      name: 'gato com lágrimas de alegria',
     },
     {
       emoji: '😻',
-      name: 'smiling cat with heart-eyes',
+      name: 'gato sorridente com olhos de coração',
     },
     {
       emoji: '😼',
-      name: 'cat with wry smile',
+      name: 'gato com sorriso irônico',
     },
     {
       emoji: '😽',
-      name: 'kissing cat',
+      name: 'gato beijando',
     },
     {
       emoji: '🙀',
-      name: 'weary cat',
+      name: 'gato assustado',
     },
     {
       emoji: '😿',
-      name: 'crying cat',
+      name: 'gato chorando',
     },
     {
       emoji: '😾',
-      name: 'pouting cat',
+      name: 'gato fazendo beicinho',
     },
     {
       emoji: '🙈',
-      name: 'see-no-evil monkey',
+      name: 'macaco que não vê mal',
     },
     {
       emoji: '🙉',
-      name: 'hear-no-evil monkey',
+      name: 'macaco que não ouve mal',
     },
     {
       emoji: '🙊',
-      name: 'speak-no-evil monkey',
+      name: 'macaco que não fala mal',
     },
     {
       emoji: '💋',
-      name: 'kiss mark',
+      name: 'marca de beijo',
     },
     {
       emoji: '💌',
-      name: 'love letter',
+      name: 'carta de amor',
     },
     {
       emoji: '💘',
-      name: 'heart with arrow',
+      name: 'coração com flecha',
     },
     {
       emoji: '💝',
-      name: 'heart with ribbon',
+      name: 'coração com fita',
     },
     {
       emoji: '💖',
-      name: 'sparkling heart',
+      name: 'coração cintilante',
     },
     {
       emoji: '💗',
-      name: 'growing heart',
+      name: 'coração crescendo',
     },
     {
       emoji: '💓',
-      name: 'beating heart',
+      name: 'coração batendo',
     },
     {
       emoji: '💞',
-      name: 'revolving hearts',
+      name: 'corações girando',
     },
     {
       emoji: '💕',
-      name: 'two hearts',
+      name: 'dois corações',
     },
     {
       emoji: '💟',
-      name: 'heart decoration',
+      name: 'decoração de coração',
     },
     {
       emoji: '❣️',
-      name: 'heart exclamation',
+      name: 'exclamação de coração',
     },
     {
       emoji: '💔',
-      name: 'broken heart',
+      name: 'coração partido',
     },
     {
       emoji: '❤️',
-      name: 'red heart',
+      name: 'coração vermelho',
     },
     {
       emoji: '🧡',
-      name: 'orange heart',
+      name: 'coração laranja',
     },
     {
       emoji: '💛',
-      name: 'yellow heart',
+      name: 'coração amarelo',
     },
     {
       emoji: '💚',
-      name: 'green heart',
+      name: 'coração verde',
     },
     {
       emoji: '💙',
-      name: 'blue heart',
+      name: 'coração azul',
     },
     {
       emoji: '💜',
-      name: 'purple heart',
+      name: 'coração roxo',
     },
     {
       emoji: '🤎',
-      name: 'brown heart',
+      name: 'coração marrom',
     },
     {
       emoji: '🖤',
-      name: 'black heart',
+      name: 'coração preto',
     },
     {
       emoji: '🤍',
-      name: 'white heart',
+      name: 'coração azul',
     },
     {
       emoji: '💯',
-      name: 'hundred points',
+      name: 'símbolo de cem pontos',
     },
     {
       emoji: '💢',
-      name: 'anger symbol',
+      name: 'símbolo de raiva',
     },
     {
       emoji: '💥',
-      name: 'collision',
+      name: 'símbolo de colisão',
     },
     {
       emoji: '💫',
-      name: 'dizzy',
+      name: 'símbolo de tonto',
     },
     {
       emoji: '💦',
-      name: 'sweat droplets',
+      name: 'gotas de suor',
     },
     {
       emoji: '💨',
-      name: 'dashing away',
+      name: 'correndo para longe',
     },
     {
       emoji: '🕳️',
-      name: 'hole',
+      name: 'buraco',
     },
     {
       emoji: '💣',
-      name: 'bomb',
+      name: 'bomba',
     },
     {
       emoji: '💬',
-      name: 'speech balloon',
+      name: 'balão de fala',
     },
     {
       emoji: '👁️‍🗨️',
-      name: 'eye in speech bubble',
+      name: 'olho no balão do discurso',
     },
     {
       emoji: '🗨️',
-      name: 'left speech bubble',
+      name: 'balão esquerdo',
     },
     {
       emoji: '🗯️',
-      name: 'right anger bubble',
+      name: 'balão de raiva',
     },
     {
       emoji: '💭',
-      name: 'thought balloon',
+      name: 'balão de pensamento',
     },
     {
       emoji: '💤',
@@ -608,215 +608,215 @@ export const emojis = {
   'people-body': [
     {
       emoji: '👋',
-      name: 'waving hand',
+      name: 'acenando com a mão',
     },
     {
       emoji: '🤚',
-      name: 'raised back of hand',
+      name: 'costas da mão levantadas',
     },
     {
       emoji: '🖐️',
-      name: 'hand with fingers splayed',
+      name: 'mão com os dedos abertos',
     },
     {
       emoji: '🖐🏻',
-      name: 'hand with fingers splayed: light skin tone',
+      name: 'mão com os dedos abertos: pele clara',
     },
     {
       emoji: '🖐🏼',
-      name: 'hand with fingers splayed: medium-light skin tone',
+      name: 'mão com os dedos abertos: pele morena clara',
     },
     {
       emoji: '🖐🏽',
-      name: 'hand with fingers splayed: medium skin tone',
+      name: 'mão com os dedos abertos: pele morena',
     },
     {
       emoji: '🖐🏾',
-      name: 'hand with fingers splayed: medium-dark skin tone',
+      name: 'mão com os dedos abertos: pele morena escura',
     },
     {
       emoji: '🖐🏿',
-      name: 'hand with fingers splayed: dark skin tone',
+      name: 'mão com os dedos abertos: pele escura',
     },
     {
       emoji: '✋',
-      name: 'raised hand',
+      name: 'mão levantada',
     },
     {
       emoji: '🖖',
-      name: 'vulcan salute',
+      name: 'saudação vulcânica',
     },
     {
       emoji: '👌',
-      name: 'OK hand',
+      name: 'mão de OK',
     },
     {
       emoji: '🤌',
-      name: 'pinched fingers',
+      name: 'dedos comprimidos',
     },
     {
       emoji: '🤏',
-      name: 'pinching hand',
+      name: 'mão beliscando',
     },
     {
       emoji: '✌️',
-      name: 'victory hand',
+      name: 'mão da vitória',
     },
     {
       emoji: '✌🏻',
-      name: 'victory hand: light skin tone',
+      name: 'mão da vitória: pele clara',
     },
     {
       emoji: '✌🏼',
-      name: 'victory hand: medium-light skin tone',
+      name: 'mão da vitória: pele morena clara',
     },
     {
       emoji: '✌🏽',
-      name: 'victory hand: medium skin tone',
+      name: 'mão da vitória: pele morena',
     },
     {
       emoji: '✌🏾',
-      name: 'victory hand: medium-dark skin tone',
+      name: 'mão da vitória: pele morena escura',
     },
     {
       emoji: '✌🏿',
-      name: 'victory hand: dark skin tone',
+      name: 'mão da vitória: pele escura',
     },
     {
       emoji: '🤞',
-      name: 'crossed fingers',
+      name: 'dedos cruzados',
     },
     {
       emoji: '🤟',
-      name: 'love-you gesture',
+      name: 'gesto de amor',
     },
     {
       emoji: '🤘',
-      name: 'sign of the horns',
+      name: 'sinal dos chifres',
     },
     {
       emoji: '🤙',
-      name: 'call me hand',
+      name: 'me chame de mão',
     },
     {
       emoji: '👈',
-      name: 'backhand index pointing left',
+      name: 'mão apontando para a esquerda',
     },
     {
       emoji: '👉',
-      name: 'backhand index pointing right',
+      name: 'mão apontando para a direita',
     },
     {
       emoji: '👆',
-      name: 'backhand index pointing up',
+      name: 'mão apontando para cima',
     },
     {
       emoji: '🖕',
-      name: 'middle finger',
+      name: 'dedo do meio',
     },
     {
       emoji: '👇',
-      name: 'backhand index pointing down',
+      name: 'mão apontando para baixo',
     },
     {
       emoji: '☝️',
-      name: 'index pointing up',
+      name: 'mão apontando para cima',
     },
     {
       emoji: '☝🏻',
-      name: 'index pointing up: light skin tone',
+      name: 'mão apontando para cima: pele clara',
     },
     {
       emoji: '☝🏼',
-      name: 'index pointing up: medium-light skin tone',
+      name: 'mão apontando para cima: tom de pele médio-claro',
     },
     {
       emoji: '☝🏽',
-      name: 'index pointing up: medium skin tone',
+      name: 'mão apontando para cima: tom de pele médio',
     },
     {
       emoji: '☝🏾',
-      name: 'index pointing up: medium-dark skin tone',
+      name: 'mão apontando para cima: pele morena escura',
     },
     {
       emoji: '☝🏿',
-      name: 'index pointing up: dark skin tone',
+      name: 'mão apontando para cima: tom de pele escuro',
     },
     {
       emoji: '👍',
-      name: 'thumbs up',
+      name: 'afirmativo',
     },
     {
       emoji: '👎',
-      name: 'thumbs down',
+      name: 'negativo',
     },
     {
       emoji: '✊',
-      name: 'raised fist',
+      name: 'punho erguido',
     },
     {
       emoji: '👊',
-      name: 'oncoming fist',
+      name: 'punho que se aproxima',
     },
     {
       emoji: '🤛',
-      name: 'left-facing fist',
+      name: 'punho para a esquerda',
     },
     {
       emoji: '🤜',
-      name: 'right-facing fist',
+      name: 'punho virado para a direita',
     },
     {
       emoji: '👏',
-      name: 'clapping hands',
+      name: 'mãos de aplauso',
     },
     {
       emoji: '🙌',
-      name: 'raising hands',
+      name: 'levantando as mãos',
     },
     {
       emoji: '👐',
-      name: 'open hands',
+      name: 'mãos abertas',
     },
     {
       emoji: '🤲',
-      name: 'palms up together',
+      name: 'palmas para cima juntas',
     },
     {
       emoji: '🤝',
-      name: 'handshake',
+      name: 'aperto de mão',
     },
     {
       emoji: '🙏',
-      name: 'folded hands',
+      name: 'mãos cruzadas',
     },
     {
       emoji: '✍️',
-      name: 'writing hand',
+      name: 'mão escrevendo',
     },
     {
       emoji: '✍🏻',
-      name: 'writing hand: light skin tone',
+      name: 'mão escrevendo: pele clara',
     },
     {
       emoji: '✍🏼',
-      name: 'writing hand: medium-light skin tone',
+      name: 'mão escrevendo: tom de pele médio-claro',
     },
     {
       emoji: '✍🏽',
-      name: 'writing hand: medium skin tone',
+      name: 'mão escrevendo: tom de pele médio',
     },
     {
       emoji: '✍🏾',
-      name: 'writing hand: medium-dark skin tone',
+      name: 'mão escrevendo: pele morena escura',
     },
     {
       emoji: '✍🏿',
-      name: 'writing hand: dark skin tone',
+      name: 'mão escrevendo: tom de pele escuro',
     },
     {
       emoji: '💅',
-      name: 'nail polish',
+      name: 'esmalte',
     },
     {
       emoji: '🤳',
@@ -824,95 +824,95 @@ export const emojis = {
     },
     {
       emoji: '💪',
-      name: 'flexed biceps',
+      name: 'bíceps flexionado',
     },
     {
       emoji: '🦾',
-      name: 'mechanical arm',
+      name: 'braço mecânico',
     },
     {
       emoji: '🦿',
-      name: 'mechanical leg',
+      name: 'perna mecânica',
     },
     {
       emoji: '🦵',
-      name: 'leg',
+      name: 'perna',
     },
     {
       emoji: '🦶',
-      name: 'foot',
+      name: 'pé',
     },
     {
       emoji: '👂',
-      name: 'ear',
+      name: 'orelha',
     },
     {
       emoji: '🦻',
-      name: 'ear with hearing aid',
+      name: 'ouvido com aparelho auditivo',
     },
     {
       emoji: '👃',
-      name: 'nose',
+      name: 'nariz',
     },
     {
       emoji: '🧠',
-      name: 'brain',
+      name: 'cérebro',
     },
     {
       emoji: '🫀',
-      name: 'anatomical heart',
+      name: 'coração anatômico',
     },
     {
       emoji: '🫁',
-      name: 'lungs',
+      name: 'pulmões',
     },
     {
       emoji: '🦷',
-      name: 'tooth',
+      name: 'dente',
     },
     {
       emoji: '🦴',
-      name: 'bone',
+      name: 'osso',
     },
     {
       emoji: '👀',
-      name: 'eyes',
+      name: 'olhos',
     },
     {
       emoji: '👁️',
-      name: 'eye',
+      name: 'olho',
     },
     {
       emoji: '👅',
-      name: 'tongue',
+      name: 'língua',
     },
     {
       emoji: '👄',
-      name: 'mouth',
+      name: 'boca',
     },
     {
       emoji: '👶',
-      name: 'baby',
+      name: 'bebê',
     },
     {
       emoji: '🧒',
-      name: 'child',
+      name: 'criança',
     },
     {
       emoji: '👦',
-      name: 'boy',
+      name: 'garoto',
     },
     {
       emoji: '👧',
-      name: 'girl',
+      name: 'garota',
     },
     {
       emoji: '🧑',
-      name: 'person',
+      name: 'pessoa',
     },
     {
       emoji: '👱',
-      name: 'person: blond hair',
+      name: 'pessoa: cabelo loiro',
     },
     {
       emoji: '👨',
