@@ -916,107 +916,107 @@ export const emojis = {
     },
     {
       emoji: '👨',
-      name: 'man',
+      name: 'homem',
     },
     {
       emoji: '🧔',
-      name: 'man: beard',
+      name: 'homem: barba',
     },
     {
       emoji: '👨‍🦰',
-      name: 'man: red hair',
+      name: 'homem: cabelo ruivo',
     },
     {
       emoji: '👩',
-      name: 'woman',
+      name: 'mulher',
     },
     {
       emoji: '🧑‍🦰',
-      name: 'person: red hair',
+      name: 'pessoa: cabelo ruivo',
     },
     {
       emoji: '👩‍🦱',
-      name: 'woman: curly hair',
+      name: 'mulher: cabelo cacheado',
     },
     {
       emoji: '🧑‍🦱',
-      name: 'person: curly hair',
+      name: 'pessoa: cabelo cacheado',
     },
     {
       emoji: '👩‍🦳',
-      name: 'woman: white hair',
+      name: 'mulher: cabelo branco',
     },
     {
       emoji: '🧑‍🦳',
-      name: 'person: white hair',
+      name: 'pessoa: cabelo branco',
     },
     {
       emoji: '👩‍🦲',
-      name: 'woman: bald',
+      name: 'mulher: careca',
     },
     {
       emoji: '🧑‍🦲',
-      name: 'person: bald',
+      name: 'pessoa: careca',
     },
     {
       emoji: '👱‍♀️',
-      name: 'woman: blond hair',
+      name: 'mulher: cabelo loiro',
     },
     {
       emoji: '🧓',
-      name: 'older person',
+      name: 'pessoa idosa',
     },
     {
       emoji: '👴',
-      name: 'old man',
+      name: 'homem idoso',
     },
     {
       emoji: '👵',
-      name: 'old woman',
+      name: 'mulher idosa',
     },
     {
       emoji: '🙍',
-      name: 'person frowning',
+      name: 'pessoa franzindo a testa',
     },
     {
       emoji: '🙎',
-      name: 'person pouting',
+      name: 'pessoa fazendo beicinho',
     },
     {
       emoji: '🙅',
-      name: 'person gesturing NO',
+      name: 'pessoa gesticulando NÃO',
     },
     {
       emoji: '🙆',
-      name: 'person gesturing OK',
+      name: 'pessoa gesticulando ok',
     },
     {
       emoji: '💁',
-      name: 'person tipping hand',
+      name: 'pessoa inclinando a mão',
     },
     {
       emoji: '🙋',
-      name: 'person raising hand',
+      name: 'pessoa levantando a mão',
     },
     {
       emoji: '🧏',
-      name: 'deaf person',
+      name: 'pessoa surda',
     },
     {
       emoji: '🙇',
-      name: 'person bowing',
+      name: 'pessoa se curvando',
     },
     {
       emoji: '🤦',
-      name: 'person facepalming',
+      name: 'pessoa com a palma no rosto',
     },
     {
       emoji: '🤷',
-      name: 'person shrugging',
+      name: 'pessoa dando de ombros',
     },
     {
       emoji: '🧑‍⚕️',
-      name: 'health worker',
+      name: 'profissional de saúde',
     },
     {
       emoji: '👨‍⚕️',
