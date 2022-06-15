@@ -88,7 +88,7 @@ export default function ConversationsPage({
             nookies.destroy({}, 'token');
             clearAllEvents();
             await router.push('/');
-            fillUser(undefined);
+            fillUser(null);
             closeDeleteAccModal();
             handleChangeTab('conversations');
           }

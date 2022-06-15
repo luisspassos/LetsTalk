@@ -1,4 +1,9 @@
-import { Icon, IconButton, IconButtonProps } from '@chakra-ui/react';
+import {
+  Icon,
+  IconButton,
+  IconButtonProps,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 
 type CategoryButtonProps = {
@@ -14,11 +19,14 @@ export function CategoryButton({
   categoryIcon,
   ...rest
 }: CategoryButtonProps) {
+  const color = {
+    selected: useColorModeValue('blackAlpha.800', 'whiteAlpha.800'),
+    default: useColorModeValue('blackAlpha.600', 'whiteAlpha.600'),
+  };
+
   return (
     <IconButton
-      color={
-        selectedCategoryIndex === index ? 'whiteAlpha.800' : 'whiteAlpha.600'
-      }
+      color={selectedCategoryIndex === index ? color.selected : color.default}
       title={ariaLabel}
       aria-label={ariaLabel}
       variant='unstyled'

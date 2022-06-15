@@ -1240,51 +1240,51 @@ export const emojis = {
     },
     {
       emoji: '🕵🏻‍♂️',
-      name: 'man detective: light skin tone',
+      name: 'homem detetive: pele clara',
     },
     {
       emoji: '🕵🏼‍♂️',
-      name: 'man detective: medium-light skin tone',
+      name: 'homem detetive: pele morena clara',
     },
     {
       emoji: '🕵🏽‍♂️',
-      name: 'man detective: medium skin tone',
+      name: 'homem detetive: pele morena',
     },
     {
       emoji: '🕵🏾‍♂️',
-      name: 'man detective: medium-dark skin tone',
+      name: 'homem detetive: pele morena escura',
     },
     {
       emoji: '🕵🏿‍♂️',
-      name: 'man detective: dark skin tone',
+      name: 'homem detetive: pele escura',
     },
     {
       emoji: '🕵️‍♀️',
-      name: 'woman detective',
+      name: 'mulher detetive',
     },
     {
       emoji: '🕵🏻‍♀️',
-      name: 'woman detective: light skin tone',
+      name: 'mulher detetive: pele clara',
     },
     {
       emoji: '🕵🏼‍♀️',
-      name: 'woman detective: medium-light skin tone',
+      name: 'mulher detetive: pele morena clara',
     },
     {
       emoji: '🕵🏽‍♀️',
-      name: 'woman detective: medium skin tone',
+      name: 'mulher detetive : pele morena',
     },
     {
       emoji: '🕵🏾‍♀️',
-      name: 'woman detective: medium-dark skin tone',
+      name: 'mulher detetive: pele morena escura',
     },
     {
       emoji: '🕵🏿‍♀️',
-      name: 'woman detective: dark skin tone',
+      name: 'detetive mulher: pele morena escura',
     },
     {
       emoji: '💂',
-      name: 'guard',
+      name: 'guarda',
     },
     {
       emoji: '🥷',
@@ -1292,223 +1292,223 @@ export const emojis = {
     },
     {
       emoji: '👷',
-      name: 'construction worker',
+      name: 'trabalhador da construção',
     },
     {
       emoji: '🤴',
-      name: 'prince',
+      name: 'príncipe',
     },
     {
       emoji: '👸',
-      name: 'princess',
+      name: 'princesa',
     },
     {
       emoji: '👳',
-      name: 'person wearing turban',
+      name: 'pessoa usando turbante',
     },
     {
       emoji: '👲',
-      name: 'person with skullcap',
+      name: 'pessoa com calota craniana',
     },
     {
       emoji: '🧕',
-      name: 'woman with headscarf',
+      name: 'mulher com lenço',
     },
     {
       emoji: '🤵',
-      name: 'person in tuxedo',
+      name: 'pessoa de smoking',
     },
     {
       emoji: '👰',
-      name: 'person with veil',
+      name: 'pessoa com véu',
     },
     {
       emoji: '🤰',
-      name: 'pregnant woman',
+      name: 'mulher grávida',
     },
     {
       emoji: '🤱',
-      name: 'breast-feeding',
+      name: 'amamentação',
     },
     {
       emoji: '👩‍🍼',
-      name: 'woman feeding baby',
+      name: 'mulher alimentando bebê',
     },
     {
       emoji: '👨‍🍼',
-      name: 'man feeding baby',
+      name: 'homem alimentando bebê',
     },
     {
       emoji: '🧑‍🍼',
-      name: 'person feeding baby',
+      name: 'pessoa alimentando bebê',
     },
     {
       emoji: '👼',
-      name: 'baby angel',
+      name: 'bebê anjo',
     },
     {
       emoji: '🎅',
-      name: 'Santa Claus',
+      name: 'papai noel',
     },
     {
       emoji: '🤶',
-      name: 'Mrs. Claus',
+      name: 'Sra. Papai Noel',
     },
     {
       emoji: '🧑‍🎄',
-      name: 'mx claus',
+      name: 'mx noel',
     },
     {
       emoji: '🦸',
-      name: 'superhero',
+      name: 'super-herói',
     },
     {
       emoji: '🦹',
-      name: 'supervillain',
+      name: 'super-vilão',
     },
     {
       emoji: '🧙',
-      name: 'mage',
+      name: 'mago',
     },
     {
       emoji: '🧚',
-      name: 'fairy',
+      name: 'fada',
     },
     {
       emoji: '🧛',
-      name: 'vampire',
+      name: 'vampiro',
     },
     {
       emoji: '🧜',
-      name: 'merperson',
+      name: 'sereia',
     },
     {
       emoji: '🧝',
-      name: 'elf',
+      name: 'elfo',
     },
     {
       emoji: '🧞',
-      name: 'genie',
+      name: 'gênio',
     },
     {
       emoji: '🧟',
-      name: 'zombie',
+      name: 'zumbi',
     },
     {
       emoji: '💆',
-      name: 'person getting massage',
+      name: 'pessoa recebendo mensagem',
     },
     {
       emoji: '💇',
-      name: 'person getting haircut',
+      name: 'pessoa cortando o cabelo',
     },
     {
       emoji: '🚶',
-      name: 'person walking',
+      name: 'pessoa caminhando',
     },
     {
       emoji: '🧍',
-      name: 'person standing',
+      name: 'pessoa em pé',
     },
     {
       emoji: '🧎',
-      name: 'person kneeling',
+      name: 'pessoa ajoelhada',
     },
     {
       emoji: '🧑‍🦯',
-      name: 'person with white cane',
+      name: 'pessoa com bengala branca',
     },
     {
       emoji: '👨‍🦯',
-      name: 'man with white cane',
+      name: 'homem com bengala branca',
     },
     {
       emoji: '👩‍🦯',
-      name: 'woman with white cane',
+      name: 'mulher com bengala branca',
     },
     {
       emoji: '🧑‍🦼',
-      name: 'person in motorized wheelchair',
+      name: 'pessoa em cadeira de rodas motorizada',
     },
     {
       emoji: '👨‍🦼',
-      name: 'man in motorized wheelchair',
+      name: 'homem em cadeira de rodas motorizada',
     },
     {
       emoji: '👩‍🦼',
-      name: 'woman in motorized wheelchair',
+      name: 'mulher em cadeira de rodas motorizada',
     },
     {
       emoji: '🧑‍🦽',
-      name: 'person in manual wheelchair',
+      name: 'pessoa em cadeira de rodas manual',
     },
     {
       emoji: '👨‍🦽',
-      name: 'man in manual wheelchair',
+      name: 'homem em cadeira de rodas manual',
     },
     {
       emoji: '👩‍🦽',
-      name: 'woman in manual wheelchair',
+      name: 'mulher em cadeira de rodas manual',
     },
     {
       emoji: '🏃',
-      name: 'person running',
+      name: 'pessoa correndo',
     },
     {
       emoji: '💃',
-      name: 'woman dancing',
+      name: 'mulher dançando',
     },
     {
       emoji: '🕺',
-      name: 'man dancing',
+      name: 'homem dançando',
     },
     {
       emoji: '🕴️',
-      name: 'person in suit levitating',
+      name: 'pessoa de terno levitando',
     },
     {
       emoji: '🕴🏻',
-      name: 'person in suit levitating: light skin tone',
+      name: 'pessoa de terno levitando: pele clara',
     },
     {
       emoji: '🕴🏼',
-      name: 'person in suit levitating: medium-light skin tone',
+      name: 'pessoa de terno levitando: pele morena clara',
     },
     {
       emoji: '🕴🏽',
-      name: 'person in suit levitating: medium skin tone',
+      name: 'pessoa de terno levitando: pele morena',
     },
     {
       emoji: '🕴🏾',
-      name: 'person in suit levitating: medium-dark skin tone',
+      name: 'pessoa de terno levitando: pele morena escura',
     },
     {
       emoji: '🕴🏿',
-      name: 'person in suit levitating: dark skin tone',
+      name: 'pessoa de terno levitando: pele escura',
     },
     {
       emoji: '👯',
-      name: 'people with bunny ears',
+      name: 'pessoas com orelhas de coelho',
     },
     {
       emoji: '🧖',
-      name: 'person in steamy room',
+      name: 'pessoa na sala cheia de vapor',
     },
     {
       emoji: '🧗',
-      name: 'person climbing',
+      name: 'pessoa escalando',
     },
     {
       emoji: '🤺',
-      name: 'person fencing',
+      name: 'pessoa esgrima',
     },
     {
       emoji: '🏇',
-      name: 'horse racing',
+      name: 'corrida de cavalo',
     },
     {
       emoji: '⛷️',
-      name: 'skier',
+      name: 'esquiador',
     },
     {
       emoji: '🏂',
@@ -1516,3927 +1516,1395 @@ export const emojis = {
     },
     {
       emoji: '🏌️',
-      name: 'person golfing',
+      name: 'pessoa jogando golfe',
     },
     {
       emoji: '🏌🏻',
-      name: 'person golfing: light skin tone',
+      name: 'pessoa jogando golfe: pele clara',
     },
     {
       emoji: '🏌🏼',
-      name: 'person golfing: medium-light skin tone',
+      name: 'pessoa jogando golfe: pele morena clara',
     },
     {
       emoji: '🏌🏽',
-      name: 'person golfing: medium skin tone',
+      name: 'pessoa jogando golfe: pele morena',
     },
     {
       emoji: '🏌🏾',
-      name: 'person golfing: medium-dark skin tone',
+      name: 'pessoa jogando golfe: pele morena escura',
     },
     {
       emoji: '🏌🏿',
-      name: 'person golfing: dark skin tone',
+      name: 'pessoa jogando golfe: pele escura',
     },
     {
       emoji: '🏌️‍♂️',
-      name: 'man golfing',
+      name: 'homem jogando golfe',
     },
     {
       emoji: '🏌🏻‍♂️',
-      name: 'man golfing: light skin tone',
+      name: 'homem jogando golfe: pele clara',
     },
     {
       emoji: '🏌🏼‍♂️',
-      name: 'man golfing: medium-light skin tone',
+      name: 'homem jogando golfe: pele morena clara',
     },
     {
       emoji: '🏌🏽‍♂️',
-      name: 'man golfing: medium skin tone',
+      name: 'homem jogando golfe: pele morena',
     },
     {
       emoji: '🏌🏾‍♂️',
-      name: 'man golfing: medium-dark skin tone',
+      name: 'homem jogando golfe: pele morena escura',
     },
     {
       emoji: '🏌🏿‍♂️',
-      name: 'man golfing: dark skin tone',
+      name: 'homem jogando golfe: pele morena escura',
     },
     {
       emoji: '🏌️‍♀️',
-      name: 'woman golfing',
+      name: 'mulher jogando golfe',
     },
     {
       emoji: '🏌🏻‍♀️',
-      name: 'woman golfing: light skin tone',
+      name: 'mulher jogando golfe: pele clara',
     },
     {
       emoji: '🏌🏼‍♀️',
-      name: 'woman golfing: medium-light skin tone',
+      name: 'mulher jogando golfe: pele morena clara',
     },
     {
       emoji: '🏌🏽‍♀️',
-      name: 'woman golfing: medium skin tone',
+      name: 'mulher jogando golfe: pele morena',
     },
     {
       emoji: '🏌🏾‍♀️',
-      name: 'woman golfing: medium-dark skin tone',
+      name: 'mulher jogando golfe: pele morena escura',
     },
     {
       emoji: '🏌🏿‍♀️',
-      name: 'woman golfing: dark skin tone',
+      name: 'mulher jogando golfe: pele morena escura',
     },
     {
       emoji: '🏄',
-      name: 'person surfing',
+      name: 'pessoa surfando',
     },
     {
       emoji: '🚣',
-      name: 'person rowing boat',
+      name: 'pessoa barco a remo',
     },
     {
       emoji: '🏊',
-      name: 'person swimming',
+      name: 'pessoa nadando',
     },
     {
       emoji: '⛹️',
-      name: 'person bouncing ball',
+      name: 'pessoa jogando bola',
     },
     {
       emoji: '⛹🏻',
-      name: 'person bouncing ball: light skin tone',
+      name: 'pessoa quicando bola: pele clara',
     },
     {
       emoji: '⛹🏼',
-      name: 'person bouncing ball: medium-light skin tone',
+      name: 'pessoa quicando bola: pele morena clara',
     },
     {
       emoji: '⛹🏽',
-      name: 'person bouncing ball: medium skin tone',
+      name: 'pessoa quicando bola: pele morena',
     },
     {
       emoji: '⛹🏾',
-      name: 'person bouncing ball: medium-dark skin tone',
+      name: 'pessoa quicando bola: pele morena escura',
     },
     {
       emoji: '⛹🏿',
-      name: 'person bouncing ball: dark skin tone',
+      name: 'pessoa quicando bola: pele morena escura',
     },
     {
       emoji: '⛹️‍♂️',
-      name: 'man bouncing ball',
+      name: 'homem jogando bola',
     },
     {
       emoji: '⛹🏻‍♂️',
-      name: 'man bouncing ball: light skin tone',
+      name: 'homem quicando bola: pele clara',
     },
     {
       emoji: '⛹🏼‍♂️',
-      name: 'man bouncing ball: medium-light skin tone',
+      name: 'homem quicando bola: pele morena clara',
     },
     {
       emoji: '⛹🏽‍♂️',
-      name: 'man bouncing ball: medium skin tone',
+      name: 'homem quicando bola: pele morena',
     },
     {
       emoji: '⛹🏾‍♂️',
-      name: 'man bouncing ball: medium-dark skin tone',
+      name: 'homem quicando bola: pele morena escura',
     },
     {
       emoji: '⛹🏿‍♂️',
-      name: 'man bouncing ball: dark skin tone',
+      name: 'homem quicando bola: pele escura',
     },
     {
       emoji: '⛹️‍♀️',
-      name: 'woman bouncing ball',
+      name: 'mulher quicando bola',
     },
     {
       emoji: '⛹🏻‍♀️',
-      name: 'woman bouncing ball: light skin tone',
+      name: 'mulher quicando bola: pele clara',
     },
     {
       emoji: '⛹🏼‍♀️',
-      name: 'woman bouncing ball: medium-light skin tone',
+      name: 'mulher quicando bola: pele morena clara',
     },
     {
       emoji: '⛹🏽‍♀️',
-      name: 'woman bouncing ball: medium skin tone',
+      name: 'mulher quicando bola: pele morena',
     },
     {
       emoji: '⛹🏾‍♀️',
-      name: 'woman bouncing ball: medium-dark skin tone',
+      name: 'mulher quicando bola: pele morena escura',
     },
     {
       emoji: '⛹🏿‍♀️',
-      name: 'woman bouncing ball: dark skin tone',
+      name: 'mulher quicando bola: pele morena escura',
     },
     {
       emoji: '🏋️',
-      name: 'person lifting weights',
+      name: 'pessoa levantando peso',
     },
     {
       emoji: '🏋🏻',
-      name: 'person lifting weights: light skin tone',
+      name: 'pessoa levantando peso: pele clara',
     },
     {
       emoji: '🏋🏼',
-      name: 'person lifting weights: medium-light skin tone',
+      name: 'pessoa levantando peso: pele morena clara',
     },
     {
       emoji: '🏋🏽',
-      name: 'person lifting weights: medium skin tone',
+      name: 'pessoa levantando peso: pele morena',
     },
     {
       emoji: '🏋🏾',
-      name: 'person lifting weights: medium-dark skin tone',
+      name: 'pessoa levantando peso: pele morena escura',
     },
     {
       emoji: '🏋🏿',
-      name: 'person lifting weights: dark skin tone',
+      name: 'pessoa levantando peso: pele escura',
     },
     {
       emoji: '🏋️‍♂️',
-      name: 'man lifting weights',
+      name: 'homem levantando pesos',
     },
     {
       emoji: '🏋🏻‍♂️',
-      name: 'man lifting weights: light skin tone',
+      name: 'homem levantando peso: pele clara',
     },
     {
       emoji: '🏋🏼‍♂️',
-      name: 'man lifting weights: medium-light skin tone',
+      name: 'homem levantando peso: pele morena clara',
     },
     {
       emoji: '🏋🏽‍♂️',
-      name: 'man lifting weights: medium skin tone',
+      name: 'homem levantando peso: pele morena',
     },
     {
       emoji: '🏋🏾‍♂️',
-      name: 'man lifting weights: medium-dark skin tone',
+      name: 'homem levantando peso: pele morena escura',
     },
     {
       emoji: '🏋🏿‍♂️',
-      name: 'man lifting weights: dark skin tone',
+      name: 'homem levantando peso: pele escura',
     },
     {
       emoji: '🏋️‍♀️',
-      name: 'woman lifting weights',
+      name: 'mulher levantando peso',
     },
     {
       emoji: '🏋🏻‍♀️',
-      name: 'woman lifting weights: light skin tone',
+      name: 'mulher levantando peso: pele clara',
     },
     {
       emoji: '🏋🏼‍♀️',
-      name: 'woman lifting weights: medium-light skin tone',
+      name: 'mulher levantando peso: pele morena clara',
     },
     {
       emoji: '🏋🏽‍♀️',
-      name: 'woman lifting weights: medium skin tone',
+      name: 'mulher levantando peso: pele morena',
     },
     {
       emoji: '🏋🏾‍♀️',
-      name: 'woman lifting weights: medium-dark skin tone',
+      name: 'mulher levantando peso: pele morena escura',
     },
     {
       emoji: '🏋🏿‍♀️',
-      name: 'woman lifting weights: dark skin tone',
+      name: 'mulher levantando peso: pele escura',
     },
     {
       emoji: '🚴',
-      name: 'person biking',
+      name: 'pessoa andando de bicicleta',
     },
     {
       emoji: '🚵',
-      name: 'person mountain biking',
+      name: 'pessoa bicicleta de montanha',
     },
     {
       emoji: '🤸',
-      name: 'person cartwheeling',
+      name: 'pessoa dando cambalhotas',
     },
     {
       emoji: '🤼',
-      name: 'people wrestling',
+      name: 'pessoas lutando',
     },
     {
       emoji: '🤽',
-      name: 'person playing water polo',
+      name: 'pessoa jogando pólo aquático',
     },
     {
       emoji: '🤾',
-      name: 'person playing handball',
+      name: 'pessoa jogando handebol',
     },
     {
       emoji: '🤹',
-      name: 'person juggling',
+      name: 'pessoa fazendo malabarismo',
     },
     {
       emoji: '🧘',
-      name: 'person in lotus position',
+      name: 'pessoa em posição de lótus',
     },
     {
       emoji: '🛀',
-      name: 'person taking bath',
+      name: 'pessoa tomando banho',
     },
     {
       emoji: '🛌',
-      name: 'person in bed',
+      name: 'pessoa na cama',
     },
     {
       emoji: '🧑‍🤝‍🧑',
-      name: 'people holding hands',
+      name: 'pessoas de mãos dadas',
     },
     {
       emoji: '👭',
-      name: 'women holding hands',
+      name: 'mulheres de mãos dadas',
     },
     {
       emoji: '👩🏻‍🤝‍👩🏼',
-      name: 'women holding hands: light skin tone, medium-light skin tone',
+      name: 'mulheres de mãos dadas: pele clara, pele morena clara',
     },
     {
       emoji: '👭🏼',
-      name: 'women holding hands: medium-light skin tone',
+      name: 'mulheres de mãos dadas: pele morena clara',
     },
     {
       emoji: '👩🏼‍🤝‍👩🏽',
-      name: 'women holding hands: medium-light skin tone, medium skin tone',
+      name: 'mulheres de mãos dadas: pele morena clara, pele morena',
     },
     {
       emoji: '👭🏽',
-      name: 'women holding hands: medium skin tone',
+      name: 'mulheres de mãos dadas: pele morena',
     },
     {
       emoji: '👩🏽‍🤝‍👩🏾',
-      name: 'women holding hands: medium skin tone, medium-dark skin tone',
+      name: 'mulheres de mãos dadas: pele morena, pele morena escura',
     },
     {
       emoji: '👭🏾',
-      name: 'women holding hands: medium-dark skin tone',
+      name: 'mulheres de mãos dadas: pele morena escura',
     },
     {
       emoji: '👩🏾‍🤝‍👩🏿',
-      name: 'women holding hands: medium-dark skin tone, dark skin tone',
+      name: 'mulheres de mãos dadas: pele morena escura, pele morena escura',
     },
     {
       emoji: '👭🏿',
-      name: 'women holding hands: dark skin tone',
+      name: 'mulheres de mãos dadas: pele morena escura',
     },
     {
       emoji: '👫',
-      name: 'woman and man holding hands',
+      name: 'mulher e homem de mãos dadas',
     },
     {
       emoji: '👩🏻‍🤝‍👨🏼',
-      name: 'woman and man holding hands: light skin tone, medium-light skin tone',
+      name: 'mulher e homem de mãos dadas: pele clara, pele morena clara',
     },
     {
       emoji: '👫🏼',
-      name: 'woman and man holding hands: medium-light skin tone',
+      name: 'mulher e homem de mãos dadas: pele morena clara',
     },
     {
       emoji: '👩🏼‍🤝‍👨🏽',
-      name: 'woman and man holding hands: medium-light skin tone, medium skin tone',
+      name: 'mulher e homem de mãos dadas: pele morena clara, pele morena',
     },
     {
       emoji: '👫🏽',
-      name: 'woman and man holding hands: medium skin tone',
+      name: 'mulher e homem de mãos dadas: pele morena',
     },
     {
       emoji: '👩🏽‍🤝‍👨🏾',
-      name: 'woman and man holding hands: medium skin tone, medium-dark skin tone',
+      name: 'mulher e homem de mãos dadas: pele morena, pele morena escura',
     },
     {
       emoji: '👫🏾',
-      name: 'woman and man holding hands: medium-dark skin tone',
+      name: 'mulher e homem de mãos dadas: pele morena escura',
     },
     {
       emoji: '👩🏾‍🤝‍👨🏿',
-      name: 'woman and man holding hands: medium-dark skin tone, dark skin tone',
+      name: 'mulher e homem de mãos dadas: pele morena escura, pele morena escura',
     },
     {
       emoji: '👫🏿',
-      name: 'woman and man holding hands: dark skin tone',
+      name: 'mulher e homem de mãos dadas: pele escura',
     },
     {
       emoji: '👬',
-      name: 'men holding hands',
+      name: 'homens de mãos dadas',
     },
     {
       emoji: '👨🏻‍🤝‍👨🏼',
-      name: 'men holding hands: light skin tone, medium-light skin tone',
+      name: 'homens de mãos dadas: pele clara, pele morena clara',
     },
     {
       emoji: '👬🏼',
-      name: 'men holding hands: medium-light skin tone',
+      name: 'homens de mãos dadas: pele morena clara',
     },
     {
       emoji: '👨🏼‍🤝‍👨🏽',
-      name: 'men holding hands: medium-light skin tone, medium skin tone',
+      name: 'homens de mãos dadas: pele morena clara, pele morena',
     },
     {
       emoji: '👬🏽',
-      name: 'men holding hands: medium skin tone',
+      name: 'homens de mãos dadas: pele morena',
     },
     {
       emoji: '👨🏽‍🤝‍👨🏾',
-      name: 'men holding hands: medium skin tone, medium-dark skin tone',
+      name: 'homens de mãos dadas: pele morena, pele morena escura',
     },
     {
       emoji: '👬🏾',
-      name: 'men holding hands: medium-dark skin tone',
+      name: 'homens de mãos dadas: pele morena escura',
     },
     {
       emoji: '👨🏾‍🤝‍👨🏿',
-      name: 'men holding hands: medium-dark skin tone, dark skin tone',
+      name: 'homens de mãos dadas: pele morena escura, pele morena escura',
     },
     {
       emoji: '👬🏿',
-      name: 'men holding hands: dark skin tone',
+      name: 'homens de mãos dadas: pele morena escura',
     },
     {
       emoji: '💏',
-      name: 'kiss',
+      name: 'beijo',
     },
     {
       emoji: '👩‍❤️‍💋‍👨',
-      name: 'kiss: woman, man',
+      name: 'beijo: mulher, homem',
     },
     {
       emoji: '👨‍❤️‍💋‍👨',
-      name: 'kiss: man, man',
+      name: 'beijo: homem, homem',
     },
     {
       emoji: '👩‍❤️‍💋‍👩',
-      name: 'kiss: woman, woman',
+      name: 'beijo: mulher, mulher',
     },
     {
       emoji: '💑',
-      name: 'couple with heart',
+      name: 'casal com coração',
     },
     {
       emoji: '👩‍❤️‍👨',
-      name: 'couple with heart: woman, man',
+      name: 'casal com coração: mulher, homem',
     },
     {
       emoji: '👨‍❤️‍👨',
-      name: 'couple with heart: man, man',
+      name: 'casal com coração: homem, homem',
     },
     {
       emoji: '👩‍❤️‍👩',
-      name: 'couple with heart: woman, woman',
+      name: 'casal com coração: mulher, mulher',
     },
     {
       emoji: '👪',
-      name: 'family',
+      name: 'família',
     },
     {
       emoji: '👨‍👩‍👦',
-      name: 'family: man, woman, boy',
+      name: 'família: homem, mulher, menino',
     },
     {
       emoji: '👩‍👩‍👦',
-      name: 'family: woman, woman, boy',
+      name: 'família: mulher, mulher, menino',
     },
     {
       emoji: '👨‍👦',
-      name: 'family: man, boy',
+      name: 'família: homem, menino',
     },
     {
       emoji: '👩‍👦',
-      name: 'family: woman, boy',
+      name: 'família: mulher, menino',
     },
     {
       emoji: '🗣️',
-      name: 'speaking head',
+      name: 'cabeça falando',
     },
     {
       emoji: '👤',
-      name: 'bust in silhouette',
+      name: 'busto em silhueta',
     },
     {
       emoji: '👥',
-      name: 'busts in silhouette',
+      name: 'bustos em silhueta',
     },
     {
       emoji: '🫂',
-      name: 'people hugging',
+      name: 'pessoas abraçando',
     },
     {
       emoji: '👣',
-      name: 'footprints',
+      name: 'pegadas',
     },
   ],
   'animals-nature': [
     {
       emoji: '🐵',
-      name: 'monkey face',
+      name: 'cara de macaco',
     },
     {
       emoji: '🐒',
-      name: 'monkey',
-    },
-    {
-      emoji: '🦍',
-      name: 'gorilla',
-    },
-    {
-      emoji: '🦧',
-      name: 'orangutan',
-    },
-    {
-      emoji: '🐶',
-      name: 'dog face',
-    },
-    {
-      emoji: '🐕',
-      name: 'dog',
-    },
-    {
-      emoji: '🦮',
-      name: 'guide dog',
-    },
-    {
-      emoji: '🐕‍🦺',
-      name: 'service dog',
-    },
-    {
-      emoji: '🐩',
-      name: 'poodle',
-    },
-    {
-      emoji: '🐺',
-      name: 'wolf',
-    },
-    {
-      emoji: '🦊',
-      name: 'fox',
-    },
-    {
-      emoji: '🦝',
-      name: 'raccoon',
-    },
-    {
-      emoji: '🐱',
-      name: 'cat face',
-    },
-    {
-      emoji: '🐈',
-      name: 'cat',
-    },
-    {
-      emoji: '🦁',
-      name: 'lion',
-    },
-    {
-      emoji: '🐯',
-      name: 'tiger face',
-    },
-    {
-      emoji: '🐅',
-      name: 'tiger',
-    },
-    {
-      emoji: '🐆',
-      name: 'leopard',
-    },
-    {
-      emoji: '🐴',
-      name: 'horse face',
-    },
-    {
-      emoji: '🐎',
-      name: 'horse',
-    },
-    {
-      emoji: '🦄',
-      name: 'unicorn',
-    },
-    {
-      emoji: '🦓',
-      name: 'zebra',
-    },
-    {
-      emoji: '🦌',
-      name: 'deer',
-    },
-    {
-      emoji: '🦬',
-      name: 'bison',
-    },
-    {
-      emoji: '🐮',
-      name: 'cow face',
-    },
-    {
-      emoji: '🐂',
-      name: 'ox',
-    },
-    {
-      emoji: '🐃',
-      name: 'water buffalo',
-    },
-    {
-      emoji: '🐄',
-      name: 'cow',
-    },
-    {
-      emoji: '🐷',
-      name: 'pig face',
-    },
-    {
-      emoji: '🐖',
-      name: 'pig',
-    },
-    {
-      emoji: '🐗',
-      name: 'boar',
-    },
-    {
-      emoji: '🐽',
-      name: 'pig nose',
-    },
-    {
-      emoji: '🐏',
-      name: 'ram',
-    },
-    {
-      emoji: '🐑',
-      name: 'ewe',
-    },
-    {
-      emoji: '🐐',
-      name: 'goat',
-    },
-    {
-      emoji: '🐪',
-      name: 'camel',
-    },
-    {
-      emoji: '🐫',
-      name: 'two-hump camel',
-    },
-    {
-      emoji: '🦙',
-      name: 'llama',
-    },
-    {
-      emoji: '🦒',
-      name: 'giraffe',
-    },
-    {
-      emoji: '🐘',
-      name: 'elephant',
-    },
-    {
-      emoji: '🦣',
-      name: 'mammoth',
-    },
-    {
-      emoji: '🦏',
-      name: 'rhinoceros',
-    },
-    {
-      emoji: '🦛',
-      name: 'hippopotamus',
-    },
-    {
-      emoji: '🐭',
-      name: 'mouse face',
-    },
-    {
-      emoji: '🐁',
-      name: 'mouse',
-    },
-    {
-      emoji: '🐀',
-      name: 'rat',
-    },
-    {
-      emoji: '🐹',
-      name: 'hamster',
-    },
-    {
-      emoji: '🐰',
-      name: 'rabbit face',
-    },
-    {
-      emoji: '🐇',
-      name: 'rabbit',
-    },
-    {
-      emoji: '🐿️',
-      name: 'chipmunk',
-    },
-    {
-      emoji: '🦫',
-      name: 'beaver',
-    },
-    {
-      emoji: '🦔',
-      name: 'hedgehog',
-    },
-    {
-      emoji: '🦇',
-      name: 'bat',
-    },
-    {
-      emoji: '🐻',
-      name: 'bear',
-    },
-    {
-      emoji: '🐨',
-      name: 'koala',
-    },
-    {
-      emoji: '🐼',
-      name: 'panda',
-    },
-    {
-      emoji: '🦥',
-      name: 'sloth',
-    },
-    {
-      emoji: '🦦',
-      name: 'otter',
-    },
-    {
-      emoji: '🦨',
-      name: 'skunk',
-    },
-    {
-      emoji: '🦘',
-      name: 'kangaroo',
-    },
-    {
-      emoji: '🦡',
-      name: 'badger',
-    },
-    {
-      emoji: '🐾',
-      name: 'paw prints',
-    },
-    {
-      emoji: '🦃',
-      name: 'turkey',
-    },
-    {
-      emoji: '🐔',
-      name: 'chicken',
-    },
-    {
-      emoji: '🐓',
-      name: 'rooster',
-    },
-    {
-      emoji: '🐣',
-      name: 'hatching chick',
-    },
-    {
-      emoji: '🐤',
-      name: 'baby chick',
-    },
-    {
-      emoji: '🐥',
-      name: 'front-facing baby chick',
-    },
-    {
-      emoji: '🐦',
-      name: 'bird',
-    },
-    {
-      emoji: '🐧',
-      name: 'penguin',
-    },
-    {
-      emoji: '🕊️',
-      name: 'dove',
-    },
-    {
-      emoji: '🦅',
-      name: 'eagle',
-    },
-    {
-      emoji: '🦆',
-      name: 'duck',
-    },
-    {
-      emoji: '🦢',
-      name: 'swan',
-    },
-    {
-      emoji: '🦉',
-      name: 'owl',
-    },
-    {
-      emoji: '🦤',
-      name: 'dodo',
-    },
-    {
-      emoji: '🪶',
-      name: 'feather',
-    },
-    {
-      emoji: '🦩',
-      name: 'flamingo',
-    },
-    {
-      emoji: '🦚',
-      name: 'peacock',
-    },
-    {
-      emoji: '🦜',
-      name: 'parrot',
-    },
-    {
-      emoji: '🐸',
-      name: 'frog',
-    },
-    {
-      emoji: '🐊',
-      name: 'crocodile',
-    },
-    {
-      emoji: '🐢',
-      name: 'turtle',
-    },
-    {
-      emoji: '🦎',
-      name: 'lizard',
-    },
-    {
-      emoji: '🐍',
-      name: 'snake',
-    },
-    {
-      emoji: '🐲',
-      name: 'dragon face',
-    },
-    {
-      emoji: '🐉',
-      name: 'dragon',
-    },
-    {
-      emoji: '🦕',
-      name: 'sauropod',
-    },
-    {
-      emoji: '🦖',
-      name: 'T-Rex',
-    },
-    {
-      emoji: '🐳',
-      name: 'spouting whale',
-    },
-    {
-      emoji: '🐋',
-      name: 'whale',
-    },
-    {
-      emoji: '🐬',
-      name: 'dolphin',
-    },
-    {
-      emoji: '🦭',
-      name: 'seal',
-    },
-    {
-      emoji: '🐟',
-      name: 'fish',
-    },
-    {
-      emoji: '🐠',
-      name: 'tropical fish',
-    },
-    {
-      emoji: '🐡',
-      name: 'blowfish',
-    },
-    {
-      emoji: '🦈',
-      name: 'shark',
-    },
-    {
-      emoji: '🐙',
-      name: 'octopus',
-    },
-    {
-      emoji: '🐚',
-      name: 'spiral shell',
-    },
-    {
-      emoji: '🐌',
-      name: 'snail',
-    },
-    {
-      emoji: '🦋',
-      name: 'butterfly',
-    },
-    {
-      emoji: '🐛',
-      name: 'bug',
-    },
-    {
-      emoji: '🐜',
-      name: 'ant',
-    },
-    {
-      emoji: '🐝',
-      name: 'honeybee',
-    },
-    {
-      emoji: '🪲',
-      name: 'beetle',
-    },
-    {
-      emoji: '🐞',
-      name: 'lady beetle',
-    },
-    {
-      emoji: '🦗',
-      name: 'cricket',
-    },
-    {
-      emoji: '🪳',
-      name: 'cockroach',
-    },
-    {
-      emoji: '🕷️',
-      name: 'spider',
-    },
-    {
-      emoji: '🕸️',
-      name: 'spider web',
-    },
-    {
-      emoji: '🦂',
-      name: 'scorpion',
-    },
-    {
-      emoji: '🦟',
-      name: 'mosquito',
-    },
-    {
-      emoji: '🪰',
-      name: 'fly',
-    },
-    {
-      emoji: '🪱',
-      name: 'worm',
-    },
-    {
-      emoji: '🦠',
-      name: 'microbe',
-    },
-    {
-      emoji: '💐',
-      name: 'bouquet',
-    },
-    {
-      emoji: '🌸',
-      name: 'cherry blossom',
-    },
-    {
-      emoji: '💮',
-      name: 'white flower',
-    },
-    {
-      emoji: '🏵️',
-      name: 'rosette',
-    },
-    {
-      emoji: '🌹',
-      name: 'rose',
-    },
-    {
-      emoji: '🥀',
-      name: 'wilted flower',
-    },
-    {
-      emoji: '🌺',
-      name: 'hibiscus',
-    },
-    {
-      emoji: '🌻',
-      name: 'sunflower',
-    },
-    {
-      emoji: '🌼',
-      name: 'blossom',
-    },
-    {
-      emoji: '🌷',
-      name: 'tulip',
-    },
-    {
-      emoji: '🌱',
-      name: 'seedling',
-    },
-    {
-      emoji: '🪴',
-      name: 'potted plant',
-    },
-    {
-      emoji: '🌲',
-      name: 'evergreen tree',
-    },
-    {
-      emoji: '🌳',
-      name: 'deciduous tree',
-    },
-    {
-      emoji: '🌴',
-      name: 'palm tree',
-    },
-    {
-      emoji: '🌵',
-      name: 'cactus',
-    },
-    {
-      emoji: '🌾',
-      name: 'sheaf of rice',
-    },
-    {
-      emoji: '🌿',
-      name: 'herb',
-    },
-    {
-      emoji: '☘️',
-      name: 'shamrock',
-    },
-    {
-      emoji: '🍀',
-      name: 'four leaf clover',
-    },
-    {
-      emoji: '🍁',
-      name: 'maple leaf',
-    },
-    {
-      emoji: '🍂',
-      name: 'fallen leaf',
-    },
-    {
-      emoji: '🍃',
-      name: 'leaf fluttering in wind',
-    },
+      name: 'macaco',
+    },
+    { emoji: '🦍', name: 'gorila' },
+    { emoji: '🦧', name: 'orangotango' },
+    { emoji: '🐶', name: 'cara de cachorro' },
+    { emoji: '🐕 ', name: 'cachorro' },
+    { emoji: '🦮', name: 'cão-guia' },
+    { emoji: '🐕‍🦺', name: 'cão de serviço' },
+    { emoji: '🐩', name: 'poodle' },
+    { emoji: '🐺', name: 'lobo' },
+    { emoji: '🦊', name: 'raposa' },
+    { emoji: '🦝', name: 'guaxinim ' },
+    { emoji: '🐱', name: 'cara de gato' },
+    { emoji: '🐈', name: 'gato' },
+    { emoji: '🦁', name: 'leão' },
+    { emoji: '🐯', name: 'cara de tigre' },
+    { emoji: '🐅', name: 'tigre' },
+    { emoji: '🐆', name: 'leopardo' },
+    { emoji: '🐴', name: 'cara de cavalo' },
+    { emoji: '🐎', name: 'cavalo' },
+    { emoji: '🦄', name: 'unicórnio' },
+    { emoji: '🦓', name: 'zebra' },
+    { emoji: '🦌', name: 'veado' },
+    { emoji: '🦬', name: 'bison' },
+    { emoji: '🐮', name: 'cara de vaca' },
+    { emoji: '🐂', name: 'boi' },
+    { emoji: '🐃', name: 'búfalo' },
+    { emoji: '🐄', name: 'vaca' },
+    { emoji: '🐷', name: 'cara de porco' },
+    { emoji: '🐖', name: 'porco' },
+    { emoji: '🐗', name: 'javali' },
+    { emoji: '🐽 ', name: 'nariz de porco' },
+    { emoji: '🐏', name: 'carneiro' },
+    { emoji: '🐑', name: 'ovelha' },
+    { emoji: '🐐', name: 'cabra' },
+    { emoji: '🐪', name: 'camelo' },
+    { emoji: '🐫', name: 'camelo de duas corcovas' },
+    { emoji: '🦙', name: 'lhama' },
+    { emoji: '🦒', name: 'girafa' },
+    { emoji: '🐘', name: 'elefante' },
+    { emoji: '🦣', name: 'mamute' },
+    { emoji: '🦏', name: 'rinoceronte' },
+    { emoji: '🦛', name: 'hipopótamo' },
+    { emoji: '🐭', name: 'cara de rato' },
+    { emoji: '🐁', name: 'rato' },
+    { emoji: '🐀', name: 'rato' },
+    { emoji: '🐹', name: 'hamster' },
+    { emoji: '🐰', name: 'cara de coelho' },
+    { emoji: '🐇', name: 'coelho' },
+    { emoji: '🐿️', name: 'esquilo' },
+    { emoji: '🦫', name: 'castor' },
+    { emoji: '🦔', name: 'ouriço' },
+    { emoji: '🦇', name: 'morcego' },
+    { emoji: '🐻', name: 'urso' },
+    { emoji: '🐨 ', name: 'koala' },
+    { emoji: '🐼', name: 'panda' },
+    { emoji: '🦥', name: 'preguiça' },
+    { emoji: '🦦', name: 'lontra' },
+    { emoji: '🦨', name: 'gambá' },
+    { emoji: '🦘', name: 'canguru' },
+    { emoji: '🦡', name: 'texugo' },
+    { emoji: '🐾', name: 'impressões de pata' },
+    { emoji: '🦃', name: 'peru' },
+    { emoji: '🐔', name: 'frango' },
+    { emoji: ' 🐓', name: 'galo' },
+    { emoji: '🐣', name: 'pintinho' },
+    { emoji: '🐤', name: 'gatinha' },
+    { emoji: '🐥', name: 'pintinho de frente' },
+    { emoji: '🐦', name: 'pássaro' },
+    { emoji: '🐧', name: 'pinguim' },
+    { emoji: '🕊️ ', name: 'pomba' },
+    { emoji: '🦅', name: 'águia' },
+    { emoji: '🦆', name: 'pato' },
+    { emoji: '🦢', name: 'cisne' },
+    { emoji: '🦉', name: 'coruja' },
+    { emoji: '🦤', name: 'dodo' },
+    { emoji: '🪶', name: 'pena' },
+    { emoji: '🦩', name: 'flamingo' },
+    { emoji: '🦚', name: 'pavão' },
+    { emoji: '🦜', name: 'papagaio' },
+    { emoji: '🐸 ', name: 'sapo' },
+    { emoji: '🐊', name: 'crocodilo' },
+    { emoji: '🐢', name: 'tartaruga' },
+    { emoji: '🦎', name: 'lagarto' },
+    { emoji: '🐍', name: 'cobra' },
+    { emoji: '🐲', name: 'cara de dragão' },
+    { emoji: '🐉', name: 'dragão' },
+    { emoji: '🦕', name: 'dinossauro' },
+    { emoji: '🦖', name: 'T-Rex' },
+    { emoji: '🐳', name: 'baleia jorrando' },
+    { emoji: '🐋', name: 'baleia' },
+    { emoji: '🐬', name: 'golfinho' },
+    { emoji: '🦭', name: 'selo' },
+    { emoji: '🐟 ', name: 'peixe' },
+    { emoji: '🐠', name: 'peixe tropical' },
+    { emoji: '🐡', name: 'baiacu' },
+    { emoji: '🦈', name: 'tubarão' },
+    { emoji: '🐙', name: 'polvo' },
+    { emoji: '🐚', name: 'concha espiral' },
+    { emoji: '🐌', name: 'caracol' },
+    { emoji: '🦋', name: 'borboleta' },
+    { emoji: '🐛', name: 'bicho' },
+    { emoji: '🐜', name: 'formiga' },
+    { emoji: '🐝', name: 'abelha' },
+    { emoji: '🪲', name: 'besouro' },
+    { emoji: '🐞', name: 'joaninha' },
+    { emoji: '🦗', name: 'grilo' },
+    { emoji: '🪳', name: 'barata' },
+    { emoji: '🕷️', name: 'aranha' },
+    { emoji: '🕸️', name: 'teia de aranha' },
+    { emoji: '🦂', name: 'escorpião' },
+    { emoji: '🦟', name: 'mosquito' },
+    { emoji: '🪰', name: 'mosca' },
+    { emoji: '🪱', name: 'minhoca' },
+    { emoji: '🦠', name: 'micróbio' },
+    { emoji: '💐', name: 'buquê' },
+    { emoji: '🌸', name: 'flor de cerejeira' },
+    { emoji: '💮', name: 'flor branca' },
+    { emoji: '🏵️', name: 'roseta' },
+    { emoji: '🌹', name: 'rosa' },
+    { emoji: '🥀', name: 'flor murcha' },
+    { emoji: '🌺', name: 'hibiscus' },
+    { emoji: '🌻', name: 'girassol' },
+    { emoji: '🌼', name: 'flor' },
+    { emoji: '🌷', name: 'tulipa' },
+    { emoji: '🌱', name: 'plantinha' },
+    { emoji: '🪴', name: 'vaso de planta' },
+    { emoji: '🌲', name: 'árvore perene' },
+    { emoji: '🌳', name: 'árvore de folha cadudca' },
+    { emoji: '🌴', name: 'palmeira' },
+    { emoji: '🌵', name: 'cactus' },
+    { emoji: '🌾', name: 'feixe de arroz' },
+    { emoji: '🌿', name: 'erva' },
+    { emoji: '☘️', name: 'trevo' },
+    { emoji: '🍀', name: 'trevo de quatro folhas' },
+    { emoji: '🍁', name: 'folha de bordo' },
+    { emoji: '🍂', name: 'folha caída' },
+    { emoji: '🍃', name: 'folha tremulando ao vento' },
   ],
   'food-drink': [
-    {
-      emoji: '🍇',
-      name: 'grapes',
-    },
-    {
-      emoji: '🍈',
-      name: 'melon',
-    },
-    {
-      emoji: '🍉',
-      name: 'watermelon',
-    },
-    {
-      emoji: '🍊',
-      name: 'tangerine',
-    },
-    {
-      emoji: '🍋',
-      name: 'lemon',
-    },
-    {
-      emoji: '🍌',
-      name: 'banana',
-    },
-    {
-      emoji: '🍍',
-      name: 'pineapple',
-    },
-    {
-      emoji: '🥭',
-      name: 'mango',
-    },
-    {
-      emoji: '🍎',
-      name: 'red apple',
-    },
-    {
-      emoji: '🍏',
-      name: 'green apple',
-    },
-    {
-      emoji: '🍐',
-      name: 'pear',
-    },
-    {
-      emoji: '🍑',
-      name: 'peach',
-    },
-    {
-      emoji: '🍒',
-      name: 'cherries',
-    },
-    {
-      emoji: '🍓',
-      name: 'strawberry',
-    },
-    {
-      emoji: '🫐',
-      name: 'blueberries',
-    },
-    {
-      emoji: '🥝',
-      name: 'kiwi fruit',
-    },
-    {
-      emoji: '🍅',
-      name: 'tomato',
-    },
-    {
-      emoji: '🫒',
-      name: 'olive',
-    },
-    {
-      emoji: '🥥',
-      name: 'coconut',
-    },
-    {
-      emoji: '🥑',
-      name: 'avocado',
-    },
-    {
-      emoji: '🍆',
-      name: 'eggplant',
-    },
-    {
-      emoji: '🥔',
-      name: 'potato',
-    },
-    {
-      emoji: '🥕',
-      name: 'carrot',
-    },
-    {
-      emoji: '🌽',
-      name: 'ear of corn',
-    },
-    {
-      emoji: '🌶️',
-      name: 'hot pepper',
-    },
-    {
-      emoji: '🫑',
-      name: 'bell pepper',
-    },
-    {
-      emoji: '🥒',
-      name: 'cucumber',
-    },
-    {
-      emoji: '🥬',
-      name: 'leafy green',
-    },
-    {
-      emoji: '🥦',
-      name: 'broccoli',
-    },
-    {
-      emoji: '🧄',
-      name: 'garlic',
-    },
-    {
-      emoji: '🧅',
-      name: 'onion',
-    },
-    {
-      emoji: '🍄',
-      name: 'mushroom',
-    },
-    {
-      emoji: '🥜',
-      name: 'peanuts',
-    },
-    {
-      emoji: '🌰',
-      name: 'chestnut',
-    },
-    {
-      emoji: '🍞',
-      name: 'bread',
-    },
-    {
-      emoji: '🥐',
-      name: 'croissant',
-    },
-    {
-      emoji: '🥖',
-      name: 'baguette bread',
-    },
-    {
-      emoji: '🫓',
-      name: 'flatbread',
-    },
-    {
-      emoji: '🥨',
-      name: 'pretzel',
-    },
-    {
-      emoji: '🥯',
-      name: 'bagel',
-    },
-    {
-      emoji: '🥞',
-      name: 'pancakes',
-    },
-    {
-      emoji: '🧇',
-      name: 'waffle',
-    },
-    {
-      emoji: '🧀',
-      name: 'cheese wedge',
-    },
-    {
-      emoji: '🍖',
-      name: 'meat on bone',
-    },
-    {
-      emoji: '🍗',
-      name: 'poultry leg',
-    },
-    {
-      emoji: '🥩',
-      name: 'cut of meat',
-    },
-    {
-      emoji: '🥓',
-      name: 'bacon',
-    },
-    {
-      emoji: '🍔',
-      name: 'hamburger',
-    },
-    {
-      emoji: '🍟',
-      name: 'french fries',
-    },
-    {
-      emoji: '🍕',
-      name: 'pizza',
-    },
-    {
-      emoji: '🌭',
-      name: 'hot dog',
-    },
-    {
-      emoji: '🥪',
-      name: 'sandwich',
-    },
-    {
-      emoji: '🌮',
-      name: 'taco',
-    },
-    {
-      emoji: '🌯',
-      name: 'burrito',
-    },
-    {
-      emoji: '🫔',
-      name: 'tamale',
-    },
-    {
-      emoji: '🥙',
-      name: 'stuffed flatbread',
-    },
-    {
-      emoji: '🧆',
-      name: 'falafel',
-    },
-    {
-      emoji: '🥚',
-      name: 'egg',
-    },
-    {
-      emoji: '🍳',
-      name: 'cooking',
-    },
-    {
-      emoji: '🥘',
-      name: 'shallow pan of food',
-    },
-    {
-      emoji: '🍲',
-      name: 'pot of food',
-    },
-    {
-      emoji: '🫕',
-      name: 'fondue',
-    },
-    {
-      emoji: '🥣',
-      name: 'bowl with spoon',
-    },
-    {
-      emoji: '🥗',
-      name: 'green salad',
-    },
-    {
-      emoji: '🍿',
-      name: 'popcorn',
-    },
-    {
-      emoji: '🧈',
-      name: 'butter',
-    },
-    {
-      emoji: '🧂',
-      name: 'salt',
-    },
-    {
-      emoji: '🥫',
-      name: 'canned food',
-    },
-    {
-      emoji: '🍱',
-      name: 'bento box',
-    },
-    {
-      emoji: '🍘',
-      name: 'rice cracker',
-    },
-    {
-      emoji: '🍙',
-      name: 'rice ball',
-    },
-    {
-      emoji: '🍚',
-      name: 'cooked rice',
-    },
-    {
-      emoji: '🍛',
-      name: 'curry rice',
-    },
-    {
-      emoji: '🍜',
-      name: 'steaming bowl',
-    },
-    {
-      emoji: '🍝',
-      name: 'spaghetti',
-    },
-    {
-      emoji: '🍠',
-      name: 'roasted sweet potato',
-    },
-    {
-      emoji: '🍢',
-      name: 'oden',
-    },
-    {
-      emoji: '🍣',
-      name: 'sushi',
-    },
-    {
-      emoji: '🍤',
-      name: 'fried shrimp',
-    },
-    {
-      emoji: '🍥',
-      name: 'fish cake with swirl',
-    },
-    {
-      emoji: '🥮',
-      name: 'moon cake',
-    },
-    {
-      emoji: '🍡',
-      name: 'dango',
-    },
-    {
-      emoji: '🥟',
-      name: 'dumpling',
-    },
-    {
-      emoji: '🥠',
-      name: 'fortune cookie',
-    },
-    {
-      emoji: '🥡',
-      name: 'takeout box',
-    },
-    {
-      emoji: '🦀',
-      name: 'crab',
-    },
-    {
-      emoji: '🦞',
-      name: 'lobster',
-    },
-    {
-      emoji: '🦐',
-      name: 'shrimp',
-    },
-    {
-      emoji: '🦑',
-      name: 'squid',
-    },
-    {
-      emoji: '🦪',
-      name: 'oyster',
-    },
-    {
-      emoji: '🍦',
-      name: 'soft ice cream',
-    },
-    {
-      emoji: '🍧',
-      name: 'shaved ice',
-    },
-    {
-      emoji: '🍨',
-      name: 'ice cream',
-    },
-    {
-      emoji: '🍩',
-      name: 'doughnut',
-    },
-    {
-      emoji: '🍪',
-      name: 'cookie',
-    },
-    {
-      emoji: '🎂',
-      name: 'birthday cake',
-    },
-    {
-      emoji: '🍰',
-      name: 'shortcake',
-    },
-    {
-      emoji: '🧁',
-      name: 'cupcake',
-    },
-    {
-      emoji: '🥧',
-      name: 'pie',
-    },
-    {
-      emoji: '🍫',
-      name: 'chocolate bar',
-    },
-    {
-      emoji: '🍬',
-      name: 'candy',
-    },
-    {
-      emoji: '🍭',
-      name: 'lollipop',
-    },
-    {
-      emoji: '🍮',
-      name: 'custard',
-    },
-    {
-      emoji: '🍯',
-      name: 'honey pot',
-    },
-    {
-      emoji: '🍼',
-      name: 'baby bottle',
-    },
-    {
-      emoji: '🥛',
-      name: 'glass of milk',
-    },
-    {
-      emoji: '☕',
-      name: 'hot beverage',
-    },
-    {
-      emoji: '🫖',
-      name: 'teapot',
-    },
-    {
-      emoji: '🍵',
-      name: 'teacup without handle',
-    },
-    {
-      emoji: '🍶',
-      name: 'sake',
-    },
-    {
-      emoji: '🍾',
-      name: 'bottle with popping cork',
-    },
-    {
-      emoji: '🍷',
-      name: 'wine glass',
-    },
-    {
-      emoji: '🍸',
-      name: 'cocktail glass',
-    },
-    {
-      emoji: '🍹',
-      name: 'tropical drink',
-    },
-    {
-      emoji: '🍺',
-      name: 'beer mug',
-    },
-    {
-      emoji: '🍻',
-      name: 'clinking beer mugs',
-    },
-    {
-      emoji: '🥂',
-      name: 'clinking glasses',
-    },
-    {
-      emoji: '🥃',
-      name: 'tumbler glass',
-    },
-    {
-      emoji: '🥤',
-      name: 'cup with straw',
-    },
-    {
-      emoji: '🧋',
-      name: 'bubble tea',
-    },
-    {
-      emoji: '🧃',
-      name: 'beverage box',
-    },
-    {
-      emoji: '🧉',
-      name: 'mate',
-    },
-    {
-      emoji: '🧊',
-      name: 'ice',
-    },
-    {
-      emoji: '🥢',
-      name: 'chopsticks',
-    },
-    {
-      emoji: '🍽️',
-      name: 'fork and knife with plate',
-    },
-    {
-      emoji: '🍴',
-      name: 'fork and knife',
-    },
-    {
-      emoji: '🥄',
-      name: 'spoon',
-    },
-    {
-      emoji: '🔪',
-      name: 'kitchen knife',
-    },
-    {
-      emoji: '🏺',
-      name: 'amphora',
-    },
+    { emoji: '🍇', name: 'uvas' },
+    { emoji: '🍈', name: 'melão' },
+    { emoji: '🍉', name: 'melancia' },
+    { emoji: ' 🍊', name: 'tangerina' },
+    { emoji: '🍋', name: 'limão' },
+    { emoji: '🍌', name: 'banana' },
+    { emoji: '🍍', name: 'abacaxi' },
+    { emoji: '🥭', name: 'manga' },
+    { emoji: '🍎', name: 'maçã vermelha' },
+    { emoji: '🍏', name: 'maçã verde' },
+    { emoji: '🍐', name: 'pêra' },
+    { emoji: '🍑', name: 'pêssego' },
+    { emoji: '🍒', name: 'cerejas' },
+    { emoji: '🍓', name: 'morango' },
+    { emoji: '🫐', name: 'mirtilos' },
+    { emoji: '🥝', name: 'kiwi' },
+    { emoji: '🍅', name: 'tomate' },
+    { emoji: '🫒', name: 'azeitona' },
+    { emoji: '🥥', name: 'coco' },
+    { emoji: '🥑', name: 'abacate' },
+    { emoji: '🍆', name: 'berinjela' },
+    { emoji: '🥔', name: 'batata' },
+    { emoji: '🥕', name: 'cenoura' },
+    { emoji: '🌽', name: 'espiga de milho' },
+    { emoji: '🌶️', name: 'pimenta' },
+    { emoji: '🫑', name: 'pimentão' },
+    { emoji: '🥒', name: 'pepino' },
+    { emoji: '🥬', name: 'verde folhoso' },
+    { emoji: '🥦', name: 'brócolis' },
+    { emoji: '🧄', name: 'alho' },
+    { emoji: '🧅', name: 'cebola' },
+    { emoji: '🍄', name: 'cogumelo' },
+    { emoji: '🥜', name: 'amendoim' },
+    { emoji: '🌰', name: 'castanha' },
+    { emoji: '🍞', name: 'pão' },
+    { emoji: '🥐', name: 'croassã' },
+    { emoji: '🥖', name: 'baguete pão' },
+    { emoji: '🫓', name: 'pão achatado' },
+    { emoji: '🥨', name: 'pretzel' },
+    { emoji: '🥯', name: 'bagel' },
+    { emoji: '🥞', name: 'panquecas' },
+    { emoji: '🧇', name: 'waffle' },
+    { emoji: '🧀', name: 'cunha de queijo' },
+    { emoji: '🍖', name: 'carne com osso' },
+    { emoji: '🍗', name: 'perna de frango' },
+    { emoji: '🥩', name: 'corte de carne' },
+    { emoji: '🥓', name: 'bacon' },
+    { emoji: '🍔', name: 'hambúrguer' },
+    { emoji: '🍟', name: 'batatas fritas' },
+    { emoji: '🍕', name: 'pizza' },
+    { emoji: '🌭', name: 'cachorro-quente' },
+    { emoji: '🥪', name: 'sanduíche' },
+    { emoji: '🌮', name: 'taco' },
+    { emoji: '🌯', name: 'burrito' },
+    { emoji: '🫔', name: 'pamonha' },
+    { emoji: '🥙', name: 'pão achatado recheado' },
+    { emoji: '🧆', name: 'falafel' },
+    { emoji: '🥚', name: 'ovo' },
+    { emoji: '🍳', name: 'cozinhar' },
+    { emoji: '🥘', name: 'panela rasa de comida' },
+    { emoji: '🍲', name: 'pote de comida' },
+    { emoji: '🫕', name: 'fondue' },
+    { emoji: '🥣', name: 'tigela com colher' },
+    { emoji: '🥗', name: 'salada verde' },
+    { emoji: '🍿', name: 'pipoca' },
+    { emoji: '🧈', name: 'manteiga' },
+    { emoji: '🧂', name: 'sal' },
+    { emoji: '🥫', name: 'enlatados' },
+    { emoji: '🍱', name: 'obentô' },
+    { emoji: '🍘', name: 'arroz bolacha' },
+    { emoji: '🍙', name: 'bolinho de arroz' },
+    { emoji: '🍚', name: 'arroz cozido' },
+    { emoji: '🍛', name: 'arroz com curry' },
+    { emoji: '🍜', name: 'tigela fumegante' },
+    { emoji: '🍝', name: 'espaguete' },
+    { emoji: '🍠', name: 'batata doce assada' },
+    { emoji: '🍢', name: 'oden' },
+    { emoji: '🍣', name: 'sushi' },
+    { emoji: '🍤', name: 'camarão frito' },
+    { emoji: '🍥', name: 'bolo de peixe com redemoinho' },
+    { emoji: '🥮', name: 'bolo da lua' },
+    { emoji: '🍡', name: 'dango' },
+    { emoji: '🥟', name: 'bolinho de massa' },
+    { emoji: '🥠', name: 'biscoito da sorte' },
+    { emoji: '🥡', name: 'caixa para viagem' },
+    { emoji: '🦀', name: 'caranguejo' },
+    { emoji: '🦞', name: 'lagosta' },
+    { emoji: '🦐', name: 'camarão' },
+    { emoji: '🦑', name: 'lula' },
+    { emoji: '🦪', name: 'ostra' },
+    { emoji: '🍦', name: 'sorvete macio' },
+    { emoji: '🍧', name: 'gelo raspado' },
+    { emoji: '🍨', name: 'sorvete' },
+    { emoji: '🍩', name: 'rosquinha' },
+    { emoji: '🍪', name: 'biscoito' },
+    { emoji: '🎂', name: 'bolo de aniversário' },
+    { emoji: '🍰', name: 'bolo' },
+    { emoji: '🧁', name: 'cupcake' },
+    { emoji: '🥧', name: 'torta' },
+    { emoji: '🍫', name: 'barra de chocolate' },
+    { emoji: '🍬', name: 'doce' },
+    { emoji: '🍭', name: 'pirulito' },
+    { emoji: '🍮', name: 'creme' },
+    { emoji: '🍯', name: 'pote de mel' },
+    { emoji: '🍼', name: 'mamadeira' },
+    { emoji: '🥛', name: 'copo de leite' },
+    { emoji: '☕', name: 'bebida quente' },
+    { emoji: '🫖', name: 'bule' },
+    { emoji: '🍵', name: 'chávena sem alça' },
+    { emoji: '🍶', name: 'saquê' },
+    { emoji: '🍾', name: 'garrafa com rolha estourando' },
+    { emoji: '🍷', name: 'copo de vinho' },
+    { emoji: '🍸', name: 'coquetel copo' },
+    { emoji: '🍹', name: 'bebida tropical' },
+    { emoji: '🍺', name: 'caneca de cerveja' },
+    { emoji: '🍻', name: 'canecas de cerveja tilintando' },
+    { emoji: '🥂', name: 'copos tilintando' },
+    { emoji: '🥃', name: 'copo de copo' },
+    { emoji: '🥤', name: 'copo com canudo' },
+    { emoji: '🧋', name: 'chá de bolhas' },
+    { emoji: '🧃', name: 'caixa de bebida' },
+    { emoji: '🧉', name: 'mate' },
+    { emoji: '🧊', name: 'gelo' },
+    { emoji: '🥢', name: 'pauzinhos' },
+    { emoji: '🍽️', name: 'garfo e faca com prato' },
+    { emoji: '🍴', name: 'garfo e faca' },
+    { emoji: '🥄', name: 'colher' },
+    { emoji: '🔪', name: 'faca de cozinha' },
+    { emoji: '🏺', name: 'ânfora' },
   ],
   'travel-places': [
-    {
-      emoji: '🌍',
-      name: 'globe showing Europe-Africa',
-    },
-    {
-      emoji: '🌎',
-      name: 'globe showing Americas',
-    },
-    {
-      emoji: '🌏',
-      name: 'globe showing Asia-Australia',
-    },
-    {
-      emoji: '🌐',
-      name: 'globe with meridians',
-    },
-    {
-      emoji: '🗺️',
-      name: 'world map',
-    },
-    {
-      emoji: '🗾',
-      name: 'map of Japan',
-    },
-    {
-      emoji: '🧭',
-      name: 'compass',
-    },
-    {
-      emoji: '🏔️',
-      name: 'snow-capped mountain',
-    },
-    {
-      emoji: '⛰️',
-      name: 'mountain',
-    },
-    {
-      emoji: '🌋',
-      name: 'volcano',
-    },
-    {
-      emoji: '🗻',
-      name: 'mount fuji',
-    },
-    {
-      emoji: '🏕️',
-      name: 'camping',
-    },
-    {
-      emoji: '🏖️',
-      name: 'beach with umbrella',
-    },
-    {
-      emoji: '🏜️',
-      name: 'desert',
-    },
-    {
-      emoji: '🏝️',
-      name: 'desert island',
-    },
-    {
-      emoji: '🏞️',
-      name: 'national park',
-    },
-    {
-      emoji: '🏟️',
-      name: 'stadium',
-    },
-    {
-      emoji: '🏛️',
-      name: 'classical building',
-    },
-    {
-      emoji: '🏗️',
-      name: 'building construction',
-    },
-    {
-      emoji: '🧱',
-      name: 'brick',
-    },
-    {
-      emoji: '🪨',
-      name: 'rock',
-    },
-    {
-      emoji: '🪵',
-      name: 'wood',
-    },
-    {
-      emoji: '🛖',
-      name: 'hut',
-    },
-    {
-      emoji: '🏘️',
-      name: 'houses',
-    },
-    {
-      emoji: '🏚️',
-      name: 'derelict house',
-    },
-    {
-      emoji: '🏠',
-      name: 'house',
-    },
-    {
-      emoji: '🏡',
-      name: 'house with garden',
-    },
-    {
-      emoji: '🏢',
-      name: 'office building',
-    },
-    {
-      emoji: '🏣',
-      name: 'Japanese post office',
-    },
-    {
-      emoji: '🏤',
-      name: 'post office',
-    },
-    {
-      emoji: '🏥',
-      name: 'hospital',
-    },
-    {
-      emoji: '🏦',
-      name: 'bank',
-    },
-    {
-      emoji: '🏨',
-      name: 'hotel',
-    },
-    {
-      emoji: '🏩',
-      name: 'love hotel',
-    },
-    {
-      emoji: '🏪',
-      name: 'convenience store',
-    },
-    {
-      emoji: '🏫',
-      name: 'school',
-    },
-    {
-      emoji: '🏬',
-      name: 'department store',
-    },
-    {
-      emoji: '🏭',
-      name: 'factory',
-    },
-    {
-      emoji: '🏯',
-      name: 'Japanese castle',
-    },
-    {
-      emoji: '🏰',
-      name: 'castle',
-    },
-    {
-      emoji: '💒',
-      name: 'wedding',
-    },
-    {
-      emoji: '🗼',
-      name: 'Tokyo tower',
-    },
-    {
-      emoji: '🗽',
-      name: 'Statue of Liberty',
-    },
-    {
-      emoji: '⛪',
-      name: 'church',
-    },
-    {
-      emoji: '🕌',
-      name: 'mosque',
-    },
-    {
-      emoji: '🛕',
-      name: 'hindu temple',
-    },
-    {
-      emoji: '🕍',
-      name: 'synagogue',
-    },
-    {
-      emoji: '⛩️',
-      name: 'shinto shrine',
-    },
-    {
-      emoji: '🕋',
-      name: 'kaaba',
-    },
-    {
-      emoji: '⛲',
-      name: 'fountain',
-    },
-    {
-      emoji: '⛺',
-      name: 'tent',
-    },
-    {
-      emoji: '🌁',
-      name: 'foggy',
-    },
-    {
-      emoji: '🌃',
-      name: 'night with stars',
-    },
-    {
-      emoji: '🏙️',
-      name: 'cityscape',
-    },
-    {
-      emoji: '🌄',
-      name: 'sunrise over mountains',
-    },
-    {
-      emoji: '🌅',
-      name: 'sunrise',
-    },
-    {
-      emoji: '🌆',
-      name: 'cityscape at dusk',
-    },
-    {
-      emoji: '🌇',
-      name: 'sunset',
-    },
-    {
-      emoji: '🌉',
-      name: 'bridge at night',
-    },
-    {
-      emoji: '♨️',
-      name: 'hot springs',
-    },
-    {
-      emoji: '🎠',
-      name: 'carousel horse',
-    },
-    {
-      emoji: '🎡',
-      name: 'ferris wheel',
-    },
-    {
-      emoji: '🎢',
-      name: 'roller coaster',
-    },
-    {
-      emoji: '💈',
-      name: 'barber pole',
-    },
-    {
-      emoji: '🎪',
-      name: 'circus tent',
-    },
-    {
-      emoji: '🚂',
-      name: 'locomotive',
-    },
-    {
-      emoji: '🚃',
-      name: 'railway car',
-    },
-    {
-      emoji: '🚄',
-      name: 'high-speed train',
-    },
-    {
-      emoji: '🚅',
-      name: 'bullet train',
-    },
-    {
-      emoji: '🚆',
-      name: 'train',
-    },
-    {
-      emoji: '🚇',
-      name: 'metro',
-    },
-    {
-      emoji: '🚈',
-      name: 'light rail',
-    },
-    {
-      emoji: '🚉',
-      name: 'station',
-    },
-    {
-      emoji: '🚊',
-      name: 'tram',
-    },
-    {
-      emoji: '🚝',
-      name: 'monorail',
-    },
-    {
-      emoji: '🚞',
-      name: 'mountain railway',
-    },
-    {
-      emoji: '🚋',
-      name: 'tram car',
-    },
-    {
-      emoji: '🚌',
-      name: 'bus',
-    },
-    {
-      emoji: '🚍',
-      name: 'oncoming bus',
-    },
-    {
-      emoji: '🚎',
-      name: 'trolleybus',
-    },
-    {
-      emoji: '🚐',
-      name: 'minibus',
-    },
-    {
-      emoji: '🚑',
-      name: 'ambulance',
-    },
-    {
-      emoji: '🚒',
-      name: 'fire engine',
-    },
-    {
-      emoji: '🚓',
-      name: 'police car',
-    },
-    {
-      emoji: '🚔',
-      name: 'oncoming police car',
-    },
-    {
-      emoji: '🚕',
-      name: 'taxi',
-    },
-    {
-      emoji: '🚖',
-      name: 'oncoming taxi',
-    },
-    {
-      emoji: '🚗',
-      name: 'automobile',
-    },
-    {
-      emoji: '🚘',
-      name: 'oncoming automobile',
-    },
-    {
-      emoji: '🚙',
-      name: 'sport utility vehicle',
-    },
-    {
-      emoji: '🛻',
-      name: 'pickup truck',
-    },
-    {
-      emoji: '🚚',
-      name: 'delivery truck',
-    },
-    {
-      emoji: '🚛',
-      name: 'articulated lorry',
-    },
-    {
-      emoji: '🚜',
-      name: 'tractor',
-    },
-    {
-      emoji: '🏎️',
-      name: 'racing car',
-    },
-    {
-      emoji: '🏍️',
-      name: 'motorcycle',
-    },
-    {
-      emoji: '🛵',
-      name: 'motor scooter',
-    },
-    {
-      emoji: '🦽',
-      name: 'manual wheelchair',
-    },
-    {
-      emoji: '🦼',
-      name: 'motorized wheelchair',
-    },
-    {
-      emoji: '🛺',
-      name: 'auto rickshaw',
-    },
-    {
-      emoji: '🚲',
-      name: 'bicycle',
-    },
-    {
-      emoji: '🛴',
-      name: 'kick scooter',
-    },
-    {
-      emoji: '🛹',
-      name: 'skateboard',
-    },
-    {
-      emoji: '🛼',
-      name: 'roller skate',
-    },
-    {
-      emoji: '🚏',
-      name: 'bus stop',
-    },
-    {
-      emoji: '🛣️',
-      name: 'motorway',
-    },
-    {
-      emoji: '🛤️',
-      name: 'railway track',
-    },
-    {
-      emoji: '🛢️',
-      name: 'oil drum',
-    },
-    {
-      emoji: '⛽',
-      name: 'fuel pump',
-    },
-    {
-      emoji: '🚨',
-      name: 'police car light',
-    },
-    {
-      emoji: '🚥',
-      name: 'horizontal traffic light',
-    },
-    {
-      emoji: '🚦',
-      name: 'vertical traffic light',
-    },
-    {
-      emoji: '🛑',
-      name: 'stop sign',
-    },
-    {
-      emoji: '🚧',
-      name: 'construction',
-    },
-    {
-      emoji: '⚓',
-      name: 'anchor',
-    },
-    {
-      emoji: '⛵',
-      name: 'sailboat',
-    },
-    {
-      emoji: '🛶',
-      name: 'canoe',
-    },
-    {
-      emoji: '🚤',
-      name: 'speedboat',
-    },
-    {
-      emoji: '🛳️',
-      name: 'passenger ship',
-    },
-    {
-      emoji: '⛴️',
-      name: 'ferry',
-    },
-    {
-      emoji: '🛥️',
-      name: 'motor boat',
-    },
-    {
-      emoji: '🚢',
-      name: 'ship',
-    },
-    {
-      emoji: '✈️',
-      name: 'airplane',
-    },
-    {
-      emoji: '🛩️',
-      name: 'small airplane',
-    },
-    {
-      emoji: '🛫',
-      name: 'airplane departure',
-    },
-    {
-      emoji: '🛬',
-      name: 'airplane arrival',
-    },
-    {
-      emoji: '🪂',
-      name: 'parachute',
-    },
-    {
-      emoji: '💺',
-      name: 'seat',
-    },
-    {
-      emoji: '🚁',
-      name: 'helicopter',
-    },
-    {
-      emoji: '🚟',
-      name: 'suspension railway',
-    },
-    {
-      emoji: '🚠',
-      name: 'mountain cableway',
-    },
-    {
-      emoji: '🚡',
-      name: 'aerial tramway',
-    },
-    {
-      emoji: '🛰️',
-      name: 'satellite',
-    },
-    {
-      emoji: '🚀',
-      name: 'rocket',
-    },
-    {
-      emoji: '🛸',
-      name: 'flying saucer',
-    },
-    {
-      emoji: '🛎️',
-      name: 'bellhop bell',
-    },
-    {
-      emoji: '🧳',
-      name: 'luggage',
-    },
-    {
-      emoji: '⌛',
-      name: 'hourglass done',
-    },
-    {
-      emoji: '⏳',
-      name: 'hourglass not done',
-    },
-    {
-      emoji: '⌚',
-      name: 'watch',
-    },
-    {
-      emoji: '⏰',
-      name: 'alarm clock',
-    },
-    {
-      emoji: '⏱️',
-      name: 'stopwatch',
-    },
-    {
-      emoji: '⏲️',
-      name: 'timer clock',
-    },
-    {
-      emoji: '🕰️',
-      name: 'mantelpiece clock',
-    },
-    {
-      emoji: '🕛',
-      name: 'twelve o’clock',
-    },
-    {
-      emoji: '🕧',
-      name: 'twelve-thirty',
-    },
-    {
-      emoji: '🕐',
-      name: 'one o’clock',
-    },
-    {
-      emoji: '🕜',
-      name: 'one-thirty',
-    },
-    {
-      emoji: '🕑',
-      name: 'two o’clock',
-    },
-    {
-      emoji: '🕝',
-      name: 'two-thirty',
-    },
-    {
-      emoji: '🕒',
-      name: 'three o’clock',
-    },
-    {
-      emoji: '🕞',
-      name: 'three-thirty',
-    },
-    {
-      emoji: '🕓',
-      name: 'four o’clock',
-    },
-    {
-      emoji: '🕟',
-      name: 'four-thirty',
-    },
-    {
-      emoji: '🕔',
-      name: 'five o’clock',
-    },
-    {
-      emoji: '🕠',
-      name: 'five-thirty',
-    },
-    {
-      emoji: '🕕',
-      name: 'six o’clock',
-    },
-    {
-      emoji: '🕡',
-      name: 'six-thirty',
-    },
-    {
-      emoji: '🕖',
-      name: 'seven o’clock',
-    },
-    {
-      emoji: '🕢',
-      name: 'seven-thirty',
-    },
-    {
-      emoji: '🕗',
-      name: 'eight o’clock',
-    },
-    {
-      emoji: '🕣',
-      name: 'eight-thirty',
-    },
-    {
-      emoji: '🕘',
-      name: 'nine o’clock',
-    },
-    {
-      emoji: '🕤',
-      name: 'nine-thirty',
-    },
-    {
-      emoji: '🕙',
-      name: 'ten o’clock',
-    },
-    {
-      emoji: '🕥',
-      name: 'ten-thirty',
-    },
-    {
-      emoji: '🕚',
-      name: 'eleven o’clock',
-    },
-    {
-      emoji: '🕦',
-      name: 'eleven-thirty',
-    },
-    {
-      emoji: '🌑',
-      name: 'new moon',
-    },
-    {
-      emoji: '🌒',
-      name: 'waxing crescent moon',
-    },
-    {
-      emoji: '🌓',
-      name: 'first quarter moon',
-    },
-    {
-      emoji: '🌔',
-      name: 'waxing gibbous moon',
-    },
-    {
-      emoji: '🌕',
-      name: 'full moon',
-    },
-    {
-      emoji: '🌖',
-      name: 'waning gibbous moon',
-    },
-    {
-      emoji: '🌗',
-      name: 'last quarter moon',
-    },
-    {
-      emoji: '🌘',
-      name: 'waning crescent moon',
-    },
-    {
-      emoji: '🌙',
-      name: 'crescent moon',
-    },
-    {
-      emoji: '🌚',
-      name: 'new moon face',
-    },
-    {
-      emoji: '🌛',
-      name: 'first quarter moon face',
-    },
-    {
-      emoji: '🌜',
-      name: 'last quarter moon face',
-    },
-    {
-      emoji: '🌡️',
-      name: 'thermometer',
-    },
-    {
-      emoji: '☀️',
-      name: 'sun',
-    },
-    {
-      emoji: '🌝',
-      name: 'full moon face',
-    },
-    {
-      emoji: '🌞',
-      name: 'sun with face',
-    },
-    {
-      emoji: '🪐',
-      name: 'ringed planet',
-    },
-    {
-      emoji: '⭐',
-      name: 'star',
-    },
-    {
-      emoji: '🌟',
-      name: 'glowing star',
-    },
-    {
-      emoji: '🌠',
-      name: 'shooting star',
-    },
-    {
-      emoji: '🌌',
-      name: 'milky way',
-    },
-    {
-      emoji: '☁️',
-      name: 'cloud',
-    },
-    {
-      emoji: '⛅',
-      name: 'sun behind cloud',
-    },
-    {
-      emoji: '⛈️',
-      name: 'cloud with lightning and rain',
-    },
-    {
-      emoji: '🌤️',
-      name: 'sun behind small cloud',
-    },
-    {
-      emoji: '🌥️',
-      name: 'sun behind large cloud',
-    },
-    {
-      emoji: '🌦️',
-      name: 'sun behind rain cloud',
-    },
-    {
-      emoji: '🌧️',
-      name: 'cloud with rain',
-    },
-    {
-      emoji: '🌨️',
-      name: 'cloud with snow',
-    },
-    {
-      emoji: '🌩️',
-      name: 'cloud with lightning',
-    },
-    {
-      emoji: '🌪️',
-      name: 'tornado',
-    },
-    {
-      emoji: '🌫️',
-      name: 'fog',
-    },
-    {
-      emoji: '🌬️',
-      name: 'wind face',
-    },
-    {
-      emoji: '🌀',
-      name: 'cyclone',
-    },
-    {
-      emoji: '🌈',
-      name: 'rainbow',
-    },
-    {
-      emoji: '🌂',
-      name: 'closed umbrella',
-    },
-    {
-      emoji: '☂️',
-      name: 'umbrella',
-    },
-    {
-      emoji: '☔',
-      name: 'umbrella with rain drops',
-    },
-    {
-      emoji: '⛱️',
-      name: 'umbrella on ground',
-    },
-    {
-      emoji: '⚡',
-      name: 'high voltage',
-    },
-    {
-      emoji: '❄️',
-      name: 'snowflake',
-    },
-    {
-      emoji: '☃️',
-      name: 'snowman',
-    },
-    {
-      emoji: '⛄',
-      name: 'snowman without snow',
-    },
-    {
-      emoji: '☄️',
-      name: 'comet',
-    },
-    {
-      emoji: '🔥',
-      name: 'fire',
-    },
-    {
-      emoji: '💧',
-      name: 'droplet',
-    },
-    {
-      emoji: '🌊',
-      name: 'water wave',
-    },
+    { emoji: '🌍', name: 'globo mostrando a Europa-África' },
+    { emoji: '🌎', name: 'globo mostrando as Américas' },
+    { emoji: '🌏', name: 'globo mostrando a Ásia -Austrália' },
+    { emoji: '🌐', name: 'globo com meridianos' },
+    { emoji: '🗺️', name: 'mapa do mundo' },
+    { emoji: '🗾', name: 'mapa do Japão' },
+    { emoji: '🧭', name: 'bússola' },
+    { emoji: '🏔️', name: 'montanha coberta de neve' },
+    { emoji: '⛰️', name: 'montanha ' },
+    { emoji: '🌋', name: 'vulcão' },
+    { emoji: '🗻', name: 'monte fuji' },
+    { emoji: '🏕️', name: 'acampamento' },
+    { emoji: '🏖️', name: 'praia com guarda-chuva' },
+    { emoji: '🏜️', name: 'deserto' },
+    { emoji: '🏝️', name: 'ilha deserta' },
+    { emoji: '🏞️', name: 'parque nacional' },
+    { emoji: '🏟️', name: 'estádio' },
+    { emoji: '🏛️', name: 'construção clássica' },
+    { emoji: '🏗️', name: 'construção civil' },
+    { emoji: '🧱', name: 'tijolo' },
+    { emoji: ' 🪨', name: 'pedra' },
+    { emoji: '🪵', name: 'madeira' },
+    { emoji: '🛖', name: 'cabana' },
+    { emoji: '🏘️', name: 'casas' },
+    { emoji: '🏚️', name: 'casa abandonada' },
+    { emoji: '🏠', name: 'casa' },
+    { emoji: '🏡', name: 'casa com jardim ' },
+    { emoji: '🏢', name: 'prédio de escritórios' },
+    { emoji: '🏣', name: 'Correio japonês' },
+    { emoji: '🏤', name: 'correio' },
+    { emoji: '🏥', name: 'hospital' },
+    { emoji: '🏦', name: 'banco' },
+    { emoji: '🏨', name: 'hotel' },
+    { emoji: '🏩', name: 'motel' },
+    { emoji: '🏪', name: 'loja de conveniência' },
+    { emoji: '🏫', name: 'escola' },
+    { emoji: '🏬', name: 'loja de departamento' },
+    { emoji: '🏭', name: 'fábrica' },
+    { emoji: ' 🏯', name: 'Castelo Japonês' },
+    { emoji: '🏰', name: 'castelo' },
+    { emoji: '💒', name: 'casamento' },
+    { emoji: '🗼', name: 'torre de tóquio' },
+    { emoji: '🗽', name: 'estátua da liberdade' },
+    { emoji: '⛪', name: 'igreja' },
+    { emoji: '🕌', name: 'mesquita' },
+    { emoji: '🛕', name: 'templo hindu' },
+    { emoji: '🕍', name: 'sinagoga' },
+    { emoji: '⛩️', name: 'santuário xintoísta' },
+    { emoji: '🕋', name: 'kaaba' },
+    { emoji: '⛲', name: 'fonte' },
+    { emoji: '⛺', name: 'tenda' },
+    { emoji: '🌁', name: 'nevoeiro' },
+    { emoji: '🌃', name: 'noite com estrelas' },
+    { emoji: '🏙️', name: 'paisagem urbana' },
+    { emoji: '🌄', name: 'nascer do sol sobre as montanhas' },
+    { emoji: '🌅', name: 'nascer do sol' },
+    { emoji: '🌆', name: 'paisagem urbana ao entardecer' },
+    { emoji: '🌇', name: 'pôr do sol' },
+    { emoji: '🌉', name: 'ponte à noite' },
+    { emoji: '♨️', name: 'fontes termais' },
+    { emoji: '🎠', name: 'cavalo carrossel' },
+    { emoji: '🎡', name: 'roda gigante' },
+    { emoji: '🎢', name: 'montanha russa' },
+    { emoji: '💈', name: 'poste de barbeiro' },
+    { emoji: '🎪', name: 'tenda de circo' },
+    { emoji: ' 🚂', name: 'locomotiva' },
+    { emoji: '🚃', name: 'vagão' },
+    { emoji: '🚄', name: 'trem de alta velocidade' },
+    { emoji: '🚅 ', name: 'trem bala' },
+    { emoji: '🚆', name: 'trem' },
+    { emoji: '🚇', name: 'metrô' },
+    { emoji: '🚈', name: 'Veiculo Leve Sobre Trilhos' },
+    { emoji: '🚉', name: 'estação' },
+    { emoji: '🚊', name: 'eléctrico' },
+    { emoji: '🚝', name: 'monotrilho' },
+    { emoji: '🚞', name: 'ferrovia de montanha' },
+    { emoji: '🚋', name: 'carro elétrico' },
+    { emoji: '🚌', name: 'ônibus' },
+    { emoji: '🚍', name: 'ônibus que se aproxima' },
+    { emoji: '🚎', name: 'trólebus' },
+    { emoji: '🚐', name: 'microônibus ' },
+    { emoji: '🚑', name: 'ambulância' },
+    { emoji: '🚒', name: 'bombeiro' },
+    { emoji: '🚓', name: 'carro de polícia' },
+    { emoji: '🚔', name: 'veículo de polícia que se aproxima' },
+    { emoji: '🚕', name: 'táxi' },
+    { emoji: '🚖', name: 'táxi que se aproxima' },
+    { emoji: '🚗', name: 'automóvel' },
+    { emoji: '🚘', name: 'automóvel' },
+    { emoji: '🚙', name: 'veículo utilitário esportivo' },
+    { emoji: '🛻', name: 'caminhonete' },
+    { emoji: '🚚', name: 'caminhão de entrega' },
+    { emoji: '🚛', name: 'caminhão articulado' },
+    { emoji: '🚜', name: 'trator' },
+    { emoji: '🏎️', name: 'carro de corrida' },
+    { emoji: '🏍️', name: 'motocicleta ' },
+    { emoji: '🛵', name: 'motocicleta' },
+    { emoji: '🦽', name: 'cadeira de rodas manual' },
+    { emoji: '🦼', name: 'cadeira de rodas motorizada' },
+    { emoji: '🛺', name: 'auto riquixá' },
+    { emoji: '🚲', name: 'bicicleta' },
+    { emoji: '🛴', name: 'patinete' },
+    { emoji: '🛹', name: 'skate' },
+    { emoji: '🛼', name: 'patins' },
+    { emoji: '🚏', name: 'parada de ônibus' },
+    { emoji: '🛣️', name: 'auto-estrada' },
+    { emoji: '🛤️', name: 'ferrovia' },
+    { emoji: '🛢️', name: 'tambor de óleo' },
+    { emoji: '⛽', name: 'bomba de combustivel' },
+    { emoji: '🚨', name: 'luz do carro da polícia' },
+    { emoji: '🚥', name: 'semáforo horizontal' },
+    { emoji: '🚦', name: 'semáforo vertical' },
+    { emoji: '🛑', name: 'sinal de pare' },
+    { emoji: '🚧', name: 'construção' },
+    { emoji: '⚓', name: 'âncora' },
+    { emoji: '⛵', name: 'veleiro' },
+    { emoji: '🛶', name: 'canoa' },
+    { emoji: '🚤', name: 'lancha' },
+    { emoji: '🛳️', name: 'navio de passageiros' },
+    { emoji: '⛴️', name: 'balsa' },
+    { emoji: '🛥️', name: 'barco a motor' },
+    { emoji: '🚢', name: 'navio' },
+    { emoji: '✈️', name: 'avião' },
+    { emoji: '🛩️', name: 'pequeno avião' },
+    { emoji: '🛫', name: 'partida do avião' },
+    { emoji: '🛬', name: 'chegada do avião' },
+    { emoji: '🪂', name: 'paraquedas' },
+    { emoji: '💺', name: 'assento' },
+    { emoji: ' 🚁', name: 'helicóptero' },
+    { emoji: '🚟', name: 'comboio suspenso' },
+    { emoji: '🚠', name: 'teleférico da montanha' },
+    { emoji: '🚡', name: 'bonde aéreo' },
+    { emoji: '🛰️', name: 'satélite' },
+    { emoji: '🚀', name: 'foguete' },
+    { emoji: '🛸', name: 'disco voador' },
+    { emoji: '🛎️', name: 'sino de mensageiro' },
+    { emoji: '🧳', name: 'bagagem' },
+    { emoji: '⌛', name: 'ampulheta feita' },
+    { emoji: '⏳', name: 'ampulheta não feita' },
+    { emoji: '⌚', name: 'observar' },
+    { emoji: '⏰', name: 'despertador' },
+    { emoji: '⏱️', name: 'cronômetro' },
+    { emoji: '⏲️', name: 'relógio temporizador' },
+    { emoji: '🕰️', name: 'relógio de lareira' },
+    { emoji: '🕛', name: 'doze horas' },
+    { emoji: '🕧', name: 'doze e meia' },
+    { emoji: '🕐', name: 'uma hora' },
+    { emoji: '🕜', name: 'uma e meia' },
+    { emoji: '🕑', name: 'duas horas' },
+    { emoji: '🕝', name: 'duas e meia' },
+    { emoji: '🕒', name: 'três horas' },
+    { emoji: '🕞', name: 'três e meia' },
+    { emoji: '🕓', name: 'quatro horas' },
+    { emoji: '🕟', name: 'quatro e meia' },
+    { emoji: '🕔', name: 'cinco horas' },
+    { emoji: '🕠', name: 'cinco e meia' },
+    { emoji: '🕕', name: 'seis horas' },
+    { emoji: '🕡', name: 'seis e meia' },
+    { emoji: '🕖', name: 'sete horas' },
+    { emoji: '🕢', name: 'sete e meia ' },
+    { emoji: '🕗', name: 'oito horas' },
+    { emoji: '🕣', name: 'oito e meia' },
+    { emoji: '🕘', name: 'nove horas' },
+    { emoji: '🕤', name: 'nove e meia' },
+    { emoji: '🕙', name: 'dez horas' },
+    { emoji: '🕥', name: 'dez e meia' },
+    { emoji: '🕚', name: 'onze horas' },
+    { emoji: '🕦', name: 'onze e meia' },
+    { emoji: '🌑', name: 'lua nova' },
+    { emoji: '🌒', name: 'lua crescente' },
+    { emoji: '🌓', name: 'lua crescente' },
+    { emoji: '🌔', name: 'lua crescente' },
+    { emoji: '🌕', name: 'lua cheia' },
+    { emoji: '🌖', name: 'mineira lua gigante' },
+    { emoji: '🌗', name: 'lua minguante' },
+    { emoji: '🌘', name: 'lua crescente minguante' },
+    { emoji: '🌙', name: 'lua crescente' },
+    { emoji: '🌚', name: 'rosto de lua nova' },
+    { emoji: '🌛', name: 'rosto de lua crescente' },
+    { emoji: '🌜', name: 'rosto de lua crescente' },
+    { emoji: ' 🌡️', name: 'termômetro' },
+    { emoji: '☀️', name: 'sol' },
+    { emoji: '🌝', name: 'face de lua cheia' },
+    { emoji: '🌞', name: 'sol com rosto' },
+    { emoji: '🪐', name: 'planeta anelado' },
+    { emoji: '⭐', name: 'estrela' },
+    { emoji: '🌟', name: 'estrela brilhante' },
+    { emoji: '🌠', name: 'estrela cadente' },
+    { emoji: '🌌', name: 'via láctea' },
+    { emoji: '☁️', name: 'nuvem ' },
+    { emoji: '⛅', name: 'sol atrás da nuvem' },
+    { emoji: '⛈️', name: 'nuvem com raios e chuva' },
+    { emoji: '🌤️', name: 'sol atrás de uma nuvem pequena' },
+    { emoji: '🌥️', name: 'sol atrás de uma nuvem grande' },
+    { emoji: '🌦️ ', name: 'sol atrás da nuvem de chuva' },
+    { emoji: '🌧️', name: 'nuvem com chuva' },
+    { emoji: '🌨️', name: 'nuvem com neve' },
+    { emoji: '🌩️', name: 'nuvem com relâmpago' },
+    { emoji: '🌪️', name: 'tornado' },
+    { emoji: '🌫️', name: 'nevoeiro' },
+    { emoji: '🌬️', name: 'face do vento' },
+    { emoji: '🌀', name: 'ciclone' },
+    { emoji: '🌈', name: 'rainbow' },
+    { emoji: '🌂', name: 'guarda-chuva fechado' },
+    { emoji: '☂️', name: 'guarda-chuva' },
+    { emoji: '☔', name: 'guarda-chuva com gotas de chuva' },
+    { emoji: '⛱️', name: 'guarda-chuva no chão' },
+    { emoji: '⚡', name: 'alta voltagem' },
+    { emoji: '❄️', name: 'floco de neve' },
+    { emoji: '☃️', name: 'boneco de neve' },
+    { emoji: '⛄', name: 'boneco de neve sem neve' },
+    { emoji: '☄️', name: 'cometa' },
+    { emoji: '🔥', name: 'fogo' },
+    { emoji: '💧', name: 'gotícula' },
+    { emoji: '🌊', name: 'onda de água' },
   ],
   activities: [
-    {
-      emoji: '🎃',
-      name: 'jack-o-lantern',
-    },
-    {
-      emoji: '🎄',
-      name: 'Christmas tree',
-    },
-    {
-      emoji: '🎆',
-      name: 'fireworks',
-    },
-    {
-      emoji: '🎇',
-      name: 'sparkler',
-    },
-    {
-      emoji: '🧨',
-      name: 'firecracker',
-    },
-    {
-      emoji: '✨',
-      name: 'sparkles',
-    },
-    {
-      emoji: '🎈',
-      name: 'balloon',
-    },
-    {
-      emoji: '🎉',
-      name: 'party popper',
-    },
-    {
-      emoji: '🎊',
-      name: 'confetti ball',
-    },
-    {
-      emoji: '🎋',
-      name: 'tanabata tree',
-    },
-    {
-      emoji: '🎍',
-      name: 'pine decoration',
-    },
-    {
-      emoji: '🎎',
-      name: 'Japanese dolls',
-    },
-    {
-      emoji: '🎏',
-      name: 'carp streamer',
-    },
-    {
-      emoji: '🎐',
-      name: 'wind chime',
-    },
-    {
-      emoji: '🎑',
-      name: 'moon viewing ceremony',
-    },
-    {
-      emoji: '🧧',
-      name: 'red envelope',
-    },
-    {
-      emoji: '🎀',
-      name: 'ribbon',
-    },
-    {
-      emoji: '🎁',
-      name: 'wrapped gift',
-    },
-    {
-      emoji: '🎗️',
-      name: 'reminder ribbon',
-    },
-    {
-      emoji: '🎟️',
-      name: 'admission tickets',
-    },
-    {
-      emoji: '🎫',
-      name: 'ticket',
-    },
-    {
-      emoji: '🎖️',
-      name: 'military medal',
-    },
-    {
-      emoji: '🏆',
-      name: 'trophy',
-    },
-    {
-      emoji: '🏅',
-      name: 'sports medal',
-    },
-    {
-      emoji: '🥇',
-      name: '1st place medal',
-    },
-    {
-      emoji: '🥈',
-      name: '2nd place medal',
-    },
-    {
-      emoji: '🥉',
-      name: '3rd place medal',
-    },
-    {
-      emoji: '⚽',
-      name: 'soccer ball',
-    },
-    {
-      emoji: '⚾',
-      name: 'baseball',
-    },
-    {
-      emoji: '🥎',
-      name: 'softball',
-    },
-    {
-      emoji: '🏀',
-      name: 'basketball',
-    },
-    {
-      emoji: '🏐',
-      name: 'volleyball',
-    },
-    {
-      emoji: '🏈',
-      name: 'american football',
-    },
-    {
-      emoji: '🏉',
-      name: 'rugby football',
-    },
-    {
-      emoji: '🎾',
-      name: 'tennis',
-    },
-    {
-      emoji: '🥏',
-      name: 'flying disc',
-    },
-    {
-      emoji: '🎳',
-      name: 'bowling',
-    },
-    {
-      emoji: '🏏',
-      name: 'cricket game',
-    },
-    {
-      emoji: '🏑',
-      name: 'field hockey',
-    },
-    {
-      emoji: '🏒',
-      name: 'ice hockey',
-    },
-    {
-      emoji: '🥍',
-      name: 'lacrosse',
-    },
-    {
-      emoji: '🏓',
-      name: 'ping pong',
-    },
-    {
-      emoji: '🏸',
-      name: 'badminton',
-    },
-    {
-      emoji: '🥊',
-      name: 'boxing glove',
-    },
-    {
-      emoji: '🥋',
-      name: 'martial arts uniform',
-    },
-    {
-      emoji: '🥅',
-      name: 'goal net',
-    },
-    {
-      emoji: '⛳',
-      name: 'flag in hole',
-    },
-    {
-      emoji: '⛸️',
-      name: 'ice skate',
-    },
-    {
-      emoji: '🎣',
-      name: 'fishing pole',
-    },
-    {
-      emoji: '🤿',
-      name: 'diving mask',
-    },
-    {
-      emoji: '🎽',
-      name: 'running shirt',
-    },
-    {
-      emoji: '🎿',
-      name: 'skis',
-    },
-    {
-      emoji: '🛷',
-      name: 'sled',
-    },
-    {
-      emoji: '🥌',
-      name: 'curling stone',
-    },
-    {
-      emoji: '🎯',
-      name: 'direct hit',
-    },
-    {
-      emoji: '🪀',
-      name: 'yo-yo',
-    },
-    {
-      emoji: '🪁',
-      name: 'kite',
-    },
-    {
-      emoji: '🎱',
-      name: 'pool 8 ball',
-    },
-    {
-      emoji: '🔮',
-      name: 'crystal ball',
-    },
-    {
-      emoji: '🪄',
-      name: 'magic wand',
-    },
-    {
-      emoji: '🧿',
-      name: 'nazar amulet',
-    },
-    {
-      emoji: '🎮',
-      name: 'video game',
-    },
-    {
-      emoji: '🕹️',
-      name: 'joystick',
-    },
-    {
-      emoji: '🎰',
-      name: 'slot machine',
-    },
-    {
-      emoji: '🎲',
-      name: 'game die',
-    },
-    {
-      emoji: '🧩',
-      name: 'puzzle piece',
-    },
-    {
-      emoji: '🧸',
-      name: 'teddy bear',
-    },
-    {
-      emoji: '🪅',
-      name: 'piñata',
-    },
-    {
-      emoji: '🪆',
-      name: 'nesting dolls',
-    },
-    {
-      emoji: '♠️',
-      name: 'spade suit',
-    },
-    {
-      emoji: '♥️',
-      name: 'heart suit',
-    },
-    {
-      emoji: '♦️',
-      name: 'diamond suit',
-    },
-    {
-      emoji: '♣️',
-      name: 'club suit',
-    },
-    {
-      emoji: '♟️',
-      name: 'chess pawn',
-    },
-    {
-      emoji: '🃏',
-      name: 'joker',
-    },
-    {
-      emoji: '🀄',
-      name: 'mahjong red dragon',
-    },
-    {
-      emoji: '🎴',
-      name: 'flower playing cards',
-    },
-    {
-      emoji: '🎭',
-      name: 'performing arts',
-    },
-    {
-      emoji: '🖼️',
-      name: 'framed picture',
-    },
-    {
-      emoji: '🎨',
-      name: 'artist palette',
-    },
-    {
-      emoji: '🧵',
-      name: 'thread',
-    },
-    {
-      emoji: '🪡',
-      name: 'sewing needle',
-    },
-    {
-      emoji: '🧶',
-      name: 'yarn',
-    },
-    {
-      emoji: '🪢',
-      name: 'knot',
-    },
+    { emoji: '🎃', name: 'jack-o-lanterna' },
+    { emoji: '🎄', name: 'árvore de natal' },
+    { emoji: '🎆', name: 'fogos de artifício' },
+    { emoji: '🎇', name: 'brilho' },
+    { emoji: '🧨', name: 'bombinha' },
+    { emoji: '✨', name: 'brilhos' },
+    { emoji: ' 🎈', name: 'balão' },
+    { emoji: '🎉', name: 'lança-confete' },
+    { emoji: '🎊', name: 'bola de confete' },
+    { emoji: '🎋', name: 'árvore de tanabata' },
+    { emoji: '🎍', name: 'decoração de pinho' },
+    { emoji: '🎎', name: 'bonecas japonesas' },
+    { emoji: '🎏', name: 'serpentina de carpa' },
+    { emoji: '🎐', name: 'carrilhão de vento' },
+    { emoji: '🎑', name: 'cerimônia de observação da lua' },
+    { emoji: '🧧', name: 'envelope vermelho' },
+    { emoji: '🎀', name: 'fita' },
+    { emoji: '🎁', name: 'presente embrulhado ' },
+    { emoji: '🎗️', name: 'faixa de lembrete' },
+    { emoji: '🎟️', name: 'ingressos' },
+    { emoji: '🎫', name: 'ticket' },
+    { emoji: '🎖️', name: 'medalha militar' },
+    { emoji: '🏆', name: 'troféu' },
+    { emoji: '🏅', name: 'medalha de esportes' },
+    { emoji: '🥇', name: '1º lugar medalha' },
+    { emoji: '🥈', name: '2º lugar medalha' },
+    { emoji: '🥉', name: '3º lugar medalha' },
+    { emoji: '⚽', name: 'bola de futebol' },
+    { emoji: '⚾', name: 'beisebol' },
+    { emoji: '🥎', name: 'softbol' },
+    { emoji: '🏀', name: 'basquete' },
+    { emoji: '🏐', name: 'vôlei' },
+    { emoji: '🏈', name: 'futebol americano' },
+    { emoji: '🏉', name: 'futebol de rugby' },
+    { emoji: '🎾', name: 'tênix' },
+    { emoji: '🥏', name: 'disco voador' },
+    { emoji: '🎳', name: 'boliche' },
+    { emoji: '🏏', name: 'jogo de críquete' },
+    { emoji: '🏑', name: 'hóquei em campo' },
+    { emoji: '🏒', name: 'hóquei no gelo' },
+    { emoji: '🥍', name: 'lacrosse' },
+    { emoji: '🏓', name: 'ping pong' },
+    { emoji: '🏸', name: 'badminton' },
+    { emoji: '🥊', name: 'luva de boxe' },
+    { emoji: '🥋', name: 'uniforme de artes marciais' },
+    { emoji: '🥅', name: 'gol' },
+    { emoji: '⛳', name: 'bandeira no buraco' },
+    { emoji: '⛸️', name: 'patim no gelo' },
+    { emoji: '🎣', name: 'vara de pesca' },
+    { emoji: '🤿', name: 'máscara de mergulho' },
+    { emoji: '🎽', name: 'camisa de corrida' },
+    { emoji: '🎿', name: 'esquis' },
+    { emoji: '🛷', name: 'trenó' },
+    { emoji: '🥌', name: 'pedra de ondulação' },
+    { emoji: '🎯', name: 'ataque direto' },
+    { emoji: '🪀', name: 'ioiô' },
+    { emoji: '🪁', name: 'pipa' },
+    { emoji: '🎱', name: 'sinuca' },
+    { emoji: '🔮', name: 'bola de cristal' },
+    { emoji: '🪄', name: 'varinha mágica' },
+    { emoji: '🧿', name: 'olho grego' },
+    { emoji: '🎮', name: 'videogame' },
+    { emoji: '🕹️', name: 'controle de video game' },
+    { emoji: '🎰', name: 'caça-níqueis' },
+    { emoji: '🎲', name: 'dado' },
+    { emoji: '🧩', name: 'peça de quebra-cabeça' },
+    { emoji: '🧸', name: 'ursinho de pelúcia' },
+    { emoji: '🪅', name: 'pinhata' },
+    { emoji: '🪆', name: 'bonecas aninhadas' },
+    { emoji: '♠️', name: 'traje de espada' },
+    { emoji: '♥️', name: 'traje de coração' },
+    { emoji: '♦️', name: 'traje de diamante' },
+    { emoji: '♣️', name: 'trevo' },
+    { emoji: '♟️', name: 'peão de xadrez' },
+    { emoji: '🃏', name: 'coringa' },
+    { emoji: '🀄', name: 'dragão vermelho mahjong' },
+    { emoji: '🎴', name: 'flores jogando cartas' },
+    { emoji: '🎭', name: 'artes cênicas' },
+    { emoji: '🖼️', name: 'foto emoldurada' },
+    { emoji: '🎨', name: 'paleta de artista' },
+    { emoji: '🧵', name: 'fio' },
+    { emoji: '🪡', name: 'agulha de costura' },
+    { emoji: '🧶', name: 'fio' },
+    { emoji: '🪢', name: 'nó' },
   ],
   objects: [
-    {
-      emoji: '👓',
-      name: 'glasses',
-    },
-    {
-      emoji: '🕶️',
-      name: 'sunglasses',
-    },
-    {
-      emoji: '🥽',
-      name: 'goggles',
-    },
-    {
-      emoji: '🥼',
-      name: 'lab coat',
-    },
-    {
-      emoji: '🦺',
-      name: 'safety vest',
-    },
-    {
-      emoji: '👔',
-      name: 'necktie',
-    },
-    {
-      emoji: '👕',
-      name: 't-shirt',
-    },
-    {
-      emoji: '👖',
-      name: 'jeans',
-    },
-    {
-      emoji: '🧣',
-      name: 'scarf',
-    },
-    {
-      emoji: '🧤',
-      name: 'gloves',
-    },
-    {
-      emoji: '🧥',
-      name: 'coat',
-    },
-    {
-      emoji: '🧦',
-      name: 'socks',
-    },
-    {
-      emoji: '👗',
-      name: 'dress',
-    },
-    {
-      emoji: '👘',
-      name: 'kimono',
-    },
-    {
-      emoji: '🥻',
-      name: 'sari',
-    },
-    {
-      emoji: '🩱',
-      name: 'one-piece swimsuit',
-    },
-    {
-      emoji: '🩲',
-      name: 'briefs',
-    },
-    {
-      emoji: '🩳',
-      name: 'shorts',
-    },
-    {
-      emoji: '👙',
-      name: 'bikini',
-    },
-    {
-      emoji: '👚',
-      name: 'woman’s clothes',
-    },
-    {
-      emoji: '👛',
-      name: 'purse',
-    },
-    {
-      emoji: '👜',
-      name: 'handbag',
-    },
-    {
-      emoji: '👝',
-      name: 'clutch bag',
-    },
-    {
-      emoji: '🛍️',
-      name: 'shopping bags',
-    },
-    {
-      emoji: '🎒',
-      name: 'backpack',
-    },
-    {
-      emoji: '🩴',
-      name: 'thong sandal',
-    },
-    {
-      emoji: '👞',
-      name: 'man’s shoe',
-    },
-    {
-      emoji: '👟',
-      name: 'running shoe',
-    },
-    {
-      emoji: '🥾',
-      name: 'hiking boot',
-    },
-    {
-      emoji: '🥿',
-      name: 'flat shoe',
-    },
-    {
-      emoji: '👠',
-      name: 'high-heeled shoe',
-    },
-    {
-      emoji: '👡',
-      name: 'woman’s sandal',
-    },
-    {
-      emoji: '🩰',
-      name: 'ballet shoes',
-    },
-    {
-      emoji: '👢',
-      name: 'woman’s boot',
-    },
-    {
-      emoji: '👑',
-      name: 'crown',
-    },
-    {
-      emoji: '👒',
-      name: 'woman’s hat',
-    },
-    {
-      emoji: '🎩',
-      name: 'top hat',
-    },
-    {
-      emoji: '🎓',
-      name: 'graduation cap',
-    },
-    {
-      emoji: '🧢',
-      name: 'billed cap',
-    },
-    {
-      emoji: '🪖',
-      name: 'military helmet',
-    },
-    {
-      emoji: '⛑️',
-      name: 'rescue worker’s helmet',
-    },
-    {
-      emoji: '📿',
-      name: 'prayer beads',
-    },
-    {
-      emoji: '💄',
-      name: 'lipstick',
-    },
-    {
-      emoji: '💍',
-      name: 'ring',
-    },
-    {
-      emoji: '💎',
-      name: 'gem stone',
-    },
-    {
-      emoji: '🔇',
-      name: 'muted speaker',
-    },
-    {
-      emoji: '🔈',
-      name: 'speaker low volume',
-    },
-    {
-      emoji: '🔉',
-      name: 'speaker medium volume',
-    },
-    {
-      emoji: '🔊',
-      name: 'speaker high volume',
-    },
-    {
-      emoji: '📢',
-      name: 'loudspeaker',
-    },
-    {
-      emoji: '📣',
-      name: 'megaphone',
-    },
-    {
-      emoji: '📯',
-      name: 'postal horn',
-    },
-    {
-      emoji: '🔔',
-      name: 'bell',
-    },
-    {
-      emoji: '🔕',
-      name: 'bell with slash',
-    },
-    {
-      emoji: '🎼',
-      name: 'musical score',
-    },
-    {
-      emoji: '🎵',
-      name: 'musical note',
-    },
-    {
-      emoji: '🎶',
-      name: 'musical notes',
-    },
-    {
-      emoji: '🎙️',
-      name: 'studio microphone',
-    },
-    {
-      emoji: '🎚️',
-      name: 'level slider',
-    },
-    {
-      emoji: '🎛️',
-      name: 'control knobs',
-    },
-    {
-      emoji: '🎤',
-      name: 'microphone',
-    },
-    {
-      emoji: '🎧',
-      name: 'headphone',
-    },
-    {
-      emoji: '📻',
-      name: 'radio',
-    },
-    {
-      emoji: '🎷',
-      name: 'saxophone',
-    },
-    {
-      emoji: '🪗',
-      name: 'accordion',
-    },
-    {
-      emoji: '🎸',
-      name: 'guitar',
-    },
-    {
-      emoji: '🎹',
-      name: 'musical keyboard',
-    },
-    {
-      emoji: '🎺',
-      name: 'trumpet',
-    },
-    {
-      emoji: '🎻',
-      name: 'violin',
-    },
-    {
-      emoji: '🪕',
-      name: 'banjo',
-    },
-    {
-      emoji: '🥁',
-      name: 'drum',
-    },
-    {
-      emoji: '🪘',
-      name: 'long drum',
-    },
-    {
-      emoji: '📱',
-      name: 'mobile phone',
-    },
-    {
-      emoji: '📲',
-      name: 'mobile phone with arrow',
-    },
-    {
-      emoji: '☎️',
-      name: 'telephone',
-    },
-    {
-      emoji: '📞',
-      name: 'telephone receiver',
-    },
-    {
-      emoji: '📟',
-      name: 'pager',
-    },
-    {
-      emoji: '📠',
-      name: 'fax machine',
-    },
-    {
-      emoji: '🔋',
-      name: 'battery',
-    },
-    {
-      emoji: '🔌',
-      name: 'electric plug',
-    },
-    {
-      emoji: '💻',
-      name: 'laptop',
-    },
-    {
-      emoji: '🖥️',
-      name: 'desktop computer',
-    },
-    {
-      emoji: '🖨️',
-      name: 'printer',
-    },
-    {
-      emoji: '⌨️',
-      name: 'keyboard',
-    },
-    {
-      emoji: '🖱️',
-      name: 'computer mouse',
-    },
-    {
-      emoji: '🖲️',
-      name: 'trackball',
-    },
-    {
-      emoji: '💽',
-      name: 'computer disk',
-    },
-    {
-      emoji: '💾',
-      name: 'floppy disk',
-    },
-    {
-      emoji: '💿',
-      name: 'optical disk',
-    },
-    {
-      emoji: '📀',
-      name: 'dvd',
-    },
-    {
-      emoji: '🧮',
-      name: 'abacus',
-    },
-    {
-      emoji: '🎥',
-      name: 'movie camera',
-    },
-    {
-      emoji: '🎞️',
-      name: 'film frames',
-    },
-    {
-      emoji: '📽️',
-      name: 'film projector',
-    },
-    {
-      emoji: '🎬',
-      name: 'clapper board',
-    },
-    {
-      emoji: '📺',
-      name: 'television',
-    },
-    {
-      emoji: '📷',
-      name: 'camera',
-    },
-    {
-      emoji: '📸',
-      name: 'camera with flash',
-    },
-    {
-      emoji: '📹',
-      name: 'video camera',
-    },
-    {
-      emoji: '📼',
-      name: 'videocassette',
-    },
-    {
-      emoji: '🔍',
-      name: 'magnifying glass tilted left',
-    },
-    {
-      emoji: '🔎',
-      name: 'magnifying glass tilted right',
-    },
-    {
-      emoji: '🕯️',
-      name: 'candle',
-    },
-    {
-      emoji: '💡',
-      name: 'light bulb',
-    },
-    {
-      emoji: '🔦',
-      name: 'flashlight',
-    },
-    {
-      emoji: '🏮',
-      name: 'red paper lantern',
-    },
-    {
-      emoji: '🪔',
-      name: 'diya lamp',
-    },
-    {
-      emoji: '📔',
-      name: 'notebook with decorative cover',
-    },
-    {
-      emoji: '📕',
-      name: 'closed book',
-    },
-    {
-      emoji: '📖',
-      name: 'open book',
-    },
-    {
-      emoji: '📗',
-      name: 'green book',
-    },
-    {
-      emoji: '📘',
-      name: 'blue book',
-    },
-    {
-      emoji: '📙',
-      name: 'orange book',
-    },
-    {
-      emoji: '📚',
-      name: 'books',
-    },
-    {
-      emoji: '📓',
-      name: 'notebook',
-    },
-    {
-      emoji: '📒',
-      name: 'ledger',
-    },
-    {
-      emoji: '📃',
-      name: 'page with curl',
-    },
-    {
-      emoji: '📜',
-      name: 'scroll',
-    },
-    {
-      emoji: '📄',
-      name: 'page facing up',
-    },
-    {
-      emoji: '📰',
-      name: 'newspaper',
-    },
-    {
-      emoji: '🗞️',
-      name: 'rolled-up newspaper',
-    },
-    {
-      emoji: '📑',
-      name: 'bookmark tabs',
-    },
-    {
-      emoji: '🔖',
-      name: 'bookmark',
-    },
-    {
-      emoji: '🏷️',
-      name: 'label',
-    },
-    {
-      emoji: '💰',
-      name: 'money bag',
-    },
-    {
-      emoji: '🪙',
-      name: 'coin',
-    },
-    {
-      emoji: '💴',
-      name: 'yen banknote',
-    },
-    {
-      emoji: '💵',
-      name: 'dollar banknote',
-    },
-    {
-      emoji: '💶',
-      name: 'euro banknote',
-    },
-    {
-      emoji: '💷',
-      name: 'pound banknote',
-    },
-    {
-      emoji: '💸',
-      name: 'money with wings',
-    },
-    {
-      emoji: '💳',
-      name: 'credit card',
-    },
-    {
-      emoji: '🧾',
-      name: 'receipt',
-    },
-    {
-      emoji: '💹',
-      name: 'chart increasing with yen',
-    },
-    {
-      emoji: '✉️',
-      name: 'envelope',
-    },
-    {
-      emoji: '📧',
-      name: 'e-mail',
-    },
-    {
-      emoji: '📨',
-      name: 'incoming envelope',
-    },
-    {
-      emoji: '📩',
-      name: 'envelope with arrow',
-    },
-    {
-      emoji: '📤',
-      name: 'outbox tray',
-    },
-    {
-      emoji: '📥',
-      name: 'inbox tray',
-    },
-    {
-      emoji: '📦',
-      name: 'package',
-    },
-    {
-      emoji: '📫',
-      name: 'closed mailbox with raised flag',
-    },
-    {
-      emoji: '📪',
-      name: 'closed mailbox with lowered flag',
-    },
-    {
-      emoji: '📬',
-      name: 'open mailbox with raised flag',
-    },
-    {
-      emoji: '📭',
-      name: 'open mailbox with lowered flag',
-    },
-    {
-      emoji: '📮',
-      name: 'postbox',
-    },
-    {
-      emoji: '🗳️',
-      name: 'ballot box with ballot',
-    },
-    {
-      emoji: '✏️',
-      name: 'pencil',
-    },
-    {
-      emoji: '✒️',
-      name: 'black nib',
-    },
-    {
-      emoji: '🖋️',
-      name: 'fountain pen',
-    },
-    {
-      emoji: '🖊️',
-      name: 'pen',
-    },
-    {
-      emoji: '🖌️',
-      name: 'paintbrush',
-    },
-    {
-      emoji: '🖍️',
-      name: 'crayon',
-    },
-    {
-      emoji: '📝',
-      name: 'memo',
-    },
-    {
-      emoji: '💼',
-      name: 'briefcase',
-    },
-    {
-      emoji: '📁',
-      name: 'file folder',
-    },
-    {
-      emoji: '📂',
-      name: 'open file folder',
-    },
-    {
-      emoji: '🗂️',
-      name: 'card index dividers',
-    },
-    {
-      emoji: '📅',
-      name: 'calendar',
-    },
-    {
-      emoji: '📆',
-      name: 'tear-off calendar',
-    },
-    {
-      emoji: '🗒️',
-      name: 'spiral notepad',
-    },
-    {
-      emoji: '🗓️',
-      name: 'spiral calendar',
-    },
-    {
-      emoji: '📇',
-      name: 'card index',
-    },
-    {
-      emoji: '📈',
-      name: 'chart increasing',
-    },
-    {
-      emoji: '📉',
-      name: 'chart decreasing',
-    },
-    {
-      emoji: '📊',
-      name: 'bar chart',
-    },
-    {
-      emoji: '📋',
-      name: 'clipboard',
-    },
-    {
-      emoji: '📌',
-      name: 'pushpin',
-    },
-    {
-      emoji: '📍',
-      name: 'round pushpin',
-    },
-    {
-      emoji: '📎',
-      name: 'paperclip',
-    },
-    {
-      emoji: '🖇️',
-      name: 'linked paperclips',
-    },
-    {
-      emoji: '📏',
-      name: 'straight ruler',
-    },
-    {
-      emoji: '📐',
-      name: 'triangular ruler',
-    },
-    {
-      emoji: '✂️',
-      name: 'scissors',
-    },
-    {
-      emoji: '🗃️',
-      name: 'card file box',
-    },
-    {
-      emoji: '🗄️',
-      name: 'file cabinet',
-    },
-    {
-      emoji: '🗑️',
-      name: 'wastebasket',
-    },
-    {
-      emoji: '🔒',
-      name: 'locked',
-    },
-    {
-      emoji: '🔓',
-      name: 'unlocked',
-    },
-    {
-      emoji: '🔏',
-      name: 'locked with pen',
-    },
-    {
-      emoji: '🔐',
-      name: 'locked with key',
-    },
-    {
-      emoji: '🔑',
-      name: 'key',
-    },
-    {
-      emoji: '🗝️',
-      name: 'old key',
-    },
-    {
-      emoji: '🔨',
-      name: 'hammer',
-    },
-    {
-      emoji: '🪓',
-      name: 'axe',
-    },
-    {
-      emoji: '⛏️',
-      name: 'pick',
-    },
-    {
-      emoji: '⚒️',
-      name: 'hammer and pick',
-    },
-    {
-      emoji: '🛠️',
-      name: 'hammer and wrench',
-    },
-    {
-      emoji: '🗡️',
-      name: 'dagger',
-    },
-    {
-      emoji: '⚔️',
-      name: 'crossed swords',
-    },
-    {
-      emoji: '🔫',
-      name: 'pistol',
-    },
-    {
-      emoji: '🪃',
-      name: 'boomerang',
-    },
-    {
-      emoji: '🏹',
-      name: 'bow and arrow',
-    },
-    {
-      emoji: '🛡️',
-      name: 'shield',
-    },
-    {
-      emoji: '🪚',
-      name: 'carpentry saw',
-    },
-    {
-      emoji: '🔧',
-      name: 'wrench',
-    },
-    {
-      emoji: '🪛',
-      name: 'screwdriver',
-    },
-    {
-      emoji: '🔩',
-      name: 'nut and bolt',
-    },
-    {
-      emoji: '⚙️',
-      name: 'gear',
-    },
-    {
-      emoji: '🗜️',
-      name: 'clamp',
-    },
-    {
-      emoji: '⚖️',
-      name: 'balance scale',
-    },
-    {
-      emoji: '🦯',
-      name: 'white cane',
-    },
-    {
-      emoji: '🔗',
-      name: 'link',
-    },
-    {
-      emoji: '⛓️',
-      name: 'chains',
-    },
-    {
-      emoji: '🪝',
-      name: 'hook',
-    },
-    {
-      emoji: '🧰',
-      name: 'toolbox',
-    },
-    {
-      emoji: '🧲',
-      name: 'magnet',
-    },
-    {
-      emoji: '🪜',
-      name: 'ladder',
-    },
-    {
-      emoji: '⚗️',
-      name: 'alembic',
-    },
-    {
-      emoji: '🧪',
-      name: 'test tube',
-    },
-    {
-      emoji: '🧫',
-      name: 'petri dish',
-    },
-    {
-      emoji: '🧬',
-      name: 'dna',
-    },
-    {
-      emoji: '🔬',
-      name: 'microscope',
-    },
-    {
-      emoji: '🔭',
-      name: 'telescope',
-    },
-    {
-      emoji: '📡',
-      name: 'satellite antenna',
-    },
-    {
-      emoji: '💉',
-      name: 'syringe',
-    },
-    {
-      emoji: '🩸',
-      name: 'drop of blood',
-    },
-    {
-      emoji: '💊',
-      name: 'pill',
-    },
-    {
-      emoji: '🩹',
-      name: 'adhesive bandage',
-    },
-    {
-      emoji: '🩺',
-      name: 'stethoscope',
-    },
-    {
-      emoji: '🚪',
-      name: 'door',
-    },
-    {
-      emoji: '🛗',
-      name: 'elevator',
-    },
-    {
-      emoji: '🪞',
-      name: 'mirror',
-    },
-    {
-      emoji: '🪟',
-      name: 'window',
-    },
-    {
-      emoji: '🛏️',
-      name: 'bed',
-    },
-    {
-      emoji: '🛋️',
-      name: 'couch and lamp',
-    },
-    {
-      emoji: '🪑',
-      name: 'chair',
-    },
-    {
-      emoji: '🚽',
-      name: 'toilet',
-    },
-    {
-      emoji: '🪠',
-      name: 'plunger',
-    },
-    {
-      emoji: '🚿',
-      name: 'shower',
-    },
-    {
-      emoji: '🛁',
-      name: 'bathtub',
-    },
-    {
-      emoji: '🪤',
-      name: 'mouse trap',
-    },
-    {
-      emoji: '🪒',
-      name: 'razor',
-    },
-    {
-      emoji: '🧴',
-      name: 'lotion bottle',
-    },
-    {
-      emoji: '🧷',
-      name: 'safety pin',
-    },
-    {
-      emoji: '🧹',
-      name: 'broom',
-    },
-    {
-      emoji: '🧺',
-      name: 'basket',
-    },
-    {
-      emoji: '🧻',
-      name: 'roll of paper',
-    },
-    {
-      emoji: '🪣',
-      name: 'bucket',
-    },
-    {
-      emoji: '🧼',
-      name: 'soap',
-    },
-    {
-      emoji: '🪥',
-      name: 'toothbrush',
-    },
-    {
-      emoji: '🧽',
-      name: 'sponge',
-    },
-    {
-      emoji: '🧯',
-      name: 'fire extinguisher',
-    },
-    {
-      emoji: '🛒',
-      name: 'shopping cart',
-    },
-    {
-      emoji: '🚬',
-      name: 'cigarette',
-    },
-    {
-      emoji: '⚰️',
-      name: 'coffin',
-    },
-    {
-      emoji: '🪦',
-      name: 'headstone',
-    },
-    {
-      emoji: '⚱️',
-      name: 'funeral urn',
-    },
-    {
-      emoji: '🗿',
-      name: 'moai',
-    },
-    {
-      emoji: '🪧',
-      name: 'placard',
-    },
+    { emoji: '👓', name: 'óculos' },
+    { emoji: '🕶️', name: 'óculos de sol' },
+    { emoji: '🥽', name: 'óculos' },
+    { emoji: ' 🥼', name: 'jaleco' },
+    { emoji: '🦺', name: 'colete de segurança' },
+    { emoji: '👔', name: 'gravata' },
+    { emoji: '👕', name: 'camisa' },
+    { emoji: '👖', name: 'jeans' },
+    { emoji: '🧣', name: 'lenço' },
+    { emoji: '🧤', name: 'luvas' },
+    { emoji: '🧥', name: 'casaco' },
+    { emoji: '🧦', name: 'meias' },
+    { emoji: '👗', name: 'vestido' },
+    { emoji: '👘', name: 'quimono' },
+    { emoji: '🥻', name: 'sari' },
+    { emoji: '🩱', name: 'maiô de uma peça' },
+    { emoji: '🩲', name: 'cueca' },
+    { emoji: '🩳', name: 'shorts' },
+    { emoji: '👙', name: 'biquíni' },
+    { emoji: '👚 ', name: 'roupa de mulher' },
+    { emoji: '👛', name: 'bolsa' },
+    { emoji: '👜', name: 'bolsa' },
+    { emoji: '👝', name: 'necessaire' },
+    { emoji: '🛍️', name: 'sacolas de compras' },
+    { emoji: '🎒', name: 'mochila' },
+    { emoji: '🩴', name: 'sandália' },
+    { emoji: '👞', name: 'sapato de homem' },
+    { emoji: '👟', name: 'sapato de corrida' },
+    { emoji: '🥾', name: 'bota de caminhada' },
+    { emoji: '🥿', name: 'sapato raso' },
+    { emoji: '👠', name: 'sapato de salto alto' },
+    { emoji: '👡', name: 'sandália feminina' },
+    { emoji: '🩰', name: 'sapatilhas' },
+    { emoji: '👢', name: 'bota feminina' },
+    { emoji: '👑', name: 'coroa' },
+    { emoji: '👒', name: 'chapéu de mulher' },
+    { emoji: '🎩', name: 'cartola' },
+    { emoji: '🎓', name: 'boné de formatura' },
+    { emoji: '🧢', name: 'boné faturado' },
+    { emoji: '🪖', name: 'capacete militar' },
+    { emoji: '⛑️', name: 'resgate capacete do trabalhador' },
+    { emoji: '📿', name: 'contas de oração' },
+    { emoji: '💄', name: 'batom' },
+    { emoji: '💍', name: 'anel' },
+    { emoji: '💎', name: 'pedra preciosa' },
+    { emoji: '🔇', name: 'falante mudo' },
+    { emoji: '🔈', name: 'alto-falante volume baixo' },
+    { emoji: '🔉', name: 'alto-falante volume médio' },
+    { emoji: '🔊', name: 'alto-falante volume alto' },
+    { emoji: '📢', name: 'alto-falante' },
+    { emoji: '📣', name: 'megafone' },
+    { emoji: '📯', name: 'buzina postal' },
+    { emoji: '🔔', name: 'sino' },
+    { emoji: '🔕', name: 'sino com barra' },
+    { emoji: '🎼', name: 'pontuação musical' },
+    { emoji: '🎵', name: 'nota musical' },
+    { emoji: '🎶', name: 'notas musicais' },
+    { emoji: '🎙️', name: 'microfone de estúdio' },
+    { emoji: '🎚️', name: 'nível slider' },
+    { emoji: '🎛️', name: 'botões de controle' },
+    { emoji: '🎤', name: 'microfone' },
+    { emoji: '🎧', name: 'fone de ouvido' },
+    { emoji: '📻', name: 'rádio' },
+    { emoji: '🎷', name: 'saxofone' },
+    { emoji: '🪗', name: 'acordeão' },
+    { emoji: '🎸', name: 'guitarra' },
+    { emoji: '🎹', name: 'teclado musical' },
+    { emoji: ' 🎺', name: 'trompete' },
+    { emoji: '🎻', name: 'violino' },
+    { emoji: '🪕', name: 'banjo' },
+    { emoji: '🥁', name: 'tambor' },
+    { emoji: '🪘', name: 'tambor longo' },
+    { emoji: '📱', name: 'telefone celular' },
+    { emoji: '📲', name: 'telefone celular com uma flecha' },
+    { emoji: '☎️', name: 'telefone' },
+    { emoji: '📞', name: 'receptor de telefone' },
+    { emoji: '📟', name: 'pager' },
+    { emoji: '📠', name: 'máquina de fax' },
+    { emoji: '🔋', name: 'bateria' },
+    { emoji: ' 🔌', name: 'plugue elétrico' },
+    { emoji: '💻', name: 'laptop' },
+    { emoji: '🖥️', name: 'computador de mesa' },
+    { emoji: '🖨️', name: 'impressora' },
+    { emoji: '⌨️', name: 'teclado' },
+    { emoji: '🖱️', name: 'mouse de computador' },
+    { emoji: '🖲️', name: 'trackball' },
+    { emoji: '💽', name: 'disco de computador' },
+    { emoji: '💾', name: 'disquete' },
+    { emoji: '💿', name: 'disco óptico' },
+    { emoji: '📀', name: 'dvd' },
+    { emoji: '🧮', name: 'ábaco' },
+    { emoji: '🎥', name: 'câmera de filme' },
+    { emoji: '🎞️', name: 'molduras de filme' },
+    { emoji: '📽️', name: 'projetor de filme' },
+    { emoji: '🎬', name: 'claquete' },
+    { emoji: '📺', name: 'televisão' },
+    { emoji: '📷', name: 'câmera' },
+    { emoji: '📸', name: 'câmera com flash ' },
+    { emoji: '📹', name: 'câmera de vídeo' },
+    { emoji: '📼', name: 'videocassete' },
+    { emoji: '🔍', name: 'lupa inclinada para a esquerda' },
+    { emoji: '🔎', name: 'lupa inclinada para a direita' },
+    { emoji: '🕯️', name: 'vela' },
+    { emoji: '💡', name: 'lâmpada' },
+    { emoji: '🔦', name: 'lanterna' },
+    { emoji: '🏮', name: 'lanterna de papel vermelho' },
+    { emoji: '🪔', name: 'lâmpada diya' },
+    { emoji: '📔', name: 'caderno com capa decorativa' },
+    { emoji: '📕', name: 'livro fechado' },
+    { emoji: '📖', name: 'livro aberto' },
+    { emoji: '📗', name: 'livro verde' },
+    { emoji: '📘', name: 'azul livro' },
+    { emoji: '📙', name: 'livro laranja' },
+    { emoji: '📚', name: 'livros' },
+    { emoji: '📓', name: 'caderno' },
+    { emoji: '📒', name: 'livro-razão' },
+    { emoji: '📃', name: 'página com ondulação' },
+    { emoji: '📜', name: 'pergaminho' },
+    { emoji: '📄', name: 'página voltada para cima' },
+    { emoji: '📰', name: 'jornal' },
+    { emoji: '🗞️', name: 'jornal enrolado' },
+    { emoji: '📑', name: 'guias de favoritos' },
+    { emoji: '🔖', name: 'marca páginas' },
+    { emoji: '🏷️', name: 'etiqueta' },
+    { emoji: '💰', name: 'saco de dinheiro' },
+    { emoji: '🪙', name: 'moeda' },
+    { emoji: '💴', name: 'nota de iene' },
+    { emoji: '💵', name: 'nota de dólar' },
+    { emoji: '💶', name: 'nota de euro' },
+    { emoji: '💷', name: 'nota de libra' },
+    { emoji: '💸', name: 'dinheiro com asas' },
+    { emoji: '💳', name: 'cartão de crédito' },
+    { emoji: '🧾', name: 'recibo' },
+    { emoji: '💹', name: 'gráfico aumentando com ienes' },
+    { emoji: '✉️', name: 'envelope' },
+    { emoji: '📧', name: 'e-mail' },
+    { emoji: '📨', name: 'envelope de entrada' },
+    { emoji: '📩', name: 'envelope com flecha' },
+    { emoji: ' 📤', name: 'bandeja de saída' },
+    { emoji: '📥', name: 'bandeja da caixa de entrada' },
+    { emoji: '📦', name: 'pacote' },
+    { emoji: '📫', name: 'caixa de correio fechada com sinalizador levantado' },
+    { emoji: '📪', name: 'caixa de correio fechada com sinalizador abaixado' },
+    { emoji: '📬', name: 'caixa de correio aberta com sinalizador levantado' },
+    { emoji: '📭', name: 'caixa de correio aberta com bandeira abaixada' },
+    { emoji: '📮', name: 'caixa postal' },
+    { emoji: '🗳️', name: 'urna com cédula' },
+    { emoji: '✏️', name: 'lápis' },
+    { emoji: '✒️', name: 'ponta preta' },
+    { emoji: '🖋️', name: 'caneta-tinteiro' },
+    { emoji: '🖊️', name: 'caneta' },
+    { emoji: '🖌️', name: 'pincel' },
+    { emoji: '🖍️', name: 'GIS de cera' },
+    { emoji: '📝', name: 'página de anotações' },
+    { emoji: '💼', name: 'pasta' },
+    { emoji: '📁', name: 'pasta de arquivo' },
+    { emoji: '📂', name: 'pasta de arquivo aberta' },
+    { emoji: '🗂️', name: 'divisores de índice de cartão' },
+    { emoji: '📅', name: 'calendário' },
+    { emoji: '📆', name: 'calendário destacável' },
+    { emoji: '🗒️', name: 'bloco de notas espiral' },
+    { emoji: ' 🗓️', name: 'calendário espiral' },
+    { emoji: '📇', name: 'índice de cartão' },
+    { emoji: '📈', name: 'gráfico aumentando' },
+    { emoji: '📉', name: 'gráfico diminuindo' },
+    { emoji: '📊', name: 'gráfico de barras' },
+    { emoji: '📋', name: 'área de transferência ' },
+    { emoji: '📌', name: 'alfinete' },
+    { emoji: '📍', name: 'alfinete redondo' },
+    { emoji: '📎', name: 'clipe' },
+    { emoji: '🖇️', name: 'grampos de papel' },
+    { emoji: '📏', name: 'régua reta' },
+    { emoji: '📐', name: 'régua triangular' },
+    { emoji: '✂️', name: 'tesoura' },
+    { emoji: '🗃️', name: 'caixa de arquivo de cartão' },
+    { emoji: '🗄️', name: 'arquivo' },
+    { emoji: ' 🗑️', name: 'lixeira' },
+    { emoji: '🔒', name: 'bloqueado' },
+    { emoji: '🔓', name: 'desbloqueado' },
+    { emoji: '🔏', name: 'bloqueado com caneta' },
+    { emoji: '🔐', name: 'bloqueado com chave' },
+    { emoji: '🔑 ', name: 'chave' },
+    { emoji: '🗝️', name: 'chave antiga' },
+    { emoji: '🔨', name: 'martelo' },
+    { emoji: '🪓', name: 'machado' },
+    { emoji: '⛏️', name: 'picareta' },
+    { emoji: '⚒️', name: 'martelo e picareta' },
+    { emoji: '🛠️', name: 'martelo e chave inglesa' },
+    { emoji: '🗡️', name: 'punhal' },
+    { emoji: '⚔️', name: 'espadas cruzadas' },
+    { emoji: '🔫', name: 'pistola' },
+    { emoji: '🪃', name: 'bumerangue' },
+    { emoji: '🏹', name: 'arco e flecha' },
+    { emoji: '🛡️', name: 'escudo' },
+    { emoji: '🪚', name: 'serra de carpintaria' },
+    { emoji: '🔧', name: 'chave' },
+    { emoji: '🪛', name: 'chave de fenda' },
+    { emoji: '🔩', name: 'porca e parafuso' },
+    { emoji: '⚙️', name: 'engrenagem' },
+    { emoji: '🗜️', name: 'grampo' },
+    { emoji: '⚖️', name: 'balança' },
+    { emoji: '🦯', name: 'bengala branca' },
+    { emoji: '🔗', name: 'link' },
+    { emoji: '⛓️ ', name: 'cadeias' },
+    { emoji: '🪝', name: 'gancho' },
+    { emoji: '🧰', name: 'caixa de ferramentas' },
+    { emoji: '🧲', name: 'imã' },
+    { emoji: '🪜', name: 'escada' },
+    { emoji: '⚗️', name: 'alambique' },
+    { emoji: '🧪', name: 'tubo de ensaio' },
+    { emoji: '🧫', name: 'placa de petri' },
+    { emoji: '🧬', name: 'dna' },
+    { emoji: '🔬', name: 'microscope' },
+    { emoji: '🔭', name: 'telescope' },
+    { emoji: '📡', name: 'antena de satélite' },
+    { emoji: '💉', name: 'seringa' },
+    { emoji: '🩸', name: 'gota de sangue' },
+    { emoji: '💊', name: 'pílula' },
+    { emoji: '🩹', name: 'bandagem adesiva' },
+    { emoji: ' 🩺', name: 'estetoscópio' },
+    { emoji: '🚪', name: 'porta' },
+    { emoji: '🛗', name: 'elevador' },
+    { emoji: '🪞', name: 'espelho' },
+    { emoji: '🪟', name: 'janela' },
+    { emoji: '🛏️', name: 'cama' },
+    { emoji: '🛋️', name: 'sofá e abajur' },
+    { emoji: '🪑', name: 'cadeira' },
+    { emoji: '🚽', name: 'banheiro' },
+    { emoji: '🪠', name: 'desentupidor' },
+    { emoji: '🚿', name: 'chuveiro' },
+    { emoji: '🛁', name: 'banheira' },
+    { emoji: '🪤', name: 'armadilha de rato' },
+    { emoji: '🪒', name: 'navalha' },
+    { emoji: '🧴', name: 'frasco de loção' },
+    { emoji: '🧷', name: 'alfinete de segurança' },
+    { emoji: '🧹', name: 'vassoura' },
+    { emoji: '🧺', name: 'cesto' },
+    { emoji: '🧻', name: 'rolo de papel' },
+    { emoji: '🪣 ', name: 'balde' },
+    { emoji: '🧼', name: 'sabão' },
+    { emoji: '🪥', name: 'escova de dentes' },
+    { emoji: '🧽', name: 'esponja' },
+    { emoji: '🧯', name: 'extintor' },
+    { emoji: '🛒', name: 'carrinho de compras' },
+    { emoji: '🚬', name: 'cigarro' },
+    { emoji: '⚰️', name: 'caixão' },
+    { emoji: '🪦', name: 'lápide' },
+    { emoji: '⚱️', name: 'urna funerária ' },
+    { emoji: '🗿', name: 'moai' },
+    { emoji: '🪧', name: 'cartaz' },
   ],
   symbols: [
-    {
-      emoji: '🏧',
-      name: 'ATM sign',
-    },
-    {
-      emoji: '🚮',
-      name: 'litter in bin sign',
-    },
-    {
-      emoji: '🚰',
-      name: 'potable water',
-    },
-    {
-      emoji: '♿',
-      name: 'wheelchair symbol',
-    },
-    {
-      emoji: '🚹',
-      name: 'men’s room',
-    },
-    {
-      emoji: '🚺',
-      name: 'women’s room',
-    },
-    {
-      emoji: '🚻',
-      name: 'restroom',
-    },
-    {
-      emoji: '🚼',
-      name: 'baby symbol',
-    },
-    {
-      emoji: '🚾',
-      name: 'water closet',
-    },
-    {
-      emoji: '🛂',
-      name: 'passport control',
-    },
-    {
-      emoji: '🛃',
-      name: 'customs',
-    },
-    {
-      emoji: '🛄',
-      name: 'baggage claim',
-    },
-    {
-      emoji: '🛅',
-      name: 'left luggage',
-    },
-    {
-      emoji: '⚠️',
-      name: 'warning',
-    },
-    {
-      emoji: '🚸',
-      name: 'children crossing',
-    },
-    {
-      emoji: '⛔',
-      name: 'no entry',
-    },
-    {
-      emoji: '🚫',
-      name: 'prohibited',
-    },
-    {
-      emoji: '🚳',
-      name: 'no bicycles',
-    },
-    {
-      emoji: '🚭',
-      name: 'no smoking',
-    },
-    {
-      emoji: '🚯',
-      name: 'no littering',
-    },
-    {
-      emoji: '🚱',
-      name: 'non-potable water',
-    },
-    {
-      emoji: '🚷',
-      name: 'no pedestrians',
-    },
-    {
-      emoji: '📵',
-      name: 'no mobile phones',
-    },
-    {
-      emoji: '🔞',
-      name: 'no one under eighteen',
-    },
-    {
-      emoji: '☢️',
-      name: 'radioactive',
-    },
-    {
-      emoji: '☣️',
-      name: 'biohazard',
-    },
-    {
-      emoji: '⬆️',
-      name: 'up arrow',
-    },
-    {
-      emoji: '↗️',
-      name: 'up-right arrow',
-    },
-    {
-      emoji: '➡️',
-      name: 'right arrow',
-    },
-    {
-      emoji: '↘️',
-      name: 'down-right arrow',
-    },
+    { emoji: '🏧', name: 'sinal de caixa eletrônico' },
+    { emoji: '🚮', name: 'sinal de lixo na lixeira' },
+    { emoji: '🚰', name: 'água potável' },
+    { emoji: '♿', name: 'símbolo da cadeira de rodas' },
+    { emoji: '🚹', name: 'quarto masculino' },
+    { emoji: '🚺', name: 'quarto feminino' },
+    { emoji: '🚻', name: 'banheiro' },
+    { emoji: '🚼', name: 'símbolo do bebê' },
+    { emoji: '🚾', name: 'lavatório' },
+    { emoji: '🛂 ', name: 'controle de passaporte' },
+    { emoji: '🛃', name: 'alfândega' },
+    { emoji: '🛄', name: 'retorno de bagagem' },
+    { emoji: '🛅', name: 'bagagem deixada' },
+    { emoji: '⚠️', name: 'aviso' },
+    { emoji: '🚸', name: 'crianças atravessando' },
+    { emoji: '⛔', name: 'sem entrada' },
+    { emoji: '🚫', name: 'proibido' },
+    { emoji: '🚳', name: 'sem bicicletas' },
+    { emoji: '🚭', name: 'não fumar' },
+    { emoji: '🚯', name: 'sem lixo' },
+    { emoji: '🚱', name: 'água não potável' },
+    { emoji: '🚷', name: 'sem pedestres' },
+    { emoji: '📵', name: 'sem telefones celulares' },
+    { emoji: '🔞', name: 'ninguém com menos de dezoito anos ' },
+    { emoji: '☢️', name: 'radioativo' },
+    { emoji: '☣️', name: 'risco biológico' },
+    { emoji: '⬆️', name: 'seta para cima' },
+    { emoji: '↗️', name: 'seta para cima-direita' },
+    { emoji: '➡️', name: 'seta para a direita' },
+    { emoji: '↘️', name: 'seta para baixo-direita' },
     {
       emoji: '⬇️',
-      name: 'down arrow',
+      name: 'seta para baixo',
     },
     {
       emoji: '↙️',
-      name: 'down-left arrow',
+      name: 'seta para baixo-esquerda',
     },
     {
       emoji: '⬅️',
-      name: 'left arrow',
+      name: 'seta esquerda',
     },
     {
       emoji: '↖️',
-      name: 'up-left arrow',
+      name: 'seta para cima-esquerda',
     },
     {
       emoji: '↕️',
-      name: 'up-down arrow',
+      name: 'seta para cima e para baixo',
     },
     {
       emoji: '↔️',
-      name: 'left-right arrow',
+      name: 'seta esquerda-direita',
     },
     {
       emoji: '↩️',
-      name: 'right arrow curving left',
+      name: 'seta para a direita curvando para a esquerda',
     },
     {
       emoji: '↪️',
-      name: 'left arrow curving right',
+      name: 'seta para a esquerda curva para a direita',
     },
     {
       emoji: '⤴️',
-      name: 'right arrow curving up',
+      name: 'seta para a direita curvando para cima',
     },
     {
       emoji: '⤵️',
-      name: 'right arrow curving down',
+      name: 'seta para a direita curvando para baixo',
     },
     {
       emoji: '🔃',
-      name: 'clockwise vertical arrows',
+      name: 'setas verticais no sentido horário',
     },
     {
       emoji: '🔄',
-      name: 'counterclockwise arrows button',
+      name: 'botão de setas no sentido anti-horário',
     },
     {
       emoji: '🔙',
-      name: 'BACK arrow',
+      name: 'seta VOLTAR',
     },
     {
       emoji: '🔚',
-      name: 'END arrow',
+      name: 'seta FIM',
     },
     {
       emoji: '🔛',
-      name: 'ON! arrow',
+      name: 'seta SOBRE',
     },
     {
       emoji: '🔜',
-      name: 'SOON arrow',
+      name: 'LOGO seta',
     },
     {
       emoji: '🔝',
-      name: 'TOP arrow',
+      name: 'Seta PARA CIMA',
     },
     {
       emoji: '🛐',
-      name: 'place of worship',
+      name: 'local de culto',
     },
     {
       emoji: '⚛️',
-      name: 'atom symbol',
+      name: 'símbolo do átomo',
     },
     {
       emoji: '🕉️',
@@ -5444,11 +2912,11 @@ export const emojis = {
     },
     {
       emoji: '✡️',
-      name: 'star of David',
+      name: 'estrela de Davi',
     },
     {
       emoji: '☸️',
-      name: 'wheel of dharma',
+      name: 'roda do dharma',
     },
     {
       emoji: '☯️',
@@ -5456,51 +2924,51 @@ export const emojis = {
     },
     {
       emoji: '✝️',
-      name: 'latin cross',
+      name: 'cruz latina',
     },
     {
       emoji: '☦️',
-      name: 'orthodox cross',
+      name: 'cruz ortodoxa',
     },
     {
       emoji: '☪️',
-      name: 'star and crescent',
+      name: 'estrela e crescente',
     },
     {
       emoji: '☮️',
-      name: 'peace symbol',
+      name: 'símbolo de paz',
     },
     {
       emoji: '🕎',
-      name: 'menorah',
+      name: 'menorá',
     },
     {
       emoji: '🔯',
-      name: 'dotted six-pointed star',
+      name: 'estrela de seis pontas pontilhada',
     },
     {
       emoji: '♈',
-      name: 'Aries',
+      name: 'Áries',
     },
     {
       emoji: '♉',
-      name: 'Taurus',
+      name: 'Touro',
     },
     {
       emoji: '♊',
-      name: 'Gemini',
+      name: 'Gêmeos',
     },
     {
       emoji: '♋',
-      name: 'Cancer',
+      name: 'Câncer',
     },
     {
       emoji: '♌',
-      name: 'Leo',
+      name: 'Leão',
     },
     {
       emoji: '♍',
-      name: 'Virgo',
+      name: 'Virgem',
     },
     {
       emoji: '♎',
@@ -5508,23 +2976,23 @@ export const emojis = {
     },
     {
       emoji: '♏',
-      name: 'Scorpio',
+      name: 'Escorpião',
     },
     {
       emoji: '♐',
-      name: 'Sagittarius',
+      name: 'Sagitário',
     },
     {
       emoji: '♑',
-      name: 'Capricorn',
+      name: 'Capricórnio',
     },
     {
       emoji: '♒',
-      name: 'Aquarius',
+      name: 'Aquário',
     },
     {
       emoji: '♓',
-      name: 'Pisces',
+      name: 'Peixes',
     },
     {
       emoji: '⛎',
@@ -5532,75 +3000,75 @@ export const emojis = {
     },
     {
       emoji: '🔀',
-      name: 'shuffle tracks button',
+      name: 'botão de reprodução aleatória',
     },
     {
       emoji: '🔁',
-      name: 'repeat button',
+      name: 'botão de repetição',
     },
     {
       emoji: '🔂',
-      name: 'repeat single button',
+      name: 'repetir botão único',
     },
     {
       emoji: '▶️',
-      name: 'play button',
+      name: 'botão de começar',
     },
     {
       emoji: '⏩',
-      name: 'fast-forward button',
+      name: 'botão de avanço rápido',
     },
     {
       emoji: '⏭️',
-      name: 'next track button',
+      name: 'botão de próxima faixa',
     },
     {
       emoji: '⏯️',
-      name: 'play or pause button',
+      name: 'botão reproduzir ou pausar',
     },
     {
       emoji: '◀️',
-      name: 'reverse button',
+      name: 'botão reverso',
     },
     {
       emoji: '⏪',
-      name: 'fast reverse button',
+      name: 'botão de retrocesso rápido',
     },
     {
       emoji: '⏮️',
-      name: 'last track button',
+      name: 'botão da última faixa',
     },
     {
       emoji: '🔼',
-      name: 'upwards button',
+      name: 'botão para cima',
     },
     {
       emoji: '⏫',
-      name: 'fast up button',
+      name: 'botão para acelerar',
     },
     {
       emoji: '🔽',
-      name: 'downwards button',
+      name: 'botão para baixo',
     },
     {
       emoji: '⏬',
-      name: 'fast down button',
+      name: 'botão de descida rápida',
     },
     {
       emoji: '⏸️',
-      name: 'pause button',
+      name: 'botão de pausa',
     },
     {
       emoji: '⏹️',
-      name: 'stop button',
+      name: 'botão de parada',
     },
     {
       emoji: '⏺️',
-      name: 'record button',
+      name: 'botão gravar',
     },
     {
       emoji: '⏏️',
-      name: 'eject button',
+      name: 'botão de ejeção',
     },
     {
       emoji: '🎦',
@@ -5608,15 +3076,15 @@ export const emojis = {
     },
     {
       emoji: '🔅',
-      name: 'dim button',
+      name: 'botão de escurecer',
     },
     {
       emoji: '🔆',
-      name: 'bright button',
+      name: 'botão de aumentar o briho',
     },
     {
       emoji: '📶',
-      name: 'antenna bars',
+      name: 'barras de antena',
     },
     {
       emoji: '📳',
@@ -5624,147 +3092,147 @@ export const emojis = {
     },
     {
       emoji: '📴',
-      name: 'mobile phone off',
+      name: 'telefone celular desligado',
     },
     {
       emoji: '♀️',
-      name: 'female sign',
+      name: 'signo feminino',
     },
     {
       emoji: '♂️',
-      name: 'male sign',
+      name: 'signo masculino',
     },
     {
       emoji: '⚧️',
-      name: 'transgender symbol',
+      name: 'símbolo transgênero',
     },
     {
       emoji: '✖️',
-      name: 'multiply',
+      name: 'multiplicar',
     },
     {
       emoji: '➕',
-      name: 'plus',
+      name: 'mais',
     },
     {
       emoji: '➖',
-      name: 'minus',
+      name: 'menos',
     },
     {
       emoji: '➗',
-      name: 'divide',
+      name: 'dividir',
     },
     {
       emoji: '♾️',
-      name: 'infinity',
+      name: 'infinito',
     },
     {
       emoji: '‼️',
-      name: 'double exclamation mark',
+      name: 'ponto de exclamação duplo',
     },
     {
       emoji: '⁉️',
-      name: 'exclamation question mark',
+      name: 'ponto de interrogação de exclamação',
     },
     {
       emoji: '❓',
-      name: 'question mark',
+      name: 'ponto de interrogação',
     },
     {
       emoji: '❔',
-      name: 'white question mark',
+      name: 'ponto de interrogação branco',
     },
     {
       emoji: '❕',
-      name: 'white exclamation mark',
+      name: 'ponto de exclamação branco',
     },
     {
       emoji: '❗',
-      name: 'exclamation mark',
+      name: 'ponto de exclamação',
     },
     {
       emoji: '〰️',
-      name: 'wavy dash',
+      name: 'traço ondulado',
     },
     {
       emoji: '💱',
-      name: 'currency exchange',
+      name: 'câmbio monetário',
     },
     {
       emoji: '💲',
-      name: 'heavy dollar sign',
+      name: 'cifrão pesado',
     },
     {
       emoji: '⚕️',
-      name: 'medical symbol',
+      name: 'símbolo médico',
     },
     {
       emoji: '♻️',
-      name: 'recycling symbol',
+      name: 'símbolo de reciclagem',
     },
     {
       emoji: '⚜️',
-      name: 'fleur-de-lis',
+      name: 'flor-de-lis',
     },
     {
       emoji: '🔱',
-      name: 'trident emblem',
+      name: 'emblema do tridente',
     },
     {
       emoji: '📛',
-      name: 'name badge',
+      name: 'crachá',
     },
     {
       emoji: '🔰',
-      name: 'Japanese symbol for beginner',
+      name: 'Símbolo japonês para iniciante',
     },
     {
       emoji: '⭕',
-      name: 'hollow red circle',
+      name: 'círculo vermelho oco',
     },
     {
       emoji: '✅',
-      name: 'check mark button',
+      name: 'botão de marca de seleção',
     },
     {
       emoji: '☑️',
-      name: 'check box with check',
+      name: 'caixa de seleção com verificação',
     },
     {
       emoji: '✔️',
-      name: 'check mark',
+      name: 'marca de verificação',
     },
     {
       emoji: '❌',
-      name: 'cross mark',
+      name: 'marca de cruz',
     },
     {
       emoji: '❎',
-      name: 'cross mark button',
+      name: 'botão de marca cruzada',
     },
     {
       emoji: '➰',
-      name: 'curly loop',
+      name: 'laço encaracolado',
     },
     {
       emoji: '➿',
-      name: 'double curly loop',
+      name: 'laço duplo encaracolado',
     },
     {
       emoji: '〽️',
-      name: 'part alternation mark',
+      name: 'marca de alternância parcial',
     },
     {
       emoji: '✳️',
-      name: 'eight-spoked asterisk',
+      name: 'asterisco de oito raios',
     },
     {
       emoji: '✴️',
-      name: 'eight-pointed star',
+      name: 'estrela de oito pontas',
     },
     {
       emoji: '❇️',
-      name: 'sparkle',
+      name: 'brilhar',
     },
     {
       emoji: '©️',
@@ -5772,1421 +3240,620 @@ export const emojis = {
     },
     {
       emoji: '®️',
-      name: 'registered',
+      name: 'registrado',
     },
     {
       emoji: '™️',
-      name: 'trade mark',
+      name: 'marca comercial',
     },
     {
       emoji: '*️⃣',
-      name: 'keycap: *',
+      name: 'tecla: *',
     },
     {
       emoji: '0️⃣',
-      name: 'keycap: 0',
+      name: 'tecla: 0',
     },
     {
       emoji: '1️⃣',
-      name: 'keycap: 1',
+      name: 'tecla: 1',
     },
     {
       emoji: '2️⃣',
-      name: 'keycap: 2',
+      name: 'tecla: 2',
     },
     {
       emoji: '3️⃣',
-      name: 'keycap: 3',
+      name: 'tecla: 3',
     },
     {
       emoji: '4️⃣',
-      name: 'keycap: 4',
+      name: 'tecla: 4',
     },
     {
       emoji: '5️⃣',
-      name: 'keycap: 5',
+      name: 'tecla: 5',
     },
     {
       emoji: '6️⃣',
-      name: 'keycap: 6',
+      name: 'tecla: 6',
     },
     {
       emoji: '7️⃣',
-      name: 'keycap: 7',
+      name: 'tecla: 7',
     },
     {
       emoji: '8️⃣',
-      name: 'keycap: 8',
+      name: 'tecla: 8',
     },
     {
       emoji: '9️⃣',
-      name: 'keycap: 9',
+      name: 'tecla: 9',
     },
     {
       emoji: '🔟',
-      name: 'keycap: 10',
+      name: 'tecla: 10',
     },
     {
       emoji: '🔠',
-      name: 'input latin uppercase',
+      name: 'entrada latina maiúscula',
     },
     {
       emoji: '🔡',
-      name: 'input latin lowercase',
+      name: 'entrada latina minúscula',
     },
     {
       emoji: '🔢',
-      name: 'input numbers',
+      name: 'números de entrada',
     },
     {
       emoji: '🔣',
-      name: 'input symbols',
+      name: 'símbolos de entrada',
     },
     {
       emoji: '🔤',
-      name: 'input latin letters',
+      name: 'inserir letras latinas',
     },
     {
       emoji: '🅰️',
-      name: 'A button (blood type)',
+      name: 'botão A (tipo sanguíneo)',
     },
     {
       emoji: '🆎',
-      name: 'AB button (blood type)',
+      name: 'botão AB (tipo sanguíneo)',
     },
     {
       emoji: '🅱️',
-      name: 'B button (blood type)',
+      name: 'botão B (tipo sanguíneo)',
     },
     {
       emoji: '🆑',
-      name: 'CL button',
+      name: 'botão CL',
     },
     {
       emoji: '🆒',
-      name: 'COOL button',
+      name: 'botão LEGAL',
     },
     {
       emoji: '🆓',
-      name: 'FREE button',
+      name: 'botão de gratuito',
     },
     {
       emoji: 'ℹ️',
-      name: 'information',
+      name: 'informação',
     },
     {
       emoji: '🆔',
-      name: 'ID button',
+      name: 'botão de identificação',
     },
     {
       emoji: 'Ⓜ️',
-      name: 'circled M',
+      name: 'M circulado',
     },
     {
       emoji: '🆕',
-      name: 'NEW button',
+      name: 'botão de NOVO',
     },
     {
       emoji: '🆖',
-      name: 'NG button',
+      name: 'botão NG',
     },
     {
       emoji: '🅾️',
-      name: 'O button (blood type)',
+      name: 'botão O (tipo sanguíneo)',
     },
     {
       emoji: '🆗',
-      name: 'OK button',
+      name: 'botão de OK',
     },
     {
       emoji: '🅿️',
-      name: 'P button',
+      name: 'botão P',
     },
     {
       emoji: '🆘',
-      name: 'SOS button',
+      name: 'botão de SOS',
     },
     {
       emoji: '🆙',
-      name: 'UP! button',
+      name: 'UP! botão',
     },
     {
       emoji: '🆚',
-      name: 'VS button',
+      name: 'VS botão',
     },
     {
       emoji: '🈁',
-      name: 'Japanese “here” button',
+      name: 'Botão japonês "aqui"',
     },
     {
       emoji: '🈂️',
-      name: 'Japanese “service charge” button',
+      name: 'Botão japonês "taxa de serviço"',
     },
     {
       emoji: '🈷️',
-      name: 'Japanese “monthly amount” button',
+      name: 'Botão japonês "quantidade mensal"',
     },
     {
       emoji: '🈶',
-      name: 'Japanese “not free of charge” button',
+      name: 'Botão japonês "não gratuito"',
     },
     {
       emoji: '🈯',
-      name: 'Japanese “reserved” button',
+      name: 'Botão japonês "reservado"',
     },
     {
       emoji: '🉐',
-      name: 'Japanese “bargain” button',
+      name: 'Botão japonês "pechinchar"',
     },
     {
       emoji: '🈹',
-      name: 'Japanese “discount” button',
+      name: 'Botão "desconto" japonês',
     },
     {
       emoji: '🈚',
-      name: 'Japanese “free of charge” button',
+      name: 'Botão japonês "gratuito"',
     },
     {
       emoji: '🈲',
-      name: 'Japanese “prohibited” button',
+      name: 'Botão japonês "proibido"',
     },
     {
       emoji: '🉑',
-      name: 'Japanese “acceptable” button',
+      name: 'Botão japonês "aceitável"',
     },
     {
       emoji: '🈸',
-      name: 'Japanese “application” button',
+      name: 'Botão japonês "aplicativo"',
     },
     {
       emoji: '🈴',
-      name: 'Japanese “passing grade” button',
+      name: 'Botão japonês de “grau de aprovação”',
     },
     {
       emoji: '🈳',
-      name: 'Japanese “vacancy” button',
+      name: 'Botão japonês "vaga"',
     },
     {
       emoji: '㊗️',
-      name: 'Japanese “congratulations” button',
+      name: 'Botão japonês "parabéns"',
     },
     {
       emoji: '㊙️',
-      name: 'Japanese “secret” button',
+      name: 'Botão "segredo" japonês',
     },
     {
       emoji: '🈺',
-      name: 'Japanese “open for business” button',
+      name: 'Botão japonês "aberto para negócios"',
     },
     {
       emoji: '🈵',
-      name: 'Japanese “no vacancy” button',
+      name: 'Botão japonês "sem vagas"',
     },
     {
       emoji: '🔴',
-      name: 'red circle',
+      name: 'círculo vermelho',
     },
     {
       emoji: '🟠',
-      name: 'orange circle',
+      name: 'círculo laranja',
     },
     {
       emoji: '🟡',
-      name: 'yellow circle',
+      name: 'círculo amarelo',
     },
     {
       emoji: '🟢',
-      name: 'green circle',
+      name: 'círculo verde',
     },
     {
       emoji: '🔵',
-      name: 'blue circle',
+      name: 'círculo azul',
     },
     {
       emoji: '🟣',
-      name: 'purple circle',
+      name: 'círculo roxo',
     },
     {
       emoji: '🟤',
-      name: 'brown circle',
+      name: 'círculo marrom',
     },
     {
       emoji: '⚫',
-      name: 'black circle',
+      name: 'círculo preto',
     },
     {
       emoji: '⚪',
-      name: 'white circle',
+      name: 'círculo branco',
     },
     {
       emoji: '🟥',
-      name: 'red square',
+      name: 'quadrado vermelho',
     },
     {
       emoji: '🟧',
-      name: 'orange square',
+      name: 'quadrado laranja',
     },
     {
       emoji: '🟨',
-      name: 'yellow square',
+      name: 'quadrado amarelo',
     },
     {
       emoji: '🟩',
-      name: 'green square',
+      name: 'quadrado verde',
     },
     {
       emoji: '🟦',
-      name: 'blue square',
+      name: 'quadrado azul',
     },
     {
       emoji: '🟪',
-      name: 'purple square',
+      name: 'quadrado roxo',
     },
     {
       emoji: '🟫',
-      name: 'brown square',
+      name: 'quadrado marrom',
     },
     {
       emoji: '⬛',
-      name: 'black large square',
+      name: 'quadrado preto grande',
     },
     {
       emoji: '⬜',
-      name: 'white large square',
+      name: 'quadrado grande branco',
     },
     {
       emoji: '◼️',
-      name: 'black medium square',
+      name: 'quadrado médio preto',
     },
     {
       emoji: '◻️',
-      name: 'white medium square',
+      name: 'quadrado médio branco',
     },
     {
       emoji: '◾',
-      name: 'black medium-small square',
+      name: 'quadrado médio-pequeno preto',
     },
     {
       emoji: '◽',
-      name: 'white medium-small square',
+      name: 'quadrado médio-pequeno branco',
     },
     {
       emoji: '▪️',
-      name: 'black small square',
+      name: 'quadrado pequeno preto',
     },
     {
       emoji: '▫️',
-      name: 'white small square',
+      name: 'quadrado pequeno branco',
     },
     {
       emoji: '🔶',
-      name: 'large orange diamond',
+      name: 'grande diamante laranja',
     },
     {
       emoji: '🔷',
-      name: 'large blue diamond',
+      name: 'grande diamante azul',
     },
     {
       emoji: '🔸',
-      name: 'small orange diamond',
+      name: 'pequeno diamante laranja',
     },
     {
       emoji: '🔹',
-      name: 'small blue diamond',
+      name: 'pequeno diamante azul',
     },
     {
       emoji: '🔺',
-      name: 'red triangle pointed up',
+      name: 'triângulo vermelho apontado para cima',
     },
     {
       emoji: '🔻',
-      name: 'red triangle pointed down',
+      name: 'triângulo vermelho apontado para baixo',
     },
     {
       emoji: '💠',
-      name: 'diamond with a dot',
+      name: 'diamante com um ponto',
     },
     {
       emoji: '🔘',
-      name: 'radio button',
+      name: 'botao de radio',
     },
     {
       emoji: '🔳',
-      name: 'white square button',
+      name: 'botão quadrado branco',
     },
     {
       emoji: '🔲',
-      name: 'black square button',
+      name: 'botão quadrado preto',
     },
   ],
   flags: [
-    {
-      emoji: '🏁',
-      name: 'chequered flag',
-    },
-    {
-      emoji: '🚩',
-      name: 'triangular flag',
-    },
-    {
-      emoji: '🎌',
-      name: 'crossed flags',
-    },
-    {
-      emoji: '🏴',
-      name: 'black flag',
-    },
-    {
-      emoji: '🏳️',
-      name: 'white flag',
-    },
-    {
-      emoji: '🏳️‍🌈',
-      name: 'rainbow flag',
-    },
-    {
-      emoji: '🏳️‍⚧️',
-      name: 'transgender flag',
-    },
-    {
-      emoji: '🏴‍☠️',
-      name: 'pirate flag',
-    },
-    {
-      emoji: '🇦🇨',
-      name: 'flag: Ascension Island',
-    },
-    {
-      emoji: '🇦🇩',
-      name: 'flag: Andorra',
-    },
-    {
-      emoji: '🇦🇪',
-      name: 'flag: United Arab Emirates',
-    },
-    {
-      emoji: '🇦🇫',
-      name: 'flag: Afghanistan',
-    },
-    {
-      emoji: '🇦🇬',
-      name: 'flag: Antigua & Barbuda',
-    },
-    {
-      emoji: '🇦🇮',
-      name: 'flag: Anguilla',
-    },
-    {
-      emoji: '🇦🇱',
-      name: 'flag: Albania',
-    },
-    {
-      emoji: '🇦🇲',
-      name: 'flag: Armenia',
-    },
-    {
-      emoji: '🇦🇴',
-      name: 'flag: Angola',
-    },
-    {
-      emoji: '🇦🇶',
-      name: 'flag: Antarctica',
-    },
-    {
-      emoji: '🇦🇷',
-      name: 'flag: Argentina',
-    },
-    {
-      emoji: '🇦🇸',
-      name: 'flag: American Samoa',
-    },
-    {
-      emoji: '🇦🇹',
-      name: 'flag: Austria',
-    },
-    {
-      emoji: '🇦🇺',
-      name: 'flag: Australia',
-    },
-    {
-      emoji: '🇦🇼',
-      name: 'flag: Aruba',
-    },
-    {
-      emoji: '🇦🇽',
-      name: 'flag: Åland Islands',
-    },
-    {
-      emoji: '🇦🇿',
-      name: 'flag: Azerbaijan',
-    },
-    {
-      emoji: '🇧🇦',
-      name: 'flag: Bosnia & Herzegovina',
-    },
-    {
-      emoji: '🇧🇧',
-      name: 'flag: Barbados',
-    },
-    {
-      emoji: '🇧🇩',
-      name: 'flag: Bangladesh',
-    },
-    {
-      emoji: '🇧🇪',
-      name: 'flag: Belgium',
-    },
-    {
-      emoji: '🇧🇫',
-      name: 'flag: Burkina Faso',
-    },
-    {
-      emoji: '🇧🇬',
-      name: 'flag: Bulgaria',
-    },
-    {
-      emoji: '🇧🇭',
-      name: 'flag: Bahrain',
-    },
-    {
-      emoji: '🇧🇮',
-      name: 'flag: Burundi',
-    },
-    {
-      emoji: '🇧🇯',
-      name: 'flag: Benin',
-    },
-    {
-      emoji: '🇧🇱',
-      name: 'flag: St. Barthélemy',
-    },
-    {
-      emoji: '🇧🇲',
-      name: 'flag: Bermuda',
-    },
-    {
-      emoji: '🇧🇳',
-      name: 'flag: Brunei',
-    },
-    {
-      emoji: '🇧🇴',
-      name: 'flag: Bolivia',
-    },
-    {
-      emoji: '🇧🇶',
-      name: 'flag: Caribbean Netherlands',
-    },
-    {
-      emoji: '🇧🇷',
-      name: 'flag: Brazil',
-    },
-    {
-      emoji: '🇧🇸',
-      name: 'flag: Bahamas',
-    },
-    {
-      emoji: '🇧🇹',
-      name: 'flag: Bhutan',
-    },
-    {
-      emoji: '🇧🇻',
-      name: 'flag: Bouvet Island',
-    },
-    {
-      emoji: '🇧🇼',
-      name: 'flag: Botswana',
-    },
-    {
-      emoji: '🇧🇾',
-      name: 'flag: Belarus',
-    },
-    {
-      emoji: '🇧🇿',
-      name: 'flag: Belize',
-    },
-    {
-      emoji: '🇨🇦',
-      name: 'flag: Canada',
-    },
-    {
-      emoji: '🇨🇨',
-      name: 'flag: Cocos (Keeling) Islands',
-    },
-    {
-      emoji: '🇨🇩',
-      name: 'flag: Congo - Kinshasa',
-    },
-    {
-      emoji: '🇨🇫',
-      name: 'flag: Central African Republic',
-    },
-    {
-      emoji: '🇨🇬',
-      name: 'flag: Congo - Brazzaville',
-    },
-    {
-      emoji: '🇨🇭',
-      name: 'flag: Switzerland',
-    },
-    {
-      emoji: '🇨🇮',
-      name: 'flag: Côte d’Ivoire',
-    },
-    {
-      emoji: '🇨🇰',
-      name: 'flag: Cook Islands',
-    },
-    {
-      emoji: '🇨🇱',
-      name: 'flag: Chile',
-    },
-    {
-      emoji: '🇨🇲',
-      name: 'flag: Cameroon',
-    },
-    {
-      emoji: '🇨🇳',
-      name: 'flag: China',
-    },
-    {
-      emoji: '🇨🇴',
-      name: 'flag: Colombia',
-    },
-    {
-      emoji: '🇨🇵',
-      name: 'flag: Clipperton Island',
-    },
-    {
-      emoji: '🇨🇷',
-      name: 'flag: Costa Rica',
-    },
-    {
-      emoji: '🇨🇺',
-      name: 'flag: Cuba',
-    },
-    {
-      emoji: '🇨🇻',
-      name: 'flag: Cape Verde',
-    },
-    {
-      emoji: '🇨🇼',
-      name: 'flag: Curaçao',
-    },
-    {
-      emoji: '🇨🇽',
-      name: 'flag: Christmas Island',
-    },
-    {
-      emoji: '🇨🇾',
-      name: 'flag: Cyprus',
-    },
-    {
-      emoji: '🇨🇿',
-      name: 'flag: Czechia',
-    },
-    {
-      emoji: '🇩🇪',
-      name: 'flag: Germany',
-    },
-    {
-      emoji: '🇩🇬',
-      name: 'flag: Diego Garcia',
-    },
-    {
-      emoji: '🇩🇯',
-      name: 'flag: Djibouti',
-    },
-    {
-      emoji: '🇩🇰',
-      name: 'flag: Denmark',
-    },
-    {
-      emoji: '🇩🇲',
-      name: 'flag: Dominica',
-    },
-    {
-      emoji: '🇩🇴',
-      name: 'flag: Dominican Republic',
-    },
-    {
-      emoji: '🇩🇿',
-      name: 'flag: Algeria',
-    },
-    {
-      emoji: '🇪🇦',
-      name: 'flag: Ceuta & Melilla',
-    },
-    {
-      emoji: '🇪🇨',
-      name: 'flag: Ecuador',
-    },
-    {
-      emoji: '🇪🇪',
-      name: 'flag: Estonia',
-    },
-    {
-      emoji: '🇪🇬',
-      name: 'flag: Egypt',
-    },
-    {
-      emoji: '🇪🇭',
-      name: 'flag: Western Sahara',
-    },
-    {
-      emoji: '🇪🇷',
-      name: 'flag: Eritrea',
-    },
-    {
-      emoji: '🇪🇸',
-      name: 'flag: Spain',
-    },
-    {
-      emoji: '🇪🇹',
-      name: 'flag: Ethiopia',
-    },
-    {
-      emoji: '🇪🇺',
-      name: 'flag: European Union',
-    },
-    {
-      emoji: '🇫🇮',
-      name: 'flag: Finland',
-    },
-    {
-      emoji: '🇫🇯',
-      name: 'flag: Fiji',
-    },
-    {
-      emoji: '🇫🇰',
-      name: 'flag: Falkland Islands',
-    },
-    {
-      emoji: '🇫🇲',
-      name: 'flag: Micronesia',
-    },
-    {
-      emoji: '🇫🇴',
-      name: 'flag: Faroe Islands',
-    },
-    {
-      emoji: '🇫🇷',
-      name: 'flag: France',
-    },
-    {
-      emoji: '🇬🇦',
-      name: 'flag: Gabon',
-    },
-    {
-      emoji: '🇬🇧',
-      name: 'flag: United Kingdom',
-    },
-    {
-      emoji: '🇬🇩',
-      name: 'flag: Grenada',
-    },
-    {
-      emoji: '🇬🇪',
-      name: 'flag: Georgia',
-    },
-    {
-      emoji: '🇬🇫',
-      name: 'flag: French Guiana',
-    },
-    {
-      emoji: '🇬🇬',
-      name: 'flag: Guernsey',
-    },
-    {
-      emoji: '🇬🇭',
-      name: 'flag: Ghana',
-    },
-    {
-      emoji: '🇬🇮',
-      name: 'flag: Gibraltar',
-    },
-    {
-      emoji: '🇬🇱',
-      name: 'flag: Greenland',
-    },
-    {
-      emoji: '🇬🇲',
-      name: 'flag: Gambia',
-    },
-    {
-      emoji: '🇬🇳',
-      name: 'flag: Guinea',
-    },
-    {
-      emoji: '🇬🇵',
-      name: 'flag: Guadeloupe',
-    },
-    {
-      emoji: '🇬🇶',
-      name: 'flag: Equatorial Guinea',
-    },
-    {
-      emoji: '🇬🇷',
-      name: 'flag: Greece',
-    },
-    {
-      emoji: '🇬🇸',
-      name: 'flag: South Georgia & South Sandwich Islands',
-    },
-    {
-      emoji: '🇬🇹',
-      name: 'flag: Guatemala',
-    },
-    {
-      emoji: '🇬🇺',
-      name: 'flag: Guam',
-    },
-    {
-      emoji: '🇬🇼',
-      name: 'flag: Guinea-Bissau',
-    },
-    {
-      emoji: '🇬🇾',
-      name: 'flag: Guyana',
-    },
-    {
-      emoji: '🇭🇰',
-      name: 'flag: Hong Kong SAR China',
-    },
-    {
-      emoji: '🇭🇲',
-      name: 'flag: Heard & McDonald Islands',
-    },
-    {
-      emoji: '🇭🇳',
-      name: 'flag: Honduras',
-    },
-    {
-      emoji: '🇭🇷',
-      name: 'flag: Croatia',
-    },
-    {
-      emoji: '🇭🇹',
-      name: 'flag: Haiti',
-    },
-    {
-      emoji: '🇭🇺',
-      name: 'flag: Hungary',
-    },
-    {
-      emoji: '🇮🇨',
-      name: 'flag: Canary Islands',
-    },
-    {
-      emoji: '🇮🇩',
-      name: 'flag: Indonesia',
-    },
-    {
-      emoji: '🇮🇪',
-      name: 'flag: Ireland',
-    },
-    {
-      emoji: '🇮🇱',
-      name: 'flag: Israel',
-    },
-    {
-      emoji: '🇮🇲',
-      name: 'flag: Isle of Man',
-    },
-    {
-      emoji: '🇮🇳',
-      name: 'flag: India',
-    },
-    {
-      emoji: '🇮🇴',
-      name: 'flag: British Indian Ocean Territory',
-    },
-    {
-      emoji: '🇮🇶',
-      name: 'flag: Iraq',
-    },
-    {
-      emoji: '🇮🇷',
-      name: 'flag: Iran',
-    },
-    {
-      emoji: '🇮🇸',
-      name: 'flag: Iceland',
-    },
-    {
-      emoji: '🇮🇹',
-      name: 'flag: Italy',
-    },
-    {
-      emoji: '🇯🇪',
-      name: 'flag: Jersey',
-    },
-    {
-      emoji: '🇯🇲',
-      name: 'flag: Jamaica',
-    },
-    {
-      emoji: '🇯🇴',
-      name: 'flag: Jordan',
-    },
-    {
-      emoji: '🇯🇵',
-      name: 'flag: Japan',
-    },
-    {
-      emoji: '🇰🇪',
-      name: 'flag: Kenya',
-    },
-    {
-      emoji: '🇰🇬',
-      name: 'flag: Kyrgyzstan',
-    },
-    {
-      emoji: '🇰🇭',
-      name: 'flag: Cambodia',
-    },
-    {
-      emoji: '🇰🇮',
-      name: 'flag: Kiribati',
-    },
-    {
-      emoji: '🇰🇲',
-      name: 'flag: Comoros',
-    },
-    {
-      emoji: '🇰🇳',
-      name: 'flag: St. Kitts & Nevis',
-    },
-    {
-      emoji: '🇰🇵',
-      name: 'flag: North Korea',
-    },
-    {
-      emoji: '🇰🇷',
-      name: 'flag: South Korea',
-    },
-    {
-      emoji: '🇰🇼',
-      name: 'flag: Kuwait',
-    },
-    {
-      emoji: '🇰🇾',
-      name: 'flag: Cayman Islands',
-    },
-    {
-      emoji: '🇰🇿',
-      name: 'flag: Kazakhstan',
-    },
-    {
-      emoji: '🇱🇦',
-      name: 'flag: Laos',
-    },
-    {
-      emoji: '🇱🇧',
-      name: 'flag: Lebanon',
-    },
-    {
-      emoji: '🇱🇨',
-      name: 'flag: St. Lucia',
-    },
-    {
-      emoji: '🇱🇮',
-      name: 'flag: Liechtenstein',
-    },
-    {
-      emoji: '🇱🇰',
-      name: 'flag: Sri Lanka',
-    },
-    {
-      emoji: '🇱🇷',
-      name: 'flag: Liberia',
-    },
-    {
-      emoji: '🇱🇸',
-      name: 'flag: Lesotho',
-    },
-    {
-      emoji: '🇱🇹',
-      name: 'flag: Lithuania',
-    },
-    {
-      emoji: '🇱🇺',
-      name: 'flag: Luxembourg',
-    },
-    {
-      emoji: '🇱🇻',
-      name: 'flag: Latvia',
-    },
-    {
-      emoji: '🇱🇾',
-      name: 'flag: Libya',
-    },
-    {
-      emoji: '🇲🇦',
-      name: 'flag: Morocco',
-    },
-    {
-      emoji: '🇲🇨',
-      name: 'flag: Monaco',
-    },
-    {
-      emoji: '🇲🇩',
-      name: 'flag: Moldova',
-    },
-    {
-      emoji: '🇲🇪',
-      name: 'flag: Montenegro',
-    },
-    {
-      emoji: '🇲🇫',
-      name: 'flag: St. Martin',
-    },
-    {
-      emoji: '🇲🇬',
-      name: 'flag: Madagascar',
-    },
-    {
-      emoji: '🇲🇭',
-      name: 'flag: Marshall Islands',
-    },
-    {
-      emoji: '🇲🇰',
-      name: 'flag: North Macedonia',
-    },
-    {
-      emoji: '🇲🇱',
-      name: 'flag: Mali',
-    },
-    {
-      emoji: '🇲🇲',
-      name: 'flag: Myanmar (Burma)',
-    },
-    {
-      emoji: '🇲🇳',
-      name: 'flag: Mongolia',
-    },
-    {
-      emoji: '🇲🇴',
-      name: 'flag: Macao SAR China',
-    },
-    {
-      emoji: '🇲🇵',
-      name: 'flag: Northern Mariana Islands',
-    },
-    {
-      emoji: '🇲🇶',
-      name: 'flag: Martinique',
-    },
-    {
-      emoji: '🇲🇷',
-      name: 'flag: Mauritania',
-    },
-    {
-      emoji: '🇲🇸',
-      name: 'flag: Montserrat',
-    },
-    {
-      emoji: '🇲🇹',
-      name: 'flag: Malta',
-    },
-    {
-      emoji: '🇲🇺',
-      name: 'flag: Mauritius',
-    },
-    {
-      emoji: '🇲🇻',
-      name: 'flag: Maldives',
-    },
-    {
-      emoji: '🇲🇼',
-      name: 'flag: Malawi',
-    },
-    {
-      emoji: '🇲🇽',
-      name: 'flag: Mexico',
-    },
-    {
-      emoji: '🇲🇾',
-      name: 'flag: Malaysia',
-    },
-    {
-      emoji: '🇲🇿',
-      name: 'flag: Mozambique',
-    },
-    {
-      emoji: '🇳🇦',
-      name: 'flag: Namibia',
-    },
-    {
-      emoji: '🇳🇨',
-      name: 'flag: New Caledonia',
-    },
-    {
-      emoji: '🇳🇪',
-      name: 'flag: Niger',
-    },
-    {
-      emoji: '🇳🇫',
-      name: 'flag: Norfolk Island',
-    },
-    {
-      emoji: '🇳🇬',
-      name: 'flag: Nigeria',
-    },
-    {
-      emoji: '🇳🇮',
-      name: 'flag: Nicaragua',
-    },
-    {
-      emoji: '🇳🇱',
-      name: 'flag: Netherlands',
-    },
-    {
-      emoji: '🇳🇴',
-      name: 'flag: Norway',
-    },
-    {
-      emoji: '🇳🇵',
-      name: 'flag: Nepal',
-    },
-    {
-      emoji: '🇳🇷',
-      name: 'flag: Nauru',
-    },
-    {
-      emoji: '🇳🇺',
-      name: 'flag: Niue',
-    },
-    {
-      emoji: '🇳🇿',
-      name: 'flag: New Zealand',
-    },
-    {
-      emoji: '🇴🇲',
-      name: 'flag: Oman',
-    },
-    {
-      emoji: '🇵🇦',
-      name: 'flag: Panama',
-    },
-    {
-      emoji: '🇵🇪',
-      name: 'flag: Peru',
-    },
-    {
-      emoji: '🇵🇫',
-      name: 'flag: French Polynesia',
-    },
-    {
-      emoji: '🇵🇬',
-      name: 'flag: Papua New Guinea',
-    },
-    {
-      emoji: '🇵🇭',
-      name: 'flag: Philippines',
-    },
-    {
-      emoji: '🇵🇰',
-      name: 'flag: Pakistan',
-    },
-    {
-      emoji: '🇵🇱',
-      name: 'flag: Poland',
-    },
-    {
-      emoji: '🇵🇲',
-      name: 'flag: St. Pierre & Miquelon',
-    },
-    {
-      emoji: '🇵🇳',
-      name: 'flag: Pitcairn Islands',
-    },
-    {
-      emoji: '🇵🇷',
-      name: 'flag: Puerto Rico',
-    },
-    {
-      emoji: '🇵🇸',
-      name: 'flag: Palestinian Territories',
-    },
-    {
-      emoji: '🇵🇹',
-      name: 'flag: Portugal',
-    },
-    {
-      emoji: '🇵🇼',
-      name: 'flag: Palau',
-    },
-    {
-      emoji: '🇵🇾',
-      name: 'flag: Paraguay',
-    },
-    {
-      emoji: '🇶🇦',
-      name: 'flag: Qatar',
-    },
-    {
-      emoji: '🇷🇪',
-      name: 'flag: Réunion',
-    },
-    {
-      emoji: '🇷🇴',
-      name: 'flag: Romania',
-    },
-    {
-      emoji: '🇷🇸',
-      name: 'flag: Serbia',
-    },
-    {
-      emoji: '🇷🇺',
-      name: 'flag: Russia',
-    },
-    {
-      emoji: '🇷🇼',
-      name: 'flag: Rwanda',
-    },
-    {
-      emoji: '🇸🇦',
-      name: 'flag: Saudi Arabia',
-    },
-    {
-      emoji: '🇸🇧',
-      name: 'flag: Solomon Islands',
-    },
-    {
-      emoji: '🇸🇨',
-      name: 'flag: Seychelles',
-    },
-    {
-      emoji: '🇸🇩',
-      name: 'flag: Sudan',
-    },
-    {
-      emoji: '🇸🇪',
-      name: 'flag: Sweden',
-    },
-    {
-      emoji: '🇸🇬',
-      name: 'flag: Singapore',
-    },
-    {
-      emoji: '🇸🇭',
-      name: 'flag: St. Helena',
-    },
-    {
-      emoji: '🇸🇮',
-      name: 'flag: Slovenia',
-    },
-    {
-      emoji: '🇸🇯',
-      name: 'flag: Svalbard & Jan Mayen',
-    },
-    {
-      emoji: '🇸🇰',
-      name: 'flag: Slovakia',
-    },
-    {
-      emoji: '🇸🇱',
-      name: 'flag: Sierra Leone',
-    },
-    {
-      emoji: '🇸🇲',
-      name: 'flag: San Marino',
-    },
-    {
-      emoji: '🇸🇳',
-      name: 'flag: Senegal',
-    },
-    {
-      emoji: '🇸🇴',
-      name: 'flag: Somalia',
-    },
-    {
-      emoji: '🇸🇷',
-      name: 'flag: Suriname',
-    },
-    {
-      emoji: '🇸🇸',
-      name: 'flag: South Sudan',
-    },
-    {
-      emoji: '🇸🇹',
-      name: 'flag: São Tomé & Príncipe',
-    },
-    {
-      emoji: '🇸🇻',
-      name: 'flag: El Salvador',
-    },
-    {
-      emoji: '🇸🇽',
-      name: 'flag: Sint Maarten',
-    },
-    {
-      emoji: '🇸🇾',
-      name: 'flag: Syria',
-    },
-    {
-      emoji: '🇸🇿',
-      name: 'flag: Eswatini',
-    },
-    {
-      emoji: '🇹🇦',
-      name: 'flag: Tristan da Cunha',
-    },
-    {
-      emoji: '🇹🇨',
-      name: 'flag: Turks & Caicos Islands',
-    },
-    {
-      emoji: '🇹🇩',
-      name: 'flag: Chad',
-    },
-    {
-      emoji: '🇹🇫',
-      name: 'flag: French Southern Territories',
-    },
-    {
-      emoji: '🇹🇬',
-      name: 'flag: Togo',
-    },
-    {
-      emoji: '🇹🇭',
-      name: 'flag: Thailand',
-    },
-    {
-      emoji: '🇹🇯',
-      name: 'flag: Tajikistan',
-    },
-    {
-      emoji: '🇹🇰',
-      name: 'flag: Tokelau',
-    },
-    {
-      emoji: '🇹🇱',
-      name: 'flag: Timor-Leste',
-    },
-    {
-      emoji: '🇹🇲',
-      name: 'flag: Turkmenistan',
-    },
-    {
-      emoji: '🇹🇳',
-      name: 'flag: Tunisia',
-    },
-    {
-      emoji: '🇹🇴',
-      name: 'flag: Tonga',
-    },
-    {
-      emoji: '🇹🇷',
-      name: 'flag: Turkey',
-    },
-    {
-      emoji: '🇹🇹',
-      name: 'flag: Trinidad & Tobago',
-    },
-    {
-      emoji: '🇹🇻',
-      name: 'flag: Tuvalu',
-    },
-    {
-      emoji: '🇹🇼',
-      name: 'flag: Taiwan',
-    },
-    {
-      emoji: '🇹🇿',
-      name: 'flag: Tanzania',
-    },
-    {
-      emoji: '🇺🇦',
-      name: 'flag: Ukraine',
-    },
-    {
-      emoji: '🇺🇬',
-      name: 'flag: Uganda',
-    },
-    {
-      emoji: '🇺🇲',
-      name: 'flag: U.S. Outlying Islands',
-    },
-    {
-      emoji: '🇺🇳',
-      name: 'flag: United Nations',
-    },
-    {
-      emoji: '🇺🇸',
-      name: 'flag: United States',
-    },
-    {
-      emoji: '🇺🇾',
-      name: 'flag: Uruguay',
-    },
-    {
-      emoji: '🇺🇿',
-      name: 'flag: Uzbekistan',
-    },
-    {
-      emoji: '🇻🇦',
-      name: 'flag: Vatican City',
-    },
-    {
-      emoji: '🇻🇨',
-      name: 'flag: St. Vincent & Grenadines',
-    },
-    {
-      emoji: '🇻🇪',
-      name: 'flag: Venezuela',
-    },
-    {
-      emoji: '🇻🇬',
-      name: 'flag: British Virgin Islands',
-    },
-    {
-      emoji: '🇻🇮',
-      name: 'flag: U.S. Virgin Islands',
-    },
-    {
-      emoji: '🇻🇳',
-      name: 'flag: Vietnam',
-    },
-    {
-      emoji: '🇻🇺',
-      name: 'flag: Vanuatu',
-    },
-    {
-      emoji: '🇼🇫',
-      name: 'flag: Wallis & Futuna',
-    },
-    {
-      emoji: '🇼🇸',
-      name: 'flag: Samoa',
-    },
-    {
-      emoji: '🇽🇰',
-      name: 'flag: Kosovo',
-    },
-    {
-      emoji: '🇾🇪',
-      name: 'flag: Yemen',
-    },
-    {
-      emoji: '🇾🇹',
-      name: 'flag: Mayotte',
-    },
-    {
-      emoji: '🇿🇦',
-      name: 'flag: South Africa',
-    },
-    {
-      emoji: '🇿🇲',
-      name: 'flag: Zambia',
-    },
-    {
-      emoji: '🇿🇼',
-      name: 'flag: Zimbabwe',
-    },
-    {
-      emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
-      name: 'flag: England',
-    },
+    { emoji: '🏁', name: 'bandeira quadriculada' },
+    { emoji: '🚩', name: 'bandeira triangular' },
+    { emoji: '🎌', name: 'bandeiras cruzadas' },
+    { emoji: '🏴', name: 'bandeira preta' },
+    { emoji: '🏳️', name: 'bandeira branca' },
+    { emoji: '🏳️‍🌈', name: 'bandeira arco-íris' },
+    { emoji: '🏳️‍⚧️', name: 'bandeira transgênero' },
+    { emoji: '🏴‍☠️', name: 'bandeira pirata' },
+    { emoji: '🇦🇨', name: 'bandeira: Ilha da Ascensão ' },
+    { emoji: '🇦🇩', name: 'bandeira: Andorra' },
+    { emoji: '🇦🇪', name: 'bandeira: Emirados Árabes Unidos' },
+    { emoji: '🇦🇫', name: 'bandeira: Afeganistão' },
+    { emoji: '🇦🇬', name: 'bandeira: Antigua & Barbuda' },
+    { emoji: '🇦🇮', name: 'bandeira: Anguilla' },
+    { emoji: '🇦🇱', name: 'bandeira: Albania' },
+    { emoji: '🇦🇲', name: 'bandeira: Armenia' },
+    { emoji: '🇦🇴', name: 'bandeira: Angola' },
+    { emoji: '🇦🇶', name: 'bandeira: Antártica' },
+    { emoji: '🇦🇷', name: 'bandeira: Argentina' },
+    { emoji: '🇦🇸', name: 'bandeira: Samoa Americana' },
+    { emoji: '🇦🇹', name: 'bandeira: Austria' },
+    { emoji: '🇦🇺', name: 'bandeira: Austrália' },
+    { emoji: '🇦🇼', name: 'bandeira: Aruba' },
+    { emoji: '🇦🇽', name: 'bandeira: Ilhas Aland' },
+    { emoji: '🇦🇿', name: 'bandeira: Azerbaijão' },
+    { emoji: '🇧🇦', name: 'bandeira: Bósnia e Herzegovina' },
+    { emoji: '🇧🇧', name: 'bandeira: Barbados' },
+    { emoji: '🇧🇩', name: 'bandeira: Bangladesh' },
+    { emoji: '🇧🇪', name: 'bandeira: Bélgica' },
+    { emoji: '🇧🇫', name: 'bandeira: Burkina Faso' },
+    { emoji: '🇧🇬', name: 'bandeira: Bulgaria' },
+    { emoji: '🇧🇭', name: 'bandeira: Bahrein' },
+    { emoji: '🇧🇮', name: 'bandeira: Burundi' },
+    { emoji: '🇧🇯', name: 'bandeira: Benin' },
+    { emoji: '🇧🇱', name: 'bandeira: St. Barthélemy' },
+    { emoji: '🇧🇲', name: 'bandeira: Bermuda' },
+    { emoji: '🇧🇳', name: 'bandeira: Brunei' },
+    { emoji: '🇧🇴', name: 'bandeira : Bolivia' },
+    { emoji: '🇧🇶', name: 'bandeira: Países Baixos Caribenhos' },
+    { emoji: '🇧🇷', name: 'bandeira: Brasil' },
+    { emoji: '🇧🇸', name: 'bandeira: Bahamas' },
+    { emoji: '🇧🇹', name: 'bandeira: Butão' },
+    { emoji: '🇧🇻', name: 'bandeira: Ilha Bouvet' },
+    { emoji: '🇧🇼', name: 'bandeira: Botsuana' },
+    { emoji: '🇧🇾', name: 'bandeira: Bielorrússia' },
+    { emoji: '🇧🇿', name: 'bandeira: Belize' },
+    { emoji: '🇨🇦', name: 'bandeira: Canadá' },
+    { emoji: '🇨🇨', name: 'bandeira: Ilhas Cocos (Keeling)' },
+    { emoji: '🇨🇩', name: 'bandeira: Congo - Kinshasa' },
+    { emoji: '🇨🇫', name: 'bandeira: República Centro-Africana' },
+    { emoji: '🇨🇬', name: 'bandeira: Congo - Brazzaville' },
+    { emoji: '🇨🇭', name: 'bandeira: Suíça' },
+    { emoji: '🇨🇮', name: 'bandeira: Costa do Marfim' },
+    { emoji: '🇨🇰', name: 'bandeira: Ilhas Cook' },
+    { emoji: '🇨🇱', name: 'bandeira: Chile' },
+    { emoji: '🇨🇲', name: 'bandeira: Camarões' },
+    { emoji: '🇨🇳', name: 'bandeira: China' },
+    { emoji: '🇨🇴', name: 'bandeira: Colômbia' },
+    { emoji: '🇨🇵', name: 'bandeira: Ilha Clipperton' },
+    { emoji: '🇨🇷', name: 'bandeira: Costa Rica' },
+    { emoji: '🇨🇺', name: 'bandeira: Cuba' },
+    { emoji: '🇨🇻', name: 'bandeira: Cabo Verde' },
+    { emoji: '🇨🇼', name: 'bandeira: Curaçao' },
+    { emoji: '🇨🇽', name: 'bandeira: Ilha Natal' },
+    { emoji: '🇨🇾', name: 'bandeira: Chipre' },
+    { emoji: '🇨🇿', name: 'bandeira: República Tcheca' },
+    { emoji: '🇩🇪', name: 'bandeira: Alemanha' },
+    { emoji: '🇩🇬', name: 'bandeira: Diego Garcia' },
+    { emoji: '🇩🇯', name: 'bandeira: Djibuti' },
+    { emoji: '🇩🇰', name: 'bandeira: Dinamarca' },
+    { emoji: '🇩🇲', name: 'bandeira: Dominica' },
+    { emoji: '🇩🇴', name: 'bandeira: República Dominicana' },
+    { emoji: '🇩🇿', name: 'bandeira: Argélia' },
+    { emoji: '🇪🇦', name: 'bandeira: Ceuta e Melilla' },
+    { emoji: '🇪🇨', name: 'bandeira: Equador' },
+    { emoji: '🇪🇪', name: 'bandeira: Estonia' },
+    { emoji: '🇪🇬', name: 'bandeira: Egito' },
+    { emoji: '🇪🇭', name: 'bandeira: Saara Ocidental' },
+    { emoji: '🇪🇷', name: 'bandeira: Eritreia' },
+    { emoji: '🇪🇸', name: 'bandeira: Espanha' },
+    { emoji: '🇪🇹', name: 'bandeira: Etiópia' },
+    { emoji: '🇪🇺', name: 'bandeira: União Europeia' },
+    { emoji: '🇫🇮', name: 'bandeira: Finlândia' },
+    { emoji: '🇫🇯', name: 'bandeira: Fiji' },
+    { emoji: '🇫🇰', name: 'bandeira: Ilhas Malvinas' },
+    { emoji: '🇫🇲', name: 'bandeira: Micronesia' },
+    { emoji: '🇫🇴', name: 'bandeira: ilhas Faroe' },
+    { emoji: '🇫🇷', name: 'bandeira: França' },
+    { emoji: '🇬🇦', name: 'bandeira: Gabão' },
+    { emoji: '🇬🇧', name: 'bandeira: Reino Unido' },
+    { emoji: '🇬🇩', name: 'bandeira: Granada' },
+    { emoji: '🇬🇪', name: 'bandeira: Geórgia' },
+    { emoji: '🇬🇫', name: 'bandeira: Guiana Francesa' },
+    { emoji: '🇬🇬', name: 'bandeira: Guernsey' },
+    { emoji: '🇬🇭', name: 'bandeira: Gana' },
+    { emoji: '🇬🇮', name: 'bandeira: Gibraltar' },
+    { emoji: '🇬🇱 ', name: 'bandeira: Groenlândia' },
+    { emoji: '🇬🇲', name: 'bandeira: Gâmbia' },
+    { emoji: '🇬🇳', name: 'bandeira: Guiné' },
+    { emoji: '🇬🇵', name: 'bandeira: Guadalupe' },
+    { emoji: '🇬🇶', name: 'bandeira: Guiné Equatorial' },
+    { emoji: '🇬🇷', name: 'bandeira: Grécia' },
+    { emoji: '🇬🇸', name: 'bandeira: Ilhas Geórgia do Sul e Sandwich do Sul' },
+    { emoji: '🇬🇹', name: 'bandeira: Guatemala' },
+    { emoji: '🇬🇺', name: 'bandeira: Guam' },
+    { emoji: '🇬🇼', name: 'bandeira: Guiné-Bissau' },
+    { emoji: '🇬🇾', name: 'bandeira: Guiana' },
+    { emoji: '🇭🇰', name: 'bandeira: Hong Kong SAR China' },
+    { emoji: '🇭🇲', name: 'bandeira: Ilhas Heard e McDonald' },
+    { emoji: '🇭🇳', name: 'bandeira: Honduras' },
+    { emoji: '🇭🇷', name: 'bandeira: Croácia' },
+    { emoji: '🇭🇹', name: 'bandeira: Haiti' },
+    { emoji: '🇭🇺', name: 'bandeira: Hungria' },
+    { emoji: '🇮🇨', name: 'bandeira: Ilhas Canárias' },
+    { emoji: '🇮🇩', name: 'bandeira: Indonésia' },
+    { emoji: '🇮🇪', name: 'bandeira: Irlanda' },
+    { emoji: '🇮🇱', name: 'bandeira: Israel' },
+    { emoji: '🇮🇲', name: 'bandeira: Ilha de Man' },
+    { emoji: '🇮🇳', name: 'bandeira: Índia' },
+    { emoji: '🇮🇴', name: 'bandeira: Território Britânico do Oceano Índico' },
+    { emoji: '🇮🇶', name: 'bandeira: Iraque' },
+    { emoji: '🇮🇷', name: 'bandeira: Irã' },
+    { emoji: '🇮🇸 ', name: 'bandeira: Islândia' },
+    { emoji: '🇮🇹', name: 'bandeira: Itália' },
+    { emoji: '🇯🇪', name: 'bandeira: Jersey' },
+    { emoji: '🇯🇲', name: 'bandeira: Jamaica' },
+    { emoji: '🇯🇴', name: 'bandeira: Jordânia' },
+    { emoji: '🇯🇵', name: 'bandeira: Japão' },
+    { emoji: '🇰🇪', name: 'bandeira: Quênia' },
+    { emoji: '🇰🇬', name: 'bandeira: Quirguistão' },
+    { emoji: '🇰🇭', name: 'bandeira: Camboja' },
+    { emoji: '🇰🇮', name: 'bandeira: Kiribati' },
+    { emoji: '🇰🇲', name: 'bandeira: Comores' },
+    { emoji: '🇰🇳', name: 'bandeira: São Cristóvão e Neves' },
+    { emoji: '🇰🇵', name: 'bandeira: Coréia do Norte' },
+    { emoji: '🇰🇷', name: 'bandeira: Coreia do Sul' },
+    { emoji: '🇰🇼', name: 'bandeira: Kuwait' },
+    { emoji: '🇰🇾', name: 'bandeira: Ilhas Cayman' },
+    { emoji: '🇰🇿', name: ' bandeira: Cazaquistão' },
+    { emoji: '🇱🇦', name: 'bandeira: Laos' },
+    { emoji: '🇱🇧', name: 'bandeira: Líbano' },
+    { emoji: '🇱🇨', name: 'bandeira: Santa Lúcia' },
+    { emoji: '🇱🇮', name: 'bandeira: Listenstaine' },
+    { emoji: '🇱🇰', name: 'bandeira: Sri Lanka' },
+    { emoji: '🇱🇷', name: 'bandeira: Libéria' },
+    { emoji: '🇱🇸', name: 'bandeira: Lesoto' },
+    { emoji: '🇱🇹', name: 'bandeira: Lituânia' },
+    { emoji: '🇱🇺', name: 'bandeira: Luxemburgo' },
+    { emoji: '🇱🇻', name: 'bandeira: Letônia' },
+    { emoji: '🇱🇾', name: 'bandeira: Líbia' },
+    { emoji: '🇲🇦', name: 'bandeira: Marrocos' },
+    { emoji: '🇲🇨', name: 'bandeira: Mônaco' },
+    { emoji: '🇲🇩', name: 'bandeira: Moldova' },
+    { emoji: '🇲🇪', name: 'bandeira: Montenegro' },
+    { emoji: '🇲🇫', name: 'bandeira: São Martinho' },
+    { emoji: '🇲🇬', name: 'bandeira: Madagáscar' },
+    { emoji: '🇲🇭', name: 'bandeira: Ilhas Marshall' },
+    { emoji: '🇲🇰', name: 'bandeira : Macedônia do Norte' },
+    { emoji: '🇲🇱', name: 'bandeira: Mali' },
+    { emoji: '🇲🇲', name: 'bandeira: Mianmar (Birmânia)' },
+    { emoji: '🇲🇳', name: 'bandeira: Mongólia' },
+    { emoji: '🇲🇴', name: 'bandeira: Macau RAE da China' },
+    { emoji: '🇲🇵', name: 'bandeira: Ilhas do Norte das Marianas' },
+    { emoji: '🇲🇶', name: 'bandeira: Martinica' },
+    { emoji: '🇲🇷', name: 'bandeira: Mauritânia' },
+    { emoji: '🇲🇸', name: 'bandeira: Montserrat' },
+    { emoji: '🇲🇹', name: 'bandeira: Malta' },
+    { emoji: '🇲🇺', name: 'bandeira: Maurício' },
+    { emoji: '🇲🇻', name: 'bandeira: Maldivas' },
+    { emoji: '🇲🇼', name: 'bandeira: Malawi' },
+    { emoji: '🇲🇽', name: 'bandeira: México' },
+    { emoji: '🇲🇾', name: 'bandeira: Malásia' },
+    { emoji: '🇲🇿', name: 'bandeira: Moçambique' },
+    { emoji: '🇳🇦', name: 'bandeira: Namíbia' },
+    { emoji: '🇳🇨', name: 'bandeira: Nova Caledônia' },
+    { emoji: '🇳🇪', name: 'bandeira: Níger' },
+    { emoji: '🇳🇫', name: 'bandeira: Ilha Norfolk' },
+    { emoji: '🇳🇬', name: 'bandeira: Nigéria' },
+    { emoji: '🇳🇮', name: 'bandeira: Nicarágua' },
+    { emoji: '🇳🇱', name: 'bandeira: Holanda' },
+    { emoji: '🇳🇴', name: 'bandeira: Noruega' },
+    { emoji: '🇳🇵', name: 'bandeira: Nepal ' },
+    { emoji: '🇳🇷', name: 'bandeira: Nauru' },
+    { emoji: '🇳🇺', name: 'bandeira: Niue' },
+    { emoji: '🇳🇿', name: 'bandeira: Nova Zelândia' },
+    { emoji: '🇴🇲', name: 'bandeira: Omã' },
+    { emoji: '🇵🇦', name: 'bandeira: Panamá' },
+    { emoji: '🇵🇪', name: 'bandeira: Peru' },
+    { emoji: '🇵🇫', name: 'bandeira: Polinésia Francesa' },
+    { emoji: '🇵🇬', name: 'bandeira: Papua Nova Guiné' },
+    { emoji: '🇵🇭', name: 'bandeira: Filipinas' },
+    { emoji: '🇵🇰', name: 'bandeira: Paquistão' },
+    { emoji: '🇵🇱', name: 'bandeira: Polônia' },
+    { emoji: '🇵🇲', name: 'bandeira: São Pedro e Miquelon' },
+    { emoji: '🇵🇳', name: 'bandeira: Ilhas Pitcairn' },
+    { emoji: '🇵🇷 ', name: 'bandeira: Porto Rico' },
+    { emoji: '🇵🇸', name: 'bandeira: Territórios Palestinos' },
+    { emoji: '🇵🇹', name: 'bandeira: Portugal' },
+    { emoji: '🇵🇼', name: 'bandeira: Palau' },
+    { emoji: '🇵🇾', name: 'bandeira: Paraguai' },
+    { emoji: '🇶🇦', name: 'bandeira: Qatar' },
+    { emoji: '🇷🇪', name: 'bandeira: Réunion' },
+    { emoji: '🇷🇴', name: 'bandeira: Romênia' },
+    { emoji: '🇷🇸', name: 'bandeira: Sérvia' },
+    { emoji: '🇷🇺', name: 'bandeira: Rússia' },
+    { emoji: '🇷🇼', name: 'bandeira: Ruanda ' },
+    { emoji: '🇸🇦', name: 'bandeira: Arábia Saudita' },
+    { emoji: '🇸🇧', name: 'bandeira: Ilhas Salomão' },
+    { emoji: '🇸🇨', name: 'bandeira: Seicheles' },
+    { emoji: '🇸🇩', name: 'bandeira: Sudão' },
+    { emoji: '🇸🇪', name: 'bandeira: Suécia' },
+    { emoji: '🇸🇬', name: 'bandeira: Cingapura' },
+    { emoji: '🇸🇭', name: 'bandeira: Santa Helena' },
+    { emoji: '🇸🇮', name: 'bandeira: Eslovênia' },
+    { emoji: '🇸🇯', name: 'bandeira: Svalbard e Jan Mayen' },
+    { emoji: '🇸🇰', name: 'bandeira: Eslováquia' },
+    { emoji: '🇸🇱', name: ' bandeira: Serra Leoa' },
+    { emoji: '🇸🇲', name: 'bandeira: São Marinho' },
+    { emoji: '🇸🇳', name: 'bandeira: Senegal' },
+    { emoji: '🇸🇴', name: 'bandeira: Somália' },
+    { emoji: '🇸🇷', name: 'bandeira: Suriname' },
+    { emoji: '🇸🇸', name: 'bandeira: Sudão do Sul' },
+    { emoji: '🇸🇹', name: 'bandeira: São Tomé e Príncipe' },
+    { emoji: '🇸🇻', name: 'bandeira: El Salvador' },
+    { emoji: '🇸🇽', name: 'bandeira: São Maarten' },
+    { emoji: '🇸🇾', name: 'bandeira: Síria' },
+    { emoji: '🇸🇿', name: 'bandeira: Eswatini' },
+    { emoji: '🇹🇦', name: 'bandeira: Tristão da Cunha' },
+    { emoji: '🇹🇨', name: 'bandeira: Ilhas Turcas e Caicos' },
+    { emoji: '🇹🇩', name: 'bandeira: Chade' },
+    { emoji: '🇹🇫', name: 'bandeira: Territórios do Sul da França' },
+    { emoji: '🇹🇬', name: 'bandeira: Togo' },
+    { emoji: '🇹🇭', name: 'bandeira: Tailândia' },
+    { emoji: '🇹🇯', name: 'bandeira: Tajiquistão' },
+    { emoji: '🇹🇰', name: 'bandeira: Toquelau' },
+    { emoji: '🇹🇱', name: 'bandeira: Timor-Leste' },
+    { emoji: '🇹🇲', name: 'bandeira: Turcomenistão' },
+    { emoji: '🇹🇳', name: ' bandeira: Tunísia' },
+    { emoji: '🇹🇴', name: 'bandeira: Tonga' },
+    { emoji: '🇹🇷', name: 'bandeira: Turquia' },
+    { emoji: '🇹🇹', name: 'bandeira: Trindade e Tobago' },
+    { emoji: '🇹🇻', name: 'bandeira: Tuvalu' },
+    { emoji: '🇹🇼', name: 'bandeira: Taiwan' },
+    { emoji: '🇹🇿', name: 'bandeira: Tanzânia' },
+    { emoji: '🇺🇦', name: 'bandeira: Ucrânia' },
+    { emoji: '🇺🇬', name: ' bandeira: Uganda' },
+    { emoji: '🇺🇲', name: 'bandeira: Ilhas Distantes dos EUA' },
+    { emoji: '🇺🇳', name: 'bandeira: Nações Unidas' },
+    { emoji: '🇺🇸', name: 'bandeira: Estados Unidos' },
+    { emoji: '🇺🇾', name: 'bandeira: Uruguai' },
+    { emoji: '🇺🇿', name: 'bandeira: Uzbequistão' },
+    { emoji: '🇻🇦', name: 'bandeira: Cidade do Vaticano' },
+    { emoji: '🇻🇨', name: 'bandeira: São Vicente e Granadinas' },
+    { emoji: '🇻🇪', name: 'bandeira: Venezuela' },
+    { emoji: '🇻🇬', name: 'bandeira: Ilhas Virgens Britânicas' },
+    { emoji: '🇻🇮', name: 'bandeira : Ilhas Virgens Americanas' },
+    { emoji: '🇻🇳', name: 'bandeira: Vietnã' },
+    { emoji: '🇻🇺', name: 'bandeira: Vanuatu' },
+    { emoji: '🇼🇫 ', name: 'bandeira: Wallis e Futuna' },
+    { emoji: '🇼🇸', name: 'bandeira: Samoa' },
+    { emoji: '🇽🇰', name: 'bandeira: Kosovo' },
+    { emoji: '🇾🇪', name: 'bandeira: Iémen' },
+    { emoji: '🇾🇹', name: 'bandeira: Maiote' },
+    { emoji: '🇿🇦', name: 'bandeira: África do Sul' },
+    { emoji: '🇿🇲', name: 'bandeira: Zâmbia' },
+    { emoji: '🇿🇼', name: 'bandeira: Zimbábue' },
+    { emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', name: 'bandeira: Inglaterra' },
   ],
 };

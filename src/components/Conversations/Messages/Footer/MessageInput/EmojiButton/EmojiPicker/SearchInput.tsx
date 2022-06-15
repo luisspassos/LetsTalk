@@ -1,4 +1,4 @@
-import { Input } from '@chakra-ui/react';
+import { Input, useColorModeValue } from '@chakra-ui/react';
 
 type SearchInputProps = {
   handleSearchEmoji: (search: string) => void;
@@ -10,7 +10,7 @@ export function SearchInput({ handleSearchEmoji }: SearchInputProps) {
       placeholder='Pesquisar emoji'
       mt='10px'
       fontSize='15px'
-      bgColor='blackAlpha.200'
+      bgColor={useColorModeValue('white', 'blackAlpha.200')}
       h='40px'
       flexShrink={0}
       w='99.5%'

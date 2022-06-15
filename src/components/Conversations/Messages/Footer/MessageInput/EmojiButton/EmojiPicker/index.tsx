@@ -91,7 +91,7 @@ export function EmojiPicker() {
   }, []);
 
   const handleSearchEmoji = useCallback((search: string) => {
-    const searchFormatted = search.trim();
+    const searchFormatted = search.toLowerCase().trim();
 
     if (!searchFormatted) {
       setSearchedEmojis({ data: [], isEmpty: true });
@@ -102,7 +102,7 @@ export function EmojiPicker() {
     const allEmojis = Object.values(emojis).flat();
 
     const searchedEmojis = allEmojis.filter(({ name }) =>
-      name.includes(searchFormatted)
+      name.toLowerCase().includes(searchFormatted)
     );
 
     setSearchedEmojis({ data: searchedEmojis, isEmpty: false });

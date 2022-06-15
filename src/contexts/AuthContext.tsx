@@ -52,7 +52,7 @@ export type UserType =
   | ({
       username: string;
     } & DecodedIdToken)
-  | undefined;
+  | null;
 
 type SetUsernameParams = {
   user: User;
@@ -152,7 +152,7 @@ export const signInWithEmailAndPassword = async ({
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<UserType>();
+  const [user, setUser] = useState<UserType>(null);
   const router = useRouter();
 
   const fillUser = useCallback((newUser: UserType) => {
@@ -175,7 +175,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     });
 
     signOut(auth);
-    router.push('/');
+    await router.push('/');
+    setUser(null);
   };
 
   useEffect(() => {

@@ -17,18 +17,13 @@
 - ver bloqueamento na conversa
 - ver bug do padding dnv testar EM PRODUÇÃO
 - ver logout EM PRODUÇÃO
-- mudar cor do input error
 - ver coverage dos testes
-- ver onlineAt ficando online em outras contas
-- ver light mode do emoji picker
 - ver responsividade do emoji picker
 - ver alternativa para o Object.values
-- ver tradução de alguns emojis
 - fazer emojis recentes
 - ver loading do dynamic do emoji picker
 - ver aria label em emoji
 - ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
-- ver tag img no 👁️‍🗨️
 
 # NEXT PROJECT
 
