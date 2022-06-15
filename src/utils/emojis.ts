@@ -1,4 +1,10 @@
-export const emojis = {
+export const emojis: Record<
+  string,
+  {
+    emoji: string;
+    name: string;
+  }[]
+> = {
   'smileys-emotion': [
     {
       emoji: '😀',

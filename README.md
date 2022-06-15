@@ -18,12 +18,10 @@
 - ver bug do padding dnv testar EM PRODUÇÃO
 - ver logout EM PRODUÇÃO
 - ver coverage dos testes
-- ver responsividade do emoji picker
-- ver alternativa para o Object.values
 - fazer emojis recentes
-- ver loading do dynamic do emoji picker
 - ver aria label em emoji
 - ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
+- trocar algumas Images pra Img
 
 # NEXT PROJECT
 
