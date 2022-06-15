@@ -1,4 +1,4 @@
-import { Collapse, Flex, Stack } from '@chakra-ui/react';
+import { Box, Collapse, Flex, Stack } from '@chakra-ui/react';
 import { useCallback, useState } from 'react';
 import { AiOutlineCar, AiOutlineClockCircle } from 'react-icons/ai';
 import { BiFootball } from 'react-icons/bi';
@@ -111,29 +111,38 @@ export function EmojiPicker() {
     <Collapse in={isOpen} unmountOnExit>
       <Flex h='300px' w='100%' direction='column'>
         <Divider />
-        <Flex pos='relative'>
-          {categories.data.map(({ icon, name }, i) => (
-            <CategoryButton
-              selectedCategoryIndex={categories.selectedCategoryIndex}
-              index={i}
-              categoryIcon={icon}
-              aria-label={name}
-              key={name}
-              onClick={() => handleSelectCategory(i)}
-            />
-          ))}
-        </Flex>
+        <Box>
+          <Flex
+            overflowX='auto'
+            sx={{
+              '&::-webkit-scrollbar': {
+                display: 'none',
+              },
+            }}
+          >
+            {categories.data.map(({ icon, name }, i) => (
+              <CategoryButton
+                selectedCategoryIndex={categories.selectedCategoryIndex}
+                index={i}
+                categoryIcon={icon}
+                aria-label={name}
+                key={name}
+                onClick={() => handleSelectCategory(i)}
+              />
+            ))}
+          </Flex>
+        </Box>
         <Flex
           direction='column'
           overflow='auto'
-          pr='15px'
+          pr='5px'
           pb={!searchedEmojis.isEmpty ? '0' : '10px'}
         >
           <SearchInput handleSearchEmoji={handleSearchEmoji} />
           {!searchedEmojis.isEmpty && (
             <EmojiList mt='15px' list={searchedEmojis.data} />
           )}
-          <Stack spacing='20px' mt='15px'>
+          <Stack spacing='15px' mt='15px'>
             {searchedEmojis.isEmpty &&
               categories.data
                 .filter((category) => category.emojis.length !== 0)

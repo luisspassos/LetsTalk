@@ -45,6 +45,7 @@ export function CategoryButton({
       aria-label={ariaLabel}
       variant='unstyled'
       flex='1'
+      minW='50px'
       h='45px'
       fontSize='22px'
       transition='0'
