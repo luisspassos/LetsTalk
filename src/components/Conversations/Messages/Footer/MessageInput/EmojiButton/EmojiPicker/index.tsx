@@ -13,7 +13,6 @@ import { RiBearSmileLine } from 'react-icons/ri';
 import { Divider } from '../../../../../../Divider';
 import { CategoryButton } from './CategoryButton';
 import { SearchInput } from './SearchInput';
-import { SelectedCategoryBar } from './SelectedCategoryBar';
 import { useToggleEmojiPicker } from '../../../../../../../contexts/ToggleEmojiPickerContext';
 import { emojis } from '../../../../../../../utils/emojis';
 import { CategoryTitle } from './CategoryTitle';
@@ -123,9 +122,6 @@ export function EmojiPicker() {
               onClick={() => handleSelectCategory(i)}
             />
           ))}
-          <SelectedCategoryBar
-            selectedCategoryIndex={categories.selectedCategoryIndex}
-          />
         </Flex>
         <Flex
           direction='column'

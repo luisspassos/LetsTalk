@@ -24,6 +24,20 @@ export function CategoryButton({
     default: useColorModeValue('blackAlpha.600', 'whiteAlpha.600'),
   };
 
+  const selectedCategoryBar =
+    index === 0
+      ? {
+          content: '""',
+          h: '4px',
+          pos: 'absolute',
+          bottom: 0,
+          bg: 'gray.300',
+          transition: '0.2s',
+          transform: `translateX(${selectedCategoryIndex * 100}%)`,
+          w: '100%',
+        }
+      : undefined;
+
   return (
     <IconButton
       color={selectedCategoryIndex === index ? color.selected : color.default}
@@ -37,6 +51,7 @@ export function CategoryButton({
       _focus={{
         boxShadow: 'none',
       }}
+      _before={selectedCategoryBar}
       d='flex'
       icon={<Icon as={categoryIcon} />}
       {...rest}

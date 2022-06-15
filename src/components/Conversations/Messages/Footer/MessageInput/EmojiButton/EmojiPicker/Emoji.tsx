@@ -8,8 +8,12 @@ type EmojiProps = {
 export function Emoji({ emoji }: EmojiProps) {
   return (
     <Twemoji options={{ className: 'twemoji' }}>
-      <Center as='li' w='46px' h='46px'>
-        <Box cursor='pointer' w='36px' h='36px'>
+      <Center as='li' w={['36px', '41px', '46px']} h={['36px', '41px', '46px']}>
+        <Box
+          cursor='pointer'
+          w={['26px', '31px', '36px']}
+          h={['26px', '31px', '36px']}
+        >
           {emoji === '👁️‍🗨️' ? (
             <Image
               draggable={false}
