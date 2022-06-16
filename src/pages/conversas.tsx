@@ -164,6 +164,8 @@ export const getServerSideProps: GetServerSideProps = async (
     const cookies = nookies.get(ctx);
     const user = await adminAuth.verifyIdToken(cookies.token);
 
+    console.log(cookies.token);
+
     const conversations = await getConversations(user.uid);
 
     if (user) {
