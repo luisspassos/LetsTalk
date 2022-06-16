@@ -45,7 +45,7 @@ function LoginButtonWithGoogleComponent() {
 
         setTimeout(async () => {
           await router.push('/conversas');
-        }, 2000);
+        }, 10000);
       }
     } catch (err) {
       const error = String(err);
