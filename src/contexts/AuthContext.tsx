@@ -163,8 +163,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     user?.firebase?.sign_in_provider === 'google.com';
 
   const signOut = async () => {
-    // const { auth } = await import('../services/firebase');
-    // const { signOut } = await import('firebase/auth');
+    const { auth } = await import('../services/firebase');
+    const { signOut } = await import('firebase/auth');
     // const { doc, updateDoc } = await import('firebase/firestore');
 
     // if (!user) return;
@@ -174,6 +174,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     //   onlineAt: Date.now(),
     // });
 
+    signOut(auth);
     router.push('/');
     // setUser(null);
   };
