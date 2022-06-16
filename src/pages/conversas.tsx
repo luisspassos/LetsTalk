@@ -67,9 +67,11 @@ export default function ConversationsPage({
   const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
   useEffect(() => {
+    console.log(contextUser);
     fillUser(user);
+    console.log(contextUser);
     setConversations(conversations);
-  }, [conversations, fillUser, setConversations, user]);
+  }, [conversations, fillUser, setConversations, user, contextUser]);
 
   useEffect(() => {
     function checkIfUserAccHasBeenDeleted() {

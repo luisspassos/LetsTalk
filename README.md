@@ -16,7 +16,6 @@
 - fazer unread messages
 - ver bloqueamento na conversa
 - ver bug do padding dnv testar EM PRODUÇÃO
-- ver logout EM PRODUÇÃO
 - ver coverage dos testes
 - ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
 - ver barra de selecionado desaparecer no emoji picker dps de ele tiver performado
