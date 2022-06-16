@@ -16,7 +16,7 @@ function LoginButtonWithGoogleComponent() {
   }, []);
 
   const router = useRouter();
-  const { setUsername } = useAuth();
+  const { setUsername, refreshToken } = useAuth();
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {
@@ -42,6 +42,8 @@ function LoginButtonWithGoogleComponent() {
         if (additionalUserInfo?.isNewUser) {
           await setUsername({ user, name });
         }
+
+        await refreshToken();
 
         await router.push('/conversas');
       }
