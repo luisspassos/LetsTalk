@@ -67,6 +67,7 @@ export default function ConversationsPage({
   const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
   useEffect(() => {
+    console.log(user);
     fillUser(user);
     setConversations(conversations);
   }, [conversations, fillUser, setConversations, user, contextUser]);
