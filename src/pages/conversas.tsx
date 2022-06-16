@@ -23,6 +23,7 @@ import { getConversations } from '../utils/getConversations';
 type ConversationsPageProps = {
   user: UserType;
   conversations: ConversationsType;
+  token: string;
 };
 
 function createLocationchangeEvent() {
@@ -52,6 +53,7 @@ function createLocationchangeEvent() {
 export default function ConversationsPage({
   user,
   conversations,
+  token,
 }: ConversationsPageProps) {
   const { tab, handleChangeTab } = useTab();
   const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
@@ -67,10 +69,10 @@ export default function ConversationsPage({
   const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
   useEffect(() => {
-    console.log(user);
+    console.log(token);
     fillUser(user);
     setConversations(conversations);
-  }, [conversations, fillUser, setConversations, user, contextUser]);
+  }, [conversations, fillUser, setConversations, user, token]);
 
   useEffect(() => {
     function checkIfUserAccHasBeenDeleted() {
@@ -177,6 +179,7 @@ export const getServerSideProps: GetServerSideProps = async (
         props: {
           conversations,
           user: newUser,
+          token: cookies.token,
         },
       };
     }
