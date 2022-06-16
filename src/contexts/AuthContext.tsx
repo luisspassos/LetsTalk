@@ -163,20 +163,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     user?.firebase?.sign_in_provider === 'google.com';
 
   const signOut = async () => {
-    const { auth, db } = await import('../services/firebase');
+    const { auth } = await import('../services/firebase');
     const { signOut } = await import('firebase/auth');
-    const { doc, updateDoc } = await import('firebase/firestore');
+    // const { doc, updateDoc } = await import('firebase/firestore');
 
-    if (!user) return;
+    // if (!user) return;
 
-    const userRef = doc(db, 'users', user.username);
-    updateDoc(userRef, {
-      onlineAt: Date.now(),
-    });
+    // const userRef = doc(db, 'users', user.username);
+    // updateDoc(userRef, {
+    //   onlineAt: Date.now(),
+    // });
 
     signOut(auth);
     await router.push('/');
-    setUser(null);
+    // setUser(null);
   };
 
   useEffect(() => {
