@@ -1,4 +1,4 @@
-import { Flex, Heading, Image, useColorModeValue } from '@chakra-ui/react';
+import { Flex, Heading, Img, useColorModeValue } from '@chakra-ui/react';
 import { BackLink } from '../components/BackLink';
 import { PageTitle } from '../components/PageTitle';
 
@@ -7,7 +7,7 @@ export default function Custom404() {
     <>
       <PageTitle pageName='404' />
       <Flex h='100vh' align='center' justify='center' gap='50px' p='20px'>
-        <Image
+        <Img
           w='602px'
           h='400px'
           src='/images/page_not_found.svg'

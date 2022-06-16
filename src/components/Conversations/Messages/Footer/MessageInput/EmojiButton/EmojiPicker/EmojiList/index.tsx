@@ -16,7 +16,7 @@ export function EmojiList({ list, ...rest }: EmojiListProps) {
       {...rest}
     >
       {list.map((emoji) => (
-        <Emoji emoji={emoji.emoji} key={emoji.emoji} />
+        <Emoji name={emoji.name} emoji={emoji.emoji} key={emoji.emoji} />
       ))}
     </Grid>
   );

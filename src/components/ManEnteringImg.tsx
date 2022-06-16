@@ -1,9 +1,9 @@
-import { Image } from '@chakra-ui/react';
+import { Img } from '@chakra-ui/react';
 import { memo } from 'react';
 
 function ManEnteringImgComponent() {
   return (
-    <Image
+    <Img
       d={{ base: 'none', xl: 'block' }}
       h='350px'
       w='585.42px'

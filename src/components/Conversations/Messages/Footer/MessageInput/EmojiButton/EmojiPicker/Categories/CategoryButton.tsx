@@ -5,6 +5,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
+import { useSearchedEmojis } from '../../../../../../../../contexts/SearchedEmojisContext';
 
 type CategoryButtonProps = {
   categoryIcon: IconType;
@@ -19,6 +20,8 @@ export function CategoryButton({
   categoryIcon,
   ...rest
 }: CategoryButtonProps) {
+  const { searchedEmojis } = useSearchedEmojis();
+
   const color = {
     selected: useColorModeValue('blackAlpha.800', 'whiteAlpha.800'),
     default: useColorModeValue('blackAlpha.600', 'whiteAlpha.600'),
@@ -28,7 +31,7 @@ export function CategoryButton({
     index === 0
       ? {
           content: '""',
-          h: '4px',
+          h: !searchedEmojis.isEmpty ? '0px' : '4px',
           pos: 'absolute',
           bottom: 0,
           bg: 'gray.300',
@@ -40,7 +43,11 @@ export function CategoryButton({
 
   return (
     <IconButton
-      color={selectedCategoryIndex === index ? color.selected : color.default}
+      color={
+        selectedCategoryIndex === index && searchedEmojis.isEmpty
+          ? color.selected
+          : color.default
+      }
       title={ariaLabel}
       aria-label={ariaLabel}
       variant='unstyled'

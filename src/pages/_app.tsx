@@ -22,43 +22,46 @@ import { OnlineAtEventsProvider } from '../contexts/OnlineAtEventsContext';
 import { ConversationPopoverProvider } from '../contexts/ConversationPopoverContext';
 import { RenamingNameProvider } from '../contexts/RenamingNameContext';
 import { ToggleEmojiPickerProvider } from '../contexts/ToggleEmojiPickerContext';
+import { SearchedEmojisProvider } from '../contexts/SearchedEmojisContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <ToggleEmojiPickerProvider>
-        <RenamingNameProvider>
-          <OnlineAtEventsProvider>
-            <SearchInConversationProvider>
-              <ConversationPopoverProvider>
-                <ConversationsProvider>
-                  <ConversationsTabProvider>
-                    <AddContactModalProvider>
-                      <BlockUserModalProvider>
-                        <RenameUsernameModalProvider>
-                          <DeleteAccountModalProvider>
-                            <ChangePasswordModalProvider>
-                              <ChangeEmailModalProvider>
-                                <TabProvider>
-                                  <FadeInAnimationProvider>
-                                    <ChakraProvider theme={theme}>
-                                      <Component {...pageProps} />
-                                    </ChakraProvider>
-                                  </FadeInAnimationProvider>
-                                </TabProvider>
-                              </ChangeEmailModalProvider>
-                            </ChangePasswordModalProvider>
-                          </DeleteAccountModalProvider>
-                        </RenameUsernameModalProvider>
-                      </BlockUserModalProvider>
-                    </AddContactModalProvider>
-                  </ConversationsTabProvider>
-                </ConversationsProvider>
-              </ConversationPopoverProvider>
-            </SearchInConversationProvider>
-          </OnlineAtEventsProvider>
-        </RenamingNameProvider>
-      </ToggleEmojiPickerProvider>
+      <SearchedEmojisProvider>
+        <ToggleEmojiPickerProvider>
+          <RenamingNameProvider>
+            <OnlineAtEventsProvider>
+              <SearchInConversationProvider>
+                <ConversationPopoverProvider>
+                  <ConversationsProvider>
+                    <ConversationsTabProvider>
+                      <AddContactModalProvider>
+                        <BlockUserModalProvider>
+                          <RenameUsernameModalProvider>
+                            <DeleteAccountModalProvider>
+                              <ChangePasswordModalProvider>
+                                <ChangeEmailModalProvider>
+                                  <TabProvider>
+                                    <FadeInAnimationProvider>
+                                      <ChakraProvider theme={theme}>
+                                        <Component {...pageProps} />
+                                      </ChakraProvider>
+                                    </FadeInAnimationProvider>
+                                  </TabProvider>
+                                </ChangeEmailModalProvider>
+                              </ChangePasswordModalProvider>
+                            </DeleteAccountModalProvider>
+                          </RenameUsernameModalProvider>
+                        </BlockUserModalProvider>
+                      </AddContactModalProvider>
+                    </ConversationsTabProvider>
+                  </ConversationsProvider>
+                </ConversationPopoverProvider>
+              </SearchInConversationProvider>
+            </OnlineAtEventsProvider>
+          </RenamingNameProvider>
+        </ToggleEmojiPickerProvider>
+      </SearchedEmojisProvider>
     </AuthProvider>
   );
 }

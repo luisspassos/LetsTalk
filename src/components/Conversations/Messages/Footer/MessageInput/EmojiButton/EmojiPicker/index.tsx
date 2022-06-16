@@ -15,14 +15,10 @@ import { SearchInput } from './SearchInput';
 import { useToggleEmojiPicker } from '../../../../../../../contexts/ToggleEmojiPickerContext';
 import { emojis } from '../../../../../../../utils/emojis';
 import { CategoryTitle } from './Categories/CategoryTitle';
-import { EmojiType } from '../../../../../../../types';
 import { EmojiList } from './EmojiList';
 import { Categories } from './Categories';
+import { useSearchedEmojis } from '../../../../../../../contexts/SearchedEmojisContext';
 
-type SearchedEmojis = {
-  data: EmojiType[];
-  isEmpty: boolean;
-};
 export function EmojiPicker() {
   const [categories, setCategories] = useState({
     data: [
@@ -75,30 +71,30 @@ export function EmojiPicker() {
     selectedCategoryIndex: 0,
   });
 
-  const [searchedEmojis, setSearchedEmojis] = useState<SearchedEmojis>({
-    data: [],
-    isEmpty: true,
-  });
-
   const { isOpen } = useToggleEmojiPicker();
 
-  const handleSearchEmoji = useCallback((search: string) => {
-    const searchFormatted = search.toLowerCase().trim();
+  const { searchedEmojis, setSearchedEmojis } = useSearchedEmojis();
 
-    if (!searchFormatted) {
-      setSearchedEmojis({ data: [], isEmpty: true });
+  const handleSearchEmoji = useCallback(
+    (search: string) => {
+      const searchFormatted = search.toLowerCase().trim();
 
-      return;
-    }
+      if (!searchFormatted) {
+        setSearchedEmojis({ data: [], isEmpty: true });
 
-    const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
+        return;
+      }
 
-    const searchedEmojis = allEmojis.filter(({ name }) =>
-      name.toLowerCase().includes(searchFormatted)
-    );
+      const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
 
-    setSearchedEmojis({ data: searchedEmojis, isEmpty: false });
-  }, []);
+      const searchedEmojis = allEmojis.filter(({ name }) =>
+        name.toLowerCase().includes(searchFormatted)
+      );
+
+      setSearchedEmojis({ data: searchedEmojis, isEmpty: false });
+    },
+    [setSearchedEmojis]
+  );
 
   return (
     <Collapse in={isOpen} unmountOnExit>

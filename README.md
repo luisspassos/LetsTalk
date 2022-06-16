@@ -19,9 +19,8 @@
 - ver logout EM PRODUÇÃO
 - ver coverage dos testes
 - fazer emojis recentes
-- ver aria label em emoji
 - ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
-- trocar algumas Images pra Img
+- ver barra de selecionado desaparecer no emoji picker dps de ele tiver performado
 
 # NEXT PROJECT
 

@@ -3,9 +3,10 @@ import { parse } from 'twemoji-parser';
 
 type EmojiProps = {
   emoji: string;
+  name: string;
 };
 
-export function Emoji({ emoji }: EmojiProps) {
+export function Emoji({ emoji, name }: EmojiProps) {
   const twemoji =
     emoji === '👁️‍🗨️'
       ? 'https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f441-200d-1f5e8.svg'
@@ -19,6 +20,7 @@ export function Emoji({ emoji }: EmojiProps) {
         h={['26px', '31px', '36px']}
         src={twemoji}
         alt={emoji}
+        aria-label={name}
       />
     </Center>
   );
