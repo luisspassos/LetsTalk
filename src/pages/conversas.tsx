@@ -166,6 +166,11 @@ export default function ConversationsPage({
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
+  ctx.res.setHeader(
+    'Cache-Control',
+    'no-cache, no-store, max-age=0, must-revalidate'
+  );
+
   try {
     const cookies = nookies.get(ctx);
     const user = await adminAuth.verifyIdToken(cookies.token);
