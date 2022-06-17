@@ -11,10 +11,6 @@ export default function Test({ timestamp }: TestProps) {
   const router = useRouter();
 
   async function handle() {
-    const { auth } = await import('../services/firebase');
-    const { signOut } = await import('firebase/auth');
-
-    await signOut(auth);
     await router.push('/');
   }
 

@@ -1,5 +1,4 @@
 import { Stack } from '@chakra-ui/react';
-import type { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
@@ -18,7 +17,6 @@ import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrappe
 import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
-import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
 import { Header } from '../components/Header';
 import { ForgotMyPasswordLink } from '../components/Form/ForgotMyPasswordLink';
@@ -267,33 +265,33 @@ const Login = ({ actionCode, mode }: LoginProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  const { mode, oobCode } = ctx.query;
+// export const getServerSideProps: GetServerSideProps = async (
+//   ctx: GetServerSidePropsContext
+// ) => {
+//   const { mode, oobCode } = ctx.query;
 
-  const redirectionToConversationsOrNot =
-    await redirectToConversationsPageOrNot(ctx);
+//   const redirectionToConversationsOrNot =
+//     await redirectToConversationsPageOrNot(ctx);
 
-  if (redirectionToConversationsOrNot.redirect) {
-    return redirectionToConversationsOrNot;
-  }
+//   if (redirectionToConversationsOrNot.redirect) {
+//     return redirectionToConversationsOrNot;
+//   }
 
-  if (mode === 'resetPassword') {
-    return {
-      redirect: {
-        destination: `/trocar-senha/?oobCode=${oobCode}`,
-        permanent: false,
-      },
-    };
-  }
+//   if (mode === 'resetPassword') {
+//     return {
+//       redirect: {
+//         destination: `/trocar-senha/?oobCode=${oobCode}`,
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: {
-      mode: mode ?? null,
-      actionCode: oobCode ?? null,
-    },
-  };
-};
+//   return {
+//     props: {
+//       mode: mode ?? null,
+//       actionCode: oobCode ?? null,
+//     },
+//   };
+// };
 
 export default Login;

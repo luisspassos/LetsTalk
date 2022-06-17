@@ -43,7 +43,7 @@ function LoginButtonWithGoogleComponent() {
           await setUsername({ user, name });
         }
 
-        await router.push('/conversas');
+        await router.push('/test');
       }
     } catch (err) {
       const error = String(err);
