@@ -24,6 +24,7 @@ type ConversationsPageProps = {
   user: UserType;
   conversations: ConversationsType;
   token: string;
+  timestamp: number;
 };
 
 function createLocationchangeEvent() {
@@ -54,6 +55,7 @@ export default function ConversationsPage({
   user,
   conversations,
   token,
+  timestamp,
 }: ConversationsPageProps) {
   const { tab, handleChangeTab } = useTab();
   const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
@@ -69,10 +71,11 @@ export default function ConversationsPage({
   const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
   useEffect(() => {
+    console.log(timestamp);
     console.log(token);
     fillUser(user);
     setConversations(conversations);
-  }, [conversations, fillUser, setConversations, user, token]);
+  }, [conversations, fillUser, setConversations, user, token, timestamp]);
 
   useEffect(() => {
     function checkIfUserAccHasBeenDeleted() {
@@ -182,6 +185,7 @@ export const getServerSideProps: GetServerSideProps = async (
           conversations,
           user: newUser,
           token: cookies.token,
+          timestamp: Date.now(),
         },
       };
     }
