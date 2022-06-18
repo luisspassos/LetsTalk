@@ -17,6 +17,7 @@
 - ver bloqueamento na conversa
 - ver bug do padding dnv testar EM PRODUÇÃO
 - ver coverage dos testes
+- fazer emojis recentes
 - ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
 - ver barra de selecionado desaparecer no emoji picker dps de ele tiver performado
 - ver getUsers

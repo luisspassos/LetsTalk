@@ -5,7 +5,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import { useSearchedEmojis } from '../../../../../../../../contexts/SearchedEmojisContext';
 
 type CategoryButtonProps = {
   categoryIcon: IconType;
@@ -20,9 +20,7 @@ export function CategoryButton({
   categoryIcon,
   ...rest
 }: CategoryButtonProps) {
-  const {
-    searchedEmojis: { data: searchedEmojis },
-  } = useEmoji();
+  const { searchedEmojis } = useSearchedEmojis();
 
   const color = {
     selected: useColorModeValue('blackAlpha.800', 'whiteAlpha.800'),
