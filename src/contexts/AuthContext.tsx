@@ -174,7 +174,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       onlineAt: Date.now(),
     });
 
-    await signOut(auth);
+    signOut(auth);
     await router.push('/');
     setUser(null);
   };
