@@ -61,7 +61,7 @@ export function Conversation({
         alignItems='center'
         py='7px'
         h={`${conversationHeight}px`}
-        flexShrink='0'
+        flexShrink={0}
         cursor='pointer'
         transition='0.2s'
         bg={name === currentConversation?.name ? bg : undefined}
