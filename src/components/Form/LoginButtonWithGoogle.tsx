@@ -20,31 +20,31 @@ function LoginButtonWithGoogleComponent() {
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
 
-      // const { GoogleAuthProvider, signInWithPopup } = await import(
-      //   'firebase/auth'
-      // );
-      // const { auth } = await import('../../services/firebase');
-      // const googleProvider = new GoogleAuthProvider();
+      const { GoogleAuthProvider, signInWithPopup } = await import(
+        'firebase/auth'
+      );
+      const { auth } = await import('../../services/firebase');
+      const googleProvider = new GoogleAuthProvider();
 
-      // const result = await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
 
-      // const { user } = result;
+      const { user } = result;
 
-      // const name = user.displayName as string;
+      const name = user.displayName as string;
 
-      // if (result) {
-      //   const { getAdditionalUserInfo } = await import('firebase/auth');
+      if (result) {
+        const { getAdditionalUserInfo } = await import('firebase/auth');
 
-      //   const additionalUserInfo = getAdditionalUserInfo(result);
+        const additionalUserInfo = getAdditionalUserInfo(result);
 
-      //   if (additionalUserInfo?.isNewUser) {
-      //     await setUsername({ user, name });
-      //   }
+        if (additionalUserInfo?.isNewUser) {
+          await setUsername({ user, name });
+        }
 
-      await router.push('/test');
-      // }
+        await router.push('/conversas');
+      }
     } catch (err) {
       const error = String(err);
       if (error.includes('popup-closed-by-user')) return;

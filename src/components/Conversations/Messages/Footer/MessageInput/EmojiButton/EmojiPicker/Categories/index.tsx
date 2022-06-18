@@ -1,26 +1,13 @@
 import { Box, Flex } from '@chakra-ui/react';
-import { Dispatch, SetStateAction, useCallback } from 'react';
-import { IconType } from 'react-icons';
+import { useCallback } from 'react';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { CategoryButton } from './CategoryButton';
 
-type Categories = {
-  data: {
-    icon: IconType;
-    name: string;
-    emojis: {
-      emoji: string;
-      name: string;
-    }[];
-  }[];
-  selectedCategoryIndex: number;
-};
+export function Categories() {
+  const {
+    categories: { data: categories, setState: setCategories },
+  } = useEmoji();
 
-type CategoriesProps = {
-  categories: Categories;
-  setCategories: Dispatch<SetStateAction<Categories>>;
-};
-
-export function Categories({ categories, setCategories }: CategoriesProps) {
   const handleSelectCategory = useCallback(
     (index: number) => {
       setCategories((prevState) => ({

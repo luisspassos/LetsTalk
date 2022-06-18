@@ -9,7 +9,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const withPWA = require('next-pwa');
-// const runtimeCaching = require('next-pwa/cache');
+const runtimeCaching = require('next-pwa/cache');
 
 module.exports = withPlugins([
   nextConfig,
@@ -19,7 +19,7 @@ module.exports = withPlugins([
       pwa: {
         disable: process.env.NODE_ENV === 'development',
         dest: 'public',
-        // runtimeCaching,
+        runtimeCaching,
       },
     },
   ],

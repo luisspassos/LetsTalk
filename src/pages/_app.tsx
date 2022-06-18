@@ -22,12 +22,12 @@ import { OnlineAtEventsProvider } from '../contexts/OnlineAtEventsContext';
 import { ConversationPopoverProvider } from '../contexts/ConversationPopoverContext';
 import { RenamingNameProvider } from '../contexts/RenamingNameContext';
 import { ToggleEmojiPickerProvider } from '../contexts/ToggleEmojiPickerContext';
-import { SearchedEmojisProvider } from '../contexts/SearchedEmojisContext';
+import { EmojiProvider } from '../contexts/EmojiContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <SearchedEmojisProvider>
+      <EmojiProvider>
         <ToggleEmojiPickerProvider>
           <RenamingNameProvider>
             <OnlineAtEventsProvider>
@@ -61,7 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </OnlineAtEventsProvider>
           </RenamingNameProvider>
         </ToggleEmojiPickerProvider>
-      </SearchedEmojisProvider>
+      </EmojiProvider>
     </AuthProvider>
   );
 }
