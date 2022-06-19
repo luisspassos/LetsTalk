@@ -266,14 +266,14 @@ export function Main() {
   useEffect(() => {
     if (initial) {
       setTimeout(() => {
-        scrollToIndex(10);
+        scrollToIndex(messages.length);
       }, 1);
 
       setInitial(false);
     } else {
-      scrollToIndex(10);
+      scrollToIndex(messages.length);
     }
-  }, [messages2, scrollToIndex, initial]);
+  }, [messages2, scrollToIndex, initial, messages.length]);
 
   return (
     <ScrollableBoxOfVirtualizedItems
