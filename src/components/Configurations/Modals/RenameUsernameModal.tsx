@@ -96,7 +96,7 @@ export function RenameUsernameModal() {
       onClose={onClose}
       modalTitle='Trocar nome de usuário'
     >
-      <ModalFormControl>
+      <ModalFormControl onSubmit={handleRenameUsername}>
         <ModalInput
           id='name'
           label='Nome'
@@ -106,7 +106,6 @@ export function RenameUsernameModal() {
         />
         <Buttons
           confirmButtonProps={{
-            onClick: handleRenameUsername,
             isLoading: isSubmitting,
           }}
           cancelButtonProps={{

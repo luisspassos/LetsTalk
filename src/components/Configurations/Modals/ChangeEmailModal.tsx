@@ -122,7 +122,7 @@ export function ChangeEmailModal() {
 
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose} modalTitle='Trocar email'>
-      <ModalFormControl>
+      <ModalFormControl onSubmit={handleChangeEmail}>
         <ModalInput
           id='email'
           label='Novo Email'
@@ -136,7 +136,6 @@ export function ChangeEmailModal() {
             onClick: onClose,
           }}
           confirmButtonProps={{
-            onClick: handleChangeEmail,
             isLoading: isSubmitting,
           }}
           confirmButtonText='Trocar'

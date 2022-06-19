@@ -216,11 +216,10 @@ export function AddContactModal() {
       onClose={onClose}
       modalTitle='Adicionar contato'
     >
-      <ModalFormControl>
+      <ModalFormControl onSubmit={handleAddContact}>
         <UserInput errors={errors} register={register} />
         <Buttons
           confirmButtonProps={{
-            onClick: handleAddContact,
             isLoading: isSubmitting,
           }}
           cancelButtonProps={{

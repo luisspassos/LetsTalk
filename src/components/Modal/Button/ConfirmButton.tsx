@@ -32,6 +32,7 @@ export function ConfirmButton({
         bg: bg,
         cursor: 'default',
       }}
+      type='submit'
       {...rest}
     >
       {text}

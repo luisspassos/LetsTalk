@@ -19,7 +19,8 @@
 - ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
 - ver barra de selecionado desaparecer no emoji picker dps de ele tiver performado
 - ver pagina going to production
-- ver foco em modal para submit
+- ver lentidao de rotas em produção
+- ver link do redefine email do firebase
 
 # NEXT PROJECT
 

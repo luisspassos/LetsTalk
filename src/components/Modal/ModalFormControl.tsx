@@ -11,6 +11,7 @@ type FormControlProps = {
 export function ModalFormControl({ children, ...rest }: FormControlProps) {
   return (
     <ChakraFormControl
+      as='form'
       display='flex'
       alignItems='center'
       justifyContent='center'

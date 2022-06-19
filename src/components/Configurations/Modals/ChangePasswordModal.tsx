@@ -110,7 +110,7 @@ export function ChangePasswordModal() {
 
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose} modalTitle='Trocar senha'>
-      <ModalFormControl>
+      <ModalFormControl onSubmit={handleChangePassword}>
         <Stack spacing={['8px', '10px', '12px']}>
           <ModalInput
             id='password'
@@ -134,7 +134,6 @@ export function ChangePasswordModal() {
             onClick: onClose,
           }}
           confirmButtonProps={{
-            onClick: handleChangePassword,
             isLoading: isSubmitting,
           }}
           confirmButtonText='Trocar'
