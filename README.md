@@ -18,7 +18,6 @@
 - ver coverage dos testes
 - ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
 - ver barra de selecionado desaparecer no emoji picker dps de ele tiver performado
-- ver getUsers
 - ver pagina going to production
 - ver foco em modal para submit
 

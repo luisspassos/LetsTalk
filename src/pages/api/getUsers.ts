@@ -1,6 +1,6 @@
 import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { auth } from '../../services/firebaseAdmin';
+import { getUsers as getUserData } from '../../utils/getUsers';
 
 type ResponseData = UserRecord[] | unknown;
 
@@ -11,10 +11,7 @@ export default async function getUsers(
   try {
     const { usersId } = req.query;
     const usersIdFormatted = usersId.toString().split(',');
-    const usersIdInObj = usersIdFormatted.map((id) => ({
-      uid: id,
-    }));
-    const users = (await auth.getUsers(usersIdInObj)).users;
+    const users = await getUserData(usersIdFormatted);
 
     res.status(200).json({ users });
   } catch (error) {
