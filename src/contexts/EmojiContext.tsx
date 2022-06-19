@@ -1,3 +1,4 @@
+import { useDisclosure } from '@chakra-ui/react';
 import {
   createContext,
   Dispatch,
@@ -50,6 +51,10 @@ type EmojiContextType = {
   categories: {
     data: Categories;
     setState: Dispatch<SetStateAction<Categories>>;
+  };
+  togglePicker: {
+    isOpen: boolean;
+    onToggle: () => void;
   };
 };
 
@@ -112,6 +117,8 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
     selectedCategoryIndex: 0,
   });
 
+  const { isOpen, onToggle } = useDisclosure();
+
   useEffect(() => {
     function getRecentlyUsedEmojis() {
       const newCategoriesData = [...categories.data];
@@ -141,6 +148,10 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
         categories: {
           data: categories,
           setState: setCategories,
+        },
+        togglePicker: {
+          isOpen,
+          onToggle,
         },
       }}
     >

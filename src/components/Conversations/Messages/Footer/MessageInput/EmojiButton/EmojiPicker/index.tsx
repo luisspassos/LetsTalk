@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 
 import { Divider } from '../../../../../../Divider';
 import { SearchInput } from './SearchInput';
-import { useToggleEmojiPicker } from '../../../../../../../contexts/ToggleEmojiPickerContext';
 import { emojis } from '../../../../../../../utils/emojis';
 import { CategoryTitle } from './Categories/CategoryTitle';
 import { EmojiList } from './EmojiList';
@@ -11,11 +10,10 @@ import { Categories } from './Categories';
 import { useEmoji } from '../../../../../../../contexts/EmojiContext';
 
 export function EmojiPicker() {
-  const { isOpen } = useToggleEmojiPicker();
-
   const {
     searchedEmojis: { data: searchedEmojis, setState: setSearchedEmojis },
     categories: { data: categories },
+    togglePicker: { isOpen },
   } = useEmoji();
 
   const handleSearchEmoji = useCallback(
