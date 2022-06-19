@@ -25,7 +25,7 @@
     "framer-motion": "^6",
     "next": "12.1.0",
     "next-compose-plugins": "^2.2.1",
-    "next-pwa": "^5.5.4",
+    "next-pwa": "git+https://github.com/luisspassos/next-pwa.git",
     "nookies": "^2.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",

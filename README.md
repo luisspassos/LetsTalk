@@ -1,5 +1,3 @@
-percury — Hoje às 20:48
-
 # TODO
 
 - ver destaque de cores nas paginas
