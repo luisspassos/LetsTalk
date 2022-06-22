@@ -1,4 +1,4 @@
-import { OnlineAt } from '../types';
+import { OnlineAt } from '../utils/types';
 
 export function formatDate(date: Date) {
   function isToday() {

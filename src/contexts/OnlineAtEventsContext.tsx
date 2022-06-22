@@ -7,7 +7,7 @@ import {
   useMemo,
 } from 'react';
 import { db } from '../services/firebase';
-import { OnlineAt } from '../types';
+import { OnlineAt } from '../utils/types';
 import { useAuth } from './AuthContext';
 
 type OnlineAtEventsProviderProps = {

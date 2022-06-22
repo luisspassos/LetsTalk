@@ -14,7 +14,7 @@ import {
   ContactsResponse,
   ConversationDocWithContactData,
   ConversationUsersId,
-} from '../../../../types';
+} from '../../../../utils/types';
 
 export type AddContactFormData = {
   contactName: string;

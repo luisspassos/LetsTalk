@@ -19,7 +19,7 @@ import {
   MdEmojiSymbols,
 } from 'react-icons/md';
 import { RiBearSmileLine } from 'react-icons/ri';
-import { EmojiType } from '../types';
+import { EmojiType } from '../utils/types';
 import { emojis } from '../utils/emojis';
 
 type EmojiProviderProps = {

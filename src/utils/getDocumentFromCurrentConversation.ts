@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../services/firebase';
-import { ConversationDocWithContactData } from '../types';
+import { ConversationDocWithContactData } from '../utils/types';
 
 export async function getDocumentFromCurrentConversation(
   userId: string,

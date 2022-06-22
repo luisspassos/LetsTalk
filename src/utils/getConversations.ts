@@ -7,7 +7,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '../services/firebase';
-import { ConversationUsersId } from '../types';
+import { ConversationUsersId } from '../utils/types';
 import { formatContactsUpdatedAt } from './formatDate';
 import { getUsers } from './getUsers';
 

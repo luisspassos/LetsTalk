@@ -6,7 +6,7 @@ import { useAuth } from '../../../../contexts/AuthContext';
 import { useConversations } from '../../../../contexts/ConversationsContext';
 import { useSearchInConversation } from '../../../../contexts/SearchInConversationContext';
 import { db } from '../../../../services/firebase';
-import { ConversationDocWithContactData } from '../../../../types';
+import { ConversationDocWithContactData } from '../../../../utils/types';
 import { Message } from './Message';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 import { VirtualizedItemsListWrapper } from '../../../Virtual/VirtualizedItemsListWrapper';

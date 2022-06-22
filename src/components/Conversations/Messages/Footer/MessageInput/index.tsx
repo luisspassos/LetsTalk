@@ -51,7 +51,7 @@ export function MessageInput() {
           whiteSpace: 'nowrap',
         }}
         _hover={{
-          borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.700'),
+          borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
         }}
         sx={{
           '&::-webkit-scrollbar-thumb': {

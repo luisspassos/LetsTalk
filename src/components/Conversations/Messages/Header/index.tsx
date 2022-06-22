@@ -18,7 +18,7 @@ import { ConversationsTabToggleButton } from './ConversationsTabToggleButton';
 import { onSnapshot } from 'firebase/firestore';
 import { db } from '../../../../services/firebase';
 import { doc } from 'firebase/firestore';
-import { OnlineAt } from '../../../../types';
+import { OnlineAt } from '../../../../utils/types';
 import { formatContactOnlineAt } from '../../../../utils/formatDate';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 

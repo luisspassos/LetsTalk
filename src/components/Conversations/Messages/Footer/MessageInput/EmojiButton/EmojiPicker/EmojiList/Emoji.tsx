@@ -1,7 +1,7 @@
 import { Center, Image } from '@chakra-ui/react';
 import { parse } from 'twemoji-parser';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
-import { EmojiType } from '../../../../../../../../types';
+import { EmojiType } from '../../../../../../../../utils/types';
 
 type EmojiProps = {
   emoji: string;

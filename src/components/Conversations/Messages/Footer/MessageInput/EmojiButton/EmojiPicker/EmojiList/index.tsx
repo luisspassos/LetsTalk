@@ -1,5 +1,5 @@
 import { FlexProps, Grid } from '@chakra-ui/react';
-import { EmojiType } from '../../../../../../../../types';
+import { EmojiType } from '../../../../../../../../utils/types';
 import { Emoji } from './Emoji';
 
 type EmojiListProps = {
