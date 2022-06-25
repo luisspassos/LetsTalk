@@ -21,6 +21,7 @@ export function EmojiPicker() {
         <Categories />
         <Flex
           direction='column'
+          id='scrollEmojis'
           overflow='auto'
           pr='5px'
           pb={!searchedEmojis.isEmpty ? '0' : '10px'}

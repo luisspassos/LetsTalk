@@ -52,21 +52,34 @@ export function CategoryButton({
         selectedCategoryIndex: index,
       }));
 
-      function findPos(obj) {
-        var curtop = 0;
-        if (obj.offsetParent) {
-          do {
-            curtop += obj.offsetTop;
-          } while ((obj = obj.offsetParent));
-          return [curtop];
-        }
-      }
+      const element = document.getElementById(ariaLabel)?.offsetTop;
+      document
+        .getElementById('scrollEmojis')
+        ?.scrollTo({ top: element - 320, behavior: 'smooth' });
 
-      console.log(document.getElementById(ariaLabel));
+      // function findPos(obj) {
+      //   var curtop = 0;
+      //   if (obj.offsetParent) {
+      //     do {
+      //       curtop += obj.offsetTop;
+      //     } while ((obj = obj.offsetParent));
+      //     return [curtop];
+      //   }
+      // }
 
-      window.scroll(0, findPos(document.getElementById(ariaLabel)));
+      // // document
+      // //   .getElementById('scrollEmojis')
+      // //   .scroll(0, findPos(document.getElementById(ariaLabel)) - 320);
+
+      // const y =
+      //   document.getElementById(ariaLabel).getBoundingClientRect().top +
+      //   document.getElementById('scrollEmojis').scrollY;
+      // document.getElementById('scrollEmojis').scroll({
+      //   top: y,
+      //   behavior: 'smooth',
+      // });
     },
-    [setCategories, ariaLabel]
+    [setCategories]
   );
 
   return (

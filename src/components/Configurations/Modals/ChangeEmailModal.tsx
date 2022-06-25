@@ -42,6 +42,14 @@ export const toasts = {
         status: 'warning',
       });
     },
+    sameEmail: async () => {
+      const { toast } = await import('../../../utils/Toasts/toast');
+
+      toast({
+        title: 'Você já está usando este email!',
+        status: 'warning',
+      });
+    },
   },
 };
 
@@ -63,6 +71,11 @@ export function ChangeEmailModal() {
     () =>
       handleSubmit(async ({ email }) => {
         try {
+          if (email === contextUser?.email) {
+            toasts.changeEmail.sameEmail();
+            return;
+          }
+
           const { updateEmail } = await import('firebase/auth');
           const { auth } = await import('../../../services/firebase');
 
