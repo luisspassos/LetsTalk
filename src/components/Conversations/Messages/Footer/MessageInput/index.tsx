@@ -1,5 +1,7 @@
 import { Textarea, useColorModeValue, Flex, HStack } from '@chakra-ui/react';
-import { FormEvent } from 'react';
+import { BaseSyntheticEvent, FormEvent, KeyboardEvent } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+import { MessageFormData } from '../../../../../utils/types';
 import { EmojiButton } from './EmojiButton';
 import { FileButton } from './FileButton';
 
@@ -7,7 +9,17 @@ type TextAreaSizeEvent = {
   target: HTMLTextAreaElement;
 } & FormEvent<HTMLTextAreaElement>;
 
-export function MessageInput() {
+type MessageInputProps = {
+  register: UseFormRegister<MessageFormData>;
+  handleSendMessage: (
+    e?: BaseSyntheticEvent<object, any, any> | undefined
+  ) => Promise<void>;
+};
+
+export function MessageInput({
+  register,
+  handleSendMessage,
+}: MessageInputProps) {
   const initialHeight = 45;
 
   function handleTextAreaSize(e: TextAreaSizeEvent) {
@@ -26,11 +38,18 @@ export function MessageInput() {
     }
   }
 
+  function handleSendMessageWithEnter(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  }
+
   return (
     <Flex align='center' justify='end' flex='1' maxW='750px' pos='relative'>
       <Textarea
         maxLength={1000}
         onInput={handleTextAreaSize}
+        onKeyDown={handleSendMessageWithEnter}
         resize='none'
         overflowY='hidden'
         h={`${initialHeight}px`}
@@ -58,6 +77,7 @@ export function MessageInput() {
             borderWidth: '9px 3px',
           },
         }}
+        {...register('message')}
       />
       <HStack pos='absolute' spacing='5px' mr='10px' zIndex='1'>
         <EmojiButton />

@@ -21,3 +21,7 @@ export type EmojiType = {
   name: string;
   emoji: string;
 };
+
+export type MessageFormData = {
+  message: string;
+};
