@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button onclick="goToPurple()">Ir para o roxo</button>
+      <div style="background-color: red; height: 500px"></div>
+      <div style="background-color: green; height: 500px" /></div>
+      <div style="background-color: yellowgreen; height: 500px" /></div>
+      <div style="background-color: blue; height: 500px" /></div>
+      <div style="background-color: pink; height: 500px" /></div>
+      <div id="purple" style="background-color: blueviolet; height: 500px" /></div>
+    </div>
+
+    <script>
+      function goToPurple() {
+        function findPos(obj) {
+          var curtop = 0;
+          if (obj.offsetParent) {
+            do {
+              curtop += obj.offsetTop;
+            } while (obj = obj.offsetParent);
+              return [curtop];
+            }
+        }
+
+        window.scroll(0, findPos(document.getElementById('purple')))
+      }
+      
+    </script>
+  </body>
+</html>

@@ -4,6 +4,7 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -31,15 +32,17 @@ type SearchedEmojis = {
   isEmpty: boolean;
 };
 
-type Categories = {
-  data: {
-    icon: IconType;
+type CategoryData = {
+  icon: IconType;
+  name: string;
+  emojis: {
+    emoji: string;
     name: string;
-    emojis: {
-      emoji: string;
-      name: string;
-    }[];
   }[];
+};
+
+type Categories = {
+  data: CategoryData[];
   selectedCategoryIndex: number;
 };
 
@@ -51,6 +54,13 @@ type EmojiContextType = {
   categories: {
     data: Categories;
     setState: Dispatch<SetStateAction<Categories>>;
+    renderFilteredCategoryData: (
+      callback: (
+        category: CategoryData,
+        index: number,
+        array: CategoryData[]
+      ) => JSX.Element
+    ) => JSX.Element[];
   };
   togglePicker: {
     isOpen: boolean;
@@ -119,6 +129,14 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
 
   const { isOpen, onToggle } = useDisclosure();
 
+  const renderFilteredCategoryData = useCallback(
+    (callback) =>
+      categories.data
+        .filter((category) => category.emojis.length !== 0)
+        .map((category, ...rest) => callback(category, ...rest)),
+    [categories.data]
+  );
+
   useEffect(() => {
     function getRecentlyUsedEmojis() {
       const newCategoriesData = [...categories.data];
@@ -148,6 +166,7 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
         categories: {
           data: categories,
           setState: setCategories,
+          renderFilteredCategoryData,
         },
         togglePicker: {
           isOpen,

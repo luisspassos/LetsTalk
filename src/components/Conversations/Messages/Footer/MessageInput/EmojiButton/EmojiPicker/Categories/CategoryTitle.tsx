@@ -11,6 +11,7 @@ export function CategoryTitle({ text }: CategoryTitleProps) {
       fontWeight='400'
       color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
       fontSize='15px'
+      id={text}
     >
       {text}
     </Heading>

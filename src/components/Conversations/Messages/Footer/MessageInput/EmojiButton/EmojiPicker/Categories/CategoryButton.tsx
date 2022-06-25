@@ -4,6 +4,7 @@ import {
   IconButtonProps,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useCallback } from 'react';
 import { IconType } from 'react-icons';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 
@@ -22,6 +23,7 @@ export function CategoryButton({
 }: CategoryButtonProps) {
   const {
     searchedEmojis: { data: searchedEmojis },
+    categories: { setState: setCategories },
   } = useEmoji();
 
   const color = {
@@ -42,6 +44,30 @@ export function CategoryButton({
           w: '100%',
         }
       : undefined;
+
+  const handleSelectCategory = useCallback(
+    (index: number) => {
+      setCategories((prevState) => ({
+        ...prevState,
+        selectedCategoryIndex: index,
+      }));
+
+      function findPos(obj) {
+        var curtop = 0;
+        if (obj.offsetParent) {
+          do {
+            curtop += obj.offsetTop;
+          } while ((obj = obj.offsetParent));
+          return [curtop];
+        }
+      }
+
+      console.log(document.getElementById(ariaLabel));
+
+      window.scroll(0, findPos(document.getElementById(ariaLabel)));
+    },
+    [setCategories, ariaLabel]
+  );
 
   return (
     <IconButton
@@ -64,6 +90,7 @@ export function CategoryButton({
       _before={selectedCategoryBar}
       d='flex'
       icon={<Icon as={categoryIcon} />}
+      onClick={() => handleSelectCategory(index)}
       {...rest}
     />
   );
