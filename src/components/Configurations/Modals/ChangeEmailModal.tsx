@@ -37,8 +37,7 @@ export const toasts = {
 
       toast({
         title: 'Email atualizado com sucesso!',
-        description:
-          'Você precisará verificar seu novo email ao fazer login novamente.',
+        description: 'Você precisará verificar seu novo email.',
         status: 'warning',
       });
     },
@@ -76,7 +75,9 @@ export function ChangeEmailModal() {
             return;
           }
 
-          const { updateEmail } = await import('firebase/auth');
+          const { updateEmail, sendEmailVerification } = await import(
+            'firebase/auth'
+          );
           const { auth } = await import('../../../services/firebase');
 
           const user = auth.currentUser;
@@ -84,6 +85,7 @@ export function ChangeEmailModal() {
           if (!user) return;
 
           await updateEmail(user, email);
+          await sendEmailVerification(user);
 
           if (!contextUser) return;
 
