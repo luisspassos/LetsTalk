@@ -1,6 +1,7 @@
 import { Textarea, useColorModeValue, Flex, HStack } from '@chakra-ui/react';
-import { BaseSyntheticEvent, FormEvent, KeyboardEvent, useState } from 'react';
+import { FormEvent, KeyboardEvent, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
+import { HandleSendMessage } from '..';
 import { MessageFormData } from '../../../../../utils/types';
 import { EmojiButton } from './EmojiButton';
 import { FileButton } from './FileButton';
@@ -11,9 +12,7 @@ type TextAreaSizeEvent = {
 
 type MessageInputProps = {
   register: UseFormRegister<MessageFormData>;
-  handleSendMessage: (
-    e?: BaseSyntheticEvent<object, any, any> | undefined
-  ) => Promise<void>;
+  handleSendMessage: HandleSendMessage;
 };
 
 export function MessageInput({
