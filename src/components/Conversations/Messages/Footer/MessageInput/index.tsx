@@ -1,5 +1,5 @@
 import { Textarea, useColorModeValue, Flex, HStack } from '@chakra-ui/react';
-import { BaseSyntheticEvent, FormEvent, KeyboardEvent } from 'react';
+import { BaseSyntheticEvent, FormEvent, KeyboardEvent, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { MessageFormData } from '../../../../../utils/types';
 import { EmojiButton } from './EmojiButton';
@@ -20,9 +20,17 @@ export function MessageInput({
   register,
   handleSendMessage,
 }: MessageInputProps) {
+  const [enterWasPressedToSendMessage, setEnterWasPressedToSendMessage] =
+    useState(false);
+
   const initialHeight = 45;
 
-  function handleTextAreaSize(e: TextAreaSizeEvent) {
+  async function handleTextAreaSize(e: TextAreaSizeEvent) {
+    if (enterWasPressedToSendMessage) {
+      await handleSendMessage();
+      setEnterWasPressedToSendMessage(false);
+    }
+
     e.target.style.height = 'inherit';
 
     const scrollHeight = e.target.scrollHeight;
@@ -40,7 +48,7 @@ export function MessageInput({
 
   function handleSendMessageWithEnter(e: KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key === 'Enter') {
-      handleSendMessage();
+      setEnterWasPressedToSendMessage(true);
     }
   }
 
