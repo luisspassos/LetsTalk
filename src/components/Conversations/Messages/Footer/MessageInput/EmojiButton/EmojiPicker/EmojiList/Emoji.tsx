@@ -1,6 +1,7 @@
 import { Center, Image } from '@chakra-ui/react';
 import { parse } from 'twemoji-parser';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import { useMessageForm } from '../../../../../../../../contexts/MessageFormContext';
 import { EmojiType } from '../../../../../../../../utils/types';
 
 type EmojiProps = {
@@ -13,58 +14,91 @@ export function Emoji({ emoji, name }: EmojiProps) {
     categories: { setState: setCategories, data: categories },
   } = useEmoji();
 
+  const {
+    messageForm: { getValues: getFormValues, setValue: setFormValues },
+    messageInputRef,
+  } = useMessageForm();
+
   const twemoji =
     emoji === '👁️‍🗨️'
       ? 'https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f441-200d-1f5e8.svg'
       : parse(emoji)[0].url;
 
   function handleSelectEmoji() {
-    const categoriesDataClone = [...categories.data];
+    function addEmojiInRecentCategory() {
+      const categoriesDataClone = [...categories.data];
 
-    const newCategoriesData = categoriesDataClone.map((category) => {
-      const returnCategoriesData = (categoryEmojis: EmojiType[]) => ({
-        ...category,
-        emojis: [
-          {
-            emoji,
-            name,
-          },
-          ...categoryEmojis,
-        ],
-      });
+      const newCategoriesData = categoriesDataClone.map((category) => {
+        const returnCategoriesData = (categoryEmojis: EmojiType[]) => ({
+          ...category,
+          emojis: [
+            {
+              emoji,
+              name,
+            },
+            ...categoryEmojis,
+          ],
+        });
 
-      if (category.name !== 'Recentes') {
-        return category;
-      }
+        if (category.name !== 'Recentes') {
+          return category;
+        }
 
-      const emojiExists = category.emojis.some((emoji) => emoji.name === name);
-
-      if (emojiExists) {
-        const categoryEmojisFiltered = category.emojis.filter(
-          ({ emoji: categoryEmoji }) => categoryEmoji !== emoji
+        const emojiExists = category.emojis.some(
+          (emoji) => emoji.name === name
         );
 
-        return returnCategoriesData(categoryEmojisFiltered);
-      }
+        if (emojiExists) {
+          const categoryEmojisFiltered = category.emojis.filter(
+            ({ emoji: categoryEmoji }) => categoryEmoji !== emoji
+          );
 
-      if (category.emojis.length === 25) {
-        category.emojis.pop();
-      }
+          return returnCategoriesData(categoryEmojisFiltered);
+        }
 
-      return returnCategoriesData(category.emojis);
-    });
+        if (category.emojis.length === 25) {
+          category.emojis.pop();
+        }
 
-    const recentlyUsedEmojis = newCategoriesData[0].emojis;
+        return returnCategoriesData(category.emojis);
+      });
 
-    localStorage.setItem(
-      'recentlyUsedEmojis',
-      JSON.stringify(recentlyUsedEmojis)
-    );
+      const recentlyUsedEmojis = newCategoriesData[0].emojis;
 
-    setCategories((prevState) => ({
-      ...prevState,
-      data: newCategoriesData,
-    }));
+      localStorage.setItem(
+        'recentlyUsedEmojis',
+        JSON.stringify(recentlyUsedEmojis)
+      );
+
+      setCategories((prevState) => ({
+        ...prevState,
+        data: newCategoriesData,
+      }));
+    }
+
+    function addEmojiInMessage() {
+      const message = getFormValues('message');
+
+      const cursorPosition = messageInputRef.current?.selectionStart ?? 0;
+
+      // this code takes into account the cursor position
+
+      const messageBeforeEmoji = message.slice(0, cursorPosition);
+      const messageRest = message.slice(cursorPosition);
+
+      const newMessage = `${messageBeforeEmoji} ${emoji}${messageRest}`;
+
+      setFormValues('message', newMessage.replace(/\s/g, ''));
+
+      messageInputRef.current?.setSelectionRange(
+        cursorPosition + 1,
+        cursorPosition + 1
+      );
+      messageInputRef.current?.focus();
+    }
+
+    addEmojiInMessage();
+    addEmojiInRecentCategory();
   }
 
   return (

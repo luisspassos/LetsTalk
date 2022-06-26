@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <input type="text" id="input" />
+    <button id="copyButton">Copiar e colar emoji</button>
+
+    <script>
+      twemoji.parse(document.body);
+
+      const copyButton = document.getElementById('copyButton');
+      const input = document.getElementById('input');
+
+      copyButton.addEventListener('click', () => {
+        const cursorPosition = input.selectionStart;
+
+        input.value =
+          input.value.slice(0, cursorPosition) +
+          '‍😂‍‍' +
+          input.value.slice(cursorPosition);
+
+        input.setSelectionRange(cursorPosition, cursorPosition);
+        input.focus();
+      });
+    </script>
+  </body>
+</html>

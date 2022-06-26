@@ -1,28 +1,28 @@
 import { Textarea, useColorModeValue, Flex, HStack } from '@chakra-ui/react';
-import { KeyboardEvent, MutableRefObject, useState } from 'react';
-import { UseFormRegister } from 'react-hook-form';
-import { HandleMessageInputSize, HandleSendMessage, MessageInputRef } from '..';
-import { MessageFormData } from '../../../../../utils/types';
+import { KeyboardEvent, useState } from 'react';
+import { HandleMessageInputSize, HandleSendMessage } from '..';
+import { useMessageForm } from '../../../../../contexts/MessageFormContext';
 import { EmojiButton } from './EmojiButton';
 import { FileButton } from './FileButton';
 
 type MessageInputProps = {
-  register: UseFormRegister<MessageFormData>;
   handleSendMessage: HandleSendMessage;
   handleMessageInputSize: HandleMessageInputSize;
-  messageInputRef: MutableRefObject<MessageInputRef>;
 };
 
 export const messageInputInitialHeight = 45;
 
 export function MessageInput({
-  register,
   handleSendMessage,
-  messageInputRef,
   handleMessageInputSize,
 }: MessageInputProps) {
   const [enterWasPressedToSendMessage, setEnterWasPressedToSendMessage] =
     useState(false);
+
+  const {
+    messageForm: { register },
+    messageInputRef,
+  } = useMessageForm();
 
   const { ref, ...registerRest } = register('message');
 

@@ -3,44 +3,33 @@ import { Divider } from '../../../Divider';
 import { MessageInput } from './MessageInput';
 import { EmojiPicker } from './MessageInput/EmojiButton/EmojiPicker';
 import { RecordButtonAudio } from './Buttons/RecordButtonAudio';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { MessageFormData } from '../../../../utils/types';
 import {
   BaseSyntheticEvent,
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import { SendMessageButton } from './Buttons/SendMessageButton';
+import { useMessageForm } from '../../../../contexts/MessageFormContext';
 
 export type HandleSendMessage = (
   e?: BaseSyntheticEvent<object, any, any> | undefined
 ) => Promise<void>;
 
-export type MessageInputRef = HTMLTextAreaElement | null;
-
 export type HandleMessageInputSize = () => Promise<void>;
-
-const messageFormSchema = yup.object().shape({
-  message: yup.string().trim().required(),
-});
 
 export function Footer() {
   const [thereIsNoMessage, setThereIsNoMessage] = useState(true);
 
-  const { register, handleSubmit, reset, watch } = useForm<MessageFormData>({
-    resolver: yupResolver(messageFormSchema),
-  });
-
-  const messageInputRef = useRef<MessageInputRef>(null);
+  const {
+    messageForm: { handleSubmit, reset: resetForm, watch: watchForm },
+    messageInputRef,
+  } = useMessageForm();
 
   useEffect(() => {
     function verifyIfThereIsNoMessage() {
-      const { unsubscribe } = watch(({ message }) => {
+      const { unsubscribe } = watchForm(({ message }) => {
         if (!message) {
           setThereIsNoMessage(true);
         } else {
@@ -54,7 +43,7 @@ export function Footer() {
     const unsub = verifyIfThereIsNoMessage();
 
     return () => unsub();
-  }, [watch]);
+  }, [watchForm]);
 
   const handleMessageInputSize = useCallback(async () => {
     if (messageInputRef.current?.style) {
@@ -78,15 +67,15 @@ export function Footer() {
         messageInputRef.current.style.overflowY = 'hidden';
       }
     }
-  }, []);
+  }, [messageInputRef]);
 
   const handleSendMessage = useMemo(
     () =>
       handleSubmit(async () => {
         console.log('message sent');
-        reset();
+        resetForm();
       }),
-    [handleSubmit, reset]
+    [handleSubmit, resetForm]
   );
 
   return (
@@ -105,8 +94,6 @@ export function Footer() {
         <MessageInput
           handleSendMessage={handleSendMessage}
           handleMessageInputSize={handleMessageInputSize}
-          register={register}
-          messageInputRef={messageInputRef}
         />
         {thereIsNoMessage ? (
           <RecordButtonAudio />
