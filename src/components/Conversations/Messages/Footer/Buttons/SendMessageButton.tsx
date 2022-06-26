@@ -1,20 +1,25 @@
 import { IoIosSend } from 'react-icons/io';
 import { Button } from '.';
-import { HandleSendMessage } from '..';
+import { HandleMessageInputSize, HandleSendMessage } from '..';
 
 type SendMessageButtonProps = {
   handleSendMessage: HandleSendMessage;
+  handleMessageInputSize: HandleMessageInputSize;
 };
 
 export function SendMessageButton({
   handleSendMessage,
+  handleMessageInputSize,
 }: SendMessageButtonProps) {
   return (
     <Button
       fontSize='30px'
       icon={IoIosSend}
       label='Enviar mensagem'
-      onClick={handleSendMessage}
+      onClick={async () => {
+        await handleSendMessage();
+        await handleMessageInputSize();
+      }}
     />
   );
 }

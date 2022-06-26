@@ -1,48 +1,38 @@
 import { Textarea, useColorModeValue, Flex, HStack } from '@chakra-ui/react';
-import { FormEvent, KeyboardEvent, useState } from 'react';
+import { KeyboardEvent, MutableRefObject, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
-import { HandleSendMessage } from '..';
+import { HandleMessageInputSize, HandleSendMessage, MessageInputRef } from '..';
 import { MessageFormData } from '../../../../../utils/types';
 import { EmojiButton } from './EmojiButton';
 import { FileButton } from './FileButton';
 
-type TextAreaSizeEvent = {
-  target: HTMLTextAreaElement;
-} & FormEvent<HTMLTextAreaElement>;
-
 type MessageInputProps = {
   register: UseFormRegister<MessageFormData>;
   handleSendMessage: HandleSendMessage;
+  handleMessageInputSize: HandleMessageInputSize;
+  messageInputRef: MutableRefObject<MessageInputRef>;
 };
+
+export const messageInputInitialHeight = 45;
 
 export function MessageInput({
   register,
   handleSendMessage,
+  messageInputRef,
+  handleMessageInputSize,
 }: MessageInputProps) {
   const [enterWasPressedToSendMessage, setEnterWasPressedToSendMessage] =
     useState(false);
 
-  const initialHeight = 45;
+  const { ref, ...registerRest } = register('message');
 
-  async function handleTextAreaSize(e: TextAreaSizeEvent) {
+  async function handleTextAreaSize() {
     if (enterWasPressedToSendMessage) {
       await handleSendMessage();
       setEnterWasPressedToSendMessage(false);
     }
 
-    e.target.style.height = 'inherit';
-
-    const scrollHeight = e.target.scrollHeight;
-    const textAreaHeight = Math.min(Math.max(scrollHeight, initialHeight), 199);
-
-    e.target.style.height = `${textAreaHeight}px`;
-    e.target.scrollTop = scrollHeight;
-
-    if (scrollHeight > 199) {
-      e.target.style.overflowY = 'visible';
-    } else {
-      e.target.style.overflowY = 'hidden';
-    }
+    handleMessageInputSize();
   }
 
   function handleSendMessageWithEnter(e: KeyboardEvent<HTMLTextAreaElement>) {
@@ -59,7 +49,7 @@ export function MessageInput({
         onKeyDown={handleSendMessageWithEnter}
         resize='none'
         overflowY='hidden'
-        h={`${initialHeight}px`}
+        h={`${messageInputInitialHeight}px`}
         borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
         bg={useColorModeValue('white', 'blackAlpha.500')}
         fontFamily='Roboto'
@@ -84,7 +74,11 @@ export function MessageInput({
             borderWidth: '9px 3px',
           },
         }}
-        {...register('message')}
+        {...registerRest}
+        ref={(e) => {
+          ref(e);
+          messageInputRef.current = e;
+        }}
       />
       <HStack pos='absolute' spacing='5px' mr='10px' zIndex='1'>
         <EmojiButton />

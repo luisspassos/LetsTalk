@@ -7,12 +7,23 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MessageFormData } from '../../../../utils/types';
-import { BaseSyntheticEvent, useEffect, useState } from 'react';
+import {
+  BaseSyntheticEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { SendMessageButton } from './Buttons/SendMessageButton';
 
 export type HandleSendMessage = (
   e?: BaseSyntheticEvent<object, any, any> | undefined
 ) => Promise<void>;
+
+export type MessageInputRef = HTMLTextAreaElement | null;
+
+export type HandleMessageInputSize = () => Promise<void>;
 
 const messageFormSchema = yup.object().shape({
   message: yup.string().trim().required(),
@@ -25,22 +36,58 @@ export function Footer() {
     resolver: yupResolver(messageFormSchema),
   });
 
-  useEffect(() => {
-    const { unsubscribe } = watch(({ message }) => {
-      if (!message) {
-        setThereIsNoMessage(true);
-      } else {
-        setThereIsNoMessage(false);
-      }
-    });
+  const messageInputRef = useRef<MessageInputRef>(null);
 
-    return () => unsubscribe();
+  useEffect(() => {
+    function verifyIfThereIsNoMessage() {
+      const { unsubscribe } = watch(({ message }) => {
+        if (!message) {
+          setThereIsNoMessage(true);
+        } else {
+          setThereIsNoMessage(false);
+        }
+      });
+
+      return () => unsubscribe();
+    }
+
+    const unsub = verifyIfThereIsNoMessage();
+
+    return () => unsub();
   }, [watch]);
 
-  const handleSendMessage = handleSubmit(async () => {
-    console.log('Send message');
-    reset();
-  });
+  const handleMessageInputSize = useCallback(async () => {
+    if (messageInputRef.current?.style) {
+      messageInputRef.current.style.height = 'inherit';
+
+      const scrollHeight = messageInputRef.current.scrollHeight;
+      const { messageInputInitialHeight } = await import(
+        './MessageInput/index'
+      );
+      const textAreaHeight = Math.min(
+        Math.max(scrollHeight, messageInputInitialHeight),
+        199
+      );
+
+      messageInputRef.current.style.height = `${textAreaHeight}px`;
+      messageInputRef.current.scrollTop = scrollHeight;
+
+      if (scrollHeight > 199) {
+        messageInputRef.current.style.overflowY = 'visible';
+      } else {
+        messageInputRef.current.style.overflowY = 'hidden';
+      }
+    }
+  }, []);
+
+  const handleSendMessage = useMemo(
+    () =>
+      handleSubmit(async () => {
+        console.log('message sent');
+        reset();
+      }),
+    [handleSubmit, reset]
+  );
 
   return (
     <FormControl as='form' mt='auto'>
@@ -57,12 +104,17 @@ export function Footer() {
       >
         <MessageInput
           handleSendMessage={handleSendMessage}
+          handleMessageInputSize={handleMessageInputSize}
           register={register}
+          messageInputRef={messageInputRef}
         />
         {thereIsNoMessage ? (
           <RecordButtonAudio />
         ) : (
-          <SendMessageButton handleSendMessage={handleSendMessage} />
+          <SendMessageButton
+            handleSendMessage={handleSendMessage}
+            handleMessageInputSize={handleMessageInputSize}
+          />
         )}
       </Flex>
     </FormControl>
