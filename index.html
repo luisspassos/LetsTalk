@@ -9,28 +9,48 @@
       src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"
       crossorigin="anonymous"
     ></script>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .container button {
+        height: 50px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .container input {
+        height: 40px;
+        width: 500px;
+        font-size: 20px;
+      }
+    </style>
   </head>
   <body>
-    <input type="text" id="input" />
-    <button id="copyButton">Copiar e colar emoji</button>
+    <div class="container">
+      <input type="text" id="input" />
+      <button id="copyButton">Copiar e colar emoji</button>
+    </div>
 
     <script>
-      twemoji.parse(document.body);
-
       const copyButton = document.getElementById('copyButton');
       const input = document.getElementById('input');
 
-      copyButton.addEventListener('click', () => {
-        const cursorPosition = input.selectionStart;
-
-        input.value =
-          input.value.slice(0, cursorPosition) +
-          '‍😂‍‍' +
-          input.value.slice(cursorPosition);
-
-        input.setSelectionRange(cursorPosition, cursorPosition);
-        input.focus();
+      copyButton.addEventListener('mousedown', (e) => {
+        e.preventDefault();
       });
+
+      copyButton.addEventListener('click', () => {});
     </script>
   </body>
 </html>
