@@ -10,6 +10,13 @@
       crossorigin="anonymous"
     ></script>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
       body {
         height: 100vh;
         display: flex;
@@ -20,37 +27,120 @@
       .container {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 0.625rem;
       }
 
       .container button {
-        height: 50px;
-        font-size: 20px;
+        height: 3.125rem;
+        font-size: 1.25rem;
         font-weight: bold;
       }
 
-      .container input {
-        height: 40px;
-        width: 500px;
-        font-size: 20px;
+      .messageInput {
+        min-height: 2.5rem;
+        width: 31.25rem;
+        font-size: 1.25rem;
+        border: 1px solid white;
+        background-color: darkgray;
+        padding: 0.78125rem 0.625rem;
+      }
+
+      .emojiWrapper {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .emoji {
+        height: 1em;
+        width: 1em;
+        margin: 0 0.1em 0 0.2em;
+        vertical-align: -0.1em;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <input type="text" id="input" />
+      <div contenteditable="plaintext-only" class="messageInput"></div>
       <button id="copyButton">Copiar e colar emoji</button>
     </div>
 
     <script>
       const copyButton = document.getElementById('copyButton');
-      const input = document.getElementById('input');
+      const messageInput = document.querySelector('.messageInput');
+
+      const selection = window.getSelection();
+
+      messageInput.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+      });
+
+      messageInput.addEventListener('drop', (e) => {
+        const draggedText = e.dataTransfer.getData('text');
+
+        e.dataTransfer.setData('text', draggedText);
+
+        setTimeout(() => {
+          twemoji.parse(messageInput);
+        }, 1);
+      });
+
+      messageInput.addEventListener('paste', (e) => {
+        e.preventDefault();
+
+        const paste = (e.clipboardData || window.clipboardData).getData('text');
+
+        if (!selection.rangeCount) return;
+
+        selection.deleteFromDocument();
+        selection.getRangeAt(0).insertNode(document.createTextNode(paste));
+        selection.collapseToEnd();
+
+        twemoji.parse(messageInput);
+      });
 
       copyButton.addEventListener('mousedown', (e) => {
         e.preventDefault();
       });
 
-      copyButton.addEventListener('click', () => {});
+      function insertTextAtCursor() {
+        const emojiInserted = document.createElement('img');
+        emojiInserted.src =
+          'https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f415-200d-1f9ba.svg';
+        emojiInserted.alt = '🐕‍🦺';
+        emojiInserted.classList.add('emoji');
+
+        const focusedElem = document.activeElement;
+        const messageInputIsFocused = focusedElem.className === 'messageInput';
+
+        if (!messageInputIsFocused) {
+          messageInput.focus();
+          messageInput.innerHTML += emojiInserted.outerHTML;
+
+          function putCursorAtTheEnd() {
+            selection.selectAllChildren(messageInput);
+            selection.collapseToEnd();
+          }
+
+          putCursorAtTheEnd();
+
+          return;
+        }
+
+        function positionCursor() {
+          const range = selection.getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(emojiInserted);
+          range.setStartAfter(emojiInserted);
+
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+
+        positionCursor();
+      }
+
+      copyButton.addEventListener('click', insertTextAtCursor);
     </script>
   </body>
 </html>
