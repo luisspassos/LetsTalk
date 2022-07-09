@@ -40,9 +40,11 @@
         min-height: 2.5rem;
         width: 31.25rem;
         font-size: 1.25rem;
+        line-height: 1.5rem;
         border: 1px solid white;
         background-color: darkgray;
         padding: 0.78125rem 0.625rem;
+        display: inline-block;
       }
 
       .emojiWrapper {
@@ -54,14 +56,14 @@
       .emoji {
         height: 1em;
         width: 1em;
-        margin: 0 0.1em 0 0.2em;
+        margin: 0 0.05em 0 0.1em;
         vertical-align: -0.1em;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div contenteditable="plaintext-only" class="messageInput"></div>
+      <div contenteditable id="messageInput" class="messageInput"></div>
       <button id="copyButton">Copiar e colar emoji</button>
     </div>
 
@@ -70,38 +72,6 @@
       const messageInput = document.querySelector('.messageInput');
 
       const selection = window.getSelection();
-
-      messageInput.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-      });
-
-      messageInput.addEventListener('drop', (e) => {
-        const draggedText = e.dataTransfer.getData('text');
-
-        e.dataTransfer.setData('text', draggedText);
-
-        setTimeout(() => {
-          twemoji.parse(messageInput);
-        }, 1);
-      });
-
-      messageInput.addEventListener('paste', (e) => {
-        e.preventDefault();
-
-        const paste = (e.clipboardData || window.clipboardData).getData('text');
-
-        if (!selection.rangeCount) return;
-
-        selection.deleteFromDocument();
-        selection.getRangeAt(0).insertNode(document.createTextNode(paste));
-        selection.collapseToEnd();
-
-        twemoji.parse(messageInput);
-      });
-
-      copyButton.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-      });
 
       function insertTextAtCursor() {
         const emojiInserted = document.createElement('img');
@@ -139,6 +109,61 @@
 
         positionCursor();
       }
+
+      function convertTextFromMessageInputToHtml(text) {
+        const convertedText = twemoji.parse(text);
+
+        const convertedTextHtml = document.createElement('span');
+        convertedTextHtml.innerHTML = convertedText;
+
+        return convertedTextHtml;
+      }
+
+      messageInput.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+      });
+
+      messageInput.addEventListener('input', (e) => {});
+
+      messageInput.addEventListener('drop', (e) => {
+        e.preventDefault();
+
+        const dataTransfer = e.dataTransfer;
+        const draggedText = dataTransfer.getData('text');
+        const convertedDraggedTextHtml =
+          convertTextFromMessageInputToHtml(draggedText);
+
+        let range;
+
+        if (document.caretRangeFromPoint) {
+          range = document.caretRangeFromPoint(e.clientX, e.clientY);
+        } else {
+          const pos = [e.rangeParent, e.rangeOffset];
+          range = document.createRange();
+          range.setStart(...pos);
+          range.setEnd(...pos);
+        }
+
+        range.insertNode(convertedDraggedTextHtml);
+      });
+
+      messageInput.addEventListener('paste', (e) => {
+        e.preventDefault();
+
+        const paste = (e.clipboardData || window.clipboardData).getData('text');
+
+        const convertedPasteHtml = convertTextFromMessageInputToHtml(paste);
+
+        if (!selection.rangeCount) return;
+
+        selection.deleteFromDocument();
+        selection.getRangeAt(0).insertNode(convertedPasteHtml);
+        selection.collapseToEnd();
+      });
+
+      copyButton.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+      });
 
       copyButton.addEventListener('click', insertTextAtCursor);
     </script>
