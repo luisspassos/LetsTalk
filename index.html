@@ -124,21 +124,18 @@
 
       let oldMessage = '';
 
-      let continueBeforeInputEvent = true;
-
       messageInput.addEventListener('beforeinput', (e) => {
-        if (!continueBeforeInputEvent) return;
-
         oldMessage = e.target.innerHTML;
-
-        continueBeforeInputEvent = false;
-
-        setTimeout(() => {
-          continueBeforeInputEvent = true;
-        }, 0);
       });
 
+      let continueInputEvent = true;
+
       messageInput.addEventListener('input', (e) => {
+        if (!continueInputEvent) {
+          e.target.innerHTML = oldMessage;
+          return;
+        }
+
         const message = e.target.innerHTML;
         const messageArr = [...message];
 
@@ -158,6 +155,12 @@
         console.log(newMessage);
 
         e.target.innerHTML = newMessage;
+
+        continueInputEvent = false;
+
+        setTimeout(() => {
+          continueInputEvent = true;
+        }, 0);
       });
 
       messageInput.addEventListener('drop', (e) => {
