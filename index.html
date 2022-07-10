@@ -122,41 +122,83 @@
         e.preventDefault();
       });
 
-      let oldMessage = '';
-
-      messageInput.addEventListener('beforeinput', (e) => {
-        oldMessage = e.target.innerHTML;
-      });
-
       let continueInputEvent = true;
 
+      let oldMessage = '';
+
+      function getCaretPosition(editableDiv) {
+        var caretPos = 0,
+          sel,
+          range;
+        if (window.getSelection) {
+          sel = window.getSelection();
+          if (sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            if (range.commonAncestorContainer.parentNode == editableDiv) {
+              caretPos = range.endOffset;
+            }
+          }
+        } else if (document.selection && document.selection.createRange) {
+          range = document.selection.createRange();
+          if (range.parentElement() == editableDiv) {
+            var tempEl = document.createElement('span');
+            editableDiv.insertBefore(tempEl, editableDiv.firstChild);
+            var tempRange = range.duplicate();
+            tempRange.moveToElementText(tempEl);
+            tempRange.setEndPoint('EndToEnd', range);
+            caretPos = tempRange.text.length;
+          }
+        }
+        return caretPos;
+      }
+
+      messageInput.addEventListener('beforeinput', (e) => {
+        oldMessage = messageInput.innerHTML;
+      });
+
+      let cursorPosition = 0;
+
       messageInput.addEventListener('input', (e) => {
+        cursorPosition = getCaretPosition(messageInput);
+
         if (!continueInputEvent) {
-          e.target.innerHTML = oldMessage;
+          messageInput.innerHTML = oldMessage;
+          var el = document.getElementsByClassName('emoji')[0];
+
+          if (!el) return;
+
+          var range = document.createRange();
+          var sel = window.getSelection();
+          range.setStartAfter(el);
+          range.collapse(true);
+          sel.removeAllRanges();
+          sel.addRange(range);
           return;
         }
 
-        const message = e.target.innerHTML;
-        const messageArr = [...message];
+        console.log(cursorPosition);
 
-        const [newValue] = messageArr.filter(
-          (m, i) => m !== [...oldMessage][i]
-        );
+        const emojis = messageInput.querySelectorAll('img');
 
-        const emojiRegex = /\p{Extended_Pictographic}/u;
-        const ItsNotAnEmoji = !emojiRegex.test(newValue);
+        emojis.forEach((img) => {
+          messageInput.replaceChild(document.createTextNode(img.alt), img);
+        });
 
-        if (ItsNotAnEmoji) return;
+        const message = messageInput.textContent;
+        const newMessage = twemoji.parse(message);
 
-        const emojiParsed = twemoji.parse(newValue);
+        messageInput.innerHTML = newMessage;
 
-        const newMessage = message.replace(newValue, emojiParsed);
-
-        e.target.innerHTML = newMessage;
+        var el = document.getElementsByClassName('emoji')[0];
+        var range = document.createRange();
+        var sel = window.getSelection();
+        range.setStartAfter(el);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
 
         continueInputEvent = false;
 
-        // to fix the duplicate emojis bug
         setTimeout(() => {
           continueInputEvent = true;
         }, 0);

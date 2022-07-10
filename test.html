@@ -57,14 +57,21 @@
 
     <script>
       const messageInput = document.querySelector('.messageInput');
-
       const emojis = messageInput.querySelectorAll('img');
 
-      emojis.forEach((img) => {
-        messageInput.replaceChild(document.createTextNode(img.alt), img);
-      });
+      var el = document.getElementsByClassName('emoji')[0];
+      var range = document.createRange();
+      var sel = window.getSelection();
+      range.setStartAfter(el);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
 
-      console.log(emojis);
+      setTimeout(() => {
+        emojis.forEach((img) => {
+          messageInput.replaceChild(document.createTextNode(img.alt), img);
+        });
+      }, 2000);
     </script>
   </body>
 </html>
