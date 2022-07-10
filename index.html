@@ -152,12 +152,11 @@
 
         const newMessage = message.replace(newValue, emojiParsed);
 
-        console.log(newMessage);
-
         e.target.innerHTML = newMessage;
 
         continueInputEvent = false;
 
+        // to fix the duplicate emojis bug
         setTimeout(() => {
           continueInputEvent = true;
         }, 0);

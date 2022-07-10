@@ -37,42 +37,34 @@
   </head>
   <body>
     <div contenteditable class="messageInput">
-      b
       <img
         src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
+        alt="😀"
         draggable="false"
         class="emoji"
-      />a<img
+      /><img
         src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
+        alt="😀"
         draggable="false"
         class="emoji"
-      />t<img
+      /><img
         src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
+        alt="😀"
         draggable="false"
         class="emoji"
-      />a<img
-        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
-        draggable="false"
-        class="emoji"
-      />t<img
-        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
-        draggable="false"
-        class="emoji"
-      />a
+      />
     </div>
 
     <script>
-      function setCursor(i) {
-        var el = document.getElementsByClassName('emoji')[i];
-        var range = document.createRange();
-        var sel = window.getSelection();
-        range.setStartAfter(el);
-        range.collapse();
-        sel.removeAllRanges();
-        sel.addRange(range);
-      }
+      const messageInput = document.querySelector('.messageInput');
 
-      setCursor(1);
+      const emojis = messageInput.querySelectorAll('img');
+
+      emojis.forEach((img) => {
+        messageInput.replaceChild(document.createTextNode(img.alt), img);
+      });
+
+      console.log(emojis);
     </script>
   </body>
 </html>
