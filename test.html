@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .messageInput {
+        width: 300px;
+        height: 50px;
+        background-color: darkgray;
+        font-size: 2rem;
+        padding: 0rem 1rem;
+      }
+
+      .emoji {
+        height: 1em;
+        width: 1em;
+        margin: 0 0.05em 0 0.1em;
+        vertical-align: -0.1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div contenteditable class="messageInput">
+      b
+      <img
+        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
+        draggable="false"
+        class="emoji"
+      />a<img
+        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
+        draggable="false"
+        class="emoji"
+      />t<img
+        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
+        draggable="false"
+        class="emoji"
+      />a<img
+        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
+        draggable="false"
+        class="emoji"
+      />t<img
+        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
+        draggable="false"
+        class="emoji"
+      />a
+    </div>
+
+    <script>
+      function setCursor(i) {
+        var el = document.getElementsByClassName('emoji')[i];
+        var range = document.createRange();
+        var sel = window.getSelection();
+        range.setStartAfter(el);
+        range.collapse();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+
+      setCursor(1);
+    </script>
+  </body>
+</html>

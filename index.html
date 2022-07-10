@@ -139,24 +139,25 @@
       });
 
       messageInput.addEventListener('input', (e) => {
-        const cursorPosition = selection.getRangeAt(0).startOffset;
+        const message = e.target.innerHTML;
+        const messageArr = [...message];
 
-        const message = [...e.target.innerHTML];
+        const [newValue] = messageArr.filter(
+          (m, i) => m !== [...oldMessage][i]
+        );
 
-        const [newValue] = message.filter((m, i) => m !== oldMessage[i]);
+        const emojiRegex = /\p{Extended_Pictographic}/u;
+        const ItsNotAnEmoji = !emojiRegex.test(newValue);
 
-        messageInput.innerHTML = oldMessage;
+        if (ItsNotAnEmoji) return;
 
-        const newValueConverted = convertTextFromMessageInputToHtml(newValue);
+        const emojiParsed = twemoji.parse(newValue);
 
-        const range = document.createRange();
+        const newMessage = message.replace(newValue, emojiParsed);
 
-        selection.getRangeAt(0).insertNode(newValueConverted);
-        range.setStart(newValueConverted, 1);
-        range.collapse(true);
+        console.log(newMessage);
 
-        selection.removeAllRanges();
-        selection.addRange(range);
+        e.target.innerHTML = newMessage;
       });
 
       messageInput.addEventListener('drop', (e) => {
