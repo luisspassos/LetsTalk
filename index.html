@@ -138,27 +138,21 @@
         }, 0);
       });
 
-      let cursorPosition = 0;
-
       messageInput.addEventListener('input', (e) => {
-        cursorPosition = selection.getRangeAt(0).startOffset;
+        const cursorPosition = selection.getRangeAt(0).startOffset;
 
         const message = [...e.target.innerHTML];
 
         const [newValue] = message.filter((m, i) => m !== oldMessage[i]);
 
-        const emojiRegex = /\p{Extended_Pictographic}/u;
-        const ItsNotAnEmoji = !emojiRegex.test(newValue);
-
-        if (ItsNotAnEmoji) return;
-
         messageInput.innerHTML = oldMessage;
 
-        const range = document.createRange();
         const newValueConverted = convertTextFromMessageInputToHtml(newValue);
 
-        range.setEnd(messageInput.childNodes[0], cursorPosition);
-        range.insertNode(newValueConverted);
+        const range = document.createRange();
+
+        selection.getRangeAt(0).insertNode(newValueConverted);
+        range.setStart(newValueConverted, 1);
         range.collapse(true);
 
         selection.removeAllRanges();
