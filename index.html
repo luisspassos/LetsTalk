@@ -44,7 +44,6 @@
         border: 1px solid white;
         background-color: darkgray;
         padding: 0.78125rem 0.625rem;
-        display: inline-block;
       }
 
       .emojiWrapper {
@@ -64,7 +63,7 @@
   <body>
     <div class="container">
       <div contenteditable id="messageInput" class="messageInput"></div>
-      <button id="copyButton">Copiar e colar emoji</button>
+      <button id="copyButton">Copy and paste emoji</button>
     </div>
 
     <script>
@@ -123,7 +122,48 @@
         e.preventDefault();
       });
 
-      messageInput.addEventListener('input', (e) => {});
+      let oldMessage = '';
+
+      let continueBeforeInputEvent = true;
+
+      messageInput.addEventListener('beforeinput', (e) => {
+        if (!continueBeforeInputEvent) return;
+
+        oldMessage = e.target.innerHTML;
+
+        continueBeforeInputEvent = false;
+
+        setTimeout(() => {
+          continueBeforeInputEvent = true;
+        }, 0);
+      });
+
+      let cursorPosition = 0;
+
+      messageInput.addEventListener('input', (e) => {
+        cursorPosition = selection.getRangeAt(0).startOffset;
+
+        const message = [...e.target.innerHTML];
+
+        const [newValue] = message.filter((m, i) => m !== oldMessage[i]);
+
+        const emojiRegex = /\p{Extended_Pictographic}/u;
+        const ItsNotAnEmoji = !emojiRegex.test(newValue);
+
+        if (ItsNotAnEmoji) return;
+
+        messageInput.innerHTML = oldMessage;
+
+        const range = document.createRange();
+        const newValueConverted = convertTextFromMessageInputToHtml(newValue);
+
+        range.setEnd(messageInput.childNodes[0], cursorPosition);
+        range.insertNode(newValueConverted);
+        range.collapse(true);
+
+        selection.removeAllRanges();
+        selection.addRange(range);
+      });
 
       messageInput.addEventListener('drop', (e) => {
         e.preventDefault();
