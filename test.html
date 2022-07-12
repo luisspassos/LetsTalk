@@ -42,36 +42,44 @@
         alt="😀"
         draggable="false"
         class="emoji"
+        id="emoji1"
       /><img
         src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
         alt="😀"
         draggable="false"
         class="emoji"
+        id="emoji2"
       /><img
         src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
         alt="😀"
         draggable="false"
         class="emoji"
-      />
+      />batata
     </div>
 
     <script>
       const messageInput = document.querySelector('.messageInput');
-      const emojis = messageInput.querySelectorAll('img');
+      const emojis = [...messageInput.querySelectorAll('.emoji')];
 
-      var el = document.getElementsByClassName('emoji')[0];
-      var range = document.createRange();
-      var sel = window.getSelection();
-      range.setStartAfter(el);
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
+      const emoji = emojis.find((emoji) => !emoji.id);
 
       setTimeout(() => {
-        emojis.forEach((img) => {
-          messageInput.replaceChild(document.createTextNode(img.alt), img);
-        });
-      }, 2000);
+        emoji.id = 'emoji3';
+
+        console.log(emoji.id);
+      }, 3000);
+
+      // firstEmoji.classList.add('emoji1');
+
+      // const emoji = messageInput.querySelector('.emoji1');
+
+      // const selection = window.getSelection();
+      // const range = document.createRange();
+
+      // range.setStartAfter(emoji);
+
+      // selection.removeAllRanges();
+      // selection.addRange(range);
     </script>
   </body>
 </html>
