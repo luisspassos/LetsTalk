@@ -58,6 +58,39 @@
         margin: 0 0.05em 0 0.1em;
         vertical-align: -0.1em;
       }
+
+      .emojiIsFirstChild {
+        margin: 0 0.05em 0 0;
+      }
+
+      .emojiIsLastChild {
+        margin: 0 0 0 0.1em;
+      }
+
+      .emojiIsFirstChildAndLast {
+        margin: 0;
+      }
+
+      .selectedEmoji {
+        margin: 0;
+      }
+
+      .selectedEmojiDefault {
+        width: calc(1em + 0.05em + 0.1em);
+        padding: 0 0.05em 0 0.1em;
+      }
+
+      .selectedEmojiIsFirstChild {
+        width: calc(1em + 0.05em);
+        padding: 0 0.05em 0 0;
+      }
+
+      .selectedEmojiIsLastChild {
+        width: calc(1em + 0.1em);
+        padding: 0 0 0 0.1em;
+      }
+
+
     </style>
   </head>
   <body>
@@ -176,6 +209,21 @@
         emojis.forEach((emoji) => {
           if (!emoji.id) {
             emoji.id = 'messageInputEmoji' + currentEmojiId;
+          }
+
+          const firstChildOfMessageInput = messageInput.firstChild;
+          const lastChildOfMessageInput = messageInput.lastChild;
+
+          if (firstChildOfMessageInput === emoji) {
+            emoji.classList.add('emojiIsFirstChild')
+          } else {
+            emoji.classList.remove('emojiIsFirstChild')
+          }
+
+          if (lastChildOfMessageInput === emoji) {
+            emoji.classList.add('emojiIsLastChild')
+          } else {
+            emoji.classList.remove('emojiIsLastChild')
           }
         });
 
