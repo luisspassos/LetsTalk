@@ -122,16 +122,15 @@
         e.preventDefault();
       });
 
-      let continueInputEvent = true;
-
       let oldMessage = '';
 
       messageInput.addEventListener('beforeinput', (e) => {
         oldMessage = messageInput.innerHTML;
       });
 
+      let continueInputEvent = true;
+
       let currentEmojiId = 0;
-      let emojiWithoutId;
 
       messageInput.addEventListener('input', (e) => {
         const emojiRegex = /\p{Extended_Pictographic}/u;
@@ -158,21 +157,27 @@
           return;
         }
 
-        const emojis = messageInput.querySelectorAll('img');
+        const message = messageInput.innerHTML;
 
-        emojis.forEach((img) => {
-          messageInput.replaceChild(document.createTextNode(img.alt), img);
-        });
+        const newMessageHtml = document.createElement('span');
 
-        const message = messageInput.textContent;
-        const newMessage = twemoji.parse(message);
+        newMessageHtml.innerHTML = message;
+
+        twemoji.parse(newMessageHtml);
+
+        const newMessage = newMessageHtml.innerHTML;
 
         messageInput.innerHTML = newMessage;
 
-        const newEmojis = [...messageInput.querySelectorAll('.emoji')];
-        emojiWithoutId = newEmojis.find((emoji) => !emoji.id);
+        const emojis = document.querySelectorAll('.emoji');
+
         currentEmojiId++;
-        emojiWithoutId.id = 'messageInputEmoji' + currentEmojiId;
+
+        emojis.forEach((emoji) => {
+          if (!emoji.id) {
+            emoji.id = 'messageInputEmoji' + currentEmojiId;
+          }
+        });
 
         continueInputEvent = false;
 
