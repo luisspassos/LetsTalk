@@ -90,12 +90,16 @@
     <script>
       const messageInput = document.querySelector('.messageInput');
 
-      function handleHaveSelectedText() {
+      function thereIsNoSelectionInTheDocumentOrMessageInput() {
         const selection = window.getSelection();
         const haveSelection = !selection.isCollapsed;
         const isMessageInput =
           selection.anchorNode?.className === 'messageInput';
 
+        return !haveSelection || !isMessageInput;
+      }
+
+      function handleHaveSelectedText() {
         const emojis = messageInput.querySelectorAll('.emoji');
 
         function handleClasses(type) {
@@ -111,15 +115,19 @@
 
             if (firstChildOfMessageInput === emoji) {
               classListFunc('selectedEmojiIsFirstChild');
-            } else if (lastChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsLastChild');
-            } else {
-              classListFunc('selectedEmojiDefault');
+              return;
             }
+
+            if (lastChildOfMessageInput === emoji) {
+              classListFunc('selectedEmojiIsLastChild');
+              return;
+            }
+
+            classListFunc('selectedEmojiDefault');
           });
         }
 
-        if (!isMessageInput || !haveSelection) {
+        if (thereIsNoSelectionInTheDocumentOrMessageInput()) {
           handleClasses('remove');
 
           return;
@@ -130,13 +138,17 @@
 
       document.addEventListener('selectionchange', handleHaveSelectedText);
 
-      document.addEventListener('mouseup', () => {});
+      function handleCursorAfterDeselect() {
+        if (thereIsNoSelectionInTheDocumentOrMessageInput()) return;
 
-      // messageInput.addEventListener('click', haveSelectedText);
+        messageInput.classList.add('invisibleCaret');
 
-      // messageInput.addEventListener('mousemove', haveSelectedText);
+        setTimeout(() => {
+          messageInput.classList.remove('invisibleCaret');
+        }, 1);
+      }
 
-      // messageInput.addEventListener('keyup', haveSelectedText);
+      messageInput.addEventListener('mouseup', handleCursorAfterDeselect);
     </script>
   </body>
 </html>
