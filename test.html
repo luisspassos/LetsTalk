@@ -33,6 +33,12 @@
         margin: 0 0.05em 0 0.1em;
         vertical-align: -0.1em;
       }
+
+      .selectedEmoji {
+        width: calc(1em + 0.05em + 0.1em);
+        margin: 0;
+        padding: 0 0.05em 0 0.1em;
+      }
     </style>
   </head>
   <body>
@@ -54,32 +60,28 @@
         alt="😀"
         draggable="false"
         class="emoji"
-      />batata
+      />
     </div>
 
     <script>
       const messageInput = document.querySelector('.messageInput');
-      const emojis = [...messageInput.querySelectorAll('.emoji')];
 
-      const emoji = emojis.find((emoji) => !emoji.id);
+      function haveSelectedText() {
+        const selection = window.getSelection();
+        const haveSelection = !selection.isCollapsed;
 
-      setTimeout(() => {
-        emoji.id = 'emoji3';
+        const emojis = messageInput.querySelectorAll('.emoji');
 
-        console.log(emoji.id);
-      }, 3000);
+        if (haveSelection) {
+          emojis.forEach((emoji) => emoji.classList.add('selectedEmoji'));
+        } else {
+          emojis.forEach((emoji) => emoji.classList.remove('selectedEmoji'));
+        }
+      }
 
-      // firstEmoji.classList.add('emoji1');
+      messageInput.addEventListener('mousemove', haveSelectedText);
 
-      // const emoji = messageInput.querySelector('.emoji1');
-
-      // const selection = window.getSelection();
-      // const range = document.createRange();
-
-      // range.setStartAfter(emoji);
-
-      // selection.removeAllRanges();
-      // selection.addRange(range);
+      messageInput.addEventListener('keyup', haveSelectedText);
     </script>
   </body>
 </html>
