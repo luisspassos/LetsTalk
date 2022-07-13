@@ -27,6 +27,10 @@
         padding: 0rem 1rem;
       }
 
+      .invisibleCaret {
+        caret-color: transparent;
+      }
+
       .emoji {
         height: 1em;
         width: 1em;
@@ -86,43 +90,47 @@
     <script>
       const messageInput = document.querySelector('.messageInput');
 
-      function haveSelectedText() {
+      function handleHaveSelectedText() {
         const selection = window.getSelection();
         const haveSelection = !selection.isCollapsed;
         const isMessageInput =
-          selection.anchorNode.className === 'messageInput';
-
-        if (!isMessageInput) return;
+          selection.anchorNode?.className === 'messageInput';
 
         const emojis = messageInput.querySelectorAll('.emoji');
 
         function handleClasses(type) {
           emojis.forEach((emoji) => {
-            emoji.classList[type]('selectedEmoji');
+            function classListFunc(className) {
+              emoji.classList[type](className);
+            }
+
+            classListFunc('selectedEmoji');
 
             const firstChildOfMessageInput = messageInput.firstElementChild;
             const lastChildOfMessageInput = messageInput.lastElementChild;
 
             if (firstChildOfMessageInput === emoji) {
-              emoji.classList[type]('selectedEmojiIsFirstChild');
+              classListFunc('selectedEmojiIsFirstChild');
             } else if (lastChildOfMessageInput === emoji) {
-              emoji.classList[type]('selectedEmojiIsLastChild');
+              classListFunc('selectedEmojiIsLastChild');
             } else {
-              emoji.classList[type]('selectedEmojiDefault');
+              classListFunc('selectedEmojiDefault');
             }
           });
         }
 
-        if (haveSelection) {
-          handleClasses('add');
-        } else {
+        if (!isMessageInput || !haveSelection) {
           handleClasses('remove');
+
+          return;
         }
+
+        handleClasses('add');
       }
 
-      document.addEventListener('selectionchange', haveSelectedText);
+      document.addEventListener('selectionchange', handleHaveSelectedText);
 
-      document;
+      document.addEventListener('mouseup', () => {});
 
       // messageInput.addEventListener('click', haveSelectedText);
 
