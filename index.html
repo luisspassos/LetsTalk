@@ -164,11 +164,6 @@
       let currentEmojiId = 0;
 
       messageInput.addEventListener('input', (e) => {
-        const emojiRegex = /\p{Extended_Pictographic}/u;
-        const thereIsEmojiInTheMessage = emojiRegex.test(
-          messageInput.textContent
-        );
-
         const emojis = messageInput.querySelectorAll('.emoji');
 
         emojis.forEach((emoji) => {
@@ -200,10 +195,44 @@
           emoji.classList.remove('emojiIsLastChild');
         });
 
-        if (!thereIsEmojiInTheMessage) return;
+        const emojiRegex = /\p{Extended_Pictographic}/u;
+        const thereIsEmojiInTheMessage = emojiRegex.test(
+          messageInput.textContent
+        );
 
         if (!continueInputEvent) {
           messageInput.innerHTML = oldMessage;
+
+          const emojis = messageInput.querySelectorAll('.emoji');
+
+          emojis.forEach((emoji) => {
+            const firstChildOfMessageInput = messageInput.firstChild;
+            const lastChildOfMessageInput = messageInput.lastChild;
+
+            if (
+              firstChildOfMessageInput === emoji &&
+              lastChildOfMessageInput === emoji
+            ) {
+              emoji.classList.add('emojiIsFirstChildAndLast');
+              return;
+            }
+
+            emoji.classList.remove('emojiIsFirstChildAndLast');
+
+            if (firstChildOfMessageInput === emoji) {
+              emoji.classList.add('emojiIsFirstChild');
+              return;
+            }
+
+            emoji.classList.remove('emojiIsFirstChild');
+
+            if (lastChildOfMessageInput === emoji) {
+              emoji.classList.add('emojiIsLastChild');
+              return;
+            }
+
+            emoji.classList.remove('emojiIsLastChild');
+          });
 
           const range = document.createRange();
 
@@ -218,6 +247,8 @@
 
           return;
         }
+
+        if (!thereIsEmojiInTheMessage) return;
 
         const message = messageInput.innerHTML;
 
