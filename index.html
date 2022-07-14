@@ -10,6 +10,11 @@
       crossorigin="anonymous"
     ></script>
     <style>
+      :root {
+        --right-spacing: 0.05em;
+        --left-spacing: 0.1em;
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -55,16 +60,16 @@
       .emoji {
         height: 1em;
         width: 1em;
-        margin: 0 0.05em 0 0.1em;
+        margin: 0 var(--right-spacing) 0 var(--left-spacing);
         vertical-align: -0.1em;
       }
 
       .emojiIsFirstChild {
-        margin: 0 0.05em 0 0;
+        margin: 0 var(--right-spacing) 0 0;
       }
 
       .emojiIsLastChild {
-        margin: 0 0 0 0.1em;
+        margin: 0 0 0 var(--left-spacing);
       }
 
       .emojiIsFirstChildAndLast {
@@ -76,18 +81,18 @@
       }
 
       .selectedEmojiDefault {
-        width: calc(1em + 0.05em + 0.1em);
-        padding: 0 0.05em 0 0.1em;
+        width: calc(1em + var(--right-spacing) + var(--left-spacing));
+        padding: 0 var(--right-spacing) 0 var(--left-spacing);
       }
 
       .selectedEmojiIsFirstChild {
-        width: calc(1em + 0.05em);
-        padding: 0 0.05em 0 0;
+        width: calc(1em + var(--right-spacing));
+        padding: 0 var(--right-spacing) 0 0;
       }
 
       .selectedEmojiIsLastChild {
-        width: calc(1em + 0.1em);
-        padding: 0 0 0 0.1em;
+        width: calc(1em + var(--left-spacing));
+        padding: 0 0 0 var(--left-spacing);
       }
     </style>
   </head>
@@ -102,6 +107,11 @@
       const messageInput = document.querySelector('.messageInput');
 
       const selection = window.getSelection();
+
+      function addSelection(range) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
 
       function insertTextAtCursor() {
         const emojiInserted = document.createElement('img');
@@ -133,8 +143,7 @@
           range.insertNode(emojiInserted);
           range.setStartAfter(emojiInserted);
 
-          selection.removeAllRanges();
-          selection.addRange(range);
+          addSelection(range);
         }
 
         positionCursor();
@@ -164,36 +173,38 @@
       let currentEmojiId = 0;
 
       messageInput.addEventListener('input', (e) => {
-        const emojis = messageInput.querySelectorAll('.emoji');
+        function handleEmojiClasses() {
+          const emojis = messageInput.querySelectorAll('.emoji');
 
-        emojis.forEach((emoji) => {
           const firstChildOfMessageInput = messageInput.firstChild;
           const lastChildOfMessageInput = messageInput.lastChild;
 
-          if (
-            firstChildOfMessageInput === emoji &&
-            lastChildOfMessageInput === emoji
-          ) {
-            emoji.classList.add('emojiIsFirstChildAndLast');
-            return;
-          }
+          emojis.forEach((emoji) => {
+            function handleClass(condition, className) {
+              if (condition) {
+                emoji.classList.add(className);
+                return;
+              }
 
-          emoji.classList.remove('emojiIsFirstChildAndLast');
+              emoji.classList.remove(className);
+            }
 
-          if (firstChildOfMessageInput === emoji) {
-            emoji.classList.add('emojiIsFirstChild');
-            return;
-          }
+            handleClass(
+              firstChildOfMessageInput === emoji &&
+                lastChildOfMessageInput === emoji,
+              'emojiIsFirstChildAndLast'
+            );
 
-          emoji.classList.remove('emojiIsFirstChild');
+            handleClass(
+              firstChildOfMessageInput === emoji,
+              'emojiIsFirstChild'
+            );
 
-          if (lastChildOfMessageInput === emoji) {
-            emoji.classList.add('emojiIsLastChild');
-            return;
-          }
+            handleClass(lastChildOfMessageInput === emoji, 'emojiIsLastChild');
+          });
+        }
 
-          emoji.classList.remove('emojiIsLastChild');
-        });
+        handleEmojiClasses();
 
         const emojiRegex = /\p{Extended_Pictographic}/u;
         const thereIsEmojiInTheMessage = emojiRegex.test(
@@ -203,36 +214,7 @@
         if (!continueInputEvent) {
           messageInput.innerHTML = oldMessage;
 
-          const emojis = messageInput.querySelectorAll('.emoji');
-
-          emojis.forEach((emoji) => {
-            const firstChildOfMessageInput = messageInput.firstChild;
-            const lastChildOfMessageInput = messageInput.lastChild;
-
-            if (
-              firstChildOfMessageInput === emoji &&
-              lastChildOfMessageInput === emoji
-            ) {
-              emoji.classList.add('emojiIsFirstChildAndLast');
-              return;
-            }
-
-            emoji.classList.remove('emojiIsFirstChildAndLast');
-
-            if (firstChildOfMessageInput === emoji) {
-              emoji.classList.add('emojiIsFirstChild');
-              return;
-            }
-
-            emoji.classList.remove('emojiIsFirstChild');
-
-            if (lastChildOfMessageInput === emoji) {
-              emoji.classList.add('emojiIsLastChild');
-              return;
-            }
-
-            emoji.classList.remove('emojiIsLastChild');
-          });
+          handleEmojiClasses();
 
           const range = document.createRange();
 
@@ -241,9 +223,7 @@
           );
 
           range.setStartAfter(currentEmoji);
-
-          selection.removeAllRanges();
-          selection.addRange(range);
+          addSelection(range);
 
           return;
         }
@@ -288,18 +268,22 @@
         const convertedDraggedTextHtml =
           convertTextFromMessageInputToHtml(draggedText);
 
-        let range;
+        function handleSelection() {
+          let range;
 
-        if (document.caretRangeFromPoint) {
-          range = document.caretRangeFromPoint(e.clientX, e.clientY);
-        } else {
-          const pos = [e.rangeParent, e.rangeOffset];
-          range = document.createRange();
-          range.setStart(...pos);
-          range.setEnd(...pos);
+          if (document.caretRangeFromPoint) {
+            range = document.caretRangeFromPoint(e.clientX, e.clientY);
+          } else {
+            const pos = [e.rangeParent, e.rangeOffset];
+            range = document.createRange();
+            range.setStart(...pos);
+            range.setEnd(...pos);
+          }
+
+          range.insertNode(convertedDraggedTextHtml);
         }
 
-        range.insertNode(convertedDraggedTextHtml);
+        handleSelection();
       });
 
       messageInput.addEventListener('paste', (e) => {
