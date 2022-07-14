@@ -51,6 +51,10 @@
         padding: 0.78125rem 0.625rem;
       }
 
+      .invisibleCaret {
+        caret-color: transparent;
+      }
+
       .emojiWrapper {
         height: 100%;
         display: flex;
@@ -107,6 +111,19 @@
       const messageInput = document.querySelector('.messageInput');
 
       const selection = window.getSelection();
+
+      function getFirstAndLastChildOfMessageInput() {
+        const firstChildOfMessageInput = messageInput.firstChild;
+        const lastChildOfMessageInput = messageInput.lastChild;
+
+        return { firstChildOfMessageInput, lastChildOfMessageInput };
+      }
+
+      function getEmojis() {
+        const emojis = messageInput.querySelectorAll('.emoji');
+
+        return emojis;
+      }
 
       function addSelection(range) {
         selection.removeAllRanges();
@@ -174,10 +191,10 @@
 
       messageInput.addEventListener('input', (e) => {
         function handleEmojiClasses() {
-          const emojis = messageInput.querySelectorAll('.emoji');
+          const emojis = getEmojis();
 
-          const firstChildOfMessageInput = messageInput.firstChild;
-          const lastChildOfMessageInput = messageInput.lastChild;
+          const { firstChildOfMessageInput, lastChildOfMessageInput } =
+            getFirstAndLastChildOfMessageInput();
 
           emojis.forEach((emoji) => {
             function handleClass(condition, className) {
@@ -242,7 +259,7 @@
 
         messageInput.innerHTML = newMessage;
 
-        const newEmojis = messageInput.querySelectorAll('.emoji');
+        const newEmojis = getEmojis();
 
         currentEmojiId++;
 
@@ -305,6 +322,66 @@
       });
 
       copyButton.addEventListener('click', insertTextAtCursor);
+
+      function thereIsNoSelectionInTheDocumentOrMessageInput() {
+        const selection = window.getSelection();
+        const haveSelection = !selection.isCollapsed;
+        const isMessageInput =
+          selection.anchorNode?.className === 'messageInput';
+
+        return !haveSelection || !isMessageInput;
+      }
+
+      function handleHaveSelectedText() {
+        const emojis = getEmojis();
+
+        function handleClasses(type) {
+          emojis.forEach((emoji) => {
+            function classListFunc(className) {
+              emoji.classList[type](className);
+            }
+
+            classListFunc('selectedEmoji');
+
+            const { firstChildOfMessageInput, lastChildOfMessageInput } =
+              getFirstAndLastChildOfMessageInput();
+
+            if (firstChildOfMessageInput === emoji) {
+              classListFunc('selectedEmojiIsFirstChild');
+              return;
+            }
+
+            if (lastChildOfMessageInput === emoji) {
+              classListFunc('selectedEmojiIsLastChild');
+              return;
+            }
+
+            classListFunc('selectedEmojiDefault');
+          });
+        }
+
+        if (thereIsNoSelectionInTheDocumentOrMessageInput()) {
+          handleClasses('remove');
+
+          return;
+        }
+
+        handleClasses('add');
+      }
+
+      document.addEventListener('selectionchange', handleHaveSelectedText);
+
+      function handleCursorAfterDeselect() {
+        if (thereIsNoSelectionInTheDocumentOrMessageInput()) return;
+
+        messageInput.classList.add('invisibleCaret');
+
+        setTimeout(() => {
+          messageInput.classList.remove('invisibleCaret');
+        }, 1);
+      }
+
+      messageInput.addEventListener('mouseup', handleCursorAfterDeselect);
     </script>
   </body>
 </html>

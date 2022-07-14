@@ -110,8 +110,8 @@
 
             classListFunc('selectedEmoji');
 
-            const firstChildOfMessageInput = messageInput.firstElementChild;
-            const lastChildOfMessageInput = messageInput.lastElementChild;
+            const firstChildOfMessageInput = messageInput.firstChild;
+            const lastChildOfMessageInput = messageInput.lastChild;
 
             if (firstChildOfMessageInput === emoji) {
               classListFunc('selectedEmojiIsFirstChild');
