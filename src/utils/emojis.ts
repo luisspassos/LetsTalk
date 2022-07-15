@@ -625,26 +625,6 @@ export const emojis: Record<
       name: 'mão com os dedos abertos',
     },
     {
-      emoji: '🖐🏻',
-      name: 'mão com os dedos abertos: pele clara',
-    },
-    {
-      emoji: '🖐🏼',
-      name: 'mão com os dedos abertos: pele morena clara',
-    },
-    {
-      emoji: '🖐🏽',
-      name: 'mão com os dedos abertos: pele morena',
-    },
-    {
-      emoji: '🖐🏾',
-      name: 'mão com os dedos abertos: pele morena escura',
-    },
-    {
-      emoji: '🖐🏿',
-      name: 'mão com os dedos abertos: pele escura',
-    },
-    {
       emoji: '✋',
       name: 'mão levantada',
     },
@@ -667,26 +647,6 @@ export const emojis: Record<
     {
       emoji: '✌️',
       name: 'mão da vitória',
-    },
-    {
-      emoji: '✌🏻',
-      name: 'mão da vitória: pele clara',
-    },
-    {
-      emoji: '✌🏼',
-      name: 'mão da vitória: pele morena clara',
-    },
-    {
-      emoji: '✌🏽',
-      name: 'mão da vitória: pele morena',
-    },
-    {
-      emoji: '✌🏾',
-      name: 'mão da vitória: pele morena escura',
-    },
-    {
-      emoji: '✌🏿',
-      name: 'mão da vitória: pele escura',
     },
     {
       emoji: '🤞',
@@ -727,26 +687,6 @@ export const emojis: Record<
     {
       emoji: '☝️',
       name: 'mão apontando para cima',
-    },
-    {
-      emoji: '☝🏻',
-      name: 'mão apontando para cima: pele clara',
-    },
-    {
-      emoji: '☝🏼',
-      name: 'mão apontando para cima: tom de pele médio-claro',
-    },
-    {
-      emoji: '☝🏽',
-      name: 'mão apontando para cima: tom de pele médio',
-    },
-    {
-      emoji: '☝🏾',
-      name: 'mão apontando para cima: pele morena escura',
-    },
-    {
-      emoji: '☝🏿',
-      name: 'mão apontando para cima: tom de pele escuro',
     },
     {
       emoji: '👍',
@@ -799,26 +739,6 @@ export const emojis: Record<
     {
       emoji: '✍️',
       name: 'mão escrevendo',
-    },
-    {
-      emoji: '✍🏻',
-      name: 'mão escrevendo: pele clara',
-    },
-    {
-      emoji: '✍🏼',
-      name: 'mão escrevendo: tom de pele médio-claro',
-    },
-    {
-      emoji: '✍🏽',
-      name: 'mão escrevendo: tom de pele médio',
-    },
-    {
-      emoji: '✍🏾',
-      name: 'mão escrevendo: pele morena escura',
-    },
-    {
-      emoji: '✍🏿',
-      name: 'mão escrevendo: tom de pele escuro',
     },
     {
       emoji: '💅',
@@ -1170,11 +1090,11 @@ export const emojis: Record<
     },
     {
       emoji: '👨‍🎨',
-      name: 'homem artist',
+      name: 'homem artista',
     },
     {
       emoji: '👩‍🎨',
-      name: 'mulher artist',
+      name: 'mulher artista',
     },
     {
       emoji: '🧑‍✈️',
@@ -1221,72 +1141,12 @@ export const emojis: Record<
       name: 'detetive',
     },
     {
-      emoji: '🕵🏻',
-      name: 'detetive: tom de pele claro',
-    },
-    {
-      emoji: '🕵🏼',
-      name: 'detetive: tom de pele médio-claro',
-    },
-    {
-      emoji: '🕵🏽',
-      name: 'detetive: tom de pele médio',
-    },
-    {
-      emoji: '🕵🏾',
-      name: 'detetive: pele morena escura',
-    },
-    {
-      emoji: '🕵🏿',
-      name: 'detetive: pele morena escura',
-    },
-    {
       emoji: '🕵️‍♂️',
       name: 'homem detetive',
     },
     {
-      emoji: '🕵🏻‍♂️',
-      name: 'homem detetive: pele clara',
-    },
-    {
-      emoji: '🕵🏼‍♂️',
-      name: 'homem detetive: pele morena clara',
-    },
-    {
-      emoji: '🕵🏽‍♂️',
-      name: 'homem detetive: pele morena',
-    },
-    {
-      emoji: '🕵🏾‍♂️',
-      name: 'homem detetive: pele morena escura',
-    },
-    {
-      emoji: '🕵🏿‍♂️',
-      name: 'homem detetive: pele escura',
-    },
-    {
       emoji: '🕵️‍♀️',
       name: 'mulher detetive',
-    },
-    {
-      emoji: '🕵🏻‍♀️',
-      name: 'mulher detetive: pele clara',
-    },
-    {
-      emoji: '🕵🏼‍♀️',
-      name: 'mulher detetive: pele morena clara',
-    },
-    {
-      emoji: '🕵🏽‍♀️',
-      name: 'mulher detetive : pele morena',
-    },
-    {
-      emoji: '🕵🏾‍♀️',
-      name: 'mulher detetive: pele morena escura',
-    },
-    {
-      emoji: '🕵🏿‍♀️',
-      name: 'detetive mulher: pele morena escura',
     },
     {
       emoji: '💂',
@@ -1473,26 +1333,6 @@ export const emojis: Record<
       name: 'pessoa de terno levitando',
     },
     {
-      emoji: '🕴🏻',
-      name: 'pessoa de terno levitando: pele clara',
-    },
-    {
-      emoji: '🕴🏼',
-      name: 'pessoa de terno levitando: pele morena clara',
-    },
-    {
-      emoji: '🕴🏽',
-      name: 'pessoa de terno levitando: pele morena',
-    },
-    {
-      emoji: '🕴🏾',
-      name: 'pessoa de terno levitando: pele morena escura',
-    },
-    {
-      emoji: '🕴🏿',
-      name: 'pessoa de terno levitando: pele escura',
-    },
-    {
       emoji: '👯',
       name: 'pessoas com orelhas de coelho',
     },
@@ -1525,72 +1365,12 @@ export const emojis: Record<
       name: 'pessoa jogando golfe',
     },
     {
-      emoji: '🏌🏻',
-      name: 'pessoa jogando golfe: pele clara',
-    },
-    {
-      emoji: '🏌🏼',
-      name: 'pessoa jogando golfe: pele morena clara',
-    },
-    {
-      emoji: '🏌🏽',
-      name: 'pessoa jogando golfe: pele morena',
-    },
-    {
-      emoji: '🏌🏾',
-      name: 'pessoa jogando golfe: pele morena escura',
-    },
-    {
-      emoji: '🏌🏿',
-      name: 'pessoa jogando golfe: pele escura',
-    },
-    {
       emoji: '🏌️‍♂️',
       name: 'homem jogando golfe',
     },
     {
-      emoji: '🏌🏻‍♂️',
-      name: 'homem jogando golfe: pele clara',
-    },
-    {
-      emoji: '🏌🏼‍♂️',
-      name: 'homem jogando golfe: pele morena clara',
-    },
-    {
-      emoji: '🏌🏽‍♂️',
-      name: 'homem jogando golfe: pele morena',
-    },
-    {
-      emoji: '🏌🏾‍♂️',
-      name: 'homem jogando golfe: pele morena escura',
-    },
-    {
-      emoji: '🏌🏿‍♂️',
-      name: 'homem jogando golfe: pele morena escura',
-    },
-    {
       emoji: '🏌️‍♀️',
       name: 'mulher jogando golfe',
-    },
-    {
-      emoji: '🏌🏻‍♀️',
-      name: 'mulher jogando golfe: pele clara',
-    },
-    {
-      emoji: '🏌🏼‍♀️',
-      name: 'mulher jogando golfe: pele morena clara',
-    },
-    {
-      emoji: '🏌🏽‍♀️',
-      name: 'mulher jogando golfe: pele morena',
-    },
-    {
-      emoji: '🏌🏾‍♀️',
-      name: 'mulher jogando golfe: pele morena escura',
-    },
-    {
-      emoji: '🏌🏿‍♀️',
-      name: 'mulher jogando golfe: pele morena escura',
     },
     {
       emoji: '🏄',
@@ -1606,147 +1386,27 @@ export const emojis: Record<
     },
     {
       emoji: '⛹️',
-      name: 'pessoa jogando bola',
-    },
-    {
-      emoji: '⛹🏻',
-      name: 'pessoa quicando bola: pele clara',
-    },
-    {
-      emoji: '⛹🏼',
-      name: 'pessoa quicando bola: pele morena clara',
-    },
-    {
-      emoji: '⛹🏽',
-      name: 'pessoa quicando bola: pele morena',
-    },
-    {
-      emoji: '⛹🏾',
-      name: 'pessoa quicando bola: pele morena escura',
-    },
-    {
-      emoji: '⛹🏿',
-      name: 'pessoa quicando bola: pele morena escura',
+      name: 'pessoa quicando bola',
     },
     {
       emoji: '⛹️‍♂️',
-      name: 'homem jogando bola',
-    },
-    {
-      emoji: '⛹🏻‍♂️',
-      name: 'homem quicando bola: pele clara',
-    },
-    {
-      emoji: '⛹🏼‍♂️',
-      name: 'homem quicando bola: pele morena clara',
-    },
-    {
-      emoji: '⛹🏽‍♂️',
-      name: 'homem quicando bola: pele morena',
-    },
-    {
-      emoji: '⛹🏾‍♂️',
-      name: 'homem quicando bola: pele morena escura',
-    },
-    {
-      emoji: '⛹🏿‍♂️',
-      name: 'homem quicando bola: pele escura',
+      name: 'homem quicando bola',
     },
     {
       emoji: '⛹️‍♀️',
       name: 'mulher quicando bola',
     },
     {
-      emoji: '⛹🏻‍♀️',
-      name: 'mulher quicando bola: pele clara',
-    },
-    {
-      emoji: '⛹🏼‍♀️',
-      name: 'mulher quicando bola: pele morena clara',
-    },
-    {
-      emoji: '⛹🏽‍♀️',
-      name: 'mulher quicando bola: pele morena',
-    },
-    {
-      emoji: '⛹🏾‍♀️',
-      name: 'mulher quicando bola: pele morena escura',
-    },
-    {
-      emoji: '⛹🏿‍♀️',
-      name: 'mulher quicando bola: pele morena escura',
-    },
-    {
       emoji: '🏋️',
       name: 'pessoa levantando peso',
-    },
-    {
-      emoji: '🏋🏻',
-      name: 'pessoa levantando peso: pele clara',
-    },
-    {
-      emoji: '🏋🏼',
-      name: 'pessoa levantando peso: pele morena clara',
-    },
-    {
-      emoji: '🏋🏽',
-      name: 'pessoa levantando peso: pele morena',
-    },
-    {
-      emoji: '🏋🏾',
-      name: 'pessoa levantando peso: pele morena escura',
-    },
-    {
-      emoji: '🏋🏿',
-      name: 'pessoa levantando peso: pele escura',
     },
     {
       emoji: '🏋️‍♂️',
       name: 'homem levantando pesos',
     },
     {
-      emoji: '🏋🏻‍♂️',
-      name: 'homem levantando peso: pele clara',
-    },
-    {
-      emoji: '🏋🏼‍♂️',
-      name: 'homem levantando peso: pele morena clara',
-    },
-    {
-      emoji: '🏋🏽‍♂️',
-      name: 'homem levantando peso: pele morena',
-    },
-    {
-      emoji: '🏋🏾‍♂️',
-      name: 'homem levantando peso: pele morena escura',
-    },
-    {
-      emoji: '🏋🏿‍♂️',
-      name: 'homem levantando peso: pele escura',
-    },
-    {
       emoji: '🏋️‍♀️',
       name: 'mulher levantando peso',
-    },
-    {
-      emoji: '🏋🏻‍♀️',
-      name: 'mulher levantando peso: pele clara',
-    },
-    {
-      emoji: '🏋🏼‍♀️',
-      name: 'mulher levantando peso: pele morena clara',
-    },
-    {
-      emoji: '🏋🏽‍♀️',
-      name: 'mulher levantando peso: pele morena',
-    },
-    {
-      emoji: '🏋🏾‍♀️',
-      name: 'mulher levantando peso: pele morena escura',
-    },
-    {
-      emoji: '🏋🏿‍♀️',
-      name: 'mulher levantando peso: pele escura',
     },
     {
       emoji: '🚴',
@@ -1797,108 +1457,12 @@ export const emojis: Record<
       name: 'mulheres de mãos dadas',
     },
     {
-      emoji: '👩🏻‍🤝‍👩🏼',
-      name: 'mulheres de mãos dadas: pele clara, pele morena clara',
-    },
-    {
-      emoji: '👭🏼',
-      name: 'mulheres de mãos dadas: pele morena clara',
-    },
-    {
-      emoji: '👩🏼‍🤝‍👩🏽',
-      name: 'mulheres de mãos dadas: pele morena clara, pele morena',
-    },
-    {
-      emoji: '👭🏽',
-      name: 'mulheres de mãos dadas: pele morena',
-    },
-    {
-      emoji: '👩🏽‍🤝‍👩🏾',
-      name: 'mulheres de mãos dadas: pele morena, pele morena escura',
-    },
-    {
-      emoji: '👭🏾',
-      name: 'mulheres de mãos dadas: pele morena escura',
-    },
-    {
-      emoji: '👩🏾‍🤝‍👩🏿',
-      name: 'mulheres de mãos dadas: pele morena escura, pele morena escura',
-    },
-    {
-      emoji: '👭🏿',
-      name: 'mulheres de mãos dadas: pele morena escura',
-    },
-    {
       emoji: '👫',
       name: 'mulher e homem de mãos dadas',
     },
     {
-      emoji: '👩🏻‍🤝‍👨🏼',
-      name: 'mulher e homem de mãos dadas: pele clara, pele morena clara',
-    },
-    {
-      emoji: '👫🏼',
-      name: 'mulher e homem de mãos dadas: pele morena clara',
-    },
-    {
-      emoji: '👩🏼‍🤝‍👨🏽',
-      name: 'mulher e homem de mãos dadas: pele morena clara, pele morena',
-    },
-    {
-      emoji: '👫🏽',
-      name: 'mulher e homem de mãos dadas: pele morena',
-    },
-    {
-      emoji: '👩🏽‍🤝‍👨🏾',
-      name: 'mulher e homem de mãos dadas: pele morena, pele morena escura',
-    },
-    {
-      emoji: '👫🏾',
-      name: 'mulher e homem de mãos dadas: pele morena escura',
-    },
-    {
-      emoji: '👩🏾‍🤝‍👨🏿',
-      name: 'mulher e homem de mãos dadas: pele morena escura, pele morena escura',
-    },
-    {
-      emoji: '👫🏿',
-      name: 'mulher e homem de mãos dadas: pele escura',
-    },
-    {
       emoji: '👬',
       name: 'homens de mãos dadas',
-    },
-    {
-      emoji: '👨🏻‍🤝‍👨🏼',
-      name: 'homens de mãos dadas: pele clara, pele morena clara',
-    },
-    {
-      emoji: '👬🏼',
-      name: 'homens de mãos dadas: pele morena clara',
-    },
-    {
-      emoji: '👨🏼‍🤝‍👨🏽',
-      name: 'homens de mãos dadas: pele morena clara, pele morena',
-    },
-    {
-      emoji: '👬🏽',
-      name: 'homens de mãos dadas: pele morena',
-    },
-    {
-      emoji: '👨🏽‍🤝‍👨🏾',
-      name: 'homens de mãos dadas: pele morena, pele morena escura',
-    },
-    {
-      emoji: '👬🏾',
-      name: 'homens de mãos dadas: pele morena escura',
-    },
-    {
-      emoji: '👨🏾‍🤝‍👨🏿',
-      name: 'homens de mãos dadas: pele morena escura, pele morena escura',
-    },
-    {
-      emoji: '👬🏿',
-      name: 'homens de mãos dadas: pele morena escura',
     },
     {
       emoji: '💏',
