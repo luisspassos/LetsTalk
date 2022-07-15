@@ -11,8 +11,8 @@
     ></script>
     <style>
       :root {
-        --right-spacing: 0.05em;
-        --left-spacing: 0.1em;
+        --right-spacing: 0.08em;
+        --left-spacing: 0.18em;
       }
 
       * {
@@ -112,6 +112,12 @@
 
       const selection = window.getSelection();
 
+      function getCurrentEmojiInMessage() {
+        const currentEmoji = document.querySelector(`#${currentEmojiId}`);
+
+        return currentEmoji;
+      }
+
       function getFirstAndLastChildOfMessageInput() {
         const firstChildOfMessageInput = messageInput.firstChild;
         const lastChildOfMessageInput = messageInput.lastChild;
@@ -119,7 +125,7 @@
         return { firstChildOfMessageInput, lastChildOfMessageInput };
       }
 
-      function getEmojis() {
+      function getEmojisInTheMessage() {
         const emojis = messageInput.querySelectorAll('.emoji');
 
         return emojis;
@@ -187,11 +193,13 @@
 
       let continueInputEvent = true;
 
-      let currentEmojiId = 0;
+      let currentEmojiId = 'messageInputEmoji0';
+
+      let oldAmountOfEmojisInMessage = 0;
 
       messageInput.addEventListener('input', (e) => {
         function handleEmojiClasses() {
-          const emojis = getEmojis();
+          const emojis = getEmojisInTheMessage();
 
           const { firstChildOfMessageInput, lastChildOfMessageInput } =
             getFirstAndLastChildOfMessageInput();
@@ -233,14 +241,20 @@
 
           handleEmojiClasses();
 
-          const range = document.createRange();
+          const currentEmoji = getCurrentEmojiInMessage();
 
-          const currentEmoji = document.querySelector(
-            `#messageInputEmoji${currentEmojiId}`
-          );
+          const range = document.createRange();
 
           range.setStartAfter(currentEmoji);
           addSelection(range);
+
+          const emojis = getEmojisInTheMessage();
+
+          emojis.forEach((emoji) => {
+            emoji.addEventListener('dblclick', () => {
+              selection.selectAllChildren(messageInput);
+            });
+          });
 
           return;
         }
@@ -255,17 +269,35 @@
 
         twemoji.parse(newMessageHtml);
 
+        const amountOfEmojisInMessage =
+          newMessageHtml.querySelectorAll('.emoji').length;
+
+        // when the emoji is broken it forms 2 emojis
+        const hasBrokenEmoji =
+          amountOfEmojisInMessage - oldAmountOfEmojisInMessage === 2;
+
+        oldAmountOfEmojisInMessage = amountOfEmojisInMessage;
+
         const newMessage = newMessageHtml.innerHTML;
 
         messageInput.innerHTML = newMessage;
 
-        const newEmojis = getEmojis();
-
-        currentEmojiId++;
+        const newEmojis = getEmojisInTheMessage();
 
         newEmojis.forEach((emoji) => {
           if (!emoji.id) {
-            emoji.id = 'messageInputEmoji' + currentEmojiId;
+            const numberRegex = /(\d+)/;
+            const letterRegex = /[a-zA-Z]+/;
+
+            const emojiIdName = currentEmojiId.match(letterRegex)[0];
+            const newCurrentEmojiIdNumber =
+              currentEmojiId.match(numberRegex)[0] + 1;
+
+            const newCurrentEmojiId = emojiIdName + newCurrentEmojiIdNumber;
+
+            currentEmojiId = newCurrentEmojiId;
+
+            emoji.id = newCurrentEmojiId;
           }
         });
 
@@ -333,7 +365,7 @@
       }
 
       function handleHaveSelectedText() {
-        const emojis = getEmojis();
+        const emojis = getEmojisInTheMessage();
 
         function handleClasses(type) {
           emojis.forEach((emoji) => {

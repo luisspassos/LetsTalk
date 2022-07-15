@@ -90,65 +90,11 @@
     <script>
       const messageInput = document.querySelector('.messageInput');
 
-      function thereIsNoSelectionInTheDocumentOrMessageInput() {
-        const selection = window.getSelection();
-        const haveSelection = !selection.isCollapsed;
-        const isMessageInput =
-          selection.anchorNode?.className === 'messageInput';
+      const emoji = document.querySelector('.emoji');
 
-        return !haveSelection || !isMessageInput;
-      }
-
-      function handleHaveSelectedText() {
-        const emojis = messageInput.querySelectorAll('.emoji');
-
-        function handleClasses(type) {
-          emojis.forEach((emoji) => {
-            function classListFunc(className) {
-              emoji.classList[type](className);
-            }
-
-            classListFunc('selectedEmoji');
-
-            const firstChildOfMessageInput = messageInput.firstChild;
-            const lastChildOfMessageInput = messageInput.lastChild;
-
-            if (firstChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsFirstChild');
-              return;
-            }
-
-            if (lastChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsLastChild');
-              return;
-            }
-
-            classListFunc('selectedEmojiDefault');
-          });
-        }
-
-        if (thereIsNoSelectionInTheDocumentOrMessageInput()) {
-          handleClasses('remove');
-
-          return;
-        }
-
-        handleClasses('add');
-      }
-
-      document.addEventListener('selectionchange', handleHaveSelectedText);
-
-      function handleCursorAfterDeselect() {
-        if (thereIsNoSelectionInTheDocumentOrMessageInput()) return;
-
-        messageInput.classList.add('invisibleCaret');
-
-        setTimeout(() => {
-          messageInput.classList.remove('invisibleCaret');
-        }, 1);
-      }
-
-      messageInput.addEventListener('mouseup', handleCursorAfterDeselect);
+      emoji.onclick = () => {
+        console.log('adjiaijdai');
+      };
     </script>
   </body>
 </html>
