@@ -1,4 +1,4 @@
-import { Flex, FormControl } from '@chakra-ui/react';
+import { Box, Flex, FormControl } from '@chakra-ui/react';
 import { Divider } from '../../../Divider';
 import { MessageInput } from './MessageInput';
 import { EmojiPicker } from './MessageInput/EmojiButton/EmojiPicker';
@@ -79,31 +79,32 @@ export function Footer() {
   );
 
   return (
-    <FormControl as='form' mt='auto'>
-      <EmojiPicker />
-      <Divider />
-      <Flex
-        as='footer'
-        py={['11px', '13px', '15px']}
-        minH={['50px', '65px', '80px']}
-        align='center'
-        justify='start'
-        pl={['6px', '8px', '10px']}
-        pos='relative'
-      >
-        <MessageInput
-          handleSendMessage={handleSendMessage}
-          handleMessageInputSize={handleMessageInputSize}
-        />
-        {thereIsNoMessage ? (
-          <RecordButtonAudio />
-        ) : (
-          <SendMessageButton
+    <Box display='inline-block' as='footer'>
+      <FormControl as='form' mt='auto'>
+        <EmojiPicker />
+        <Divider />
+        <Flex
+          py={['11px', '13px', '15px']}
+          minH={['50px', '65px', '80px']}
+          align='center'
+          justify='start'
+          pl={['6px', '8px', '10px']}
+          pos='relative'
+        >
+          <MessageInput
             handleSendMessage={handleSendMessage}
             handleMessageInputSize={handleMessageInputSize}
           />
-        )}
-      </Flex>
-    </FormControl>
+          {thereIsNoMessage ? (
+            <RecordButtonAudio />
+          ) : (
+            <SendMessageButton
+              handleSendMessage={handleSendMessage}
+              handleMessageInputSize={handleMessageInputSize}
+            />
+          )}
+        </Flex>
+      </FormControl>
+    </Box>
   );
 }

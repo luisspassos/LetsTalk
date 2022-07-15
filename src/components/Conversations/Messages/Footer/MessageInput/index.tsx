@@ -54,7 +54,7 @@ export function MessageInput({
         bg={useColorModeValue('white', 'blackAlpha.500')}
         fontFamily='Roboto'
         pt='11.25px'
-        borderRadius={['11px', '13px', '15px']}
+        borderRadius='10px'
         rows={1}
         placeholder='Sua mensagem...'
         pr={['73px', '83px', '103px']}

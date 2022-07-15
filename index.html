@@ -51,6 +51,11 @@
         padding: 0.78125rem 0.625rem;
       }
 
+      .messageInput[placeholder]:empty::before {
+        content: attr(placeholder);
+        color: white;
+      }
+
       .invisibleCaret {
         caret-color: transparent;
       }
@@ -102,7 +107,12 @@
   </head>
   <body>
     <div class="container">
-      <div contenteditable id="messageInput" class="messageInput"></div>
+      <div
+        contenteditable
+        placeholder="Sua mensagem..."
+        id="messageInput"
+        class="messageInput"
+      ></div>
       <button id="copyButton">Copy and paste emoji</button>
     </div>
 
