@@ -1,4 +1,4 @@
-import { FlexProps, Grid } from '@chakra-ui/react';
+import { FlexProps, Flex } from '@chakra-ui/react';
 import { EmojiType } from '../../../../../../../../utils/types';
 import { Emoji } from './Emoji';
 
@@ -8,16 +8,10 @@ type EmojiListProps = {
 
 export function EmojiList({ list, ...rest }: EmojiListProps) {
   return (
-    <Grid
-      gridTemplateColumns='repeat(auto-fill, 50px)'
-      justifyContent='center'
-      as='ul'
-      listStyleType='none'
-      {...rest}
-    >
+    <Flex paddingLeft='10px' wrap='wrap' as='ul' {...rest}>
       {list.map((emoji) => (
         <Emoji name={emoji.name} emoji={emoji.emoji} key={emoji.emoji} />
       ))}
-    </Grid>
+    </Flex>
   );
 }
