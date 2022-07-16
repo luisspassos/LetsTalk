@@ -110,7 +110,6 @@
       <div
         contenteditable
         placeholder="Sua mensagem..."
-        id="messageInput"
         class="messageInput"
       ></div>
       <button id="copyButton">Copy and paste emoji</button>
@@ -205,8 +204,6 @@
 
       let currentEmojiId = 'messageInputEmoji0';
 
-      let oldAmountOfEmojisInMessage = 0;
-
       messageInput.addEventListener('input', (e) => {
         function handleEmojiClasses() {
           const emojis = getEmojisInTheMessage();
@@ -241,75 +238,90 @@
 
         handleEmojiClasses();
 
-        const emojiRegex = /\p{Extended_Pictographic}/u;
-        const thereIsEmojiInTheMessage = emojiRegex.test(
-          messageInput.textContent
-        );
-
         if (!continueInputEvent) {
           messageInput.innerHTML = oldMessage;
 
           handleEmojiClasses();
 
-          const currentEmoji = getCurrentEmojiInMessage();
+          function setSelection() {
+            const currentEmoji = getCurrentEmojiInMessage();
 
-          const range = document.createRange();
+            const range = document.createRange();
 
-          range.setStartAfter(currentEmoji);
-          addSelection(range);
+            range.setStartAfter(currentEmoji);
+            addSelection(range);
+          }
 
-          const emojis = getEmojisInTheMessage();
+          setSelection();
 
-          emojis.forEach((emoji) => {
-            emoji.addEventListener('dblclick', () => {
-              selection.selectAllChildren(messageInput);
+          function addDoubleClickEventOnEmojis() {
+            const emojis = getEmojisInTheMessage();
+
+            emojis.forEach((emoji) => {
+              emoji.addEventListener('dblclick', () => {
+                selection.selectAllChildren(messageInput);
+              });
             });
-          });
+          }
+
+          addDoubleClickEventOnEmojis();
 
           return;
         }
 
+        const emojiRegex = /\p{Extended_Pictographic}/u;
+        const thereIsEmojiInTheMessage = emojiRegex.test(
+          messageInput.textContent
+        );
+
+        const a = messageInput.innerHTML;
+
+        const b = document.createElement('span');
+
+        b.innerHTML = a;
+
+        const c =
+
         if (!thereIsEmojiInTheMessage) return;
 
-        const message = messageInput.innerHTML;
+        function setMessageWithEmojis() {
+          const message = messageInput.innerHTML;
 
-        const newMessageHtml = document.createElement('span');
+          const newMessageHtml = document.createElement('span');
 
-        newMessageHtml.innerHTML = message;
+          newMessageHtml.innerHTML = message;
 
-        twemoji.parse(newMessageHtml);
+          twemoji.parse(newMessageHtml);
 
-        const amountOfEmojisInMessage =
-          newMessageHtml.querySelectorAll('.emoji').length;
+          const newMessage = newMessageHtml.innerHTML;
 
-        // when the emoji is broken it forms 2 emojis
-        const hasBrokenEmoji =
-          amountOfEmojisInMessage - oldAmountOfEmojisInMessage === 2;
+          messageInput.innerHTML = newMessage;
+        }
 
-        oldAmountOfEmojisInMessage = amountOfEmojisInMessage;
+        setMessageWithEmojis();
 
-        const newMessage = newMessageHtml.innerHTML;
+        function setIdInNewEmoji() {
+          const newEmojis = getEmojisInTheMessage();
 
-        messageInput.innerHTML = newMessage;
+          newEmojis.forEach((emoji) => {
+            if (!emoji.id) {
+              const numberRegex = /(\d+)/;
+              const letterRegex = /[a-zA-Z]+/;
 
-        const newEmojis = getEmojisInTheMessage();
+              const emojiIdName = currentEmojiId.match(letterRegex)[0];
+              const newCurrentEmojiIdNumber =
+                currentEmojiId.match(numberRegex)[0] + 1;
 
-        newEmojis.forEach((emoji) => {
-          if (!emoji.id) {
-            const numberRegex = /(\d+)/;
-            const letterRegex = /[a-zA-Z]+/;
+              const newCurrentEmojiId = emojiIdName + newCurrentEmojiIdNumber;
 
-            const emojiIdName = currentEmojiId.match(letterRegex)[0];
-            const newCurrentEmojiIdNumber =
-              currentEmojiId.match(numberRegex)[0] + 1;
+              currentEmojiId = newCurrentEmojiId;
 
-            const newCurrentEmojiId = emojiIdName + newCurrentEmojiIdNumber;
+              emoji.id = newCurrentEmojiId;
+            }
+          });
+        }
 
-            currentEmojiId = newCurrentEmojiId;
-
-            emoji.id = newCurrentEmojiId;
-          }
-        });
+        setIdInNewEmoji();
 
         continueInputEvent = false;
 
@@ -369,7 +381,7 @@
         const selection = window.getSelection();
         const haveSelection = !selection.isCollapsed;
         const isMessageInput =
-          selection.anchorNode?.className.includes('messageInput');
+          selection.anchorNode?.className?.includes('messageInput');
 
         return !haveSelection || !isMessageInput;
       }

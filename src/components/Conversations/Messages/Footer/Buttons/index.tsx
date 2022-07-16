@@ -22,7 +22,7 @@ export function Button({ icon, label, ...rest }: ButtonProps) {
         fontSize='22px'
         w='45px'
         h='45px'
-        borderRadius={['11px', '13px', '15px']}
+        borderRadius='15px'
         ml={['11px', '13px', '15px']}
         color='white'
         bg={bg}

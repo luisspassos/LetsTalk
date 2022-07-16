@@ -40,6 +40,8 @@ export const theme = extendTheme(
           boxShadowHover: isDark ? 'whiteAlpha-700' : 'blueAlpha-900',
         };
 
+        const placeholderColor = isDark ? 'whiteAlpha.800' : 'blackAlpha.700';
+
         return {
           '*': {
             wordBreak: 'break-word',
@@ -49,7 +51,12 @@ export const theme = extendTheme(
             color: isDark ? 'gray.50' : 'gray.900',
           },
           '*::placeholder': {
-            color: isDark ? 'whiteAlpha.800' : 'blackAlpha.700',
+            color: placeholderColor,
+          },
+          '*[placeholder]:empty::before': {
+            content: 'attr(placeholder)',
+            color: placeholderColor,
+            cursor: 'text',
           },
           '*::-webkit-scrollbar': {
             width: ['8px', '10px', '12px'],
