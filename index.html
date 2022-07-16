@@ -210,14 +210,14 @@
 
       function thereIsNoSelectionInTheDocumentOrMessageInput() {
         function hasTheMessageInputClass(node) {
-          return node.className?.includes('messageInput');
+          return node?.className?.includes('messageInput');
         }
 
         const selection = window.getSelection();
         const haveSelection = !selection.isCollapsed;
         const isMessageInput =
           hasTheMessageInputClass(selection.anchorNode) ||
-          hasTheMessageInputClass(selection.anchorNode.parentNode);
+          hasTheMessageInputClass(selection.anchorNode?.parentNode);
 
         return !haveSelection || !isMessageInput;
       }
@@ -262,6 +262,7 @@
       function handleCursorAfterDeselect() {
         if (thereIsNoSelectionInTheDocumentOrMessageInput()) return;
 
+        // serves to give time for the cursor to position itself
         messageInput.classList.add('invisibleCaret');
 
         setTimeout(() => {
@@ -269,42 +270,39 @@
         }, 1);
       }
 
+      function handleEmojiClasses() {
+        const emojis = getEmojisInTheMessage();
+
+        const { firstChildOfMessageInput, lastChildOfMessageInput } =
+          getFirstAndLastChildOfMessageInput();
+
+        emojis.forEach((emoji) => {
+          function handleClass(condition, className) {
+            if (condition) {
+              emoji.classList.add(className);
+              return;
+            }
+
+            emoji.classList.remove(className);
+          }
+
+          handleClass(
+            firstChildOfMessageInput === emoji &&
+              lastChildOfMessageInput === emoji,
+            'emojiIsFirstChildAndLast'
+          );
+
+          handleClass(firstChildOfMessageInput === emoji, 'emojiIsFirstChild');
+
+          handleClass(lastChildOfMessageInput === emoji, 'emojiIsLastChild');
+        });
+      }
+
       messageInput.addEventListener('beforeinput', (e) => {
         oldMessage = messageInput.innerHTML;
       });
 
       messageInput.addEventListener('input', (e) => {
-        function handleEmojiClasses() {
-          const emojis = getEmojisInTheMessage();
-
-          const { firstChildOfMessageInput, lastChildOfMessageInput } =
-            getFirstAndLastChildOfMessageInput();
-
-          emojis.forEach((emoji) => {
-            function handleClass(condition, className) {
-              if (condition) {
-                emoji.classList.add(className);
-                return;
-              }
-
-              emoji.classList.remove(className);
-            }
-
-            handleClass(
-              firstChildOfMessageInput === emoji &&
-                lastChildOfMessageInput === emoji,
-              'emojiIsFirstChildAndLast'
-            );
-
-            handleClass(
-              firstChildOfMessageInput === emoji,
-              'emojiIsFirstChild'
-            );
-
-            handleClass(lastChildOfMessageInput === emoji, 'emojiIsLastChild');
-          });
-        }
-
         if (!continueInputEvent) {
           messageInput.innerHTML = oldMessage;
 
@@ -336,38 +334,6 @@
           return;
         }
 
-        const message = messageInput.innerHTML;
-
-        function messageHasTooManyCharacters() {
-          const messageHtml = turnTextIntoHtml(message);
-          const emojis = messageHtml.querySelectorAll('.emoji');
-
-          emojis.forEach((emoji) => {
-            messageHtml.replaceChild(document.createTextNode(emoji.alt), emoji);
-          });
-
-          // spread operator is for emojis to be counted correctly
-          const numberOfCharacters = [
-            ...removeInvisibleCharacter(messageHtml.textContent),
-          ].length;
-
-          const limit = 10;
-
-          if (numberOfCharacters > limit) {
-            const numberOfCharactersMore = limit - numberOfCharacters;
-
-            return { numberOfCharactersMore };
-          } else {
-            return false;
-          }
-        }
-
-        const messageHasTooManyCharactersResult = messageHasTooManyCharacters();
-
-        if (messageHasTooManyCharactersResult) {
-          console.log(messageHasTooManyCharactersResult.numberOfCharactersMore);
-        }
-
         handleEmojiClasses();
 
         const emojiRegex = /\p{Extended_Pictographic}/u;
@@ -378,6 +344,8 @@
         if (!thereIsEmojiInTheMessage) return;
 
         function setMessageWithEmojis() {
+          const message = messageInput.innerHTML;
+
           const newMessageHtml = turnTextIntoHtml(message);
 
           twemoji.parse(newMessageHtml);
@@ -428,6 +396,8 @@
         const convertedDraggedTextHtml =
           convertTextFromMessageInputToHtml(draggedText);
 
+        console.log(convertedDraggedTextHtml);
+
         function handleSelection() {
           let range;
 
@@ -441,10 +411,12 @@
           }
 
           range.insertNode(convertedDraggedTextHtml);
+          handleEmojiClasses();
         }
 
         handleSelection();
       });
+
       messageInput.addEventListener('paste', (e) => {
         e.preventDefault();
 
@@ -467,6 +439,7 @@
       messageInput.addEventListener('dragstart', (e) => {
         e.preventDefault();
       });
+      messageInput.addEventListener('mousedown', handleCursorAfterDeselect);
     </script>
   </body>
 </html>
