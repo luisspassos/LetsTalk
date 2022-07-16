@@ -121,6 +121,13 @@
 
       const selection = window.getSelection();
 
+      function turnTextIntoHtml(text) {
+        const html = document.createElement('span');
+        html.innerHTML = text;
+
+        return html;
+      }
+
       function getCurrentEmojiInMessage() {
         const currentEmoji = document.querySelector(`#${currentEmojiId}`);
 
@@ -184,25 +191,87 @@
       function convertTextFromMessageInputToHtml(text) {
         const convertedText = twemoji.parse(text);
 
-        const convertedTextHtml = document.createElement('span');
-        convertedTextHtml.innerHTML = convertedText;
+        const convertedTextHtml = turnTextIntoHtml(convertedText);
 
         return convertedTextHtml;
       }
 
-      messageInput.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-      });
+      function removeInvisibleCharacter(text) {
+        const newText = text.replace('‍', '');
+
+        return newText;
+      }
 
       let oldMessage = '';
-
-      messageInput.addEventListener('beforeinput', (e) => {
-        oldMessage = messageInput.innerHTML;
-      });
 
       let continueInputEvent = true;
 
       let currentEmojiId = 'messageInputEmoji0';
+
+      function thereIsNoSelectionInTheDocumentOrMessageInput() {
+        function hasTheMessageInputClass(node) {
+          return node.className?.includes('messageInput');
+        }
+
+        const selection = window.getSelection();
+        const haveSelection = !selection.isCollapsed;
+        const isMessageInput =
+          hasTheMessageInputClass(selection.anchorNode) ||
+          hasTheMessageInputClass(selection.anchorNode.parentNode);
+
+        return !haveSelection || !isMessageInput;
+      }
+
+      function handleHaveSelectedText() {
+        const emojis = getEmojisInTheMessage();
+
+        function handleClasses(type) {
+          emojis.forEach((emoji) => {
+            function classListFunc(className) {
+              emoji.classList[type](className);
+            }
+
+            classListFunc('selectedEmoji');
+
+            const { firstChildOfMessageInput, lastChildOfMessageInput } =
+              getFirstAndLastChildOfMessageInput();
+
+            if (firstChildOfMessageInput === emoji) {
+              classListFunc('selectedEmojiIsFirstChild');
+              return;
+            }
+
+            if (lastChildOfMessageInput === emoji) {
+              classListFunc('selectedEmojiIsLastChild');
+              return;
+            }
+
+            classListFunc('selectedEmojiDefault');
+          });
+        }
+
+        if (thereIsNoSelectionInTheDocumentOrMessageInput()) {
+          handleClasses('remove');
+
+          return;
+        }
+
+        handleClasses('add');
+      }
+
+      function handleCursorAfterDeselect() {
+        if (thereIsNoSelectionInTheDocumentOrMessageInput()) return;
+
+        messageInput.classList.add('invisibleCaret');
+
+        setTimeout(() => {
+          messageInput.classList.remove('invisibleCaret');
+        }, 1);
+      }
+
+      messageInput.addEventListener('beforeinput', (e) => {
+        oldMessage = messageInput.innerHTML;
+      });
 
       messageInput.addEventListener('input', (e) => {
         function handleEmojiClasses() {
@@ -236,8 +305,6 @@
           });
         }
 
-        handleEmojiClasses();
-
         if (!continueInputEvent) {
           messageInput.innerHTML = oldMessage;
 
@@ -269,31 +336,52 @@
           return;
         }
 
+        const message = messageInput.innerHTML;
+
+        function messageHasTooManyCharacters() {
+          const messageHtml = turnTextIntoHtml(message);
+          const emojis = messageHtml.querySelectorAll('.emoji');
+
+          emojis.forEach((emoji) => {
+            messageHtml.replaceChild(document.createTextNode(emoji.alt), emoji);
+          });
+
+          // spread operator is for emojis to be counted correctly
+          const numberOfCharacters = [
+            ...removeInvisibleCharacter(messageHtml.textContent),
+          ].length;
+
+          const limit = 10;
+
+          if (numberOfCharacters > limit) {
+            const numberOfCharactersMore = limit - numberOfCharacters;
+
+            return { numberOfCharactersMore };
+          } else {
+            return false;
+          }
+        }
+
+        const messageHasTooManyCharactersResult = messageHasTooManyCharacters();
+
+        if (messageHasTooManyCharactersResult) {
+          console.log(messageHasTooManyCharactersResult.numberOfCharactersMore);
+        }
+
+        handleEmojiClasses();
+
         const emojiRegex = /\p{Extended_Pictographic}/u;
         const thereIsEmojiInTheMessage = emojiRegex.test(
           messageInput.textContent
         );
 
-        const a = messageInput.innerHTML;
-
-        const b = document.createElement('span');
-
-        b.innerHTML = a;
-
-        const c =
-
         if (!thereIsEmojiInTheMessage) return;
 
         function setMessageWithEmojis() {
-          const message = messageInput.innerHTML;
-
-          const newMessageHtml = document.createElement('span');
-
-          newMessageHtml.innerHTML = message;
+          const newMessageHtml = turnTextIntoHtml(message);
 
           twemoji.parse(newMessageHtml);
-
-          const newMessage = newMessageHtml.innerHTML;
+          const newMessage = removeInvisibleCharacter(newMessageHtml.innerHTML);
 
           messageInput.innerHTML = newMessage;
         }
@@ -308,9 +396,10 @@
               const numberRegex = /(\d+)/;
               const letterRegex = /[a-zA-Z]+/;
 
-              const emojiIdName = currentEmojiId.match(letterRegex)[0];
-              const newCurrentEmojiIdNumber =
-                currentEmojiId.match(numberRegex)[0] + 1;
+              const [emojiIdName] = currentEmojiId.match(letterRegex);
+              const [emojiIdNumber] = currentEmojiId.match(numberRegex);
+
+              const newCurrentEmojiIdNumber = Number(emojiIdNumber) + 1;
 
               const newCurrentEmojiId = emojiIdName + newCurrentEmojiIdNumber;
 
@@ -356,7 +445,6 @@
 
         handleSelection();
       });
-
       messageInput.addEventListener('paste', (e) => {
         e.preventDefault();
 
@@ -370,72 +458,15 @@
         selection.getRangeAt(0).insertNode(convertedPasteHtml);
         selection.collapseToEnd();
       });
-
       copyButton.addEventListener('mousedown', (e) => {
         e.preventDefault();
       });
-
       copyButton.addEventListener('click', insertTextAtCursor);
-
-      function thereIsNoSelectionInTheDocumentOrMessageInput() {
-        const selection = window.getSelection();
-        const haveSelection = !selection.isCollapsed;
-        const isMessageInput =
-          selection.anchorNode?.className?.includes('messageInput');
-
-        return !haveSelection || !isMessageInput;
-      }
-
-      function handleHaveSelectedText() {
-        const emojis = getEmojisInTheMessage();
-
-        function handleClasses(type) {
-          emojis.forEach((emoji) => {
-            function classListFunc(className) {
-              emoji.classList[type](className);
-            }
-
-            classListFunc('selectedEmoji');
-
-            const { firstChildOfMessageInput, lastChildOfMessageInput } =
-              getFirstAndLastChildOfMessageInput();
-
-            if (firstChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsFirstChild');
-              return;
-            }
-
-            if (lastChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsLastChild');
-              return;
-            }
-
-            classListFunc('selectedEmojiDefault');
-          });
-        }
-
-        if (thereIsNoSelectionInTheDocumentOrMessageInput()) {
-          handleClasses('remove');
-
-          return;
-        }
-
-        handleClasses('add');
-      }
-
       document.addEventListener('selectionchange', handleHaveSelectedText);
-
-      function handleCursorAfterDeselect() {
-        if (thereIsNoSelectionInTheDocumentOrMessageInput()) return;
-
-        messageInput.classList.add('invisibleCaret');
-
-        setTimeout(() => {
-          messageInput.classList.remove('invisibleCaret');
-        }, 1);
-      }
-
       messageInput.addEventListener('mouseup', handleCursorAfterDeselect);
+      messageInput.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+      });
     </script>
   </body>
 </html>
