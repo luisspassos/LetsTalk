@@ -188,12 +188,16 @@
         positionCursor();
       }
 
-      function convertTextFromMessageInputToHtml(text) {
+      convertTextFromMessageInputToChildNodes;
+
+      function convertTextFromMessageInputToChildNodes(text) {
         const convertedText = twemoji.parse(text);
 
         const convertedTextHtml = turnTextIntoHtml(convertedText);
+        const childNodes = [...convertedTextHtml.childNodes].reverse();
+        // reverse is to fix the children's position
 
-        return convertedTextHtml;
+        return childNodes;
       }
 
       function removeInvisibleCharacter(text) {
@@ -292,6 +296,8 @@
             'emojiIsFirstChildAndLast'
           );
 
+          console.log('aqui');
+
           handleClass(firstChildOfMessageInput === emoji, 'emojiIsFirstChild');
 
           handleClass(lastChildOfMessageInput === emoji, 'emojiIsLastChild');
@@ -303,6 +309,8 @@
       });
 
       messageInput.addEventListener('input', (e) => {
+        handleEmojiClasses();
+
         if (!continueInputEvent) {
           messageInput.innerHTML = oldMessage;
 
@@ -333,8 +341,6 @@
 
           return;
         }
-
-        handleEmojiClasses();
 
         const emojiRegex = /\p{Extended_Pictographic}/u;
         const thereIsEmojiInTheMessage = emojiRegex.test(
@@ -393,10 +399,8 @@
 
         const dataTransfer = e.dataTransfer;
         const draggedText = dataTransfer.getData('text');
-        const convertedDraggedTextHtml =
-          convertTextFromMessageInputToHtml(draggedText);
-
-        console.log(convertedDraggedTextHtml);
+        const draggedTextChildNodes =
+          convertTextFromMessageInputToChildNodes(draggedText);
 
         function handleSelection() {
           let range;
@@ -410,7 +414,10 @@
             range.setEnd(...pos);
           }
 
-          range.insertNode(convertedDraggedTextHtml);
+          draggedTextChildNodes.forEach((child) => {
+            range.insertNode(child);
+          });
+
           handleEmojiClasses();
         }
 
@@ -422,13 +429,19 @@
 
         const paste = (e.clipboardData || window.clipboardData).getData('text');
 
-        const convertedPasteHtml = convertTextFromMessageInputToHtml(paste);
+        const pasteChildNodes = convertTextFromMessageInputToChildNodes(paste);
 
         if (!selection.rangeCount) return;
 
         selection.deleteFromDocument();
-        selection.getRangeAt(0).insertNode(convertedPasteHtml);
+
+        pasteChildNodes.forEach((child) => {
+          selection.getRangeAt(0).insertNode(child);
+        });
+
         selection.collapseToEnd();
+
+        handleEmojiClasses();
       });
       copyButton.addEventListener('mousedown', (e) => {
         e.preventDefault();
