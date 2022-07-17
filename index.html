@@ -140,6 +140,7 @@
           }
 
           putCursorAtTheEnd();
+          addDoubleClickEventOnEmojis();
 
           return;
         }
@@ -154,9 +155,8 @@
         }
 
         positionCursor();
+        addDoubleClickEventOnEmojis();
       }
-
-      convertTextFromMessageInputToChildNodes;
 
       function convertTextFromMessageInputToChildNodes(text) {
         const convertedText = twemoji.parse(text);
@@ -227,6 +227,16 @@
         }, 1);
       }
 
+      function addDoubleClickEventOnEmojis() {
+        const emojis = getEmojisInTheMessage();
+
+        emojis.forEach((emoji) => {
+          emoji.addEventListener('dblclick', () => {
+            selection.selectAllChildren(messageInput);
+          });
+        });
+      }
+
       messageInput.addEventListener('beforeinput', (e) => {
         oldMessage = messageInput.innerHTML;
       });
@@ -245,16 +255,6 @@
           }
 
           setSelection();
-
-          function addDoubleClickEventOnEmojis() {
-            const emojis = getEmojisInTheMessage();
-
-            emojis.forEach((emoji) => {
-              emoji.addEventListener('dblclick', () => {
-                selection.selectAllChildren(messageInput);
-              });
-            });
-          }
 
           addDoubleClickEventOnEmojis();
 
@@ -336,6 +336,8 @@
           draggedTextChildNodes.forEach((child) => {
             range.insertNode(child);
           });
+
+          addDoubleClickEventOnEmojis();
         }
 
         handleSelection();
@@ -357,6 +359,8 @@
         });
 
         selection.collapseToEnd();
+
+        addDoubleClickEventOnEmojis();
       });
       copyButton.addEventListener('mousedown', (e) => {
         e.preventDefault();
