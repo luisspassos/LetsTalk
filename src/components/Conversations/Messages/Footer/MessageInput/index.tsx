@@ -1,15 +1,7 @@
-import {
-  Box,
-  Flex,
-  HStack,
-  useColorModeValue,
-  useStyleConfig,
-} from '@chakra-ui/react';
+import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { KeyboardEvent, useState } from 'react';
 import { HandleMessageInputSize, HandleSendMessage } from '..';
 import { useMessageForm } from '../../../../../contexts/MessageFormContext';
-import { EmojiButton } from './EmojiButton';
-import { FileButton } from './FileButton';
 
 type MessageInputProps = {
   handleSendMessage: HandleSendMessage;
@@ -50,31 +42,32 @@ export function MessageInput({
   const defaultStyles: any = useStyleConfig('Textarea');
 
   return (
-    <Flex align='center' justify='end' flex='1' maxW='750px' pos='relative'>
-      <Box
-        {...defaultStyles}
-        borderRadius='10px'
-        py='11.25px'
-        pr={['73px', '83px', '103px']}
-        fontFamily='Roboto'
-        bg={useColorModeValue('white', 'blackAlpha.500')}
-        borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
-        contentEditable
-        h='auto'
-        minH='0'
-        maxH={['200.5px']}
-        overflowY='auto'
-        _hover={{
-          borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
-        }}
-        placeholder='Mensagem'
-        sx={{
-          '&::-webkit-scrollbar-thumb': {
-            borderWidth: '9px 3px',
-          },
-        }}
-      />
-      {/* <Textarea
+    <Box
+      {...defaultStyles}
+      borderRadius='10px'
+      py='10.5px'
+      fontFamily='Roboto'
+      bg={useColorModeValue('white', 'blackAlpha.500')}
+      borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
+      contentEditable
+      h='auto'
+      minH='0'
+      maxH={['200.5px']}
+      overflowY='auto'
+      _hover={{
+        borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
+      }}
+      placeholder='Mensagem'
+      sx={{
+        '&::-webkit-scrollbar-thumb': {
+          borderWidth: '9px 3px',
+        },
+      }}
+    />
+  );
+}
+
+/* <Textarea
         maxLength={1000}
         onInput={handleTextAreaSize}
         onKeyDown={handleSendMessageWithEnter}
@@ -110,11 +103,4 @@ export function MessageInput({
           ref(e);
           messageInputRef.current = e;
         }}
-      /> */}
-      <HStack mt='-0.1px' pos='absolute' spacing='5px' mr='13px' zIndex='1'>
-        <EmojiButton />
-        <FileButton />
-      </HStack>
-    </Flex>
-  );
-}
+      /> */

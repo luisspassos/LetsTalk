@@ -1,7 +1,7 @@
 import { IoMdClose } from 'react-icons/io';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { useEmoji } from '../../../../../../contexts/EmojiContext';
-import { InputIconButton } from '../InputIconButton';
+import { InputIconButton } from '../';
 
 export function EmojiButton() {
   const {
