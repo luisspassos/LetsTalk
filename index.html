@@ -281,26 +281,32 @@
           getFirstAndLastChildOfMessageInput();
 
         emojis.forEach((emoji) => {
-          function handleClass(condition, className) {
-            if (condition) {
-              emoji.classList.add(className);
-              return;
-            }
+          if (
+            firstChildOfMessageInput === emoji &&
+            lastChildOfMessageInput === emoji
+          ) {
+            emoji.classList.add('emojiIsFirstChildAndLast');
 
-            emoji.classList.remove(className);
+            emoji.classList.remove('emojiIsFirstChild');
+            emoji.classList.remove('emojiIsLastChild');
+            return;
           }
 
-          handleClass(
-            firstChildOfMessageInput === emoji &&
-              lastChildOfMessageInput === emoji,
-            'emojiIsFirstChildAndLast'
-          );
+          if (firstChildOfMessageInput === emoji) {
+            emoji.classList.add('emojiIsFirstChild');
 
-          console.log('aqui');
+            emoji.classList.remove('emojiIsFirstChildAndLast');
+            emoji.classList.remove('emojiIsLastChild');
+            return;
+          }
 
-          handleClass(firstChildOfMessageInput === emoji, 'emojiIsFirstChild');
+          if (lastChildOfMessageInput === emoji) {
+            emoji.classList.add('emojiIsLastChild');
 
-          handleClass(lastChildOfMessageInput === emoji, 'emojiIsLastChild');
+            emoji.classList.remove('emojiIsFirstChildAndLast');
+            emoji.classList.remove('emojiIsFirstChild');
+            return;
+          }
         });
       }
 
