@@ -60,8 +60,10 @@ export function MessageInput({
         bg={useColorModeValue('white', 'blackAlpha.500')}
         borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
         contentEditable
-        minH='45px'
         h='auto'
+        minH='0'
+        maxH={['200.5px']}
+        overflowY='auto'
         _hover={{
           borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
         }}
@@ -109,7 +111,7 @@ export function MessageInput({
           messageInputRef.current = e;
         }}
       /> */}
-      <HStack pos='absolute' spacing='5px' mr='10px' zIndex='1'>
+      <HStack mt='-0.1px' pos='absolute' spacing='5px' mr='13px' zIndex='1'>
         <EmojiButton />
         <FileButton />
       </HStack>
