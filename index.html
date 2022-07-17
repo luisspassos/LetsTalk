@@ -73,35 +73,10 @@
         vertical-align: -0.1em;
       }
 
-      .emojiIsFirstChild {
-        margin: 0 var(--right-spacing) 0 0;
-      }
-
-      .emojiIsLastChild {
-        margin: 0 0 0 var(--left-spacing);
-      }
-
-      .emojiIsFirstChildAndLast {
-        margin: 0;
-      }
-
       .selectedEmoji {
         margin: 0;
-      }
-
-      .selectedEmojiDefault {
-        width: calc(1em + var(--right-spacing) + var(--left-spacing));
+        width: calc(1em + var(--left-spacing) + var(--right-spacing));
         padding: 0 var(--right-spacing) 0 var(--left-spacing);
-      }
-
-      .selectedEmojiIsFirstChild {
-        width: calc(1em + var(--right-spacing));
-        padding: 0 var(--right-spacing) 0 0;
-      }
-
-      .selectedEmojiIsLastChild {
-        width: calc(1em + var(--left-spacing));
-        padding: 0 0 0 var(--left-spacing);
       }
     </style>
   </head>
@@ -132,13 +107,6 @@
         const currentEmoji = document.querySelector(`#${currentEmojiId}`);
 
         return currentEmoji;
-      }
-
-      function getFirstAndLastChildOfMessageInput() {
-        const firstChildOfMessageInput = messageInput.firstChild;
-        const lastChildOfMessageInput = messageInput.lastChild;
-
-        return { firstChildOfMessageInput, lastChildOfMessageInput };
       }
 
       function getEmojisInTheMessage() {
@@ -236,21 +204,6 @@
             }
 
             classListFunc('selectedEmoji');
-
-            const { firstChildOfMessageInput, lastChildOfMessageInput } =
-              getFirstAndLastChildOfMessageInput();
-
-            if (firstChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsFirstChild');
-              return;
-            }
-
-            if (lastChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsLastChild');
-              return;
-            }
-
-            classListFunc('selectedEmojiDefault');
           });
         }
 
@@ -274,53 +227,13 @@
         }, 1);
       }
 
-      function handleEmojiClasses() {
-        const emojis = getEmojisInTheMessage();
-
-        const { firstChildOfMessageInput, lastChildOfMessageInput } =
-          getFirstAndLastChildOfMessageInput();
-
-        emojis.forEach((emoji) => {
-          if (
-            firstChildOfMessageInput === emoji &&
-            lastChildOfMessageInput === emoji
-          ) {
-            emoji.classList.add('emojiIsFirstChildAndLast');
-
-            emoji.classList.remove('emojiIsFirstChild');
-            emoji.classList.remove('emojiIsLastChild');
-            return;
-          }
-
-          if (firstChildOfMessageInput === emoji) {
-            emoji.classList.add('emojiIsFirstChild');
-
-            emoji.classList.remove('emojiIsFirstChildAndLast');
-            emoji.classList.remove('emojiIsLastChild');
-            return;
-          }
-
-          if (lastChildOfMessageInput === emoji) {
-            emoji.classList.add('emojiIsLastChild');
-
-            emoji.classList.remove('emojiIsFirstChildAndLast');
-            emoji.classList.remove('emojiIsFirstChild');
-            return;
-          }
-        });
-      }
-
       messageInput.addEventListener('beforeinput', (e) => {
         oldMessage = messageInput.innerHTML;
       });
 
       messageInput.addEventListener('input', (e) => {
-        handleEmojiClasses();
-
         if (!continueInputEvent) {
           messageInput.innerHTML = oldMessage;
-
-          handleEmojiClasses();
 
           function setSelection() {
             const currentEmoji = getCurrentEmojiInMessage();
@@ -423,8 +336,6 @@
           draggedTextChildNodes.forEach((child) => {
             range.insertNode(child);
           });
-
-          handleEmojiClasses();
         }
 
         handleSelection();
@@ -446,8 +357,6 @@
         });
 
         selection.collapseToEnd();
-
-        handleEmojiClasses();
       });
       copyButton.addEventListener('mousedown', (e) => {
         e.preventDefault();
