@@ -56,27 +56,11 @@
         color: white;
       }
 
-      .invisibleCaret {
-        caret-color: transparent;
-      }
-
-      .emojiWrapper {
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
-
       .emoji {
         height: 1em;
-        width: 1em;
-        margin: 0 var(--right-spacing) 0 var(--left-spacing);
-        vertical-align: -0.1em;
-      }
-
-      .selectedEmoji {
-        margin: 0;
         width: calc(1em + var(--left-spacing) + var(--right-spacing));
         padding: 0 var(--right-spacing) 0 var(--left-spacing);
+        vertical-align: -0.1em;
       }
     </style>
   </head>
@@ -84,7 +68,7 @@
     <div class="container">
       <div
         contenteditable
-        placeholder="Sua mensagem..."
+        placeholder="Your message..."
         class="messageInput"
       ></div>
       <button id="copyButton">Copy and paste emoji</button>
@@ -170,6 +154,7 @@
 
       function removeInvisibleCharacter(text) {
         const newText = text.replace('‍', '');
+        // see this
 
         return newText;
       }
@@ -179,53 +164,6 @@
       let continueInputEvent = true;
 
       let currentEmojiId = 'messageInputEmoji0';
-
-      function thereIsNoSelectionInTheDocumentOrMessageInput() {
-        function hasTheMessageInputClass(node) {
-          return node?.className?.includes('messageInput');
-        }
-
-        const selection = window.getSelection();
-        const haveSelection = !selection.isCollapsed;
-        const isMessageInput =
-          hasTheMessageInputClass(selection.anchorNode) ||
-          hasTheMessageInputClass(selection.anchorNode?.parentNode);
-
-        return !haveSelection || !isMessageInput;
-      }
-
-      function handleHaveSelectedText() {
-        const emojis = getEmojisInTheMessage();
-
-        function handleClasses(type) {
-          emojis.forEach((emoji) => {
-            function classListFunc(className) {
-              emoji.classList[type](className);
-            }
-
-            classListFunc('selectedEmoji');
-          });
-        }
-
-        if (thereIsNoSelectionInTheDocumentOrMessageInput()) {
-          handleClasses('remove');
-
-          return;
-        }
-
-        handleClasses('add');
-      }
-
-      function handleCursorAfterDeselect() {
-        if (thereIsNoSelectionInTheDocumentOrMessageInput()) return;
-
-        // serves to give time for the cursor to position itself
-        messageInput.classList.add('invisibleCaret');
-
-        setTimeout(() => {
-          messageInput.classList.remove('invisibleCaret');
-        }, 1);
-      }
 
       function addDoubleClickEventOnEmojis() {
         const emojis = getEmojisInTheMessage();
@@ -322,16 +260,12 @@
           convertTextFromMessageInputToChildNodes(draggedText);
 
         function handleSelection() {
-          let range;
+          const range = document.createRange();
 
-          if (document.caretRangeFromPoint) {
-            range = document.caretRangeFromPoint(e.clientX, e.clientY);
-          } else {
-            const pos = [e.rangeParent, e.rangeOffset];
-            range = document.createRange();
-            range.setStart(...pos);
-            range.setEnd(...pos);
-          }
+          const pos = [e.rangeParent, e.rangeOffset];
+          // see this
+          range.setStart(...pos);
+          range.setEnd(...pos);
 
           draggedTextChildNodes.forEach((child) => {
             range.insertNode(child);
@@ -366,12 +300,9 @@
         e.preventDefault();
       });
       copyButton.addEventListener('click', insertTextAtCursor);
-      document.addEventListener('selectionchange', handleHaveSelectedText);
-      messageInput.addEventListener('mouseup', handleCursorAfterDeselect);
       messageInput.addEventListener('dragstart', (e) => {
         e.preventDefault();
       });
-      messageInput.addEventListener('mousedown', handleCursorAfterDeselect);
     </script>
   </body>
 </html>

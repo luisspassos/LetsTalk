@@ -26,75 +26,12 @@
         font-size: 2rem;
         padding: 0rem 1rem;
       }
-
-      .invisibleCaret {
-        caret-color: transparent;
-      }
-
-      .emoji {
-        height: 1em;
-        width: 1em;
-        margin: 0 0.05em 0 0.1em;
-        vertical-align: -0.1em;
-      }
-
-      .emojiIsFirstChild {
-        margin: 0 0.05em 0 0;
-      }
-
-      .emojiIsLastChild {
-        margin: 0 0 0 0.1em;
-      }
-
-      .selectedEmoji {
-        margin: 0;
-      }
-
-      .selectedEmojiDefault {
-        width: calc(1em + 0.05em + 0.1em);
-        padding: 0 0.05em 0 0.1em;
-      }
-
-      .selectedEmojiIsFirstChild {
-        width: calc(1em + 0.05em);
-        padding: 0 0.05em 0 0;
-      }
-
-      .selectedEmojiIsLastChild {
-        width: calc(1em + 0.1em);
-        padding: 0 0 0 0.1em;
-      }
     </style>
   </head>
   <body>
-    <h1>Hello world</h1>
     <div contenteditable class="messageInput">
-      <img
-        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
-        alt="😀"
-        draggable="false"
-        class="emoji emojiIsFirstChild"
-      /><img
-        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
-        alt="😀"
-        draggable="false"
-        class="emoji"
-      /><img
-        src="https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f1f9-1f1f1.svg"
-        alt="😀"
-        draggable="false"
-        class="emoji emojiIsLastChild"
-      />
+      <span> 😍 </span>
     </div>
-
-    <script>
-      const messageInput = document.querySelector('.messageInput');
-
-      const emoji = document.querySelector('.emoji');
-
-      emoji.onclick = () => {
-        console.log('adjiaijdai');
-      };
-    </script>
+    <script></script>
   </body>
 </html>
