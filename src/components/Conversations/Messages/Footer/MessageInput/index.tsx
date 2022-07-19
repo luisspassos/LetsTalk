@@ -1,42 +1,49 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { KeyboardEvent, useState } from 'react';
-import { HandleMessageInputSize, HandleSendMessage } from '..';
-import { useMessageForm } from '../../../../../contexts/MessageFormContext';
+import { useState } from 'react';
 
-type MessageInputProps = {
-  handleSendMessage: HandleSendMessage;
-  handleMessageInputSize: HandleMessageInputSize;
-};
+type MessageInputEvent = { target: HTMLDivElement };
 
-export const messageInputInitialHeight = 45;
+export function MessageInput() {
+  const [oldMessage, setOldMessage] = useState('');
+  const [continueInputEvent, setContinueInputEvent] = useState(true);
 
-export function MessageInput({
-  handleSendMessage,
-  handleMessageInputSize,
-}: MessageInputProps) {
-  const [enterWasPressedToSendMessage, setEnterWasPressedToSendMessage] =
-    useState(false);
+  async function handleInput(e: MessageInputEvent) {
+    if (!continueInputEvent) return;
 
-  const {
-    messageForm: { register },
-    messageInputRef,
-  } = useMessageForm();
+    const message = e.target.textContent ?? '';
 
-  const { ref, ...registerRest } = register('message');
+    const Graphemer = (await import('graphemer')).default;
+    const splitter = new Graphemer();
 
-  async function handleTextAreaSize() {
-    if (enterWasPressedToSendMessage) {
-      await handleSendMessage();
-      setEnterWasPressedToSendMessage(false);
+    const messageChars = splitter.splitGraphemes(message);
+    const oldMessageChars = splitter.splitGraphemes(oldMessage);
+
+    const newValue = messageChars.find(
+      (char, i) => char !== oldMessageChars[i]
+    );
+
+    if (!newValue) return;
+
+    const { regexs } = await import('../../../../../utils/regexs');
+
+    const isEmoji = regexs.emoji.test(newValue);
+
+    if (isEmoji) {
+      const { parse: twemojiParse } = await import('twemoji-parser');
+
+      const emojiUrl = twemojiParse(newValue)[0].url;
+
+      console.log(emojiUrl);
     }
 
-    handleMessageInputSize();
-  }
+    setOldMessage(message);
 
-  function handleSendMessageWithEnter(e: KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key === 'Enter') {
-      setEnterWasPressedToSendMessage(true);
-    }
+    // it is for the event not to run 2 times when inserting an emoji
+    setContinueInputEvent(false);
+
+    setTimeout(() => {
+      setContinueInputEvent(true);
+    }, 0);
   }
 
   const defaultStyles: any = useStyleConfig('Textarea');
@@ -62,45 +69,19 @@ export function MessageInput({
         '&::-webkit-scrollbar-thumb': {
           borderWidth: '9px 3px',
         },
+        '.emoji': {
+          bgSize: 'contain',
+          bgRepeat: 'no-repeat',
+          bgPosition: 'center',
+          color: 'transparent',
+          caretColor: 'gray.50',
+          '&::selection': {
+            color: 'transparent',
+            bgColor: 'rgba(0, 0, 255, 0.438)',
+          },
+        },
       }}
+      onInput={handleInput}
     />
   );
 }
-
-/* <Textarea
-        maxLength={1000}
-        onInput={handleTextAreaSize}
-        onKeyDown={handleSendMessageWithEnter}
-        resize='none'
-        overflowY='hidden'
-        h={`${messageInputInitialHeight}px`}
-        borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
-        bg={useColorModeValue('white', 'blackAlpha.500')}
-        fontFamily='Roboto'
-        pt='11.25px'
-        borderRadius='10px'
-        rows={1}
-        placeholder='Sua mensagem...'
-        pr={['73px', '83px', '103px']}
-        _placeholderShown={{
-          textOverflow: 'ellipsis',
-        }}
-        _placeholder={{
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-        }}
-        _hover={{
-          borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
-        }}
-        sx={{
-          '&::-webkit-scrollbar-thumb': {
-            borderWidth: '9px 3px',
-          },
-        }}
-        {...registerRest}
-        ref={(e) => {
-          ref(e);
-          messageInputRef.current = e;
-        }}
-      /> */

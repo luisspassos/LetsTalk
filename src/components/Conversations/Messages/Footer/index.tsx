@@ -86,13 +86,7 @@ export function Footer() {
       <FormControl as='form' mt='auto'>
         <EmojiPicker />
         <Divider />
-        <Flex
-          py='15px'
-          align='end'
-          justify='start'
-          pl={['6px', '8px', '10px']}
-          pos='relative'
-        >
+        <Flex py='15px' align='end' justify='start' pos='relative'>
           <ButtonWrapper>
             <HStack mr='10px' spacing='5px'>
               <EmojiButton />
