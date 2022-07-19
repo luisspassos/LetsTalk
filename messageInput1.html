@@ -56,52 +56,11 @@
         color: white;
       }
 
-      .invisibleCaret {
-        caret-color: transparent;
-      }
-
-      .emojiWrapper {
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
-
       .emoji {
         height: 1em;
-        width: 1em;
-        margin: 0 var(--right-spacing) 0 var(--left-spacing);
-        vertical-align: -0.1em;
-      }
-
-      .emojiIsFirstChild {
-        margin: 0 var(--right-spacing) 0 0;
-      }
-
-      .emojiIsLastChild {
-        margin: 0 0 0 var(--left-spacing);
-      }
-
-      .emojiIsFirstChildAndLast {
-        margin: 0;
-      }
-
-      .selectedEmoji {
-        margin: 0;
-      }
-
-      .selectedEmojiDefault {
-        width: calc(1em + var(--right-spacing) + var(--left-spacing));
+        width: calc(1em + var(--left-spacing) + var(--right-spacing));
         padding: 0 var(--right-spacing) 0 var(--left-spacing);
-      }
-
-      .selectedEmojiIsFirstChild {
-        width: calc(1em + var(--right-spacing));
-        padding: 0 var(--right-spacing) 0 0;
-      }
-
-      .selectedEmojiIsLastChild {
-        width: calc(1em + var(--left-spacing));
-        padding: 0 0 0 var(--left-spacing);
+        vertical-align: -0.1em;
       }
     </style>
   </head>
@@ -109,7 +68,7 @@
     <div class="container">
       <div
         contenteditable
-        placeholder="Sua mensagem..."
+        placeholder="Your message..."
         class="messageInput"
       ></div>
       <button id="copyButton">Copy and paste emoji</button>
@@ -132,13 +91,6 @@
         const currentEmoji = document.querySelector(`#${currentEmojiId}`);
 
         return currentEmoji;
-      }
-
-      function getFirstAndLastChildOfMessageInput() {
-        const firstChildOfMessageInput = messageInput.firstChild;
-        const lastChildOfMessageInput = messageInput.lastChild;
-
-        return { firstChildOfMessageInput, lastChildOfMessageInput };
       }
 
       function getEmojisInTheMessage() {
@@ -172,6 +124,7 @@
           }
 
           putCursorAtTheEnd();
+          addDoubleClickEventOnEmojis();
 
           return;
         }
@@ -186,9 +139,8 @@
         }
 
         positionCursor();
+        addDoubleClickEventOnEmojis();
       }
-
-      convertTextFromMessageInputToChildNodes;
 
       function convertTextFromMessageInputToChildNodes(text) {
         const convertedText = twemoji.parse(text);
@@ -202,6 +154,7 @@
 
       function removeInvisibleCharacter(text) {
         const newText = text.replace('‍', '');
+        // see this
 
         return newText;
       }
@@ -212,105 +165,13 @@
 
       let currentEmojiId = 'messageInputEmoji0';
 
-      function thereIsNoSelectionInTheDocumentOrMessageInput() {
-        function hasTheMessageInputClass(node) {
-          return node?.className?.includes('messageInput');
-        }
-
-        const selection = window.getSelection();
-        const haveSelection = !selection.isCollapsed;
-        const isMessageInput =
-          hasTheMessageInputClass(selection.anchorNode) ||
-          hasTheMessageInputClass(selection.anchorNode?.parentNode);
-
-        return !haveSelection || !isMessageInput;
-      }
-
-      function handleHaveSelectedText() {
+      function addDoubleClickEventOnEmojis() {
         const emojis = getEmojisInTheMessage();
-
-        function handleClasses(type) {
-          emojis.forEach((emoji) => {
-            function classListFunc(className) {
-              emoji.classList[type](className);
-            }
-
-            classListFunc('selectedEmoji');
-
-            const { firstChildOfMessageInput, lastChildOfMessageInput } =
-              getFirstAndLastChildOfMessageInput();
-
-            if (firstChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsFirstChild');
-              return;
-            }
-
-            if (lastChildOfMessageInput === emoji) {
-              classListFunc('selectedEmojiIsLastChild');
-              return;
-            }
-
-            classListFunc('selectedEmojiDefault');
-          });
-        }
-
-        if (thereIsNoSelectionInTheDocumentOrMessageInput()) {
-          handleClasses('remove');
-
-          return;
-        }
-
-        handleClasses('add');
-      }
-
-      function handleCursorAfterDeselect() {
-        if (thereIsNoSelectionInTheDocumentOrMessageInput()) return;
-
-        // serves to give time for the cursor to position itself
-        messageInput.classList.add('invisibleCaret');
-
-        setTimeout(() => {
-          messageInput.classList.remove('invisibleCaret');
-        }, 1);
-      }
-
-      function handleEmojiClasses() {
-        const emojis = getEmojisInTheMessage();
-
-        const { firstChildOfMessageInput, lastChildOfMessageInput } =
-          getFirstAndLastChildOfMessageInput();
 
         emojis.forEach((emoji) => {
-          if (
-            firstChildOfMessageInput === emoji &&
-            lastChildOfMessageInput === emoji
-          ) {
-            emoji.classList.add('emojiIsFirstChildAndLast');
-
-            emoji.classList.remove('emojiIsFirstChild');
-            emoji.classList.remove('emojiIsLastChild');
-            return;
-          }
-
-          if (firstChildOfMessageInput === emoji) {
-            emoji.classList.add('emojiIsFirstChild');
-
-            emoji.classList.remove('emojiIsFirstChildAndLast');
-            emoji.classList.remove('emojiIsLastChild');
-            return;
-          }
-
-          if (lastChildOfMessageInput === emoji) {
-            emoji.classList.add('emojiIsLastChild');
-
-            emoji.classList.remove('emojiIsFirstChildAndLast');
-            emoji.classList.remove('emojiIsFirstChild');
-            return;
-          }
-
-          emoji.classList.remove('emojiIsFirstChildAndLast');
-          emoji.classList.remove('emojiIsFirstChild');
-          emoji.classList.remove('emojiIsLastChild');
+          emoji.addEventListener('dblclick', () => {
+            selection.selectAllChildren(messageInput);
+          });
         });
       }
 
@@ -319,12 +180,8 @@
       });
 
       messageInput.addEventListener('input', (e) => {
-        handleEmojiClasses();
-
         if (!continueInputEvent) {
           messageInput.innerHTML = oldMessage;
-
-          handleEmojiClasses();
 
           function setSelection() {
             const currentEmoji = getCurrentEmojiInMessage();
@@ -336,16 +193,6 @@
           }
 
           setSelection();
-
-          function addDoubleClickEventOnEmojis() {
-            const emojis = getEmojisInTheMessage();
-
-            emojis.forEach((emoji) => {
-              emoji.addEventListener('dblclick', () => {
-                selection.selectAllChildren(messageInput);
-              });
-            });
-          }
 
           addDoubleClickEventOnEmojis();
 
@@ -413,22 +260,18 @@
           convertTextFromMessageInputToChildNodes(draggedText);
 
         function handleSelection() {
-          let range;
+          const range = document.createRange();
 
-          if (document.caretRangeFromPoint) {
-            range = document.caretRangeFromPoint(e.clientX, e.clientY);
-          } else {
-            const pos = [e.rangeParent, e.rangeOffset];
-            range = document.createRange();
-            range.setStart(...pos);
-            range.setEnd(...pos);
-          }
+          const pos = [e.rangeParent, e.rangeOffset];
+          // see this
+          range.setStart(...pos);
+          range.setEnd(...pos);
 
           draggedTextChildNodes.forEach((child) => {
             range.insertNode(child);
           });
 
-          handleEmojiClasses();
+          addDoubleClickEventOnEmojis();
         }
 
         handleSelection();
@@ -451,18 +294,15 @@
 
         selection.collapseToEnd();
 
-        handleEmojiClasses();
+        addDoubleClickEventOnEmojis();
       });
       copyButton.addEventListener('mousedown', (e) => {
         e.preventDefault();
       });
       copyButton.addEventListener('click', insertTextAtCursor);
-      document.addEventListener('selectionchange', handleHaveSelectedText);
-      messageInput.addEventListener('mouseup', handleCursorAfterDeselect);
       messageInput.addEventListener('dragstart', (e) => {
         e.preventDefault();
       });
-      messageInput.addEventListener('mousedown', handleCursorAfterDeselect);
     </script>
   </body>
 </html>

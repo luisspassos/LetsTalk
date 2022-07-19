@@ -20,6 +20,7 @@
 - ver pagina going to production
 - ver github copilot
 - delete htmls
+- see emoji selection
 
 # NEXT PROJECT
 

@@ -1,5 +1,5 @@
 import { AiOutlinePaperClip } from 'react-icons/ai';
-import { InputIconButton } from './InputIconButton';
+import { InputIconButton } from '.';
 
 export function FileButton() {
   return (

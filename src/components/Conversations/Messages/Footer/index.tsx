@@ -1,7 +1,7 @@
-import { Box, Flex, FormControl } from '@chakra-ui/react';
+import { Box, Flex, FormControl, HStack } from '@chakra-ui/react';
 import { Divider } from '../../../Divider';
 import { MessageInput } from './MessageInput';
-import { EmojiPicker } from './MessageInput/EmojiButton/EmojiPicker';
+import { EmojiPicker } from './IconButtons/EmojiButton/EmojiPicker';
 import { RecordButtonAudio } from './Buttons/RecordButtonAudio';
 import {
   BaseSyntheticEvent,
@@ -12,6 +12,9 @@ import {
 } from 'react';
 import { SendMessageButton } from './Buttons/SendMessageButton';
 import { useMessageForm } from '../../../../contexts/MessageFormContext';
+import { EmojiButton } from './IconButtons/EmojiButton';
+import { FileButton } from './IconButtons/FileButton';
+import { ButtonWrapper } from './ButtonWrapper';
 
 export type HandleSendMessage = (
   e?: BaseSyntheticEvent<object, any, any> | undefined
@@ -83,14 +86,13 @@ export function Footer() {
       <FormControl as='form' mt='auto'>
         <EmojiPicker />
         <Divider />
-        <Flex
-          py={['11px', '13px', '15px']}
-          minH={['50px', '65px', '80px']}
-          align='center'
-          justify='start'
-          pl={['6px', '8px', '10px']}
-          pos='relative'
-        >
+        <Flex py='15px' align='end' justify='start' pos='relative'>
+          <ButtonWrapper>
+            <HStack mr='10px' spacing='5px'>
+              <EmojiButton />
+              <FileButton />
+            </HStack>
+          </ButtonWrapper>
           <MessageInput
             handleSendMessage={handleSendMessage}
             handleMessageInputSize={handleMessageInputSize}
