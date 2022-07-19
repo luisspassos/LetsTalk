@@ -54,8 +54,13 @@
     <div contenteditable class="messageInput"></div>
 
     <script>
-      const messageInput = document.querySelector('.messageInput');
+      const splitEmoji = (string) =>
+        [...new Intl.Segmenter().segment(string)].map((x) => x.segment);
 
+      console.log('👁️‍🗨️'.split(''));
+      console.log([...'👁️‍🗨️']);
+
+      const messageInput = document.querySelector('.messageInput');
       const selection = window.getSelection();
 
       function saveSelection(containerEl) {

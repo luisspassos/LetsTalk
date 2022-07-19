@@ -106,8 +106,8 @@ export function Emoji({ emoji, name }: EmojiProps) {
       <Image
         cursor='pointer'
         onClick={handleSelectEmoji}
-        w={['26px', '31px', '36px']}
-        h={['26px', '31px', '36px']}
+        w='70%'
+        h='70%'
         src={twemoji}
         alt={emoji}
         aria-label={name}
