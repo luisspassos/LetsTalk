@@ -33,7 +33,17 @@ export function MessageInput() {
 
       const emojiUrl = twemojiParse(newValue)[0].url;
 
-      console.log(emojiUrl);
+      const emojiHtml = document.createElement('span');
+      emojiHtml.className = 'emoji';
+      emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
+      emojiHtml.textContent = newValue;
+
+      e.target.textContent = oldMessage;
+
+      const selection = window.getSelection();
+      const range = selection?.getRangeAt(0);
+      range?.insertNode(emojiHtml);
+      selection?.collapseToEnd();
     }
 
     setOldMessage(message);
@@ -74,7 +84,7 @@ export function MessageInput() {
           bgRepeat: 'no-repeat',
           bgPosition: 'center',
           color: 'transparent',
-          caretColor: 'gray.50',
+          caretColor: 'var(--chakra-colors-gray-50)',
           '&::selection': {
             color: 'transparent',
             bgColor: 'rgba(0, 0, 255, 0.438)',

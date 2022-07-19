@@ -172,12 +172,7 @@
           return character;
         });
 
-        const newMessage = newCharacterArr
-          .join('')
-          .replace('<', '&lt;')
-          .replace('>', '&gt;');
-
-        console.log(newMessage);
+        const newMessage = newCharacterArr.join('');
 
         savedSel = saveSelection(messageInput);
 
