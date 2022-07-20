@@ -4,7 +4,10 @@ import { useState } from 'react';
 type MessageInputEvent = { target: HTMLDivElement };
 
 export function MessageInput() {
-  const [oldMessage, setOldMessage] = useState('');
+  const [oldMessage, setOldMessage] = useState({
+    innerHtml: '',
+    textContent: '',
+  });
   const [continueInputEvent, setContinueInputEvent] = useState(true);
 
   async function handleInput(e: MessageInputEvent) {
@@ -16,7 +19,7 @@ export function MessageInput() {
     const splitter = new Graphemer();
 
     const messageChars = splitter.splitGraphemes(message);
-    const oldMessageChars = splitter.splitGraphemes(oldMessage);
+    const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
 
     const newValue = messageChars.find(
       (char, i) => char !== oldMessageChars[i]
@@ -38,22 +41,26 @@ export function MessageInput() {
       emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
       emojiHtml.textContent = newValue;
 
-      e.target.textContent = oldMessage;
+      e.target.innerHTML = oldMessage.innerHtml;
 
-      const selection = window.getSelection();
-      const range = selection?.getRangeAt(0);
-      range?.insertNode(emojiHtml);
-      selection?.collapseToEnd();
+      if (!e.target.innerHTML) {
+        e.target.append(emojiHtml);
+      }
     }
 
-    setOldMessage(message);
+    const messageHtml = e.target.innerHTML;
+
+    setOldMessage({
+      textContent: message,
+      innerHtml: messageHtml,
+    });
 
     // it is for the event not to run 2 times when inserting an emoji
     setContinueInputEvent(false);
 
     setTimeout(() => {
       setContinueInputEvent(true);
-    }, 0);
+    }, 1);
   }
 
   const defaultStyles: any = useStyleConfig('Textarea');
