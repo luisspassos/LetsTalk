@@ -123,15 +123,22 @@ export function MessageInput() {
       emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
       emojiHtml.textContent = newValue;
 
-      setSavedSel(saveSelection(e.target));
-
       e.target.innerHTML = oldMessage.innerHtml;
 
       if (!e.target.innerHTML) {
         e.target.append(emojiHtml);
+
+        setSavedSel({
+          end: 2,
+          start: 2,
+        });
       }
 
       restoreSelection(e.target, savedSel);
+
+      console.log(getSelection()?.focusOffset);
+
+      console.log(e.target.childNodes[0]);
     }
 
     const messageHtml = e.target.innerHTML;
