@@ -85,6 +85,7 @@
         while (!stop && (node = nodeStack.pop())) {
           if (node.nodeType == 3) {
             const nextCharIndex = charIndex + node.length;
+
             if (
               !foundStart &&
               savedSel.start >= charIndex &&

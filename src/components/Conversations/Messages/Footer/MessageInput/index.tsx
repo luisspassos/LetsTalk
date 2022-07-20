@@ -1,7 +1,84 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useState } from 'react';
+import Graphemer from 'graphemer';
 
 type MessageInputEvent = { target: HTMLDivElement };
+
+type SavedSel =
+  | {
+      start: number;
+      end: number;
+    }
+  | undefined;
+
+const splitter = new Graphemer();
+
+function saveSelection(containerEl: HTMLDivElement) {
+  const selection = getSelection();
+  const range = selection?.getRangeAt(0);
+  const preSelectionRange = range?.cloneRange();
+  preSelectionRange?.selectNodeContents(containerEl);
+
+  if (!range?.startContainer) return;
+
+  preSelectionRange?.setEnd(range.startContainer, range?.startOffset);
+  const start = preSelectionRange?.toString().length;
+
+  if (!start) return;
+
+  return {
+    start: start,
+    end: start + range.toString().length,
+  };
+}
+
+function restoreSelection(containerEl: HTMLDivElement, savedSel: SavedSel) {
+  const selection = getSelection();
+
+  const doc = containerEl.ownerDocument;
+  let charIndex = 0;
+  const range = doc.createRange();
+  range.setStart(containerEl, 0);
+  range.collapse(true);
+  const nodeStack: (HTMLDivElement | ChildNode)[] = [containerEl];
+  let node;
+  let foundStart = false;
+  let stop = false;
+
+  while (!stop && (node = nodeStack.pop())) {
+    if (node.nodeType == 3) {
+      if (!node.textContent || !savedSel) return;
+
+      const nextCharIndex = charIndex + node.textContent.length;
+
+      if (
+        !foundStart &&
+        savedSel?.start >= charIndex &&
+        savedSel?.start <= nextCharIndex
+      ) {
+        range.setStart(node, savedSel?.start - charIndex);
+        foundStart = true;
+      }
+      if (
+        foundStart &&
+        savedSel?.end >= charIndex &&
+        savedSel?.end <= nextCharIndex
+      ) {
+        range.setEnd(node, savedSel?.end - charIndex);
+        stop = true;
+      }
+      charIndex = nextCharIndex;
+    } else {
+      let i = node.childNodes.length;
+      while (i--) {
+        nodeStack.push(node.childNodes[i]);
+      }
+    }
+  }
+
+  selection?.removeAllRanges();
+  selection?.addRange(range);
+}
 
 export function MessageInput() {
   const [oldMessage, setOldMessage] = useState({
@@ -9,14 +86,18 @@ export function MessageInput() {
     textContent: '',
   });
   const [continueInputEvent, setContinueInputEvent] = useState(true);
+  const [savedSel, setSavedSel] = useState<SavedSel>();
 
   async function handleInput(e: MessageInputEvent) {
-    if (!continueInputEvent) return;
+    if (!continueInputEvent) {
+      e.target.innerHTML = oldMessage.innerHtml;
+
+      restoreSelection(e.target, savedSel);
+
+      return;
+    }
 
     const message = e.target.textContent ?? '';
-
-    const Graphemer = (await import('graphemer')).default;
-    const splitter = new Graphemer();
 
     const messageChars = splitter.splitGraphemes(message);
     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
@@ -37,15 +118,20 @@ export function MessageInput() {
       const emojiUrl = twemojiParse(newValue)[0].url;
 
       const emojiHtml = document.createElement('span');
+
       emojiHtml.className = 'emoji';
       emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
       emojiHtml.textContent = newValue;
+
+      setSavedSel(saveSelection(e.target));
 
       e.target.innerHTML = oldMessage.innerHtml;
 
       if (!e.target.innerHTML) {
         e.target.append(emojiHtml);
       }
+
+      restoreSelection(e.target, savedSel);
     }
 
     const messageHtml = e.target.innerHTML;
@@ -60,7 +146,7 @@ export function MessageInput() {
 
     setTimeout(() => {
       setContinueInputEvent(true);
-    }, 1);
+    }, 0);
   }
 
   const defaultStyles: any = useStyleConfig('Textarea');
