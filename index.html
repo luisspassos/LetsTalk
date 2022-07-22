@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container"><span>😍</span><span><span>🥸</span>here</span><span>🤣</span></div>
+
+    <script>
+
+      function insertAfter(newNode, referenceNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+      }
+
+      const container = document.querySelector('.container');
+      const childNodes = [...container.childNodes];
+
+      const childNodeThatHasChildNode = childNodes.find(child => child.childNodes.length > 1);
+      const otherChildNodes = [...childNodeThatHasChildNode.childNodes];
+
+      const elIndex = otherChildNodes.findIndex(child => child instanceof Element);
+
+      const el = {
+        node: otherChildNodes[elIndex],
+        position: elIndex === 0 ? 'before' : 'after'
+      }
+
+      el.node.remove()
+
+      if(el.position === 'before') {
+        container.insertBefore(el.node, childNodeThatHasChildNode)
+      } else {
+        insertAfter(el.node, childNodeThatHasChildNode)
+      }
+    </script>
+  </body>
+</html>

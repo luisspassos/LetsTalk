@@ -4,12 +4,17 @@ import Graphemer from 'graphemer';
 
 type MessageInputEvent = { target: HTMLDivElement };
 
-type SavedSel =
+type SavedSelection =
   | {
       start: number;
       end: number;
     }
   | undefined;
+
+type SavedSelectionObj = {
+  old: SavedSelection;
+  new: SavedSelection;
+};
 
 const splitter = new Graphemer();
 
@@ -24,7 +29,7 @@ function saveSelection(containerEl: HTMLDivElement) {
   preSelectionRange?.setEnd(range.startContainer, range?.startOffset);
   const start = preSelectionRange?.toString().length;
 
-  if (!start) return;
+  if (start === undefined) return;
 
   return {
     start: start,
@@ -32,7 +37,10 @@ function saveSelection(containerEl: HTMLDivElement) {
   };
 }
 
-function restoreSelection(containerEl: HTMLDivElement, savedSel: SavedSel) {
+function restoreSelection(
+  containerEl: HTMLDivElement,
+  savedSelection: SavedSelection
+) {
   const selection = getSelection();
 
   const doc = containerEl.ownerDocument;
@@ -47,24 +55,24 @@ function restoreSelection(containerEl: HTMLDivElement, savedSel: SavedSel) {
 
   while (!stop && (node = nodeStack.pop())) {
     if (node.nodeType == 3) {
-      if (!node.textContent || !savedSel) return;
+      if (!node.textContent || !savedSelection) return;
 
       const nextCharIndex = charIndex + node.textContent.length;
 
       if (
         !foundStart &&
-        savedSel?.start >= charIndex &&
-        savedSel?.start <= nextCharIndex
+        savedSelection?.start >= charIndex &&
+        savedSelection?.start <= nextCharIndex
       ) {
-        range.setStart(node, savedSel?.start - charIndex);
+        range.setStart(node, savedSelection?.start - charIndex);
         foundStart = true;
       }
       if (
         foundStart &&
-        savedSel?.end >= charIndex &&
-        savedSel?.end <= nextCharIndex
+        savedSelection?.end >= charIndex &&
+        savedSelection?.end <= nextCharIndex
       ) {
-        range.setEnd(node, savedSel?.end - charIndex);
+        range.setEnd(node, savedSelection?.end - charIndex);
         stop = true;
       }
       charIndex = nextCharIndex;
@@ -86,74 +94,92 @@ export function MessageInput() {
     textContent: '',
   });
   const [continueInputEvent, setContinueInputEvent] = useState(true);
-  const [savedSel, setSavedSel] = useState<SavedSel>();
+  const [savedSelection, setSavedSelection] = useState<SavedSelectionObj>({
+    old: undefined,
+    new: undefined,
+  });
 
-  async function handleInput(e: MessageInputEvent) {
-    if (!continueInputEvent) {
-      e.target.innerHTML = oldMessage.innerHtml;
+  // async function handleInput(e: MessageInputEvent) {
+  //   const messageInput = e.target;
 
-      restoreSelection(e.target, savedSel);
+  //   if (!continueInputEvent) {
+  //     messageInput.innerHTML = oldMessage.innerHtml;
 
-      return;
-    }
+  //     restoreSelection(messageInput, savedSelection.new);
 
-    const message = e.target.textContent ?? '';
+  //     return;
+  //   }
 
-    const messageChars = splitter.splitGraphemes(message);
-    const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
+  //   const message = messageInput.textContent ?? '';
 
-    const newValue = messageChars.find(
-      (char, i) => char !== oldMessageChars[i]
-    );
+  //   const messageChars = splitter.splitGraphemes(message);
+  //   const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
 
-    if (!newValue) return;
+  //   const newValue = messageChars.find(
+  //     (char, i) => char !== oldMessageChars[i]
+  //   );
 
-    const { regexs } = await import('../../../../../utils/regexs');
+  //   if (!newValue) return;
 
-    const isEmoji = regexs.emoji.test(newValue);
+  //   const { regexs } = await import('../../../../../utils/regexs');
 
-    if (isEmoji) {
-      const { parse: twemojiParse } = await import('twemoji-parser');
+  //   const isEmoji = regexs.emoji.test(newValue);
 
-      const emojiUrl = twemojiParse(newValue)[0].url;
+  //   if (isEmoji) {
+  //     const { parse: twemojiParse } = await import('twemoji-parser');
 
-      const emojiHtml = document.createElement('span');
+  //     const emojiUrl = twemojiParse(newValue)[0].url;
 
-      emojiHtml.className = 'emoji';
-      emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
-      emojiHtml.textContent = newValue;
+  //     const emojiHtml = document.createElement('span');
 
-      e.target.innerHTML = oldMessage.innerHtml;
+  //     emojiHtml.className = 'emoji';
+  //     emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
+  //     emojiHtml.textContent = newValue;
 
-      if (!e.target.innerHTML) {
-        e.target.append(emojiHtml);
+  //     const newSavedSelection = saveSelection(messageInput);
 
-        setSavedSel({
-          end: 2,
-          start: 2,
-        });
-      }
+  //     // setSavedSelection((prevState) => ({
+  //     //   ...prevState,
+  //     //   new: newSavedSelection,
+  //     // }));
 
-      restoreSelection(e.target, savedSel);
+  //     messageInput.innerHTML = oldMessage.innerHtml;
 
-      console.log(getSelection()?.focusOffset);
+  //     restoreSelection(messageInput, savedSelection.old);
 
-      console.log(e.target.childNodes[0]);
-    }
+  //     const selection = getSelection();
 
-    const messageHtml = e.target.innerHTML;
+  //     selection?.getRangeAt(0).insertNode(emojiHtml);
+  //   }
 
-    setOldMessage({
-      textContent: message,
-      innerHtml: messageHtml,
-    });
+  //   const messageHtml = messageInput.innerHTML;
 
-    // it is for the event not to run 2 times when inserting an emoji
-    setContinueInputEvent(false);
+  //   setOldMessage({
+  //     textContent: message,
+  //     innerHtml: messageHtml,
+  //   });
+
+  //   // it is for the event not to run 2 times when inserting an emoji
+  //   setContinueInputEvent(false);
+
+  //   setTimeout(() => {
+  //     setContinueInputEvent(true);
+  //   }, 0);
+  // }
+
+  function handleBeforeInput(e: MessageInputEvent) {
+    const messageInput = e.target;
+
+    const newSavedSelection = saveSelection(messageInput);
+
+    setSavedSelection((prevState) => ({
+      ...prevState,
+      old: newSavedSelection,
+    }));
 
     setTimeout(() => {
-      setContinueInputEvent(true);
-    }, 0);
+      console.log(savedSelection.old);
+    }, 5000);
   }
 
   const defaultStyles: any = useStyleConfig('Textarea');
@@ -191,7 +217,7 @@ export function MessageInput() {
           },
         },
       }}
-      onInput={handleInput}
+      onBeforeInput={handleBeforeInput}
     />
   );
 }
