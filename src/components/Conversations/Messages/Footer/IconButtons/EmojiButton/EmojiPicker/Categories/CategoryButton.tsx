@@ -52,10 +52,10 @@ export function CategoryButton({
         selectedCategoryIndex: index,
       }));
 
-      const element = document.getElementById(ariaLabel)?.offsetTop;
-      document
-        .getElementById('scrollEmojis')
-        ?.scrollTo({ top: element - 320, behavior: 'smooth' });
+      // const element = document.getElementById(ariaLabel)?.offsetTop;
+      // document
+      //   .getElementById('scrollEmojis')
+      //   ?.scrollTo({ top: element - 320, behavior: 'smooth' });
 
       // function findPos(obj) {
       //   var curtop = 0;
