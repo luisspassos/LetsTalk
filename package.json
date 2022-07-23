@@ -14,6 +14,7 @@
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@fontsource/noto-emoji": "^4.5.2",
     "@fontsource/poppins": "^4.5.2",
     "@fontsource/roboto": "^4.5.3",
     "@hookform/resolvers": "^2.8.8",

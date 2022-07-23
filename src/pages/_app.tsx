@@ -2,6 +2,7 @@ import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
 import '@fontsource/roboto/400.css';
+import '@fontsource/noto-emoji/400.css';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';

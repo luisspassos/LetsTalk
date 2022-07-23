@@ -1,5 +1,5 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
+import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import Graphemer from 'graphemer';
 
 type SavedSelection =
@@ -94,6 +94,7 @@ export function MessageInput() {
     innerHtml: '',
   });
   const [savedSelection, setSavedSelection] = useState<SavedSelection>();
+  const [isKeyDownEvent, setIsKeyDownEvent] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
@@ -101,6 +102,11 @@ export function MessageInput() {
   useEffect(() => {
     async function afterInputEvent() {
       if (!savedSelection || !messageInput) return;
+
+      if (isKeyDownEvent) {
+        setIsKeyDownEvent(false);
+        return;
+      }
 
       const message = messageInput?.textContent ?? '';
 
@@ -125,7 +131,9 @@ export function MessageInput() {
         const emojiHtml = document.createElement('span');
 
         emojiHtml.className = 'emoji';
+
         emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
+
         emojiHtml.textContent = newValue;
 
         messageInput.innerHTML = oldMessage.innerHtml;
@@ -178,7 +186,7 @@ export function MessageInput() {
     afterInputEvent();
   }, [savedSelection]);
 
-  function handleBeforeInput() {
+  function saveMessageInputSelection() {
     if (!messageInput) return;
 
     const newSavedSelection = saveSelection(messageInput);
@@ -186,10 +194,30 @@ export function MessageInput() {
     setSavedSelection(newSavedSelection);
   }
 
-  function handleInput() {
-    if (!messageInput?.textContent?.length && messageInput?.innerHTML) {
+  function handleBeforeInput() {
+    saveMessageInputSelection();
+  }
+
+  function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    const key = e.key;
+
+    if (!(key === 'Delete' || key === 'Backspace')) return;
+
+    if (!messageInput?.textContent && messageInput?.innerHTML) {
       messageInput.innerHTML = '';
     }
+
+    const message = messageInput?.textContent ?? '';
+    const messageHtml = messageInput?.innerHTML ?? '';
+
+    setOldMessage({
+      innerHtml: messageHtml,
+      textContent: message,
+    });
+
+    setIsKeyDownEvent(true);
+
+    saveMessageInputSelection();
   }
 
   const defaultStyles: any = useStyleConfig('Textarea');
@@ -199,14 +227,14 @@ export function MessageInput() {
       {...defaultStyles}
       borderRadius='10px'
       py='10.5px'
-      fontFamily='Roboto'
+      fontFamily='Roboto, Noto Emoji, sans-serif'
       bg={useColorModeValue('white', 'blackAlpha.500')}
       borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
       contentEditable
       ref={ref}
       h='auto'
       minH='0'
-      maxH={['200.5px']}
+      maxH='200.5px'
       overflowY='auto'
       _hover={{
         borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
@@ -217,11 +245,15 @@ export function MessageInput() {
           borderWidth: '9px 3px',
         },
         '.emoji': {
+          letterSpacing: '2px',
           bgSize: 'contain',
           bgRepeat: 'no-repeat',
           bgPosition: 'center',
           color: 'transparent',
-          caretColor: 'var(--chakra-colors-gray-50)',
+          caretColor: useColorModeValue(
+            'var(--chakra-colors-gray-900)',
+            'var(--chakra-colors-gray-50)'
+          ),
           '&::selection': {
             color: 'transparent',
             bgColor: 'rgba(0, 0, 255, 0.438)',
@@ -229,7 +261,7 @@ export function MessageInput() {
         },
       }}
       onBeforeInput={handleBeforeInput}
-      onInput={handleInput}
+      onKeyDown={handleKeyDown}
     />
   );
 }
