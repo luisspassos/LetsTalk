@@ -1,8 +1,6 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Graphemer from 'graphemer';
-
-type MessageInputEvent = { target: HTMLDivElement };
 
 type SavedSelection =
   | {
@@ -10,11 +8,6 @@ type SavedSelection =
       end: number;
     }
   | undefined;
-
-type SavedSelectionObj = {
-  old: SavedSelection;
-  new: SavedSelection;
-};
 
 const splitter = new Graphemer();
 
@@ -88,98 +81,111 @@ function restoreSelection(
   selection?.addRange(range);
 }
 
+function insertAfter(
+  newNode: HTMLSpanElement,
+  referenceNode: ParentNode | null
+) {
+  referenceNode?.parentNode?.insertBefore(newNode, referenceNode.nextSibling);
+}
+
 export function MessageInput() {
   const [oldMessage, setOldMessage] = useState({
-    innerHtml: '',
     textContent: '',
+    innerHtml: '',
   });
-  const [continueInputEvent, setContinueInputEvent] = useState(true);
-  const [savedSelection, setSavedSelection] = useState<SavedSelectionObj>({
-    old: undefined,
-    new: undefined,
-  });
+  const [savedSelection, setSavedSelection] = useState<SavedSelection>();
 
-  // async function handleInput(e: MessageInputEvent) {
-  //   const messageInput = e.target;
+  const ref = useRef<HTMLDivElement>(null);
+  const messageInput = ref.current;
 
-  //   if (!continueInputEvent) {
-  //     messageInput.innerHTML = oldMessage.innerHtml;
+  useEffect(() => {
+    async function afterInputEvent() {
+      if (!savedSelection || !messageInput) return;
 
-  //     restoreSelection(messageInput, savedSelection.new);
+      const message = messageInput?.textContent ?? '';
 
-  //     return;
-  //   }
+      const messageChars = splitter.splitGraphemes(message);
+      const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
 
-  //   const message = messageInput.textContent ?? '';
+      const newValue = messageChars.find(
+        (char, i) => char !== oldMessageChars[i]
+      );
 
-  //   const messageChars = splitter.splitGraphemes(message);
-  //   const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
+      if (!newValue) return;
 
-  //   const newValue = messageChars.find(
-  //     (char, i) => char !== oldMessageChars[i]
-  //   );
+      const { regexs } = await import('../../../../../utils/regexs');
 
-  //   if (!newValue) return;
+      const isEmoji = regexs.emoji.test(newValue);
 
-  //   const { regexs } = await import('../../../../../utils/regexs');
+      if (isEmoji) {
+        const { parse: twemojiParse } = await import('twemoji-parser');
 
-  //   const isEmoji = regexs.emoji.test(newValue);
+        const emojiUrl = twemojiParse(newValue)[0].url;
 
-  //   if (isEmoji) {
-  //     const { parse: twemojiParse } = await import('twemoji-parser');
+        const emojiHtml = document.createElement('span');
 
-  //     const emojiUrl = twemojiParse(newValue)[0].url;
+        emojiHtml.className = 'emoji';
+        emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
+        emojiHtml.textContent = newValue;
 
-  //     const emojiHtml = document.createElement('span');
+        const newSavedSelection = saveSelection(messageInput);
 
-  //     emojiHtml.className = 'emoji';
-  //     emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
-  //     emojiHtml.textContent = newValue;
+        messageInput.innerHTML = oldMessage.innerHtml;
 
-  //     const newSavedSelection = saveSelection(messageInput);
+        restoreSelection(messageInput, savedSelection);
 
-  //     // setSavedSelection((prevState) => ({
-  //     //   ...prevState,
-  //     //   new: newSavedSelection,
-  //     // }));
+        const selection = getSelection();
 
-  //     messageInput.innerHTML = oldMessage.innerHtml;
+        selection?.getRangeAt(0).insertNode(emojiHtml);
 
-  //     restoreSelection(messageInput, savedSelection.old);
+        const isTheFirstElement = oldMessage.textContent.length === 0;
 
-  //     const selection = getSelection();
+        if (!isTheFirstElement) {
+          const emojiParentNode = emojiHtml.parentNode;
 
-  //     selection?.getRangeAt(0).insertNode(emojiHtml);
-  //   }
+          const emojiParentNodeChildren = [
+            ...(emojiParentNode?.childNodes ?? []),
+          ].filter((child) => child.textContent);
 
-  //   const messageHtml = messageInput.innerHTML;
+          const emojiIndex = emojiParentNodeChildren.findIndex(
+            (child) => child === emojiHtml
+          );
 
-  //   setOldMessage({
-  //     textContent: message,
-  //     innerHtml: messageHtml,
-  //   });
+          const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
 
-  //   // it is for the event not to run 2 times when inserting an emoji
-  //   setContinueInputEvent(false);
+          emojiHtml.remove();
 
-  //   setTimeout(() => {
-  //     setContinueInputEvent(true);
-  //   }, 0);
-  // }
+          if (emojiPosition === 'before') {
+            messageInput.insertBefore(emojiHtml, emojiParentNode);
+          } else {
+            insertAfter(emojiHtml, emojiParentNode);
+          }
+        }
+      }
 
-  function handleBeforeInput(e: MessageInputEvent) {
-    const messageInput = e.target;
+      const messageHtml = messageInput.innerHTML;
+
+      setOldMessage({
+        textContent: message,
+        innerHtml: messageHtml,
+      });
+    }
+
+    afterInputEvent();
+  }, [savedSelection]);
+
+  function handleBeforeInput() {
+    if (!messageInput) return;
 
     const newSavedSelection = saveSelection(messageInput);
 
-    setSavedSelection((prevState) => ({
-      ...prevState,
-      old: newSavedSelection,
-    }));
+    setSavedSelection(newSavedSelection);
+  }
 
-    setTimeout(() => {
-      console.log(savedSelection.old);
-    }, 5000);
+  function handleInput() {
+    if (!messageInput?.textContent?.length && messageInput?.innerHTML) {
+      messageInput.innerHTML = '';
+    }
   }
 
   const defaultStyles: any = useStyleConfig('Textarea');
@@ -193,6 +199,7 @@ export function MessageInput() {
       bg={useColorModeValue('white', 'blackAlpha.500')}
       borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
       contentEditable
+      ref={ref}
       h='auto'
       minH='0'
       maxH={['200.5px']}
@@ -218,6 +225,7 @@ export function MessageInput() {
         },
       }}
       onBeforeInput={handleBeforeInput}
+      onInput={handleInput}
     />
   );
 }
