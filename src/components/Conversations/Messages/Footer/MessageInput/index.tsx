@@ -128,8 +128,6 @@ export function MessageInput() {
         emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
         emojiHtml.textContent = newValue;
 
-        const newSavedSelection = saveSelection(messageInput);
-
         messageInput.innerHTML = oldMessage.innerHtml;
 
         restoreSelection(messageInput, savedSelection);
@@ -161,6 +159,12 @@ export function MessageInput() {
             insertAfter(emojiHtml, emojiParentNode);
           }
         }
+
+        const range = document.createRange();
+        range.setStartAfter(emojiHtml);
+
+        selection?.removeAllRanges();
+        selection?.addRange(range);
       }
 
       const messageHtml = messageInput.innerHTML;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Emoji&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: black;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      div[contenteditable] {
+        background-color: rgb(26, 26, 26);
+        width: 500px;
+        height: 50px;
+        border: 1px solid white;
+        color: white;
+        line-height: 50px;
+        font-size: 1.3rem;
+        padding-left: 10px;
+      }
+
+      .emoji {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        color: transparent;
+        caret-color: white;
+        font-family: 'Noto Emoji', sans-serif;
+      }
+
+      /* see this */
+      .emoji::selection {
+        color: transparent;
+        background-color: rgba(0, 0, 255, 0.438);
+      }
+    </style>
+  </head>
+  <body>
+    <div contenteditable></div>
+  </body>
+</html>
