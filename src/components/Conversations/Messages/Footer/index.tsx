@@ -53,15 +53,15 @@ export function Footer() {
       messageInputRef.current.style.height = 'inherit';
 
       const scrollHeight = messageInputRef.current.scrollHeight;
-      const { messageInputInitialHeight } = await import(
-        './MessageInput/index'
-      );
-      const textAreaHeight = Math.min(
-        Math.max(scrollHeight, messageInputInitialHeight),
-        199
-      );
+      // const { messageInputInitialHeight } = await import(
+      //   './MessageInput/index'
+      // );
+      // const textAreaHeight = Math.min(
+      //   Math.max(scrollHeight, messageInputInitialHeight),
+      //   199
+      // );
 
-      messageInputRef.current.style.height = `${textAreaHeight}px`;
+      // messageInputRef.current.style.height = `${textAreaHeight}px`;
       messageInputRef.current.scrollTop = scrollHeight;
 
       if (scrollHeight > 199) {
@@ -94,8 +94,8 @@ export function Footer() {
             </HStack>
           </ButtonWrapper>
           <MessageInput
-            handleSendMessage={handleSendMessage}
-            handleMessageInputSize={handleMessageInputSize}
+          // handleSendMessage={handleSendMessage}
+          // handleMessageInputSize={handleMessageInputSize}
           />
           {thereIsNoMessage ? (
             <RecordButtonAudio />
