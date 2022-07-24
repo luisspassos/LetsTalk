@@ -131,9 +131,7 @@ export function MessageInput() {
         const emojiHtml = document.createElement('span');
 
         emojiHtml.className = 'emoji';
-
         emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
-
         emojiHtml.textContent = newValue;
 
         messageInput.innerHTML = oldMessage.innerHtml;
@@ -203,10 +201,6 @@ export function MessageInput() {
 
     if (!(key === 'Delete' || key === 'Backspace')) return;
 
-    if (!messageInput?.textContent && messageInput?.innerHTML) {
-      messageInput.innerHTML = '';
-    }
-
     const message = messageInput?.textContent ?? '';
     const messageHtml = messageInput?.innerHTML ?? '';
 
@@ -218,6 +212,12 @@ export function MessageInput() {
     setIsKeyDownEvent(true);
 
     saveMessageInputSelection();
+  }
+
+  function handleInput() {
+    if (!messageInput?.textContent && messageInput?.innerHTML) {
+      messageInput.innerHTML = '';
+    }
   }
 
   const defaultStyles: any = useStyleConfig('Textarea');
@@ -261,7 +261,8 @@ export function MessageInput() {
         },
       }}
       onBeforeInput={handleBeforeInput}
-      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyDown}
+      onInput={handleInput}
     />
   );
 }
