@@ -132,6 +132,8 @@ export function MessageInput() {
 
     if (!continueInputEvent) {
       messageInput.innerHTML = oldMessage.innerHtml;
+      restoreSelection(messageInput, savedSelection);
+
       return;
     }
 
@@ -166,6 +168,15 @@ export function MessageInput() {
       restoreSelection(messageInput, savedSelection);
 
       const selection = getSelection();
+
+      selection?.deleteFromDocument();
+
+      const collapsedSelection = {
+        start: savedSelection?.start ?? 0,
+        end: savedSelection?.start ?? 0,
+      };
+
+      restoreSelection(messageInput, collapsedSelection);
 
       selection?.getRangeAt(0).insertNode(emojiHtml);
 
@@ -206,6 +217,10 @@ export function MessageInput() {
       innerHtml: messageHtml,
       textContent: message,
     });
+
+    const newSavedSelection = saveSelection(messageInput);
+
+    setSavedSelection(newSavedSelection);
 
     setContinueInputEvent(false);
 
