@@ -1,5 +1,5 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Graphemer from 'graphemer';
 
 type SavedSelection =
@@ -94,131 +94,253 @@ export function MessageInput() {
     innerHtml: '',
   });
   const [savedSelection, setSavedSelection] = useState<SavedSelection>();
+  const [continueInputEvent, setContinueInputEvent] = useState(true);
   const [isKeyDownEvent, setIsKeyDownEvent] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
 
   useEffect(() => {
-    async function afterInputEvent() {
-      if (!savedSelection || !messageInput) return;
+    // using addEventListener for prevent bugs
 
-      if (isKeyDownEvent) {
-        setIsKeyDownEvent(false);
-        return;
-      }
+    let continueBeforeInputEvent = true;
 
-      const message = messageInput?.textContent ?? '';
+    function handleBeforeInput() {
+      if (!continueBeforeInputEvent || !messageInput) return;
 
-      const messageChars = splitter.splitGraphemes(message);
-      const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
+      const newSavedSelection = saveSelection(messageInput);
 
-      const newValue = messageChars.find(
-        (char, i) => char !== oldMessageChars[i]
-      );
+      setSavedSelection(newSavedSelection);
 
-      if (!newValue) return;
+      // this is so the event doesn't run twice
+      continueBeforeInputEvent = false;
 
-      const { regexs } = await import('../../../../../utils/regexs');
-
-      const isEmoji = regexs.emoji.test(newValue);
-
-      if (isEmoji) {
-        const { parse: twemojiParse } = await import('twemoji-parser');
-
-        const emojiUrl = twemojiParse(newValue)[0].url;
-
-        const emojiHtml = document.createElement('span');
-
-        emojiHtml.className = 'emoji';
-        emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
-        emojiHtml.textContent = newValue;
-
-        messageInput.innerHTML = oldMessage.innerHtml;
-
-        restoreSelection(messageInput, savedSelection);
-
-        const selection = getSelection();
-
-        selection?.getRangeAt(0).insertNode(emojiHtml);
-
-        const isTheFirstElement = oldMessage.textContent.length === 0;
-
-        if (!isTheFirstElement) {
-          const emojiParentNode = emojiHtml.parentNode;
-
-          const emojiParentNodeChildren = [
-            ...(emojiParentNode?.childNodes ?? []),
-          ].filter((child) => child.textContent);
-
-          const emojiIndex = emojiParentNodeChildren.findIndex(
-            (child) => child === emojiHtml
-          );
-
-          const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
-
-          emojiHtml.remove();
-
-          if (emojiPosition === 'before') {
-            messageInput.insertBefore(emojiHtml, emojiParentNode);
-          } else {
-            insertAfter(emojiHtml, emojiParentNode);
-          }
-        }
-
-        const range = document.createRange();
-        range.setStartAfter(emojiHtml);
-
-        selection?.removeAllRanges();
-        selection?.addRange(range);
-      }
-
-      const messageHtml = messageInput.innerHTML;
-
-      setOldMessage({
-        textContent: message,
-        innerHtml: messageHtml,
-      });
+      setTimeout(() => {
+        continueBeforeInputEvent = true;
+      }, 0);
     }
 
-    afterInputEvent();
-  }, [savedSelection]);
+    messageInput?.addEventListener('beforeinput', handleBeforeInput);
 
-  function saveMessageInputSelection() {
+    return () => {
+      messageInput?.removeEventListener('beforeinput', handleBeforeInput);
+    };
+  }, [messageInput]);
+
+  async function handleInput() {
     if (!messageInput) return;
 
-    const newSavedSelection = saveSelection(messageInput);
+    if (!continueInputEvent) {
+      messageInput.innerHTML = oldMessage.innerHtml;
+      return;
+    }
 
-    setSavedSelection(newSavedSelection);
-  }
+    const message = messageInput.textContent ?? '';
 
-  function handleBeforeInput() {
-    saveMessageInputSelection();
-  }
+    const messageChars = splitter.splitGraphemes(message);
+    const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
 
-  function handleKeyUp(e: KeyboardEvent<HTMLDivElement>) {
-    const key = e.key;
+    const newValue = messageChars.find(
+      (char, i) => char !== oldMessageChars[i]
+    );
 
-    if (!(key === 'Delete' || key === 'Backspace')) return;
+    if (!newValue) return;
 
-    const message = messageInput?.textContent ?? '';
-    const messageHtml = messageInput?.innerHTML ?? '';
+    const { regexs } = await import('../../../../../utils/regexs');
+
+    const isEmoji = regexs.emoji.test(newValue);
+
+    if (isEmoji) {
+      const { parse: twemojiParse } = await import('twemoji-parser');
+
+      const emojiUrl = twemojiParse(newValue)[0].url;
+
+      const emojiHtml = document.createElement('span');
+
+      emojiHtml.className = 'emoji';
+      emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
+      emojiHtml.textContent = newValue;
+
+      messageInput.innerHTML = oldMessage.innerHtml;
+
+      restoreSelection(messageInput, savedSelection);
+
+      const selection = getSelection();
+
+      selection?.getRangeAt(0).insertNode(emojiHtml);
+
+      const isTheFirstElement = oldMessage.textContent.length === 0;
+
+      if (!isTheFirstElement) {
+        const emojiParentNode = emojiHtml.parentNode;
+
+        const emojiParentNodeChildren = [
+          ...(emojiParentNode?.childNodes ?? []),
+        ].filter((child) => child.textContent);
+
+        const emojiIndex = emojiParentNodeChildren.findIndex(
+          (child) => child === emojiHtml
+        );
+
+        const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
+
+        emojiHtml.remove();
+
+        if (emojiPosition === 'before') {
+          messageInput.insertBefore(emojiHtml, emojiParentNode);
+        } else {
+          insertAfter(emojiHtml, emojiParentNode);
+        }
+      }
+
+      const range = document.createRange();
+      range.setStartAfter(emojiHtml);
+
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+    }
+
+    const messageHtml = messageInput.innerHTML;
 
     setOldMessage({
       innerHtml: messageHtml,
       textContent: message,
     });
 
-    setIsKeyDownEvent(true);
+    setContinueInputEvent(false);
 
-    saveMessageInputSelection();
+    setTimeout(() => {
+      setContinueInputEvent(true);
+    }, 0);
   }
 
-  function handleInput() {
-    if (!messageInput?.textContent && messageInput?.innerHTML) {
-      messageInput.innerHTML = '';
-    }
-  }
+  // useEffect(() => {
+  //   async function afterInputEvent() {
+  //     if (!savedSelection || !messageInput) return;
+
+  //     if (isKeyDownEvent) {
+  //       setIsKeyDownEvent(false);
+  //       return;
+  //     }
+
+  //     const message = messageInput?.textContent ?? '';
+
+  //     const messageChars = splitter.splitGraphemes(message);
+  //     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
+
+  //     const newValue = messageChars.find(
+  //       (char, i) => char !== oldMessageChars[i]
+  //     );
+
+  //     if (!newValue) return;
+
+  //     const { regexs } = await import('../../../../../utils/regexs');
+
+  //     const isEmoji = regexs.emoji.test(newValue);
+
+  //     if (isEmoji) {
+  //       const { parse: twemojiParse } = await import('twemoji-parser');
+
+  //       const emojiUrl = twemojiParse(newValue)[0].url;
+
+  //       const emojiHtml = document.createElement('span');
+
+  //       emojiHtml.className = 'emoji';
+  //       emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
+  //       emojiHtml.textContent = newValue;
+
+  //       messageInput.innerHTML = oldMessage.innerHtml;
+
+  //       restoreSelection(messageInput, savedSelection);
+
+  //       const selection = getSelection();
+
+  //       selection?.getRangeAt(0).insertNode(emojiHtml);
+
+  //       const isTheFirstElement = oldMessage.textContent.length === 0;
+
+  //       if (!isTheFirstElement) {
+  //         const emojiParentNode = emojiHtml.parentNode;
+
+  //         const emojiParentNodeChildren = [
+  //           ...(emojiParentNode?.childNodes ?? []),
+  //         ].filter((child) => child.textContent);
+
+  //         const emojiIndex = emojiParentNodeChildren.findIndex(
+  //           (child) => child === emojiHtml
+  //         );
+
+  //         const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
+
+  //         emojiHtml.remove();
+
+  //         if (emojiPosition === 'before') {
+  //           messageInput.insertBefore(emojiHtml, emojiParentNode);
+  //         } else {
+  //           insertAfter(emojiHtml, emojiParentNode);
+  //         }
+  //       }
+
+  //       const range = document.createRange();
+  //       range.setStartAfter(emojiHtml);
+
+  //       selection?.removeAllRanges();
+  //       selection?.addRange(range);
+  //     }
+
+  //     const messageHtml = messageInput.innerHTML;
+
+  //     setOldMessage({
+  //       textContent: message,
+  //       innerHtml: messageHtml,
+  //     });
+  //   }
+
+  //   afterInputEvent();
+  // }, [savedSelection]);
+
+  // function saveMessageInputSelection() {
+  //   if (!messageInput) return;
+
+  //   const newSavedSelection = saveSelection(messageInput);
+
+  //   setSavedSelection(newSavedSelection);
+  // }
+
+  // const [continueBeforeInputEvent, setContinueBeforeInputEvent] =
+  //   useState(true);
+
+  // function handleBeforeInput() {
+  //   if (!continueBeforeInputEvent) return;
+
+  //   const range = getSelection()?.getRangeAt(0);
+
+  //   console.log(range?.startOffset, range?.endOffset);
+
+  //   setContinueBeforeInputEvent(false);
+
+  //   setTimeout(() => {
+  //     setContinueBeforeInputEvent(true);
+  //   }, 0);
+  // }
+
+  // function handleKeyUp(e: KeyboardEvent<HTMLDivElement>) {
+  //   const key = e.key;
+
+  //   if (!(key === 'Delete' || key === 'Backspace')) return;
+
+  //   const message = messageInput?.textContent ?? '';
+  //   const messageHtml = messageInput?.innerHTML ?? '';
+
+  //   setOldMessage({
+  //     innerHtml: messageHtml,
+  //     textContent: message,
+  //   });
+
+  //   setIsKeyDownEvent(true);
+
+  //   saveMessageInputSelection();
+  // }
 
   const defaultStyles: any = useStyleConfig('Textarea');
 
@@ -260,8 +382,6 @@ export function MessageInput() {
           },
         },
       }}
-      onBeforeInput={handleBeforeInput}
-      onKeyUp={handleKeyUp}
       onInput={handleInput}
     />
   );

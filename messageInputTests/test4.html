@@ -56,4 +56,24 @@
   <body>
     <div contenteditable></div>
   </body>
+
+  <script>
+    const contenteditable = document.querySelector('div[contenteditable]');
+
+    let continueBeforeInputEvent = true;
+
+    contenteditable.addEventListener('beforeinput', () => {
+      if (!continueBeforeInputEvent) return;
+
+      const range = getSelection().getRangeAt(0);
+
+      console.log(range.startOffset, range.endOffset);
+
+      continueBeforeInputEvent = false;
+
+      setTimeout(() => {
+        continueBeforeInputEvent = true;
+      }, 0);
+    });
+  </script>
 </html>
