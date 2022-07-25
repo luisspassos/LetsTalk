@@ -196,7 +196,7 @@ export function MessageInput() {
     saveMessageInputSelection();
   }
 
-  function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+  function handleKeyUp(e: KeyboardEvent<HTMLDivElement>) {
     const key = e.key;
 
     if (!(key === 'Delete' || key === 'Backspace')) return;
@@ -261,7 +261,7 @@ export function MessageInput() {
         },
       }}
       onBeforeInput={handleBeforeInput}
-      onKeyUp={handleKeyDown}
+      onKeyUp={handleKeyUp}
       onInput={handleInput}
     />
   );
