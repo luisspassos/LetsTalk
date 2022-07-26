@@ -9,6 +9,10 @@ type SavedSelection =
     }
   | undefined;
 
+type ParentNodeType = {
+  className: string;
+} & ParentNode;
+
 const splitter = new Graphemer();
 
 function saveSelection(containerEl: HTMLDivElement) {
@@ -179,12 +183,13 @@ export function MessageInput() {
       restoreSelection(messageInput, collapsedSelection);
 
       selection?.getRangeAt(0).insertNode(emojiHtml);
+      selection?.collapseToEnd();
 
-      const isTheFirstElement = oldMessage.textContent.length === 0;
+      const emojiParentNode = emojiHtml.parentNode as ParentNodeType;
 
-      if (!isTheFirstElement) {
-        const emojiParentNode = emojiHtml.parentNode;
+      const isFirstElement = emojiParentNode.className !== 'emoji';
 
+      if (!isFirstElement) {
         const emojiParentNodeChildren = [
           ...(emojiParentNode?.childNodes ?? []),
         ].filter((child) => child.textContent);
