@@ -183,7 +183,6 @@ export function MessageInput() {
       restoreSelection(messageInput, collapsedSelection);
 
       selection?.getRangeAt(0).insertNode(emojiHtml);
-      selection?.collapseToEnd();
 
       const emojiParentNode = emojiHtml.parentNode as ParentNodeType;
 
