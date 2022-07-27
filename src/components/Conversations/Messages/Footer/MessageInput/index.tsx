@@ -13,6 +13,13 @@ type ParentNodeType = {
   className: string;
 } & ParentNode;
 
+type ElementType = HTMLSpanElement | Text;
+
+type InsertInPositionCallback = (
+  position: 'before' | 'after',
+  parentNode: ParentNode
+) => void;
+
 const splitter = new Graphemer();
 
 function saveSelection(containerEl: HTMLDivElement) {
@@ -85,10 +92,7 @@ function restoreSelection(
   selection?.addRange(range);
 }
 
-function insertAfter(
-  newNode: HTMLSpanElement | Text,
-  referenceNode: ParentNode | null
-) {
+function insertAfter(newNode: ElementType, referenceNode: ParentNode | null) {
   referenceNode?.parentNode?.insertBefore(newNode, referenceNode.nextSibling);
 }
 
@@ -152,7 +156,46 @@ export function MessageInput() {
       });
     };
 
-    const insertValue = () => {};
+    const insertValue = (
+      value: ElementType,
+      insertInPostionCallback: InsertInPositionCallback
+    ) => {
+      const selection = getSelection();
+
+      const range = selection?.getRangeAt(0);
+
+      range?.insertNode(value);
+
+      const valueParentNode = value.parentNode as ParentNodeType;
+
+      const isOutOfEmoji = valueParentNode.className !== 'emoji';
+
+      if (!isOutOfEmoji) {
+        const valueParentNodeChildren = [
+          ...(valueParentNode?.childNodes ?? []),
+        ].filter((child) => child.textContent);
+
+        const newValueIndex = valueParentNodeChildren.findIndex(
+          (child) => child === value
+        );
+
+        const newValuePosition = newValueIndex === 0 ? 'before' : 'after';
+
+        value.remove();
+
+        insertInPostionCallback(newValuePosition, valueParentNode);
+      }
+    };
+
+    const setCursorAfterLastValueInserted = (value: ElementType) => {
+      const selection = getSelection();
+
+      const range = document.createRange();
+      range.setStartAfter(value);
+
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+    };
 
     const messageChars = splitter.splitGraphemes(message);
     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
@@ -236,37 +279,19 @@ export function MessageInput() {
       restoreSelection(messageInput, collapsedSelection);
 
       emojis.forEach((emojiHtml) => {
-        selection?.getRangeAt(0).insertNode(emojiHtml);
-
-        const emojiParentNode = emojiHtml.parentNode as ParentNodeType;
-
-        const isFirstElement = emojiParentNode.className !== 'emoji';
-
-        if (!isFirstElement) {
-          const emojiParentNodeChildren = [
-            ...(emojiParentNode?.childNodes ?? []),
-          ].filter((child) => child.textContent);
-
-          const emojiIndex = emojiParentNodeChildren.findIndex(
-            (child) => child === emojiHtml
-          );
-
-          const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
-
-          emojiHtml.remove();
-
+        const insertInPositionCallback: InsertInPositionCallback = (
+          emojiPosition,
+          emojiParentNode
+        ) => {
           if (emojiPosition === 'before') {
             messageInput.insertBefore(emojiHtml, emojiParentNode);
           } else {
             insertAfter(emojiHtml, emojiParentNode);
           }
-        }
+        };
 
-        const range = document.createRange();
-        range.setStartAfter(emojiHtml);
-
-        selection?.removeAllRanges();
-        selection?.addRange(range);
+        insertValue(emojiHtml, insertInPositionCallback);
+        setCursorAfterLastValueInserted(emojiHtml);
       });
     } else {
       const newValueHtml = document.createTextNode(newValue);
@@ -279,39 +304,19 @@ export function MessageInput() {
 
       selection?.deleteFromDocument();
 
-      const range = selection?.getRangeAt(0);
-
-      range?.insertNode(newValueHtml);
-
-      const newValueParentNode = newValueHtml.parentNode as ParentNodeType;
-
-      const isOutOfEmoji = newValueParentNode.className !== 'emoji';
-
-      if (!isOutOfEmoji) {
-        const newValueParentNodeChildren = [
-          ...(newValueParentNode?.childNodes ?? []),
-        ].filter((child) => child.textContent);
-
-        const newValueIndex = newValueParentNodeChildren.findIndex(
-          (child) => child === newValueHtml
-        );
-
-        const newValuePosition = newValueIndex === 0 ? 'before' : 'after';
-
-        newValueHtml.remove();
-
+      const insertInPositionCallback: InsertInPositionCallback = (
+        newValuePosition,
+        newValueParentNode
+      ) => {
         if (newValuePosition === 'before') {
           messageInput.insertBefore(newValueHtml, newValueParentNode);
         } else {
           insertAfter(newValueHtml, newValueParentNode);
-
-          const range = document.createRange();
-          range.setStartAfter(newValueHtml);
-
-          selection?.removeAllRanges();
-          selection?.addRange(range);
+          setCursorAfterLastValueInserted(newValueHtml);
         }
-      }
+      };
+
+      insertValue(newValueHtml, insertInPositionCallback);
     }
 
     saveOldMessage();
