@@ -267,12 +267,46 @@ export function MessageInput() {
         selection?.addRange(range);
       });
     } else {
-      const newValueHtml = document.createElement('span');
-      newValueHtml.textContent = newValue;
+      const newValueHtml = document.createTextNode(newValue);
 
-      const range = getSelection()?.getRangeAt(0);
+      messageInput.innerHTML = oldMessage.innerHtml;
 
-      console.log(range);
+      restoreSelection(messageInput, savedSelection);
+
+      const selection = getSelection();
+
+      selection?.deleteFromDocument();
+
+      const range = selection?.getRangeAt(0);
+
+      range?.insertNode(newValueHtml);
+      selection?.collapseToEnd();
+
+      const newValueParentNode = newValueHtml.parentNode as ParentNodeType;
+
+      const isOutOfEmoji = newValueParentNode.className !== 'emoji';
+
+      if (!isOutOfEmoji) {
+        const newValueParentNodeChildren = [
+          ...(newValueParentNode?.childNodes ?? []),
+        ];
+
+        console.log(newValueParentNodeChildren);
+
+        // const emojiIndex = emojiParentNodeChildren.findIndex(
+        //   (child) => child === emojiHtml
+        // );
+
+        // const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
+
+        // emojiHtml.remove();
+
+        // if (emojiPosition === 'before') {
+        //   messageInput.insertBefore(emojiHtml, emojiParentNode);
+        // } else {
+        //   insertAfter(emojiHtml, emojiParentNode);
+        // }
+      }
     }
 
     saveOldMessage();
