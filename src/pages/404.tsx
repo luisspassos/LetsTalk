@@ -1,8 +1,29 @@
 import { Flex, Heading, Img, useColorModeValue } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { BackLink } from '../components/BackLink';
 import { PageTitle } from '../components/PageTitle';
+import Graphemer from 'graphemer';
+import { parse as twemojiParse } from 'twemoji-parser';
+
+const graphemer = new Graphemer();
 
 export default function Custom404() {
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(
+        'https://emoji-api.com/emojis?access_key=2b410828de16e114075221df8478aea8e1948c9b'
+      );
+
+      const data = await response.json();
+
+      const emojis = data
+        .map((el) => twemojiParse(el.character))
+        .filter((e) => e.length > 1);
+
+      console.log(emojis);
+    })();
+  }, []);
+
   return (
     <>
       <PageTitle pageName='404' />
