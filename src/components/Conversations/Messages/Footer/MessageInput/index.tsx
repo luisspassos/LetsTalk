@@ -86,7 +86,7 @@ function restoreSelection(
 }
 
 function insertAfter(
-  newNode: HTMLSpanElement,
+  newNode: HTMLSpanElement | Text,
   referenceNode: ParentNode | null
 ) {
   referenceNode?.parentNode?.insertBefore(newNode, referenceNode.nextSibling);
@@ -151,6 +151,8 @@ export function MessageInput() {
         textContent: message,
       });
     };
+
+    const insertValue = () => {};
 
     const messageChars = splitter.splitGraphemes(message);
     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
@@ -280,7 +282,6 @@ export function MessageInput() {
       const range = selection?.getRangeAt(0);
 
       range?.insertNode(newValueHtml);
-      selection?.collapseToEnd();
 
       const newValueParentNode = newValueHtml.parentNode as ParentNodeType;
 
@@ -289,23 +290,27 @@ export function MessageInput() {
       if (!isOutOfEmoji) {
         const newValueParentNodeChildren = [
           ...(newValueParentNode?.childNodes ?? []),
-        ];
+        ].filter((child) => child.textContent);
 
-        console.log(newValueParentNodeChildren);
+        const newValueIndex = newValueParentNodeChildren.findIndex(
+          (child) => child === newValueHtml
+        );
 
-        // const emojiIndex = emojiParentNodeChildren.findIndex(
-        //   (child) => child === emojiHtml
-        // );
+        const newValuePosition = newValueIndex === 0 ? 'before' : 'after';
 
-        // const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
+        newValueHtml.remove();
 
-        // emojiHtml.remove();
+        if (newValuePosition === 'before') {
+          messageInput.insertBefore(newValueHtml, newValueParentNode);
+        } else {
+          insertAfter(newValueHtml, newValueParentNode);
 
-        // if (emojiPosition === 'before') {
-        //   messageInput.insertBefore(emojiHtml, emojiParentNode);
-        // } else {
-        //   insertAfter(emojiHtml, emojiParentNode);
-        // }
+          const range = document.createRange();
+          range.setStartAfter(newValueHtml);
+
+          selection?.removeAllRanges();
+          selection?.addRange(range);
+        }
       }
     }
 
