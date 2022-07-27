@@ -143,6 +143,15 @@ export function MessageInput() {
 
     const message = messageInput.textContent ?? '';
 
+    const saveOldMessage = () => {
+      const messageHtml = messageInput.innerHTML;
+
+      setOldMessage({
+        innerHtml: messageHtml,
+        textContent: message,
+      });
+    };
+
     const messageChars = splitter.splitGraphemes(message);
     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
 
@@ -150,9 +159,14 @@ export function MessageInput() {
       (char, i) => char !== oldMessageChars[i]
     );
 
-    console.log(newValue);
+    if (!newValue) {
+      if (!message) {
+        messageInput.innerHTML = '';
+      }
 
-    if (!newValue) return;
+      saveOldMessage();
+      return;
+    }
 
     const { regexs } = await import('../../../../../utils/regexs');
 
@@ -196,7 +210,9 @@ export function MessageInput() {
         return newEmojiHtmls;
       };
 
-      if (twemojis.length > 1) {
+      const emojiIsNotComplete = twemojis.length > 1;
+
+      if (emojiIsNotComplete) {
         emojis = getEmojisWithLinkCharacter();
       } else {
         emojis = emojiHtmls;
@@ -252,12 +268,7 @@ export function MessageInput() {
       });
     }
 
-    const messageHtml = messageInput.innerHTML;
-
-    setOldMessage({
-      innerHtml: messageHtml,
-      textContent: message,
-    });
+    saveOldMessage();
 
     const newSavedSelection = saveSelection(messageInput);
 
