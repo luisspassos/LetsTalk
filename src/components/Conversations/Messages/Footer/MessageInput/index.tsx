@@ -15,11 +15,6 @@ type ParentNodeType = {
 
 type ElementType = HTMLSpanElement | Text;
 
-type InsertInPositionCallback = (
-  position: 'before' | 'after',
-  parentNode: ParentNode
-) => void;
-
 const splitter = new Graphemer();
 
 function saveSelection(containerEl: HTMLDivElement) {
@@ -156,10 +151,7 @@ export function MessageInput() {
       });
     };
 
-    const insertValue = (
-      value: ElementType,
-      insertInPostionCallback: InsertInPositionCallback
-    ) => {
+    const insertValue = (value: ElementType) => {
       const selection = getSelection();
 
       const range = selection?.getRangeAt(0);
@@ -183,8 +175,14 @@ export function MessageInput() {
 
         value.remove();
 
-        insertInPostionCallback(newValuePosition, valueParentNode);
+        if (newValuePosition === 'before') {
+          messageInput.insertBefore(value, valueParentNode);
+        } else {
+          insertAfter(value, valueParentNode);
+        }
       }
+
+      setCursorAfterLastValueInserted(value);
     };
 
     const setCursorAfterLastValueInserted = (value: ElementType) => {
@@ -279,19 +277,7 @@ export function MessageInput() {
       restoreSelection(messageInput, collapsedSelection);
 
       emojis.forEach((emojiHtml) => {
-        const insertInPositionCallback: InsertInPositionCallback = (
-          emojiPosition,
-          emojiParentNode
-        ) => {
-          if (emojiPosition === 'before') {
-            messageInput.insertBefore(emojiHtml, emojiParentNode);
-          } else {
-            insertAfter(emojiHtml, emojiParentNode);
-          }
-        };
-
-        insertValue(emojiHtml, insertInPositionCallback);
-        setCursorAfterLastValueInserted(emojiHtml);
+        insertValue(emojiHtml);
       });
     } else {
       const newValueHtml = document.createTextNode(newValue);
@@ -304,19 +290,7 @@ export function MessageInput() {
 
       selection?.deleteFromDocument();
 
-      const insertInPositionCallback: InsertInPositionCallback = (
-        newValuePosition,
-        newValueParentNode
-      ) => {
-        if (newValuePosition === 'before') {
-          messageInput.insertBefore(newValueHtml, newValueParentNode);
-        } else {
-          insertAfter(newValueHtml, newValueParentNode);
-          setCursorAfterLastValueInserted(newValueHtml);
-        }
-      };
-
-      insertValue(newValueHtml, insertInPositionCallback);
+      insertValue(newValueHtml);
     }
 
     saveOldMessage();
