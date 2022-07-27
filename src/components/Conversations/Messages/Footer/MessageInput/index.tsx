@@ -266,6 +266,13 @@ export function MessageInput() {
         selection?.removeAllRanges();
         selection?.addRange(range);
       });
+    } else {
+      const newValueHtml = document.createElement('span');
+      newValueHtml.textContent = newValue;
+
+      const range = getSelection()?.getRangeAt(0);
+
+      console.log(range);
     }
 
     saveOldMessage();
