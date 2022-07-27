@@ -6,15 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .emoji {
-        background-image: url(https://twemoji.maxcdn.com/v/latest/svg/1f431.svg),
-          url(https://twemoji.maxcdn.com/v/latest/svg/1f464.svg);
-        background-repeat: no-repeat;
-        background-position: left, 20px;
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Emoji&display=swap');
+
+      * {
+        font-family: 'Noto Emoji', sans-serif;
       }
     </style>
   </head>
   <body>
-    <span class="emoji">🐱‍👤</span>
+    <div contenteditable></div>
   </body>
+
+  <script>
+    const arr = [1, 2];
+    const newArr = [];
+
+    arr.forEach((num, i) => {
+      newArr.push(num);
+
+      if (arr.length - 1 === i) return;
+
+      newArr.push('this');
+    });
+
+    console.log(newArr);
+  </script>
 </html>

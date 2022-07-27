@@ -150,6 +150,8 @@ export function MessageInput() {
       (char, i) => char !== oldMessageChars[i]
     );
 
+    console.log(newValue);
+
     if (!newValue) return;
 
     const { regexs } = await import('../../../../../utils/regexs');
@@ -159,13 +161,46 @@ export function MessageInput() {
     if (isEmoji) {
       const { parse: twemojiParse } = await import('twemoji-parser');
 
-      const emojiUrl = twemojiParse(newValue)[0].url;
+      const twemojis = twemojiParse(newValue);
 
-      const emojiHtml = document.createElement('span');
+      let emojis;
 
-      emojiHtml.className = 'emoji';
-      emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
-      emojiHtml.textContent = newValue;
+      const emojiHtmls = twemojis.map(({ text, url }) => {
+        const emojiHtml = document.createElement('span');
+
+        emojiHtml.className = 'emoji';
+        emojiHtml.style.backgroundImage = `url(${url})`;
+        emojiHtml.textContent = text;
+
+        return emojiHtml;
+      });
+
+      const getEmojisWithLinkCharacter = () => {
+        const newEmojiHtmls: HTMLSpanElement[] = [];
+
+        emojiHtmls.forEach((html, i) => {
+          newEmojiHtmls.push(html);
+
+          const isLast = emojiHtmls.length - 1 === i;
+
+          if (isLast) return;
+
+          const linkCharacterHtml = document.createElement('span');
+
+          // the character is invisible
+          linkCharacterHtml.textContent = '‍';
+
+          newEmojiHtmls.push(linkCharacterHtml);
+        });
+
+        return newEmojiHtmls;
+      };
+
+      if (twemojis.length > 1) {
+        emojis = getEmojisWithLinkCharacter();
+      } else {
+        emojis = emojiHtmls;
+      }
 
       messageInput.innerHTML = oldMessage.innerHtml;
 
@@ -182,37 +217,39 @@ export function MessageInput() {
 
       restoreSelection(messageInput, collapsedSelection);
 
-      selection?.getRangeAt(0).insertNode(emojiHtml);
+      emojis.forEach((emojiHtml) => {
+        selection?.getRangeAt(0).insertNode(emojiHtml);
 
-      const emojiParentNode = emojiHtml.parentNode as ParentNodeType;
+        const emojiParentNode = emojiHtml.parentNode as ParentNodeType;
 
-      const isFirstElement = emojiParentNode.className !== 'emoji';
+        const isFirstElement = emojiParentNode.className !== 'emoji';
 
-      if (!isFirstElement) {
-        const emojiParentNodeChildren = [
-          ...(emojiParentNode?.childNodes ?? []),
-        ].filter((child) => child.textContent);
+        if (!isFirstElement) {
+          const emojiParentNodeChildren = [
+            ...(emojiParentNode?.childNodes ?? []),
+          ].filter((child) => child.textContent);
 
-        const emojiIndex = emojiParentNodeChildren.findIndex(
-          (child) => child === emojiHtml
-        );
+          const emojiIndex = emojiParentNodeChildren.findIndex(
+            (child) => child === emojiHtml
+          );
 
-        const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
+          const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
 
-        emojiHtml.remove();
+          emojiHtml.remove();
 
-        if (emojiPosition === 'before') {
-          messageInput.insertBefore(emojiHtml, emojiParentNode);
-        } else {
-          insertAfter(emojiHtml, emojiParentNode);
+          if (emojiPosition === 'before') {
+            messageInput.insertBefore(emojiHtml, emojiParentNode);
+          } else {
+            insertAfter(emojiHtml, emojiParentNode);
+          }
         }
-      }
 
-      const range = document.createRange();
-      range.setStartAfter(emojiHtml);
+        const range = document.createRange();
+        range.setStartAfter(emojiHtml);
 
-      selection?.removeAllRanges();
-      selection?.addRange(range);
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+      });
     }
 
     const messageHtml = messageInput.innerHTML;
