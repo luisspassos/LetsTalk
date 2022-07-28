@@ -195,6 +195,16 @@ export function MessageInput() {
       selection?.addRange(range);
     };
 
+    const clearOldMessage = () => {
+      messageInput.innerHTML = oldMessage.innerHtml;
+
+      restoreSelection(messageInput, savedSelection);
+
+      const selection = getSelection();
+
+      selection?.deleteFromDocument();
+    };
+
     const messageChars = splitter.splitGraphemes(message);
     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
 
@@ -261,13 +271,7 @@ export function MessageInput() {
         emojis = emojiHtmls;
       }
 
-      messageInput.innerHTML = oldMessage.innerHtml;
-
-      restoreSelection(messageInput, savedSelection);
-
-      const selection = getSelection();
-
-      selection?.deleteFromDocument();
+      clearOldMessage();
 
       const collapsedSelection = {
         start: savedSelection?.start ?? 0,
@@ -282,13 +286,7 @@ export function MessageInput() {
     } else {
       const newValueHtml = document.createTextNode(newValue);
 
-      messageInput.innerHTML = oldMessage.innerHtml;
-
-      restoreSelection(messageInput, savedSelection);
-
-      const selection = getSelection();
-
-      selection?.deleteFromDocument();
+      clearOldMessage();
 
       insertValue(newValueHtml);
     }
