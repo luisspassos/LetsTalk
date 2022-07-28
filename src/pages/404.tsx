@@ -1,8 +1,17 @@
 import { Flex, Heading, Img, useColorModeValue } from '@chakra-ui/react';
 import { BackLink } from '../components/BackLink';
 import { PageTitle } from '../components/PageTitle';
+import { useEffect } from 'react';
+import twemoji from 'twemoji';
 
 export default function Custom404() {
+  useEffect(() => {
+    const emoji = twemoji.convert.toCodePoint('👁️‍🗨️');
+    const newEmoji = emoji.replace('-fe0f', '');
+
+    console.log(newEmoji);
+  }, []);
+
   return (
     <>
       <PageTitle pageName='404' />

@@ -230,6 +230,8 @@ export function MessageInput() {
 
       const twemojis = twemojiParse(newValue);
 
+      console.log(twemojis);
+
       let emojis;
 
       const emojiHtmls = twemojis.map(({ text, url }) => {
