@@ -47,6 +47,10 @@ export const emojis: Record<
       name: 'rosto de cabeça para baixo',
     },
     {
+      emoji: '🫠',
+      name: 'rosto derretido',
+    },
+    {
       emoji: '😉',
       name: 'rosto piscando',
     },
@@ -127,12 +131,24 @@ export const emojis: Record<
       name: 'rosto com a mão na boca',
     },
     {
+      emoji: '🫢',
+      name: 'rosto com olhos abertos e mão sobre a boca',
+    },
+    {
+      emoji: '🫣',
+      name: 'rosto com olho espreitando',
+    },
+    {
       emoji: '🤫',
       name: 'rosto calado',
     },
     {
       emoji: '🤔',
       name: 'rosto pensando',
+    },
+    {
+      emoji: '🫡',
+      name: 'rosto saudando',
     },
     {
       emoji: '🤐',
@@ -155,6 +171,14 @@ export const emojis: Record<
       name: 'rosto sem boca',
     },
     {
+      emoji: '🫥',
+      name: 'rosto de linha pontilhada',
+    },
+    {
+      emoji: '😶‍🌫️',
+      name: 'rosto nas nuvens',
+    },
+    {
       emoji: '😏',
       name: 'rosto sorrindo maliciosamente',
     },
@@ -169,6 +193,10 @@ export const emojis: Record<
     {
       emoji: '😬',
       name: 'careta',
+    },
+    {
+      emoji: '😮‍💨',
+      name: 'rosto exalando',
     },
     {
       emoji: '🤥',
@@ -267,6 +295,10 @@ export const emojis: Record<
       name: 'rosto confuso',
     },
     {
+      emoji: '🫤',
+      name: 'rosto com boca diagonal',
+    },
+    {
       emoji: '😟',
       name: 'rosto preocupado',
     },
@@ -297,6 +329,10 @@ export const emojis: Record<
     {
       emoji: '🥺',
       name: 'rosto suplicante',
+    },
+    {
+      emoji: '🥹',
+      name: 'rosto segurando lágrimas',
     },
     {
       emoji: '😦',
@@ -633,6 +669,22 @@ export const emojis: Record<
       name: 'saudação vulcânica',
     },
     {
+      emoji: '🫱',
+      name: 'mão direita',
+    },
+    {
+      emoji: '🫲',
+      name: 'mão esquerda',
+    },
+    {
+      emoji: '🫳',
+      name: 'palma para baixo',
+    },
+    {
+      emoji: '🫴',
+      name: 'palma para cima',
+    },
+    {
       emoji: '👌',
       name: 'mão de OK',
     },
@@ -651,6 +703,10 @@ export const emojis: Record<
     {
       emoji: '🤞',
       name: 'dedos cruzados',
+    },
+    {
+      emoji: '🫰',
+      name: 'mão com dedo indicador e polegar cruzados',
     },
     {
       emoji: '🤟',
@@ -689,6 +745,10 @@ export const emojis: Record<
       name: 'mão apontando para cima',
     },
     {
+      emoji: '🫵',
+      name: 'indicador apontando para o visualizador',
+    },
+    {
       emoji: '👍',
       name: 'afirmativo',
     },
@@ -719,6 +779,10 @@ export const emojis: Record<
     {
       emoji: '🙌',
       name: 'levantando as mãos',
+    },
+    {
+      emoji: '🫶',
+      name: 'mãos de coração',
     },
     {
       emoji: '👐',
@@ -817,6 +881,10 @@ export const emojis: Record<
       name: 'boca',
     },
     {
+      emoji: '🫦',
+      name: 'mordendo o lábio',
+    },
+    {
       emoji: '👶',
       name: 'bebê',
     },
@@ -853,8 +921,24 @@ export const emojis: Record<
       name: 'homem: cabelo ruivo',
     },
     {
+      emoji: '👨‍🦱',
+      name: 'homem: cabelo cacheado',
+    },
+    {
+      emoji: '👨‍🦳',
+      name: 'homem: cabelo branco',
+    },
+    {
+      emoji: '👨‍🦲',
+      name: 'homem: careca',
+    },
+    {
       emoji: '👩',
       name: 'mulher',
+    },
+    {
+      emoji: '👩‍🦰',
+      name: 'mulher: cabelo ruivo',
     },
     {
       emoji: '🧑‍🦰',
