@@ -99,76 +99,56 @@ export const emojis: Record<
       name: 'rosto sorridente com lágrima',
     },
     {
-      emoji: '🫠',
-      name: 'rosto derretido',
-    },
-    {
-      emoji: '🤩',
-      name: 'deslumbrado deslumbrada',
-    },
-    {
-      emoji: '😛',
-      name: 'rosto com língua',
+      emoji: '🤪',
+      name: 'rosto doido',
     },
     {
       emoji: '😜',
       name: 'rosto piscando com língua',
     },
     {
-      emoji: '🤪',
-      name: 'rosto doido',
-    },
-    {
       emoji: '😝',
       name: 'rosto apertado com língua',
+    },
+    {
+      emoji: '😛',
+      name: 'rosto com língua',
     },
     {
       emoji: '🤑',
       name: 'rosto de dinheiro',
     },
     {
-      emoji: '🤗',
-      name: 'rosto abraçando',
+      emoji: '😎',
+      name: 'rosto sorridente com óculos de sol',
     },
     {
-      emoji: '🤭',
-      name: 'rosto com a mão na boca',
+      emoji: '🤓',
+      name: 'rosto nerd',
     },
     {
-      emoji: '🫢',
-      name: 'rosto com olhos abertos e mão sobre a boca',
+      emoji: '🥸',
+      name: 'rosto disfarçado',
     },
     {
-      emoji: '🫣',
-      name: 'rosto com olho espreitando',
+      emoji: '🧐',
+      name: 'rosto com monóculo',
     },
     {
-      emoji: '🤫',
-      name: 'rosto calado',
+      emoji: '🤠',
+      name: 'rosto com chapéu de cowbow',
     },
     {
-      emoji: '🤔',
-      name: 'rosto pensando',
+      emoji: '🥳',
+      name: 'rosto festejando',
     },
     {
-      emoji: '🫡',
-      name: 'rosto saudando',
+      emoji: '🤡',
+      name: 'rosto de palhaço',
     },
     {
-      emoji: '🤐',
-      name: 'cara de zíper',
-    },
-    {
-      emoji: '🤨',
-      name: 'rosto com sobrancelha levantada',
-    },
-    {
-      emoji: '😐',
-      name: 'rosto neutro',
-    },
-    {
-      emoji: '😑',
-      name: 'rosto sem expressão',
+      emoji: '😏',
+      name: 'rosto sorrindo maliciosamente',
     },
     {
       emoji: '😶',
@@ -179,12 +159,16 @@ export const emojis: Record<
       name: 'rosto de linha pontilhada',
     },
     {
-      emoji: '😶‍🌫️',
-      name: 'rosto nas nuvens',
+      emoji: '😐',
+      name: 'rosto neutro',
     },
     {
-      emoji: '😏',
-      name: 'rosto sorrindo maliciosamente',
+      emoji: '🫤',
+      name: 'rosto com boca diagonal',
+    },
+    {
+      emoji: '😑',
+      name: 'rosto sem expressão',
     },
     {
       emoji: '😒',
@@ -192,32 +176,200 @@ export const emojis: Record<
     },
     {
       emoji: '🙄',
-      name: 'rosto com olhos rolando',
+      name: 'rosto com olhos revirados',
     },
     {
-      emoji: '😬',
-      name: 'careta',
+      emoji: '🤨',
+      name: 'rosto com sobrancelha levantada',
     },
     {
-      emoji: '😮‍💨',
-      name: 'rosto exalando',
+      emoji: '🤔',
+      name: 'rosto pensando',
+    },
+    {
+      emoji: '🤫',
+      name: 'rosto fazendo sinal de silêncio',
+    },
+    {
+      emoji: '🤭',
+      name: 'rosto com a mão na boca',
+    },
+    {
+      emoji: '🫢',
+      name: 'rosto com olhos abertos e mão na boca',
+    },
+    {
+      emoji: '🫡',
+      name: 'rosto saudando',
+    },
+    {
+      emoji: '🤗',
+      name: 'rosto abraçando',
+    },
+    {
+      emoji: '🫣',
+      name: 'rosto com olho espreitando',
     },
     {
       emoji: '🤥',
       name: 'rosto mentiroso',
     },
     {
+      emoji: '😳',
+      name: 'rosto envergonhado',
+    },
+    {
+      emoji: '😞',
+      name: 'rosto desapontado',
+    },
+    {
+      emoji: '😟',
+      name: 'rosto preocupado',
+    },
+    {
+      emoji: '😤',
+      name: 'rosto soltando vapor pelo nariz',
+    },
+    {
+      emoji: '😠',
+      name: 'rosto bravo',
+    },
+    {
+      emoji: '😡',
+      name: 'rosto furioso',
+    },
+    {
+      emoji: '🤬',
+      name: 'rosto com símbolos na boca',
+    },
+
+    {
       emoji: '😔',
-      name: 'rosto pensativo',
+      name: 'rosto deprimido',
+    },
+    {
+      emoji: '😕',
+      name: 'rosto confuso',
+    },
+    {
+      emoji: '🙁',
+      name: 'rosto meio triste',
+    },
+    {
+      emoji: '☹️',
+      name: 'rosto descontente',
+    },
+    {
+      emoji: '😬',
+      name: 'rosto expressando desagrado',
+    },
+    {
+      emoji: '🥺',
+      name: 'rosto implorando',
+    },
+    {
+      emoji: '😣',
+      name: 'rosto perseverante',
+    },
+    {
+      emoji: '😖',
+      name: 'rosto perplexo',
+    },
+    {
+      emoji: '😫',
+      name: 'rosto farto',
+    },
+    {
+      emoji: '😩',
+      name: 'rosto desolado',
+    },
+    {
+      emoji: '🥱',
+      name: 'rosto bocejando',
     },
     {
       emoji: '😪',
-      name: 'cara de sono',
+      name: 'rosto sonolento',
+    },
+    {
+      emoji: '😮‍💨',
+      name: 'rosto exalando',
+    },
+    {
+      emoji: '😮',
+      name: 'rosto com a boca aberta',
+    },
+    {
+      emoji: '😱',
+      name: 'rosto gritando de medo',
+    },
+    {
+      emoji: '😨',
+      name: 'rosto de medo',
+    },
+    {
+      emoji: '😰',
+      name: 'rosto ansioso com gota de suor',
+    },
+    {
+      emoji: '😥',
+      name: 'rosto triste mas aliviado',
+    },
+    {
+      emoji: '😓',
+      name: 'rosto cabisbaixo com gota de suor',
+    },
+    {
+      emoji: '😯',
+      name: 'rosto surpreso',
+    },
+    {
+      emoji: '😦',
+      name: 'rosto franzido com a boca aberta',
+    },
+    {
+      emoji: '😧',
+      name: 'rosto angustiado',
+    },
+    {
+      emoji: '🥹',
+      name: 'rosto segurando lágrimas',
+    },
+    {
+      emoji: '😢',
+      name: 'rosto de choro',
+    },
+    {
+      emoji: '😭',
+      name: 'rosto de choro alto',
     },
     {
       emoji: '🤤',
       name: 'rosto babando',
     },
+    {
+      emoji: '🤩',
+      name: 'rosto com olhar maravilhado',
+    },
+    {
+      emoji: '😵',
+      name: 'rosto morto',
+    },
+    {
+      emoji: '🫠',
+      name: 'rosto derretido',
+    },
+
+    {
+      emoji: '🤐',
+      name: 'cara de zíper',
+    },
+
+    {
+      emoji: '😶‍🌫️',
+      name: 'rosto nas nuvens',
+    },
+
     {
       emoji: '😴',
       name: 'rosto dormindo',
@@ -258,158 +410,17 @@ export const emojis: Record<
       emoji: '🥴',
       name: 'woozy face',
     },
-    {
-      emoji: '😵',
-      name: 'rosto morto',
-    },
+
     {
       emoji: '🤯',
       name: 'cabeça explodindo',
     },
-    {
-      emoji: '🤠',
-      name: 'rosto com chapéu de cowbow',
-    },
-    {
-      emoji: '🥳',
-      name: 'rosto festejando',
-    },
-    {
-      emoji: '🥸',
-      name: 'rosto disfarçado',
-    },
-    {
-      emoji: '😎',
-      name: 'rosto sorridente com óculos de sol',
-    },
-    {
-      emoji: '🤓',
-      name: 'rosto nerd',
-    },
-    {
-      emoji: '🧐',
-      name: 'rosto com monóculo',
-    },
-    {
-      emoji: '😕',
-      name: 'rosto confuso',
-    },
-    {
-      emoji: '🫤',
-      name: 'rosto com boca diagonal',
-    },
-    {
-      emoji: '😟',
-      name: 'rosto preocupado',
-    },
-    {
-      emoji: '🙁',
-      name: 'rosto ligeiramente carrancudo',
-    },
-    {
-      emoji: '☹️',
-      name: 'rosto carrancudo',
-    },
-    {
-      emoji: '😮',
-      name: 'rosto com a boca aberta',
-    },
-    {
-      emoji: '😯',
-      name: 'rosto surpreso',
-    },
+
     {
       emoji: '😲',
       name: 'rosto muito surpreso',
     },
-    {
-      emoji: '😳',
-      name: 'rosto envergonhado',
-    },
-    {
-      emoji: '🥺',
-      name: 'rosto suplicante',
-    },
-    {
-      emoji: '🥹',
-      name: 'rosto segurando lágrimas',
-    },
-    {
-      emoji: '😦',
-      name: 'rosto carrancudo com a boca aberta',
-    },
-    {
-      emoji: '😧',
-      name: 'rosto angustiado',
-    },
-    {
-      emoji: '😨',
-      name: 'rosto de medo',
-    },
-    {
-      emoji: '😰',
-      name: 'rosto ansioso com suor',
-    },
-    {
-      emoji: '😥',
-      name: 'rosto triste mas aliviado',
-    },
-    {
-      emoji: '😢',
-      name: 'rosto de choro',
-    },
-    {
-      emoji: '😭',
-      name: 'rosto de choro alto',
-    },
-    {
-      emoji: '😱',
-      name: 'rosto gritando de medo',
-    },
-    {
-      emoji: '😖',
-      name: 'rosto perturbado',
-    },
-    {
-      emoji: '😣',
-      name: 'rosto perseverante',
-    },
-    {
-      emoji: '😞',
-      name: 'rosto desapontado',
-    },
-    {
-      emoji: '😓',
-      name: 'rosto abatido com suor',
-    },
-    {
-      emoji: '😩',
-      name: 'rosto cansado',
-    },
-    {
-      emoji: '😫',
-      name: 'rosto farto',
-    },
-    {
-      emoji: '🥱',
-      name: 'rosto bocejando',
-    },
-    {
-      emoji: '😤',
-      name: 'rosto com vapor do nariz',
-    },
-    {
-      emoji: '😡',
-      name: 'rosto de beicinho',
-    },
-    {
-      emoji: '😠',
-      name: 'rosto bravo',
-    },
-    {
-      emoji: '🤬',
-      name: 'rosto com símbolos na boca',
-    },
+
     {
       emoji: '😈',
       name: 'rosto sorridente com chifres',
@@ -430,10 +441,7 @@ export const emojis: Record<
       emoji: '💩',
       name: 'pilha de cocô',
     },
-    {
-      emoji: '🤡',
-      name: 'rosto de palhaço',
-    },
+
     {
       emoji: '👹',
       name: 'ogre',
