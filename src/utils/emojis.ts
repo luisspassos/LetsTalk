@@ -8,47 +8,39 @@ export const emojis: Record<
   'smileys-emotion': [
     {
       emoji: '😀',
-      name: 'rosto sorridente',
+      name: 'rosto risonho',
     },
     {
       emoji: '😃',
-      name: 'rosto sorridente com olhos grandes',
+      name: 'rosto risonho com olhos bem abertos',
     },
     {
       emoji: '😄',
-      name: 'rosto sorridente com olhos sorridentes',
+      name: 'rosto risonho com olhos sorridentes',
     },
     {
       emoji: '😁',
-      name: 'rosto radiante com olhos sorridentes',
+      name: 'rosto contente com olhos sorridentes',
     },
     {
       emoji: '😆',
-      name: 'cara de estrabismo sorrindo',
+      name: 'rosto risonho com olhos semicerrados',
     },
     {
       emoji: '😅',
-      name: 'rosto sorridente com suor',
+      name: 'rosto risonho com gota de suor',
+    },
+    {
+      emoji: '😂',
+      name: 'rosto chorando de rir',
     },
     {
       emoji: '🤣',
       name: 'rolando de rir no chão',
     },
     {
-      emoji: '😂',
-      name: 'rosto com lágrimas de alegria',
-    },
-    {
-      emoji: '🙂',
-      name: 'rosto levemente sorridente',
-    },
-    {
-      emoji: '🙃',
-      name: 'rosto de cabeça para baixo',
-    },
-    {
-      emoji: '🫠',
-      name: 'rosto derretido',
+      emoji: '😇',
+      name: 'rosto sorridente com auréola',
     },
     {
       emoji: '😉',
@@ -59,20 +51,32 @@ export const emojis: Record<
       name: 'rosto sorridente com olhos sorridentes',
     },
     {
-      emoji: '😇',
-      name: 'rosto sorridente com auréola',
+      emoji: '🙂',
+      name: 'rosto levemente sorridente',
     },
     {
-      emoji: '🥰',
-      name: 'rosto sorridente com corações',
+      emoji: '🙃',
+      name: 'rosto de cabeça para baixo',
+    },
+    {
+      emoji: '☺️',
+      name: 'rosto sorridente',
+    },
+    {
+      emoji: '😋',
+      name: 'rosto saboreando comida',
+    },
+    {
+      emoji: '😌',
+      name: 'rosto aliviado',
     },
     {
       emoji: '😍',
       name: 'rosto sorridente com olhos de coração',
     },
     {
-      emoji: '🤩',
-      name: 'deslumbrado deslumbrada',
+      emoji: '🥰',
+      name: 'rosto sorridente com 3 corações',
     },
     {
       emoji: '😘',
@@ -80,27 +84,27 @@ export const emojis: Record<
     },
     {
       emoji: '😗',
-      name: 'rosto de beijo',
-    },
-    {
-      emoji: '☺️',
-      name: 'rosto sorridente',
-    },
-    {
-      emoji: '😚',
-      name: 'rosto beijando com olhos fechados',
+      name: 'rosto beijando',
     },
     {
       emoji: '😙',
       name: 'rosto beijando com olhos sorridentes',
     },
     {
+      emoji: '😚',
+      name: 'rosto beijando com olhos fechados',
+    },
+    {
       emoji: '🥲',
       name: 'rosto sorridente com lágrima',
     },
     {
-      emoji: '😋',
-      name: 'rosto saboreando comida',
+      emoji: '🫠',
+      name: 'rosto derretido',
+    },
+    {
+      emoji: '🤩',
+      name: 'deslumbrado deslumbrada',
     },
     {
       emoji: '😛',
@@ -201,10 +205,6 @@ export const emojis: Record<
     {
       emoji: '🤥',
       name: 'rosto mentiroso',
-    },
-    {
-      emoji: '😌',
-      name: 'rosto aliviado',
     },
     {
       emoji: '😔',
@@ -627,7 +627,7 @@ export const emojis: Record<
       name: 'balão de fala',
     },
     {
-      emoji: '👁️‍🗨️',
+      emoji: '👁‍🗨',
       name: 'olho no balão do discurso',
     },
     {
@@ -3004,6 +3004,14 @@ export const emojis: Record<
       name: 'seta para a direita curvando para baixo',
     },
     {
+      emoji: '#⃣',
+      name: 'tecla de sinal de número',
+    },
+    {
+      emoji: '*⃣',
+      name: 'tecla de asterisco',
+    },
+    {
       emoji: '🔃',
       name: 'setas verticais no sentido horário',
     },
@@ -3141,7 +3149,7 @@ export const emojis: Record<
     },
     {
       emoji: '🔂',
-      name: 'repetir botão único',
+      name: 'botão de repetir uma única faixa',
     },
     {
       emoji: '▶️',
@@ -3161,7 +3169,7 @@ export const emojis: Record<
     },
     {
       emoji: '◀️',
-      name: 'botão reverso',
+      name: 'botão de voltar',
     },
     {
       emoji: '⏪',
@@ -3177,7 +3185,7 @@ export const emojis: Record<
     },
     {
       emoji: '⏫',
-      name: 'botão para acelerar',
+      name: 'botão de avanço para cima',
     },
     {
       emoji: '🔽',
@@ -3185,7 +3193,7 @@ export const emojis: Record<
     },
     {
       emoji: '⏬',
-      name: 'botão de descida rápida',
+      name: 'botão de avança para baixo',
     },
     {
       emoji: '⏸️',
@@ -3244,6 +3252,10 @@ export const emojis: Record<
       name: 'multiplicar',
     },
     {
+      emoji: '🟰',
+      name: 'sinal de igual',
+    },
+    {
       emoji: '➕',
       name: 'mais',
     },
@@ -3293,7 +3305,7 @@ export const emojis: Record<
     },
     {
       emoji: '💲',
-      name: 'cifrão pesado',
+      name: 'cifrão',
     },
     {
       emoji: '⚕️',
@@ -3429,23 +3441,23 @@ export const emojis: Record<
     },
     {
       emoji: '🔠',
-      name: 'entrada latina maiúscula',
+      name: 'letras latinas maiúsculas',
     },
     {
       emoji: '🔡',
-      name: 'entrada latina minúscula',
+      name: 'letras latinas minúsculas',
     },
     {
       emoji: '🔢',
-      name: 'números de entrada',
+      name: 'números',
     },
     {
       emoji: '🔣',
-      name: 'símbolos de entrada',
+      name: 'símbolos',
     },
     {
       emoji: '🔤',
-      name: 'inserir letras latinas',
+      name: 'letras latinas',
     },
     {
       emoji: '🅰️',
@@ -3474,7 +3486,7 @@ export const emojis: Record<
 
     {
       emoji: 'ℹ️',
-      name: 'informação',
+      name: 'informações',
     },
     {
       emoji: '🆔',
@@ -3927,7 +3939,7 @@ export const emojis: Record<
     { emoji: '🇷🇴', name: 'bandeira: Romênia' },
     { emoji: '🇷🇸', name: 'bandeira: Sérvia' },
     { emoji: '🇷🇺', name: 'bandeira: Rússia' },
-    { emoji: '🇷🇼', name: 'bandeira: Ruanda ' },
+    { emoji: '🇷🇼', name: 'bandeira: Ruanda' },
     { emoji: '🇸🇦', name: 'bandeira: Arábia Saudita' },
     { emoji: '🇸🇧', name: 'bandeira: Ilhas Salomão' },
     { emoji: '🇸🇨', name: 'bandeira: Seicheles' },
@@ -3989,5 +4001,7 @@ export const emojis: Record<
     { emoji: '🇿🇲', name: 'bandeira: Zâmbia' },
     { emoji: '🇿🇼', name: 'bandeira: Zimbábue' },
     { emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', name: 'bandeira: Inglaterra' },
+    { emoji: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', name: 'bandeira: escócia' },
+    { emoji: '🏴󠁧󠁢󠁷󠁬󠁳󠁿', name: 'Bandeira: País de Gales' },
   ],
 };
