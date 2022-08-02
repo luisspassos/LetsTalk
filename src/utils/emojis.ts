@@ -937,30 +937,17 @@ export const emojis: Record<
       emoji: '👨',
       name: 'homem',
     },
-
     {
-      emoji: '👱',
-      name: 'pessoa: cabelo loiro',
+      emoji: '👩‍🦱',
+      name: 'mulher: cabelo cacheado',
     },
     {
-      emoji: '🧔',
-      name: 'homem: barba',
-    },
-    {
-      emoji: '👨‍🦰',
-      name: 'homem: cabelo ruivo',
+      emoji: '🧑‍🦱',
+      name: 'pessoa: cabelo cacheado',
     },
     {
       emoji: '👨‍🦱',
       name: 'homem: cabelo cacheado',
-    },
-    {
-      emoji: '👨‍🦳',
-      name: 'homem: cabelo branco',
-    },
-    {
-      emoji: '👨‍🦲',
-      name: 'homem: careca',
     },
     {
       emoji: '👩‍🦰',
@@ -971,12 +958,20 @@ export const emojis: Record<
       name: 'pessoa: cabelo ruivo',
     },
     {
-      emoji: '👩‍🦱',
-      name: 'mulher: cabelo cacheado',
+      emoji: '👨‍🦰',
+      name: 'homem: cabelo ruivo',
     },
     {
-      emoji: '🧑‍🦱',
-      name: 'pessoa: cabelo cacheado',
+      emoji: '👱‍♀️',
+      name: 'mulher: cabelo loiro',
+    },
+    {
+      emoji: '👱',
+      name: 'pessoa: cabelo loiro',
+    },
+    {
+      emoji: '👱‍♂️',
+      name: 'homem: Cabelo Loiro',
     },
     {
       emoji: '👩‍🦳',
@@ -987,6 +982,10 @@ export const emojis: Record<
       name: 'pessoa: cabelo branco',
     },
     {
+      emoji: '👨‍🦳',
+      name: 'homem: cabelo branco',
+    },
+    {
       emoji: '👩‍🦲',
       name: 'mulher: careca',
     },
@@ -995,12 +994,24 @@ export const emojis: Record<
       name: 'pessoa: careca',
     },
     {
-      emoji: '👱‍♀️',
-      name: 'mulher: cabelo loiro',
+      emoji: '👨‍🦲',
+      name: 'homem: careca',
     },
     {
-      emoji: '👱‍♂️',
-      name: 'homem: Cabelo Loiro',
+      emoji: '🧔‍♀️',
+      name: 'mulher: barba',
+    },
+    {
+      emoji: '🧔',
+      name: 'homem: barba',
+    },
+    {
+      emoji: '🧔‍♂️',
+      name: 'homem barbudo',
+    },
+    {
+      emoji: '👵',
+      name: 'mulher idosa',
     },
     {
       emoji: '🧓',
@@ -1011,8 +1022,36 @@ export const emojis: Record<
       name: 'homem idoso',
     },
     {
-      emoji: '👵',
-      name: 'mulher idosa',
+      emoji: '👲',
+      name: 'pessoa de boné',
+    },
+    {
+      emoji: '👳‍♀️',
+      name: 'mulher usando turbante',
+    },
+    {
+      emoji: '👳',
+      name: 'pessoa usando turbante',
+    },
+    {
+      emoji: '👳‍♂️',
+      name: 'homem usando turbante',
+    },
+    {
+      emoji: '🧕',
+      name: 'mulher com véu',
+    },
+    {
+      emoji: '👼',
+      name: 'bebê anjo',
+    },
+    {
+      emoji: '👸',
+      name: 'princesa',
+    },
+    {
+      emoji: '🫅',
+      name: 'pessoa com coroa',
     },
     {
       emoji: '🙍',
@@ -1378,38 +1417,7 @@ export const emojis: Record<
       emoji: '👷‍♀️',
       name: 'mulher trabalhadora da construção',
     },
-    {
-      emoji: '🫅',
-      name: 'pessoa com coroa',
-    },
-    {
-      emoji: '🤴',
-      name: 'príncipe',
-    },
-    {
-      emoji: '👸',
-      name: 'princesa',
-    },
-    {
-      emoji: '👳',
-      name: 'pessoa usando turbante',
-    },
-    {
-      emoji: '👳‍♂️',
-      name: 'homem usando turbante',
-    },
-    {
-      emoji: '👳‍♀️',
-      name: 'mulher usando turbante',
-    },
-    {
-      emoji: '👲',
-      name: 'pessoa com calota craniana',
-    },
-    {
-      emoji: '🧕',
-      name: 'mulher com véu',
-    },
+
     {
       emoji: '🤵',
       name: 'pessoa de smoking',
@@ -1462,10 +1470,7 @@ export const emojis: Record<
       emoji: '🧑‍🍼',
       name: 'pessoa alimentando bebê',
     },
-    {
-      emoji: '👼',
-      name: 'bebê anjo',
-    },
+
     {
       emoji: '🎅',
       name: 'papai noel',
