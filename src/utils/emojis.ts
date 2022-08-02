@@ -2309,371 +2309,371 @@ export const emojis = [
   },
   {
     emoji: '🦇',
-    name: '',
+    name: 'Morcego',
   },
   {
     emoji: '🐻',
-    name: '',
+    name: 'Rosto De Urso',
   },
   {
     emoji: '🐻‍❄️',
-    name: '',
+    name: 'Urso Polar',
   },
   {
     emoji: '🐨',
-    name: '',
+    name: 'Coala',
   },
   {
     emoji: '🐼',
-    name: '',
+    name: 'Rosto De Panda',
   },
   {
     emoji: '🦥',
-    name: '',
+    name: 'Preguiça',
   },
   {
     emoji: '🦦',
-    name: '',
+    name: 'Lontra',
   },
   {
     emoji: '🦨',
-    name: '',
+    name: 'Gambá',
   },
   {
     emoji: '🦘',
-    name: '',
+    name: 'Canguru',
   },
   {
     emoji: '🦡',
-    name: '',
+    name: 'Texugo',
   },
   {
     emoji: '🐾',
-    name: '',
+    name: 'Patas',
   },
   {
     emoji: '🦃',
-    name: '',
+    name: 'Peru',
   },
   {
     emoji: '🐔',
-    name: '',
+    name: 'Galinha',
   },
   {
     emoji: '🐓',
-    name: '',
+    name: 'Galo',
   },
   {
     emoji: '🐣',
-    name: '',
+    name: 'Pintinho Chocando',
   },
   {
     emoji: '🐤',
-    name: '',
+    name: 'Pintinho De Perfil',
   },
   {
     emoji: '🐥',
-    name: '',
+    name: 'Pintinho De Frente',
   },
   {
     emoji: '🐦',
-    name: '',
+    name: 'Pássaro',
   },
   {
     emoji: '🐧',
-    name: '',
+    name: 'Pinguim',
   },
   {
     emoji: '🕊️',
-    name: '',
+    name: 'Pomba Branca',
   },
   {
     emoji: '🦅',
-    name: '',
+    name: 'Águia',
   },
   {
     emoji: '🦆',
-    name: '',
+    name: 'Pato',
   },
   {
     emoji: '🦢',
-    name: '',
+    name: 'Cisne',
   },
   {
     emoji: '🦉',
-    name: '',
+    name: 'Coruja',
   },
   {
     emoji: '🦤',
-    name: '',
+    name: 'Dodô',
   },
   {
     emoji: '🪶',
-    name: '',
+    name: 'Pena',
   },
   {
     emoji: '🦩',
-    name: '',
+    name: 'Flamingo',
   },
   {
     emoji: '🦚',
-    name: '',
+    name: 'Pavão',
   },
   {
     emoji: '🦜',
-    name: '',
+    name: 'Papagaio',
   },
   {
     emoji: '🐸',
-    name: '',
+    name: 'Sapo',
   },
   {
     emoji: '🐊',
-    name: '',
+    name: 'Crocodilo',
   },
   {
     emoji: '🐢',
-    name: '',
+    name: 'Tartaruga',
   },
   {
     emoji: '🦎',
-    name: '',
+    name: 'Lagartixa',
   },
   {
     emoji: '🐍',
-    name: '',
+    name: 'Cobra',
   },
   {
     emoji: '🐲',
-    name: '',
+    name: 'Rosto De Dragão',
   },
   {
     emoji: '🐉',
-    name: '',
+    name: 'Dragão',
   },
   {
     emoji: '🦕',
-    name: '',
+    name: 'Saurópode',
   },
   {
     emoji: '🦖',
-    name: '',
+    name: 'Tiranossauro Rex',
   },
   {
     emoji: '🐳',
-    name: '',
+    name: 'Baleia Esguichando Água',
   },
   {
     emoji: '🐋',
-    name: '',
+    name: 'Baleia',
   },
   {
     emoji: '🐬',
-    name: '',
+    name: 'Golfinho',
   },
   {
     emoji: '🦭',
-    name: '',
+    name: 'Foca',
   },
   {
     emoji: '🐟',
-    name: '',
+    name: 'Peixe',
   },
   {
     emoji: '🐠',
-    name: '',
+    name: 'Peixe Tropical',
   },
   {
     emoji: '🐡',
-    name: '',
+    name: 'Baiacu',
   },
   {
     emoji: '🦈',
-    name: '',
+    name: 'Tubarão',
   },
   {
     emoji: '🐙',
-    name: '',
+    name: 'Polvo',
   },
   {
     emoji: '🐚',
-    name: '',
+    name: 'Caramujo',
   },
   {
     emoji: '🪸',
-    name: '',
+    name: 'Coral',
   },
   {
     emoji: '🐌',
-    name: '',
+    name: 'Caracol',
   },
   {
     emoji: '🦋',
-    name: '',
+    name: 'Borboleta',
   },
   {
     emoji: '🐛',
-    name: '',
+    name: 'Inseto',
   },
   {
     emoji: '🐜',
-    name: '',
+    name: 'Formiga',
   },
   {
     emoji: '🐝',
-    name: '',
+    name: 'Abelha',
   },
   {
     emoji: '🪲',
-    name: '',
+    name: 'Besouro',
   },
   {
     emoji: '🐞',
-    name: '',
+    name: 'Joaninha',
   },
   {
     emoji: '🦗',
-    name: '',
+    name: 'Grilo',
   },
   {
     emoji: '🪳',
-    name: '',
+    name: 'Barata',
   },
   {
     emoji: '🕷️',
-    name: '',
+    name: 'Aranha',
   },
   {
     emoji: '🕸️',
-    name: '',
+    name: 'Teia De Aranha',
   },
   {
     emoji: '🦂',
-    name: '',
+    name: 'Escorpião',
   },
   {
     emoji: '🦟',
-    name: '',
+    name: 'Mosquito',
   },
   {
     emoji: '🪰',
-    name: '',
+    name: 'Mosca',
   },
   {
     emoji: '🪱',
-    name: '',
+    name: 'Minhoca',
   },
   {
     emoji: '🦠',
-    name: '',
+    name: 'Micróbio',
   },
   {
     emoji: '💐',
-    name: '',
+    name: 'Buquê',
   },
   {
     emoji: '🌸',
-    name: '',
+    name: 'Flor De Cerejeira',
   },
   {
     emoji: '💮',
-    name: '',
+    name: 'Flor Branca',
   },
   {
     emoji: '🪷',
-    name: '',
+    name: 'Flor De Lotus',
   },
   {
     emoji: '🏵️',
-    name: '',
+    name: 'Roseta',
   },
   {
     emoji: '🌹',
-    name: '',
+    name: 'Rosa',
   },
   {
     emoji: '🥀',
-    name: '',
+    name: 'Flor Murcha',
   },
   {
     emoji: '🌺',
-    name: '',
+    name: 'Hibisco',
   },
   {
     emoji: '🌻',
-    name: '',
+    name: 'Girassol',
   },
   {
     emoji: '🌼',
-    name: '',
+    name: 'Flor',
   },
   {
     emoji: '🌷',
-    name: '',
+    name: 'Tulipa',
   },
   {
     emoji: '🌱',
-    name: '',
+    name: 'Muda De Planta',
   },
   {
     emoji: '🪴',
-    name: '',
+    name: 'Vaso Com Planta',
   },
   {
     emoji: '🌲',
-    name: '',
+    name: 'Conífera',
   },
   {
     emoji: '🌳',
-    name: '',
+    name: 'Árvore Caidiça',
   },
   {
     emoji: '🌴',
-    name: '',
+    name: 'Palmeira',
   },
   {
     emoji: '🌵',
-    name: '',
+    name: 'Cacto',
   },
   {
     emoji: '🌾',
-    name: '',
+    name: 'Planta De Arroz',
   },
   {
     emoji: '🌿',
-    name: '',
+    name: 'Erva',
   },
   {
     emoji: '☘️',
-    name: '',
+    name: 'Trevo',
   },
   {
     emoji: '🍀',
-    name: '',
+    name: 'Trevo De Quatro Folhas',
   },
   {
     emoji: '🍁',
-    name: '',
+    name: 'Folha De Bordo',
   },
   {
     emoji: '🍂',
-    name: '',
+    name: 'Folhas Caídas',
   },
   {
     emoji: '🍃',
-    name: '',
+    name: 'Folha Ao Vento',
   },
   {
     emoji: '🪹',
-    name: '',
+    name: 'Ninho Vazio',
   },
   {
     emoji: '🪺',
-    name: '',
+    name: 'Ninho Com Ovos',
   },
   {
     emoji: '🍇',
-    name: '',
+    name: 'Uvas',
   },
   {
     emoji: '🍈',
