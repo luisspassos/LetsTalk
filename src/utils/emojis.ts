@@ -877,1435 +877,1435 @@ export const emojis = [
   },
   {
     emoji: '👅',
-    name: '',
+    name: 'Língua',
   },
   {
     emoji: '👄',
-    name: '',
+    name: 'Boca',
   },
   {
     emoji: '🫦',
-    name: '',
+    name: 'Morder O Lábio',
   },
   {
     emoji: '👶',
-    name: '',
+    name: 'Bebê',
   },
   {
     emoji: '🧒',
-    name: '',
+    name: 'Criança',
   },
   {
     emoji: '👦',
-    name: '',
+    name: 'Menino',
   },
   {
     emoji: '👧',
-    name: '',
+    name: 'Menina',
   },
   {
     emoji: '🧑',
-    name: '',
+    name: 'Pessoa',
   },
   {
     emoji: '👱',
-    name: '',
+    name: 'Pessoa: Cabelo Louro',
   },
   {
     emoji: '👨',
-    name: '',
+    name: 'Homem',
   },
   {
     emoji: '🧔',
-    name: '',
+    name: 'Homem: Barba',
   },
   {
     emoji: '🧔‍♂️',
-    name: '',
+    name: 'Homem: Barbudo',
   },
   {
     emoji: '🧔‍♀️',
-    name: '',
+    name: 'Mulher: Barba',
   },
   {
     emoji: '👨‍🦰',
-    name: '',
+    name: 'Homem: Cabelo Vermelho',
   },
   {
     emoji: '👨‍🦱',
-    name: '',
+    name: 'Homem: Cabelo Cacheado',
   },
   {
     emoji: '👨‍🦳',
-    name: '',
+    name: 'Homem: Cabelo Branco',
   },
   {
     emoji: '👨‍🦲',
-    name: '',
+    name: 'Homem: Careca',
   },
   {
     emoji: '👩',
-    name: '',
+    name: 'Mulher',
   },
   {
     emoji: '👩‍🦰',
-    name: '',
+    name: 'Mulher: Cabelo Vermelho',
   },
   {
     emoji: '🧑‍🦰',
-    name: '',
+    name: 'Pessoa: Cabelo Vermelho',
   },
   {
     emoji: '👩‍🦱',
-    name: '',
+    name: 'Mulher: Cabelo Cacheado',
   },
   {
     emoji: '🧑‍🦱',
-    name: '',
+    name: 'Pessoa: Cabelo Cacheado',
   },
   {
     emoji: '👩‍🦳',
-    name: '',
+    name: 'Mulher: Cabelo Branco',
   },
   {
     emoji: '🧑‍🦳',
-    name: '',
+    name: 'Pessoa: Cabelo Branco',
   },
   {
     emoji: '👩‍🦲',
-    name: '',
+    name: 'Mulher: Careca',
   },
   {
     emoji: '🧑‍🦲',
-    name: '',
+    name: 'Pessoa: Careca',
   },
   {
     emoji: '👱‍♀️',
-    name: '',
+    name: 'Mulher: Cabelo Loiro',
   },
   {
     emoji: '👱‍♂️',
-    name: '',
+    name: 'Homem: Cabelo Loiro',
   },
   {
     emoji: '🧓',
-    name: '',
+    name: 'Idoso',
   },
   {
     emoji: '👴',
-    name: '',
+    name: 'Homem Idoso',
   },
   {
     emoji: '👵',
-    name: '',
+    name: 'Idosa',
   },
   {
     emoji: '🙍',
-    name: '',
+    name: 'Franzindo A Sobrancelha',
   },
   {
     emoji: '🙍‍♂️',
-    name: '',
+    name: 'Homem Franzindo A Sobrancelha',
   },
   {
     emoji: '🙍‍♀️',
-    name: '',
+    name: 'Mulher Franzindo A Sobrancelha',
   },
   {
     emoji: '🙎',
-    name: '',
+    name: 'Pessoa Fazendo Bico',
   },
   {
     emoji: '🙎‍♂️',
-    name: '',
+    name: 'Homem Fazendo Bico',
   },
   {
     emoji: '🙎‍♀️',
-    name: '',
+    name: 'Mulher Fazendo Bico',
   },
   {
     emoji: '🙅',
-    name: '',
+    name: 'Pessoa Fazendo Gesto De “Não”',
   },
   {
     emoji: '🙅‍♂️',
-    name: '',
+    name: 'Homem Fazendo Gesto De “Não”',
   },
   {
     emoji: '🙅‍♀️',
-    name: '',
+    name: 'Mulher Fazendo Gesto De “Não”',
   },
   {
     emoji: '🙆',
-    name: '',
+    name: 'Pessoa Fazendo Gesto De “Ok”',
   },
   {
     emoji: '🙆‍♂️',
-    name: '',
+    name: 'Homem Fazendo Gesto De “Ok”',
   },
   {
     emoji: '🙆‍♀️',
-    name: '',
+    name: 'Mulher Fazendo Gesto De “Ok”',
   },
   {
     emoji: '💁',
-    name: '',
+    name: 'Pessoa Com A Palma Virada Para Cima',
   },
   {
     emoji: '💁‍♂️',
-    name: '',
+    name: 'Homem Com A Palma Virada Para Cima',
   },
   {
     emoji: '💁‍♀️',
-    name: '',
+    name: 'Mulher Com A Palma Virada Para Cima',
   },
   {
     emoji: '🙋',
-    name: '',
+    name: 'Pessoa Levantando A Mão',
   },
   {
     emoji: '🙋‍♂️',
-    name: '',
+    name: 'Homem Levantando A Mão',
   },
   {
     emoji: '🙋‍♀️',
-    name: '',
+    name: 'Mulher Levantando A Mão',
   },
   {
     emoji: '🧏',
-    name: '',
+    name: 'Pessoa Surda',
   },
   {
     emoji: '🧏‍♂️',
-    name: '',
+    name: 'Homem Surdo',
   },
   {
     emoji: '🧏‍♀️',
-    name: '',
+    name: 'Mulher Surda',
   },
   {
     emoji: '🙇',
-    name: '',
+    name: 'Pessoa Fazendo Reverência',
   },
   {
     emoji: '🙇‍♂️',
-    name: '',
+    name: 'Homem Fazendo Reverência',
   },
   {
     emoji: '🙇‍♀️',
-    name: '',
+    name: 'Mulher Fazendo Reverência',
   },
   {
     emoji: '🤦',
-    name: '',
+    name: 'Pessoa Decepcionada',
   },
   {
     emoji: '🤦‍♂️',
-    name: '',
+    name: 'Homem Decepcionado',
   },
   {
     emoji: '🤦‍♀️',
-    name: '',
+    name: 'Mulher Decepcionada',
   },
   {
     emoji: '🤷',
-    name: '',
+    name: 'Pessoa Dando De Ombros',
   },
   {
     emoji: '🤷‍♂️',
-    name: '',
+    name: 'Homem Dando De Ombros',
   },
   {
     emoji: '🤷‍♀️',
-    name: '',
+    name: 'Mulher Dando De Ombros',
   },
   {
     emoji: '🧑‍⚕️',
-    name: '',
+    name: 'Profissional De Saúde',
   },
   {
     emoji: '👨‍⚕️',
-    name: '',
+    name: 'Homem Profissional Da Saúde',
   },
   {
     emoji: '👩‍⚕️',
-    name: '',
+    name: 'Mulher Profissional Da Saúde',
   },
   {
     emoji: '🧑‍🎓',
-    name: '',
+    name: 'Aluno',
   },
   {
     emoji: '👨‍🎓',
-    name: '',
+    name: 'Estudante',
   },
   {
     emoji: '👩‍🎓',
-    name: '',
+    name: 'Aluna',
   },
   {
     emoji: '🧑‍🏫',
-    name: '',
+    name: 'Professora Na Escola',
   },
   {
     emoji: '👨‍🏫',
-    name: '',
+    name: 'Professor',
   },
   {
     emoji: '👩‍🏫',
-    name: '',
+    name: 'Professora',
   },
   {
     emoji: '🧑‍⚖️',
-    name: '',
+    name: 'Juiz No Tribunal',
   },
   {
     emoji: '👨‍⚖️',
-    name: '',
+    name: 'Juiz',
   },
   {
     emoji: '👩‍⚖️',
-    name: '',
+    name: 'Juíza',
   },
   {
     emoji: '🧑‍🌾',
-    name: '',
+    name: 'Agricultor',
   },
   {
     emoji: '👨‍🌾',
-    name: '',
+    name: 'Fazendeiro',
   },
   {
     emoji: '👩‍🌾',
-    name: '',
+    name: 'Fazendeira',
   },
   {
     emoji: '🧑‍🍳',
-    name: '',
+    name: 'Chef De Cozinha',
   },
   {
     emoji: '👨‍🍳',
-    name: '',
+    name: 'Cozinheiro',
   },
   {
     emoji: '👩‍🍳',
-    name: '',
+    name: 'Cozinheira',
   },
   {
     emoji: '🧑‍🔧',
-    name: '',
+    name: 'Mecânico Trabalhando',
   },
   {
     emoji: '👨‍🔧',
-    name: '',
+    name: 'Mecânico',
   },
   {
     emoji: '👩‍🔧',
-    name: '',
+    name: 'Mecânica',
   },
   {
     emoji: '🧑‍🏭',
-    name: '',
+    name: 'Funcionário De Fábrica',
   },
   {
     emoji: '👨‍🏭',
-    name: '',
+    name: 'Operário',
   },
   {
     emoji: '👩‍🏭',
-    name: '',
+    name: 'Operária',
   },
   {
     emoji: '🧑‍💼',
-    name: '',
+    name: 'Trabalhador De Escritório',
   },
   {
     emoji: '👨‍💼',
-    name: '',
+    name: 'Funcionário De Escritório',
   },
   {
     emoji: '👩‍💼',
-    name: '',
+    name: 'Funcionária De Escritório',
   },
   {
     emoji: '🧑‍🔬',
-    name: '',
+    name: 'Cientista',
   },
   {
     emoji: '👨‍🔬',
-    name: '',
+    name: 'Cientista Homem',
   },
   {
     emoji: '👩‍🔬',
-    name: '',
+    name: 'Cientista Mulher',
   },
   {
     emoji: '🧑‍💻',
-    name: '',
+    name: 'Programador',
   },
   {
     emoji: '👨‍💻',
-    name: '',
+    name: 'Tecnólogo',
   },
   {
     emoji: '👩‍💻',
-    name: '',
+    name: 'Tecnóloga',
   },
   {
     emoji: '🧑‍🎤',
-    name: '',
+    name: 'Cantor',
   },
   {
     emoji: '👨‍🎤',
-    name: '',
+    name: 'Cantor Homem',
   },
   {
     emoji: '👩‍🎤',
-    name: '',
+    name: 'Cantora',
   },
   {
     emoji: '🧑‍🎨',
-    name: '',
+    name: 'Artista',
   },
   {
     emoji: '👨‍🎨',
-    name: '',
+    name: 'Artista Plástico',
   },
   {
     emoji: '👩‍🎨',
-    name: '',
+    name: 'Artista Plástica',
   },
   {
     emoji: '🧑‍✈️',
-    name: '',
+    name: 'Piloto',
   },
   {
     emoji: '👨‍✈️',
-    name: '',
+    name: 'Piloto De Avião Homem',
   },
   {
     emoji: '👩‍✈️',
-    name: '',
+    name: 'Piloto De Avião Mulher',
   },
   {
     emoji: '🧑‍🚀',
-    name: '',
+    name: 'Astronauta',
   },
   {
     emoji: '👨‍🚀',
-    name: '',
+    name: 'Astronauta Homem',
   },
   {
     emoji: '👩‍🚀',
-    name: '',
+    name: 'Astronauta Mulher',
   },
   {
     emoji: '🧑‍🚒',
-    name: '',
+    name: 'Bombeiro',
   },
   {
     emoji: '👨‍🚒',
-    name: '',
+    name: 'Bombeiro Homem',
   },
   {
     emoji: '👩‍🚒',
-    name: '',
+    name: 'Bombeira',
   },
   {
     emoji: '👮',
-    name: '',
+    name: 'Policial',
   },
   {
     emoji: '👮‍♂️',
-    name: '',
+    name: 'Policial Homem',
   },
   {
     emoji: '👮‍♀️',
-    name: '',
+    name: 'Policial Mulher',
   },
   {
     emoji: '🕵️',
-    name: '',
+    name: 'Detetive',
   },
   {
     emoji: '🕵️‍♂️',
-    name: '',
+    name: 'Detetive Homem',
   },
   {
     emoji: '🕵️‍♀️',
-    name: '',
+    name: 'Detetive Mulher',
   },
   {
     emoji: '💂',
-    name: '',
+    name: 'Guarda',
   },
   {
     emoji: '💂‍♂️',
-    name: '',
+    name: 'Guarda Homem',
   },
   {
     emoji: '💂‍♀️',
-    name: '',
+    name: 'Guarda Mulher',
   },
   {
     emoji: '🥷',
-    name: '',
+    name: 'Ninja',
   },
   {
     emoji: '👷',
-    name: '',
+    name: 'Trabalhador De Construção Civil',
   },
   {
     emoji: '👷‍♂️',
-    name: '',
+    name: 'Pedreiro',
   },
   {
     emoji: '👷‍♀️',
-    name: '',
+    name: 'Pedreira',
   },
   {
     emoji: '🫅',
-    name: '',
+    name: 'Pessoa Com Coroa',
   },
   {
     emoji: '🤴',
-    name: '',
+    name: 'Príncipe',
   },
   {
     emoji: '👸',
-    name: '',
+    name: 'Princesa',
   },
   {
     emoji: '👳',
-    name: '',
+    name: 'Pessoa Com Turbante',
   },
   {
     emoji: '👳‍♂️',
-    name: '',
+    name: 'Homem Com Turbante',
   },
   {
     emoji: '👳‍♀️',
-    name: '',
+    name: 'Mulher Com Turbante',
   },
   {
     emoji: '👲',
-    name: '',
+    name: 'Homem De Boné',
   },
   {
     emoji: '🧕',
-    name: '',
+    name: 'Mulher Com Véu',
   },
   {
     emoji: '🤵',
-    name: '',
+    name: 'Pessoa De Smoking',
   },
   {
     emoji: '🤵‍♂️',
-    name: '',
+    name: 'Homem De Smoking',
   },
   {
     emoji: '🤵‍♀️',
-    name: '',
+    name: 'Mulher De Smoking',
   },
   {
     emoji: '👰',
-    name: '',
+    name: 'Noiva',
   },
   {
     emoji: '👰‍♂️',
-    name: '',
+    name: 'Noivo Com Véu',
   },
   {
     emoji: '👰‍♀️',
-    name: '',
+    name: 'Noiva Com Véu',
   },
   {
     emoji: '🤰',
-    name: '',
+    name: 'Grávida',
   },
   {
     emoji: '🫃',
-    name: '',
+    name: 'Homem Grávido',
   },
   {
     emoji: '🫄',
-    name: '',
+    name: 'Pessoa Grávida',
   },
   {
     emoji: '🤱',
-    name: '',
+    name: 'Amamentando',
   },
   {
     emoji: '👩‍🍼',
-    name: '',
+    name: 'Mulher Alimentando Bebê',
   },
   {
     emoji: '👨‍🍼',
-    name: '',
+    name: 'Homem Alimentando Bebê',
   },
   {
     emoji: '🧑‍🍼',
-    name: '',
+    name: 'Pessoa Alimentando Bebê',
   },
   {
     emoji: '👼',
-    name: '',
+    name: 'Bebê Anjo',
   },
   {
     emoji: '🎅',
-    name: '',
+    name: 'Papai Noel',
   },
   {
     emoji: '🤶',
-    name: '',
+    name: 'Mamãe Noel',
   },
   {
     emoji: '🧑‍🎄',
-    name: '',
+    name: 'Noel',
   },
   {
     emoji: '🦸',
-    name: '',
+    name: 'Super-Herói',
   },
   {
     emoji: '🦸‍♂️',
-    name: '',
+    name: 'Homem Super-Herói',
   },
   {
     emoji: '🦸‍♀️',
-    name: '',
+    name: 'Super-Heroína',
   },
   {
     emoji: '🦹',
-    name: '',
+    name: 'Supervilão',
   },
   {
     emoji: '🦹‍♂️',
-    name: '',
+    name: 'Homem Supervilão',
   },
   {
     emoji: '🦹‍♀️',
-    name: '',
+    name: 'Supervilã',
   },
   {
     emoji: '🧙',
-    name: '',
+    name: 'Mago',
   },
   {
     emoji: '🧙‍♂️',
-    name: '',
+    name: 'Homem Mago',
   },
   {
     emoji: '🧙‍♀️',
-    name: '',
+    name: 'Maga',
   },
   {
     emoji: '🧚',
-    name: '',
+    name: 'Fada',
   },
   {
     emoji: '🧚‍♂️',
-    name: '',
+    name: 'Homem Fada',
   },
   {
     emoji: '🧚‍♀️',
-    name: '',
+    name: 'Mulher Fada',
   },
   {
     emoji: '🧛',
-    name: '',
+    name: 'Vampiro',
   },
   {
     emoji: '🧛‍♂️',
-    name: '',
+    name: 'Homem Vampiro',
   },
   {
     emoji: '🧛‍♀️',
-    name: '',
+    name: 'Mulher Vampira',
   },
   {
     emoji: '🧜',
-    name: '',
+    name: 'Pessoa Sereia',
   },
   {
     emoji: '🧜‍♂️',
-    name: '',
+    name: 'Sereio',
   },
   {
     emoji: '🧜‍♀️',
-    name: '',
+    name: 'Sereia',
   },
   {
     emoji: '🧝',
-    name: '',
+    name: 'Elfo',
   },
   {
     emoji: '🧝‍♂️',
-    name: '',
+    name: 'Elfo Homem',
   },
   {
     emoji: '🧝‍♀️',
-    name: '',
+    name: 'Elfa',
   },
   {
     emoji: '🧞',
-    name: '',
+    name: 'Gênio',
   },
   {
     emoji: '🧞‍♂️',
-    name: '',
+    name: 'Homem Gênio',
   },
   {
     emoji: '🧞‍♀️',
-    name: '',
+    name: 'Mulher Gênio',
   },
   {
     emoji: '🧟',
-    name: '',
+    name: 'Zumbi',
   },
   {
     emoji: '🧟‍♂️',
-    name: '',
+    name: 'Homem Zumbi',
   },
   {
     emoji: '🧟‍♀️',
-    name: '',
+    name: 'Mulher Zumbi',
   },
   {
     emoji: '🧌',
-    name: '',
+    name: 'Duende',
   },
   {
     emoji: '💆',
-    name: '',
+    name: 'Pessoa Recebendo Massagem Facial',
   },
   {
     emoji: '💆‍♂️',
-    name: '',
+    name: 'Homem Recebendo Massagem Facial',
   },
   {
     emoji: '💆‍♀️',
-    name: '',
+    name: 'Mulher Recebendo Massagem Facial',
   },
   {
     emoji: '💇',
-    name: '',
+    name: 'Pessoa Cortando O Cabelo',
   },
   {
     emoji: '💇‍♂️',
-    name: '',
+    name: 'Homem Cortando O Cabelo',
   },
   {
     emoji: '💇‍♀️',
-    name: '',
+    name: 'Mulher Cortando O Cabelo',
   },
   {
     emoji: '🚶',
-    name: '',
+    name: 'Pessoa Andando',
   },
   {
     emoji: '🚶‍♂️',
-    name: '',
+    name: 'Homem Andando',
   },
   {
     emoji: '🚶‍♀️',
-    name: '',
+    name: 'Mulher Andando',
   },
   {
     emoji: '🧍',
-    name: '',
+    name: 'Pessoa Em Pé',
   },
   {
     emoji: '🧍‍♂️',
-    name: '',
+    name: 'Homem Em Pé',
   },
   {
     emoji: '🧍‍♀️',
-    name: '',
+    name: 'Mulher Em Pé',
   },
   {
     emoji: '🧎',
-    name: '',
+    name: 'Pessoa Ajoelhando',
   },
   {
     emoji: '🧎‍♂️',
-    name: '',
+    name: 'Homem Ajoelhando',
   },
   {
     emoji: '🧎‍♀️',
-    name: '',
+    name: 'Mulher Ajoelhando',
   },
   {
     emoji: '🧑‍🦯',
-    name: '',
+    name: 'Pessoa Com Bengala Para Cego',
   },
   {
     emoji: '👨‍🦯',
-    name: '',
+    name: 'Homem Com Bengala Para Cego',
   },
   {
     emoji: '👩‍🦯',
-    name: '',
+    name: 'Mulher Com Bengala Para Cego',
   },
   {
     emoji: '🧑‍🦼',
-    name: '',
+    name: 'Pessoa Em Cadeira De Rodas Motorizada',
   },
   {
     emoji: '👨‍🦼',
-    name: '',
+    name: 'Homem Em Cadeira De Rodas Motorizada',
   },
   {
     emoji: '👩‍🦼',
-    name: '',
+    name: 'Mulher Em Cadeira De Rodas Motorizada',
   },
   {
     emoji: '🧑‍🦽',
-    name: '',
+    name: 'Pessoa Em Cadeira De Rodas Manual',
   },
   {
     emoji: '👨‍🦽',
-    name: '',
+    name: 'Homem Em Cadeira De Rodas Manual',
   },
   {
     emoji: '👩‍🦽',
-    name: '',
+    name: 'Mulher Em Cadeira De Rodas Manual',
   },
   {
     emoji: '🏃',
-    name: '',
+    name: 'Pessoa Correndo',
   },
   {
     emoji: '🏃‍♂️',
-    name: '',
+    name: 'Homem Correndo',
   },
   {
     emoji: '🏃‍♀️',
-    name: '',
+    name: 'Mulher Correndo',
   },
   {
     emoji: '💃',
-    name: '',
+    name: 'Mulher Dançando',
   },
   {
     emoji: '🕺',
-    name: '',
+    name: 'Homem Dançando',
   },
   {
     emoji: '🕴️',
-    name: '',
+    name: 'Pessoa De Terno Levitando',
   },
   {
     emoji: '👯',
-    name: '',
+    name: 'Pessoas Com Orelhas De Coelho',
   },
   {
     emoji: '👯‍♂️',
-    name: '',
+    name: 'Homens Com Orelhas De Coelho',
   },
   {
     emoji: '👯‍♀️',
-    name: '',
+    name: 'Mulheres Com Orelhas De Coelho',
   },
   {
     emoji: '🧖',
-    name: '',
+    name: 'Pessoa Na Sauna',
   },
   {
     emoji: '🧖‍♂️',
-    name: '',
+    name: 'Homem Na Sauna',
   },
   {
     emoji: '🧖‍♀️',
-    name: '',
+    name: 'Mulher Na Sauna',
   },
   {
     emoji: '🧗',
-    name: '',
+    name: 'Pessoa Escalando',
   },
   {
     emoji: '🧗‍♂️',
-    name: '',
+    name: 'Homem Escalando',
   },
   {
     emoji: '🧗‍♀️',
-    name: '',
+    name: 'Mulher Escalando',
   },
   {
     emoji: '🤺',
-    name: '',
+    name: 'Esgrimista',
   },
   {
     emoji: '🏇',
-    name: '',
+    name: 'Corrida De Cavalos',
   },
   {
     emoji: '⛷️',
-    name: '',
+    name: 'Esquiador',
   },
   {
     emoji: '🏂',
-    name: '',
+    name: 'Praticante De Snowboard',
   },
   {
     emoji: '🏌️',
-    name: '',
+    name: 'Golfista',
   },
   {
     emoji: '🏌️‍♂️',
-    name: '',
+    name: 'Homem Golfista',
   },
   {
     emoji: '🏌️‍♀️',
-    name: '',
+    name: 'Mulher Golfista',
   },
   {
     emoji: '🏄',
-    name: '',
+    name: 'Surfista',
   },
   {
     emoji: '🏄‍♂️',
-    name: '',
+    name: 'Homem Surfista',
   },
   {
     emoji: '🏄‍♀️',
-    name: '',
+    name: 'Mulher Surfista',
   },
   {
     emoji: '🚣',
-    name: '',
+    name: 'Pessoa Remando',
   },
   {
     emoji: '🚣‍♂️',
-    name: '',
+    name: 'Homem Remando',
   },
   {
     emoji: '🚣‍♀️',
-    name: '',
+    name: 'Mulher Remando',
   },
   {
     emoji: '🏊',
-    name: '',
+    name: 'Pessoa Nadando',
   },
   {
     emoji: '🏊‍♂️',
-    name: '',
+    name: 'Homem Nadando',
   },
   {
     emoji: '🏊‍♀️',
-    name: '',
+    name: 'Mulher Nadando',
   },
   {
     emoji: '⛹️',
-    name: '',
+    name: 'Pessoa Jogando Basquete',
   },
   {
     emoji: '⛹️‍♂️',
-    name: '',
+    name: 'Homem Jogando Basquete',
   },
   {
     emoji: '⛹️‍♀️',
-    name: '',
+    name: 'Mulher Jogando Basquete',
   },
   {
     emoji: '🏋️',
-    name: '',
+    name: 'Pessoa Levantando Peso',
   },
   {
     emoji: '🏋️‍♂️',
-    name: '',
+    name: 'Homem Levantando Peso',
   },
   {
     emoji: '🏋️‍♀️',
-    name: '',
+    name: 'Mulher Levantando Peso',
   },
   {
     emoji: '🚴',
-    name: '',
+    name: 'Ciclista',
   },
   {
     emoji: '🚴‍♂️',
-    name: '',
+    name: 'Homem Ciclista',
   },
   {
     emoji: '🚴‍♀️',
-    name: '',
+    name: 'Mulher Ciclista',
   },
   {
     emoji: '🚵',
-    name: '',
+    name: 'Pessoa Fazendo Mountain Bike',
   },
   {
     emoji: '🚵‍♂️',
-    name: '',
+    name: 'Homem Fazendo Mountain Bike',
   },
   {
     emoji: '🚵‍♀️',
-    name: '',
+    name: 'Mulher Fazendo Mountain Bike',
   },
   {
     emoji: '🤸',
-    name: '',
+    name: 'Pessoa Fazendo Estrela',
   },
   {
     emoji: '🤸‍♂️',
-    name: '',
+    name: 'Homem Fazendo Estrela',
   },
   {
     emoji: '🤸‍♀️',
-    name: '',
+    name: 'Mulher Fazendo Estrela',
   },
   {
     emoji: '🤼',
-    name: '',
+    name: 'Pessoas Lutando',
   },
   {
     emoji: '🤼‍♂️',
-    name: '',
+    name: 'Homens Lutando',
   },
   {
     emoji: '🤼‍♀️',
-    name: '',
+    name: 'Mulheres Lutando',
   },
   {
     emoji: '🤽',
-    name: '',
+    name: 'Pessoa Jogando Polo Aquático',
   },
   {
     emoji: '🤽‍♂️',
-    name: '',
+    name: 'Homem Jogando Polo Aquático',
   },
   {
     emoji: '🤽‍♀️',
-    name: '',
+    name: 'Mulher Jogando Polo Aquático',
   },
   {
     emoji: '🤾',
-    name: '',
+    name: 'Handebol',
   },
   {
     emoji: '🤾‍♂️',
-    name: '',
+    name: 'Jogador De Handebol',
   },
   {
     emoji: '🤾‍♀️',
-    name: '',
+    name: 'Jogadora De Handebol',
   },
   {
     emoji: '🤹',
-    name: '',
+    name: 'Malabarista',
   },
   {
     emoji: '🤹‍♂️',
-    name: '',
+    name: 'Homem Malabarista',
   },
   {
     emoji: '🤹‍♀️',
-    name: '',
+    name: 'Mulher Malabarista',
   },
   {
     emoji: '🧘',
-    name: '',
+    name: 'Pessoa Na Posição De Lótus',
   },
   {
     emoji: '🧘‍♂️',
-    name: '',
+    name: 'Homem Na Posição De Lótus',
   },
   {
     emoji: '🧘‍♀️',
-    name: '',
+    name: 'Mulher Na Posição De Lótus',
   },
   {
     emoji: '🛀',
-    name: '',
+    name: 'Pessoa Tomando Banho',
   },
   {
     emoji: '🛌',
-    name: '',
+    name: 'Pessoa Deitada Na Cama',
   },
   {
     emoji: '🧑‍🤝‍🧑',
-    name: '',
+    name: 'Pessoas De Mãos Dadas',
   },
   {
     emoji: '👭',
-    name: '',
+    name: 'Duas Mulheres De Mãos Dadas',
   },
   {
     emoji: '👫',
-    name: '',
+    name: 'Homem E Mulher De Mãos Dadas',
   },
   {
     emoji: '👬',
-    name: '',
+    name: 'Dois Homens De Mãos Dadas',
   },
   {
     emoji: '💏',
-    name: '',
+    name: 'Beijo',
   },
   {
     emoji: '👩‍❤️‍💋‍👨',
-    name: '',
+    name: 'beijo: mulher e homem',
   },
   {
     emoji: '👨‍❤️‍💋‍👨',
-    name: '',
+    name: 'Beijo: Homem, Homem',
   },
   {
     emoji: '👩‍❤️‍💋‍👩',
-    name: '',
+    name: 'Beijo: Mulher, Mulher',
   },
   {
     emoji: '💑',
-    name: '',
+    name: 'Casal Apaixonado',
   },
   {
     emoji: '👩‍❤️‍👨',
-    name: '',
+    name: 'Casal Apaixonado: Mulher, Homem',
   },
   {
     emoji: '👨‍❤️‍👨',
-    name: '',
+    name: 'Casal Apaixonado: Homem, Homem',
   },
   {
     emoji: '👩‍❤️‍👩',
-    name: '',
+    name: 'Casal Apaixonado: Mulher, Mulher',
   },
   {
     emoji: '👪',
-    name: '',
+    name: 'Família',
   },
   {
     emoji: '👨‍👩‍👦',
-    name: '',
+    name: 'Família: Homem, Mulher, Menino',
   },
   {
     emoji: '👨‍👩‍👧',
-    name: '',
+    name: 'Família: Homem, Mulher, Menina',
   },
   {
     emoji: '👨‍👩‍👧‍👦',
-    name: '',
+    name: 'Família: Homem, Mulher, Menina, Menino',
   },
   {
     emoji: '👨‍👩‍👦‍👦',
-    name: '',
+    name: 'Família: Homem, Mulher, Menino, Menino',
   },
   {
     emoji: '👨‍👩‍👧‍👧',
-    name: '',
+    name: 'Família: Homem, Mulher, Menina, Menina',
   },
   {
     emoji: '👨‍👨‍👦',
-    name: '',
+    name: 'Família: Homem, Homem, Menino',
   },
   {
     emoji: '👨‍👨‍👧',
-    name: '',
+    name: 'Família: Homem, Homem, Menina',
   },
   {
     emoji: '👨‍👨‍👧‍👦',
-    name: '',
+    name: 'Família: Homem, Homem, Menina, Menino',
   },
   {
     emoji: '👨‍👨‍👦‍👦',
-    name: '',
+    name: 'Família: Homem, Homem, Menino, Menino',
   },
   {
     emoji: '👨‍👨‍👧‍👧',
-    name: '',
+    name: 'Família: Homem, Homem, Menina, Menina',
   },
   {
     emoji: '👩‍👩‍👦',
-    name: '',
+    name: 'Família: Mulher, Mulher, Menino',
   },
   {
     emoji: '👩‍👩‍👧',
-    name: '',
+    name: 'Família: Mulher, Mulher, Menina',
   },
   {
     emoji: '👩‍👩‍👧‍👦',
-    name: '',
+    name: 'Família: Mulher, Mulher, Menina, Menino',
   },
   {
     emoji: '👩‍👩‍👦‍👦',
-    name: '',
+    name: 'Família: Mulher, Mulher, Menino, Menino',
   },
   {
     emoji: '👩‍👩‍👧‍👧',
-    name: '',
+    name: 'Família: Mulher, Mulher, Menina, Menina',
   },
   {
     emoji: '👨‍👦',
-    name: '',
+    name: 'Família: Homem, Menino',
   },
   {
     emoji: '👨‍👦‍👦',
-    name: '',
+    name: 'Família: Homem, Menina',
   },
   {
     emoji: '👨‍👧',
-    name: '',
+    name: 'Família: Homem, Menino, Menino',
   },
   {
     emoji: '👨‍👧‍👦',
-    name: '',
+    name: 'Família: Homem, Menina, Menino',
   },
   {
     emoji: '👨‍👧‍👧',
-    name: '',
+    name: 'Família: Homem, Menina, Menina',
   },
   {
     emoji: '👩‍👦',
-    name: '',
+    name: 'Família: Mulher, Menino',
   },
   {
     emoji: '👩‍👦‍👦',
-    name: '',
+    name: 'Família: Mulher, Menino, Menino',
   },
   {
     emoji: '👩‍👧',
-    name: '',
+    name: 'Família: Mulher, Menina',
   },
   {
     emoji: '👩‍👧‍👦',
-    name: '',
+    name: 'Família: Mulher, Menina, Menino',
   },
   {
     emoji: '👩‍👧‍👧',
-    name: '',
+    name: 'Família: Mulher, Menina, Menina',
   },
   {
     emoji: '🗣️',
-    name: '',
+    name: 'Silhueta Falando',
   },
   {
     emoji: '👤',
-    name: '',
+    name: 'Silhueta De Busto',
   },
   {
     emoji: '👥',
-    name: '',
+    name: 'Silhueta De Bustos',
   },
   {
     emoji: '🫂',
-    name: '',
+    name: 'Pessoas Se Abraçando',
   },
   {
     emoji: '👣',
-    name: '',
+    name: 'Pegadas',
   },
   {
     emoji: '🐵',
-    name: '',
+    name: 'Rosto De Macaco',
   },
   {
     emoji: '🐒',
-    name: '',
+    name: 'Macaco',
   },
   {
     emoji: '🦍',
-    name: '',
+    name: 'Gorila',
   },
   {
     emoji: '🦧',
-    name: '',
+    name: 'Orangotango',
   },
   {
     emoji: '🐶',
-    name: '',
+    name: 'Rosto De Cachorro',
   },
   {
     emoji: '🐕',
-    name: '',
+    name: 'Cachorro',
   },
   {
     emoji: '🦮',
-    name: '',
+    name: 'Cão-Guia',
   },
   {
     emoji: '🐕‍🦺',
-    name: '',
+    name: 'Cão De Serviço',
   },
   {
     emoji: '🐩',
-    name: '',
+    name: 'Poodle',
   },
   {
     emoji: '🐺',
-    name: '',
+    name: 'Rosto De Lobo',
   },
   {
     emoji: '🦊',
-    name: '',
+    name: 'Rosto De Raposa',
   },
   {
     emoji: '🦝',
-    name: '',
+    name: 'Guaxinim',
   },
   {
     emoji: '🐱',
-    name: '',
+    name: 'Rosto De Gato',
   },
   {
     emoji: '🐈',
-    name: '',
+    name: 'Gato',
   },
   {
     emoji: '🐈‍⬛',
-    name: '',
+    name: 'Gato Preto',
   },
   {
     emoji: '🦁',
-    name: '',
+    name: 'Rosto De Leão',
   },
   {
     emoji: '🐯',
-    name: '',
+    name: 'Rosto De Tigre',
   },
   {
     emoji: '🐅',
-    name: '',
+    name: 'Tigre',
   },
   {
     emoji: '🐆',
-    name: '',
+    name: 'Leopardo',
   },
   {
     emoji: '🐴',
-    name: '',
+    name: 'Rosto De Cavalo',
   },
   {
     emoji: '🐎',
-    name: '',
+    name: 'Cavalo',
   },
   {
     emoji: '🦄',
-    name: '',
+    name: 'Rosto De Unicórnio',
   },
   {
     emoji: '🦓',
-    name: '',
+    name: 'Zebra',
   },
   {
     emoji: '🦌',
-    name: '',
+    name: 'Cervo',
   },
   {
     emoji: '🦬',
-    name: '',
+    name: 'Bisão',
   },
   {
     emoji: '🐮',
-    name: '',
+    name: 'Rosto De Vaca',
   },
   {
     emoji: '🐂',
-    name: '',
+    name: 'Boi',
   },
   {
     emoji: '🐃',
-    name: '',
+    name: 'Búfalo-Asiático',
   },
   {
     emoji: '🐄',
-    name: '',
+    name: 'Vaca',
   },
   {
     emoji: '🐷',
-    name: '',
+    name: 'Rosto De Porco',
   },
   {
     emoji: '🐖',
-    name: '',
+    name: 'Porco',
   },
   {
     emoji: '🐗',
-    name: '',
+    name: 'Javali',
   },
   {
     emoji: '🐽',
-    name: '',
+    name: 'Nariz De Porco',
   },
   {
     emoji: '🐏',
-    name: '',
+    name: 'Carneiro',
   },
   {
     emoji: '🐑',
-    name: '',
+    name: 'Ovelha',
   },
   {
     emoji: '🐐',
-    name: '',
+    name: 'Cabra',
   },
   {
     emoji: '🐪',
-    name: '',
+    name: 'Camelo',
   },
   {
     emoji: '🐫',
-    name: '',
+    name: 'Camelo Com Duas Corcovas',
   },
   {
     emoji: '🦙',
-    name: '',
+    name: 'Lhama',
   },
   {
     emoji: '🦒',
-    name: '',
+    name: 'Girafa',
   },
   {
     emoji: '🐘',
-    name: '',
+    name: 'Elefante',
   },
   {
     emoji: '🦣',
-    name: '',
+    name: 'Mamute',
   },
   {
     emoji: '🦏',
-    name: '',
+    name: 'Rinoceronte',
   },
   {
     emoji: '🦛',
-    name: '',
+    name: 'Hipopótamo',
   },
   {
     emoji: '🐭',
-    name: '',
+    name: 'Rosto De Camundongo',
   },
   {
     emoji: '🐁',
-    name: '',
+    name: 'Camundongo',
   },
   {
     emoji: '🐀',
-    name: '',
+    name: 'Rato',
   },
   {
     emoji: '🐹',
-    name: '',
+    name: 'Rosto De Hamster',
   },
   {
     emoji: '🐰',
-    name: '',
+    name: 'Rosto De Coelho',
   },
   {
     emoji: '🐇',
-    name: '',
+    name: 'Coelho',
   },
   {
     emoji: '🐿️',
-    name: '',
+    name: 'Esquilo',
   },
   {
     emoji: '🦫',
-    name: '',
+    name: 'Castor',
   },
   {
     emoji: '🦔',
-    name: '',
+    name: 'Porco-Espinho',
   },
   {
     emoji: '🦇',
