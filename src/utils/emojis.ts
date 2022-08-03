@@ -2677,1435 +2677,1435 @@ export const emojis = [
   },
   {
     emoji: '🍈',
-    name: '',
+    name: 'Melão',
   },
   {
     emoji: '🍉',
-    name: '',
+    name: 'Melancia',
   },
   {
     emoji: '🍊',
-    name: '',
+    name: 'Laranja',
   },
   {
     emoji: '🍋',
-    name: '',
+    name: 'Limão',
   },
   {
     emoji: '🍌',
-    name: '',
+    name: 'Banana',
   },
   {
     emoji: '🍍',
-    name: '',
+    name: 'Abacaxi',
   },
   {
     emoji: '🥭',
-    name: '',
+    name: 'Manga',
   },
   {
     emoji: '🍎',
-    name: '',
+    name: 'Maçã Vermelha',
   },
   {
     emoji: '🍏',
-    name: '',
+    name: 'Maçã Verde',
   },
   {
     emoji: '🍐',
-    name: '',
+    name: 'Pera',
   },
   {
     emoji: '🍑',
-    name: '',
+    name: 'Pêssego',
   },
   {
     emoji: '🍒',
-    name: '',
+    name: 'Cereja',
   },
   {
     emoji: '🍓',
-    name: '',
+    name: 'Morango',
   },
   {
     emoji: '🫐',
-    name: '',
+    name: 'Mirtilos',
   },
   {
     emoji: '🥝',
-    name: '',
+    name: 'Kiwi',
   },
   {
     emoji: '🍅',
-    name: '',
+    name: 'Tomate',
   },
   {
     emoji: '🫒',
-    name: '',
+    name: 'Azeitona',
   },
   {
     emoji: '🥥',
-    name: '',
+    name: 'Coco',
   },
   {
     emoji: '🥑',
-    name: '',
+    name: 'Abacate',
   },
   {
     emoji: '🍆',
-    name: '',
+    name: 'Berinjela',
   },
   {
     emoji: '🥔',
-    name: '',
+    name: 'Batata',
   },
   {
     emoji: '🥕',
-    name: '',
+    name: 'Cenoura',
   },
   {
     emoji: '🌽',
-    name: '',
+    name: 'Milho',
   },
   {
     emoji: '🌶️',
-    name: '',
+    name: 'Pimenta',
   },
   {
     emoji: '🫑',
-    name: '',
+    name: 'Pimentão',
   },
   {
     emoji: '🥒',
-    name: '',
+    name: 'Pepino',
   },
   {
     emoji: '🥬',
-    name: '',
+    name: 'Verdura',
   },
   {
     emoji: '🥦',
-    name: '',
+    name: 'Brócolis',
   },
   {
     emoji: '🧄',
-    name: '',
+    name: 'Alho',
   },
   {
     emoji: '🧅',
-    name: '',
+    name: 'Cebola',
   },
   {
     emoji: '🍄',
-    name: '',
+    name: 'Cogumelo',
   },
   {
     emoji: '🥜',
-    name: '',
+    name: 'Amendoim',
   },
   {
     emoji: '🫘',
-    name: '',
+    name: 'Feijões',
   },
   {
     emoji: '🌰',
-    name: '',
+    name: 'Castanha',
   },
   {
     emoji: '🍞',
-    name: '',
+    name: 'Pão',
   },
   {
     emoji: '🥐',
-    name: '',
+    name: 'Croissant',
   },
   {
     emoji: '🥖',
-    name: '',
+    name: 'Baguete',
   },
   {
     emoji: '🫓',
-    name: '',
+    name: 'Pão Sírio',
   },
   {
     emoji: '🥨',
-    name: '',
+    name: 'Pretzel',
   },
   {
     emoji: '🥯',
-    name: '',
+    name: 'Rosca',
   },
   {
     emoji: '🥞',
-    name: '',
+    name: 'Panquecas',
   },
   {
     emoji: '🧇',
-    name: '',
+    name: 'Waffle',
   },
   {
     emoji: '🧀',
-    name: '',
+    name: 'Queijo',
   },
   {
     emoji: '🍖',
-    name: '',
+    name: 'Carne',
   },
   {
     emoji: '🍗',
-    name: '',
+    name: 'Coxa De Frango',
   },
   {
     emoji: '🥩',
-    name: '',
+    name: 'Corte De Carne',
   },
   {
     emoji: '🥓',
-    name: '',
+    name: 'Bacon',
   },
   {
     emoji: '🍔',
-    name: '',
+    name: 'Hambúrguer',
   },
   {
     emoji: '🍟',
-    name: '',
+    name: 'Batata Frita',
   },
   {
     emoji: '🍕',
-    name: '',
+    name: 'Pizza',
   },
   {
     emoji: '🌭',
-    name: '',
+    name: 'Cachorro-Quente',
   },
   {
     emoji: '🥪',
-    name: '',
+    name: 'Sanduíche',
   },
   {
     emoji: '🌮',
-    name: '',
+    name: 'Taco',
   },
   {
     emoji: '🌯',
-    name: '',
+    name: 'Burrito',
   },
   {
     emoji: '🫔',
-    name: '',
+    name: 'Tamale',
   },
   {
     emoji: '🥙',
-    name: '',
+    name: 'Pão Recheado',
   },
   {
     emoji: '🧆',
-    name: '',
+    name: 'Falafel',
   },
   {
     emoji: '🥚',
-    name: '',
+    name: 'Ovo',
   },
   {
     emoji: '🍳',
-    name: '',
+    name: 'Ovo Frito',
   },
   {
     emoji: '🥘',
-    name: '',
+    name: 'Caçarola Com Comida',
   },
   {
     emoji: '🍲',
-    name: '',
+    name: 'Panela',
   },
   {
     emoji: '🫕',
-    name: '',
+    name: 'Fondue',
   },
   {
     emoji: '🥣',
-    name: '',
+    name: 'Tigela Com Colher',
   },
   {
     emoji: '🥗',
-    name: '',
+    name: 'Salada Verde',
   },
   {
     emoji: '🍿',
-    name: '',
+    name: 'Pipoca',
   },
   {
     emoji: '🧈',
-    name: '',
+    name: 'Manteiga',
   },
   {
     emoji: '🧂',
-    name: '',
+    name: 'Sal',
   },
   {
     emoji: '🥫',
-    name: '',
+    name: 'Comida Enlatada',
   },
   {
     emoji: '🍱',
-    name: '',
+    name: 'Bentô',
   },
   {
     emoji: '🍘',
-    name: '',
+    name: 'Biscoito De Arroz',
   },
   {
     emoji: '🍙',
-    name: '',
+    name: 'Arroz Japonês',
   },
   {
     emoji: '🍚',
-    name: '',
+    name: 'Arroz Cozido',
   },
   {
     emoji: '🍛',
-    name: '',
+    name: 'Arroz com Curry',
   },
   {
     emoji: '🍜',
-    name: '',
+    name: 'Lámen',
   },
   {
     emoji: '🍝',
-    name: '',
+    name: 'Espaguete',
   },
   {
     emoji: '🍠',
-    name: '',
+    name: 'Batata Assada',
   },
   {
     emoji: '🍢',
-    name: '',
+    name: 'Oden',
   },
   {
     emoji: '🍣',
-    name: '',
+    name: 'Sushi',
   },
   {
     emoji: '🍤',
-    name: '',
+    name: 'Camarão Frito',
   },
   {
     emoji: '🍥',
-    name: '',
+    name: 'Bolinho De Peixe',
   },
   {
     emoji: '🥮',
-    name: '',
+    name: 'Bolo Lunar',
   },
   {
     emoji: '🍡',
-    name: '',
+    name: 'Dango',
   },
   {
     emoji: '🥟',
-    name: '',
+    name: 'Bolinho Asiático',
   },
   {
     emoji: '🥠',
-    name: '',
+    name: 'Biscoito Da Sorte',
   },
   {
     emoji: '🥡',
-    name: '',
+    name: 'Caixa Para Viagem',
   },
   {
     emoji: '🦀',
-    name: '',
+    name: 'Caranguejo',
   },
   {
     emoji: '🦞',
-    name: '',
+    name: 'Lagosta',
   },
   {
     emoji: '🦐',
-    name: '',
+    name: 'Camarão',
   },
   {
     emoji: '🦑',
-    name: '',
+    name: 'Lula',
   },
   {
     emoji: '🦪',
-    name: '',
+    name: 'Ostra',
   },
   {
     emoji: '🍦',
-    name: '',
+    name: 'Sorvete Italiano',
   },
   {
     emoji: '🍧',
-    name: '',
+    name: 'Raspadinha De Gelo',
   },
   {
     emoji: '🍨',
-    name: '',
+    name: 'Sorvete',
   },
   {
     emoji: '🍩',
-    name: '',
+    name: 'Donut',
   },
   {
     emoji: '🍪',
-    name: '',
+    name: 'Biscoito',
   },
   {
     emoji: '🎂',
-    name: '',
+    name: 'Bolo De Aniversário',
   },
   {
     emoji: '🍰',
-    name: '',
+    name: 'Pedaço de bolo',
   },
   {
     emoji: '🧁',
-    name: '',
+    name: 'Cupcake',
   },
   {
     emoji: '🥧',
-    name: '',
+    name: 'Torta',
   },
   {
     emoji: '🍫',
-    name: '',
+    name: 'Chocolate',
   },
   {
     emoji: '🍬',
-    name: '',
+    name: 'Bala',
   },
   {
     emoji: '🍭',
-    name: '',
+    name: 'Pirulito',
   },
   {
     emoji: '🍮',
-    name: '',
+    name: 'Pudim',
   },
   {
     emoji: '🍯',
-    name: '',
+    name: 'Pote De Mel',
   },
   {
     emoji: '🍼',
-    name: '',
+    name: 'Mamadeira',
   },
   {
     emoji: '🥛',
-    name: '',
+    name: 'Copo De Leite',
   },
   {
     emoji: '☕',
-    name: '',
+    name: 'Café',
   },
   {
     emoji: '🫖',
-    name: '',
+    name: 'Bule',
   },
   {
     emoji: '🍵',
-    name: '',
+    name: 'Xícara De Chá Sem Alça',
   },
   {
     emoji: '🍶',
-    name: '',
+    name: 'Saquê',
   },
   {
     emoji: '🍾',
-    name: '',
+    name: 'Garrafa De Champanhe',
   },
   {
     emoji: '🍷',
-    name: '',
+    name: 'Vinho',
   },
   {
     emoji: '🍸',
-    name: '',
+    name: 'Coquetel',
   },
   {
     emoji: '🍹',
-    name: '',
+    name: 'Bebida Tropical',
   },
   {
     emoji: '🍺',
-    name: '',
+    name: 'Cerveja',
   },
   {
     emoji: '🍻',
-    name: '',
+    name: 'Canecas De Cerveja',
   },
   {
     emoji: '🥂',
-    name: '',
+    name: 'Taças Brindando',
   },
   {
     emoji: '🥃',
-    name: '',
+    name: 'Copo',
   },
   {
     emoji: '🫗',
-    name: '',
+    name: 'Líquido A Verter',
   },
   {
     emoji: '🥤',
-    name: '',
+    name: 'Copo Com Canudo',
   },
   {
     emoji: '🧋',
-    name: '',
+    name: 'Chá Perolado',
   },
   {
     emoji: '🧃',
-    name: '',
+    name: 'Suco De Caixa',
   },
   {
     emoji: '🧉',
-    name: '',
+    name: 'Mate',
   },
   {
     emoji: '🧊',
-    name: '',
+    name: 'Cubo De Gelo',
   },
   {
     emoji: '🥢',
-    name: '',
+    name: 'Hashi',
   },
   {
     emoji: '🍽️',
-    name: '',
+    name: 'Prato Com Talheres',
   },
   {
     emoji: '🍴',
-    name: '',
+    name: 'Garfo E Faca',
   },
   {
     emoji: '🥄',
-    name: '',
+    name: 'Colher',
   },
   {
     emoji: '🔪',
-    name: '',
+    name: 'Faca De Cozinha',
   },
   {
     emoji: '🫙',
-    name: '',
+    name: 'Jarro',
   },
   {
     emoji: '🏺',
-    name: '',
+    name: 'Ânfora',
   },
   {
     emoji: '🌍',
-    name: '',
+    name: 'Globo Mostrando Europa E África',
   },
   {
     emoji: '🌎',
-    name: '',
+    name: 'Globo Mostrando As Américas',
   },
   {
     emoji: '🌏',
-    name: '',
+    name: 'Globo Mostrando Ásia E Oceania',
   },
   {
     emoji: '🌐',
-    name: '',
+    name: 'Globo Com Meridianos',
   },
   {
     emoji: '🗺️',
-    name: '',
+    name: 'Mapa-Múndi',
   },
   {
     emoji: '🗾',
-    name: '',
+    name: 'Mapa Do Japão',
   },
   {
     emoji: '🧭',
-    name: '',
+    name: 'Bússola',
   },
   {
     emoji: '🏔️',
-    name: '',
+    name: 'Montanha Com Neve',
   },
   {
     emoji: '⛰️',
-    name: '',
+    name: 'Montanha',
   },
   {
     emoji: '🌋',
-    name: '',
+    name: 'Vulcão',
   },
   {
     emoji: '🗻',
-    name: '',
+    name: 'Monte Fuji',
   },
   {
     emoji: '🏕️',
-    name: '',
+    name: 'Acampamento',
   },
   {
     emoji: '🏖️',
-    name: '',
+    name: 'Praia E Guarda-Sol',
   },
   {
     emoji: '🏜️',
-    name: '',
+    name: 'Deserto',
   },
   {
     emoji: '🏝️',
-    name: '',
+    name: 'Ilha Deserta',
   },
   {
     emoji: '🏞️',
-    name: '',
+    name: 'Parque Nacional',
   },
   {
     emoji: '🏟️',
-    name: '',
+    name: 'Estádio',
   },
   {
     emoji: '🏛️',
-    name: '',
+    name: 'Prédio Grego',
   },
   {
     emoji: '🏗️',
-    name: '',
+    name: 'Construção',
   },
   {
     emoji: '🧱',
-    name: '',
+    name: 'Tijolo',
   },
   {
     emoji: '🪨',
-    name: '',
+    name: 'Pedra',
   },
   {
     emoji: '🪵',
-    name: '',
+    name: 'Madeira',
   },
   {
     emoji: '🛖',
-    name: '',
+    name: 'Cabana',
   },
   {
     emoji: '🏘️',
-    name: '',
+    name: 'Casas',
   },
   {
     emoji: '🏚️',
-    name: '',
+    name: 'Casa Abandonada',
   },
   {
     emoji: '🏠',
-    name: '',
+    name: 'Casa',
   },
   {
     emoji: '🏡',
-    name: '',
+    name: 'Casa Com Jardim',
   },
   {
     emoji: '🏢',
-    name: '',
+    name: 'Edifício Comercial',
   },
   {
     emoji: '🏣',
-    name: '',
+    name: 'Correio Japonês',
   },
   {
     emoji: '🏤',
-    name: '',
+    name: 'Correio',
   },
   {
     emoji: '🏥',
-    name: '',
+    name: 'Hospital',
   },
   {
     emoji: '🏦',
-    name: '',
+    name: 'Banco',
   },
   {
     emoji: '🏨',
-    name: '',
+    name: 'Hotel',
   },
   {
     emoji: '🏩',
-    name: '',
+    name: 'Motel',
   },
   {
     emoji: '🏪',
-    name: '',
+    name: 'Loja De Conveniência',
   },
   {
     emoji: '🏫',
-    name: '',
+    name: 'Escola',
   },
   {
     emoji: '🏬',
-    name: '',
+    name: 'Loja De Departamentos',
   },
   {
     emoji: '🏭',
-    name: '',
+    name: 'Fábrica',
   },
   {
     emoji: '🏯',
-    name: '',
+    name: 'Castelo Japonês',
   },
   {
     emoji: '🏰',
-    name: '',
+    name: 'Castelo',
   },
   {
     emoji: '💒',
-    name: '',
+    name: 'Capela De Casamento',
   },
   {
     emoji: '🗼',
-    name: '',
+    name: 'Torre De Tóquio',
   },
   {
     emoji: '🗽',
-    name: '',
+    name: 'Estátua Da Liberdade',
   },
   {
     emoji: '⛪',
-    name: '',
+    name: 'Igreja',
   },
   {
     emoji: '🕌',
-    name: '',
+    name: 'Mesquita',
   },
   {
     emoji: '🛕',
-    name: '',
+    name: 'Templo Hindu',
   },
   {
     emoji: '🕍',
-    name: '',
+    name: 'Sinagoga',
   },
   {
     emoji: '⛩️',
-    name: '',
+    name: 'Santuário Japonês',
   },
   {
     emoji: '🕋',
-    name: '',
+    name: 'Caaba Islã',
   },
   {
     emoji: '⛲',
-    name: '',
+    name: 'Fonte',
   },
   {
     emoji: '⛺',
-    name: '',
+    name: 'Barraca',
   },
   {
     emoji: '🌁',
-    name: '',
+    name: 'Enevoado',
   },
   {
     emoji: '🌃',
-    name: '',
+    name: 'Noite Estrelada',
   },
   {
     emoji: '🏙️',
-    name: '',
+    name: 'Cidade',
   },
   {
     emoji: '🌄',
-    name: '',
+    name: 'Aurora Sobre Montanhas',
   },
   {
     emoji: '🌅',
-    name: '',
+    name: 'Aurora Sobre Água',
   },
   {
     emoji: '🌆',
-    name: '',
+    name: 'Cidade Ao Anoitecer',
   },
   {
     emoji: '🌇',
-    name: '',
+    name: 'Pôr Do Sol',
   },
   {
     emoji: '🌉',
-    name: '',
+    name: 'Ponte À Noite',
   },
   {
     emoji: '♨️',
-    name: '',
+    name: 'Chamas',
   },
   {
     emoji: '🎠',
-    name: '',
+    name: '🎠',
   },
   {
     emoji: '🛝',
-    name: '',
+    name: 'Escorrega Infantil',
   },
   {
     emoji: '🎡',
-    name: '',
+    name: 'Roda Gigante',
   },
   {
     emoji: '🎢',
-    name: '',
+    name: 'Montanha Russa',
   },
   {
     emoji: '💈',
-    name: '',
+    name: 'Barbearia',
   },
   {
     emoji: '🎪',
-    name: '',
+    name: 'Circo',
   },
   {
     emoji: '🚂',
-    name: '',
+    name: 'Locomotiva',
   },
   {
     emoji: '🚃',
-    name: '',
+    name: 'Vagão De Trem',
   },
   {
     emoji: '🚄',
-    name: '',
+    name: 'Trem De Alta Velocidade',
   },
   {
     emoji: '🚅',
-    name: '',
+    name: 'Trem De Alta Velocidade Japonês',
   },
   {
     emoji: '🚆',
-    name: '',
+    name: 'Trem',
   },
   {
     emoji: '🚇',
-    name: '',
+    name: 'Metrô',
   },
   {
     emoji: '🚈',
-    name: '',
+    name: 'Trem Urbano',
   },
   {
     emoji: '🚉',
-    name: '',
+    name: 'Estação',
   },
   {
     emoji: '🚊',
-    name: '',
+    name: 'Bonde Elétrico',
   },
   {
     emoji: '🚝',
-    name: '',
+    name: 'Monotrilho',
   },
   {
     emoji: '🚞',
-    name: '',
+    name: 'Estrada De Ferro Na Montanha',
   },
   {
     emoji: '🚋',
-    name: '',
+    name: 'Bonde',
   },
   {
     emoji: '🚌',
-    name: '',
+    name: 'Ônibus',
   },
   {
     emoji: '🚍',
-    name: '',
+    name: 'Ônibus Se Aproximando',
   },
   {
     emoji: '🚎',
-    name: '',
+    name: 'Trólebus',
   },
   {
     emoji: '🚐',
-    name: '',
+    name: 'Van',
   },
   {
     emoji: '🚑',
-    name: '',
+    name: 'Ambulância',
   },
   {
     emoji: '🚒',
-    name: '',
+    name: 'Carro Do Corpo De Bombeiros',
   },
   {
     emoji: '🚓',
-    name: '',
+    name: 'Viatura Policial',
   },
   {
     emoji: '🚔',
-    name: '',
+    name: 'Viatura Policial Se Aproximando',
   },
   {
     emoji: '🚕',
-    name: '',
+    name: 'Táxi',
   },
   {
     emoji: '🚖',
-    name: '',
+    name: 'Táxi Se Aproximando',
   },
   {
     emoji: '🚗',
-    name: '',
+    name: 'Carro',
   },
   {
     emoji: '🚘',
-    name: '',
+    name: 'Carro Se Aproximando',
   },
   {
     emoji: '🚙',
-    name: '',
+    name: 'Suv',
   },
   {
     emoji: '🛻',
-    name: '',
+    name: 'Caminhonete',
   },
   {
     emoji: '🚚',
-    name: '',
+    name: 'Caminhão De Entrega',
   },
   {
     emoji: '🚛',
-    name: '',
+    name: 'Caminhão',
   },
   {
     emoji: '🚜',
-    name: '',
+    name: 'Trator',
   },
   {
     emoji: '🏎️',
-    name: '',
+    name: 'Carro De Corrida',
   },
   {
     emoji: '🏍️',
-    name: '',
+    name: 'Motocicleta',
   },
   {
     emoji: '🛵',
-    name: '',
+    name: 'Scooter',
   },
   {
     emoji: '🦽',
-    name: '',
+    name: 'Cadeira De Rodas Manual',
   },
   {
     emoji: '🦼',
-    name: '',
+    name: 'Cadeira De Rodas Motorizada',
   },
   {
     emoji: '🛺',
-    name: '',
+    name: 'Automóvel Riquixá',
   },
   {
     emoji: '🚲',
-    name: '',
+    name: 'Bicicleta',
   },
   {
     emoji: '🛴',
-    name: '',
+    name: 'Patinete',
   },
   {
     emoji: '🛹',
-    name: '',
+    name: 'Skate',
   },
   {
     emoji: '🛼',
-    name: '',
+    name: 'Patins De Rodas',
   },
   {
     emoji: '🚏',
-    name: '',
+    name: 'Ponto De Ônibus',
   },
   {
     emoji: '🛣️',
-    name: '',
+    name: 'Estrada',
   },
   {
     emoji: '🛤️',
-    name: '',
+    name: 'Trilhos',
   },
   {
     emoji: '🛢️',
-    name: '',
+    name: 'Barril De Óleo',
   },
   {
     emoji: '⛽',
-    name: '',
+    name: 'Posto De Gasolina',
   },
   {
     emoji: '🛞',
-    name: '',
+    name: 'Roda',
   },
   {
     emoji: '🚨',
-    name: '',
+    name: 'Sirene',
   },
   {
     emoji: '🚥',
-    name: '',
+    name: 'Semáforo Horizontal',
   },
   {
     emoji: '🚦',
-    name: '',
+    name: 'Semáforo Vertical',
   },
   {
     emoji: '🛑',
-    name: '',
+    name: 'Sinal De Pare',
   },
   {
     emoji: '🚧',
-    name: '',
+    name: 'Em Construção',
   },
   {
     emoji: '⚓',
-    name: '',
+    name: 'Âncora',
   },
   {
     emoji: '🛟',
-    name: '',
+    name: 'Bóia Em Anel',
   },
   {
     emoji: '⛵',
-    name: '',
+    name: 'Barco A Vela',
   },
   {
     emoji: '🛶',
-    name: '',
+    name: 'Canoa',
   },
   {
     emoji: '🚤',
-    name: '',
+    name: 'Lancha',
   },
   {
     emoji: '🛳️',
-    name: '',
+    name: 'Cruzeiro',
   },
   {
     emoji: '⛴️',
-    name: '',
+    name: 'Balsa',
   },
   {
     emoji: '🛥️',
-    name: '',
+    name: 'Barco',
   },
   {
     emoji: '🚢',
-    name: '',
+    name: 'Navio',
   },
   {
     emoji: '✈️',
-    name: '',
+    name: 'Avião',
   },
   {
     emoji: '🛩️',
-    name: '',
+    name: 'Avião Pequeno',
   },
   {
     emoji: '🛫',
-    name: '',
+    name: 'Avião Decolando',
   },
   {
     emoji: '🛬',
-    name: '',
+    name: 'Avião Aterrissando',
   },
   {
     emoji: '🪂',
-    name: '',
+    name: 'Paraquedas',
   },
   {
     emoji: '💺',
-    name: '',
+    name: 'Assento',
   },
   {
     emoji: '🚁',
-    name: '',
+    name: 'Helicóptero',
   },
   {
     emoji: '🚟',
-    name: '',
+    name: 'Estrada De Ferro Suspensa',
   },
   {
     emoji: '🚠',
-    name: '',
+    name: 'Cabo Suspenso Usado Em Teleféricos Nas Montanhas',
   },
   {
     emoji: '🚡',
-    name: '',
+    name: 'Teleférico',
   },
   {
     emoji: '🛰️',
-    name: '',
+    name: 'Satélite',
   },
   {
     emoji: '🚀',
-    name: '',
+    name: 'Foguete',
   },
   {
     emoji: '🛸',
-    name: '',
+    name: 'Disco Voador',
   },
   {
     emoji: '🛎️',
-    name: '',
+    name: 'Sineta',
   },
   {
     emoji: '🧳',
-    name: '',
+    name: 'Mala',
   },
   {
     emoji: '⌛',
-    name: '',
+    name: 'Ampulheta',
   },
   {
     emoji: '⏳',
-    name: '',
+    name: 'Ampulheta Contando O Tempo',
   },
   {
     emoji: '⌚',
-    name: '',
+    name: 'Relógio De Pulso',
   },
   {
     emoji: '⏰',
-    name: '',
+    name: 'Despertador',
   },
   {
     emoji: '⏱️',
-    name: '',
+    name: 'Cronômetro',
   },
   {
     emoji: '⏲️',
-    name: '',
+    name: 'Relógio Temporizador',
   },
   {
     emoji: '🕰️',
-    name: '',
+    name: 'Relógio De Mesa',
   },
   {
     emoji: '🕛',
-    name: '',
+    name: '12 Horas',
   },
   {
     emoji: '🕧',
-    name: '',
+    name: 'Doze E Meia',
   },
   {
     emoji: '🕐',
-    name: '',
+    name: '1 Hora',
   },
   {
     emoji: '🕜',
-    name: '',
+    name: 'Uma E Meia',
   },
   {
     emoji: '🕑',
-    name: '',
+    name: '2 Horas',
   },
   {
     emoji: '🕝',
-    name: '',
+    name: 'Duas E Meia',
   },
   {
     emoji: '🕒',
-    name: '',
+    name: '3 Horas',
   },
   {
     emoji: '🕞',
-    name: '',
+    name: 'Três E Meia',
   },
   {
     emoji: '🕓',
-    name: '',
+    name: '4 Horas',
   },
   {
     emoji: '🕟',
-    name: '',
+    name: 'Quatro E Meia',
   },
   {
     emoji: '🕔',
-    name: '',
+    name: '5 Horas',
   },
   {
     emoji: '🕠',
-    name: '',
+    name: 'Cinco E Meia',
   },
   {
     emoji: '🕕',
-    name: '',
+    name: '6 Horas',
   },
   {
     emoji: '🕡',
-    name: '',
+    name: 'Seis E Meia',
   },
   {
     emoji: '🕖',
-    name: '',
+    name: '7 Horas',
   },
   {
     emoji: '🕢',
-    name: '',
+    name: 'Sete E Meia',
   },
   {
     emoji: '🕗',
-    name: '',
+    name: '8 Horas',
   },
   {
     emoji: '🕣',
-    name: '',
+    name: 'Oito E Meia',
   },
   {
     emoji: '🕘',
-    name: '',
+    name: '9 Horas',
   },
   {
     emoji: '🕤',
-    name: '',
+    name: 'Nove E Meia',
   },
   {
     emoji: '🕙',
-    name: '',
+    name: '10 Horas',
   },
   {
     emoji: '🕥',
-    name: '',
+    name: 'Dez E Meia',
   },
   {
     emoji: '🕚',
-    name: '',
+    name: '11 Horas',
   },
   {
     emoji: '🕦',
-    name: '',
+    name: 'Onze E Meia',
   },
   {
     emoji: '🌑',
-    name: '',
+    name: 'Lua Nova',
   },
   {
     emoji: '🌒',
-    name: '',
+    name: 'Lua Crescente Côncava',
   },
   {
     emoji: '🌓',
-    name: '',
+    name: 'Lua Quarto Crescente',
   },
   {
     emoji: '🌔',
-    name: '',
+    name: 'Lua Crescente Convexa',
   },
   {
     emoji: '🌕',
-    name: '',
+    name: 'Lua Cheia',
   },
   {
     emoji: '🌖',
-    name: '',
+    name: 'Lua Minguante Convexa',
   },
   {
     emoji: '🌗',
-    name: '',
+    name: 'Lua Quarto Minguante',
   },
   {
     emoji: '🌘',
-    name: '',
+    name: 'Lua Minguante Côncava',
   },
   {
     emoji: '🌙',
-    name: '',
+    name: 'Lua Crescente',
   },
   {
     emoji: '🌚',
-    name: '',
+    name: 'Rosto Da Lua Nova',
   },
   {
     emoji: '🌛',
-    name: '',
+    name: 'Rosto Da Lua De Quarto Crescente',
   },
   {
     emoji: '🌜',
-    name: '',
+    name: 'Rosto Da Lua De Quarto Minguante',
   },
   {
     emoji: '🌡️',
-    name: '',
+    name: 'Termômetro',
   },
   {
     emoji: '☀️',
-    name: '',
+    name: 'Sol',
   },
   {
     emoji: '🌝',
-    name: '',
+    name: 'Rosto Da Lua Cheia',
   },
   {
     emoji: '🌞',
-    name: '',
+    name: 'Rosto Do Sol',
   },
   {
     emoji: '🪐',
-    name: '',
+    name: 'Planeta Com Anéis',
   },
   {
     emoji: '⭐',
-    name: '',
+    name: 'Estrela Branca Média',
   },
   {
     emoji: '🌟',
-    name: '',
+    name: 'Estrela Brilhante',
   },
   {
     emoji: '🌠',
-    name: '',
+    name: 'Estrela Cadente',
   },
   {
     emoji: '🌌',
-    name: '',
+    name: 'Via Láctea',
   },
   {
     emoji: '☁️',
-    name: '',
+    name: 'Nuvem',
   },
   {
     emoji: '⛅',
-    name: '',
+    name: 'Sol Por Trás Das Nuvens',
   },
   {
     emoji: '⛈️',
-    name: '',
+    name: 'Chuva Com Trovão',
   },
   {
     emoji: '🌤️',
-    name: '',
+    name: 'Sol Com Nuvens',
   },
   {
     emoji: '🌥️',
-    name: '',
+    name: 'Nublado',
   },
   {
     emoji: '🌦️',
-    name: '',
+    name: 'Sol Com Chuva',
   },
   {
     emoji: '🌧️',
-    name: '',
+    name: 'Nuvem Com Chuva',
   },
   {
     emoji: '🌨️',
-    name: '',
+    name: 'Nuvem Com Neve',
   },
   {
     emoji: '🌩️',
-    name: '',
+    name: 'Nuvem Com Trovão',
   },
   {
     emoji: '🌪️',
-    name: '',
+    name: 'Tornado',
   },
   {
     emoji: '🌫️',
-    name: '',
+    name: 'Nevoeiro',
   },
   {
     emoji: '🌬️',
-    name: '',
+    name: 'Rosto De Vento',
   },
   {
     emoji: '🌀',
-    name: '',
+    name: 'Ciclone',
   },
   {
     emoji: '🌈',
-    name: '',
+    name: 'Arco-Íris',
   },
   {
     emoji: '🌂',
-    name: '',
+    name: 'Guarda-Chuva Fechado',
   },
   {
     emoji: '☂️',
-    name: '',
+    name: 'Guarda-Chuva',
   },
   {
     emoji: '☔',
-    name: '',
+    name: 'Sombrinha Na Chuva',
   },
   {
     emoji: '⛱️',
-    name: '',
+    name: 'Guarda-Sol',
   },
   {
     emoji: '⚡',
-    name: '',
+    name: 'Alta Tensão',
   },
   {
     emoji: '❄️',
-    name: '',
+    name: 'Floco De Neve',
   },
   {
     emoji: '☃️',
-    name: '',
+    name: 'Boneco De Neve',
   },
   {
     emoji: '⛄',
-    name: '',
+    name: 'Boneco De Neve Sem Neve',
   },
   {
     emoji: '☄️',
-    name: '',
+    name: 'Cometa',
   },
   {
     emoji: '🔥',
-    name: '',
+    name: 'Fogo',
   },
   {
     emoji: '💧',
-    name: '',
+    name: 'Gota',
   },
   {
     emoji: '🌊',
-    name: '',
+    name: 'Onda',
   },
   {
     emoji: '🎃',
-    name: '',
+    name: 'Abóbora De Halloween',
   },
   {
     emoji: '🎄',
-    name: '',
+    name: 'Árvore De Natal',
   },
   {
     emoji: '🎆',
-    name: '',
+    name: 'Fogos De Artifício',
   },
   {
     emoji: '🎇',
-    name: '',
+    name: 'Vela Estrela',
   },
   {
     emoji: '🧨',
-    name: '',
+    name: 'Bombinha',
   },
   {
     emoji: '✨',
-    name: '',
+    name: 'Brilhos',
   },
   {
     emoji: '🎈',
-    name: '',
+    name: 'Balão',
   },
   {
     emoji: '🎉',
-    name: '',
+    name: 'Cone De Festa',
   },
   {
     emoji: '🎊',
-    name: '',
+    name: 'Confete',
   },
   {
     emoji: '🎋',
