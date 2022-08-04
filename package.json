@@ -34,7 +34,6 @@
     "react-hook-form": "^7.27.1",
     "react-icons": "^4.3.1",
     "react-virtual": "^2.10.4",
-    "twemoji": "^14.0.2",
     "twemoji-parser": "^14.0.0",
     "yup": "^0.32.11"
   },

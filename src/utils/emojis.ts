@@ -632,7 +632,7 @@ export const emojis = [
     name: 'Balão De Diálogo',
   },
   {
-    emoji: '👁️‍🗨️',
+    emoji: '👁‍🗨',
     name: 'Olho No Balão De Diálogo',
   },
   {
@@ -4577,7 +4577,7 @@ export const emojis = [
   },
   {
     emoji: '⛑️',
-    name: 'Capacacete De Socorrista',
+    name: 'Capacete De Socorrista',
   },
   {
     emoji: '📿',
@@ -5852,7 +5852,7 @@ export const emojis = [
     name: 'Sinal De Igual A Negrito',
   },
   {
-    emoji: '♾️',
+    emoji: '♾',
     name: 'Infinito',
   },
   {
