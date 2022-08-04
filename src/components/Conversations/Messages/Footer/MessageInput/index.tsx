@@ -1,6 +1,7 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import Graphemer from 'graphemer';
+import { EmojiEntity } from 'twemoji-parser';
 
 type SavedSelection =
   | {
@@ -228,19 +229,34 @@ export function MessageInput() {
     if (isEmoji) {
       const { parse: twemojiParse } = await import('twemoji-parser');
 
-      const twemojiObj = {
+      const twemojiObj:
+        | Record<
+            string,
+            {
+              text: string;
+              url: string;
+            }
+          >
+        | {
+            default: () => EmojiEntity | EmojiEntity[];
+          } = {
         '👁️‍🗨️': {
           text: '👁️‍🗨️',
           url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
         },
         '♾️': {
-          url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
           text: '♾️',
+          url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
         },
-        default: twemojiParse(newValue),
+        default: () => {
+          const twemoji = twemojiParse(newValue);
+          const thereAreMoreEmojis = twemoji.length > 1;
+
+          return thereAreMoreEmojis ? twemoji : twemoji[0];
+        },
       };
 
-      const twemojis = twemojiObj[newValue] || twemojiObj.default;
+      const twemojis = twemojiObj[newValue] || twemojiObj.default();
 
       let emojis;
 
