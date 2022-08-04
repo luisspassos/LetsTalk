@@ -4109,3290 +4109,3290 @@ export const emojis = [
   },
   {
     emoji: '🎋',
-    name: '',
+    name: 'Árvore De Tanabata',
   },
   {
     emoji: '🎍',
-    name: '',
+    name: 'Decoração De Pinhos',
   },
   {
     emoji: '🎎',
-    name: '',
+    name: 'Bonecas Japonesas',
   },
   {
     emoji: '🎏',
-    name: '',
+    name: 'Bandeira De Carpas',
   },
   {
     emoji: '🎐',
-    name: '',
+    name: 'Carrilhão De Vento',
   },
   {
     emoji: '🎑',
-    name: '',
+    name: 'Contemplação Da Lua',
   },
   {
     emoji: '🧧',
-    name: '',
+    name: 'Envelope Vermelho',
   },
   {
     emoji: '🎀',
-    name: '',
+    name: 'Laço De Fita',
   },
   {
     emoji: '🎁',
-    name: '',
+    name: 'Presente',
   },
   {
     emoji: '🎗️',
-    name: '',
+    name: 'Fita De Lembrete',
   },
   {
     emoji: '🎟️',
-    name: '',
+    name: 'Ingresso De Cinema',
   },
   {
     emoji: '🎫',
-    name: '',
+    name: 'Ingresso',
   },
   {
     emoji: '🎖️',
-    name: '',
+    name: 'Medalha Militar',
   },
   {
     emoji: '🏆',
-    name: '',
+    name: 'Troféu',
   },
   {
     emoji: '🏅',
-    name: '',
+    name: 'Medalha Esportiva',
   },
   {
     emoji: '🥇',
-    name: '',
+    name: 'Medalha De Ouro',
   },
   {
     emoji: '🥈',
-    name: '',
+    name: 'Medalha De Prata',
   },
   {
     emoji: '🥉',
-    name: '',
+    name: 'Medalha De Bronze',
   },
   {
     emoji: '⚽',
-    name: '',
+    name: 'Bola De Futebol',
   },
   {
     emoji: '⚾',
-    name: '',
+    name: 'Bola De Beisebol',
   },
   {
     emoji: '🥎',
-    name: '',
+    name: 'Softbol',
   },
   {
     emoji: '🏀',
-    name: '',
+    name: 'Bola De Basquete',
   },
   {
     emoji: '🏐',
-    name: '',
+    name: 'Bola De Vôlei',
   },
   {
     emoji: '🏈',
-    name: '',
+    name: 'Bola De Futebol Americano',
   },
   {
     emoji: '🏉',
-    name: '',
+    name: 'Bola De Rugby',
   },
   {
     emoji: '🎾',
-    name: '',
+    name: 'Tênis',
   },
   {
     emoji: '🥏',
-    name: '',
+    name: 'Frisbee',
   },
   {
     emoji: '🎳',
-    name: '',
+    name: 'Boliche',
   },
   {
     emoji: '🏏',
-    name: '',
+    name: 'Críquete',
   },
   {
     emoji: '🏑',
-    name: '',
+    name: 'Hóquei De Campo',
   },
   {
     emoji: '🏒',
-    name: '',
+    name: 'Hóquei No Gelo',
   },
   {
     emoji: '🥍',
-    name: '',
+    name: 'Lacrosse',
   },
   {
     emoji: '🏓',
-    name: '',
+    name: 'Pingue-Pongue',
   },
   {
     emoji: '🏸',
-    name: '',
+    name: 'Badminton',
   },
   {
     emoji: '🥊',
-    name: '',
+    name: 'Luva De Boxe',
   },
   {
     emoji: '🥋',
-    name: '',
+    name: 'Quimono De Artes Marciais',
   },
   {
     emoji: '🥅',
-    name: '',
+    name: 'Gol',
   },
   {
     emoji: '⛳',
-    name: '',
+    name: 'Bandeira No Buraco',
   },
   {
     emoji: '⛸️',
-    name: '',
+    name: 'Patins De Gelo',
   },
   {
     emoji: '🎣',
-    name: '',
+    name: 'Pesca',
   },
   {
     emoji: '🤿',
-    name: '',
+    name: 'Máscara De Mergulho',
   },
   {
     emoji: '🎽',
-    name: '',
+    name: 'Camiseta De Corrida',
   },
   {
     emoji: '🎿',
-    name: '',
+    name: 'Esqui',
   },
   {
     emoji: '🛷',
-    name: '',
+    name: 'Trenó',
   },
   {
     emoji: '🥌',
-    name: '',
+    name: 'Pedra De Curling',
   },
   {
     emoji: '🎯',
-    name: '',
+    name: 'No Alvo',
   },
   {
     emoji: '🪀',
-    name: '',
+    name: 'Ioiô',
   },
   {
     emoji: '🪁',
-    name: '',
+    name: 'Pipa',
   },
   {
     emoji: '🎱',
-    name: '',
+    name: 'Bilhar',
   },
   {
     emoji: '🔮',
-    name: '',
+    name: 'Bola De Cristal',
   },
   {
     emoji: '🪄',
-    name: '',
+    name: 'Varinha Mágica',
   },
   {
     emoji: '🧿',
-    name: '',
+    name: 'Olho Grego',
   },
   {
     emoji: '🪬',
-    name: '',
+    name: 'Mão Hamsá',
   },
   {
     emoji: '🎮',
-    name: '',
+    name: 'Videogame',
   },
   {
     emoji: '🕹️',
-    name: '',
+    name: 'Joystick',
   },
   {
     emoji: '🎰',
-    name: '',
+    name: 'Caça-Níquel',
   },
   {
     emoji: '🎲',
-    name: '',
+    name: 'Jogo De Dado',
   },
   {
     emoji: '🧩',
-    name: '',
+    name: 'Quebra-Cabeça',
   },
   {
     emoji: '🧸',
-    name: '',
+    name: 'Ursinho De Pelúcia',
   },
   {
     emoji: '🪅',
-    name: '',
+    name: 'Pinhata',
   },
   {
     emoji: '🪩',
-    name: '',
+    name: 'Bola Espelhada',
   },
   {
     emoji: '🪆',
-    name: '',
+    name: 'boneca Russa',
   },
   {
     emoji: '♠️',
-    name: '',
+    name: 'Naipe De Espadas',
   },
   {
     emoji: '♥️',
-    name: '',
+    name: 'Naipe De Copas',
   },
   {
     emoji: '♦️',
-    name: '',
+    name: 'Naipe De Ouros',
   },
   {
     emoji: '♣️',
-    name: '',
+    name: 'Naipe De Paus',
   },
   {
     emoji: '♟️',
-    name: '',
+    name: 'Peão De Xadrez',
   },
   {
     emoji: '🃏',
-    name: '',
+    name: 'Curinga',
   },
   {
     emoji: '🀄',
-    name: '',
+    name: 'Dragão Vermelho De Mahjong',
   },
   {
     emoji: '🎴',
-    name: '',
+    name: 'Carta De Flores',
   },
   {
     emoji: '🎭',
-    name: '',
+    name: 'Máscara',
   },
   {
     emoji: '🖼️',
-    name: '',
+    name: 'Quadro Emoldurado',
   },
   {
     emoji: '🎨',
-    name: '',
+    name: 'Paleta De Tintas',
   },
   {
     emoji: '🧵',
-    name: '',
+    name: 'Carretel',
   },
   {
     emoji: '🪡',
-    name: '',
+    name: 'Agulha De Costura',
   },
   {
     emoji: '🧶',
-    name: '',
+    name: 'Novelo',
   },
   {
     emoji: '🪢',
-    name: '',
+    name: 'Nó',
   },
   {
     emoji: '👓',
-    name: '',
+    name: 'Óculos',
   },
   {
     emoji: '🕶️',
-    name: '',
+    name: 'Óculos Escuros',
   },
   {
     emoji: '🥽',
-    name: '',
+    name: 'Óculos De Proteção',
   },
   {
     emoji: '🥼',
-    name: '',
+    name: 'Jaleco',
   },
   {
     emoji: '🦺',
-    name: '',
+    name: 'Colete Salva-Vidas',
   },
   {
     emoji: '👔',
-    name: '',
+    name: 'Gravata',
   },
   {
     emoji: '👕',
-    name: '',
+    name: 'Camiseta',
   },
   {
     emoji: '👖',
-    name: '',
+    name: 'Jeans',
   },
   {
     emoji: '🧣',
-    name: '',
+    name: 'Cachecol',
   },
   {
     emoji: '🧤',
-    name: '',
+    name: 'Luvas',
   },
   {
     emoji: '🧥',
-    name: '',
+    name: 'Casaco',
   },
   {
     emoji: '🧦',
-    name: '',
+    name: 'Meias',
   },
   {
     emoji: '👗',
-    name: '',
+    name: ' Vestido',
   },
   {
     emoji: '👘',
-    name: '',
+    name: 'Quimono',
   },
   {
     emoji: '🥻',
-    name: '',
+    name: 'Sari',
   },
   {
     emoji: '🩱',
-    name: '',
+    name: 'Maiô',
   },
   {
     emoji: '🩲',
-    name: '',
+    name: 'Cueca',
   },
   {
     emoji: '🩳',
-    name: '',
+    name: 'Shorts',
   },
   {
     emoji: '👙',
-    name: '',
+    name: 'Biquíni',
   },
   {
     emoji: '👚',
-    name: '',
+    name: 'Roupas Femininas',
   },
   {
     emoji: '👛',
-    name: '',
+    name: 'Bolsinha',
   },
   {
     emoji: '👜',
-    name: '',
+    name: 'Bolsa De Mão',
   },
   {
     emoji: '👝',
-    name: '',
+    name: 'Bolsa Pequena',
   },
   {
     emoji: '🛍️',
-    name: '',
+    name: 'Sacolas De Compras',
   },
   {
     emoji: '🎒',
-    name: '',
+    name: 'Mochila',
   },
   {
     emoji: '🩴',
-    name: '',
+    name: 'Chinelo',
   },
   {
     emoji: '👞',
-    name: '',
+    name: 'Sapato Masculino',
   },
   {
     emoji: '👟',
-    name: '',
+    name: 'Tênis De Corrida',
   },
   {
     emoji: '🥾',
-    name: '',
+    name: 'Bota De Trekking',
   },
   {
     emoji: '🥿',
-    name: '',
+    name: 'Sapatilha',
   },
   {
     emoji: '👠',
-    name: '',
+    name: 'Sapato De Salto Alto',
   },
   {
     emoji: '👡',
-    name: '',
+    name: 'Sandália Feminina',
   },
   {
     emoji: '🩰',
-    name: '',
+    name: 'Sapatilha De Balé',
   },
   {
     emoji: '👢',
-    name: '',
+    name: 'Bota Feminina',
   },
   {
     emoji: '👑',
-    name: '',
+    name: 'Coroa',
   },
   {
     emoji: '👒',
-    name: '',
+    name: 'Chapéu Feminino',
   },
   {
     emoji: '🎩',
-    name: '',
+    name: 'Cartola',
   },
   {
     emoji: '🎓',
-    name: '',
+    name: 'Chapéu De Formatura',
   },
   {
     emoji: '🧢',
-    name: '',
+    name: 'Boné',
   },
   {
     emoji: '🪖',
-    name: '',
+    name: 'Capacete Militar',
   },
   {
     emoji: '⛑️',
-    name: '',
+    name: 'Capacacete De Socorrista',
   },
   {
     emoji: '📿',
-    name: '',
+    name: 'Rosário De Oração',
   },
   {
     emoji: '💄',
-    name: '',
+    name: 'Batom',
   },
   {
     emoji: '💍',
-    name: '',
+    name: 'Anel',
   },
   {
     emoji: '💎',
-    name: '',
+    name: 'Pedra Preciosa',
   },
   {
     emoji: '🔇',
-    name: '',
+    name: 'Alto-Falante Silenciado',
   },
   {
     emoji: '🔈',
-    name: '',
+    name: 'Alto-Falante Com Volume Baixo',
   },
   {
     emoji: '🔉',
-    name: '',
+    name: 'Alto-Falante Com Volume Médio',
   },
   {
     emoji: '🔊',
-    name: '',
+    name: 'Alto-Falante Com Volume Alto',
   },
   {
     emoji: '📢',
-    name: '',
+    name: 'Buzina',
   },
   {
     emoji: '📣',
-    name: '',
+    name: 'Megafone',
   },
   {
     emoji: '📯',
-    name: '',
+    name: 'Corneta Postal',
   },
   {
     emoji: '🔔',
-    name: '',
+    name: 'Sino',
   },
   {
     emoji: '🔕',
-    name: '',
+    name: 'Sino Silenciado',
   },
   {
     emoji: '🎼',
-    name: '',
+    name: 'Partitura Musical',
   },
   {
     emoji: '🎵',
-    name: '',
+    name: 'Nota Musical',
   },
   {
     emoji: '🎶',
-    name: '',
+    name: 'Notas Musicais',
   },
   {
     emoji: '🎙️',
-    name: '',
+    name: 'Microfone De Estúdio',
   },
   {
     emoji: '🎚️',
-    name: '',
+    name: 'Controle De Volume',
   },
   {
     emoji: '🎛️',
-    name: '',
+    name: 'Botões Giratórios',
   },
   {
     emoji: '🎤',
-    name: '',
+    name: 'Microfone',
   },
   {
     emoji: '🎧',
-    name: '',
+    name: 'Fones De Ouvido',
   },
   {
     emoji: '📻',
-    name: '',
+    name: 'Rádio',
   },
   {
     emoji: '🎷',
-    name: '',
+    name: 'Saxofone',
   },
   {
     emoji: '🪗',
-    name: '',
+    name: 'Acordeão',
   },
   {
     emoji: '🎸',
-    name: '',
+    name: 'Guitarra',
   },
   {
     emoji: '🎹',
-    name: '',
+    name: 'Teclado Musical',
   },
   {
     emoji: '🎺',
-    name: '',
+    name: 'Trompete',
   },
   {
     emoji: '🎻',
-    name: '',
+    name: 'Violino',
   },
   {
     emoji: '🪕',
-    name: '',
+    name: 'Banjo',
   },
   {
     emoji: '🥁',
-    name: '',
+    name: 'Tambor',
   },
   {
     emoji: '🪘',
-    name: '',
+    name: 'Tambor Comprido',
   },
   {
     emoji: '📱',
-    name: '',
+    name: 'Telefone Celular',
   },
   {
     emoji: '📲',
-    name: '',
+    name: 'Telefone Celular Com Seta',
   },
   {
     emoji: '☎️',
-    name: '',
+    name: 'Telefone No Gancho',
   },
   {
     emoji: '📞',
-    name: '',
+    name: 'Telefone',
   },
   {
     emoji: '📟',
-    name: '',
+    name: 'Pager',
   },
   {
     emoji: '📠',
-    name: '',
+    name: 'Fax',
   },
   {
     emoji: '🔋',
-    name: '',
+    name: 'Pilha',
   },
   {
     emoji: '🪫',
-    name: '',
+    name: 'Bateria Fraca',
   },
   {
     emoji: '🔌',
-    name: '',
+    name: 'Tomada Elétrica',
   },
   {
     emoji: '💻',
-    name: '',
+    name: 'Laptop',
   },
   {
     emoji: '🖥️',
-    name: '',
+    name: 'Computador De Mesa',
   },
   {
     emoji: '🖨️',
-    name: '',
+    name: 'Impressora',
   },
   {
     emoji: '⌨️',
-    name: '',
+    name: 'Teclado',
   },
   {
     emoji: '🖱️',
-    name: '',
+    name: 'Mouse',
   },
   {
     emoji: '🖲️',
-    name: '',
+    name: 'Trackball',
   },
   {
     emoji: '💽',
-    name: '',
+    name: 'Minidisc',
   },
   {
     emoji: '💾',
-    name: '',
+    name: 'Disquete',
   },
   {
     emoji: '💿',
-    name: '',
+    name: 'Cd',
   },
   {
     emoji: '📀',
-    name: '',
+    name: 'Dvd',
   },
   {
     emoji: '🧮',
-    name: '',
+    name: 'Ábaco',
   },
   {
     emoji: '🎥',
-    name: '',
+    name: 'Câmera De Cinema',
   },
   {
     emoji: '🎞️',
-    name: '',
+    name: 'Rolo De Filmes',
   },
   {
     emoji: '📽️',
-    name: '',
+    name: 'Projetor De Filmes',
   },
   {
     emoji: '🎬',
-    name: '',
+    name: 'Claquete',
   },
   {
     emoji: '📺',
-    name: '',
+    name: 'Televisão',
   },
   {
     emoji: '📷',
-    name: '',
+    name: 'Câmera',
   },
   {
     emoji: '📸',
-    name: '',
+    name: 'Câmera Com Flash',
   },
   {
     emoji: '📹',
-    name: '',
+    name: 'Câmera De Vídeo',
   },
   {
     emoji: '📼',
-    name: '',
+    name: 'Videocassete',
   },
   {
     emoji: '🔍',
-    name: '',
+    name: 'Lupa Para A Esquerda',
   },
   {
     emoji: '🔎',
-    name: '',
+    name: 'Lupa Para A Direita',
   },
   {
     emoji: '🕯️',
-    name: '',
+    name: 'Vela',
   },
   {
     emoji: '💡',
-    name: '',
+    name: 'Lâmpada',
   },
   {
     emoji: '🔦',
-    name: '',
+    name: 'Lanterna',
   },
   {
     emoji: '🏮',
-    name: '',
+    name: 'Lanterna Vermelha De Papel',
   },
   {
     emoji: '🪔',
-    name: '',
+    name: 'Lâmpada De Óleo',
   },
   {
     emoji: '📔',
-    name: '',
+    name: 'Caderno Decorado',
   },
   {
     emoji: '📕',
-    name: '',
+    name: 'Livro Fechado',
   },
   {
     emoji: '📖',
-    name: '',
+    name: 'Livro Aberto',
   },
   {
     emoji: '📗',
-    name: '',
+    name: 'Livro Verde',
   },
   {
     emoji: '📘',
-    name: '',
+    name: 'Livro Azul',
   },
   {
     emoji: '📙',
-    name: '',
+    name: 'Livro Laranja',
   },
   {
     emoji: '📚',
-    name: '',
+    name: 'Livros',
   },
   {
     emoji: '📓',
-    name: '',
+    name: 'Caderno',
   },
   {
     emoji: '📒',
-    name: '',
+    name: 'Livro Contábil',
   },
   {
     emoji: '📃',
-    name: '',
+    name: 'Página Dobrada',
   },
   {
     emoji: '📜',
-    name: '',
+    name: 'Pergaminho',
   },
   {
     emoji: '📄',
-    name: '',
+    name: 'Página Voltada Para Cima',
   },
   {
     emoji: '📰',
-    name: '',
+    name: 'Jornal',
   },
   {
     emoji: '🗞️',
-    name: '',
+    name: 'Jornal Enrolado',
   },
   {
     emoji: '📑',
-    name: '',
+    name: 'Marcadores De Página',
   },
   {
     emoji: '🔖',
-    name: '',
+    name: 'Marcador De Página',
   },
   {
     emoji: '🏷️',
-    name: '',
+    name: 'Etiqueta',
   },
   {
     emoji: '💰',
-    name: '',
+    name: 'Saco De Dinheiro',
   },
   {
     emoji: '🪙',
-    name: '',
+    name: 'Moeda',
   },
   {
     emoji: '💴',
-    name: '',
+    name: 'Nota De Iene',
   },
   {
     emoji: '💵',
-    name: '',
+    name: 'Nota De Dólar',
   },
   {
     emoji: '💶',
-    name: '',
+    name: 'Nota De Euro',
   },
   {
     emoji: '💷',
-    name: '',
+    name: 'Nota De Libra',
   },
   {
     emoji: '💸',
-    name: '',
+    name: 'Dinheiro Voando',
   },
   {
     emoji: '💳',
-    name: '',
+    name: 'Cartão De Crédito',
   },
   {
     emoji: '🧾',
-    name: '',
+    name: 'Recibo',
   },
   {
     emoji: '💹',
-    name: '',
+    name: 'Gráfico Subindo Com Iene',
   },
   {
     emoji: '✉️',
-    name: '',
+    name: 'Envelope',
   },
   {
     emoji: '📧',
-    name: '',
+    name: 'E-Mail',
   },
   {
     emoji: '📨',
-    name: '',
+    name: 'Envelope Chegando',
   },
   {
     emoji: '📩',
-    name: '',
+    name: 'Envelope Com Seta',
   },
   {
     emoji: '📤',
-    name: '',
+    name: 'Bandeja De Saída',
   },
   {
     emoji: '📥',
-    name: '',
+    name: 'Bandeja De Entrada',
   },
   {
     emoji: '📦',
-    name: '',
+    name: 'Pacote',
   },
   {
     emoji: '📫',
-    name: '',
+    name: 'Caixa De Correio Fechada Com Bandeira Levantada',
   },
   {
     emoji: '📪',
-    name: '',
+    name: 'Caixa De Correio Fechada Com Bandeira Abaixada',
   },
   {
     emoji: '📬',
-    name: '',
+    name: 'Caixa De Correio Aberta Com Bandeira Levantada',
   },
   {
     emoji: '📭',
-    name: '',
+    name: 'Caixa De Correio Aberta Com Bandeira Abaixada',
   },
   {
     emoji: '📮',
-    name: '',
+    name: 'Caixa De Correio',
   },
   {
     emoji: '🗳️',
-    name: '',
+    name: 'Urna Eleitoral Com Cédula',
   },
   {
     emoji: '✏️',
-    name: '',
+    name: 'Lápis',
   },
   {
     emoji: '✒️',
-    name: '',
+    name: 'Ponta De Caneta Tinteiro',
   },
   {
     emoji: '🖋️',
-    name: '',
+    name: 'Caneta Tinteiro',
   },
   {
     emoji: '🖊️',
-    name: '',
+    name: 'Caneta',
   },
   {
     emoji: '🖌️',
-    name: '',
+    name: 'Pincel',
   },
   {
     emoji: '🖍️',
-    name: '',
+    name: 'Giz De Cera',
   },
   {
     emoji: '📝',
-    name: '',
+    name: 'Memorando',
   },
   {
     emoji: '💼',
-    name: '',
+    name: 'Maleta',
   },
   {
     emoji: '📁',
-    name: '',
+    name: 'Pasta De Arquivos',
   },
   {
     emoji: '📂',
-    name: '',
+    name: 'Pasta De Arquivos Aberta',
   },
   {
     emoji: '🗂️',
-    name: '',
+    name: 'Divisores De Pastas',
   },
   {
     emoji: '📅',
-    name: '',
+    name: 'Calendário',
   },
   {
     emoji: '📆',
-    name: '',
+    name: 'Calendário Com Folhas Destacáveis',
   },
   {
     emoji: '🗒️',
-    name: '',
+    name: 'Bloco Espiral',
   },
   {
     emoji: '🗓️',
-    name: '',
+    name: 'Calendário Espiral',
   },
   {
     emoji: '📇',
-    name: '',
+    name: 'Índice De Cartões',
   },
   {
     emoji: '📈',
-    name: '',
+    name: 'Gráfico Subindo',
   },
   {
     emoji: '📉',
-    name: '',
+    name: 'Gráfico Caindo',
   },
   {
     emoji: '📊',
-    name: '',
+    name: 'Gráfico De Barras',
   },
   {
     emoji: '📋',
-    name: '',
+    name: 'Prancheta',
   },
   {
     emoji: '📌',
-    name: '',
+    name: 'Tacha',
   },
   {
     emoji: '📍',
-    name: '',
+    name: 'Tacha Redond',
   },
   {
     emoji: '📎',
-    name: '',
+    name: 'Clipe De Papel',
   },
   {
     emoji: '🖇️',
-    name: '',
+    name: 'Clipes De Papel Conectados',
   },
   {
     emoji: '📏',
-    name: '',
+    name: 'Régua Reta',
   },
   {
     emoji: '📐',
-    name: '',
+    name: 'Régua Triangular',
   },
   {
     emoji: '✂️',
-    name: '',
+    name: 'Tesoura',
   },
   {
     emoji: '🗃️',
-    name: '',
+    name: 'Caixa De Arquivos',
   },
   {
     emoji: '🗄️',
-    name: '',
+    name: 'Gavetas De Escritório',
   },
   {
     emoji: '🗑️',
-    name: '',
+    name: 'Lixeira',
   },
   {
     emoji: '🔒',
-    name: '',
+    name: 'Cadeado',
   },
   {
     emoji: '🔓',
-    name: '',
+    name: 'Cadeado Aberto',
   },
   {
     emoji: '🔏',
-    name: '',
+    name: 'Cadeado Com Caneta',
   },
   {
     emoji: '🔐',
-    name: '',
+    name: 'Cadeado Fechado Com Chave',
   },
   {
     emoji: '🔑',
-    name: '',
+    name: 'Chave',
   },
   {
     emoji: '🗝️',
-    name: '',
+    name: 'Chave Antiga',
   },
   {
     emoji: '🔨',
-    name: '',
+    name: 'Martelo',
   },
   {
     emoji: '🪓',
-    name: '',
+    name: 'Machado',
   },
   {
     emoji: '⛏️',
-    name: '',
+    name: 'Picareta',
   },
   {
     emoji: '⚒️',
-    name: '',
+    name: 'Martelo E Picareta',
   },
   {
     emoji: '🛠️',
-    name: '',
+    name: 'Martelo E Chave-Inglesa',
   },
   {
     emoji: '🗡️',
-    name: '',
+    name: 'Adaga',
   },
   {
     emoji: '⚔️',
-    name: '',
+    name: 'Espadas Cruzadas',
   },
   {
     emoji: '🔫',
-    name: '',
+    name: 'Pistola D’Água',
   },
   {
     emoji: '🪃',
-    name: '',
+    name: 'Bumerangue',
   },
   {
     emoji: '🏹',
-    name: '',
+    name: 'Arco E Flecha',
   },
   {
     emoji: '🛡️',
-    name: '',
+    name: 'Escudo',
   },
   {
     emoji: '🪚',
-    name: '',
+    name: 'Serrote',
   },
   {
     emoji: '🔧',
-    name: '',
+    name: 'Chave Inglesa',
   },
   {
     emoji: '🪛',
-    name: '',
+    name: 'Chave De Fenda',
   },
   {
     emoji: '🔩',
-    name: '',
+    name: 'Porca E Parafuso',
   },
   {
     emoji: '⚙️',
-    name: '',
+    name: 'Engrenagem',
   },
   {
     emoji: '🗜️',
-    name: '',
+    name: 'Braçadeira',
   },
   {
     emoji: '⚖️',
-    name: '',
+    name: 'Balança',
   },
   {
     emoji: '🦯',
-    name: '',
+    name: 'Bengala Para Cegos',
   },
   {
     emoji: '🔗',
-    name: '',
+    name: 'Link',
   },
   {
     emoji: '⛓️',
-    name: '',
+    name: 'Correntes',
   },
   {
     emoji: '🪝',
-    name: '',
+    name: 'Gancho',
   },
   {
     emoji: '🧰',
-    name: '',
+    name: 'Caixa De Ferramentas',
   },
   {
     emoji: '🧲',
-    name: '',
+    name: 'Ímã',
   },
   {
     emoji: '🪜',
-    name: '',
+    name: 'Escada',
   },
   {
     emoji: '⚗️',
-    name: '',
+    name: 'Alambique',
   },
   {
     emoji: '🧪',
-    name: '',
+    name: 'Tubo De Ensaio',
   },
   {
     emoji: '🧫',
-    name: '',
+    name: 'Placa De Petri',
   },
   {
     emoji: '🧬',
-    name: '',
+    name: 'Dna',
   },
   {
     emoji: '🔬',
-    name: '',
+    name: 'Microscópio',
   },
   {
     emoji: '🔭',
-    name: '',
+    name: 'Telescópio',
   },
   {
     emoji: '📡',
-    name: '',
+    name: 'Antena Parabólica',
   },
   {
     emoji: '💉',
-    name: '',
+    name: 'Seringa',
   },
   {
     emoji: '🩸',
-    name: '',
+    name: 'Gota De Sangue',
   },
   {
     emoji: '💊',
-    name: '',
+    name: 'Comprimido',
   },
   {
     emoji: '🩹',
-    name: '',
+    name: 'Atadura Adesiva',
   },
   {
     emoji: '🩼',
-    name: '',
+    name: 'Muleta',
   },
   {
     emoji: '🩺',
-    name: '',
+    name: 'Estetoscópio',
   },
   {
     emoji: '🩻',
-    name: '',
+    name: 'Raio-X',
   },
   {
     emoji: '🚪',
-    name: '',
+    name: 'Porta',
   },
   {
     emoji: '🛗',
-    name: '',
+    name: 'Elevador',
   },
   {
     emoji: '🪞',
-    name: '',
+    name: 'Espelho',
   },
   {
     emoji: '🪟',
-    name: '',
+    name: 'Janela',
   },
   {
     emoji: '🛏️',
-    name: '',
+    name: 'Cama',
   },
   {
     emoji: '🛋️',
-    name: '',
+    name: 'Sofá E Luminária',
   },
   {
     emoji: '🪑',
-    name: '',
+    name: 'Cadeira',
   },
   {
     emoji: '🚽',
-    name: '',
+    name: 'Vaso Sanitário',
   },
   {
     emoji: '🪠',
-    name: '',
+    name: 'Desentupidor',
   },
   {
     emoji: '🚿',
-    name: '',
+    name: 'Chuveiro',
   },
   {
     emoji: '🛁',
-    name: '',
+    name: 'Banheira',
   },
   {
     emoji: '🪤',
-    name: '',
+    name: 'Ratoeira',
   },
   {
     emoji: '🪒',
-    name: '',
+    name: 'Lâmina',
   },
   {
     emoji: '🧴',
-    name: '',
+    name: 'Frasco De Loção',
   },
   {
     emoji: '🧷',
-    name: '',
+    name: 'Alfinete De Segurança',
   },
   {
     emoji: '🧹',
-    name: '',
+    name: 'Vassoura',
   },
   {
     emoji: '🧺',
-    name: '',
+    name: 'Cesta',
   },
   {
     emoji: '🧻',
-    name: '',
+    name: 'Rolo De Papel',
   },
   {
     emoji: '🪣',
-    name: '',
+    name: 'Balde',
   },
   {
     emoji: '🧼',
-    name: '',
+    name: 'Sabonete',
   },
   {
     emoji: '🫧',
-    name: '',
+    name: 'Bolhas',
   },
   {
     emoji: '🪥',
-    name: '',
+    name: 'Escova De Dentes',
   },
   {
     emoji: '🧽',
-    name: '',
+    name: 'Esponja',
   },
   {
     emoji: '🧯',
-    name: '',
+    name: 'Extintor De Incêndio',
   },
   {
     emoji: '🛒',
-    name: '',
+    name: 'Carrinho De Compras',
   },
   {
     emoji: '🚬',
-    name: '',
+    name: 'Cigarro',
   },
   {
     emoji: '⚰️',
-    name: '',
+    name: 'Caixão',
   },
   {
     emoji: '🪦',
-    name: '',
+    name: 'Lápide',
   },
   {
     emoji: '⚱️',
-    name: '',
+    name: 'Urna Funerária',
   },
   {
     emoji: '🗿',
-    name: '',
+    name: 'Moai',
   },
   {
     emoji: '🪧',
-    name: '',
+    name: 'Placa',
   },
   {
     emoji: '🪪',
-    name: '',
+    name: 'Cartão De Identificação',
   },
   {
     emoji: '🏧',
-    name: '',
+    name: 'Símbolo De Caixa Automático',
   },
   {
     emoji: '🚮',
-    name: '',
+    name: 'Símbolo De Lixeira',
   },
   {
     emoji: '🚰',
-    name: '',
+    name: 'Água Potável',
   },
   {
     emoji: '♿',
-    name: '',
+    name: 'Símbolo De Cadeira De Rodas',
   },
   {
     emoji: '🚹',
-    name: '',
+    name: 'Banheiro Masculino',
   },
   {
     emoji: '🚺',
-    name: '',
+    name: 'Banheiro Feminino',
   },
   {
     emoji: '🚻',
-    name: '',
+    name: 'Banheiro',
   },
   {
     emoji: '🚼',
-    name: '',
+    name: 'Símbolo De Bebê',
   },
   {
     emoji: '🚾',
-    name: '',
+    name: 'Wc',
   },
   {
     emoji: '🛂',
-    name: '',
+    name: 'Controle De Passaportes',
   },
   {
     emoji: '🛃',
-    name: '',
+    name: 'Alfândega',
   },
   {
     emoji: '🛄',
-    name: '',
+    name: 'Restituição De Bagagem',
   },
   {
     emoji: '🛅',
-    name: '',
+    name: 'Depósito De Bagagem',
   },
   {
     emoji: '⚠️',
-    name: '',
+    name: 'Aviso',
   },
   {
     emoji: '🚸',
-    name: '',
+    name: 'Crianças Atravessando',
   },
   {
     emoji: '⛔',
-    name: '',
+    name: 'Entrada Proibida',
   },
   {
     emoji: '🚫',
-    name: '',
+    name: 'Proibido',
   },
   {
     emoji: '🚳',
-    name: '',
+    name: 'Proibido Andar De Bicicleta',
   },
   {
     emoji: '🚭',
-    name: '',
+    name: 'Proibido Fumar',
   },
   {
     emoji: '🚯',
-    name: '',
+    name: 'Proibido Jogar Lixo No Chão',
   },
   {
     emoji: '🚱',
-    name: '',
+    name: 'Água Não Potável',
   },
   {
     emoji: '🚷',
-    name: '',
+    name: 'Proibida A Passagem De Pedestres',
   },
   {
     emoji: '📵',
-    name: '',
+    name: 'Proibido O Uso De Telefone Celular',
   },
   {
     emoji: '🔞',
-    name: '',
+    name: 'Proibido Para Menores De 18 Anos',
   },
   {
     emoji: '☢️',
-    name: '',
+    name: 'Radioativo',
   },
   {
     emoji: '☣️',
-    name: '',
+    name: 'Risco Biológico',
   },
   {
     emoji: '⬆️',
-    name: '',
+    name: 'Seta Para Cima',
   },
   {
     emoji: '↗️',
-    name: '',
+    name: 'Seta Para Cima E Para A Direita',
   },
   {
     emoji: '➡️',
-    name: '',
+    name: 'Seta Para A Direita',
   },
   {
     emoji: '↘️',
-    name: '',
+    name: 'Seta Para Baixo E Para A Direita',
   },
   {
     emoji: '⬇️',
-    name: '',
+    name: 'Seta Para Baixo',
   },
   {
     emoji: '↙️',
-    name: '',
+    name: 'Seta Para Baixo E Para A Esquerda',
   },
   {
     emoji: '⬅️',
-    name: '',
+    name: 'Seta Para A Esquerda',
   },
   {
     emoji: '↖️',
-    name: '',
+    name: 'Seta Para Cima E Para A Esquerda',
   },
   {
     emoji: '↕️',
-    name: '',
+    name: 'Seta Para Cima E Para Baixo',
   },
   {
     emoji: '↔️',
-    name: '',
+    name: 'Seta Para Esquerda E Direita',
   },
   {
     emoji: '↩️',
-    name: '',
+    name: 'Seta Curva Da Direita Para A Esquerda',
   },
   {
     emoji: '↪️',
-    name: '',
+    name: 'Seta Curva Da Esquerda Para A Direita',
   },
   {
     emoji: '⤴️',
-    name: '',
+    name: 'Seta Para A Direita Curvada Para Cima',
   },
   {
     emoji: '⤵️',
-    name: '',
+    name: 'Seta Para A Direita Curvada Para Baixo',
   },
   {
     emoji: '🔃',
-    name: '',
+    name: 'Setas Verticais No Sentido Horário',
   },
   {
     emoji: '🔄',
-    name: '',
+    name: 'Botão De Setas Em Sentido Anti-Horário',
   },
   {
     emoji: '🔙',
-    name: '',
+    name: 'Seta "Back"',
   },
   {
     emoji: '🔚',
-    name: '',
+    name: 'Seta "End"',
   },
   {
     emoji: '🔛',
-    name: '',
+    name: 'Seta "On!"',
   },
   {
     emoji: '🔜',
-    name: '',
+    name: 'Seta "Soon"',
   },
   {
     emoji: '🔝',
-    name: '',
+    name: 'Seta "Top"',
   },
   {
     emoji: '🛐',
-    name: '',
+    name: 'Local De Culto',
   },
   {
     emoji: '⚛️',
-    name: '',
+    name: 'Símbolo De Átomo',
   },
   {
     emoji: '🕉️',
-    name: '',
+    name: 'Om',
   },
   {
     emoji: '✡️',
-    name: '',
+    name: 'Estrela De Davi',
   },
   {
     emoji: '☸️',
-    name: '',
+    name: 'Roda Do Dharma',
   },
   {
     emoji: '☯️',
-    name: '',
+    name: 'Yin Yang',
   },
   {
     emoji: '✝️',
-    name: '',
+    name: 'Cruz Latina',
   },
   {
     emoji: '☦️',
-    name: '',
+    name: 'Cruz Ortodoxa',
   },
   {
     emoji: '☪️',
-    name: '',
+    name: 'Estrela E Lua Crescente',
   },
   {
     emoji: '☮️',
-    name: '',
+    name: 'Símbolo Da Paz',
   },
   {
     emoji: '🕎',
-    name: '',
+    name: 'Menorá',
   },
   {
     emoji: '🔯',
-    name: '',
+    name: 'Estrela De Seis Pontas',
   },
   {
     emoji: '♈',
-    name: '',
+    name: 'Signo De Áries',
   },
   {
     emoji: '♉',
-    name: '',
+    name: 'Signo De Touro',
   },
   {
     emoji: '♊',
-    name: '',
+    name: 'Signo De Gêmeos',
   },
   {
     emoji: '♋',
-    name: '',
+    name: 'Signo De Câncer',
   },
   {
     emoji: '♌',
-    name: '',
+    name: 'Signo De Leão',
   },
   {
     emoji: '♍',
-    name: '',
+    name: 'Signo De Virgem',
   },
   {
     emoji: '♎',
-    name: '',
+    name: 'Signo De Libra',
   },
   {
     emoji: '♏',
-    name: '',
+    name: 'Signo De Escorpião',
   },
   {
     emoji: '♐',
-    name: '',
+    name: 'Signo De Sagitário',
   },
   {
     emoji: '♑',
-    name: '',
+    name: 'Signo De Capricórnio',
   },
   {
     emoji: '♒',
-    name: '',
+    name: 'Signo De Aquário',
   },
   {
     emoji: '♓',
-    name: '',
+    name: 'Signo De Peixes',
   },
   {
     emoji: '⛎',
-    name: '',
+    name: 'Signo De Ofiúco',
   },
   {
     emoji: '🔀',
-    name: '',
+    name: 'Botão De Músicas Aleatórias',
   },
   {
     emoji: '🔁',
-    name: '',
+    name: 'Botão De Repetir',
   },
   {
     emoji: '🔂',
-    name: '',
+    name: 'Botão De Repetir Uma Única Faixa',
   },
   {
     emoji: '▶️',
-    name: '',
+    name: 'Botão Reproduzir',
   },
   {
     emoji: '⏩',
-    name: '',
+    name: 'Botão Avançar',
   },
   {
     emoji: '⏭️',
-    name: '',
+    name: 'Botão De Próxima Faixa',
   },
   {
     emoji: '⏯️',
-    name: '',
+    name: 'Botão De Reproduzir Ou Pausar',
   },
   {
     emoji: '◀️',
-    name: '',
+    name: 'Botão De Voltar',
   },
   {
     emoji: '⏪',
-    name: '',
+    name: 'Botão De Retroceder',
   },
   {
     emoji: '⏮️',
-    name: '',
+    name: 'Botão De Faixa Anterior',
   },
   {
     emoji: '🔼',
-    name: '',
+    name: 'Botão Apontando Para Cima',
   },
   {
     emoji: '⏫',
-    name: '',
+    name: 'Botão De Avanço Para Cima',
   },
   {
     emoji: '🔽',
-    name: '',
+    name: 'Botão Apontando Para Baixo',
   },
   {
     emoji: '⏬',
-    name: '',
+    name: 'Botão De Avanço Para Baixo',
   },
   {
     emoji: '⏸️',
-    name: '',
+    name: 'Botão Pausar',
   },
   {
     emoji: '⏹️',
-    name: '',
+    name: 'Botão Parar',
   },
   {
     emoji: '⏺️',
-    name: '',
+    name: 'Botão Gravar',
   },
   {
     emoji: '⏏️',
-    name: '',
+    name: 'Botão Ejetar',
   },
   {
     emoji: '🎦',
-    name: '',
+    name: 'Cinema',
   },
   {
     emoji: '🔅',
-    name: '',
+    name: 'Botão De Diminuir Brilho',
   },
   {
     emoji: '🔆',
-    name: '',
+    name: 'Botão De Aumentar Brilho',
   },
   {
     emoji: '📶',
-    name: '',
+    name: 'Barras De Sinal',
   },
   {
     emoji: '📳',
-    name: '',
+    name: 'Modo Vibratório',
   },
   {
     emoji: '📴',
-    name: '',
+    name: 'Telefone Celular Desligado',
   },
   {
     emoji: '♀️',
-    name: '',
+    name: 'Símbolo De Feminino',
   },
   {
     emoji: '♂️',
-    name: '',
+    name: 'Símbolo De Masculino',
   },
   {
     emoji: '⚧️',
-    name: '',
+    name: 'Símbolo Transgênero',
   },
   {
     emoji: '✖️',
-    name: '',
+    name: 'Sinal De Multiplicação',
   },
   {
     emoji: '➕',
-    name: '',
+    name: 'Símbolo De Adição',
   },
   {
     emoji: '➖',
-    name: '',
+    name: 'Símbolo De Subtração',
   },
   {
     emoji: '➗',
-    name: '',
+    name: 'Símbolo De Divisão',
   },
   {
     emoji: '🟰',
-    name: '',
+    name: 'Sinal De Igual A Negrito',
   },
   {
     emoji: '♾️',
-    name: '',
+    name: 'Infinito',
   },
   {
     emoji: '‼️',
-    name: '',
+    name: 'Dupla Exclamação',
   },
   {
     emoji: '⁉️',
-    name: '',
+    name: 'Exclamação Com Interrogação',
   },
   {
     emoji: '❓',
-    name: '',
+    name: 'Ponto De Interrogação Vermelho',
   },
   {
     emoji: '❔',
-    name: '',
+    name: 'Ponto De Interrogação Branco',
   },
   {
     emoji: '❕',
-    name: '',
+    name: 'Ponto De Exclamação Branco',
   },
   {
     emoji: '❗',
-    name: '',
+    name: 'Ponto De Exclamação Vermelho',
   },
   {
     emoji: '〰️',
-    name: '',
+    name: 'Travessão Ondulado',
   },
   {
     emoji: '💱',
-    name: '',
+    name: 'Câmbio De Moeda',
   },
   {
     emoji: '💲',
-    name: '',
+    name: 'Cifrão',
   },
   {
     emoji: '⚕️',
-    name: '',
+    name: 'Símbolo Da Medicina',
   },
   {
     emoji: '♻️',
-    name: '',
+    name: 'Símbolo De Reciclagem',
   },
   {
     emoji: '⚜️',
-    name: '',
+    name: 'Flor-De-Lis',
   },
   {
     emoji: '🔱',
-    name: '',
+    name: 'Emblema De Tridente',
   },
   {
     emoji: '📛',
-    name: '',
+    name: 'Crachá',
   },
   {
     emoji: '🔰',
-    name: '',
+    name: 'Símbolo Japonês De Principiante',
   },
   {
     emoji: '⭕',
-    name: '',
+    name: 'Círculo Grande Oco',
   },
   {
     emoji: '✅',
-    name: '',
+    name: 'Marca De Seleção Branca',
   },
   {
     emoji: '☑️',
-    name: '',
+    name: 'Caixa De Seleção Marcada Com Tique',
   },
   {
     emoji: '✔️',
-    name: '',
+    name: 'Marca De Seleção',
   },
   {
     emoji: '❌',
-    name: '',
+    name: 'Xis',
   },
   {
     emoji: '❎',
-    name: '',
+    name: 'Botão De Xis',
   },
   {
     emoji: '➰',
-    name: '',
+    name: 'Laço Encaracolado',
   },
   {
     emoji: '➿',
-    name: '',
+    name: 'Loop Encaracolado Duas Vezes',
   },
   {
     emoji: '〽️',
-    name: '',
+    name: 'Sinal Japonês Indicando Início De Música',
   },
   {
     emoji: '✳️',
-    name: '',
+    name: 'Asterisco De Oito Pontas',
   },
   {
     emoji: '✴️',
-    name: '',
+    name: 'Estrela De Oito Pontas',
   },
   {
     emoji: '❇️',
-    name: '',
+    name: 'Faísca',
   },
   {
     emoji: '©️',
-    name: '',
+    name: 'Símbolo De Copyright',
   },
   {
     emoji: '®️',
-    name: '',
+    name: 'Símbolo De Registrado',
   },
   {
     emoji: '™️',
-    name: '',
+    name: 'Símbolo De Marca Registrada',
   },
   {
     emoji: '#️⃣',
-    name: '',
+    name: 'Sinal numérico do teclado',
   },
   {
     emoji: '*️⃣',
-    name: '',
+    name: 'Tecla: asterisco',
   },
   {
     emoji: '0️⃣',
-    name: '',
+    name: 'Tecla: zero',
   },
   {
     emoji: '1️⃣',
-    name: '',
+    name: 'Tecla: um',
   },
   {
     emoji: '2️⃣',
-    name: '',
+    name: 'Tecla: dois',
   },
   {
     emoji: '3️⃣',
-    name: '',
+    name: 'Tecla: três',
   },
   {
     emoji: '4️⃣',
-    name: '',
+    name: 'Tecla: quatro',
   },
   {
     emoji: '5️⃣',
-    name: '',
+    name: 'Tecla: cinco',
   },
   {
     emoji: '6️⃣',
-    name: '',
+    name: 'Tecla: seis',
   },
   {
     emoji: '7️⃣',
-    name: '',
+    name: 'Tecla: sete',
   },
   {
     emoji: '8️⃣',
-    name: '',
+    name: 'Tecla: oito',
   },
   {
     emoji: '9️⃣',
-    name: '',
+    name: 'Tecla: nove',
   },
   {
     emoji: '🔟',
-    name: '',
+    name: 'Tecla: dez',
   },
   {
     emoji: '🔠',
-    name: '',
+    name: 'Letras Latinas Maiúsculas',
   },
   {
     emoji: '🔡',
-    name: '',
+    name: 'Letras Latinas Minúsculas',
   },
   {
     emoji: '🔢',
-    name: '',
+    name: 'Números',
   },
   {
     emoji: '🔣',
-    name: '',
+    name: 'Símbolos',
   },
   {
     emoji: '🔤',
-    name: '',
+    name: 'Letras Latinas',
   },
   {
     emoji: '🅰️',
-    name: '',
+    name: 'Botão A (Tipo Sanguíneo)',
   },
   {
     emoji: '🆎',
-    name: '',
+    name: 'Botão Ab (Tipo Sanguíneo)',
   },
   {
     emoji: '🅱️',
-    name: '',
+    name: 'Botão B (Tipo Sanguíneo)',
   },
   {
     emoji: '🆑',
-    name: '',
+    name: 'Botão Cl',
   },
   {
     emoji: '🆒',
-    name: '',
+    name: 'Botão "Cool"',
   },
   {
     emoji: '🆓',
-    name: '',
+    name: 'Botão "Free"',
   },
   {
     emoji: 'ℹ️',
-    name: '',
+    name: 'Informações',
   },
   {
     emoji: '🆔',
-    name: '',
+    name: 'Botão Id',
   },
   {
     emoji: 'Ⓜ️',
-    name: '',
+    name: 'Círculo Com A Letra M',
   },
   {
     emoji: '🆕',
-    name: '',
+    name: 'Botão "New"',
   },
   {
     emoji: '🆖',
-    name: '',
+    name: 'Botão Ng',
   },
   {
     emoji: '🅾️',
-    name: '',
+    name: 'Botão O (Tipo Sanguíneo)',
   },
   {
     emoji: '🆗',
-    name: '',
+    name: 'Botão Ok',
   },
   {
     emoji: '🅿️',
-    name: '',
+    name: 'Botão P',
   },
   {
     emoji: '🆘',
-    name: '',
+    name: 'Botão Sos',
   },
   {
     emoji: '🆙',
-    name: '',
+    name: 'Botão "Up!"',
   },
   {
     emoji: '🆚',
-    name: '',
+    name: 'Botão Vs',
   },
   {
     emoji: '🈁',
-    name: '',
+    name: 'Botão Japonês De “Aqui”',
   },
   {
     emoji: '🈂️',
-    name: '',
+    name: 'Botão Japonês De “Taxa De Serviço”',
   },
   {
     emoji: '🈷️',
-    name: '',
+    name: 'Botão Japonês De “Quantidade Mensal”',
   },
   {
     emoji: '🈶',
-    name: '',
+    name: 'Botão Japonês De “Não Gratuito”',
   },
   {
     emoji: '🈯',
-    name: '',
+    name: 'Botão Japonês De “Reservado”',
   },
   {
     emoji: '🉐',
-    name: '',
+    name: 'Botão Japonês De “Barganha”',
   },
   {
     emoji: '🈹',
-    name: '',
+    name: 'Botão Japonês De “Desconto”',
   },
   {
     emoji: '🈚',
-    name: '',
+    name: 'Botão Japonês De “Gratuito”',
   },
   {
     emoji: '🈲',
-    name: '',
+    name: 'Botão Japonês De “Proibido”',
   },
   {
     emoji: '🉑',
-    name: '',
+    name: 'Botão Japonês De “Aceitável”',
   },
   {
     emoji: '🈸',
-    name: '',
+    name: 'Botão Japonês De “Aplicação”',
   },
   {
     emoji: '🈴',
-    name: '',
+    name: 'Botão Japonês De “Nota Mínima”',
   },
   {
     emoji: '🈳',
-    name: '',
+    name: 'Botão Japonês De “Vago”',
   },
   {
     emoji: '㊗️',
-    name: '',
+    name: 'Botão Japonês De “Parabéns”',
   },
   {
     emoji: '㊙️',
-    name: '',
+    name: 'Botão Japonês De “Segredo”',
   },
   {
     emoji: '🈺',
-    name: '',
+    name: 'Botão Japonês De “Aberto Para Negócios”',
   },
   {
     emoji: '🈵',
-    name: '',
+    name: 'Botão Japonês De “Sem Vagas”',
   },
   {
     emoji: '🔴',
-    name: '',
+    name: 'Círculo Vermelho',
   },
   {
     emoji: '🟠',
-    name: '',
+    name: 'Círculo Laranja',
   },
   {
     emoji: '🟡',
-    name: '',
+    name: 'Círculo Amarelo',
   },
   {
     emoji: '🟢',
-    name: '',
+    name: 'Círculo Verde',
   },
   {
     emoji: '🔵',
-    name: '',
+    name: 'Círculo Azul',
   },
   {
     emoji: '🟣',
-    name: '',
+    name: 'Círculo Roxo',
   },
   {
     emoji: '🟤',
-    name: '',
+    name: 'Círculo Marrom',
   },
   {
     emoji: '⚫',
-    name: '',
+    name: 'Círculo Preto',
   },
   {
     emoji: '⚪',
-    name: '',
+    name: 'Círculo Branco',
   },
   {
     emoji: '🟥',
-    name: '',
+    name: 'Quadrado Vermelho',
   },
   {
     emoji: '🟧',
-    name: '',
+    name: 'Quadrado Laranja',
   },
   {
     emoji: '🟨',
-    name: '',
+    name: 'Quadrado Amarelo',
   },
   {
     emoji: '🟩',
-    name: '',
+    name: 'Quadrado Verde',
   },
   {
     emoji: '🟦',
-    name: '',
+    name: 'Quadrado Azul',
   },
   {
     emoji: '🟪',
-    name: '',
+    name: 'Quadrado Roxo',
   },
   {
     emoji: '🟫',
-    name: '',
+    name: 'Quadrado Marrom',
   },
   {
     emoji: '⬛',
-    name: '',
+    name: 'Quadrado Preto Grande',
   },
   {
     emoji: '⬜',
-    name: '',
+    name: 'Quadrado Branco Grande',
   },
   {
     emoji: '◼️',
-    name: '',
+    name: 'Quadrado Preto Médio',
   },
   {
     emoji: '◻️',
-    name: '',
+    name: 'Quadrado Branco Médio',
   },
   {
     emoji: '◾',
-    name: '',
+    name: 'Quadrado Preto Médio Menor',
   },
   {
     emoji: '◽',
-    name: '',
+    name: 'Quadrado Branco Médio Menor',
   },
   {
     emoji: '▪️',
-    name: '',
+    name: 'Quadrado Preto Pequeno',
   },
   {
     emoji: '▫️',
-    name: '',
+    name: 'Quadrado Branco Pequeno',
   },
   {
     emoji: '🔶',
-    name: '',
+    name: 'Losango Laranja Grande',
   },
   {
     emoji: '🔷',
-    name: '',
+    name: 'Losango Azul Grande',
   },
   {
     emoji: '🔸',
-    name: '',
+    name: 'Losango Laranja Pequeno',
   },
   {
     emoji: '🔹',
-    name: '',
+    name: 'Losango Azul Pequeno',
   },
   {
     emoji: '🔺',
-    name: '',
+    name: 'Triângulo Vermelho Para Cima',
   },
   {
     emoji: '🔻',
-    name: '',
+    name: 'Triângulo Vermelho Para Baixo',
   },
   {
     emoji: '💠',
-    name: '',
+    name: 'Diamante Com Um Ponto',
   },
   {
     emoji: '🔘',
-    name: '',
+    name: 'Botão De Opção',
   },
   {
     emoji: '🔳',
-    name: '',
+    name: 'Botão Quadrado Branco',
   },
   {
     emoji: '🔲',
-    name: '',
+    name: 'Botão Quadrado Preto',
   },
   {
     emoji: '🏁',
-    name: '',
+    name: 'Bandeira Quadriculada',
   },
   {
     emoji: '🚩',
-    name: '',
+    name: 'Bandeira Triangular',
   },
   {
     emoji: '🎌',
-    name: '',
+    name: 'Bandeiras Cruzadas',
   },
   {
     emoji: '🏴',
-    name: '',
+    name: 'Bandeira Preta',
   },
   {
     emoji: '🏳️',
-    name: '',
+    name: 'Bandeira Branca',
   },
   {
     emoji: '🏳️‍🌈',
-    name: '',
+    name: 'Bandeira Do Arco-Íris',
   },
   {
     emoji: '🏳️‍⚧️',
-    name: '',
+    name: 'Bandeira Transgênero',
   },
   {
     emoji: '🏴‍☠️',
-    name: '',
+    name: 'Bandeira De Pirata',
   },
   {
     emoji: '🇦🇨',
-    name: '',
+    name: 'Bandeira: Ilha de Ascensão',
   },
   {
     emoji: '🇦🇩',
-    name: '',
+    name: 'Bandeira: Andorra',
   },
   {
     emoji: '🇦🇪',
-    name: '',
+    name: 'Bandeira: Emirados Árabes Unidos',
   },
   {
     emoji: '🇦🇫',
-    name: '',
+    name: 'Bandeira: Afeganistão',
   },
   {
     emoji: '🇦🇬',
-    name: '',
+    name: 'Bandeira: Antígua e Barbuda',
   },
   {
     emoji: '🇦🇮',
-    name: '',
+    name: 'Bandeira: Anguila',
   },
   {
     emoji: '🇦🇱',
-    name: '',
+    name: 'Bandeira: Albânia',
   },
   {
     emoji: '🇦🇲',
-    name: '',
+    name: 'Bandeira: Armênia',
   },
   {
     emoji: '🇦🇴',
-    name: '',
+    name: 'Bandeira: Angola',
   },
   {
     emoji: '🇦🇶',
-    name: '',
+    name: 'Bandeira: Antártida',
   },
   {
     emoji: '🇦🇷',
-    name: '',
+    name: 'Bandeira: Argentina',
   },
   {
     emoji: '🇦🇸',
-    name: '',
+    name: 'Bandeira: Samoa Americana',
   },
   {
     emoji: '🇦🇹',
-    name: '',
+    name: 'Bandeira: Áustria',
   },
   {
     emoji: '🇦🇺',
-    name: '',
+    name: 'Bandeira: Austrália',
   },
   {
     emoji: '🇦🇼',
-    name: '',
+    name: 'Bandeira: Aruba',
   },
   {
     emoji: '🇦🇽',
-    name: '',
+    name: 'Bandeira: Ilhas Aland',
   },
   {
     emoji: '🇦🇿',
-    name: '',
+    name: 'Bandeira: Azerbaijão',
   },
   {
     emoji: '🇧🇦',
-    name: '',
+    name: 'Bandeira: Bósnia e Herzegovina',
   },
   {
     emoji: '🇧🇧',
-    name: '',
+    name: 'Bandeira: Barbados',
   },
   {
     emoji: '🇧🇩',
-    name: '',
+    name: 'Bandeira: Bangladesh',
   },
   {
     emoji: '🇧🇪',
-    name: '',
+    name: 'Bandeira: Bélgica',
   },
   {
     emoji: '🇧🇫',
-    name: '',
+    name: 'Bandeira: Burquina Faso',
   },
   {
     emoji: '🇧🇬',
-    name: '',
+    name: 'Bandeira: Bulgária',
   },
   {
     emoji: '🇧🇭',
-    name: '',
+    name: 'Bandeira: Barein',
   },
   {
     emoji: '🇧🇮',
-    name: '',
+    name: 'Bandeira: Burundi',
   },
   {
     emoji: '🇧🇯',
-    name: '',
+    name: 'Bandeira: Benin',
   },
   {
     emoji: '🇧🇱',
-    name: '',
+    name: 'Bandeira: São Bartolomeu',
   },
   {
     emoji: '🇧🇲',
-    name: '',
+    name: 'Bandeira: Bermudas',
   },
   {
     emoji: '🇧🇳',
-    name: '',
+    name: 'Bandeira: Brunei',
   },
   {
     emoji: '🇧🇴',
-    name: '',
+    name: 'Bandeira: Bolívia',
   },
   {
     emoji: '🇧🇶',
-    name: '',
+    name: 'Bandeira: Países Baixos Caribenhos',
   },
   {
     emoji: '🇧🇷',
-    name: '',
+    name: 'Bandeira: Brasil',
   },
   {
     emoji: '🇧🇸',
-    name: '',
+    name: 'Bandeira: Bahamas',
   },
   {
     emoji: '🇧🇹',
-    name: '',
+    name: 'Bandeira: Butão',
   },
   {
     emoji: '🇧🇻',
-    name: '',
+    name: 'Bandeira: Ilha Bouvet',
   },
   {
     emoji: '🇧🇼',
-    name: '',
+    name: 'Bandeira: Botsuana',
   },
   {
     emoji: '🇧🇾',
-    name: '',
+    name: 'Bandeira: Bielorrússia',
   },
   {
     emoji: '🇧🇿',
-    name: '',
+    name: 'Bandeira: Belize',
   },
   {
     emoji: '🇨🇦',
-    name: '',
+    name: 'Bandeira: Canadá',
   },
   {
     emoji: '🇨🇨',
-    name: '',
+    name: 'Bandeira: Ilhas Cocos (Keeling)',
   },
   {
     emoji: '🇨🇩',
-    name: '',
+    name: 'Bandeira: Congo - Kinshasa',
   },
   {
     emoji: '🇨🇫',
-    name: '',
+    name: 'Bandeira: República Centro-Africana',
   },
   {
     emoji: '🇨🇬',
-    name: '',
+    name: 'Bandeira: República do Congo',
   },
   {
     emoji: '🇨🇭',
-    name: '',
+    name: 'Bandeira: Suíça',
   },
   {
     emoji: '🇨🇮',
-    name: '',
+    name: 'Bandeira: Costa do Marfim',
   },
   {
     emoji: '🇨🇰',
-    name: '',
+    name: 'Bandeira: Ilhas Cook',
   },
   {
     emoji: '🇨🇱',
-    name: '',
+    name: 'Bandeira: Chile',
   },
   {
     emoji: '🇨🇲',
-    name: '',
+    name: 'Bandeira: Camarões',
   },
   {
     emoji: '🇨🇳',
-    name: '',
+    name: 'Bandeira: China',
   },
   {
     emoji: '🇨🇴',
-    name: '',
+    name: 'Bandeira: Colômbia',
   },
   {
     emoji: '🇨🇵',
-    name: '',
+    name: 'Bandeira: Ilha de Clipperton',
   },
   {
     emoji: '🇨🇷',
-    name: '',
+    name: 'Bandeira: Costa Rica',
   },
   {
     emoji: '🇨🇺',
-    name: '',
+    name: 'Bandeira: Cuba',
   },
   {
     emoji: '🇨🇻',
-    name: '',
+    name: 'Bandeira: Cabo Verde',
   },
   {
     emoji: '🇨🇼',
-    name: '',
+    name: 'Bandeira: Curaçao',
   },
   {
     emoji: '🇨🇽',
-    name: '',
+    name: 'Bandeira: Ilha Christmas',
   },
   {
     emoji: '🇨🇾',
-    name: '',
+    name: 'Bandeira: Chipre',
   },
   {
     emoji: '🇨🇿',
-    name: '',
+    name: 'Bandeira: Tchéquia',
   },
   {
     emoji: '🇩🇪',
-    name: '',
+    name: 'Bandeira: Alemanha',
   },
   {
     emoji: '🇩🇬',
-    name: '',
+    name: 'Bandeira: Diego Garcia',
   },
   {
     emoji: '🇩🇯',
-    name: '',
+    name: 'Bandeira: Djibuti',
   },
   {
     emoji: '🇩🇰',
-    name: '',
+    name: 'Bandeira: Dinamarca',
   },
   {
     emoji: '🇩🇲',
-    name: '',
+    name: 'Bandeira: Dominica',
   },
   {
     emoji: '🇩🇴',
-    name: '',
+    name: 'Bandeira: República Dominicana',
   },
   {
     emoji: '🇩🇿',
-    name: '',
+    name: 'Bandeira: Argélia',
   },
   {
     emoji: '🇪🇦',
-    name: '',
+    name: 'Bandeira: Ceuta e Melilla',
   },
   {
     emoji: '🇪🇨',
-    name: '',
+    name: 'Bandeira: Equador',
   },
   {
     emoji: '🇪🇪',
-    name: '',
+    name: 'Bandeira: Estônia',
   },
   {
     emoji: '🇪🇬',
-    name: '',
+    name: 'Bandeira: Egito',
   },
   {
     emoji: '🇪🇭',
-    name: '',
+    name: 'Bandeira: Saara Ocidental',
   },
   {
     emoji: '🇪🇷',
-    name: '',
+    name: 'Bandeira: Eritreia',
   },
   {
     emoji: '🇪🇸',
-    name: '',
+    name: 'Bandeira: Espanha',
   },
   {
     emoji: '🇪🇹',
-    name: '',
+    name: 'Bandeira: Etiópia',
   },
   {
     emoji: '🇪🇺',
-    name: '',
+    name: 'Flag: European Union',
   },
   {
     emoji: '🇫🇮',
-    name: '',
+    name: 'Bandeira: Finlândia',
   },
   {
     emoji: '🇫🇯',
-    name: '',
+    name: 'Bandeira: Fiji',
   },
   {
     emoji: '🇫🇰',
-    name: '',
+    name: 'Bandeira: Ilhas Malvinas',
   },
   {
     emoji: '🇫🇲',
-    name: '',
+    name: 'Bandeira: Micronésia',
   },
   {
     emoji: '🇫🇴',
-    name: '',
+    name: 'Bandeira: Ilhas Faroé',
   },
   {
     emoji: '🇫🇷',
-    name: '',
+    name: 'Bandeira: França',
   },
   {
     emoji: '🇬🇦',
-    name: '',
+    name: 'Bandeira: Gabão',
   },
   {
     emoji: '🇬🇧',
-    name: '',
+    name: 'Bandeira: Reino Unido',
   },
   {
     emoji: '🇬🇩',
-    name: '',
+    name: 'Bandeira: Granada',
   },
   {
     emoji: '🇬🇪',
-    name: '',
+    name: 'Bandeira: Geórgia',
   },
   {
     emoji: '🇬🇫',
-    name: '',
+    name: 'Bandeira: Guiana Francesa',
   },
   {
     emoji: '🇬🇬',
-    name: '',
+    name: 'Bandeira: Guernsey',
   },
   {
     emoji: '🇬🇭',
-    name: '',
+    name: 'Bandeira: Gana',
   },
   {
     emoji: '🇬🇮',
-    name: '',
+    name: 'Bandeira: Gibraltar',
   },
   {
     emoji: '🇬🇱',
-    name: '',
+    name: 'Bandeira: Groenlândia',
   },
   {
     emoji: '🇬🇲',
-    name: '',
+    name: 'Bandeira: Gâmbia',
   },
   {
     emoji: '🇬🇳',
-    name: '',
+    name: 'Bandeira: Guiné',
   },
   {
     emoji: '🇬🇵',
-    name: '',
+    name: 'Bandeira: Guadalupe',
   },
   {
     emoji: '🇬🇶',
-    name: '',
+    name: 'Bandeira: Guiné Equatorial',
   },
   {
     emoji: '🇬🇷',
-    name: '',
+    name: 'Bandeira: Grécia',
   },
   {
     emoji: '🇬🇸',
-    name: '',
+    name: 'Bandeira: Ilhas Geórgia do Sul e Sandwich do Sul',
   },
   {
     emoji: '🇬🇹',
-    name: '',
+    name: 'Bandeira: Guatemala',
   },
   {
     emoji: '🇬🇺',
-    name: '',
+    name: 'Bandeira: Guam',
   },
   {
     emoji: '🇬🇼',
-    name: '',
+    name: 'Bandeira: Guiné-Bissau',
   },
   {
     emoji: '🇬🇾',
-    name: '',
+    name: 'Bandeira: Guiana',
   },
   {
     emoji: '🇭🇰',
-    name: '',
+    name: 'Bandeira: Hong Kong, RAE da China',
   },
   {
     emoji: '🇭🇲',
-    name: '',
+    name: 'Bandeira: Ilhas Heard e McDonald',
   },
   {
     emoji: '🇭🇳',
-    name: '',
+    name: 'Bandeira: Honduras',
   },
   {
     emoji: '🇭🇷',
-    name: '',
+    name: 'Bandeira: Croácia',
   },
   {
     emoji: '🇭🇹',
-    name: '',
+    name: 'Bandeira: Haiti',
   },
   {
     emoji: '🇭🇺',
-    name: '',
+    name: 'Bandeira: Hungria',
   },
   {
     emoji: '🇮🇨',
-    name: '',
+    name: 'Bandeira: Ilhas Canárias',
   },
   {
     emoji: '🇮🇩',
-    name: '',
+    name: 'Bandeira: Indonésia',
   },
   {
     emoji: '🇮🇪',
-    name: '',
+    name: 'Bandeira: Irlanda',
   },
   {
     emoji: '🇮🇱',
-    name: '',
+    name: 'Bandeira: Israel',
   },
   {
     emoji: '🇮🇲',
-    name: '',
+    name: 'Bandeira: Ilha de Man',
   },
   {
     emoji: '🇮🇳',
-    name: '',
+    name: 'Bandeira: Índia',
   },
   {
     emoji: '🇮🇴',
-    name: '',
+    name: 'Bandeira: Território Britânico do Oceano Índico',
   },
   {
     emoji: '🇮🇶',
-    name: '',
+    name: 'Bandeira: Iraque',
   },
   {
     emoji: '🇮🇷',
-    name: '',
+    name: 'Bandeira: Irã',
   },
   {
     emoji: '🇮🇸',
-    name: '',
+    name: 'Bandeira: Islândia',
   },
   {
     emoji: '🇮🇹',
-    name: '',
+    name: 'Bandeira: Itália',
   },
   {
     emoji: '🇯🇪',
-    name: '',
+    name: 'Bandeira: Jersey',
   },
   {
     emoji: '🇯🇲',
-    name: '',
+    name: 'Bandeira: Jamaica',
   },
   {
     emoji: '🇯🇴',
-    name: '',
+    name: 'Bandeira: Jordânia',
   },
   {
     emoji: '🇯🇵',
-    name: '',
+    name: 'Bandeira: Japão',
   },
   {
     emoji: '🇰🇪',
-    name: '',
+    name: 'Bandeira: Quênia',
   },
   {
     emoji: '🇰🇬',
-    name: '',
+    name: 'Bandeira: Quirguistão',
   },
   {
     emoji: '🇰🇭',
-    name: '',
+    name: 'Bandeira: Camboja',
   },
   {
     emoji: '🇰🇮',
-    name: '',
+    name: 'Bandeira: Quiribati',
   },
   {
     emoji: '🇰🇲',
-    name: '',
+    name: 'Bandeira: Comores',
   },
   {
     emoji: '🇰🇳',
-    name: '',
+    name: 'Bandeira: São Cristóvão e Névis',
   },
   {
     emoji: '🇰🇵',
-    name: '',
+    name: 'Bandeira: Coreia do Norte',
   },
   {
     emoji: '🇰🇷',
-    name: '',
+    name: 'Bandeira: Coreia do Sul',
   },
   {
     emoji: '🇰🇼',
-    name: '',
+    name: 'Bandeira: Kuwait',
   },
   {
     emoji: '🇰🇾',
-    name: '',
+    name: 'Bandeira: Ilhas Cayman',
   },
   {
     emoji: '🇰🇿',
-    name: '',
+    name: 'Bandeira: Cazaquistão',
   },
   {
     emoji: '🇱🇦',
-    name: '',
+    name: 'Bandeira: Laos',
   },
   {
     emoji: '🇱🇧',
-    name: '',
+    name: 'Bandeira: Líbano',
   },
   {
     emoji: '🇱🇨',
-    name: '',
+    name: 'Bandeira: Santa Lúcia',
   },
   {
     emoji: '🇱🇮',
-    name: '',
+    name: 'Bandeira: Liechtenstein',
   },
   {
     emoji: '🇱🇰',
-    name: '',
+    name: 'Bandeira: Sri Lanka',
   },
   {
     emoji: '🇱🇷',
-    name: '',
+    name: 'Bandeira: Libéria',
   },
   {
     emoji: '🇱🇸',
-    name: '',
+    name: 'Bandeira: Lesoto',
   },
   {
     emoji: '🇱🇹',
-    name: '',
+    name: 'Bandeira: Lituânia',
   },
   {
     emoji: '🇱🇺',
-    name: '',
+    name: 'Bandeira: Luxemburgo',
   },
   {
     emoji: '🇱🇻',
-    name: '',
+    name: 'Bandeira: Letônia',
   },
   {
     emoji: '🇱🇾',
-    name: '',
+    name: 'Bandeira: Líbia',
   },
   {
     emoji: '🇲🇦',
-    name: '',
+    name: 'Bandeira: Marrocos',
   },
   {
     emoji: '🇲🇨',
-    name: '',
+    name: 'Bandeira: Mônaco',
   },
   {
     emoji: '🇲🇩',
-    name: '',
+    name: 'Bandeira: Moldávia',
   },
   {
     emoji: '🇲🇪',
-    name: '',
+    name: 'Bandeira: Montenegro',
   },
   {
     emoji: '🇲🇫',
-    name: '',
+    name: 'Bandeira: São Martinho',
   },
   {
     emoji: '🇲🇬',
-    name: '',
+    name: 'Bandeira: Madagascar',
   },
   {
     emoji: '🇲🇭',
-    name: '',
+    name: 'Bandeira: Ilhas Marshall',
   },
   {
     emoji: '🇲🇰',
-    name: '',
+    name: 'Bandeira: Macedônia do Norte',
   },
   {
     emoji: '🇲🇱',
-    name: '',
+    name: 'Bandeira: Mali',
   },
   {
     emoji: '🇲🇲',
-    name: '',
+    name: 'Bandeira: Mianmar (Birmânia)',
   },
   {
     emoji: '🇲🇳',
-    name: '',
+    name: 'Bandeira: Mongólia',
   },
   {
     emoji: '🇲🇴',
-    name: '',
+    name: 'Bandeira: Macau, RAE da China',
   },
   {
     emoji: '🇲🇵',
-    name: '',
+    name: 'Bandeira: Ilhas Marianas do Norte',
   },
   {
     emoji: '🇲🇶',
-    name: '',
+    name: 'Bandeira: Martinica',
   },
   {
     emoji: '🇲🇷',
-    name: '',
+    name: 'Bandeira: Mauritânia',
   },
   {
     emoji: '🇲🇸',
-    name: '',
+    name: 'Bandeira: Montserrate',
   },
   {
     emoji: '🇲🇹',
-    name: '',
+    name: 'Bandeira: Malta',
   },
   {
     emoji: '🇲🇺',
-    name: '',
+    name: 'Bandeira: Maurício',
   },
   {
     emoji: '🇲🇻',
-    name: '',
+    name: 'Bandeira: Maldivas',
   },
   {
     emoji: '🇲🇼',
-    name: '',
+    name: 'Bandeira: Malaui',
   },
   {
     emoji: '🇲🇽',
-    name: '',
+    name: 'Bandeira: México',
   },
   {
     emoji: '🇲🇾',
-    name: '',
+    name: 'Bandeira: Malásia',
   },
   {
     emoji: '🇲🇿',
-    name: '',
+    name: 'Bandeira: Moçambique',
   },
   {
     emoji: '🇳🇦',
-    name: '',
+    name: 'Bandeira: Namíbia',
   },
   {
     emoji: '🇳🇨',
-    name: '',
+    name: 'Bandeira: Nova Caledônia',
   },
   {
     emoji: '🇳🇪',
-    name: '',
+    name: 'Bandeira: Níger',
   },
   {
     emoji: '🇳🇫',
-    name: '',
+    name: 'Bandeira: Ilha Norfolk',
   },
   {
     emoji: '🇳🇬',
-    name: '',
+    name: 'Bandeira: Nigéria',
   },
   {
     emoji: '🇳🇮',
-    name: '',
+    name: 'Bandeira: Nicarágua',
   },
   {
     emoji: '🇳🇱',
-    name: '',
+    name: 'Bandeira: Países Baixos',
   },
   {
     emoji: '🇳🇴',
-    name: '',
+    name: 'Bandeira: Noruega',
   },
   {
     emoji: '🇳🇵',
-    name: '',
+    name: 'Bandeira: Nepal',
   },
   {
     emoji: '🇳🇷',
-    name: '',
+    name: 'Bandeira: Nauru',
   },
   {
     emoji: '🇳🇺',
-    name: '',
+    name: 'Bandeira: Niue',
   },
   {
     emoji: '🇳🇿',
-    name: '',
+    name: 'Bandeira: Nova Zelândia',
   },
   {
     emoji: '🇴🇲',
-    name: '',
+    name: 'Bandeira: Omã',
   },
   {
     emoji: '🇵🇦',
-    name: '',
+    name: 'Bandeira: Panamá',
   },
   {
     emoji: '🇵🇪',
-    name: '',
+    name: 'Bandeira: Peru',
   },
   {
     emoji: '🇵🇫',
-    name: '',
+    name: 'Bandeira: Polinésia Francesa',
   },
   {
     emoji: '🇵🇬',
-    name: '',
+    name: 'Bandeira: Papua-Nova Guiné',
   },
   {
     emoji: '🇵🇭',
-    name: '',
+    name: 'Bandeira: Filipinas',
   },
   {
     emoji: '🇵🇰',
-    name: '',
+    name: 'Bandeira: Paquistão',
   },
   {
     emoji: '🇵🇱',
-    name: '',
+    name: 'Bandeira: Polônia',
   },
   {
     emoji: '🇵🇲',
-    name: '',
+    name: 'Bandeira: São Pedro e Miquelão',
   },
   {
     emoji: '🇵🇳',
-    name: '',
+    name: 'Bandeira: Ilhas Pitcairn',
   },
   {
     emoji: '🇵🇷',
-    name: '',
+    name: 'Bandeira: Porto Rico',
   },
   {
     emoji: '🇵🇸',
-    name: '',
+    name: 'Bandeira: Territórios palestinos',
   },
   {
     emoji: '🇵🇹',
-    name: '',
+    name: 'Bandeira: Portugal',
   },
   {
     emoji: '🇵🇼',
-    name: '',
+    name: 'Bandeira: Palau',
   },
   {
     emoji: '🇵🇾',
-    name: '',
+    name: 'Bandeira: Paraguai',
   },
   {
     emoji: '🇶🇦',
-    name: '',
+    name: 'Bandeira: Catar',
   },
   {
     emoji: '🇷🇪',
-    name: '',
+    name: 'Bandeira: Reunião',
   },
   {
     emoji: '🇷🇴',
-    name: '',
+    name: 'Bandeira: Romênia',
   },
   {
     emoji: '🇷🇸',
-    name: '',
+    name: 'Bandeira: Sérvia',
   },
   {
     emoji: '🇷🇺',
-    name: '',
+    name: 'Bandeira: Rússia',
   },
   {
     emoji: '🇷🇼',
-    name: '',
+    name: 'Bandeira: Ruanda',
   },
   {
     emoji: '🇸🇦',
-    name: '',
+    name: 'Bandeira: Arábia Saudita',
   },
   {
     emoji: '🇸🇧',
-    name: '',
+    name: 'Bandeira: Ilhas Salomão',
   },
   {
     emoji: '🇸🇨',
-    name: '',
+    name: 'Bandeira: Seicheles',
   },
   {
     emoji: '🇸🇩',
-    name: '',
+    name: 'Bandeira: Sudão',
   },
   {
     emoji: '🇸🇪',
-    name: '',
+    name: 'Bandeira: Suécia',
   },
   {
     emoji: '🇸🇬',
-    name: '',
+    name: 'Bandeira: Singapura',
   },
   {
     emoji: '🇸🇭',
-    name: '',
+    name: 'Bandeira: Santa Helena',
   },
   {
     emoji: '🇸🇮',
-    name: '',
+    name: 'Bandeira: Eslovênia',
   },
   {
     emoji: '🇸🇯',
-    name: '',
+    name: 'Bandeira: Svalbard e Jan Mayen',
   },
   {
     emoji: '🇸🇰',
-    name: '',
+    name: 'Bandeira: Eslováquia',
   },
   {
     emoji: '🇸🇱',
-    name: '',
+    name: 'Bandeira: Serra Leoa',
   },
   {
     emoji: '🇸🇲',
-    name: '',
+    name: 'Bandeira: San Marino',
   },
   {
     emoji: '🇸🇳',
-    name: '',
+    name: 'Bandeira: Senegal',
   },
   {
     emoji: '🇸🇴',
-    name: '',
+    name: 'Bandeira: Somália',
   },
   {
     emoji: '🇸🇷',
-    name: '',
+    name: 'Bandeira: Suriname',
   },
   {
     emoji: '🇸🇸',
-    name: '',
+    name: 'Bandeira: Sudão do Sul',
   },
   {
     emoji: '🇸🇹',
-    name: '',
+    name: 'Bandeira: São Tomé e Príncipe',
   },
   {
     emoji: '🇸🇻',
-    name: '',
+    name: 'Bandeira: El Salvador',
   },
   {
     emoji: '🇸🇽',
-    name: '',
+    name: 'Bandeira: Sint Maarten',
   },
   {
     emoji: '🇸🇾',
-    name: '',
+    name: 'Bandeira: Síria',
   },
   {
     emoji: '🇸🇿',
-    name: '',
+    name: 'Bandeira: Essuatíni',
   },
   {
     emoji: '🇹🇦',
-    name: '',
+    name: 'Bandeira: Tristão da Cunha',
   },
   {
     emoji: '🇹🇨',
-    name: '',
+    name: 'Bandeira: Ilhas Turcas e Caicos',
   },
   {
     emoji: '🇹🇩',
-    name: '',
+    name: 'Bandeira: Chade',
   },
   {
     emoji: '🇹🇫',
-    name: '',
+    name: 'Bandeira: Territórios Franceses do Sul',
   },
   {
     emoji: '🇹🇬',
-    name: '',
+    name: 'Bandeira: Togo',
   },
   {
     emoji: '🇹🇭',
-    name: '',
+    name: 'Bandeira: Tailândia',
   },
   {
     emoji: '🇹🇯',
-    name: '',
+    name: 'Bandeira: Tadjiquistão',
   },
   {
     emoji: '🇹🇰',
-    name: '',
+    name: 'Bandeira: Tokelau',
   },
   {
     emoji: '🇹🇱',
-    name: '',
+    name: 'Bandeira: Timor-Leste',
   },
   {
     emoji: '🇹🇲',
-    name: '',
+    name: 'Bandeira: Turcomenistão',
   },
   {
     emoji: '🇹🇳',
-    name: '',
+    name: 'Bandeira: Tunísia',
   },
   {
     emoji: '🇹🇴',
-    name: '',
+    name: 'Bandeira: Tonga',
   },
   {
     emoji: '🇹🇷',
-    name: '',
+    name: 'Bandeira: Turquia',
   },
   {
     emoji: '🇹🇹',
-    name: '',
+    name: 'Bandeira: Trinidad e Tobago',
   },
   {
     emoji: '🇹🇻',
-    name: '',
+    name: 'Bandeira: Tuvalu',
   },
   {
     emoji: '🇹🇼',
-    name: '',
+    name: 'Bandeira: Taiwan',
   },
   {
     emoji: '🇹🇿',
-    name: '',
+    name: 'Bandeira: Tanzânia',
   },
   {
     emoji: '🇺🇦',
-    name: '',
+    name: 'Bandeira: Ucrânia',
   },
   {
     emoji: '🇺🇬',
-    name: '',
+    name: 'Bandeira: Uganda',
   },
   {
     emoji: '🇺🇲',
-    name: '',
+    name: 'Bandeira: Ilhas Menores Distantes dos EUA',
   },
   {
     emoji: '🇺🇳',
-    name: '',
+    name: 'Flag: United Nations',
   },
   {
     emoji: '🇺🇸',
-    name: '',
+    name: 'Bandeira: Estados Unidos',
   },
   {
     emoji: '🇺🇾',
-    name: '',
+    name: 'Bandeira: Uruguai',
   },
   {
     emoji: '🇺🇿',
-    name: '',
+    name: 'Bandeira: Uzbequistão',
   },
   {
     emoji: '🇻🇦',
-    name: '',
+    name: 'Bandeira: Cidade do Vaticano',
   },
   {
     emoji: '🇻🇨',
-    name: '',
+    name: 'Bandeira: São Vicente e Granadinas',
   },
   {
     emoji: '🇻🇪',
-    name: '',
+    name: 'Bandeira: Venezuela',
   },
   {
     emoji: '🇻🇬',
-    name: '',
+    name: 'Bandeira: Ilhas Virgens Britânicas',
   },
   {
     emoji: '🇻🇮',
-    name: '',
+    name: 'Bandeira: Ilhas Virgens Americanas',
   },
   {
     emoji: '🇻🇳',
-    name: '',
+    name: 'Bandeira: Vietnã',
   },
   {
     emoji: '🇻🇺',
-    name: '',
+    name: 'Bandeira: Vanuatu',
   },
   {
     emoji: '🇼🇫',
-    name: '',
+    name: 'Bandeira: Wallis e Futuna',
   },
   {
     emoji: '🇼🇸',
-    name: '',
+    name: 'Bandeira: Samoa',
   },
   {
     emoji: '🇽🇰',
-    name: '',
+    name: 'Bandeira: Kosovo',
   },
   {
     emoji: '🇾🇪',
-    name: '',
+    name: 'Bandeira: Iêmen',
   },
   {
     emoji: '🇾🇹',
-    name: '',
+    name: 'Bandeira: Mayotte',
   },
   {
     emoji: '🇿🇦',
-    name: '',
+    name: 'Bandeira: África do Sul',
   },
   {
     emoji: '🇿🇲',
-    name: '',
+    name: 'Bandeira: Zâmbia',
   },
   {
     emoji: '🇿🇼',
-    name: '',
+    name: 'Bandeira: Zimbábue',
   },
   {
     emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
-    name: '',
+    name: 'Bandeira: Inglaterra',
   },
   {
     emoji: '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
-    name: '',
+    name: 'Bandeira: Escócia',
   },
   {
     emoji: '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
-    name: '',
+    name: 'Bandeira: País de Gales',
   },
 ];
