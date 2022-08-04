@@ -228,9 +228,19 @@ export function MessageInput() {
     if (isEmoji) {
       const { parse: twemojiParse } = await import('twemoji-parser');
 
-      const twemojis = twemojiParse(newValue);
+      const twemojiObj = {
+        '👁️‍🗨️': {
+          text: '👁️‍🗨️',
+          url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+        },
+        '♾️': {
+          url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+          text: '♾️',
+        },
+        default: twemojiParse(newValue),
+      };
 
-      console.log(twemojis);
+      const twemojis = twemojiObj[newValue] || twemojiObj.default;
 
       let emojis;
 
