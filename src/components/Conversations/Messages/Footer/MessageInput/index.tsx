@@ -172,8 +172,6 @@ export function MessageInput() {
       return;
     }
 
-    console.log('input');
-
     const setCursorAfterLastValueInserted = (value: ElementType) => {
       const selection = getSelection();
 
@@ -231,19 +229,9 @@ export function MessageInput() {
     const messageChars = splitter.splitGraphemes(message);
     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
 
-    // const getMessageFirstCharacterAndClearOldMessage = () => {
-    //   setOldMessage({
-    //     innerHtml: '',
-    //     textContent: '',
-    //   });
-
-    //   return messageChars[0];
-    // };
-
     const newValue = messageChars.find(
       (char, i) => char !== oldMessageChars[i]
     );
-    // ?? getMessageFirstCharacterAndClearOldMessage();
 
     if (!newValue) {
       return;
@@ -372,8 +360,9 @@ export function MessageInput() {
 
   function handleKeyDown(e: KeyboardEvent) {
     const key = e.key;
+    const message = messageInput?.textContent;
 
-    if (key === 'Delete' || key === 'Backspace') {
+    if ((key === 'Delete' || key === 'Backspace') && message) {
       setSomethingInMessageWasDeleted(true);
     }
   }
