@@ -172,6 +172,16 @@ export function MessageInput() {
       return;
     }
 
+    const setCursorAfterLastValueInserted = (value: ElementType) => {
+      const selection = getSelection();
+
+      const range = document.createRange();
+      range.setStartAfter(value);
+
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+    };
+
     const insertValue = (value: ElementType) => {
       const selection = getSelection();
 
@@ -206,17 +216,7 @@ export function MessageInput() {
       setCursorAfterLastValueInserted(value);
     };
 
-    const setCursorAfterLastValueInserted = (value: ElementType) => {
-      const selection = getSelection();
-
-      const range = document.createRange();
-      range.setStartAfter(value);
-
-      selection?.removeAllRanges();
-      selection?.addRange(range);
-    };
-
-    const clearOldMessage = () => {
+    const restoreOldMessageByDeletingSelectedText = () => {
       messageInput.innerHTML = oldMessage.innerHtml;
 
       restoreSelection(messageInput, savedSelection);
@@ -262,15 +262,32 @@ export function MessageInput() {
 
       const twemoji = specialEmojis[newValue] || getParsedEmoji();
 
+      const getEmojiHtml = (text: string, url: string) => {
+        const emojiHtml = document.createElement('span');
+
+        emojiHtml.className = 'emoji';
+        emojiHtml.style.backgroundImage = `url(${url})`;
+        emojiHtml.textContent = text;
+
+        return emojiHtml;
+      };
+
+      const positionCollapsedSelection = () => {
+        restoreOldMessageByDeletingSelectedText();
+
+        const collapsedSelection = {
+          start: savedSelection?.start ?? 0,
+          end: savedSelection?.start ?? 0,
+        };
+
+        restoreSelection(messageInput, collapsedSelection);
+      };
+
       if (Array.isArray(twemoji)) {
         let emojis;
 
         const emojiHtmls = twemoji.map(({ text, url }) => {
-          const emojiHtml = document.createElement('span');
-
-          emojiHtml.className = 'emoji';
-          emojiHtml.style.backgroundImage = `url(${url})`;
-          emojiHtml.textContent = text;
+          const emojiHtml = getEmojiHtml(text, url);
 
           return emojiHtml;
         });
@@ -304,40 +321,22 @@ export function MessageInput() {
           emojis = emojiHtmls;
         }
 
-        clearOldMessage();
-
-        const collapsedSelection = {
-          start: savedSelection?.start ?? 0,
-          end: savedSelection?.start ?? 0,
-        };
-
-        restoreSelection(messageInput, collapsedSelection);
+        positionCollapsedSelection();
 
         emojis.forEach((emojiHtml) => {
           insertValue(emojiHtml);
         });
       } else {
-        const emojiHtml = document.createElement('span');
+        const emojiHtml = getEmojiHtml(twemoji.text, twemoji.url);
 
-        emojiHtml.className = 'emoji';
-        emojiHtml.style.backgroundImage = `url(${twemoji.url})`;
-        emojiHtml.textContent = twemoji.text;
-
-        clearOldMessage();
-
-        const collapsedSelection = {
-          start: savedSelection?.start ?? 0,
-          end: savedSelection?.start ?? 0,
-        };
-
-        restoreSelection(messageInput, collapsedSelection);
+        positionCollapsedSelection();
 
         insertValue(emojiHtml);
       }
     } else {
       const newValueHtml = document.createTextNode(newValue);
 
-      clearOldMessage();
+      restoreOldMessageByDeletingSelectedText();
 
       insertValue(newValueHtml);
     }
@@ -362,134 +361,6 @@ export function MessageInput() {
       setSomethingInMessageWasDeleted(true);
     }
   }
-
-  // useEffect(() => {
-  //   async function afterInputEvent() {
-  //     if (!savedSelection || !messageInput) return;
-
-  //     if (isKeyDownEvent) {
-  //       setIsKeyDownEvent(false);
-  //       return;
-  //     }
-
-  //     const message = messageInput?.textContent ?? '';
-
-  //     const messageChars = splitter.splitGraphemes(message);
-  //     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
-
-  //     const newValue = messageChars.find(
-  //       (char, i) => char !== oldMessageChars[i]
-  //     );
-
-  //     if (!newValue) return;
-
-  //     const { regexs } = await import('../../../../../utils/regexs');
-
-  //     const isEmoji = regexs.emoji.test(newValue);
-
-  //     if (isEmoji) {
-  //       const { parse: twemojiParse } = await import('twemoji-parser');
-
-  //       const emojiUrl = twemojiParse(newValue)[0].url;
-
-  //       const emojiHtml = document.createElement('span');
-
-  //       emojiHtml.className = 'emoji';
-  //       emojiHtml.style.backgroundImage = `url(${emojiUrl})`;
-  //       emojiHtml.textContent = newValue;
-
-  //       messageInput.innerHTML = oldMessage.innerHtml;
-
-  //       restoreSelection(messageInput, savedSelection);
-
-  //       const selection = getSelection();
-
-  //       selection?.getRangeAt(0).insertNode(emojiHtml);
-
-  //       const isTheFirstElement = oldMessage.textContent.length === 0;
-
-  //       if (!isTheFirstElement) {
-  //         const emojiParentNode = emojiHtml.parentNode;
-
-  //         const emojiParentNodeChildren = [
-  //           ...(emojiParentNode?.childNodes ?? []),
-  //         ].filter((child) => child.textContent);
-
-  //         const emojiIndex = emojiParentNodeChildren.findIndex(
-  //           (child) => child === emojiHtml
-  //         );
-
-  //         const emojiPosition = emojiIndex === 0 ? 'before' : 'after';
-
-  //         emojiHtml.remove();
-
-  //         if (emojiPosition === 'before') {
-  //           messageInput.insertBefore(emojiHtml, emojiParentNode);
-  //         } else {
-  //           insertAfter(emojiHtml, emojiParentNode);
-  //         }
-  //       }
-
-  //       const range = document.createRange();
-  //       range.setStartAfter(emojiHtml);
-
-  //       selection?.removeAllRanges();
-  //       selection?.addRange(range);
-  //     }
-
-  //     const messageHtml = messageInput.innerHTML;
-
-  //     setOldMessage({
-  //       textContent: message,
-  //       innerHtml: messageHtml,
-  //     });
-  //   }
-
-  //   afterInputEvent();
-  // }, [savedSelection]);
-
-  // function saveMessageInputSelection() {
-  //   if (!messageInput) return;
-
-  //   const newSavedSelection = saveSelection(messageInput);
-
-  //   setSavedSelection(newSavedSelection);
-  // }
-
-  // const [continueBeforeInputEvent, setContinueBeforeInputEvent] =
-  //   useState(true);
-
-  // function handleBeforeInput() {
-  //   if (!continueBeforeInputEvent) return;
-
-  //   const range = getSelection()?.getRangeAt(0);
-
-  //   console.log(range?.startOffset, range?.endOffset);
-
-  //   setContinueBeforeInputEvent(false);
-
-  //   setTimeout(() => {
-  //     setContinueBeforeInputEvent(true);
-  //   }, 0);
-  // }
-
-  // function handleKeyUp(e: KeyboardEvent<HTMLDivElement>) {
-  //   const key = e.key;
-
-  //   if (!(key === 'Delete' || key === 'Backspace')) return;
-
-  //   const message = messageInput?.textContent ?? '';
-  //   const messageHtml = messageInput?.innerHTML ?? '';
-
-  //   setOldMessage({
-  //     innerHtml: messageHtml,
-  //     textContent: message,
-  //   });
-
-  //   setIsKeyDownEvent(true);
-
-  //   saveMessageInputSelection();
-  // }
 
   const defaultStyles: any = useStyleConfig('Textarea');
 
