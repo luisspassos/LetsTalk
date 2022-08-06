@@ -172,6 +172,8 @@ export function MessageInput() {
       return;
     }
 
+    console.log('input');
+
     const setCursorAfterLastValueInserted = (value: ElementType) => {
       const selection = getSelection();
 
@@ -229,11 +231,23 @@ export function MessageInput() {
     const messageChars = splitter.splitGraphemes(message);
     const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
 
+    // const getMessageFirstCharacterAndClearOldMessage = () => {
+    //   setOldMessage({
+    //     innerHtml: '',
+    //     textContent: '',
+    //   });
+
+    //   return messageChars[0];
+    // };
+
     const newValue = messageChars.find(
       (char, i) => char !== oldMessageChars[i]
     );
+    // ?? getMessageFirstCharacterAndClearOldMessage();
 
-    if (!newValue) return;
+    if (!newValue) {
+      return;
+    }
 
     const { regexs } = await import('../../../../../utils/regexs');
 
@@ -346,6 +360,8 @@ export function MessageInput() {
     const newSavedSelection = saveSelection(messageInput);
 
     setSavedSelection(newSavedSelection);
+
+    // this is to fix the duplicate emojis bug
 
     setContinueInputEvent(false);
 
