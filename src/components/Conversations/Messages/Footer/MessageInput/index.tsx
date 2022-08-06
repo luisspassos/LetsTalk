@@ -106,6 +106,8 @@ export function MessageInput() {
   });
   const [savedSelection, setSavedSelection] = useState<SavedSelection>();
   const [continueInputEvent, setContinueInputEvent] = useState(true);
+  const [somethingInMessageWasDeleted, setSomethingInMessageWasDeleted] =
+    useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
@@ -157,6 +159,18 @@ export function MessageInput() {
         textContent: message,
       });
     };
+
+    if (somethingInMessageWasDeleted) {
+      setSomethingInMessageWasDeleted(false);
+
+      if (!message) {
+        messageInput.innerHTML = '';
+      }
+
+      saveOldMessage();
+
+      return;
+    }
 
     const insertValue = (value: ElementType) => {
       const selection = getSelection();
@@ -219,18 +233,7 @@ export function MessageInput() {
       (char, i) => char !== oldMessageChars[i]
     );
 
-    console.log(messageChars);
-    console.log(oldMessageChars);
-    console.log(newValue);
-
-    if (!newValue) {
-      if (!message) {
-        messageInput.innerHTML = '';
-      }
-
-      saveOldMessage();
-      return;
-    }
+    if (!newValue) return;
 
     const { regexs } = await import('../../../../../utils/regexs');
 
@@ -350,6 +353,14 @@ export function MessageInput() {
     setTimeout(() => {
       setContinueInputEvent(true);
     }, 0);
+  }
+
+  function handleKeyDown(e: KeyboardEvent) {
+    const key = e.key;
+
+    if (key === 'Delete' || key === 'Backspace') {
+      setSomethingInMessageWasDeleted(true);
+    }
   }
 
   // useEffect(() => {
@@ -521,6 +532,7 @@ export function MessageInput() {
         },
       }}
       onInput={handleInput}
+      onKeyDown={handleKeyDown}
     />
   );
 }
