@@ -2,6 +2,13 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import Graphemer from 'graphemer';
 
+type SavedSelection =
+  | {
+      start: number;
+      end: number;
+    }
+  | undefined;
+
 type ParentNodeType = {
   className: string;
 } & ParentNode;
@@ -16,17 +23,77 @@ type SpecialEmojis = Record<
   }
 >;
 
-type SelectionPosition = {
-  offset: number | undefined;
-  container: Node | undefined;
-};
-
-type SavedSelection = {
-  end: SelectionPosition;
-  start: SelectionPosition;
-};
-
 const splitter = new Graphemer();
+
+function saveSelection(containerEl: HTMLDivElement) {
+  const selection = getSelection();
+  const range = selection?.getRangeAt(0);
+  const preSelectionRange = range?.cloneRange();
+  preSelectionRange?.selectNodeContents(containerEl);
+
+  if (!range?.startContainer) return;
+
+  preSelectionRange?.setEnd(range.startContainer, range?.startOffset);
+  const start = preSelectionRange?.toString().length;
+
+  if (start === undefined) return;
+
+  return {
+    start: start,
+    end: start + range.toString().length,
+  };
+}
+
+function restoreSelection(
+  containerEl: HTMLDivElement,
+  savedSelection: SavedSelection
+) {
+  const selection = getSelection();
+
+  const doc = containerEl.ownerDocument;
+  let charIndex = 0;
+  const range = doc.createRange();
+  range.setStart(containerEl, 0);
+  range.collapse(true);
+  const nodeStack: (HTMLDivElement | ChildNode)[] = [containerEl];
+  let node;
+  let foundStart = false;
+  let stop = false;
+
+  while (!stop && (node = nodeStack.pop())) {
+    if (node.nodeType == 3) {
+      if (!node.textContent || !savedSelection) return;
+
+      const nextCharIndex = charIndex + node.textContent.length;
+
+      if (
+        !foundStart &&
+        savedSelection?.start >= charIndex &&
+        savedSelection?.start <= nextCharIndex
+      ) {
+        range.setStart(node, savedSelection?.start - charIndex);
+        foundStart = true;
+      }
+      if (
+        foundStart &&
+        savedSelection?.end >= charIndex &&
+        savedSelection?.end <= nextCharIndex
+      ) {
+        range.setEnd(node, savedSelection?.end - charIndex);
+        stop = true;
+      }
+      charIndex = nextCharIndex;
+    } else {
+      let i = node.childNodes.length;
+      while (i--) {
+        nodeStack.push(node.childNodes[i]);
+      }
+    }
+  }
+
+  selection?.removeAllRanges();
+  selection?.addRange(range);
+}
 
 function insertAfter(newNode: ElementType, referenceNode: ParentNode | null) {
   referenceNode?.parentNode?.insertBefore(newNode, referenceNode.nextSibling);
@@ -37,71 +104,13 @@ export function MessageInput() {
     textContent: '',
     innerHtml: '',
   });
+  const [savedSelection, setSavedSelection] = useState<SavedSelection>();
   const [continueInputEvent, setContinueInputEvent] = useState(true);
   const [somethingInMessageWasDeleted, setSomethingInMessageWasDeleted] =
     useState(false);
-  const [savedSelection, setSavedSelection] = useState<SavedSelection>();
 
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
-
-  const saveSelection = () => {
-    const selection = getSelection();
-    const range = selection?.getRangeAt(0);
-
-    const newSavedSelection = {
-      start: {
-        offset: range?.startOffset,
-        container: range?.startContainer,
-      },
-      end: {
-        offset: range?.endOffset,
-        container: range?.endContainer,
-      },
-    };
-
-    setSavedSelection(newSavedSelection);
-
-    return {
-      start: {
-        offset: range?.startOffset,
-        container: range?.startContainer.textContent,
-      },
-      end: {
-        offset: range?.endOffset,
-        container: range?.endContainer.textContent,
-      },
-    };
-  };
-
-  const restoreSelection = () => {
-    const selection = getSelection();
-
-    if (
-      !savedSelection?.start.container ||
-      !savedSelection?.start.offset ||
-      !savedSelection?.end.container ||
-      !savedSelection?.end.offset
-    ) {
-      return;
-    }
-
-    selection?.setBaseAndExtent(
-      savedSelection?.start.container,
-      savedSelection?.start.offset,
-      savedSelection?.end.container,
-      savedSelection?.end.offset
-    );
-
-    return {
-      a: savedSelection?.start.container.textContent,
-      b: savedSelection?.start.container.className,
-      c: savedSelection?.start.offset,
-      d: savedSelection?.end.container.className,
-      e: savedSelection?.end.container.textContent,
-      f: savedSelection?.end.offset,
-    };
-  };
 
   useEffect(() => {
     // using addEventListener for prevent bugs
@@ -111,7 +120,9 @@ export function MessageInput() {
     function handleBeforeInput() {
       if (!continueBeforeInputEvent || !messageInput) return;
 
-      // console.log(saveSelection());
+      const newSavedSelection = saveSelection(messageInput);
+
+      setSavedSelection(newSavedSelection);
 
       // this is so the event doesn't run twice
       continueBeforeInputEvent = false;
@@ -129,14 +140,11 @@ export function MessageInput() {
   }, [messageInput]);
 
   async function handleInput() {
-    console.log(savedSelection?.start.container?.textContent);
-
     if (!messageInput) return;
 
     if (!continueInputEvent) {
       messageInput.innerHTML = oldMessage.innerHtml;
-
-      restoreSelection();
+      restoreSelection(messageInput, savedSelection);
 
       return;
     }
@@ -211,11 +219,11 @@ export function MessageInput() {
     const restoreOldMessageByDeletingSelectedText = () => {
       messageInput.innerHTML = oldMessage.innerHtml;
 
-      // restoreSelection();
+      restoreSelection(messageInput, savedSelection);
 
-      // const selection = getSelection();
+      const selection = getSelection();
 
-      // selection?.deleteFromDocument();
+      selection?.deleteFromDocument();
     };
 
     const messageChars = splitter.splitGraphemes(message);
@@ -269,14 +277,12 @@ export function MessageInput() {
       const positionCollapsedSelection = () => {
         restoreOldMessageByDeletingSelectedText();
 
-        // console.log(
-        //   savedSelection?.start.container?.textContent,
-        //   savedSelection?.start.offset,
-        //   savedSelection?.end.container?.textContent,
-        //   savedSelection?.end.offset
-        // );
+        const collapsedSelection = {
+          start: savedSelection?.start ?? 0,
+          end: savedSelection?.start ?? 0,
+        };
 
-        restoreSelection();
+        restoreSelection(messageInput, collapsedSelection);
       };
 
       if (Array.isArray(twemoji)) {
@@ -338,9 +344,13 @@ export function MessageInput() {
     }
 
     saveOldMessage();
-    saveSelection();
+
+    const newSavedSelection = saveSelection(messageInput);
+
+    setSavedSelection(newSavedSelection);
 
     // this is to fix the duplicate emojis bug
+
     setContinueInputEvent(false);
 
     setTimeout(() => {
