@@ -151,6 +151,10 @@ export function MessageInput() {
 
     const message = messageInput.textContent ?? '';
 
+    if (!message) {
+      messageInput.innerHTML = '';
+    }
+
     const saveOldMessage = () => {
       const messageHtml = messageInput.innerHTML;
 
@@ -162,10 +166,6 @@ export function MessageInput() {
 
     if (somethingInMessageWasDeleted) {
       setSomethingInMessageWasDeleted(false);
-
-      if (!message) {
-        messageInput.innerHTML = '';
-      }
 
       saveOldMessage();
 
