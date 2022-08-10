@@ -233,7 +233,11 @@ export function MessageInput() {
       (char, i) => char !== oldMessageChars[i]
     );
 
-    if (!newValue) return;
+    if (!newValue) {
+      saveOldMessage();
+
+      return;
+    }
 
     const { regexs } = await import('../../../../../utils/regexs');
 
