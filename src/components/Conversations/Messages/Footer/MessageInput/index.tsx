@@ -157,49 +157,51 @@ export function MessageInput() {
   useEffect(() => {
     if (messageInput === null) return;
 
-    messageInput.innerHTML = `<span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
-  >😭</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
-  >🤹‍♀️</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
-  >😊</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f978.svg");'
-  >🥸</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f618.svg");'
-  >😘</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f923.svg");'
-  >🤣</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f3e7.svg");'
-  >🏧</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg");'
-  >😍</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/267e.svg");'
-  >♾️</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/270f.svg");'
-  >✏️</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f612.svg");'
-  >😒</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
-  >😭</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
-  >🤹‍♀️</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
-  >😊</span>`;
+    messageInput.textContent = '😭🤹‍♀️😊🥸😘🤣🏧😍♾️✏️😒😭🤹‍♀️😊';
+
+    //   messageInput.innerHTML = `<span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
+    // >😭</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
+    // >🤹‍♀️</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
+    // >😊</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f978.svg");'
+    // >🥸</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f618.svg");'
+    // >😘</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f923.svg");'
+    // >🤣</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f3e7.svg");'
+    // >🏧</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg");'
+    // >😍</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/267e.svg");'
+    // >♾️</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/270f.svg");'
+    // >✏️</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f612.svg");'
+    // >😒</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
+    // >😭</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
+    // >🤹‍♀️</span><span
+    //   class='emoji'
+    //   style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
+    // >😊</span>`;
   }, [messageInput]);
 
   useEffect(() => {
@@ -232,14 +234,16 @@ export function MessageInput() {
   async function handleInput() {
     if (!messageInput) return;
 
-    if (!continueInputEvent) {
-      messageInput.innerHTML = oldMessage.innerHtml;
-      restoreSelection(messageInput, savedSelection);
-
-      return;
-    }
-
     const message = messageInput.textContent ?? '';
+
+    console.log([...message]);
+
+    // if (!continueInputEvent) {
+    //   messageInput.innerHTML = oldMessage.innerHtml;
+    //   restoreSelection(messageInput, savedSelection);
+
+    //   return;
+    // }
 
     if (!message) {
       messageInput.innerHTML = '';
@@ -377,62 +381,62 @@ export function MessageInput() {
         restoreSelection(messageInput, collapsedSelection);
       };
 
-      if (Array.isArray(twemoji)) {
-        let emojis;
+      //   if (Array.isArray(twemoji)) {
+      //     let emojis;
 
-        const emojiHtmls = twemoji.map(({ text, url }) => {
-          const emojiHtml = getEmojiHtml(text, url);
+      //     const emojiHtmls = twemoji.map(({ text, url }) => {
+      //       const emojiHtml = getEmojiHtml(text, url);
 
-          return emojiHtml;
-        });
+      //       return emojiHtml;
+      //     });
 
-        const getEmojisWithLinkCharacter = () => {
-          const newEmojiHtmls: HTMLSpanElement[] = [];
+      //     const getEmojisWithLinkCharacter = () => {
+      //       const newEmojiHtmls: HTMLSpanElement[] = [];
 
-          emojiHtmls.forEach((html, i) => {
-            newEmojiHtmls.push(html);
+      //       emojiHtmls.forEach((html, i) => {
+      //         newEmojiHtmls.push(html);
 
-            const isLast = emojiHtmls.length - 1 === i;
+      //         const isLast = emojiHtmls.length - 1 === i;
 
-            if (isLast) return;
+      //         if (isLast) return;
 
-            const linkCharacterHtml = document.createElement('span');
+      //         const linkCharacterHtml = document.createElement('span');
 
-            // the character is invisible
-            linkCharacterHtml.textContent = '‍';
+      //         // the character is invisible
+      //         linkCharacterHtml.textContent = '‍';
 
-            newEmojiHtmls.push(linkCharacterHtml);
-          });
+      //         newEmojiHtmls.push(linkCharacterHtml);
+      //       });
 
-          return newEmojiHtmls;
-        };
+      //       return newEmojiHtmls;
+      //     };
 
-        const emojiIsNotComplete = twemoji.length > 1;
+      //     const emojiIsNotComplete = twemoji.length > 1;
 
-        if (emojiIsNotComplete) {
-          emojis = getEmojisWithLinkCharacter();
-        } else {
-          emojis = emojiHtmls;
-        }
+      //     if (emojiIsNotComplete) {
+      //       emojis = getEmojisWithLinkCharacter();
+      //     } else {
+      //       emojis = emojiHtmls;
+      //     }
 
-        positionCollapsedSelection();
+      //     positionCollapsedSelection();
 
-        emojis.forEach((emojiHtml) => {
-          insertValue(emojiHtml);
-        });
-      } else {
-        const emojiHtml = getEmojiHtml(twemoji.text, twemoji.url);
+      //     emojis.forEach((emojiHtml) => {
+      //       insertValue(emojiHtml);
+      //     });
+      //   } else {
+      //     const emojiHtml = getEmojiHtml(twemoji.text, twemoji.url);
 
-        positionCollapsedSelection();
+      //     positionCollapsedSelection();
 
-        insertValue(emojiHtml);
-      }
-    } else {
-      const newValueHtml = document.createTextNode(newValue);
+      //     insertValue(emojiHtml);
+      //   }
+      // } else {
+      //   const newValueHtml = document.createTextNode(newValue);
 
-      restoreOldMessageByDeletingSelectedText();
+      //   restoreOldMessageByDeletingSelectedText();
 
-      insertValue(newValueHtml);
+      //   insertValue(newValueHtml);
     }
 
     saveOldMessage();
@@ -450,7 +454,7 @@ export function MessageInput() {
     }, 0);
   }
 
-  function handleKeyDown(e: KeyboardEvent) {
+  function handleDeleteKeys(e: KeyboardEvent) {
     const key = e.key;
     const message = messageInput?.textContent;
 
@@ -500,7 +504,7 @@ export function MessageInput() {
         },
       }}
       onInput={handleInput}
-      onKeyDown={handleKeyDown}
+      onKeyDown={handleDeleteKeys}
     />
   );
 }
