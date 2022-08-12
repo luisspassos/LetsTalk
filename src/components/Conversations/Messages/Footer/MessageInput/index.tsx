@@ -157,6 +157,8 @@ export function MessageInput() {
       });
     };
 
+    // 7h 56min ends
+
     if (somethingInMessageWasDeleted) {
       setSomethingInMessageWasDeleted(false);
 
