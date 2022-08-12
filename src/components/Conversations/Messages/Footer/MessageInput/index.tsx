@@ -101,108 +101,16 @@ function insertAfter(newNode: ElementType, referenceNode: ParentNode | null) {
 
 export function MessageInput() {
   const [oldMessage, setOldMessage] = useState({
-    textContent: '😭🤹‍♀️😊🥸😘🤣🏧😍♾️✏️😒😭🤹‍♀️😊',
-    innerHtml: `<span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
-  >😭</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
-  >🤹‍♀️</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
-  >😊</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f978.svg");'
-  >🥸</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f618.svg");'
-  >😘</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f923.svg");'
-  >🤣</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f3e7.svg");'
-  >🏧</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg");'
-  >😍</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/267e.svg");'
-  >♾️</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/270f.svg");'
-  >✏️</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f612.svg");'
-  >😒</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
-  >😭</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
-  >🤹‍♀️</span><span
-    class='emoji'
-    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
-  >😊</span>`,
+    textContent: '',
+    innerHtml: '',
   });
   const [savedSelection, setSavedSelection] = useState<SavedSelection>();
-  const [continueInputEvent, setContinueInputEvent] = useState(true);
+  const [continueInputEvent, setContinueInputEvent] = useState(false);
   const [somethingInMessageWasDeleted, setSomethingInMessageWasDeleted] =
     useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
-
-  useEffect(() => {
-    if (messageInput === null) return;
-
-    messageInput.textContent = '😭🤹‍♀️😊🥸😘🤣🏧😍♾️✏️😒😭🤹‍♀️😊';
-
-    messageInput.innerHTML = `<span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
-    >😭</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
-    >🤹‍♀️</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
-    >😊</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f978.svg");'
-    >🥸</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f618.svg");'
-    >😘</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f923.svg");'
-    >🤣</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f3e7.svg");'
-    >🏧</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg");'
-    >😍</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/267e.svg");'
-    >♾️</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/270f.svg");'
-    >✏️</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f612.svg");'
-    >😒</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
-    >😭</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
-    >🤹‍♀️</span><span
-      class='emoji'
-      style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
-    >😊</span>`;
-  }, [messageInput]);
 
   useEffect(() => {
     // using addEventListener for prevent bugs
@@ -235,15 +143,6 @@ export function MessageInput() {
     if (!messageInput) return;
 
     const message = messageInput.textContent ?? '';
-
-    console.log([...message]);
-
-    // if (!continueInputEvent) {
-    //   messageInput.innerHTML = oldMessage.innerHtml;
-    //   restoreSelection(messageInput, savedSelection);
-
-    //   return;
-    // }
 
     if (!message) {
       messageInput.innerHTML = '';
@@ -327,6 +226,10 @@ export function MessageInput() {
       (char, i) => char !== oldMessageChars[i]
     );
 
+    console.log(oldMessageChars);
+    console.log(messageChars);
+    console.log(newValue);
+
     if (!newValue) {
       saveOldMessage();
 
@@ -338,6 +241,14 @@ export function MessageInput() {
     const isEmoji = regexs.emoji.test(newValue);
 
     if (isEmoji) {
+      if (!continueInputEvent) {
+        setContinueInputEvent(true);
+
+        return;
+      }
+
+      setContinueInputEvent(false);
+
       const { parse: twemojiParse } = await import('twemoji-parser');
 
       const specialEmojis: SpecialEmojis = {
@@ -421,23 +332,22 @@ export function MessageInput() {
 
         positionCollapsedSelection();
 
-        //     emojis.forEach((emojiHtml) => {
-        //       insertValue(emojiHtml);
-        //     });
-        //   } else {
-        //     const emojiHtml = getEmojiHtml(twemoji.text, twemoji.url);
+        emojis.forEach((emojiHtml) => {
+          insertValue(emojiHtml);
+        });
+      } else {
+        const emojiHtml = getEmojiHtml(twemoji.text, twemoji.url);
 
-        //     positionCollapsedSelection();
+        positionCollapsedSelection();
 
-        //     insertValue(emojiHtml);
-        //   }
+        insertValue(emojiHtml);
       }
-      // else {
-      //   const newValueHtml = document.createTextNode(newValue);
+    } else {
+      const newValueHtml = document.createTextNode(newValue);
 
-      //   restoreOldMessageByDeletingSelectedText();
+      restoreOldMessageByDeletingSelectedText();
 
-      //   insertValue(newValueHtml);
+      insertValue(newValueHtml);
     }
 
     saveOldMessage();
@@ -445,17 +355,9 @@ export function MessageInput() {
     const newSavedSelection = saveSelection(messageInput);
 
     setSavedSelection(newSavedSelection);
-
-    // this is to fix the duplicate emojis bug
-
-    setContinueInputEvent(false);
-
-    setTimeout(() => {
-      setContinueInputEvent(true);
-    }, 0);
   }
 
-  function handleDeleteKeys(e: KeyboardEvent) {
+  function handleKeyDown(e: KeyboardEvent) {
     const key = e.key;
     const message = messageInput?.textContent;
 
@@ -505,7 +407,7 @@ export function MessageInput() {
         },
       }}
       onInput={handleInput}
-      onKeyDown={handleDeleteKeys}
+      onKeyDown={handleKeyDown}
     />
   );
 }

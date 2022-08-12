@@ -19,9 +19,16 @@
   <script>
     const contenteditable = document.querySelector('div[contenteditable]');
 
-    contenteditable.textContent = '😭🤹‍♀️😊🥸😘🤣🏧😍♾️✏️😒😭🤹‍♀️😊';
+    let continueInputEvent = false;
 
     contenteditable.addEventListener('input', () => {
+      if (!continueInputEvent) {
+        continueInputEvent = true;
+        return;
+      }
+
+      continueInputEvent = false;
+
       console.log([...contenteditable.textContent]);
     });
   </script>
