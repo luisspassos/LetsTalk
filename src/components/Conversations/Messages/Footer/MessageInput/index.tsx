@@ -101,8 +101,50 @@ function insertAfter(newNode: ElementType, referenceNode: ParentNode | null) {
 
 export function MessageInput() {
   const [oldMessage, setOldMessage] = useState({
-    textContent: '',
-    innerHtml: '',
+    textContent: '😭🤹‍♀️😊🥸😘🤣🏧😍♾️✏️😒😭🤹‍♀️😊',
+    innerHtml: `<span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
+  >😭</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
+  >🤹‍♀️</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
+  >😊</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f978.svg");'
+  >🥸</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f618.svg");'
+  >😘</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f923.svg");'
+  >🤣</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f3e7.svg");'
+  >🏧</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg");'
+  >😍</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/267e.svg");'
+  >♾️</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/270f.svg");'
+  >✏️</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f612.svg");'
+  >😒</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
+  >😭</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
+  >🤹‍♀️</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
+  >😊</span>`,
   });
   const [savedSelection, setSavedSelection] = useState<SavedSelection>();
   const [continueInputEvent, setContinueInputEvent] = useState(true);
@@ -111,6 +153,54 @@ export function MessageInput() {
 
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
+
+  useEffect(() => {
+    if (messageInput === null) return;
+
+    messageInput.innerHTML = `<span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
+  >😭</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
+  >🤹‍♀️</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
+  >😊</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f978.svg");'
+  >🥸</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f618.svg");'
+  >😘</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f923.svg");'
+  >🤣</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f3e7.svg");'
+  >🏧</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg");'
+  >😍</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/267e.svg");'
+  >♾️</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/270f.svg");'
+  >✏️</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f612.svg");'
+  >😒</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f62d.svg");'
+  >😭</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2640-fe0f.svg");'
+  >🤹‍♀️</span><span
+    class='emoji'
+    style='background-image: url("https://twemoji.maxcdn.com/v/latest/svg/1f60a.svg");'
+  >😊</span>`;
+  }, [messageInput]);
 
   useEffect(() => {
     // using addEventListener for prevent bugs
