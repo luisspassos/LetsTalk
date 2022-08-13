@@ -13,17 +13,14 @@
     </style>
   </head>
   <body>
-    <div contenteditable>
-      <span>a</span><span>p</span><span>p</span><span>l</span><span>e</span>
-    </div>
+    <div contenteditable></div>
   </body>
 
   <script>
     const contenteditable = document.querySelector('div[contenteditable]');
 
-    const selection = getSelection();
-
-    selection.setBaseAndExtent(contenteditable, 1, contenteditable, 5);
-    selection.deleteFromDocument();
+    contenteditable.addEventListener('input', (e) => {
+      console.log(e.inputType);
+    });
   </script>
 </html>

@@ -396,6 +396,10 @@ export function MessageInput() {
     }
   }
 
+  function handleInput2() {
+    console.log('a');
+  }
+
   const defaultStyles: any = useStyleConfig('Textarea');
 
   return (
@@ -436,8 +440,8 @@ export function MessageInput() {
           },
         },
       }}
-      onInput={handleInput}
-      onKeyDown={handleKeyDown}
+      onInput={handleInput2}
+      // onKeyDown={handleKeyDown}
     />
   );
 }
