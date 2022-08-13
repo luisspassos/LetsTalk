@@ -2,12 +2,17 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import Graphemer from 'graphemer';
 
-type SavedSelection =
+type SelectionPosition =
   | {
       start: number;
       end: number;
     }
   | undefined;
+
+type SavedSelection = {
+  wasCollapsed: boolean | undefined;
+  position: SelectionPosition;
+};
 
 type ParentNodeType = {
   className: string;
@@ -46,7 +51,7 @@ function saveSelection(containerEl: HTMLDivElement) {
 
 function restoreSelection(
   containerEl: HTMLDivElement,
-  savedSelection: SavedSelection
+  savedSelection: SelectionPosition
 ) {
   const selection = getSelection();
 
@@ -120,9 +125,25 @@ export function MessageInput() {
     function handleBeforeInput() {
       if (!continueBeforeInputEvent || !messageInput) return;
 
+      const selection = getSelection();
+      const selectionIsCollapsed = selection?.isCollapsed;
+
+      selection?.deleteFromDocument();
+
+      const message = messageInput.textContent ?? '';
+      const messageHtml = messageInput.innerHTML;
+
+      setOldMessage({
+        innerHtml: messageHtml,
+        textContent: message,
+      });
+
       const newSavedSelection = saveSelection(messageInput);
 
-      setSavedSelection(newSavedSelection);
+      setSavedSelection({
+        position: newSavedSelection,
+        wasCollapsed: selectionIsCollapsed,
+      });
 
       // this is so the event doesn't run twice
       continueBeforeInputEvent = false;
@@ -214,7 +235,7 @@ export function MessageInput() {
     const restoreOldMessageByDeletingSelectedText = () => {
       messageInput.innerHTML = oldMessage.innerHtml;
 
-      restoreSelection(messageInput, savedSelection);
+      restoreSelection(messageInput, savedSelection?.position);
 
       const selection = getSelection();
 
@@ -228,10 +249,6 @@ export function MessageInput() {
       (char, i) => char !== oldMessageChars[i]
     );
 
-    console.log(oldMessageChars);
-    console.log(messageChars);
-    console.log(newValue);
-
     if (!newValue) {
       saveOldMessage();
 
@@ -243,7 +260,7 @@ export function MessageInput() {
     const isEmoji = regexs.emoji.test(newValue);
 
     if (isEmoji) {
-      if (!continueInputEvent) {
+      if (!continueInputEvent && savedSelection?.wasCollapsed) {
         setContinueInputEvent(true);
 
         return;
@@ -287,8 +304,8 @@ export function MessageInput() {
         restoreOldMessageByDeletingSelectedText();
 
         const collapsedSelection = {
-          start: savedSelection?.start ?? 0,
-          end: savedSelection?.start ?? 0,
+          start: savedSelection?.position?.start ?? 0,
+          end: savedSelection?.position?.start ?? 0,
         };
 
         restoreSelection(messageInput, collapsedSelection);
@@ -356,7 +373,10 @@ export function MessageInput() {
 
     const newSavedSelection = saveSelection(messageInput);
 
-    setSavedSelection(newSavedSelection);
+    setSavedSelection({
+      wasCollapsed: false,
+      position: newSavedSelection,
+    });
   }
 
   function handleKeyDown(e: KeyboardEvent) {

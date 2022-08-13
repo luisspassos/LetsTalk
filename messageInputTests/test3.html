@@ -8,28 +8,22 @@
     <style>
       div[contenteditable] {
         border: 1px solid black;
-        padding: 10px 0;
+        padding: 10px 5px;
       }
     </style>
   </head>
   <body>
-    <div contenteditable></div>
+    <div contenteditable>
+      <span>a</span><span>p</span><span>p</span><span>l</span><span>e</span>
+    </div>
   </body>
 
   <script>
     const contenteditable = document.querySelector('div[contenteditable]');
 
-    let continueInputEvent = false;
+    const selection = getSelection();
 
-    contenteditable.addEventListener('input', () => {
-      if (!continueInputEvent) {
-        continueInputEvent = true;
-        return;
-      }
-
-      continueInputEvent = false;
-
-      console.log([...contenteditable.textContent]);
-    });
+    selection.setBaseAndExtent(contenteditable, 1, contenteditable, 5);
+    selection.deleteFromDocument();
   </script>
 </html>
