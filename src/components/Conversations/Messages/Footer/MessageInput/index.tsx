@@ -129,6 +129,8 @@ export function MessageInput() {
 
       if (!message) {
         messageInput.innerHTML = '';
+
+        setSomethingInMessageWasDeleted(false);
       }
 
       const messageHtml = messageInput.innerHTML;
