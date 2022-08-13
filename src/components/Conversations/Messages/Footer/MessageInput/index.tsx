@@ -273,6 +273,9 @@ export function MessageInput() {
     const isEmoji = regexs.emoji.test(newValue);
 
     if (isEmoji) {
+      // if the selection was collapsed, the event ran twice
+      // this is so the event doesn't run twice with some emoji
+
       if (!continueInputEvent && savedSelection?.wasCollapsed) {
         setContinueInputEvent(true);
 
@@ -345,7 +348,7 @@ export function MessageInput() {
 
             const linkCharacterHtml = document.createElement('span');
 
-            // the character is invisible
+            // the link character is invisible
             linkCharacterHtml.textContent = '‍';
 
             newEmojiHtmls.push(linkCharacterHtml);
@@ -375,6 +378,16 @@ export function MessageInput() {
         insertValue(emojiHtml);
       }
     } else {
+      // this is so the event doesn't run twice with some characters type
+
+      if (!continueInputEvent) {
+        setContinueInputEvent(true);
+
+        return;
+      }
+
+      setContinueInputEvent(false);
+
       const newValueHtml = document.createTextNode(newValue);
 
       restoreOldMessageByDeletingSelectedText();
