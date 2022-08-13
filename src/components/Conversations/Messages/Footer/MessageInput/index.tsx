@@ -278,6 +278,17 @@ export function MessageInput() {
 
       const { parse: twemojiParse } = await import('twemoji-parser');
 
+      const specialEmojis: SpecialEmojis = {
+        '👁️‍🗨️': {
+          text: '👁️‍🗨️',
+          url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+        },
+        '♾️': {
+          text: '♾️',
+          url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+        },
+      };
+
       const getParsedEmoji = () => {
         const twemoji = twemojiParse(newValue);
         const thereAreMoreEmojis = twemoji.length > 1;
@@ -285,7 +296,7 @@ export function MessageInput() {
         return thereAreMoreEmojis ? twemoji : twemoji[0];
       };
 
-      const twemoji = getParsedEmoji();
+      const twemoji = specialEmojis[newValue] || getParsedEmoji();
 
       const getEmojiHtml = (text: string, url: string) => {
         const emojiHtml = document.createElement('span');
