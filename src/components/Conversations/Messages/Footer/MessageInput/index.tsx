@@ -115,8 +115,6 @@ export function MessageInput() {
   const messageInput = ref.current;
 
   useEffect(() => {
-    // using addEventListener for prevent bugs
-
     let continueBeforeInputEvent = true;
 
     function handleBeforeInput() {
@@ -128,6 +126,11 @@ export function MessageInput() {
       selection?.deleteFromDocument();
 
       const message = messageInput.textContent ?? '';
+
+      if (!message) {
+        messageInput.innerHTML = '';
+      }
+
       const messageHtml = messageInput.innerHTML;
 
       setOldMessage({
@@ -150,6 +153,7 @@ export function MessageInput() {
       }, 0);
     }
 
+    // using addEventListener for prevent bugs
     messageInput?.addEventListener('beforeinput', handleBeforeInput);
 
     return () => {
@@ -168,14 +172,13 @@ export function MessageInput() {
 
     const saveOldMessage = () => {
       const messageHtml = messageInput.innerHTML;
+      const message = messageInput.textContent ?? '';
 
       setOldMessage({
         innerHtml: messageHtml,
         textContent: message,
       });
     };
-
-    // 7h 56min ends
 
     if (somethingInMessageWasDeleted) {
       setSomethingInMessageWasDeleted(false);
@@ -396,10 +399,6 @@ export function MessageInput() {
     }
   }
 
-  function handleInput2() {
-    console.log('a');
-  }
-
   const defaultStyles: any = useStyleConfig('Textarea');
 
   return (
@@ -440,8 +439,8 @@ export function MessageInput() {
           },
         },
       }}
-      onInput={handleInput2}
-      // onKeyDown={handleKeyDown}
+      onInput={handleInput}
+      onKeyDown={handleKeyDown}
     />
   );
 }
