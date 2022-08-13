@@ -1,6 +1,5 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
-import Graphemer from 'graphemer';
 
 type SelectionPosition =
   | {
@@ -27,8 +26,6 @@ type SpecialEmojis = Record<
     url: string;
   }
 >;
-
-const splitter = new Graphemer();
 
 function saveSelection(containerEl: HTMLDivElement) {
   const selection = getSelection();
@@ -242,12 +239,23 @@ export function MessageInput() {
       selection?.deleteFromDocument();
     };
 
-    const messageChars = splitter.splitGraphemes(message);
-    const oldMessageChars = splitter.splitGraphemes(oldMessage.textContent);
+    const messageChars = [...message];
+    const oldMessageChars = [...oldMessage.textContent];
 
-    const newValue = messageChars.find(
-      (char, i) => char !== oldMessageChars[i]
-    );
+    for (const key in messageChars) {
+      const newKey = Number(key);
+
+      const messageChar = messageChars[newKey];
+      const oldMessageChar = oldMessageChars[newKey];
+
+      if (messageChar !== oldMessageChar) {
+        oldMessageChars.splice(newKey, 0, 'fill empty space');
+      }
+    }
+
+    const newValue = messageChars
+      .filter((char, i) => char !== oldMessageChars[i])
+      .join('');
 
     if (!newValue) {
       saveOldMessage();
@@ -270,17 +278,6 @@ export function MessageInput() {
 
       const { parse: twemojiParse } = await import('twemoji-parser');
 
-      const specialEmojis: SpecialEmojis = {
-        '👁️‍🗨️': {
-          text: '👁️‍🗨️',
-          url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
-        },
-        '♾️': {
-          text: '♾️',
-          url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
-        },
-      };
-
       const getParsedEmoji = () => {
         const twemoji = twemojiParse(newValue);
         const thereAreMoreEmojis = twemoji.length > 1;
@@ -288,7 +285,7 @@ export function MessageInput() {
         return thereAreMoreEmojis ? twemoji : twemoji[0];
       };
 
-      const twemoji = specialEmojis[newValue] || getParsedEmoji();
+      const twemoji = getParsedEmoji();
 
       const getEmojiHtml = (text: string, url: string) => {
         const emojiHtml = document.createElement('span');
