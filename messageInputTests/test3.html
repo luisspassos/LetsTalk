@@ -5,22 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      div[contenteditable] {
-        border: 1px solid black;
-        padding: 10px 5px;
-      }
-    </style>
+    <style></style>
   </head>
   <body>
-    <div contenteditable></div>
+    <div contenteditable style="border: 1px solid white"></div>
   </body>
 
   <script>
     const contenteditable = document.querySelector('div[contenteditable]');
 
-    contenteditable.addEventListener('beforeinput', (e) => {
-      e.data = 'a';
+    contenteditable.addEventListener('input', (e) => {
+      console.log(e.data);
     });
   </script>
 </html>
