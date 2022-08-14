@@ -172,14 +172,29 @@ export function MessageInput() {
 
     const nativeEvent = e.nativeEvent as NativeEvent;
 
-    const newValue = '🐱‍👤';
+    const newValue = nativeEvent.data;
+
+    if (!newValue) return;
 
     const Graphemer = (await import('graphemer')).default;
     const graphemer = new Graphemer();
 
     const newValueCharacters = graphemer.splitGraphemes(newValue);
 
-    console.log(newValueCharacters);
+    const { regexs } = await import('../../../../../utils/regexs');
+
+    for (const char of newValueCharacters) {
+      const isEmoji = regexs.emoji.test(char);
+
+      if (isEmoji) {
+        const { parse: twemojiParse } = await import('twemoji-parser');
+        const twemoji = twemojiParse(newValue);
+
+        console.log(twemoji);
+
+        break;
+      }
+    }
 
     const preventTheEventFromExecutingTwiceBecauseOfSomeCharacters = () => {
       setContinueInputEvent(false);
