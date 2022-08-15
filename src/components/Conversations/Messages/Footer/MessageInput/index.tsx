@@ -1,5 +1,5 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 
 type SelectionPosition =
   | {
@@ -111,9 +111,9 @@ export function MessageInput() {
     innerHtml: '',
   });
   const [savedSelection, setSavedSelection] = useState<SavedSelection>();
-  const [continueInputEvent, setContinueInputEvent] = useState(true);
   const [somethingInMessageWasDeleted, setSomethingInMessageWasDeleted] =
     useState(false);
+  const [newValue, setNewValue] = useState('');
 
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
@@ -167,44 +167,51 @@ export function MessageInput() {
   //   };
   // }, [messageInput]);
 
-  async function handleInput(e: FormEvent<HTMLDivElement>) {
-    if (!continueInputEvent) return;
+  // useEffect is being used to prevent duplicate values that would be inserted by handleInput func
+  useEffect(() => {
+    if (!newValue) return;
 
+    async function handleNewValue() {
+      const Graphemer = (await import('graphemer')).default;
+      const graphemer = new Graphemer();
+
+      const newValueCharacters = graphemer.splitGraphemes(newValue);
+
+      const { regexs } = await import('../../../../../utils/regexs');
+
+      for (const char of newValueCharacters) {
+        const isEmoji = regexs.emoji.test(char);
+
+        if (isEmoji) {
+          const { parse: twemojiParse } = await import('twemoji-parser');
+          const twemoji = twemojiParse(newValue)[0];
+
+          const twemojiElement = document.createElement('span');
+          twemojiElement.className = 'emoji';
+          twemojiElement.textContent = twemoji.text;
+          twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
+
+          const selection = getSelection();
+          const range = selection?.getRangeAt(0);
+
+          range?.insertNode(twemojiElement);
+
+          selection?.collapseToEnd();
+        }
+      }
+    }
+
+    handleNewValue();
+  }, [newValue]);
+
+  function handleInput(e: FormEvent<HTMLDivElement>) {
     const nativeEvent = e.nativeEvent as NativeEvent;
 
     const newValue = nativeEvent.data;
 
     if (!newValue) return;
 
-    const Graphemer = (await import('graphemer')).default;
-    const graphemer = new Graphemer();
-
-    const newValueCharacters = graphemer.splitGraphemes(newValue);
-
-    const { regexs } = await import('../../../../../utils/regexs');
-
-    for (const char of newValueCharacters) {
-      const isEmoji = regexs.emoji.test(char);
-
-      if (isEmoji) {
-        const { parse: twemojiParse } = await import('twemoji-parser');
-        const twemoji = twemojiParse(newValue);
-
-        console.log(twemoji);
-
-        break;
-      }
-    }
-
-    const preventTheEventFromExecutingTwiceBecauseOfSomeCharacters = () => {
-      setContinueInputEvent(false);
-
-      setTimeout(() => {
-        setContinueInputEvent(true);
-      }, 0);
-    };
-
-    preventTheEventFromExecutingTwiceBecauseOfSomeCharacters();
+    setNewValue(newValue);
 
     // if (!messageInput) return;
     // const message = messageInput.textContent ?? '';
