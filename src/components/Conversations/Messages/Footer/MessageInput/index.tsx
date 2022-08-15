@@ -1,5 +1,6 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
+import Graphemer from 'graphemer';
 
 type SelectionPosition =
   | {
@@ -30,6 +31,8 @@ type SpecialEmojis = Record<
     url: string;
   }
 >;
+
+const graphemer = new Graphemer();
 
 function saveSelection(containerEl: HTMLDivElement) {
   const selection = getSelection();
@@ -106,14 +109,14 @@ function insertAfter(newNode: ElementType, referenceNode: ParentNode | null) {
 }
 
 export function MessageInput() {
-  const [oldMessage, setOldMessage] = useState({
-    textContent: '',
-    innerHtml: '',
-  });
+  const [oldMessage, setOldMessage] = useState('');
   const [savedSelection, setSavedSelection] = useState<SavedSelection>();
   const [somethingInMessageWasDeleted, setSomethingInMessageWasDeleted] =
     useState(false);
-  const [newValue, setNewValue] = useState('');
+  const [
+    preventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters,
+    setPreventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters,
+  ] = useState(false);
 
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
@@ -168,50 +171,55 @@ export function MessageInput() {
   // }, [messageInput]);
 
   // useEffect is being used to prevent duplicate values that would be inserted by handleInput func
-  useEffect(() => {
-    if (!newValue) return;
 
-    async function handleNewValue() {
-      const Graphemer = (await import('graphemer')).default;
-      const graphemer = new Graphemer();
+  async function handleInput(e: FormEvent<HTMLDivElement>) {
+    const nativeEvent = e.nativeEvent as NativeEvent;
+    const newValue = nativeEvent.data;
 
-      const newValueCharacters = graphemer.splitGraphemes(newValue);
+    if (
+      !newValue ||
+      !messageInput ||
+      preventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters
+    )
+      return;
 
-      const { regexs } = await import('../../../../../utils/regexs');
+    const newValueCharacters = graphemer.splitGraphemes(newValue);
 
-      for (const char of newValueCharacters) {
-        const isEmoji = regexs.emoji.test(char);
+    const { regexs } = await import('../../../../../utils/regexs');
 
-        if (isEmoji) {
-          const { parse: twemojiParse } = await import('twemoji-parser');
-          const twemoji = twemojiParse(newValue)[0];
+    for (const char of newValueCharacters) {
+      const isEmoji = regexs.emoji.test(char);
 
-          const twemojiElement = document.createElement('span');
-          twemojiElement.className = 'emoji';
-          twemojiElement.textContent = twemoji.text;
-          twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
+      if (isEmoji) {
+        const { parse: twemojiParse } = await import('twemoji-parser');
+        const twemoji = twemojiParse(newValue)[0];
 
-          const selection = getSelection();
-          const range = selection?.getRangeAt(0);
+        const twemojiElement = document.createElement('span');
+        twemojiElement.className = 'emoji';
+        twemojiElement.textContent = twemoji.text;
+        twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
 
-          range?.insertNode(twemojiElement);
+        const selection = getSelection();
+        const range = selection?.getRangeAt(0);
 
-          selection?.collapseToEnd();
-        }
+        messageInput.innerHTML = oldMessage;
+
+        range?.insertNode(twemojiElement);
+
+        selection?.collapseToEnd();
       }
     }
 
-    handleNewValue();
-  }, [newValue]);
+    const message = messageInput.innerHTML;
 
-  function handleInput(e: FormEvent<HTMLDivElement>) {
-    const nativeEvent = e.nativeEvent as NativeEvent;
+    setOldMessage(message);
 
-    const newValue = nativeEvent.data;
-
-    if (!newValue) return;
-
-    setNewValue(newValue);
+    setPreventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters(true);
+    // read about to and for
+    const timeNecessaryToPrevent = 0;
+    setTimeout(() => {
+      setPreventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters(false);
+    }, 0);
 
     // if (!messageInput) return;
     // const message = messageInput.textContent ?? '';
