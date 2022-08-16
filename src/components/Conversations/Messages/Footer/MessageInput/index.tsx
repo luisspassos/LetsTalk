@@ -1,22 +1,17 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import Graphemer from 'graphemer';
-
-type SelectionPosition =
-  | {
-      start: number;
-      end: number;
-    }
-  | undefined;
 
 type NativeEvent = Event & {
   data: string;
 };
 
-type SavedSelection = {
-  wasCollapsed: boolean | undefined;
-  position: SelectionPosition;
-};
+type SavedSelection =
+  | {
+      start: number;
+      end: number;
+    }
+  | undefined;
 
 const graphemer = new Graphemer();
 
@@ -41,7 +36,7 @@ function saveSelection(containerEl: HTMLDivElement) {
 
 function restoreSelection(
   containerEl: HTMLDivElement,
-  savedSelection: SelectionPosition
+  savedSelection: SavedSelection
 ) {
   const selection = getSelection();
 
@@ -90,6 +85,10 @@ function restoreSelection(
   selection?.addRange(range);
 }
 
+function insertAfter(newNode: HTMLSpanElement, referenceNode: Node | null) {
+  referenceNode?.parentNode?.insertBefore(newNode, referenceNode.nextSibling);
+}
+
 export function MessageInput() {
   const [oldMessage, setOldMessage] = useState('');
   const [savedSelection, setSavedSelection] = useState<SavedSelection>();
@@ -101,14 +100,39 @@ export function MessageInput() {
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
 
+  const saveNewSelection = useCallback(() => {
+    if (!messageInput) return;
+
+    const newSavedSelection = saveSelection(messageInput);
+
+    setSavedSelection(newSavedSelection);
+  }, [messageInput]);
+
+  useEffect(() => {
+    function handleBeforeInput() {
+      saveNewSelection();
+    }
+
+    messageInput?.addEventListener('beforeinput', handleBeforeInput);
+
+    return () => {
+      messageInput?.removeEventListener('beforeinput', handleBeforeInput);
+    };
+  }, [messageInput, saveNewSelection]);
+
   async function handleInput(e: FormEvent<HTMLDivElement>) {
     const nativeEvent = e.nativeEvent as NativeEvent;
     const newValue = nativeEvent.data;
 
     if (!newValue || !messageInput) return;
 
-    if (preventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters) {
+    const restoreOldMessageAndRestoreSelection = () => {
       messageInput.innerHTML = oldMessage;
+      restoreSelection(messageInput, savedSelection);
+    };
+
+    if (preventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters) {
+      restoreOldMessageAndRestoreSelection();
 
       return;
     }
@@ -124,19 +148,40 @@ export function MessageInput() {
         const { parse: twemojiParse } = await import('twemoji-parser');
         const twemoji = twemojiParse(newValue)[0];
 
-        const twemojiElement = document.createElement('span');
-        twemojiElement.className = 'emoji';
-        twemojiElement.textContent = twemoji.text;
-        twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
+        const emojiElement = document.createElement('span');
+        emojiElement.className = 'emoji';
+        emojiElement.textContent = twemoji.text;
+        emojiElement.style.backgroundImage = `url(${twemoji.url})`;
+
+        restoreOldMessageAndRestoreSelection();
 
         const selection = getSelection();
         const range = selection?.getRangeAt(0);
 
-        messageInput.innerHTML = oldMessage;
+        range?.insertNode(emojiElement);
 
-        range?.insertNode(twemojiElement);
+        const emojiHasBeenAddedToTheRightOfAnotherEmoji = regexs.emoji.test(
+          emojiElement.previousSibling?.textContent ?? ''
+        );
+        const emojiHasBeenAddedToTheLeftOfAnotherEmoji = regexs.emoji.test(
+          emojiElement.nextSibling?.textContent ?? ''
+        );
+
+        if (emojiHasBeenAddedToTheRightOfAnotherEmoji) {
+          emojiElement.remove();
+
+          messageInput.insertBefore(emojiElement, emojiElement.nextSibling);
+        }
+
+        if (emojiHasBeenAddedToTheLeftOfAnotherEmoji) {
+          emojiElement.remove();
+
+          insertAfter(emojiElement, emojiElement.previousSibling);
+        }
 
         selection?.collapseToEnd();
+
+        break;
       }
     }
 
@@ -144,9 +189,7 @@ export function MessageInput() {
 
     setOldMessage(message);
 
-    const newSavedSelection = saveSelection(messageInput);
-
-    setSavedSelection(newSavedSelection);
+    saveNewSelection();
 
     setPreventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters(true);
 
@@ -198,7 +241,6 @@ export function MessageInput() {
         },
       }}
       onInput={handleInput}
-      // onKeyDown={handleKeyDown}
     />
   );
 }

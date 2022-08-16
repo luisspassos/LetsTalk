@@ -1,13 +1,14 @@
-let continueInputEvent = true;
+const num = 1;
 
-function handleInput() {
-  if (!continueInputEvent) {
-    return;
-  }
 
-  continueInputEvent = false;
+if (num === 1) {
+  console.log("it's 1")
 
-  setTimeout(() => {
-    continueInputEvent = true;
-  }, 0);
+  return;
 }
+
+if (num === 1) {
+  console.log("it's 1 again")
+}
+
+
