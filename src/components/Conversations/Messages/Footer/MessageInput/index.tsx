@@ -148,6 +148,8 @@ export function MessageInput() {
         const { parse: twemojiParse } = await import('twemoji-parser');
         const twemoji = twemojiParse(newValue)[0];
 
+        // 👁️‍🗨️ ♾️
+
         const emojiElement = document.createElement('span');
         emojiElement.className = 'emoji';
         emojiElement.textContent = twemoji.text;
@@ -158,14 +160,14 @@ export function MessageInput() {
         const selection = getSelection();
         const range = selection?.getRangeAt(0);
 
-        if(range?.startOffset === 0) {
-          emojiElement.remove()
+        if (range?.startOffset === 0) {
+          emojiElement.remove();
 
-          messageInput.prepend(emojiElement)
+          messageInput.prepend(emojiElement);
         } else {
-          emojiElement.remove()
+          emojiElement.remove();
 
-          insertAfter(emojiElement, range?.commonAncestorContainer)
+          insertAfter(emojiElement, range?.commonAncestorContainer);
         }
 
         // range?.insertNode(emojiElement);
