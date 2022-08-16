@@ -158,28 +158,43 @@ export function MessageInput() {
         const selection = getSelection();
         const range = selection?.getRangeAt(0);
 
-        range?.insertNode(emojiElement);
+        if(range?.startOffset === 0) {
+          emojiElement.remove()
 
-        const emojiHasBeenAddedToTheRightOfAnotherEmoji = regexs.emoji.test(
-          emojiElement.previousSibling?.textContent ?? ''
-        );
-        const emojiHasBeenAddedToTheLeftOfAnotherEmoji = regexs.emoji.test(
-          emojiElement.nextSibling?.textContent ?? ''
-        );
+          messageInput.prepend(emojiElement)
+        } else {
+          emojiElement.remove()
 
-        if (emojiHasBeenAddedToTheRightOfAnotherEmoji) {
-          emojiElement.remove();
-
-          messageInput.insertBefore(emojiElement, emojiElement.nextSibling);
+          insertAfter(emojiElement, range?.commonAncestorContainer)
         }
 
-        if (emojiHasBeenAddedToTheLeftOfAnotherEmoji) {
-          emojiElement.remove();
+        // range?.insertNode(emojiElement);
 
-          insertAfter(emojiElement, emojiElement.previousSibling);
-        }
+        // console.log(range);
 
-        selection?.collapseToEnd();
+        // console.log(emojiElement.nextSibling);
+        // console.log(emojiElement.previousSibling);
+
+        // const emojiHasBeenAddedToTheRightOfAnotherEmoji = regexs.emoji.test(
+        //   emojiElement.previousSibling?.textContent ?? ''
+        // );
+        // const emojiHasBeenAddedToTheLeftOfAnotherEmoji = regexs.emoji.test(
+        //   emojiElement.nextSibling?.textContent ?? ''
+        // );
+
+        // if (emojiHasBeenAddedToTheRightOfAnotherEmoji) {
+        //   emojiElement.remove();
+
+        //   messageInput.insertBefore(emojiElement, emojiElement.nextSibling);
+        // }
+
+        // if (emojiHasBeenAddedToTheLeftOfAnotherEmoji) {
+        //   emojiElement.remove();
+
+        //   insertAfter(emojiElement, emojiElement.previousSibling);
+        // }
+
+        range?.setStartAfter(emojiElement);
 
         break;
       }
