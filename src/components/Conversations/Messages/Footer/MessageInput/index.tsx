@@ -13,6 +13,14 @@ type SavedSelection =
     }
   | undefined;
 
+type SpecialEmojis = Record<
+  string,
+  {
+    text: string;
+    url: string;
+  }
+>;
+
 const graphemer = new Graphemer();
 
 function saveSelection(containerEl: HTMLDivElement) {
@@ -145,10 +153,28 @@ export function MessageInput() {
       const isEmoji = regexs.emoji.test(char);
 
       if (isEmoji) {
-        const { parse: twemojiParse } = await import('twemoji-parser');
-        const twemoji = twemojiParse(newValue)[0];
+        const specialEmojis: SpecialEmojis = {
+          '👁️‍🗨️': {
+            text: '👁️‍🗨️',
+            url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+          },
+          '♾️': {
+            text: '♾️',
+            url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+          },
+        };
 
-        // 👁️‍🗨️ ♾️
+        const getParsedEmoji = async () => {
+          const { parse: twemojiParse } = await import('twemoji-parser');
+
+          const emoji = twemojiParse(char)[0];
+
+          return emoji;
+        };
+
+        const twemoji = specialEmojis[char] || (await getParsedEmoji());
+
+        console.log(twemoji);
 
         const emojiElement = document.createElement('span');
         emojiElement.className = 'emoji';
@@ -160,41 +186,34 @@ export function MessageInput() {
         const selection = getSelection();
         const range = selection?.getRangeAt(0);
 
-        if (range?.startOffset === 0) {
+        const positionEmoji = () => {
           emojiElement.remove();
 
-          messageInput.prepend(emojiElement);
-        } else {
-          emojiElement.remove();
+          const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+            range?.startOffset === 0;
 
-          insertAfter(emojiElement, range?.commonAncestorContainer);
-        }
+          if (emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+            messageInput.prepend(emojiElement);
 
-        // range?.insertNode(emojiElement);
+            return;
+          }
 
-        // console.log(range);
+          const elementThatWasNextToTheInsertedEmoji =
+            range?.commonAncestorContainer;
+          const referenceElementForInsertingEmoji =
+            elementThatWasNextToTheInsertedEmoji?.parentElement?.nextSibling;
+          // parentElement has been used because the emoji would be inserted after its textContext and now will be outside the tag
+          // nextSibling is being used to insert the emoji after the reference element
 
-        // console.log(emojiElement.nextSibling);
-        // console.log(emojiElement.previousSibling);
+          if (referenceElementForInsertingEmoji === undefined) return;
 
-        // const emojiHasBeenAddedToTheRightOfAnotherEmoji = regexs.emoji.test(
-        //   emojiElement.previousSibling?.textContent ?? ''
-        // );
-        // const emojiHasBeenAddedToTheLeftOfAnotherEmoji = regexs.emoji.test(
-        //   emojiElement.nextSibling?.textContent ?? ''
-        // );
+          messageInput.insertBefore(
+            emojiElement,
+            referenceElementForInsertingEmoji
+          );
+        };
 
-        // if (emojiHasBeenAddedToTheRightOfAnotherEmoji) {
-        //   emojiElement.remove();
-
-        //   messageInput.insertBefore(emojiElement, emojiElement.nextSibling);
-        // }
-
-        // if (emojiHasBeenAddedToTheLeftOfAnotherEmoji) {
-        //   emojiElement.remove();
-
-        //   insertAfter(emojiElement, emojiElement.previousSibling);
-        // }
+        positionEmoji();
 
         range?.setStartAfter(emojiElement);
 
