@@ -20,7 +20,10 @@ type Emoji = {
 
 type SpecialEmojis = Record<string, Emoji>;
 
-type TwemojiWithLinkCharacter = (Emoji | '‍')[];
+// the link character is invisible
+const linkCharacter = '‍';
+
+type TwemojiWithLinkCharacter = (Emoji | typeof linkCharacter)[];
 
 const graphemer = new Graphemer();
 
@@ -183,6 +186,47 @@ export function MessageInput() {
             return emojiElement;
           };
 
+          const positionElement = (element: HTMLSpanElement) => {
+            const selection = getSelection();
+            const range = selection?.getRangeAt(0);
+
+            element.remove();
+
+            const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+              range?.startOffset === 0;
+
+            if (emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+              messageInput.prepend(element);
+            } else {
+              const elementThatWasNextToTheInsertedEmoji =
+                range?.commonAncestorContainer;
+
+              const isMessageInput =
+                elementThatWasNextToTheInsertedEmoji?.nodeName === 'DIV';
+
+              if (isMessageInput) {
+                range?.insertNode(element);
+              } else {
+                const referenceElementForInsertingEmoji =
+                  elementThatWasNextToTheInsertedEmoji?.parentElement
+                    ?.nextSibling;
+                // parentElement has been used because the emoji would be inserted after its textContext and now will be outside the tag
+                // nextSibling is being used to insert the emoji after the reference element
+
+                if (referenceElementForInsertingEmoji === undefined) return;
+
+                messageInput.insertBefore(
+                  element,
+                  referenceElementForInsertingEmoji
+                );
+              }
+            }
+
+            range?.setStartAfter(element);
+          };
+
+          restoreOldMessageAndRestoreSelection();
+
           if (Array.isArray(twemoji)) {
             const getEmojisWithLinkCharacter = () => {
               const newTwemoji: TwemojiWithLinkCharacter = [];
@@ -196,8 +240,7 @@ export function MessageInput() {
 
                 if (isLast) continue;
 
-                // the link character is invisible
-                newTwemoji.push('‍');
+                newTwemoji.push(linkCharacter);
               }
 
               return newTwemoji;
@@ -206,14 +249,16 @@ export function MessageInput() {
             const emojis = getEmojisWithLinkCharacter();
 
             for (const char of emojis) {
-              if (char === '‍') {
-                const element = document.createElement('span');
-                element.textContent = '‍';
+              let element: HTMLSpanElement;
 
-                continue;
+              if (char === linkCharacter) {
+                element = document.createElement('span');
+                element.textContent = linkCharacter;
+              } else {
+                element = getEmojiElement(char.text, char.url);
               }
 
-              const emojiElement = getEmojiElement(char.text, char.url);
+              positionElement(element);
             }
 
             return;
@@ -221,41 +266,7 @@ export function MessageInput() {
 
           const emojiElement = getEmojiElement(twemoji.text, twemoji.url);
 
-          restoreOldMessageAndRestoreSelection();
-
-          const selection = getSelection();
-          const range = selection?.getRangeAt(0);
-
-          const positionEmoji = () => {
-            emojiElement.remove();
-
-            const emojiHasBeenPlacedAtTheBeginningOfTheInput =
-              range?.startOffset === 0;
-
-            if (emojiHasBeenPlacedAtTheBeginningOfTheInput) {
-              messageInput.prepend(emojiElement);
-
-              return;
-            }
-
-            const elementThatWasNextToTheInsertedEmoji =
-              range?.commonAncestorContainer;
-            const referenceElementForInsertingEmoji =
-              elementThatWasNextToTheInsertedEmoji?.parentElement?.nextSibling;
-            // parentElement has been used because the emoji would be inserted after its textContext and now will be outside the tag
-            // nextSibling is being used to insert the emoji after the reference element
-
-            if (referenceElementForInsertingEmoji === undefined) return;
-
-            messageInput.insertBefore(
-              emojiElement,
-              referenceElementForInsertingEmoji
-            );
-          };
-
-          positionEmoji();
-
-          range?.setStartAfter(emojiElement);
+          positionElement(emojiElement);
         };
 
         insertEmoji();
