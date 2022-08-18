@@ -6,12 +6,17 @@ type NativeEvent = Event & {
   data: string;
 };
 
-type SavedSelection =
+type SelectionPosition =
   | {
       start: number;
       end: number;
     }
   | undefined;
+
+type SavedSelection = {
+  position: SelectionPosition;
+  elementThatIsClose: Node | undefined;
+};
 
 type Emoji = {
   text: string;
@@ -48,7 +53,7 @@ function saveSelection(containerEl: HTMLDivElement) {
 
 function restoreSelection(
   containerEl: HTMLDivElement,
-  savedSelection: SavedSelection
+  selectionPosition: SelectionPosition
 ) {
   const selection = getSelection();
 
@@ -64,24 +69,24 @@ function restoreSelection(
 
   while (!stop && (node = nodeStack.pop())) {
     if (node.nodeType == 3) {
-      if (!node.textContent || !savedSelection) return;
+      if (!node.textContent || !selectionPosition) return;
 
       const nextCharIndex = charIndex + node.textContent.length;
 
       if (
         !foundStart &&
-        savedSelection?.start >= charIndex &&
-        savedSelection?.start <= nextCharIndex
+        selectionPosition?.start >= charIndex &&
+        selectionPosition?.start <= nextCharIndex
       ) {
-        range.setStart(node, savedSelection?.start - charIndex);
+        range.setStart(node, selectionPosition?.start - charIndex);
         foundStart = true;
       }
       if (
         foundStart &&
-        savedSelection?.end >= charIndex &&
-        savedSelection?.end <= nextCharIndex
+        selectionPosition?.end >= charIndex &&
+        selectionPosition?.end <= nextCharIndex
       ) {
-        range.setEnd(node, savedSelection?.end - charIndex);
+        range.setEnd(node, selectionPosition?.end - charIndex);
         stop = true;
       }
       charIndex = nextCharIndex;
@@ -112,8 +117,13 @@ export function MessageInput() {
     if (!messageInput) return;
 
     const newSavedSelection = saveSelection(messageInput);
+    const selection = getSelection();
+    const range = selection?.getRangeAt(0);
 
-    setSavedSelection(newSavedSelection);
+    setSavedSelection({
+      elementThatIsClose: range?.commonAncestorContainer,
+      position: newSavedSelection,
+    });
   }, [messageInput]);
 
   useEffect(() => {
@@ -121,6 +131,7 @@ export function MessageInput() {
       saveNewSelection();
     }
 
+    // addEventListener is being used to fire the event when a deletion happens, the normal event ignores a deletion
     messageInput?.addEventListener('beforeinput', handleBeforeInput);
 
     return () => {
@@ -134,13 +145,12 @@ export function MessageInput() {
 
     if (!newValue || !messageInput) return;
 
-    const restoreOldMessageAndRestoreSelection = () => {
+    const restoreTheOldMessage = () => {
       messageInput.innerHTML = oldMessage;
-      restoreSelection(messageInput, savedSelection);
     };
 
     if (preventTheInputEventFromExecutingTwiceBecauseOfSomeCharacters) {
-      restoreOldMessageAndRestoreSelection();
+      restoreTheOldMessage();
 
       return;
     }
@@ -190,16 +200,16 @@ export function MessageInput() {
             const selection = getSelection();
             const range = selection?.getRangeAt(0);
 
-            element.remove();
-
             const emojiHasBeenPlacedAtTheBeginningOfTheInput =
-              range?.startOffset === 0;
+              savedSelection?.position?.start === 0;
 
             if (emojiHasBeenPlacedAtTheBeginningOfTheInput) {
               messageInput.prepend(element);
             } else {
+              element.remove();
+
               const elementThatWasNextToTheInsertedEmoji =
-                range?.commonAncestorContainer;
+                savedSelection?.elementThatIsClose;
 
               const isMessageInput =
                 elementThatWasNextToTheInsertedEmoji?.nodeName === 'DIV';
@@ -225,7 +235,7 @@ export function MessageInput() {
             range?.setStartAfter(element);
           };
 
-          restoreOldMessageAndRestoreSelection();
+          restoreTheOldMessage();
 
           if (Array.isArray(twemoji)) {
             const getEmojisWithLinkCharacter = () => {
