@@ -7,20 +7,22 @@
     <title>Document</title>
   </head>
   <body>
-    <div contenteditable style="border: 1px solid white"></div>
+    <div contenteditable style="border: 1px solid white; padding: 0 10px"></div>
 
     <script>
       const contenteditable = document.querySelector('div[contenteditable]');
 
-      contenteditable.addEventListener(
-        'input',
-        (e) => {
-          console.log(e.data);
-        },
-        {
-          once: true,
-        }
-      );
+      let newValue = '';
+
+      contenteditable.addEventListener('beforeinput', (e) => {
+        newValue = '🤣😍';
+
+        e.target.textContent = newValue;
+      });
+
+      contenteditable.addEventListener('input', (e) => {
+        e.target.textContent = newValue;
+      });
     </script>
   </body>
 </html>
