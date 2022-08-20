@@ -3,18 +3,54 @@ import { FormEvent } from 'react';
 
 type BeforeInputEvent = FormEvent<HTMLDivElement> & {
   data: string;
+  target: HTMLDivElement;
 };
 
 export function MessageInput() {
-  const defaultStyles: any = useStyleConfig('Textarea');
+  let oldMessage = '';
 
   async function handleInsertValues(e: BeforeInputEvent) {
-    const newValue = e.data as string;
+    const messageInput = e.target;
 
-    const {} = await import('../../../../../utils/regexs');
+    messageInput.innerHTML = oldMessage;
 
-    const isEmoji = regexs;
+    const newValue = e.data;
+
+    const Graphemer = (await import('graphemer')).default;
+    const graphemer = new Graphemer();
+
+    const newValueChars = graphemer.splitGraphemes(newValue);
+
+    for (const char of newValueChars) {
+      const { regexs } = await import('../../../../../utils/regexs');
+
+      const isEmoji = regexs.emoji.test(char);
+
+      if (isEmoji) {
+        const { parse: twemojiParse } = await import('twemoji-parser');
+
+        const twemojiEmojis = twemojiParse(char);
+
+        for (const emoji of twemojiEmojis) {
+          const element = document.createElement('span');
+          element.textContent = emoji.text;
+          element.style.backgroundImage = `url(${emoji.url})`;
+          element.className = 'emoji';
+
+          const selection = getSelection();
+          const range = selection?.getRangeAt(0);
+
+          range?.insertNode(element);
+        }
+      }
+    }
+
+    const message = messageInput.innerHTML;
+
+    oldMessage = message;
   }
+
+  const defaultStyles: any = useStyleConfig('Textarea');
 
   return (
     <Box

@@ -12,16 +12,8 @@
     <script>
       const contenteditable = document.querySelector('div[contenteditable]');
 
-      let newValue = '';
-
       contenteditable.addEventListener('beforeinput', (e) => {
-        newValue = '🤣😍';
-
-        e.target.textContent = newValue;
-      });
-
-      contenteditable.addEventListener('input', (e) => {
-        e.target.textContent = newValue;
+        console.log(e.target.textContent);
       });
     </script>
   </body>
