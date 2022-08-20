@@ -2,6 +2,14 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import Graphemer from 'graphemer';
 
+type SpecialEmojis = Record<
+  string,
+  {
+    text: string;
+    url: string;
+  }[]
+>;
+
 const graphemer = new Graphemer();
 
 export function MessageInput() {
@@ -34,7 +42,23 @@ export function MessageInput() {
 
         if (isEmoji) {
           const { parse: twemojiParse } = await import('twemoji-parser');
-          const twemojiEmojis = twemojiParse(char);
+
+          const specialEmojis: SpecialEmojis = {
+            '👁️‍🗨️': [
+              {
+                text: '👁️‍🗨️',
+                url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+              },
+            ],
+            '♾️': [
+              {
+                text: '♾️',
+                url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+              },
+            ],
+          };
+
+          const twemojiEmojis = specialEmojis[char] ?? twemojiParse(char);
 
           for (const emoji of twemojiEmojis) {
             const element = document.createElement('span');
