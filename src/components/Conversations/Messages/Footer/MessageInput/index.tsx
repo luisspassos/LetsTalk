@@ -2,13 +2,21 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import Graphemer from 'graphemer';
 
-type SpecialEmojis = Record<
-  string,
-  {
-    text: string;
-    url: string;
-  }[]
->;
+type Event = {
+  name: string;
+  func: EventListener;
+};
+
+type Emoji = {
+  text: string;
+  url: string;
+};
+
+type SpecialEmojis = Record<string, Emoji[]>;
+
+const linkCharacter = '‍';
+
+type Emojis = (Emoji | typeof linkCharacter)[];
 
 const graphemer = new Graphemer();
 
@@ -18,6 +26,12 @@ export function MessageInput() {
 
   useEffect(() => {
     let preventTheBeforeInputEventFromRunningTwice = false;
+
+    // this is to prevent the value from being inserted twice
+    const message = {
+      data: '',
+      restore: false,
+    };
 
     async function handleInsertValues(e: InputEvent) {
       if (preventTheBeforeInputEventFromRunningTwice) {
@@ -58,32 +72,69 @@ export function MessageInput() {
             ],
           };
 
-          const twemojiEmojis = specialEmojis[char] ?? twemojiParse(char);
+          const getEmojis = () => {
+            const emojis = twemojiParse(char);
 
-          for (const emoji of twemojiEmojis) {
-            const element = document.createElement('span');
+            const thereAreMoreEmojis = emojis.length > 1;
 
-            element.textContent = emoji.text;
-            element.style.backgroundImage = `url(${emoji.url})`;
-            element.className = 'emoji';
+            if (!thereAreMoreEmojis) return emojis;
 
-            const emojiHasBeenPlacedAtTheBeginningOfTheInput =
-              selectionRange?.startOffset === 0;
+            message.restore = true;
 
-            if (
-              emojiHasBeenPlacedAtTheBeginningOfTheInput &&
-              messageInput?.firstChild
-            ) {
-              selectionRange?.setStartBefore(messageInput?.firstChild);
+            const emojisWithLinkCharacter = [];
+
+            for (const index in emojis) {
+              const emoji = emojis[index];
+
+              emojisWithLinkCharacter.push(emoji);
+
+              const isLast = emojis.length - 1 === Number(index);
+
+              if (isLast) continue;
+
+              // the link character is invisible
+              emojisWithLinkCharacter.push(linkCharacter);
             }
 
-            if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
-              const elementThatWasCloseToTheInsertion =
-                selectionRange?.commonAncestorContainer.parentElement;
+            return emojisWithLinkCharacter;
+          };
 
-              if (!elementThatWasCloseToTheInsertion) return;
+          const emojis: Emojis = specialEmojis[char] ?? getEmojis();
 
-              selectionRange?.setStartAfter(elementThatWasCloseToTheInsertion);
+          for (const emoji of emojis) {
+            console.log(selectionRange);
+
+            let element;
+
+            if (emoji === linkCharacter) {
+              element = document.createTextNode(linkCharacter);
+            } else {
+              element = document.createElement('span');
+
+              element.textContent = emoji.text;
+              element.style.backgroundImage = `url(${emoji.url})`;
+              element.className = 'emoji';
+
+              const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+                selectionRange?.startOffset === 0;
+
+              if (
+                emojiHasBeenPlacedAtTheBeginningOfTheInput &&
+                messageInput?.firstChild
+              ) {
+                selectionRange?.setStartBefore(messageInput?.firstChild);
+              }
+
+              if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+                const elementThatWasCloseToTheInsertion =
+                  selectionRange?.commonAncestorContainer.parentElement;
+
+                if (!elementThatWasCloseToTheInsertion) return;
+
+                selectionRange?.setStartAfter(
+                  elementThatWasCloseToTheInsertion
+                );
+              }
             }
 
             selectionRange?.insertNode(element);
@@ -91,14 +142,50 @@ export function MessageInput() {
         }
       }
 
+      const newMessage = messageInput?.innerHTML ?? '';
+
+      if (message.restore) message.data = newMessage;
+
       preventTheBeforeInputEventFromRunningTwice = true;
     }
 
-    // addEventListener is being used to prevent bugs
-    messageInput?.addEventListener('beforeinput', handleInsertValues);
+    let continueInputEvent = false;
+
+    function handleRestoreMessage() {
+      if (!message.restore || !messageInput) return;
+
+      if (!continueInputEvent) {
+        continueInputEvent = true;
+
+        return;
+      }
+
+      messageInput.innerHTML = message.data;
+
+      message.restore = false;
+      continueInputEvent = false;
+    }
+
+    const events = [
+      {
+        name: 'beforeinput',
+        func: handleInsertValues,
+      },
+      {
+        name: 'input',
+        func: handleRestoreMessage,
+      },
+    ] as Event[];
+
+    for (const event of events) {
+      // addEventListener is being used to prevent bugs
+      messageInput?.addEventListener(event.name, event.func);
+    }
 
     return () => {
-      messageInput?.removeEventListener('beforeinput', handleInsertValues);
+      for (const event of events) {
+        messageInput?.removeEventListener(event.name, event.func);
+      }
     };
   }, [messageInput]);
 
