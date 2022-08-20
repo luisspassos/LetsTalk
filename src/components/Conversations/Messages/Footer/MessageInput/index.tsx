@@ -1,60 +1,65 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { FormEvent } from 'react';
-
-type BeforeInputEvent = FormEvent<HTMLDivElement> & {
-  data: string;
-  target: HTMLDivElement;
-};
+import { useEffect, useRef } from 'react';
 
 export function MessageInput() {
-  let oldMessage = '';
+  const ref = useRef<HTMLDivElement>();
+  const messageInput = ref.current;
 
-  async function handleInsertValues(e: BeforeInputEvent) {
-    const messageInput = e.target;
+  useEffect(() => {
+    async function handleInsertValues(e: InputEvent) {
+      const newValue = e.data ?? e.dataTransfer?.getData('text');
 
-    messageInput.innerHTML = oldMessage;
+      if (newValue === undefined) return;
 
-    const newValue = e.data;
+      const selection = getSelection();
+      const selectionRange = selection?.getRangeAt(0);
 
-    const Graphemer = (await import('graphemer')).default;
-    const graphemer = new Graphemer();
+      const Graphemer = (await import('graphemer')).default;
+      const graphemer = new Graphemer();
 
-    const newValueChars = graphemer.splitGraphemes(newValue);
+      const newValueChars = graphemer.splitGraphemes(newValue);
 
-    for (const char of newValueChars) {
-      const { regexs } = await import('../../../../../utils/regexs');
+      for (const char of newValueChars) {
+        const { regexs } = await import('../../../../../utils/regexs');
 
-      const isEmoji = regexs.emoji.test(char);
+        const isEmoji = regexs.emoji.test(char);
 
-      if (isEmoji) {
-        const { parse: twemojiParse } = await import('twemoji-parser');
+        if (isEmoji) {
+          const { parse: twemojiParse } = await import('twemoji-parser');
+          const twemojiEmojis = twemojiParse(char);
 
-        const twemojiEmojis = twemojiParse(char);
+          for (const emoji of twemojiEmojis) {
+            const element = document.createElement('span');
 
-        for (const emoji of twemojiEmojis) {
-          const element = document.createElement('span');
-          element.textContent = emoji.text;
-          element.style.backgroundImage = `url(${emoji.url})`;
-          element.className = 'emoji';
+            element.textContent = emoji.text;
+            element.style.backgroundImage = `url(${emoji.url})`;
+            element.className = 'emoji';
 
-          const selection = getSelection();
-          const range = selection?.getRangeAt(0);
+            const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+              selectionRange?.startOffset === 0;
 
-          range?.insertNode(element);
+            if (emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+              messageInput?.prepend(element);
+            }
+          }
         }
       }
     }
 
-    const message = messageInput.innerHTML;
+    // addEventListener is being used to prevent bugs
+    messageInput?.addEventListener('beforeinput', handleInsertValues);
 
-    oldMessage = message;
-  }
+    return () => {
+      messageInput?.removeEventListener('beforeinput', handleInsertValues);
+    };
+  }, [messageInput]);
 
   const defaultStyles: any = useStyleConfig('Textarea');
 
   return (
     <Box
       {...defaultStyles}
+      ref={ref}
       borderRadius='10px'
       py='10.5px'
       fontFamily='Roboto, Noto Emoji, sans-serif'
@@ -89,7 +94,6 @@ export function MessageInput() {
           },
         },
       }}
-      onBeforeInput={handleInsertValues}
     />
   );
 }

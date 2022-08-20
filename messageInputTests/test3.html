@@ -12,8 +12,21 @@
     <script>
       const contenteditable = document.querySelector('div[contenteditable]');
 
+      let continueBeforeInputEvent = false;
+
       contenteditable.addEventListener('beforeinput', (e) => {
-        console.log(e.target.textContent);
+        if (continueBeforeInputEvent) {
+          continueBeforeInputEvent = false;
+
+          return;
+        }
+
+        const selection = getSelection();
+        const range = selection.getRangeAt(0);
+
+        range.insertNode(document.createTextNode('😋'));
+
+        continueBeforeInputEvent = true;
       });
     </script>
   </body>
