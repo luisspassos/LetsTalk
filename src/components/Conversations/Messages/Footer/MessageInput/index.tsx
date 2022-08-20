@@ -1,21 +1,29 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
+import Graphemer from 'graphemer';
+
+const graphemer = new Graphemer();
 
 export function MessageInput() {
   const ref = useRef<HTMLDivElement>();
   const messageInput = ref.current;
 
   useEffect(() => {
+    let preventTheBeforeInputEventFromRunningTwice = false;
+
     async function handleInsertValues(e: InputEvent) {
+      if (preventTheBeforeInputEventFromRunningTwice) {
+        preventTheBeforeInputEventFromRunningTwice = false;
+
+        return;
+      }
+
       const newValue = e.data ?? e.dataTransfer?.getData('text');
 
       if (newValue === undefined) return;
 
       const selection = getSelection();
       const selectionRange = selection?.getRangeAt(0);
-
-      const Graphemer = (await import('graphemer')).default;
-      const graphemer = new Graphemer();
 
       const newValueChars = graphemer.splitGraphemes(newValue);
 
@@ -38,12 +46,28 @@ export function MessageInput() {
             const emojiHasBeenPlacedAtTheBeginningOfTheInput =
               selectionRange?.startOffset === 0;
 
-            if (emojiHasBeenPlacedAtTheBeginningOfTheInput) {
-              messageInput?.prepend(element);
+            if (
+              emojiHasBeenPlacedAtTheBeginningOfTheInput &&
+              messageInput?.firstChild
+            ) {
+              selectionRange?.setStartBefore(messageInput?.firstChild);
             }
+
+            if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+              const elementThatWasCloseToTheInsertion =
+                selectionRange?.commonAncestorContainer.parentElement;
+
+              if (!elementThatWasCloseToTheInsertion) return;
+
+              selectionRange?.setStartAfter(elementThatWasCloseToTheInsertion);
+            }
+
+            selectionRange?.insertNode(element);
           }
         }
       }
+
+      preventTheBeforeInputEventFromRunningTwice = true;
     }
 
     // addEventListener is being used to prevent bugs
@@ -80,7 +104,6 @@ export function MessageInput() {
         },
         '.emoji': {
           letterSpacing: '2px',
-          bgSize: 'contain',
           bgRepeat: 'no-repeat',
           bgPosition: 'center',
           color: 'transparent',
