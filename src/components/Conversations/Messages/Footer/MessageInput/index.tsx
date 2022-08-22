@@ -157,6 +157,39 @@ export function MessageInput() {
               }
             }
           }
+
+          continue;
+        }
+
+        const userInsertedValueWasNextToAnEmoji =
+          selectionRange?.commonAncestorContainer.parentElement?.className ===
+          'emoji';
+
+        if (userInsertedValueWasNextToAnEmoji) {
+          const node = document.createTextNode(char);
+
+          const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+            selectionRange?.startOffset === 0;
+
+          if (
+            emojiHasBeenPlacedAtTheBeginningOfTheInput &&
+            messageInput?.firstChild
+          ) {
+            selectionRange?.setStartBefore(messageInput?.firstChild);
+          }
+
+          if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+            const elementThatWasCloseToTheInsertion =
+              selectionRange?.commonAncestorContainer.parentElement;
+
+            console.log(elementThatWasCloseToTheInsertion);
+
+            if (!elementThatWasCloseToTheInsertion) return;
+
+            selectionRange?.setStartAfter(elementThatWasCloseToTheInsertion);
+          }
+
+          selectionRange.insertNode(node);
         }
       }
 
