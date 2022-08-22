@@ -35,15 +35,10 @@ export function MessageInput() {
     };
 
     async function handleInsertValues(e: InputEvent) {
-      if (preventTheBeforeInputEventFromRunningTwice) {
-        preventTheBeforeInputEventFromRunningTwice = false;
-
-        return;
-      }
-
       const newValue = e.data ?? e.dataTransfer?.getData('text');
 
-      if (newValue === undefined) return;
+      if (newValue === undefined || preventTheBeforeInputEventFromRunningTwice)
+        return;
 
       const selection = getSelection();
       const selectionRange = selection?.getRangeAt(0);
@@ -165,11 +160,17 @@ export function MessageInput() {
         }
       }
 
-      const newMessage = messageInput?.innerHTML ?? '';
+      if (message.restore) {
+        const newMessage = messageInput?.innerHTML ?? '';
 
-      if (message.restore) message.data = newMessage;
+        message.data = newMessage;
+      }
 
       preventTheBeforeInputEventFromRunningTwice = true;
+
+      setTimeout(() => {
+        preventTheBeforeInputEventFromRunningTwice = false;
+      }, 0);
     }
 
     let continueInputEvent = false;
