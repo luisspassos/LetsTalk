@@ -31,6 +31,7 @@ export function MessageInput() {
     const message = {
       data: '',
       restore: false,
+      selectionPosition: 0,
     };
 
     async function handleInsertValues(e: InputEvent) {
@@ -101,8 +102,10 @@ export function MessageInput() {
 
           const emojis: Emojis = specialEmojis[char] ?? getEmojis();
 
-          for (const emoji of emojis) {
-            console.log(selectionRange);
+          for (const index in emojis) {
+            const newIndex = Number(index);
+
+            const emoji = emojis[newIndex];
 
             let element;
 
@@ -115,29 +118,49 @@ export function MessageInput() {
               element.style.backgroundImage = `url(${emoji.url})`;
               element.className = 'emoji';
 
-              const emojiHasBeenPlacedAtTheBeginningOfTheInput =
-                selectionRange?.startOffset === 0;
+              const userInsertedValueWasNextToAnEmoji =
+                selectionRange?.commonAncestorContainer.parentElement
+                  ?.className === 'emoji';
 
-              if (
-                emojiHasBeenPlacedAtTheBeginningOfTheInput &&
-                messageInput?.firstChild
-              ) {
-                selectionRange?.setStartBefore(messageInput?.firstChild);
-              }
+              if (userInsertedValueWasNextToAnEmoji) {
+                const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+                  selectionRange?.startOffset === 0;
 
-              if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
-                const elementThatWasCloseToTheInsertion =
-                  selectionRange?.commonAncestorContainer.parentElement;
+                if (
+                  emojiHasBeenPlacedAtTheBeginningOfTheInput &&
+                  messageInput?.firstChild
+                ) {
+                  selectionRange?.setStartBefore(messageInput?.firstChild);
+                }
 
-                if (!elementThatWasCloseToTheInsertion) return;
+                if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+                  const elementThatWasCloseToTheInsertion =
+                    selectionRange?.commonAncestorContainer.parentElement;
 
-                selectionRange?.setStartAfter(
-                  elementThatWasCloseToTheInsertion
-                );
+                  if (!elementThatWasCloseToTheInsertion) return;
+
+                  selectionRange?.setStartAfter(
+                    elementThatWasCloseToTheInsertion
+                  );
+                }
               }
             }
 
             selectionRange?.insertNode(element);
+
+            const thereAreMoreEmojis = emojis.length > 1;
+
+            if (thereAreMoreEmojis) {
+              selectionRange?.setStartAfter(element);
+
+              const isLast = emojis.length - 1 === Number(index);
+
+              if (isLast) {
+                const selectionPosition = selectionRange?.startOffset ?? 0;
+
+                message.selectionPosition = selectionPosition;
+              }
+            }
           }
         }
       }
@@ -161,6 +184,10 @@ export function MessageInput() {
       }
 
       messageInput.innerHTML = message.data;
+
+      const selection = getSelection();
+
+      selection?.setPosition(messageInput, message.selectionPosition);
 
       message.restore = false;
       continueInputEvent = false;
