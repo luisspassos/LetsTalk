@@ -1,23 +1,28 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
+import { useEffect, useRef } from 'react';
 
 export function MessageInput() {
-  function handleBeforeInput(e) {
-    const selection = getSelection();
-    const range = selection?.getRangeAt(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const messageInput = ref.current;
 
-    const newValue = e.data ?? e.dataTransfer.getData('text');
+  useEffect(() => {
+    function handleInsertValues(e: InputEvent) {
+      console.log('u');
+    }
 
-    const node = document.createTextNode(newValue);
+    messageInput?.addEventListener('beforeinput', handleInsertValues);
 
-    range?.insertNode(node);
-  }
+    return () => {
+      messageInput?.removeEventListener('beforeinput', handleInsertValues);
+    };
+  }, [messageInput]);
 
   const defaultStyles: any = useStyleConfig('Textarea');
 
   return (
     <Box
       {...defaultStyles}
-      onBeforeInput={handleBeforeInput}
+      ref={ref}
       borderRadius='10px'
       py='10.5px'
       fontFamily='Roboto, Noto Emoji, sans-serif'
