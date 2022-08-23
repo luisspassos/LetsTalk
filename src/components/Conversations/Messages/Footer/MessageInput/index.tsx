@@ -12,6 +12,12 @@ type Emoji = {
   url: string;
 };
 
+type Message = {
+  data: string;
+  typeOfLastCharacterInserted: 'emoji' | 'default';
+  selectionPosition: number;
+};
+
 type SpecialEmojis = Record<string, Emoji[]>;
 
 const linkCharacter = '‍';
@@ -25,19 +31,22 @@ export function MessageInput() {
   const messageInput = ref.current;
 
   useEffect(() => {
-    let preventTheBeforeInputEventFromRunningTwice = false;
+    const preventEventFromRunningTwice = {
+      beforeinput: false,
+      input: false,
+    };
 
     // this is to prevent the value from being inserted twice
-    const message = {
+    const message: Message = {
       data: '',
-      restore: false,
+      typeOfLastCharacterInserted: 'default',
       selectionPosition: 0,
     };
 
     async function handleInsertValues(e: InputEvent) {
       const newValue = e.data ?? e.dataTransfer?.getData('text');
 
-      if (newValue === undefined || preventTheBeforeInputEventFromRunningTwice)
+      if (newValue === undefined || preventEventFromRunningTwice.beforeinput)
         return;
 
       const selection = getSelection();
@@ -49,6 +58,31 @@ export function MessageInput() {
         const { regexs } = await import('../../../../../utils/regexs');
 
         const isEmoji = regexs.emoji.test(char);
+
+        const userInsertedValueWasNextToAnEmoji =
+          selectionRange?.commonAncestorContainer.parentElement?.className ===
+          'emoji';
+
+        const positionSelection = () => {
+          const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+            selectionRange?.startOffset === 0;
+
+          if (
+            emojiHasBeenPlacedAtTheBeginningOfTheInput &&
+            messageInput?.firstChild
+          ) {
+            selectionRange?.setStartBefore(messageInput?.firstChild);
+          }
+
+          if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+            const elementThatWasCloseToTheInsertion =
+              selectionRange?.commonAncestorContainer.parentElement;
+
+            if (!elementThatWasCloseToTheInsertion) return;
+
+            selectionRange?.setStartAfter(elementThatWasCloseToTheInsertion);
+          }
+        };
 
         if (isEmoji) {
           const { parse: twemojiParse } = await import('twemoji-parser');
@@ -74,8 +108,6 @@ export function MessageInput() {
             const thereAreMoreEmojis = emojis.length > 1;
 
             if (!thereAreMoreEmojis) return emojis;
-
-            message.restore = true;
 
             const emojisWithLinkCharacter = [];
 
@@ -113,31 +145,8 @@ export function MessageInput() {
               element.style.backgroundImage = `url(${emoji.url})`;
               element.className = 'emoji';
 
-              const userInsertedValueWasNextToAnEmoji =
-                selectionRange?.commonAncestorContainer.parentElement
-                  ?.className === 'emoji';
-
               if (userInsertedValueWasNextToAnEmoji) {
-                const emojiHasBeenPlacedAtTheBeginningOfTheInput =
-                  selectionRange?.startOffset === 0;
-
-                if (
-                  emojiHasBeenPlacedAtTheBeginningOfTheInput &&
-                  messageInput?.firstChild
-                ) {
-                  selectionRange?.setStartBefore(messageInput?.firstChild);
-                }
-
-                if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
-                  const elementThatWasCloseToTheInsertion =
-                    selectionRange?.commonAncestorContainer.parentElement;
-
-                  if (!elementThatWasCloseToTheInsertion) return;
-
-                  selectionRange?.setStartAfter(
-                    elementThatWasCloseToTheInsertion
-                  );
-                }
+                positionSelection();
               }
             }
 
@@ -147,84 +156,60 @@ export function MessageInput() {
 
             if (thereAreMoreEmojis) {
               selectionRange?.setStartAfter(element);
-
-              const isLast = emojis.length - 1 === Number(index);
-
-              if (isLast) {
-                const selectionPosition = selectionRange?.startOffset ?? 0;
-
-                message.selectionPosition = selectionPosition;
-              }
             }
           }
+
+          message.typeOfLastCharacterInserted = 'emoji';
 
           continue;
         }
 
-        const userInsertedValueWasNextToAnEmoji =
-          selectionRange?.commonAncestorContainer.parentElement?.className ===
-          'emoji';
-
         if (userInsertedValueWasNextToAnEmoji) {
           const node = document.createTextNode(char);
 
-          const emojiHasBeenPlacedAtTheBeginningOfTheInput =
-            selectionRange?.startOffset === 0;
-
-          if (
-            emojiHasBeenPlacedAtTheBeginningOfTheInput &&
-            messageInput?.firstChild
-          ) {
-            selectionRange?.setStartBefore(messageInput?.firstChild);
-          }
-
-          if (!emojiHasBeenPlacedAtTheBeginningOfTheInput) {
-            const elementThatWasCloseToTheInsertion =
-              selectionRange?.commonAncestorContainer.parentElement;
-
-            console.log(elementThatWasCloseToTheInsertion);
-
-            if (!elementThatWasCloseToTheInsertion) return;
-
-            selectionRange?.setStartAfter(elementThatWasCloseToTheInsertion);
-          }
+          positionSelection();
 
           selectionRange.insertNode(node);
+
+          message.typeOfLastCharacterInserted = 'default';
         }
       }
 
-      if (message.restore) {
-        const newMessage = messageInput?.innerHTML ?? '';
+      const newMessage = messageInput?.innerHTML ?? '';
+      message.data = newMessage;
 
-        message.data = newMessage;
-      }
+      const selectionPosition = selectionRange?.endOffset ?? 0;
+      message.selectionPosition = selectionPosition;
 
-      preventTheBeforeInputEventFromRunningTwice = true;
+      preventEventFromRunningTwice.beforeinput = true;
 
       setTimeout(() => {
-        preventTheBeforeInputEventFromRunningTwice = false;
+        preventEventFromRunningTwice.beforeinput = false;
       }, 0);
     }
 
-    let continueInputEvent = false;
-
     function handleRestoreMessage() {
-      if (!message.restore || !messageInput) return;
+      if (!messageInput) return;
 
-      if (!continueInputEvent) {
-        continueInputEvent = true;
+      if (message.typeOfLastCharacterInserted === 'default') {
+        messageInput.innerHTML = message.data;
+
+        const selection = getSelection();
+        selection?.setPosition(messageInput, message.selectionPosition);
 
         return;
       }
 
-      messageInput.innerHTML = message.data;
-
-      const selection = getSelection();
-
-      selection?.setPosition(messageInput, message.selectionPosition);
-
-      message.restore = false;
-      continueInputEvent = false;
+      // if (!message.restore || !messageInput) return;
+      // if (!preventEventFromRunningTwice.input) {
+      //   preventEventFromRunningTwice.input = true;
+      //   return;
+      // }
+      // messageInput.innerHTML = message.data;
+      // const selection = getSelection();
+      // selection?.setPosition(messageInput, message.selectionPosition);
+      // message.restore = false;
+      // preventEventFromRunningTwice.input = false;
     }
 
     const events = [

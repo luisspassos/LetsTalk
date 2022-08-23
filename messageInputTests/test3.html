@@ -7,26 +7,17 @@
     <title>Document</title>
   </head>
   <body>
-    <div contenteditable style="border: 1px solid white; padding: 0 10px"></div>
+    <div contenteditable style="border: 1px solid white; padding: 0 10px">
+      <p>😎</p>
+    </div>
+
+    <button>press</button>
 
     <script>
       const contenteditable = document.querySelector('div[contenteditable]');
 
-      let continueBeforeInputEvent = false;
-
       contenteditable.addEventListener('beforeinput', (e) => {
-        if (continueBeforeInputEvent) {
-          continueBeforeInputEvent = false;
-
-          return;
-        }
-
-        const selection = getSelection();
-        const range = selection.getRangeAt(0);
-
-        range.insertNode(document.createTextNode('😋'));
-
-        continueBeforeInputEvent = true;
+        console.log(e.dataTransfer.getData('text'));
       });
     </script>
   </body>
