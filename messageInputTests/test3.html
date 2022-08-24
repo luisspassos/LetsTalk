@@ -6,19 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body>
-    <div contenteditable style="border: 1px solid white; padding: 0 10px">
-      <p>😎</p>
-    </div>
+  <body></body>
 
-    <button>press</button>
+  <script>
+    const emoji = '👁️‍🗨️';
 
-    <script>
-      const contenteditable = document.querySelector('div[contenteditable]');
-
-      contenteditable.addEventListener('beforeinput', (e) => {
-        console.log(e.dataTransfer.getData('text'));
-      });
-    </script>
-  </body>
+    for (e of [...emoji]) {
+      console.log(e.codePointAt(0).toString(16));
+    }
+  </script>
 </html>
