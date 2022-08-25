@@ -9,8 +9,6 @@ type Emoji = {
 
 type SpecialEmojis = Record<string, Emoji>;
 
-type TwemojiOrTwemojis = Emoji | Emoji[];
-
 export function MessageInput() {
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
@@ -24,96 +22,40 @@ export function MessageInput() {
       const doesNotHaveHtml =
         newValueTypes.length === 1 && newValueTypes[0] === 'text/plain';
 
-      const { regexs } = await import('../../../../../utils/regexs');
+      const dataTransfer = e.dataTransfer.getData('text');
 
-      let dataTransfer = e.dataTransfer.getData('text');
-
-      const hasEmojis = regexs.emoji.test(dataTransfer);
-
-      if (doesNotHaveHtml && !hasEmojis) return;
+      if (doesNotHaveHtml) return;
 
       e.preventDefault();
 
-      if (hasEmojis) {
-        const graphemer = new Graphemer();
-
-        const dataTransferChars = graphemer.splitGraphemes(dataTransfer);
-
-        const { parse } = await import('twemoji-parser');
-
-        const newDataTransfer = dataTransferChars
-          .map((char) => {
-            const isEmoji = regexs.emoji.test(char);
-
-            if (!isEmoji) return char;
-
-            const specialEmojis: SpecialEmojis = {
-              '👁️‍🗨️': {
-                text: '👁️‍🗨️',
-                url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
-              },
-
-              '♾️': {
-                text: '♾️',
-                url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
-              },
-            };
-
-            const getParsedEmoji = () => {
-              const twemoji = parse(char);
-
-              return twemoji.length > 1 ? twemoji : twemoji[0];
-            };
-
-            const twemojiOrTwemojs = (specialEmojis[char] ??
-              getParsedEmoji()) as TwemojiOrTwemojis;
-
-            const getElement = (text: string, url: string) =>
-              `<span class='emoji' style='background-image: url(${url})'>${text}</span>`;
-
-            if (Array.isArray(twemojiOrTwemojs)) {
-              let element = '';
-
-              for (const twemoji of twemojiOrTwemojs) {
-                element += getElement(twemoji.text, twemoji.url);
-              }
-
-              return element;
-            }
-
-            const element = getElement(
-              twemojiOrTwemojs.text,
-              twemojiOrTwemojs.url
-            );
-
-            return element;
-          })
-          .join('');
-
-        dataTransfer = newDataTransfer;
-      }
-
-      // 2:14:00
-
-      const selection = getSelection();
-      const selectionRange = selection?.getRangeAt(0);
-
       const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
 
-      if (isPaste && !selection?.isCollapsed) selectionRange?.deleteContents();
+      const selection = getSelection();
 
-      const element = document.createElement('template');
-      element.innerHTML = dataTransfer;
+      if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
 
-      const html = element.content;
+      const textNode = document.createTextNode(dataTransfer);
 
-      selectionRange?.insertNode(html);
+      const selectionRange = selection?.getRangeAt(0);
+
+      selectionRange?.insertNode(textNode);
 
       if (isPaste) selection?.collapseToEnd();
     }
 
-    async function handleEmojis(e: Event & { target: HTMLDivElement }) {
-      const message = e.target.textContent ?? '';
+    let oldMessage = '';
+    let preventInputEventFromRunningTwice = false;
+
+    async function handleEmojis() {
+      if (!messageInput) return;
+
+      if (preventInputEventFromRunningTwice) {
+        messageInput.innerHTML = oldMessage;
+
+        return;
+      }
+
+      const message = messageInput.textContent ?? '';
 
       const graphemer = new Graphemer();
 
@@ -126,6 +68,18 @@ export function MessageInput() {
         const isEmoji = regexs.emoji.test(char);
 
         if (isEmoji) {
+          const specialEmojis: SpecialEmojis = {
+            '👁️‍🗨️': {
+              text: '👁️‍🗨️',
+              url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+            },
+
+            '♾️': {
+              text: '♾️',
+              url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+            },
+          };
+
           const url = parse(char)[0].url;
 
           const element = `<span class='emoji' style='background-image: url(${url})'>${char}</span>`;
@@ -138,14 +92,22 @@ export function MessageInput() {
 
       const newMessage = newChars.join('');
 
-      e.target.innerHTML = newMessage;
+      messageInput.innerHTML = newMessage;
+
+      oldMessage = newMessage;
+
+      preventInputEventFromRunningTwice = true;
+
+      setTimeout(() => {
+        preventInputEventFromRunningTwice = false;
+      }, 0);
     }
 
-    // messageInput?.addEventListener('beforeinput', handleDropAndPaste);
+    messageInput?.addEventListener('beforeinput', handleDropAndPaste);
     messageInput?.addEventListener('input', handleEmojis);
 
     return () => {
-      // messageInput?.removeEventListener('beforeinput', handleDropAndPaste);
+      messageInput?.removeEventListener('beforeinput', handleDropAndPaste);
       messageInput?.removeEventListener('input', handleEmojis);
     };
   }, [messageInput]);
