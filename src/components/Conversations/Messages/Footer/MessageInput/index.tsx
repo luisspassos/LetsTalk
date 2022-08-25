@@ -2,6 +2,15 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import Graphemer from 'graphemer';
 
+type Emoji = {
+  text: string;
+  url: string;
+};
+
+type SpecialEmojis = Record<string, Emoji>;
+
+type TwemojiOrTwemojis = Emoji | Emoji[];
+
 export function MessageInput() {
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
@@ -38,7 +47,7 @@ export function MessageInput() {
 
             if (!isEmoji) return char;
 
-            const specialEmojis = {
+            const specialEmojis: SpecialEmojis = {
               '👁️‍🗨️': {
                 text: '👁️‍🗨️',
                 url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
@@ -50,11 +59,32 @@ export function MessageInput() {
               },
             };
 
-            console.log(parse(char));
+            const getParsedEmoji = () => {
+              const twemoji = parse(char);
 
-            const url = parse(char)[0].url;
+              return twemoji.length > 1 ? twemoji : twemoji[0];
+            };
 
-            const element = `<span class='emoji' style='background-image: url(${url})'>${char}</span>`;
+            const twemojiOrTwemojs = (specialEmojis[char] ??
+              getParsedEmoji()) as TwemojiOrTwemojis;
+
+            const getElement = (text: string, url: string) =>
+              `<span class='emoji' style='background-image: url(${url})'>${text}</span>`;
+
+            if (Array.isArray(twemojiOrTwemojs)) {
+              let element = '';
+
+              for (const twemoji of twemojiOrTwemojs) {
+                element += getElement(twemoji.text, twemoji.url);
+              }
+
+              return element;
+            }
+
+            const element = getElement(
+              twemojiOrTwemojs.text,
+              twemojiOrTwemojs.url
+            );
 
             return element;
           })
@@ -70,7 +100,7 @@ export function MessageInput() {
 
       const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
 
-      if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
+      if (isPaste && !selection?.isCollapsed) selectionRange?.deleteContents();
 
       const element = document.createElement('template');
       element.innerHTML = dataTransfer;
@@ -82,18 +112,41 @@ export function MessageInput() {
       if (isPaste) selection?.collapseToEnd();
     }
 
-    // function handleEmojis(e: InputEvent) {
-    //   const newValue = e.data ?? e.dataTransfer?.getData('text');
+    async function handleEmojis(e: Event & { target: HTMLDivElement }) {
+      const message = e.target.textContent ?? '';
 
-    //   console.log(newValue);
-    // }
+      const graphemer = new Graphemer();
 
-    messageInput?.addEventListener('beforeinput', handleDropAndPaste);
-    // messageInput?.addEventListener('input', handleEmojis);
+      const chars = graphemer.splitGraphemes(message);
+
+      const { regexs } = await import('../../../../../utils/regexs');
+      const { parse } = await import('twemoji-parser');
+
+      const newChars = chars.map((char) => {
+        const isEmoji = regexs.emoji.test(char);
+
+        if (isEmoji) {
+          const url = parse(char)[0].url;
+
+          const element = `<span class='emoji' style='background-image: url(${url})'>${char}</span>`;
+
+          return element;
+        }
+
+        return char;
+      });
+
+      const newMessage = newChars.join('');
+
+      e.target.innerHTML = newMessage;
+    }
+
+    // messageInput?.addEventListener('beforeinput', handleDropAndPaste);
+    messageInput?.addEventListener('input', handleEmojis);
 
     return () => {
-      messageInput?.removeEventListener('beforeinput', handleDropAndPaste);
-      // messageInput?.removeEventListener('input', handleEmojis);
+      // messageInput?.removeEventListener('beforeinput', handleDropAndPaste);
+      messageInput?.removeEventListener('input', handleEmojis);
     };
   }, [messageInput]);
 
@@ -124,7 +177,7 @@ export function MessageInput() {
         '.emoji': {
           letterSpacing: '2px',
           bgRepeat: 'no-repeat',
-          bgPosition: 'center',
+          bgPos: 'center',
           color: 'transparent',
           caretColor: useColorModeValue(
             'var(--chakra-colors-gray-900)',
