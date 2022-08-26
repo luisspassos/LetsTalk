@@ -5,30 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Noto+Emoji&display=swap');
-
-      * {
-        font-family: 'Noto Emoji', sans-serif;
+      *::selection {
+        background-color: rgba(255, 255, 0, 0.192);
       }
-
-      .emoji {
-        background-image: url(https://twemoji.maxcdn.com/v/latest/svg/1f431.svg),
-          url(https://twemoji.maxcdn.com/v/latest/svg/1f464.svg);
-        background-repeat: no-repeat;
-        background-position: 10%, 90%;
-      }
-
-      .emoji::selection {
-        color: transparent;
-        background-color: rgba(0, 0, 255, 0.438);
-      }
-
-      /* 1:15:43 */
     </style>
   </head>
   <body>
-    <span class="emoji">🐱‍👤</span>
+    <div contenteditable></div>
   </body>
+  <script>
+    const str = '👉ﾟ';
+
+    console.log(str.replace(/\p{Extended_Pictographic}/u, 'hi'));
+  </script>
 </html>

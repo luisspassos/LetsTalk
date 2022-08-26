@@ -9,6 +9,85 @@ type Emoji = {
 
 type SpecialEmojis = Record<string, Emoji>;
 
+type TwemojiOrTwemojis = Emoji | Emoji[];
+
+type SavedSelection =
+  | {
+      start: number;
+      end: number;
+    }
+  | undefined;
+
+function saveSelection(containerEl: HTMLDivElement) {
+  const selection = getSelection();
+  const range = selection?.getRangeAt(0);
+  const preSelectionRange = range?.cloneRange();
+  preSelectionRange?.selectNodeContents(containerEl);
+
+  if (!range?.startContainer) return;
+
+  preSelectionRange?.setEnd(range.startContainer, range?.startOffset);
+  const start = preSelectionRange?.toString().length;
+
+  if (start === undefined) return;
+
+  return {
+    start: start,
+    end: start + range.toString().length,
+  };
+}
+
+function restoreSelection(
+  containerEl: HTMLDivElement,
+  savedSelection: SavedSelection
+) {
+  const selection = getSelection();
+
+  const doc = containerEl.ownerDocument;
+  let charIndex = 0;
+  const range = doc.createRange();
+  range.setStart(containerEl, 0);
+  range.collapse(true);
+  const nodeStack: (HTMLDivElement | ChildNode)[] = [containerEl];
+  let node;
+  let foundStart = false;
+  let stop = false;
+
+  while (!stop && (node = nodeStack.pop())) {
+    if (node.nodeType == 3) {
+      if (!node.textContent || !savedSelection) return;
+
+      const nextCharIndex = charIndex + node.textContent.length;
+
+      if (
+        !foundStart &&
+        savedSelection?.start >= charIndex &&
+        savedSelection?.start <= nextCharIndex
+      ) {
+        range.setStart(node, savedSelection?.start - charIndex);
+        foundStart = true;
+      }
+      if (
+        foundStart &&
+        savedSelection?.end >= charIndex &&
+        savedSelection?.end <= nextCharIndex
+      ) {
+        range.setEnd(node, savedSelection?.end - charIndex);
+        stop = true;
+      }
+      charIndex = nextCharIndex;
+    } else {
+      let i = node.childNodes.length;
+      while (i--) {
+        nodeStack.push(node.childNodes[i]);
+      }
+    }
+  }
+
+  selection?.removeAllRanges();
+  selection?.addRange(range);
+}
+
 export function MessageInput() {
   const ref = useRef<HTMLDivElement>(null);
   const messageInput = ref.current;
@@ -44,16 +123,26 @@ export function MessageInput() {
     }
 
     let oldMessage = '';
+    let savedSelection: SavedSelection;
     let preventInputEventFromRunningTwice = false;
 
     async function handleEmojis() {
       if (!messageInput) return;
 
+      const setMessageAndRestoreSelection = (message: string) => {
+        messageInput.innerHTML = message;
+        restoreSelection(messageInput, savedSelection);
+      };
+
       if (preventInputEventFromRunningTwice) {
-        messageInput.innerHTML = oldMessage;
+        setMessageAndRestoreSelection(oldMessage);
 
         return;
       }
+
+      const newSavedSelection = saveSelection(messageInput);
+
+      savedSelection = newSavedSelection;
 
       const message = messageInput.textContent ?? '';
 
@@ -64,35 +153,65 @@ export function MessageInput() {
       const { regexs } = await import('../../../../../utils/regexs');
       const { parse } = await import('twemoji-parser');
 
+      const getEmoji = (char: string) => {
+        const specialEmojis: SpecialEmojis = {
+          '👁️‍🗨️': {
+            text: '👁️‍🗨️',
+            url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+          },
+
+          '♾️': {
+            text: '♾️',
+            url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+          },
+        };
+
+        const getParsedEmoji = () => {
+          const twemoji = parse(char);
+
+          return twemoji.length > 1 ? twemoji : twemoji[0];
+        };
+
+        const twemojiOrTwemojs = (specialEmojis[char] ??
+          getParsedEmoji()) as TwemojiOrTwemojis;
+
+        const getElement = (text: string, url: string) =>
+          `<span class='emoji' style='background-image: url(${url})'>${text}</span>`;
+
+        let element = '';
+
+        if (Array.isArray(twemojiOrTwemojs)) {
+          for (const twemoji of twemojiOrTwemojs) {
+            element += getElement(twemoji.text, twemoji.url);
+          }
+        } else {
+          element = getElement(twemojiOrTwemojs.text, twemojiOrTwemojs.url);
+        }
+
+        return element;
+      };
+
       const newChars = chars.map((char) => {
+        const specialChars: Record<string, string> = {
+          '<': '&lt;',
+          '>': '&gt;',
+          '&': '&amp;',
+        };
+
+        const specialChar = specialChars[char];
+
+        if (specialChar) return specialChar;
+
         const isEmoji = regexs.emoji.test(char);
 
-        if (isEmoji) {
-          const specialEmojis: SpecialEmojis = {
-            '👁️‍🗨️': {
-              text: '👁️‍🗨️',
-              url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
-            },
-
-            '♾️': {
-              text: '♾️',
-              url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
-            },
-          };
-
-          const url = parse(char)[0].url;
-
-          const element = `<span class='emoji' style='background-image: url(${url})'>${char}</span>`;
-
-          return element;
-        }
+        if (isEmoji) return getEmoji(char);
 
         return char;
       });
 
       const newMessage = newChars.join('');
 
-      messageInput.innerHTML = newMessage;
+      setMessageAndRestoreSelection(newMessage);
 
       oldMessage = newMessage;
 
