@@ -8,7 +8,6 @@
   <img alt="Stars" src="https://img.shields.io/github/stars/luisspassos/LetsTalk?style=for-the-badge&color=525f6f&labelColor=1d2434"/> 
 </p>
 
-<img alt="Login Page" src=".github/images/login_page.png" />
 <img alt="Conversations Page" src=".github/images/conversations_page.png" />
 
 ## :computer: Project
@@ -32,6 +31,8 @@ Let's Talk is a web chat app like Whatsapp Web, with features like:
 - Contact blocking system
 - CTRL + F for searching in the conversation
 - Unit tests with Jest
+- Server side rendering with Next JS
+- Progressive Web App
 
 ## :rocket: Technologies
 
@@ -45,6 +46,17 @@ Let's Talk is a web chat app like Whatsapp Web, with features like:
 - [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 - [ESLint](https://eslint.org/)
 
+## :camera: Images
+
+<img alt='Login Page' src='.github/images/login_page.png' />
+<img alt='Emoji Picker' src='.github/images/emojipicker.png' />
+<img alt='Registration Page' src='.github/images/registration_page.png' />
+<img alt='Configurations Page' src='.github/images/configurations_page.png' />
+
+<p> 
+  <img alt='Modal' src='.github/images/modal.png' /> <img alt='Block user modal' src='.github/images/block_user_modal.png' /> <img alt='Conversation info' src='.github/images/conversation_info.png' />
+</p>
+
 ## :dart: Future Features
 
 - [ ] see color highlighting on pages
@@ -55,26 +67,25 @@ Let's Talk is a web chat app like Whatsapp Web, with features like:
 - [ ] make env.example
 - [ ] test if when adding a contact, the contact immediately receives who made contact
 - [ ] use react hook query
+- [ ] see if name is updated in the conversation list
+- [ ] see storage rules
+- [ ] test conversations after account is deleted
+- [ ] make unreade message
+- [ ] see conversation blocking
+- [ ] see test coverage
+- [ ] see emojis throughout the app, especially this one :eye_speech_bubble:
+- [ ] see selected bar disappear in the emoji picker after perfomed
+- [ ] see page going to production
+- [ ] see github copilot
+- [ ] delete htmls
+- [ ] see emoji selection
 
-- ver se nome é atualizado na lista de conversas
-- ver regras do storage
-- testar conversas depois que a conta for excluida
-- fazer unread messages
-- ver bloqueamento na conversa
-- ver coverage dos testes
-- ver emojis em toda a aplicação, principalmente esse 👁️‍🗨️
-- ver barra de selecionado desaparecer no emoji picker dps de ele tiver performado
-- ver pagina going to production
-- ver github copilot
-- delete htmls
-- see emoji selection
+### Next Project
 
-# NEXT PROJECT
-
-- Mobile First
-- Componentes todos em pastas
-- ver REMS no chakra pra melhor responsividade
-- Fazer my template next js
-- usar create pwa no proximo projeto
-- colocar atributo lang no html
-- fazer ações do db ou pagamento no api route
+- [ ] Mobile First
+- [ ] All components in folders
+- [ ] see REMS in the chakra to improve responsiveness
+- [ ] make my template next js
+- [ ] use create-pwa in the next project
+- [ ] put lang attribute in the html
+- [ ] make db actions or payment in the api route
