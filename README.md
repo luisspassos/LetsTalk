@@ -12,8 +12,6 @@
 
 ## :computer: Project
 
-https://letstalk-chat.vercel.app/
-
 Let's Talk is a web chat app like Whatsapp Web, with features like:
 
 - Login and registration
