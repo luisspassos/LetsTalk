@@ -18,13 +18,6 @@ type SavedSelection =
     }
   | undefined;
 
-type SelectionElement =
-  | (Node & {
-      className?: string;
-    })
-  | null
-  | undefined;
-
 function saveSelection(containerEl: HTMLDivElement) {
   const selection = getSelection();
   const range = selection?.getRangeAt(0);
@@ -101,22 +94,37 @@ export function MessageInput() {
 
   useEffect(() => {
     async function handleDropAndPaste(e: InputEvent) {
-      const isBackspace = e.inputType === 'deleteContentBackward';
-
       const selection = getSelection();
 
-      const selectionElement = selection?.anchorNode as SelectionElement;
+      function handleBackspaceDeletion() {
+        const selectionElement = selection?.anchorNode;
 
-      const anEmojiWillBeDeleted =
-        (selectionElement?.className &&
-          selectionElement.className === 'emoji') ||
-        selectionElement?.parentElement?.className === 'emoji';
+        const isBackspace = e.inputType === 'deleteContentBackward';
+        const anEmojiWillBeDeleted =
+          selectionElement?.parentElement?.className === 'emoji';
 
-      if (anEmojiWillBeDeleted && isBackspace) {
-        e.preventDefault();
+        if (isBackspace && anEmojiWillBeDeleted) {
+          e.preventDefault();
 
-        selectionElement.remove();
+          const emoji = selectionElement?.parentElement;
+
+          const nodeThatWillReceiveTheSelection =
+            emoji.previousSibling?.firstChild;
+          const selectionPosition =
+            nodeThatWillReceiveTheSelection?.textContent?.length;
+
+          if (nodeThatWillReceiveTheSelection) {
+            selection?.setPosition(
+              nodeThatWillReceiveTheSelection,
+              selectionPosition
+            );
+          }
+
+          emoji.remove();
+        }
       }
+
+      handleBackspaceDeletion();
 
       if (!e.dataTransfer) return;
 
