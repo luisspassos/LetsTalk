@@ -18,6 +18,13 @@ type SavedSelection =
     }
   | undefined;
 
+type SelectionElement =
+  | (Node & {
+      className?: string;
+    })
+  | null
+  | undefined;
+
 function saveSelection(containerEl: HTMLDivElement) {
   const selection = getSelection();
   const range = selection?.getRangeAt(0);
@@ -94,6 +101,23 @@ export function MessageInput() {
 
   useEffect(() => {
     async function handleDropAndPaste(e: InputEvent) {
+      const isBackspace = e.inputType === 'deleteContentBackward';
+
+      const selection = getSelection();
+
+      const selectionElement = selection?.anchorNode as SelectionElement;
+
+      const anEmojiWillBeDeleted =
+        (selectionElement?.className &&
+          selectionElement.className === 'emoji') ||
+        selectionElement?.parentElement?.className === 'emoji';
+
+      if (anEmojiWillBeDeleted && isBackspace) {
+        e.preventDefault();
+
+        selectionElement.remove();
+      }
+
       if (!e.dataTransfer) return;
 
       const newValueTypes = e.dataTransfer.types;
@@ -109,7 +133,7 @@ export function MessageInput() {
 
       const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
 
-      const selection = getSelection();
+      // const selection = getSelection();
 
       if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
 
