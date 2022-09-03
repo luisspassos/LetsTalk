@@ -329,7 +329,7 @@ export function MessageInput() {
           ),
           '&::selection': {
             color: 'transparent',
-            bgColor: 'rgba(0, 0, 255, 0.438)',
+            bgColor: 'blueAlpha.200',
           },
         },
       }}
