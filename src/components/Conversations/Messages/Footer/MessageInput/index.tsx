@@ -103,7 +103,7 @@ export function MessageInput() {
         const anEmojiWillBeDeleted =
           selectionElement?.parentElement?.className === 'emoji';
 
-        if (isBackspace && anEmojiWillBeDeleted) {
+        if (isBackspace && anEmojiWillBeDeleted && selection?.isCollapsed) {
           e.preventDefault();
 
           const emoji = selectionElement?.parentElement;
@@ -140,8 +140,6 @@ export function MessageInput() {
       e.preventDefault();
 
       const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
-
-      // const selection = getSelection();
 
       if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
 
