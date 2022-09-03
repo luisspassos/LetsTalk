@@ -126,8 +126,26 @@ export function MessageInput() {
     let savedSelection: SavedSelection;
     let preventInputEventFromRunningTwice = false;
 
-    async function handleEmojis() {
-      if (!messageInput) return;
+    async function handleEmojis(e: Event) {
+      // this is for addEventListener to stop complaining about typing
+      const event = e as InputEvent;
+
+      const messageInput = event.target as HTMLDivElement;
+
+      const newValue = event.data;
+
+      if (!newValue) {
+        const message = messageInput.textContent;
+        const messageHtml = messageInput.innerHTML;
+
+        if (!message && messageHtml) {
+          messageInput.innerHTML = '';
+
+          return;
+        }
+
+        return;
+      }
 
       const setMessageAndRestoreSelection = (message: string) => {
         messageInput.innerHTML = message;
