@@ -181,8 +181,19 @@ export function MessageInput() {
         let element = '';
 
         if (Array.isArray(twemojiOrTwemojs)) {
-          for (const twemoji of twemojiOrTwemojs) {
+          for (const index in twemojiOrTwemojs) {
+            const twemoji = twemojiOrTwemojs[index];
+
             element += getElement(twemoji.text, twemoji.url);
+
+            const isLast = twemojiOrTwemojs.length - 1 === Number(index);
+
+            if (isLast) break;
+
+            // the link character is invisible
+            const linkCharacter = '‍';
+
+            element += linkCharacter;
           }
         } else {
           element = getElement(twemojiOrTwemojs.text, twemojiOrTwemojs.url);
