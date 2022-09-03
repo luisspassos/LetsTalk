@@ -90,7 +90,6 @@ function restoreSelection(
 
 export function MessageInput() {
   const ref = useRef<HTMLDivElement>(null);
-  const messageInput = ref.current;
 
   useEffect(() => {
     async function handleDropAndPaste(e: InputEvent) {
@@ -285,6 +284,8 @@ export function MessageInput() {
       }, 0);
     }
 
+    const messageInput = ref.current;
+
     messageInput?.addEventListener('beforeinput', handleDropAndPaste);
     messageInput?.addEventListener('input', handleEmojis);
 
@@ -292,7 +293,7 @@ export function MessageInput() {
       messageInput?.removeEventListener('beforeinput', handleDropAndPaste);
       messageInput?.removeEventListener('input', handleEmojis);
     };
-  }, [messageInput]);
+  }, [ref]);
 
   const defaultStyles: any = useStyleConfig('Textarea');
 
