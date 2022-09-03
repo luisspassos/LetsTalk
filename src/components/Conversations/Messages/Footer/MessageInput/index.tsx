@@ -9,7 +9,7 @@ type Emoji = {
 
 type SpecialEmojis = Record<string, Emoji>;
 
-type TwemojiOrTwemojis = Emoji | Emoji[];
+type EmojiOrEmojis = string | Emoji | Emoji[];
 
 type SavedSelection =
   | {
@@ -169,24 +169,26 @@ export function MessageInput() {
         const getParsedEmoji = () => {
           const twemoji = parse(char);
 
-          return twemoji.length > 1 ? twemoji : twemoji[0];
+          const emojiOrEmojis = twemoji.length > 1 ? twemoji : twemoji[0];
+
+          return twemoji.length > 0 ? emojiOrEmojis : char;
         };
 
-        const twemojiOrTwemojs = (specialEmojis[char] ??
-          getParsedEmoji()) as TwemojiOrTwemojis;
+        const emojiOrEmojis = (specialEmojis[char] ??
+          getParsedEmoji()) as EmojiOrEmojis;
 
         const getElement = (text: string, url: string) =>
           `<span class='emoji' style='background-image: url(${url})'>${text}</span>`;
 
         let element = '';
 
-        if (Array.isArray(twemojiOrTwemojs)) {
-          for (const index in twemojiOrTwemojs) {
-            const twemoji = twemojiOrTwemojs[index];
+        if (Array.isArray(emojiOrEmojis)) {
+          for (const index in emojiOrEmojis) {
+            const twemoji = emojiOrEmojis[index];
 
             element += getElement(twemoji.text, twemoji.url);
 
-            const isLast = twemojiOrTwemojs.length - 1 === Number(index);
+            const isLast = emojiOrEmojis.length - 1 === Number(index);
 
             if (isLast) break;
 
@@ -195,8 +197,10 @@ export function MessageInput() {
 
             element += linkCharacter;
           }
+        } else if (typeof emojiOrEmojis === 'string') {
+          element = emojiOrEmojis;
         } else {
-          element = getElement(twemojiOrTwemojs.text, twemojiOrTwemojs.url);
+          element = getElement(emojiOrEmojis.text, emojiOrEmojis.url);
         }
 
         return element;

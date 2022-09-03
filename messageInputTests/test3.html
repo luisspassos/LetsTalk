@@ -16,21 +16,8 @@
     <div contenteditable></div>
   </body>
   <script>
-    const nums = [1, 2, 3];
-    const newNums = [];
+    const char = '☞ﾟ';
 
-    for (const index in nums) {
-      const num = nums[index];
-
-      newNums.push(num);
-
-      const isLast = nums.length - 1 === Number(index);
-
-      if (isLast) break;
-
-      newNums.push('link character');
-    }
-
-    console.log(newNums);
+    console.log(char.replace('ﾟ', ''));
   </script>
 </html>
