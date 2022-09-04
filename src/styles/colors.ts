@@ -2,7 +2,7 @@ export const colors = {
   blueAlpha: {
     900: '#1d243490',
     700: '#1d243470',
-    200: '#87cefa60',
+    200: 'rgb(99, 179, 237, 0.4)',
   },
   grayAlpha: {
     500: '#646C7720',

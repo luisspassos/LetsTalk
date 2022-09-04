@@ -315,6 +315,9 @@ export function MessageInput() {
         borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
       }}
       placeholder='Mensagem'
+      _selection={{
+        bgColor: 'blueAlpha.200',
+      }}
       sx={{
         '&::-webkit-scrollbar-thumb': {
           borderWidth: '9px 3px',

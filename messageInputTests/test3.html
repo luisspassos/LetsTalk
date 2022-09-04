@@ -7,16 +7,45 @@
     <title>Document</title>
     <style>
       div[contenteditable] {
-        border: 1px solid white;
-        padding: 5px;
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      .emoji {
+        letter-spacing: 2px;
+        background-repeat: no-repeat;
+        background-position: center;
+        color: transparent;
+        caret-color: rgb(0, 0, 0);
       }
     </style>
   </head>
   <body>
-    <div contenteditable></div>
-    <input type="text" />
+    <div contenteditable>
+      <span
+        class="emoji"
+        style="
+          background-image: url(https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg);
+        "
+      >
+        😍 </span
+      >dadasdasd
+    </div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi eos porro
+      cupiditate accusantium nobis dolores quam tempora illo fugiat ipsa optio,
+      possimus totam neque sunt sint cumque vitae provident maiores?
+    </p>
   </body>
   <script>
-    const str = (false && 'potato') || (true && 'apple');
+    document.addEventListener('selectionchange', (e) => {
+      const selection = getSelection();
+
+      const isEmoji = selection.focusNode.parentElement.className === 'emoji';
+
+      if (isEmoji && !selection.isCollapsed) {
+        console.log('here');
+      }
+    });
   </script>
 </html>
