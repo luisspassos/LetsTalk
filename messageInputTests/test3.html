@@ -21,31 +21,12 @@
     </style>
   </head>
   <body>
-    <div contenteditable>
-      <span
-        class="emoji"
-        style="
-          background-image: url(https://twemoji.maxcdn.com/v/latest/svg/1f60d.svg);
-        "
-      >
-        😍 </span
-      >dadasdasd
-    </div>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi eos porro
-      cupiditate accusantium nobis dolores quam tempora illo fugiat ipsa optio,
-      possimus totam neque sunt sint cumque vitae provident maiores?
-    </p>
+    <div contenteditable>🍕 Pizza</div>
+    <button class="saveSelectionBtn">Save selection</button
+    ><button class="formatEmojiBtn">Format emoji</button>
   </body>
+  <p>aa\na</p>
   <script>
-    document.addEventListener('selectionchange', (e) => {
-      const selection = getSelection();
-
-      const isEmoji = selection.focusNode.parentElement.className === 'emoji';
-
-      if (isEmoji && !selection.isCollapsed) {
-        console.log('here');
-      }
-    });
+    console.log('beforeinpu\nt');
   </script>
 </html>

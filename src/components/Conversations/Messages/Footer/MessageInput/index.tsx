@@ -92,100 +92,19 @@ export function MessageInput() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    async function handleDropAndPaste(e: InputEvent) {
-      const selection = getSelection();
+    const messageInput = ref.current;
 
-      function handleBackspaceDeletion() {
-        const selectionElement = selection?.anchorNode;
-
-        const isBackspace = e.inputType === 'deleteContentBackward';
-        const anEmojiWillBeDeleted =
-          selectionElement?.parentElement?.className === 'emoji';
-
-        if (isBackspace && anEmojiWillBeDeleted && selection?.isCollapsed) {
-          e.preventDefault();
-
-          const emoji = selectionElement?.parentElement;
-
-          const nodeThatWillReceiveTheSelection =
-            emoji.previousSibling?.firstChild;
-          const selectionPosition =
-            nodeThatWillReceiveTheSelection?.textContent?.length;
-
-          if (nodeThatWillReceiveTheSelection) {
-            selection?.setPosition(
-              nodeThatWillReceiveTheSelection,
-              selectionPosition
-            );
-          }
-
-          emoji.remove();
-        }
-      }
-
-      handleBackspaceDeletion();
-
-      if (!e.dataTransfer) return;
-
-      const newValueTypes = e.dataTransfer.types;
-
-      const doesNotHaveHtml =
-        newValueTypes.length === 1 && newValueTypes[0] === 'text/plain';
-
-      const dataTransfer = e.dataTransfer.getData('text');
-
-      if (doesNotHaveHtml) return;
-
-      e.preventDefault();
-
-      const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
-
-      if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
-
-      const textNode = document.createTextNode(dataTransfer);
-
-      const selectionRange = selection?.getRangeAt(0);
-
-      selectionRange?.insertNode(textNode);
-
-      if (isPaste) selection?.collapseToEnd();
-    }
-
-    let oldMessage = '';
     let savedSelection: SavedSelection;
-    let preventInputEventFromRunningTwice = false;
 
-    async function handleEmojis(e: Event) {
-      // this is for addEventListener to stop complaining about typing
-      const event = e as InputEvent;
+    const setMessageAndRestoreSelection = (message: string) => {
+      if (!messageInput) return;
 
-      const messageInput = event.target as HTMLDivElement;
+      messageInput.innerHTML = message;
+      restoreSelection(messageInput, savedSelection);
+    };
 
-      const newValue = event.data;
-
-      if (!newValue) {
-        const message = messageInput.textContent;
-        const messageHtml = messageInput.innerHTML;
-
-        if (!message && messageHtml) {
-          messageInput.innerHTML = '';
-
-          return;
-        }
-
-        return;
-      }
-
-      const setMessageAndRestoreSelection = (message: string) => {
-        messageInput.innerHTML = message;
-        restoreSelection(messageInput, savedSelection);
-      };
-
-      if (preventInputEventFromRunningTwice) {
-        setMessageAndRestoreSelection(oldMessage);
-
-        return;
-      }
+    async function handleEmojis() {
+      if (!messageInput) return;
 
       const newSavedSelection = saveSelection(messageInput);
 
@@ -254,6 +173,10 @@ export function MessageInput() {
       };
 
       const newChars = chars.map((char) => {
+        const lineBreaks = ['\r', '\n', '\r\n'];
+
+        if (lineBreaks.includes(char)) return '<br>';
+
         const specialChars: Record<string, string> = {
           '<': '&lt;',
           '>': '&gt;',
@@ -275,6 +198,97 @@ export function MessageInput() {
 
       setMessageAndRestoreSelection(newMessage);
 
+      return newMessage;
+    }
+
+    async function handleDropAndPasteAndBackspaceDeletionAndEmojis(
+      e: InputEvent
+    ) {
+      const selection = getSelection();
+
+      function handleBackspaceDeletion() {
+        const selectionElement = selection?.anchorNode;
+
+        const isBackspace = e.inputType === 'deleteContentBackward';
+        const anEmojiWillBeDeleted =
+          selectionElement?.parentElement?.className === 'emoji';
+
+        if (isBackspace && anEmojiWillBeDeleted && selection?.isCollapsed) {
+          e.preventDefault();
+
+          const emoji = selectionElement?.parentElement;
+
+          const nodeThatWillReceiveTheSelection =
+            emoji.previousSibling?.firstChild;
+          const selectionPosition =
+            nodeThatWillReceiveTheSelection?.textContent?.length;
+
+          if (nodeThatWillReceiveTheSelection) {
+            selection?.setPosition(
+              nodeThatWillReceiveTheSelection,
+              selectionPosition
+            );
+          }
+
+          emoji.remove();
+        }
+      }
+
+      handleBackspaceDeletion();
+
+      if (!e.dataTransfer) return;
+
+      e.preventDefault();
+
+      const dataTransfer = e.dataTransfer.getData('text');
+
+      const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
+
+      if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
+
+      const textNode = document.createTextNode(dataTransfer);
+
+      const selectionRange = selection?.getRangeAt(0);
+
+      selectionRange?.insertNode(textNode);
+
+      if (isPaste) selection?.collapseToEnd();
+
+      handleEmojis();
+    }
+
+    let oldMessage = '';
+    let preventInputEventFromRunningTwice = false;
+
+    async function handleNativeEmojiPicker(e: Event) {
+      // this is for addEventListener to stop complaining about typing
+      const event = e as InputEvent;
+
+      if (!messageInput) return;
+
+      const newValue = event.data;
+
+      if (!newValue) {
+        const message = messageInput.textContent;
+        const messageHtml = messageInput.innerHTML;
+
+        if (!message && messageHtml) {
+          messageInput.innerHTML = '';
+
+          return;
+        }
+
+        return;
+      }
+
+      if (preventInputEventFromRunningTwice) {
+        setMessageAndRestoreSelection(oldMessage);
+
+        return;
+      }
+
+      const newMessage = (await handleEmojis()) ?? '';
+
       oldMessage = newMessage;
 
       preventInputEventFromRunningTwice = true;
@@ -284,14 +298,18 @@ export function MessageInput() {
       }, 0);
     }
 
-    const messageInput = ref.current;
-
-    messageInput?.addEventListener('beforeinput', handleDropAndPaste);
-    messageInput?.addEventListener('input', handleEmojis);
+    messageInput?.addEventListener(
+      'beforeinput',
+      handleDropAndPasteAndBackspaceDeletionAndEmojis
+    );
+    messageInput?.addEventListener('input', handleNativeEmojiPicker);
 
     return () => {
-      messageInput?.removeEventListener('beforeinput', handleDropAndPaste);
-      messageInput?.removeEventListener('input', handleEmojis);
+      messageInput?.removeEventListener(
+        'beforeinput',
+        handleDropAndPasteAndBackspaceDeletionAndEmojis
+      );
+      messageInput?.removeEventListener('input', handleNativeEmojiPicker);
     };
   }, [ref]);
 
