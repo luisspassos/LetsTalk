@@ -103,6 +103,8 @@ export function MessageInput() {
       restoreSelection(messageInput, savedSelection);
     };
 
+    const lineBreaks = ['\r\n', '\r', '\n'];
+
     async function handleEmojis() {
       if (!messageInput) return;
 
@@ -110,7 +112,7 @@ export function MessageInput() {
 
       savedSelection = newSavedSelection;
 
-      const message = messageInput.textContent ?? '';
+      const message = messageInput.innerText ?? '';
 
       const graphemer = new Graphemer();
 
@@ -148,6 +150,8 @@ export function MessageInput() {
 
         let element = '';
 
+        const thereIsNotTwemoji = typeof emojiOrEmojis === 'string';
+
         if (Array.isArray(emojiOrEmojis)) {
           for (const index in emojiOrEmojis) {
             const twemoji = emojiOrEmojis[index];
@@ -163,7 +167,7 @@ export function MessageInput() {
 
             element += linkCharacter;
           }
-        } else if (typeof emojiOrEmojis === 'string') {
+        } else if (thereIsNotTwemoji) {
           element = emojiOrEmojis;
         } else {
           element = getElement(emojiOrEmojis.text, emojiOrEmojis.url);
@@ -173,9 +177,7 @@ export function MessageInput() {
       };
 
       const newChars = chars.map((char) => {
-        const lineBreaks = ['\r', '\n', '\r\n'];
-
-        if (lineBreaks.includes(char)) return '<br>';
+        if (lineBreaks.includes(char)) return '<p>';
 
         const specialChars: Record<string, string> = {
           '<': '&lt;',
@@ -201,6 +203,15 @@ export function MessageInput() {
       return newMessage;
     }
 
+    function cleanUpHtmlRestIfAny() {
+      if (!messageInput) return;
+
+      const message = messageInput.textContent;
+      const messageHtml = messageInput.innerHTML;
+
+      if (!message && messageHtml) messageInput.innerHTML = '';
+    }
+
     async function handleDropAndPasteAndBackspaceDeletionAndEmojis(
       e: InputEvent
     ) {
@@ -220,6 +231,7 @@ export function MessageInput() {
 
           const nodeThatWillReceiveTheSelection =
             emoji.previousSibling?.firstChild;
+
           const selectionPosition =
             nodeThatWillReceiveTheSelection?.textContent?.length;
 
@@ -231,6 +243,8 @@ export function MessageInput() {
           }
 
           emoji.remove();
+
+          cleanUpHtmlRestIfAny();
         }
       }
 
@@ -240,17 +254,30 @@ export function MessageInput() {
 
       e.preventDefault();
 
-      const dataTransfer = e.dataTransfer.getData('text');
-
       const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
 
       if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
 
-      const textNode = document.createTextNode(dataTransfer);
+      const dataTransfer = e.dataTransfer.getData('text');
+
+      function standardizeLineBreaks(string: string) {
+        for (const lineBreak of lineBreaks) {
+          string = string.replaceAll(lineBreak, '<br>');
+        }
+
+        return string;
+      }
+
+      const newDataTransfer = standardizeLineBreaks(dataTransfer);
+
+      const textParent = document.createElement('template');
+      textParent.innerHTML = newDataTransfer;
+
+      const text = textParent.content;
 
       const selectionRange = selection?.getRangeAt(0);
 
-      selectionRange?.insertNode(textNode);
+      selectionRange?.insertNode(text);
 
       if (isPaste) selection?.collapseToEnd();
 
@@ -264,19 +291,10 @@ export function MessageInput() {
       // this is for addEventListener to stop complaining about typing
       const event = e as InputEvent;
 
-      if (!messageInput) return;
-
       const newValue = event.data;
 
       if (!newValue) {
-        const message = messageInput.textContent;
-        const messageHtml = messageInput.innerHTML;
-
-        if (!message && messageHtml) {
-          messageInput.innerHTML = '';
-
-          return;
-        }
+        cleanUpHtmlRestIfAny();
 
         return;
       }
@@ -337,6 +355,9 @@ export function MessageInput() {
         bgColor: 'blueAlpha.200',
       }}
       sx={{
+        '*::selection': {
+          bgColor: 'blueAlpha.200',
+        },
         '&::-webkit-scrollbar-thumb': {
           borderWidth: '9px 3px',
         },
@@ -351,7 +372,6 @@ export function MessageInput() {
           ),
           '&::selection': {
             color: 'transparent',
-            bgColor: 'blueAlpha.200',
           },
         },
       }}

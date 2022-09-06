@@ -11,22 +11,23 @@
         padding: 10px;
       }
 
-      .emoji {
-        letter-spacing: 2px;
-        background-repeat: no-repeat;
-        background-position: center;
-        color: transparent;
-        caret-color: rgb(0, 0, 0);
+      div[contenteditable] ::selection,
+      div[contenteditable]::selection {
+        background-color: red;
       }
     </style>
   </head>
   <body>
-    <div contenteditable>🍕 Pizza</div>
-    <button class="saveSelectionBtn">Save selection</button
-    ><button class="formatEmojiBtn">Format emoji</button>
+    <div contenteditable>
+      <p>dsadiasdij</p>
+    </div>
   </body>
-  <p>aa\na</p>
   <script>
-    console.log('beforeinpu\nt');
+    const str = `
+      \r\n
+      \r\n
+    `;
+
+    console.log(str.replaceAll('\r\n', '<p>'));
   </script>
 </html>
