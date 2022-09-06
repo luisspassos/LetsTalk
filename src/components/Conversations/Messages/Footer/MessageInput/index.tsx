@@ -18,6 +18,8 @@ type SavedSelection =
     }
   | undefined;
 
+type Events = { type: string; func: () => {} }[];
+
 function saveSelection(containerEl: HTMLDivElement) {
   const selection = getSelection();
   const range = selection?.getRangeAt(0);
@@ -287,10 +289,7 @@ export function MessageInput() {
     let oldMessage = '';
     let preventInputEventFromRunningTwice = false;
 
-    async function handleNativeEmojiPicker(e: Event) {
-      // this is for addEventListener to stop complaining about typing
-      const event = e as InputEvent;
-
+    async function handleNativeEmojiPicker(event: InputEvent) {
       const newValue = event.data;
 
       if (!newValue) {
@@ -316,18 +315,39 @@ export function MessageInput() {
       }, 0);
     }
 
-    messageInput?.addEventListener(
-      'beforeinput',
-      handleDropAndPasteAndBackspaceDeletionAndEmojis
-    );
-    messageInput?.addEventListener('input', handleNativeEmojiPicker);
+    function handleDisableKeyboardShortcuts(e: KeyboardEvent) {
+      const key = e.key;
+
+      const keys = ['u', 'b', 'i'];
+
+      if ((e.metaKey || e.ctrlKey) && keys.includes(key)) {
+        e.preventDefault();
+      }
+    }
+
+    const events = [
+      {
+        type: 'beforeinput',
+        func: handleDropAndPasteAndBackspaceDeletionAndEmojis,
+      },
+      {
+        type: 'input',
+        func: handleNativeEmojiPicker,
+      },
+      {
+        type: 'keydown',
+        func: handleDisableKeyboardShortcuts,
+      },
+    ] as Events;
+
+    for (const event of events) {
+      messageInput?.addEventListener(event.type, event.func);
+    }
 
     return () => {
-      messageInput?.removeEventListener(
-        'beforeinput',
-        handleDropAndPasteAndBackspaceDeletionAndEmojis
-      );
-      messageInput?.removeEventListener('input', handleNativeEmojiPicker);
+      for (const event of events) {
+        messageInput?.removeEventListener(event.type, event.func);
+      }
     };
   }, [ref]);
 
