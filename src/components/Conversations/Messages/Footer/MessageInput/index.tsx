@@ -121,11 +121,15 @@ export function MessageInput() {
 
       savedSelection = newSavedSelection;
 
-      const message = messageInput.innerText ?? '';
+      const innerText = messageInput.innerText ?? '';
+      const textContent = messageInput.textContent ?? '';
 
       const graphemer = new Graphemer();
 
-      const chars = graphemer.splitGraphemes(message);
+      const textContentChars = graphemer.splitGraphemes(textContent);
+      const innerTextChars = graphemer.splitGraphemes(innerText);
+
+      const thereAreBlankSpacesAtTheEnd;
 
       const { regexs } = await import('../../../../../utils/regexs');
       const { parse } = await import('twemoji-parser');
@@ -263,7 +267,7 @@ export function MessageInput() {
 
       e.preventDefault();
 
-      const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
+      isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
 
       if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
 

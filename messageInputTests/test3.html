@@ -24,21 +24,16 @@
     </style>
   </head>
   <body>
-    <div id="container">
-      <div id="content" contenteditable>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
-        consequuntur odio optio dignissimos, iste laborum accusantium ipsa hic
-        commodi doloribus sed eius delectus nemo cum at debitis odit?
-        Consequatur, sed.
-      </div>
-    </div>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
   </body>
   <script>
-    const str = `
-      \r\n
-      \r\n
-    `;
+    const str1 = [...'potato   '];
+    const str2 = [...'potato'];
 
-    console.log(str.replaceAll('\r\n', '<p>'));
+    let newStr = [];
+
+    if (str1[str1.length - 1] === ' ') {
+      newStr = str1;
+    }
   </script>
 </html>
