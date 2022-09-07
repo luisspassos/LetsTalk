@@ -379,9 +379,6 @@ export function MessageInput() {
         '*::selection': {
           bgColor: 'blueAlpha.200',
         },
-        '&::-webkit-scrollbar-thumb': {
-          borderWidth: '9px 3px',
-        },
         '.emoji': {
           letterSpacing: '2px',
           bgRepeat: 'no-repeat',

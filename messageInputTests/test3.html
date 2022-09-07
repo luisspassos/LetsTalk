@@ -15,12 +15,19 @@
       div[contenteditable]::selection {
         background-color: red;
       }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: blue;
+        border: 1px solid rgba(255, 0, 0, 0);
+      }
     </style>
   </head>
   <body>
-    <div contenteditable>
-      <p>dsadiasdij</p>
-    </div>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
   </body>
   <script>
     const str = `
