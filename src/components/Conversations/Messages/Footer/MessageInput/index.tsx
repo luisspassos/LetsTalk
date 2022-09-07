@@ -1,6 +1,7 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Graphemer from 'graphemer';
+import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 
 type Emoji = {
   text: string;
@@ -91,7 +92,7 @@ function restoreSelection(
 }
 
 export function MessageInput() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useMessageInputRef();
 
   useEffect(() => {
     const messageInput = ref.current;

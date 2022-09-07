@@ -1,7 +1,8 @@
 import { Center, Image } from '@chakra-ui/react';
+import { MouseEvent } from 'react';
 import { parse as twemojiParse } from 'twemoji-parser';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
-import { useMessageForm } from '../../../../../../../../contexts/MessageFormContext';
+import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRefContext';
 import { EmojiType } from '../../../../../../../../utils/types';
 
 type EmojiProps = {
@@ -14,10 +15,7 @@ export function Emoji({ emoji, name }: EmojiProps) {
     categories: { setState: setCategories, data: categories },
   } = useEmoji();
 
-  const {
-    messageForm: { getValues: getFormValues, setValue: setFormValues },
-    messageInputRef,
-  } = useMessageForm();
+  const messageInputRef = useMessageInputRef();
 
   const twemoji =
     emoji === '👁️‍🗨️'
@@ -76,29 +74,52 @@ export function Emoji({ emoji, name }: EmojiProps) {
       }));
     }
 
-    function addEmojiInMessage() {
-      const message = getFormValues('message');
+    function insertEmoji() {
+      const messageInput = messageInputRef.current;
 
-      const cursorPosition = messageInputRef.current?.selectionStart ?? 0;
+      const messageInputIsFocused = messageInput === document.activeElement;
 
-      // this code takes into account the cursor position
+      const selection = getSelection();
 
-      const messageBeforeEmoji = message.slice(0, cursorPosition);
-      const messageRest = message.slice(cursorPosition);
+      function putCursorAtTheEnd() {
+        if (!messageInput) return;
 
-      const newMessage = `${messageBeforeEmoji} ${emoji}${messageRest}`;
+        selection?.selectAllChildren(messageInput);
+        selection?.collapseToEnd();
+      }
 
-      setFormValues('message', newMessage.replace(/\s/g, ''));
+      if (!messageInputIsFocused) {
+        messageInput?.focus();
 
-      messageInputRef.current?.setSelectionRange(
-        cursorPosition + 1,
-        cursorPosition + 1
-      );
-      messageInputRef.current?.focus();
+        putCursorAtTheEnd();
+      }
+
+      const emojiElement = document.createElement('span');
+      emojiElement.textContent = emoji;
+      emojiElement.className = 'emoji';
+      emojiElement.style.backgroundImage = `url(${twemoji})`;
+
+      const emojiHasBeenPlacedNextToAnEmoji =
+        selection?.anchorNode?.parentElement?.className === 'emoji';
+
+      const selectionRange = selection?.getRangeAt(0);
+
+      if (emojiHasBeenPlacedNextToAnEmoji) {
+        const emoji = selection.anchorNode.parentElement;
+
+        selectionRange?.setStartAfter(emoji);
+      }
+
+      selectionRange?.insertNode(emojiElement);
+      selection?.collapseToEnd();
     }
 
-    addEmojiInMessage();
+    insertEmoji();
     addEmojiInRecentCategory();
+  }
+
+  function handleDisableFocusOnClick(e: MouseEvent) {
+    e.preventDefault();
   }
 
   return (
@@ -106,6 +127,7 @@ export function Emoji({ emoji, name }: EmojiProps) {
       <Image
         cursor='pointer'
         onClick={handleSelectEmoji}
+        onMouseDown={handleDisableFocusOnClick}
         w='70%'
         h='70%'
         src={twemoji}
