@@ -267,7 +267,7 @@ export function MessageInput() {
 
       e.preventDefault();
 
-      isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
+      const isPaste = e.dataTransfer.effectAllowed === 'uninitialized';
 
       if (isPaste && !selection?.isCollapsed) selection?.deleteFromDocument();
 
