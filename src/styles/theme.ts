@@ -35,11 +35,6 @@ export const theme = extendTheme(
       global: (props: GlobalStyleProps) => {
         const isDark = props.colorMode === 'dark';
 
-        const scrollbarColor = {
-          default: isDark ? 'whiteAlpha.500' : 'blueAlpha.700',
-          hover: isDark ? 'whiteAlpha.700' : 'blueAlpha.900',
-        };
-
         const placeholderColor = isDark ? 'whiteAlpha.800' : 'blackAlpha.700';
 
         return {
@@ -62,9 +57,8 @@ export const theme = extendTheme(
             width: ['3px', '6px'],
           },
           '::-webkit-scrollbar-thumb': {
-            bgColor: scrollbarColor.default,
+            bgColor: isDark ? colors.scrollbar.dark : colors.scrollbar.light,
           },
-          '::webkit-scrollbar-thumb:hover': {},
           '#chakra-toast-manager-top-right': {
             alignItems: 'end',
           },

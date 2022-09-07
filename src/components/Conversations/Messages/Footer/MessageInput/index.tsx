@@ -2,6 +2,7 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import Graphemer from 'graphemer';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
+import { colors } from '../../../../../styles/colors';
 
 type Emoji = {
   text: string;
@@ -20,6 +21,11 @@ type SavedSelection =
   | undefined;
 
 type Events = { type: string; func: () => {} }[];
+
+type Styles = {
+  default: any;
+  HSpacing: string;
+};
 
 function saveSelection(containerEl: HTMLDivElement) {
   const selection = getSelection();
@@ -352,14 +358,17 @@ export function MessageInput() {
     };
   }, [ref]);
 
-  const defaultStyles: any = useStyleConfig('Textarea');
+  const styles: Styles = {
+    default: useStyleConfig('Textarea'),
+    HSpacing: '10.5px',
+  };
 
   return (
     <Box
-      {...defaultStyles}
+      {...styles.default}
       ref={ref}
       borderRadius='10px'
-      py='10.5px'
+      py={styles.HSpacing}
       fontFamily='Roboto, Noto Emoji, sans-serif'
       bg={useColorModeValue('white', 'blackAlpha.500')}
       borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
@@ -378,6 +387,21 @@ export function MessageInput() {
       sx={{
         '*::selection': {
           bgColor: 'blueAlpha.200',
+        },
+        '::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '::-webkit-scrollbar-track': {
+          margin: styles.HSpacing,
+        },
+        '::-webkit-scrollbar-thumb': {
+          bgColor: 'transparent',
+          borderLeftColor: useColorModeValue(
+            colors.scrollbar.light,
+            colors.scrollbar.dark
+          ),
+          borderLeftStyle: 'solid',
+          borderLeftWidth: '4px',
         },
         '.emoji': {
           letterSpacing: '2px',

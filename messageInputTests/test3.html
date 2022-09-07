@@ -6,28 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      div[contenteditable] {
-        border: 1px solid black;
-        padding: 10px;
-      }
-
-      div[contenteditable] ::selection,
-      div[contenteditable]::selection {
-        background-color: red;
+      #content {
+        font-size: 30em;
       }
 
       ::-webkit-scrollbar {
-        width: 10px;
+        width: 15px;
+      }
+
+      ::-webkit-scrollbar-track {
+        margin: 40px;
       }
 
       ::-webkit-scrollbar-thumb {
-        background: blue;
-        border: 1px solid rgba(255, 0, 0, 0);
+        border-left: 10px solid black;
       }
     </style>
   </head>
   <body>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <div id="container">
+      <div id="content" contenteditable>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
+        consequuntur odio optio dignissimos, iste laborum accusantium ipsa hic
+        commodi doloribus sed eius delectus nemo cum at debitis odit?
+        Consequatur, sed.
+      </div>
+    </div>
   </body>
   <script>
     const str = `

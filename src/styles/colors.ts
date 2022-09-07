@@ -23,4 +23,8 @@ export const colors = {
     300: '#f37871',
     600: '#b03340',
   },
+  scrollbar: {
+    dark: 'whiteAlpha.500',
+    light: 'blueAlpha.700',
+  },
 };
