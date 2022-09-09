@@ -122,14 +122,10 @@ export function MessageInput() {
       savedSelection = newSavedSelection;
 
       const innerText = messageInput.innerText ?? '';
-      const textContent = messageInput.textContent ?? '';
 
       const graphemer = new Graphemer();
 
-      const textContentChars = graphemer.splitGraphemes(textContent);
-      const innerTextChars = graphemer.splitGraphemes(innerText);
-
-      const thereAreBlankSpacesAtTheEnd;
+      const chars = graphemer.splitGraphemes(innerText);
 
       const { regexs } = await import('../../../../../utils/regexs');
       const { parse } = await import('twemoji-parser');
@@ -273,15 +269,21 @@ export function MessageInput() {
 
       const dataTransfer = e.dataTransfer.getData('text');
 
-      function standardizeLineBreaks(string: string) {
+      function manipulateSomeCharacters(string: string) {
+        const htmlLineBreaker = '<br>';
+
         for (const lineBreak of lineBreaks) {
-          string = string.replaceAll(lineBreak, '<br>');
+          string = string.replaceAll(lineBreak, htmlLineBreaker);
         }
+
+        const htmlBlankSpace = '&nbsp;';
+
+        string = string.replaceAll(' ', htmlBlankSpace);
 
         return string;
       }
 
-      const newDataTransfer = standardizeLineBreaks(dataTransfer);
+      const newDataTransfer = manipulateSomeCharacters(dataTransfer);
 
       const textParent = document.createElement('template');
       textParent.innerHTML = newDataTransfer;

@@ -27,13 +27,10 @@
     <textarea name="" id="" cols="30" rows="10"></textarea>
   </body>
   <script>
-    const str1 = [...'potato   '];
-    const str2 = [...'potato'];
+    const str1 = ['a', 'b', 'c'];
 
-    let newStr = [];
+    const str2 = 'hiii dddy';
 
-    if (str1[str1.length - 1] === ' ') {
-      newStr = str1;
-    }
+    console.log(str1.some((char) => str2.includes(char)));
   </script>
 </html>
