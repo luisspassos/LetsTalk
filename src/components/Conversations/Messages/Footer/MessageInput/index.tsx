@@ -8,13 +8,12 @@ type Styles = {
   HSpacing: string;
 };
 
-type SpecialTwemojis = Record<
-  string,
-  {
-    text: string;
-    url: string;
-  }
->;
+type Twemoji = {
+  text: string;
+  url: string;
+};
+
+type SpecialTwemojis = Record<string, Twemoji>;
 
 export function MessageInput() {
   const ref = useMessageInputRef();
@@ -42,7 +41,6 @@ export function MessageInput() {
           text: '👁️‍🗨️',
           url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
         },
-
         '♾️': {
           text: '♾️',
           url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
@@ -52,17 +50,51 @@ export function MessageInput() {
       const getTwemoji = async () => {
         const { parse } = await import('twemoji-parser');
 
-        const twemoji = parse(newValue)[0];
+        const twemoji = parse(newValue);
 
-        return twemoji;
+        return twemoji.length > 1 ? twemoji : twemoji[0];
       };
 
-      const twemoji = specialTwemojis[newValue] || (await getTwemoji());
+      const specialTwemoji = specialTwemojis[newValue];
 
-      const emojiEl = document.createElement('span');
-      emojiEl.className = 'emoji';
-      emojiEl.textContent = twemoji.text;
-      emojiEl.style.backgroundImage = `url(${twemoji.url})`;
+      const twemojiOrTwemojis = (specialTwemoji || (await getTwemoji())) as
+        | Twemoji
+        | Twemoji[];
+
+      let emoji: DocumentFragment | HTMLSpanElement;
+
+      const isTwemojis = Array.isArray(twemojiOrTwemojis);
+
+      if (isTwemojis) {
+        let twemojisHtml = '';
+
+        for (const index in twemojiOrTwemojis) {
+          const twemoji = twemojiOrTwemojis[index];
+
+          const twemojiHtml = `<span class="emoji" style="background-image: url(${twemoji.url})">${twemoji.text}</span>`;
+
+          twemojisHtml += twemojiHtml;
+
+          const isLast = twemojiOrTwemojis.length - 1 === Number(index);
+
+          if (isLast) break;
+
+          // the emojis link character is invisible
+          const emojisLinkCharacter = '‍';
+
+          twemojisHtml += emojisLinkCharacter;
+        }
+
+        const emojiEl = document.createElement('template');
+        emojiEl.innerHTML = twemojisHtml;
+
+        emoji = emojiEl.content;
+      } else {
+        emoji = document.createElement('span');
+        emoji.className = 'emoji';
+        emoji.textContent = twemojiOrTwemojis.text;
+        emoji.style.backgroundImage = `url(${twemojiOrTwemojis.url})`;
+      }
 
       const selection = getSelection();
 
@@ -89,7 +121,7 @@ export function MessageInput() {
         }
       }
 
-      selectionRange?.insertNode(emojiEl);
+      selectionRange?.insertNode(emoji);
 
       preventHandleEmojisFromRunningTwiceBecauseOfSomeCharacters = true;
 
