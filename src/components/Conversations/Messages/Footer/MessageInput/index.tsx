@@ -8,6 +8,14 @@ type Styles = {
   HSpacing: string;
 };
 
+type SpecialTwemojis = Record<
+  string,
+  {
+    text: string;
+    url: string;
+  }
+>;
+
 export function MessageInput() {
   const ref = useMessageInputRef();
 
@@ -29,11 +37,27 @@ export function MessageInput() {
 
       if (!isEmoji) return;
 
-      const { parse: twemojiParse } = await import('twemoji-parser');
+      const specialTwemojis: SpecialTwemojis = {
+        '👁️‍🗨️': {
+          text: '👁️‍🗨️',
+          url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+        },
 
-      console.log(twemojiParse(newValue));
+        '♾️': {
+          text: '♾️',
+          url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+        },
+      };
 
-      const twemoji = twemojiParse(newValue)[0];
+      const getTwemoji = async () => {
+        const { parse } = await import('twemoji-parser');
+
+        const twemoji = parse(newValue)[0];
+
+        return twemoji;
+      };
+
+      const twemoji = specialTwemojis[newValue] || (await getTwemoji());
 
       const emojiEl = document.createElement('span');
       emojiEl.className = 'emoji';
@@ -48,10 +72,21 @@ export function MessageInput() {
       const emojiHasBeenPlacedCloseToAnEmoji =
         elementThatIsCloseToTheEmojiToBeInserted?.className === 'emoji';
 
+      const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+        selection?.anchorOffset === 0;
+
       const selectionRange = selection?.getRangeAt(0);
 
       if (emojiHasBeenPlacedCloseToAnEmoji) {
-        selectionRange?.setStartAfter(elementThatIsCloseToTheEmojiToBeInserted);
+        if (emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+          selectionRange?.setStartBefore(
+            elementThatIsCloseToTheEmojiToBeInserted
+          );
+        } else {
+          selectionRange?.setStartAfter(
+            elementThatIsCloseToTheEmojiToBeInserted
+          );
+        }
       }
 
       selectionRange?.insertNode(emojiEl);
