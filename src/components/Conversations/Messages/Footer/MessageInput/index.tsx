@@ -1,5 +1,5 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
-import { FormEvent } from 'react';
+import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
 
@@ -8,48 +8,70 @@ type Styles = {
   HSpacing: string;
 };
 
-type InputEventType = FormEvent<HTMLDivElement> & {
-  target: HTMLDivElement;
-  nativeEvent: InputEvent;
-};
-
 export function MessageInput() {
   const ref = useMessageInputRef();
 
-  let message = '';
-  let handleDuplicateCharacters = false;
+  useEffect(() => {
+    const messageInput = ref.current;
 
-  async function handleEmojis(e: InputEventType) {
-    console.log(e.target.textContent);
+    let preventHandleEmojisFromRunningTwiceBecauseOfSomeCharacters = false;
 
-    // const messageInput = e.target;
-    // if (handleDuplicateCharacters) {
-    //   messageInput.innerHTML = message;
-    //   return;
-    // }
-    // const nativeEvent = e.nativeEvent;
-    // const newValue = nativeEvent.data;
-    // if (!newValue) return;
-    // const { regexs } = await import('../../../../../utils/regexs');
-    // const isEmoji = regexs.emoji.test(newValue);
-    // if (!isEmoji) return;
-    // const { parse: twemojiParse } = await import('twemoji-parser');
-    // const twemoji = twemojiParse(newValue)[0];
-    // const emoji = document.createElement('span');
-    // emoji.className = 'emoji';
-    // emoji.style.backgroundImage = `url(${twemoji.url})`;
-    // emoji.textContent = twemoji.text;
-    // const selection = getSelection();
-    // const selectionRange = selection?.getRangeAt(0);
-    // selectionRange?.insertNode(emoji);
-    // const newMessage = messageInput.innerHTML;
-    // message = newMessage;
-    // handleDuplicateCharacters = true;
-    // const timeToHandleDuplicateCharacters = 0;
-    // setTimeout(() => {
-    //   handleDuplicateCharacters = false;
-    // }, timeToHandleDuplicateCharacters);
-  }
+    async function handleEmojis(e: InputEvent) {
+      if (preventHandleEmojisFromRunningTwiceBecauseOfSomeCharacters) return;
+
+      const newValue = e.data;
+
+      if (!newValue) return;
+
+      const { regexs } = await import('../../../../../utils/regexs');
+
+      const isEmoji = regexs.emoji.test(newValue);
+
+      if (!isEmoji) return;
+
+      const { parse: twemojiParse } = await import('twemoji-parser');
+
+      console.log(twemojiParse(newValue));
+
+      const twemoji = twemojiParse(newValue)[0];
+
+      const emojiEl = document.createElement('span');
+      emojiEl.className = 'emoji';
+      emojiEl.textContent = twemoji.text;
+      emojiEl.style.backgroundImage = `url(${twemoji.url})`;
+
+      const selection = getSelection();
+
+      const elementThatIsCloseToTheEmojiToBeInserted =
+        selection?.anchorNode?.parentElement;
+
+      const emojiHasBeenPlacedCloseToAnEmoji =
+        elementThatIsCloseToTheEmojiToBeInserted?.className === 'emoji';
+
+      const selectionRange = selection?.getRangeAt(0);
+
+      if (emojiHasBeenPlacedCloseToAnEmoji) {
+        selectionRange?.setStartAfter(elementThatIsCloseToTheEmojiToBeInserted);
+      }
+
+      selectionRange?.insertNode(emojiEl);
+
+      preventHandleEmojisFromRunningTwiceBecauseOfSomeCharacters = true;
+
+      const timeToPreventHandleEmojisFromRunningTwiceBecauseOfSomeCharacters = 0;
+
+      setTimeout(() => {
+        preventHandleEmojisFromRunningTwiceBecauseOfSomeCharacters = false;
+      }, timeToPreventHandleEmojisFromRunningTwiceBecauseOfSomeCharacters);
+    }
+
+    // addEventListener is being used to avoid bugs
+    messageInput?.addEventListener('beforeinput', handleEmojis);
+
+    return () => {
+      messageInput?.removeEventListener('beforeinput', handleEmojis);
+    };
+  }, [ref]);
 
   const styles: Styles = {
     default: useStyleConfig('Textarea'),
@@ -59,7 +81,6 @@ export function MessageInput() {
   return (
     <Box
       {...styles.default}
-      onBeforeInput={handleEmojis}
       ref={ref}
       borderRadius='10px'
       py={styles.HSpacing}
