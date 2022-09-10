@@ -24,13 +24,13 @@
     </style>
   </head>
   <body>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <div contenteditable></div>
   </body>
   <script>
-    const str1 = ['a', 'b', 'c'];
+    const contenteditable = document.querySelector('div[contenteditable]');
 
-    const str2 = 'hiii dddy';
-
-    console.log(str1.some((char) => str2.includes(char)));
+    contenteditable.addEventListener('beforeinput', (e) => {
+      console.log(e.target.textContent);
+    });
   </script>
 </html>
