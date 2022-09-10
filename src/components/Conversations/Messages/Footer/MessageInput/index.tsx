@@ -209,6 +209,26 @@ export function MessageInput() {
 
       setMessageAndRestoreSelection(newMessage);
 
+      const positionScroll = () => {
+        const selection = getSelection();
+
+        if (!selection?.isCollapsed) return;
+
+        const firstRange = selection?.getRangeAt(0);
+
+        if (firstRange?.commonAncestorContainer === document) return;
+
+        const tempAnchorEl = document.createElement('br');
+
+        firstRange?.insertNode(tempAnchorEl);
+
+        tempAnchorEl.scrollIntoView();
+
+        tempAnchorEl.remove();
+      };
+
+      positionScroll();
+
       return newMessage;
     }
 
