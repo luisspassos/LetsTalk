@@ -33,6 +33,10 @@ export function MessageInput() {
 
       if (!newValue) return;
 
+      const { regexs } = await import('../../../../../utils/regexs');
+
+      const isEmoji = regexs.emoji.test(newValue);
+
       const selection = getSelection();
 
       const elementThatIsCloseToTheContentToBeInserted =
@@ -41,13 +45,15 @@ export function MessageInput() {
       const contentHasBeenPlacedCloseToAnEmoji =
         elementThatIsCloseToTheContentToBeInserted?.className === 'emoji';
 
+      if (!contentHasBeenPlacedCloseToAnEmoji && !isEmoji) return;
+
+      const selectionRange = selection?.getRangeAt(0);
+
       const positionSelection = () => {
         if (!elementThatIsCloseToTheContentToBeInserted) return;
 
         const contentHasBeenPlacedAtTheBeginningOfTheInput =
           selection?.anchorOffset === 0;
-
-        const selectionRange = selection?.getRangeAt(0);
 
         if (contentHasBeenPlacedAtTheBeginningOfTheInput) {
           selectionRange?.setStartBefore(
@@ -61,14 +67,8 @@ export function MessageInput() {
       };
 
       const insertNode = (node: Emoji | Text) => {
-        const selectionRange = selection?.getRangeAt(0);
-
         selectionRange?.insertNode(node);
       };
-
-      const { regexs } = await import('../../../../../utils/regexs');
-
-      const isEmoji = regexs.emoji.test(newValue);
 
       if (isEmoji) {
         const specialTwemojis: SpecialTwemojis = {
@@ -131,29 +131,27 @@ export function MessageInput() {
           emoji.style.backgroundImage = `url(${twemojiOrTwemojis.url})`;
         }
 
-        if (contentHasBeenPlacedCloseToAnEmoji) {
-          positionSelection();
-        }
+        if (contentHasBeenPlacedCloseToAnEmoji) positionSelection();
 
         insertNode(emoji);
       } else {
-        if (!contentHasBeenPlacedCloseToAnEmoji) return;
-
         e.preventDefault();
 
         const specialChars: Record<string, string> = {
           ' ': '\xA0',
         };
 
-        const value = specialChars[newValue] ?? newValue;
+        const value = specialChars[newValue] || newValue;
 
         const textNode = document.createTextNode(value);
 
         positionSelection();
 
-        insertNode(textNode);
+        selectionRange?.insertNode(textNode);
 
-        selection?.collapseToEnd();
+        const isOnlyOneCharacter = value.length === 1;
+
+        if (isOnlyOneCharacter) selection?.collapseToEnd();
       }
 
       preventBeforeInputEventFromRunningTwiceBecauseOfSomeCharacters = true;
