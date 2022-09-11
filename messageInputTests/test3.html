@@ -20,17 +20,8 @@
   <script>
     const contenteditable = document.querySelector('div[contenteditable]');
 
-    contenteditable.addEventListener('beforeinput', (e) => {
-      e.preventDefault();
-
-      const text = document.createTextNode(e.data);
-
-      const selection = window.getSelection();
-      const selectionRange = selection.getRangeAt(0);
-
-      selectionRange.setStartAfter(contenteditable.firstChild);
-
-      selectionRange.insertNode(text);
-    });
+    const div = document.createElement('div');
+    div.innerHTML = ' ';
+    console.log(div);
   </script>
 </html>

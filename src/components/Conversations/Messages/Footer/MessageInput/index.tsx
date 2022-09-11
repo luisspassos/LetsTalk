@@ -139,11 +139,21 @@ export function MessageInput() {
       } else {
         if (!contentHasBeenPlacedCloseToAnEmoji) return;
 
-        const text = document.createTextNode(newValue);
+        e.preventDefault();
+
+        const specialChars: Record<string, string> = {
+          ' ': '\xA0',
+        };
+
+        const value = specialChars[newValue] ?? newValue;
+
+        const textNode = document.createTextNode(value);
 
         positionSelection();
 
-        insertNode(text);
+        insertNode(textNode);
+
+        selection?.collapseToEnd();
       }
 
       preventBeforeInputEventFromRunningTwiceBecauseOfSomeCharacters = true;
