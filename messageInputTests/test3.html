@@ -15,6 +15,22 @@
     </style>
   </head>
   <body>
-    <div contenteditable><span class="emoji" style="background-image: url(https://twemoji.maxcdn.com/v/latest/svg/1f431.svg);">🐱‍</span><span class="emoji" style="background-image: url(&quot;https://twemoji.maxcdn.com/v/latest/svg/1f464.svg&quot;);">👤</span></div>
+    <div contenteditable><p>a</p></div>
   </body>
+  <script>
+    const contenteditable = document.querySelector('div[contenteditable]');
+
+    contenteditable.addEventListener('beforeinput', (e) => {
+      e.preventDefault();
+
+      const text = document.createTextNode(e.data);
+
+      const selection = window.getSelection();
+      const selectionRange = selection.getRangeAt(0);
+
+      selectionRange.setStartAfter(contenteditable.firstChild);
+
+      selectionRange.insertNode(text);
+    });
+  </script>
 </html>
