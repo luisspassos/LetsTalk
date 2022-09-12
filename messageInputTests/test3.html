@@ -21,11 +21,13 @@
     const contenteditable = document.querySelector('div[contenteditable]');
 
     contenteditable.addEventListener('beforeinput', (e) => {
+      e.preventDefault();
+
       const text = document.createTextNode(e.data);
 
-      console.log(text);
-
       getSelection().getRangeAt(0).insertNode(text);
+
+      getSelection().collapseToEnd();
     });
   </script>
 </html>

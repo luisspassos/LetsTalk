@@ -37,38 +37,9 @@ export function MessageInput() {
 
       const isEmoji = regexs.emoji.test(newValue);
 
-      const selection = getSelection();
+      let content: Emoji | Text;
 
-      const elementThatIsCloseToTheContentToBeInserted =
-        selection?.anchorNode?.parentElement;
-
-      const contentHasBeenPlacedCloseToAnEmoji =
-        elementThatIsCloseToTheContentToBeInserted?.className === 'emoji';
-
-      if (!contentHasBeenPlacedCloseToAnEmoji && !isEmoji) return;
-
-      const selectionRange = selection?.getRangeAt(0);
-
-      const positionSelection = () => {
-        if (!elementThatIsCloseToTheContentToBeInserted) return;
-
-        const contentHasBeenPlacedAtTheBeginningOfTheInput =
-          selection?.anchorOffset === 0;
-
-        if (contentHasBeenPlacedAtTheBeginningOfTheInput) {
-          selectionRange?.setStartBefore(
-            elementThatIsCloseToTheContentToBeInserted
-          );
-        } else {
-          selectionRange?.setStartAfter(
-            elementThatIsCloseToTheContentToBeInserted
-          );
-        }
-      };
-
-      const insertNode = (node: Emoji | Text) => {
-        selectionRange?.insertNode(node);
-      };
+      let isSpecialChar = false;
 
       if (isEmoji) {
         const specialTwemojis: SpecialTwemojis = {
@@ -131,28 +102,54 @@ export function MessageInput() {
           emoji.style.backgroundImage = `url(${twemojiOrTwemojis.url})`;
         }
 
-        if (contentHasBeenPlacedCloseToAnEmoji) positionSelection();
-
-        insertNode(emoji);
+        content = emoji;
       } else {
-        e.preventDefault();
-
         const specialChars: Record<string, string> = {
           ' ': '\xA0',
         };
+
+        const specialChar = specialChars[newValue];
+
+        if (specialChar) {
+          e.preventDefault();
+
+          isSpecialChar = true;
+        }
 
         const value = specialChars[newValue] || newValue;
 
         const textNode = document.createTextNode(value);
 
-        positionSelection();
-
-        selectionRange?.insertNode(textNode);
-
-        const isOnlyOneCharacter = value.length === 1;
-
-        if (isOnlyOneCharacter) selection?.collapseToEnd();
+        content = textNode;
       }
+
+      const selection = getSelection();
+
+      const elementThatIsCloseToTheContentToBeInserted =
+        selection?.anchorNode?.parentElement;
+
+      const contentHasBeenPlacedCloseToAnEmoji =
+        elementThatIsCloseToTheContentToBeInserted?.className === 'emoji';
+
+      const selectionRange = selection?.getRangeAt(0);
+
+      if (contentHasBeenPlacedCloseToAnEmoji) {
+        const contentHasBeenPlacedAtTheBeginningOfTheInput =
+          selection?.anchorOffset === 0;
+
+        if (contentHasBeenPlacedAtTheBeginningOfTheInput) {
+          selectionRange?.setStartBefore(
+            elementThatIsCloseToTheContentToBeInserted
+          );
+        } else {
+          selectionRange?.setStartAfter(
+            elementThatIsCloseToTheContentToBeInserted
+          );
+        }
+      }
+
+      selectionRange?.insertNode(content);
+      if (isSpecialChar) selectionRange?.collapse();
 
       preventBeforeInputEventFromRunningTwiceBecauseOfSomeCharacters = true;
 
