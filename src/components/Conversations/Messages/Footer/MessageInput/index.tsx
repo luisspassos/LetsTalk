@@ -35,13 +35,19 @@ export function MessageInput() {
 
       const { regexs } = await import('../../../../../utils/regexs');
 
-      const isEmoji = regexs.emoji.test(newValue);
+      const thereAreEmojis = regexs.emoji.test(newValue);
 
       let content: Emoji | Text;
 
-      let isSpecialChar = false;
+      if (thereAreEmojis) {
+        // const Graphemer = (await import('graphemer')).default;
+        // const graphemer = new Graphemer();
 
-      if (isEmoji) {
+        // const chars = graphemer.splitGraphemes(newValue);
+
+        // for (const char of chars) {
+        // }
+
         const specialTwemojis: SpecialTwemojis = {
           '👁️‍🗨️': {
             text: '👁️‍🗨️',
@@ -104,19 +110,15 @@ export function MessageInput() {
 
         content = emoji;
       } else {
+        e.preventDefault();
+
         const specialChars: Record<string, string> = {
           ' ': '\xA0',
         };
 
         const specialChar = specialChars[newValue];
 
-        if (specialChar) {
-          e.preventDefault();
-
-          isSpecialChar = true;
-        }
-
-        const value = specialChars[newValue] || newValue;
+        const value = specialChar || newValue;
 
         const textNode = document.createTextNode(value);
 
@@ -149,7 +151,12 @@ export function MessageInput() {
       }
 
       selectionRange?.insertNode(content);
-      if (isSpecialChar) selectionRange?.collapse();
+
+      // on Windows
+      const newValueCameFromNativeEmojiPicker =
+        e.inputType === 'insertCompositionText';
+
+      if (!newValueCameFromNativeEmojiPicker) selectionRange?.collapse();
 
       preventBeforeInputEventFromRunningTwiceBecauseOfSomeCharacters = true;
 

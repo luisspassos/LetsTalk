@@ -15,19 +15,19 @@
     </style>
   </head>
   <body>
-    <div contenteditable></div>
+    <div contenteditable>potato</div>
   </body>
   <script>
     const contenteditable = document.querySelector('div[contenteditable]');
 
     contenteditable.addEventListener('beforeinput', (e) => {
-      e.preventDefault();
+      // e.preventDefault();
+      // console.log(e.isComposing);
+      // const textNode = document.createTextNode('\xA0');
+      // getSelection().getRangeAt(0).insertNode(textNode);
+      // getSelection().collapseToEnd();
 
-      const text = document.createTextNode(e.data);
-
-      getSelection().getRangeAt(0).insertNode(text);
-
-      getSelection().collapseToEnd();
+      console.log(e);
     });
   </script>
 </html>
