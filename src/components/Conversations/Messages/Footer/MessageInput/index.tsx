@@ -1,14 +1,10 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
+import Graphemer from 'graphemer';
 import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
 
 type Emoji = DocumentFragment | HTMLSpanElement;
-
-type Styles = {
-  default: any;
-  HSpacing: string;
-};
 
 type Twemoji = {
   text: string;
@@ -16,6 +12,11 @@ type Twemoji = {
 };
 
 type SpecialTwemojis = Record<string, Twemoji>;
+
+type Styles = {
+  default: any;
+  HSpacing: string;
+};
 
 export function MessageInput() {
   const ref = useMessageInputRef();
@@ -37,78 +38,93 @@ export function MessageInput() {
 
       const thereAreEmojis = regexs.emoji.test(newValue);
 
-      let content: Emoji | Text;
+      let content: DocumentFragment | Text;
 
       if (thereAreEmojis) {
-        // const Graphemer = (await import('graphemer')).default;
-        // const graphemer = new Graphemer();
+        const graphemer = new Graphemer();
 
-        // const chars = graphemer.splitGraphemes(newValue);
+        const chars = graphemer.splitGraphemes(newValue);
 
-        // for (const char of chars) {
-        // }
+        console.log(chars);
 
-        const specialTwemojis: SpecialTwemojis = {
-          '👁️‍🗨️': {
-            text: '👁️‍🗨️',
-            url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
-          },
-          '♾️': {
-            text: '♾️',
-            url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
-          },
-        };
+        let newValueEl = document.createElement('template');
 
-        const getTwemoji = async () => {
-          const { parse } = await import('twemoji-parser');
+        for (const char of chars) {
+          const isEmoji = regexs.emoji.test(char);
 
-          const twemoji = parse(newValue);
+          let node: Emoji | Text;
 
-          return twemoji.length > 1 ? twemoji : twemoji[0];
-        };
+          if (isEmoji) {
+            const specialTwemojis: SpecialTwemojis = {
+              '👁️‍🗨️': {
+                text: '👁️‍🗨️',
+                url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+              },
+              '♾️': {
+                text: '♾️',
+                url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+              },
+            };
 
-        const specialTwemoji = specialTwemojis[newValue];
+            const getTwemoji = async () => {
+              const { parse } = await import('twemoji-parser');
 
-        const twemojiOrTwemojis = (specialTwemoji || (await getTwemoji())) as
-          | Twemoji
-          | Twemoji[];
+              const twemoji = parse(newValue);
 
-        let emoji: Emoji;
+              return twemoji.length > 1 ? twemoji : twemoji[0];
+            };
 
-        const isTwemojis = Array.isArray(twemojiOrTwemojis);
+            const specialTwemoji = specialTwemojis[newValue];
 
-        if (isTwemojis) {
-          let twemojisHtml = '';
+            const twemojiOrTwemojis = (specialTwemoji ||
+              (await getTwemoji())) as Twemoji | Twemoji[];
 
-          for (const index in twemojiOrTwemojis) {
-            const twemoji = twemojiOrTwemojis[index];
+            let emoji: Emoji;
 
-            const twemojiHtml = `<span class="emoji" style="background-image: url(${twemoji.url})">${twemoji.text}</span>`;
+            const isTwemojis = Array.isArray(twemojiOrTwemojis);
 
-            twemojisHtml += twemojiHtml;
+            if (isTwemojis) {
+              let twemojisHtml = '';
 
-            const isLast = twemojiOrTwemojis.length - 1 === Number(index);
+              for (const index in twemojiOrTwemojis) {
+                const twemoji = twemojiOrTwemojis[index];
 
-            if (isLast) break;
+                const twemojiHtml = `<span class="emoji" style="background-image: url(${twemoji.url})">${twemoji.text}</span>`;
 
-            // the emojis link character is invisible
-            const emojisLinkCharacter = '‍';
+                twemojisHtml += twemojiHtml;
 
-            twemojisHtml += emojisLinkCharacter;
+                const isLast = twemojiOrTwemojis.length - 1 === Number(index);
+
+                if (isLast) break;
+
+                // the emojis link character is invisible
+                const emojisLinkCharacter = '‍';
+
+                twemojisHtml += emojisLinkCharacter;
+              }
+
+              const emojiEl = document.createElement('template');
+              emojiEl.innerHTML = twemojisHtml;
+
+              emoji = emojiEl.content;
+            } else {
+              emoji = document.createElement('span');
+              emoji.className = 'emoji';
+              emoji.textContent = twemojiOrTwemojis.text;
+              emoji.style.backgroundImage = `url(${twemojiOrTwemojis.url})`;
+            }
+
+            node = emoji;
+          } else {
+            const textNode = document.createTextNode(char);
+
+            node = textNode;
           }
 
-          const emojiEl = document.createElement('template');
-          emojiEl.innerHTML = twemojisHtml;
-
-          emoji = emojiEl.content;
-        } else {
-          emoji = document.createElement('span');
-          emoji.className = 'emoji';
-          emoji.textContent = twemojiOrTwemojis.text;
-          emoji.style.backgroundImage = `url(${twemojiOrTwemojis.url})`;
+          newValueEl.content.appendChild(node);
         }
 
-        content = emoji;
+        content = newValueEl.content;
       } else {
         e.preventDefault();
 
