@@ -6,12 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      * {
-        white-space: pre;
-      }
-
-      .test {
-        color: blue;
+      .text {
+        /* display: none; */
+        color: transparent;
+        font-size: 0;
       }
 
       .emoji {
@@ -20,10 +18,14 @@
         background-position: center;
         color: transparent;
       }
+
+      div[contenteditable] {
+        padding: 5px 10px;
+      }
     </style>
   </head>
   <body>
-    <div contenteditable></div>
+    <div contenteditable><span>potato</span></div>
   </body>
   <script>
     const contenteditable = document.querySelector('div[contenteditable]');
@@ -33,38 +35,46 @@
     contenteditable.addEventListener('beforeinput', (e) => {
       if (!continueBeforeInputEvent) return;
 
-      const newValue = e.data;
-      const chars = [...newValue];
+      e.preventDefault();
 
-      const template = document.createElement('template');
-
-      for (const char of chars) {
-        const emojiRegex = /\p{Extended_Pictographic}/u;
-        const isEmoji = emojiRegex.test(char);
-
-        if (isEmoji) {
-          const emoji = document.createElement('span');
-          emoji.textContent = '❤️';
-          emoji.className = 'emoji';
-          emoji.style.backgroundImage = `url("https://twemoji.maxcdn.com/v/latest/svg/2764.svg")`;
-
-          template.content.appendChild(emoji);
-        } else {
-          template.content.insertAdjacentText('beforeend', char)
-        }
-
-        continueBeforeInputEvent = false;
-
-        setTimeout(() => {
-          continueBeforeInputEvent = true;
-        }, 0);
-      }
-
-      console.log(template.content);
+      const span = document.createElement('span');
+      span.textContent = e.data;
+      span.className = 'text';
+      // span.style.display = 'none';
 
       const selection = window.getSelection();
+      const selectionRange = selection.getRangeAt(0);
 
-      // selection.getRangeAt(0).insertNode(template.content);
+      selectionRange.setStartAfter(contenteditable.firstChild);
+
+      selectionRange.insertNode(span);
+
+      setTimeout(() => {
+        span.textContent = 'asdsadad';
+      }, 0);
+
+      continueBeforeInputEvent = false;
+
+      setTimeout(() => {
+        continueBeforeInputEvent = true;
+      }, 0);
+    });
+
+    let continueInputEvent = true;
+
+    contenteditable.addEventListener('input', (e) => {
+      // const span = document.querySelector('.text');
+      // setTimeout(() => {
+      //   span.textContent = 'aaa';
+      // }, 0);
+      //   if (!continueInputEvent) return;
+      //   const a = 'dsajd';
+      //   const span = document.querySelector('.text');
+      //   span.textContent = 'aaa';
+      //   continueInputEvent = false;
+      //   setTimeout(() => {
+      //     continueInputEvent = true;
+      //   }, 0);
     });
   </script>
 </html>
