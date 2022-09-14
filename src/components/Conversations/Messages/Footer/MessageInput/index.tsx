@@ -1,4 +1,5 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
+import Graphemer from 'graphemer';
 import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
@@ -17,6 +18,10 @@ type Twemoji = {
 
 type SpecialTwemojis = Record<string, Twemoji>;
 
+type TwemojisCallback = (twemojisHtml: string) => DocumentFragment | string;
+
+type TwemojiCallback = (twemoji: Twemoji) => HTMLSpanElement | string;
+
 export function MessageInput() {
   const ref = useMessageInputRef();
 
@@ -33,82 +38,183 @@ export function MessageInput() {
 
       if (!newValue) return;
 
+      function positionSelectionAndInsertNode(node: Emoji | Text) {
+        const selection = getSelection();
+
+        const elementThatIsCloseToTheContentToBeInserted =
+          selection?.anchorNode?.parentElement;
+
+        const contentHasBeenPlacedCloseToAnEmoji =
+          elementThatIsCloseToTheContentToBeInserted?.className === 'emoji';
+
+        const selectionRange = selection?.getRangeAt(0);
+
+        if (contentHasBeenPlacedCloseToAnEmoji) {
+          const contentHasBeenPlacedAtTheBeginningOfTheInput =
+            selection?.anchorOffset === 0;
+
+          if (contentHasBeenPlacedAtTheBeginningOfTheInput) {
+            selectionRange?.setStartBefore(
+              elementThatIsCloseToTheContentToBeInserted
+            );
+          } else {
+            selectionRange?.setStartAfter(
+              elementThatIsCloseToTheContentToBeInserted
+            );
+          }
+        }
+
+        selectionRange?.insertNode(node);
+
+        // on Windows
+        const newValueCameFromNativeEmojiPicker =
+          e.inputType === 'insertCompositionText';
+
+        if (!newValueCameFromNativeEmojiPicker) selectionRange?.collapse();
+      }
+
       const { regexs } = await import('../../../../../utils/regexs');
 
       const thereAreEmojis = regexs.emoji.test(newValue);
 
-      let content: Emoji | Text;
-
       if (thereAreEmojis) {
-        // const Graphemer = (await import('graphemer')).default;
-        // const graphemer = new Graphemer();
+        const graphemer = new Graphemer();
 
-        // const chars = graphemer.splitGraphemes(newValue);
+        const numberOfCharacters = graphemer.countGraphemes(newValue);
 
-        // for (const char of chars) {
-        // }
+        const thereAreMoreCharacters = numberOfCharacters > 1;
 
-        const specialTwemojis: SpecialTwemojis = {
-          '👁️‍🗨️': {
-            text: '👁️‍🗨️',
-            url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
-          },
-          '♾️': {
-            text: '♾️',
-            url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
-          },
+        const createTwemojiHtml = (text: string, url: string) => {
+          return `<span class="emoji" style="background-image: url(${url})">${text}</span>`;
         };
 
-        const getTwemoji = async () => {
-          const { parse } = await import('twemoji-parser');
+        const createTwemojiElement = async (
+          emoji: string,
+          twemojisCallback: TwemojisCallback,
+          twemojiCallback: TwemojiCallback
+        ) => {
+          const specialTwemojis: SpecialTwemojis = {
+            '👁️‍🗨️': {
+              text: '👁️‍🗨️',
+              url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+            },
+            '♾️': {
+              text: '♾️',
+              url: 'https://twemoji.maxcdn.com/v/latest/svg/267e.svg',
+            },
+          };
 
-          const twemoji = parse(newValue);
+          const getTwemoji = async () => {
+            const { parse } = await import('twemoji-parser');
 
-          return twemoji.length > 1 ? twemoji : twemoji[0];
-        };
+            const twemoji = parse(emoji);
 
-        const specialTwemoji = specialTwemojis[newValue];
+            return twemoji.length > 1 ? twemoji : twemoji[0];
+          };
 
-        const twemojiOrTwemojis = (specialTwemoji || (await getTwemoji())) as
-          | Twemoji
-          | Twemoji[];
+          const specialTwemoji = specialTwemojis[emoji];
 
-        let emoji: Emoji;
+          const twemojiOrTwemojis = (specialTwemoji || (await getTwemoji())) as
+            | Twemoji
+            | Twemoji[];
 
-        const isTwemojis = Array.isArray(twemojiOrTwemojis);
+          const isTwemojis = Array.isArray(twemojiOrTwemojis);
 
-        if (isTwemojis) {
-          let twemojisHtml = '';
+          if (isTwemojis) {
+            let twemojisHtml = '';
 
-          for (const index in twemojiOrTwemojis) {
-            const twemoji = twemojiOrTwemojis[index];
+            const insertLinkCharacters = () => {
+              for (const index in twemojiOrTwemojis) {
+                const twemoji = twemojiOrTwemojis[index];
 
-            const twemojiHtml = `<span class="emoji" style="background-image: url(${twemoji.url})">${twemoji.text}</span>`;
+                const twemojiHtml = createTwemojiHtml(
+                  twemoji.text,
+                  twemoji.url
+                );
 
-            twemojisHtml += twemojiHtml;
+                twemojisHtml += twemojiHtml;
 
-            const isLast = twemojiOrTwemojis.length - 1 === Number(index);
+                const isLast = twemojiOrTwemojis.length - 1 === Number(index);
 
-            if (isLast) break;
+                if (isLast) break;
 
-            // the emojis link character is invisible
-            const emojisLinkCharacter = '‍';
+                // the link character is invisible
+                const linkCharacter = '‍';
 
-            twemojisHtml += emojisLinkCharacter;
+                twemojisHtml += linkCharacter;
+              }
+            };
+
+            insertLinkCharacters();
+
+            const twemojiElement = twemojisCallback(twemojisHtml);
+
+            return twemojiElement;
           }
+          const twemojiElement = twemojiCallback(twemojiOrTwemojis);
 
-          const emojiEl = document.createElement('template');
-          emojiEl.innerHTML = twemojisHtml;
+          return twemojiElement;
+        };
 
-          emoji = emojiEl.content;
+        if (thereAreMoreCharacters) {
+          const content = document.createElement('span');
+          content.textContent = newValue;
+
+          positionSelectionAndInsertNode(content);
+
+          const innerHTML = content.innerHTML;
+          const chars = graphemer.splitGraphemes(innerHTML);
+
+          const charPromises = chars.map((char) => {
+            const isEmoji = regexs.emoji.test(char);
+
+            if (!isEmoji) return char;
+
+            const twemojisCallback: TwemojisCallback = (twemojisHtml) => {
+              return twemojisHtml;
+            };
+
+            const twemojiCallback: TwemojiCallback = (twemoji) => {
+              const twemojiHtml = createTwemojiHtml(twemoji.text, twemoji.url);
+
+              return twemojiHtml;
+            };
+
+            const twemojiEl = createTwemojiElement(
+              char,
+              twemojisCallback,
+              twemojiCallback
+            );
+
+            return twemojiEl;
+          });
+
+          const newChars = await Promise.all(charPromises);
         } else {
-          emoji = document.createElement('span');
-          emoji.className = 'emoji';
-          emoji.textContent = twemojiOrTwemojis.text;
-          emoji.style.backgroundImage = `url(${twemojiOrTwemojis.url})`;
-        }
+          const twemojisCallback: TwemojisCallback = (twemojisHtml) => {
+            const twemojiEl = document.createElement('template');
+            twemojiEl.innerHTML = twemojisHtml;
 
-        content = emoji;
+            return twemojiEl.content;
+          };
+
+          const twemojiCallback: TwemojiCallback = (twemoji) => {
+            const twemojiElement = document.createElement('span');
+            twemojiElement.className = 'emoji';
+            twemojiElement.textContent = twemoji.text;
+            twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
+
+            return twemojiElement;
+          };
+
+          const twemojiEl = await createTwemojiElement(
+            newValue,
+            twemojisCallback,
+            twemojiCallback
+          );
+
+          positionSelectionAndInsertNode(twemojiEl);
+        }
       } else {
         e.preventDefault();
 
@@ -122,41 +228,8 @@ export function MessageInput() {
 
         const textNode = document.createTextNode(value);
 
-        content = textNode;
+        positionSelectionAndInsertNode(textNode);
       }
-
-      const selection = getSelection();
-
-      const elementThatIsCloseToTheContentToBeInserted =
-        selection?.anchorNode?.parentElement;
-
-      const contentHasBeenPlacedCloseToAnEmoji =
-        elementThatIsCloseToTheContentToBeInserted?.className === 'emoji';
-
-      const selectionRange = selection?.getRangeAt(0);
-
-      if (contentHasBeenPlacedCloseToAnEmoji) {
-        const contentHasBeenPlacedAtTheBeginningOfTheInput =
-          selection?.anchorOffset === 0;
-
-        if (contentHasBeenPlacedAtTheBeginningOfTheInput) {
-          selectionRange?.setStartBefore(
-            elementThatIsCloseToTheContentToBeInserted
-          );
-        } else {
-          selectionRange?.setStartAfter(
-            elementThatIsCloseToTheContentToBeInserted
-          );
-        }
-      }
-
-      selectionRange?.insertNode(content);
-
-      // on Windows
-      const newValueCameFromNativeEmojiPicker =
-        e.inputType === 'insertCompositionText';
-
-      if (!newValueCameFromNativeEmojiPicker) selectionRange?.collapse();
 
       preventBeforeInputEventFromRunningTwiceBecauseOfSomeCharacters = true;
 
