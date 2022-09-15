@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
 
+type Emoji = DocumentFragment | HTMLSpanElement;
+
 type Styles = {
   default: any;
   HSpacing: string;
 };
-
-type Emoji = DocumentFragment | HTMLSpanElement;
 
 type Twemoji = {
   text: string;
@@ -18,9 +18,9 @@ type Twemoji = {
 
 type SpecialTwemojis = Record<string, Twemoji>;
 
-type TwemojisCallbackArgs = [twemojisHtml: string];
+type TwemojisCallback = (twemojisHtml: string) => DocumentFragment | string;
 
-type TwemojiCallbackArgs = [twemoji: Twemoji];
+type TwemojiCallback = (twemoji: Twemoji) => HTMLSpanElement | string;
 
 export function MessageInput() {
   const ref = useMessageInputRef();
@@ -88,7 +88,7 @@ export function MessageInput() {
           return `<span class="emoji" style="background-image: url(${url})">${text}</span>`;
         };
 
-        const createTwemojiElement = async <TwemojisCallback, TwemojiCallback>(
+        const createTwemojiElement = async (
           emoji: string,
           twemojisCallback: TwemojisCallback,
           twemojiCallback: TwemojiCallback
@@ -170,34 +170,41 @@ export function MessageInput() {
 
             if (!isEmoji) return char;
 
-            const twemojisCallback = ([twemojisHtml]: TwemojisCallbackArgs) => {
+            const twemojisCallback: TwemojisCallback = (twemojisHtml) => {
               return twemojisHtml;
             };
 
-            const twemojiCallback = ([twemoji]: TwemojiCallbackArgs) => {
+            const twemojiCallback: TwemojiCallback = (twemoji) => {
               const twemojiHtml = createTwemojiHtml(twemoji.text, twemoji.url);
 
               return twemojiHtml;
             };
 
-            const twemojiEl = createTwemojiElement<
-              typeof twemojisCallback,
-              typeof twemojiCallback
-            >(char, twemojisCallback, twemojiCallback);
+            const twemojiEl = createTwemojiElement(
+              char,
+              twemojisCallback,
+              twemojiCallback
+            );
 
             return twemojiEl;
           });
 
           const newChars = await Promise.all(charPromises);
+
+          const newInnerHTML = newChars.join('');
+
+          setTimeout(() => {
+            content.outerHTML = newInnerHTML;
+          }, 1000);
         } else {
-          const twemojisCallback = ([twemojisHtml]: TwemojisCallbackArgs) => {
+          const twemojisCallback: TwemojisCallback = (twemojisHtml) => {
             const twemojiEl = document.createElement('template');
             twemojiEl.innerHTML = twemojisHtml;
 
             return twemojiEl.content;
           };
 
-          const twemojiCallback = ([twemoji]: TwemojiCallbackArgs) => {
+          const twemojiCallback: TwemojiCallback = (twemoji) => {
             const twemojiElement = document.createElement('span');
             twemojiElement.className = 'emoji';
             twemojiElement.textContent = twemoji.text;
@@ -206,10 +213,13 @@ export function MessageInput() {
             return twemojiElement;
           };
 
-          const twemojiEl = await createTwemojiElement<
-            typeof twemojisCallback,
-            typeof twemojiCallback
-          >(newValue, twemojisCallback, twemojiCallback);
+          const twemojiEl = await createTwemojiElement(
+            newValue,
+            twemojisCallback,
+            twemojiCallback
+          );
+
+          if (typeof twemojiEl === 'string') return;
 
           positionSelectionAndInsertNode(twemojiEl);
         }

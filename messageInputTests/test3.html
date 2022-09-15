@@ -6,75 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      .text {
-        /* display: none; */
-        color: transparent;
-        font-size: 0;
-      }
-
       .emoji {
         letter-spacing: 2px;
         background-repeat: no-repeat;
         background-position: center;
         color: transparent;
       }
-
-      div[contenteditable] {
-        padding: 5px 10px;
-      }
     </style>
   </head>
   <body>
-    <div contenteditable><span>potato</span></div>
+    <div contenteditable>potato</div>
   </body>
   <script>
     const contenteditable = document.querySelector('div[contenteditable]');
 
-    let continueBeforeInputEvent = true;
-
     contenteditable.addEventListener('beforeinput', (e) => {
-      if (!continueBeforeInputEvent) return;
+      // e.preventDefault();
+      // console.log(e.isComposing);
+      // const textNode = document.createTextNode('\xA0');
+      // getSelection().getRangeAt(0).insertNode(textNode);
+      // getSelection().collapseToEnd();
 
-      e.preventDefault();
-
-      const span = document.createElement('span');
-      span.textContent = e.data;
-      span.className = 'text';
-      // span.style.display = 'none';
-
-      const selection = window.getSelection();
-      const selectionRange = selection.getRangeAt(0);
-
-      selectionRange.setStartAfter(contenteditable.firstChild);
-
-      selectionRange.insertNode(span);
-
-      setTimeout(() => {
-        span.textContent = 'asdsadad';
-      }, 0);
-
-      continueBeforeInputEvent = false;
-
-      setTimeout(() => {
-        continueBeforeInputEvent = true;
-      }, 0);
-    });
-
-    let continueInputEvent = true;
-
-    contenteditable.addEventListener('input', (e) => {
-      // const span = document.querySelector('.text');
-      // setTimeout(() => {
-      //   span.textContent = 'aaa';
-      // }, 0);
-      //   if (!continueInputEvent) return;
-      //   const a = 'dsajd';
-      //   const span = document.querySelector('.text');
-      //   span.textContent = 'aaa';
-      //   continueInputEvent = false;
-      //   setTimeout(() => {
-      //     continueInputEvent = true;
-      //   }, 0);
+      console.log(e);
     });
   </script>
 </html>
