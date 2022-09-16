@@ -39,7 +39,6 @@ export function MessageInput() {
       if (!newValue) return;
 
       const selection = getSelection();
-      const selectionRange = selection?.getRangeAt(0);
 
       function positionSelectionAndInsertNode(node: Emoji | Text) {
         const elementThatIsCloseToTheContentToBeInserted =
@@ -47,6 +46,8 @@ export function MessageInput() {
 
         const contentHasBeenPlacedCloseToAnEmoji =
           elementThatIsCloseToTheContentToBeInserted?.className === 'emoji';
+
+        const selectionRange = selection?.getRangeAt(0);
 
         if (contentHasBeenPlacedCloseToAnEmoji) {
           const contentHasBeenPlacedAtTheBeginningOfTheInput =
@@ -150,6 +151,7 @@ export function MessageInput() {
 
             return twemojiElement;
           }
+
           const twemojiElement = twemojiCallback(twemojiOrTwemojis);
 
           return twemojiElement;
@@ -201,7 +203,12 @@ export function MessageInput() {
           const timeoutToChangeHtmlAndPreventBugs = 0;
 
           setTimeout(() => {
-            content.outerHTML = newInnerHTML;
+            content.innerHTML = newInnerHTML;
+            content.style.fontSize = '';
+
+            const selectionRange = selection?.getRangeAt(0);
+
+            selectionRange?.setStartAfter(content);
           }, timeoutToChangeHtmlAndPreventBugs);
         } else {
           const twemojisCallback: TwemojisCallback = (twemojisHtml) => {
