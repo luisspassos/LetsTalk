@@ -170,7 +170,7 @@ export function MessageInput() {
           positionSelectionAndInsertNode(content);
 
           const innerHTML = content.innerHTML;
-          const chars = graphemer.splitGraphemes(innerHTML);
+          const chars = [...innerHTML];
 
           const charPromises = chars.map((char) => {
             const isEmoji = regexs.emoji.test(char);

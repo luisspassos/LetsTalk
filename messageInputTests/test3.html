@@ -18,6 +18,8 @@
     <div contenteditable>potato</div>
   </body>
   <script>
+    console.log([...'✍️']);
+
     const contenteditable = document.querySelector('div[contenteditable]');
 
     contenteditable.addEventListener('beforeinput', (e) => {
