@@ -3,6 +3,8 @@ import Graphemer from 'graphemer';
 import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
+import { regexs } from '../../../../../utils/regexs';
+import emojiRegex from 'emoji-regex';
 
 type Emoji = DocumentFragment | HTMLSpanElement;
 
@@ -73,9 +75,7 @@ export function MessageInput() {
         if (!newValueCameFromNativeEmojiPicker) selectionRange?.collapse();
       }
 
-      const { regexs } = await import('../../../../../utils/regexs');
-
-      const thereAreEmojis = regexs.emoji.test(newValue);
+      const thereAreEmojis = emojiRegex().test(newValue);
 
       if (thereAreEmojis) {
         const graphemer = new Graphemer();
