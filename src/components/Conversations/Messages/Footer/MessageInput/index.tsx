@@ -84,6 +84,9 @@ export function MessageInput() {
 
         const thereAreMoreCharacters = numberOfCharacters > 1;
 
+        // the link character is invisible
+        const linkCharacter = '‍';
+
         const createTwemojiHtml = (text: string, url: string) => {
           return `<span class="emoji" style="background-image: url(${url})">${text}</span>`;
         };
@@ -138,9 +141,6 @@ export function MessageInput() {
 
                 if (isLast) break;
 
-                // the link character is invisible
-                const linkCharacter = '‍';
-
                 twemojisHtml += linkCharacter;
               }
             };
@@ -170,7 +170,7 @@ export function MessageInput() {
           positionSelectionAndInsertNode(content);
 
           const innerHTML = content.innerHTML;
-          const chars = [...innerHTML];
+          const chars = graphemer.splitGraphemes(innerHTML);
 
           const charPromises = chars.map((char) => {
             const isEmoji = regexs.emoji.test(char);

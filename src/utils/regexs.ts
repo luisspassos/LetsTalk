@@ -1,5 +1,7 @@
+import emojiRegex from 'emoji-regex';
+
 export const regexs = {
   cannotContainHashtag: /^(?!.*#).*$/,
   fullUsername: /^([^#])([^#]*#\d+)$/,
-  emoji: /\p{Extended_Pictographic}/u,
+  emoji: emojiRegex(),
 };

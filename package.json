@@ -21,6 +21,7 @@
     "@next/bundle-analyzer": "^12.1.0",
     "@types/twemoji-parser": "^13.1.1",
     "axios": "^0.26.1",
+    "emoji-regex": "^10.1.0",
     "firebase": "^9.6.8",
     "firebase-admin": "^10.0.2",
     "framer-motion": "^6",

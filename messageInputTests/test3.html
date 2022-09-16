@@ -13,23 +13,20 @@
         color: transparent;
       }
     </style>
+    <script
+      src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <div contenteditable>potato</div>
+    👁️‍🗨️💑✍️
   </body>
   <script>
-    console.log([...'✍️']);
+    const str = '👁️‍🗨️(ﾟヮﾟ👈)❤️♾️💑😎'.replace(
+      /(?![*#0-9]+)[\p{Emoji}\p{Emoji_Modifier}\p{Emoji_Component}\p{Emoji_Modifier_Base}\p{Emoji_Presentation}]/gu,
+      ''
+    );
 
-    const contenteditable = document.querySelector('div[contenteditable]');
-
-    contenteditable.addEventListener('beforeinput', (e) => {
-      // e.preventDefault();
-      // console.log(e.isComposing);
-      // const textNode = document.createTextNode('\xA0');
-      // getSelection().getRangeAt(0).insertNode(textNode);
-      // getSelection().collapseToEnd();
-
-      console.log(e);
-    });
+    console.log([...str]);
   </script>
 </html>
