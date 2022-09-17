@@ -9,6 +9,14 @@ type Styles = {
   HSpacing: string;
 };
 
+type SpecialTwemojis = Record<
+  string,
+  {
+    text: string;
+    url: string;
+  }
+>;
+
 export function MessageInput() {
   const ref = useMessageInputRef();
 
@@ -27,9 +35,24 @@ export function MessageInput() {
       const isEmoji = emojiRegex.test(newValue);
 
       if (isEmoji) {
-        const { parse: twemojiParse } = await import('twemoji-parser');
+        const specialTwemojis: SpecialTwemojis = {
+          '👁️‍🗨️': {
+            text: '👁️‍🗨️',
+            url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
+          },
+        };
 
-        const twemoji = twemojiParse(newValue)[0];
+        const specialTwemoji = specialTwemojis[newValue];
+
+        const getTwemoji = async () => {
+          const { parse: parse } = await import('twemoji-parser');
+
+          const twemoji = parse(newValue)[0];
+
+          return twemoji;
+        };
+
+        const twemoji = specialTwemoji || (await getTwemoji());
 
         const twemojiElement = document.createElement('span');
         twemojiElement.className = 'emoji';
