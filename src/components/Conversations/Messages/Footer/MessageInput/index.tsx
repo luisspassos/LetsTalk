@@ -1,8 +1,8 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
 import getEmojiRegex from 'emoji-regex';
-import { CompositionEvent } from 'react';
 
 type Styles = {
   default: any;
@@ -10,74 +10,83 @@ type Styles = {
 };
 
 export function MessageInput() {
-  let preventHandleInputMethodEditorFromRunningTwice = true;
+  const ref = useMessageInputRef();
 
-  async function handleInputMethodEditor(e: CompositionEvent<HTMLDivElement>) {
-    if (preventHandleInputMethodEditorFromRunningTwice) {
-      preventHandleInputMethodEditorFromRunningTwice = false;
+  useEffect(() => {
+    let preventHandleInputMethodEditorFromRunningTwice = false;
 
-      return;
-    }
+    async function handleInputMethodEditor(e: InputEvent) {
+      if (preventHandleInputMethodEditorFromRunningTwice) return;
 
-    const newValue = e.data;
+      const newValue = e.data;
 
-    const emojiRegex = getEmojiRegex();
+      if (!newValue) return;
 
-    const isEmoji = emojiRegex.test(newValue);
+      const emojiRegex = getEmojiRegex();
 
-    if (isEmoji) {
-      const { parse: twemojiParse } = await import('twemoji-parser');
+      const isEmoji = emojiRegex.test(newValue);
 
-      const twemoji = twemojiParse(newValue)[0];
+      if (isEmoji) {
+        const { parse: twemojiParse } = await import('twemoji-parser');
 
-      const twemojiElement = document.createElement('span');
-      twemojiElement.className = 'emoji';
-      twemojiElement.textContent = twemoji.text;
-      twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
+        const twemoji = twemojiParse(newValue)[0];
 
-      const selection = getSelection();
+        const twemojiElement = document.createElement('span');
+        twemojiElement.className = 'emoji';
+        twemojiElement.textContent = twemoji.text;
+        twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
 
-      const elementThatIsCloseToTheContentToBeInserted =
-        selection?.anchorNode?.parentElement;
+        const selection = getSelection();
 
-      const contentHasBeenPlacedCloseToAnEmoji =
-        elementThatIsCloseToTheContentToBeInserted?.className === 'emoji';
+        const elementThatIsCloseToTheEmojiToBeInserted =
+          selection?.anchorNode?.parentElement;
 
-      const selectionRange = selection?.getRangeAt(0);
+        const emojiHasBeenPlacedCloseToAnEmoji =
+          elementThatIsCloseToTheEmojiToBeInserted?.className === 'emoji';
 
-      if (contentHasBeenPlacedCloseToAnEmoji) {
-        const contentHasBeenPlacedAtTheBeginningOfTheInput =
-          selection?.anchorOffset === 0;
+        const selectionRange = selection?.getRangeAt(0);
 
-        if (contentHasBeenPlacedAtTheBeginningOfTheInput) {
-          selectionRange?.setStartBefore(
-            elementThatIsCloseToTheContentToBeInserted
-          );
-        } else {
-          selectionRange?.setStartAfter(
-            elementThatIsCloseToTheContentToBeInserted
-          );
+        if (emojiHasBeenPlacedCloseToAnEmoji) {
+          const emojiHasBeenPlacedAtTheBeginningOfTheInput =
+            selection?.anchorOffset === 0;
+
+          if (emojiHasBeenPlacedAtTheBeginningOfTheInput) {
+            selectionRange?.setStartBefore(
+              elementThatIsCloseToTheEmojiToBeInserted
+            );
+          } else {
+            selectionRange?.setStartAfter(
+              elementThatIsCloseToTheEmojiToBeInserted
+            );
+          }
         }
+
+        selectionRange?.insertNode(twemojiElement);
       }
 
-      selectionRange?.insertNode(twemojiElement);
-
       preventHandleInputMethodEditorFromRunningTwice = true;
+
+      const timeToPreventHandleInputMethodEditorFromRunningTwice = 0;
+
+      setTimeout(() => {
+        preventHandleInputMethodEditorFromRunningTwice = false;
+      }, timeToPreventHandleInputMethodEditorFromRunningTwice);
     }
-  }
+
+    const messageInput = ref.current;
+
+    messageInput?.addEventListener('beforeinput', handleInputMethodEditor);
+  }, [ref]);
 
   const styles: Styles = {
     default: useStyleConfig('Textarea'),
     HSpacing: '10.5px',
   };
 
-  const ref = useMessageInputRef();
-
   return (
     <Box
       {...styles.default}
       ref={ref}
-      onCompositionUpdate={handleInputMethodEditor}
       borderRadius='10px'
       py={styles.HSpacing}
       fontFamily='Roboto, Noto Emoji, sans-serif'
@@ -115,7 +124,7 @@ export function MessageInput() {
           borderLeftWidth: '4px',
         },
         '.emoji': {
-          letterSpacing: '2px',
+          letterSpacing: '1px',
           bgRepeat: 'no-repeat',
           bgPos: 'center',
           color: 'transparent',
