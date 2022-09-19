@@ -23,7 +23,7 @@ export function MessageInput() {
   useEffect(() => {
     let preventHandleInputMethodEditorFromRunningTwice = false;
 
-    async function handleInputMethodEditor(e: InputEvent) {
+    async function handleEmojis(e: InputEvent) {
       if (preventHandleInputMethodEditorFromRunningTwice) return;
 
       const newValue = e.data;
@@ -168,9 +168,20 @@ export function MessageInput() {
       }, timeToPreventHandleInputMethodEditorFromRunningTwice);
     }
 
+    async function handleCharacters() {
+      const selection = getSelection();
+    }
+
     const messageInput = ref.current;
 
-    messageInput?.addEventListener('beforeinput', handleInputMethodEditor);
+    // addEventListener is for preventing bugs
+    messageInput?.addEventListener('beforeinput', handleEmojis);
+    messageInput?.addEventListener('input', handleCharacters);
+
+    return () => {
+      messageInput?.removeEventListener('beforeinput', handleEmojis);
+      messageInput?.removeEventListener('input', handleCharacters);
+    };
   }, [ref]);
 
   const styles: Styles = {
