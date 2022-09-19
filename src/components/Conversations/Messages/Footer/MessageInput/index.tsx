@@ -168,19 +168,45 @@ export function MessageInput() {
       }, timeToPreventHandleInputMethodEditorFromRunningTwice);
     }
 
-    async function handleCharacters() {
+    async function handleValuesWithoutEmojis(e: InputEvent) {
       const selection = getSelection();
+
+      const currentText = selection?.anchorNode?.textContent;
+
+      const emojiRegex = getEmojiRegex();
+
+      const textWithoutEmoji = currentText?.replace(emojiRegex, '');
+
+      const emojiElement = selection?.anchorNode?.parentElement;
+
+      emojiElement?.insertAdjacentText('afterend', textWithoutEmoji);
     }
+
+    const events = [
+      {
+        type: 'beforeinput',
+        func: handleEmojis,
+      },
+      {
+        type: 'input',
+        func: handleValuesWithoutEmojis,
+      },
+    ] as {
+      type: string;
+      func: EventListenerOrEventListenerObject;
+    }[];
 
     const messageInput = ref.current;
 
     // addEventListener is for preventing bugs
-    messageInput?.addEventListener('beforeinput', handleEmojis);
-    messageInput?.addEventListener('input', handleCharacters);
+    for (const event of events) {
+      messageInput?.addEventListener(event.type, event.func);
+    }
 
     return () => {
-      messageInput?.removeEventListener('beforeinput', handleEmojis);
-      messageInput?.removeEventListener('input', handleCharacters);
+      for (const event of events) {
+        messageInput?.removeEventListener(event.type, event.func);
+      }
     };
   }, [ref]);
 
