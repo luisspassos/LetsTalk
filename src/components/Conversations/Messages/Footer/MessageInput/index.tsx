@@ -191,7 +191,7 @@ export function MessageInput() {
         type: 'input',
         func: handleValuesWithoutEmojis,
       },
-    ] as {
+    ] as unknown as {
       type: string;
       func: EventListenerOrEventListenerObject;
     }[];
