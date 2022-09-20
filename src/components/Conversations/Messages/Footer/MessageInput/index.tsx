@@ -29,7 +29,11 @@ export function MessageInput() {
     let preventHandleInputMethodEditorFromRunningTwice = false;
 
     async function handleEmojis(e: InputEvent) {
-      if (preventHandleInputMethodEditorFromRunningTwice) return;
+      if (preventHandleInputMethodEditorFromRunningTwice) {
+        e.preventDefault();
+
+        return;
+      }
 
       const newValue = e.data;
 
