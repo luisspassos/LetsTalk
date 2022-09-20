@@ -17,6 +17,11 @@ type SpecialTwemojis = Record<
   }
 >;
 
+type Events = {
+  type: string;
+  func: EventListenerOrEventListenerObject;
+}[];
+
 export function MessageInput() {
   const ref = useMessageInputRef();
 
@@ -168,18 +173,65 @@ export function MessageInput() {
       }, timeToPreventHandleInputMethodEditorFromRunningTwice);
     }
 
-    async function handleValuesWithoutEmojis(e: InputEvent) {
-      const selection = getSelection();
+    let preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = false;
 
-      const currentText = selection?.anchorNode?.textContent;
+    async function handleValuesWithoutEmojis(e: InputEvent) {
+      if (preventInputEventFromRunningTwiceBecauseOfInputMethodEditor) return;
+
+      const newValue = e.data;
 
       const emojiRegex = getEmojiRegex();
 
+      const thereAreEmojis = emojiRegex.test(newValue);
+
+      if (thereAreEmojis) return;
+
+      const selection = getSelection();
+
+      const elementThatIsNextToTheInsertedValue =
+        selection?.anchorNode?.parentElement;
+
+      const valueHasBeenPlacedNextToAnEmoji =
+        elementThatIsNextToTheInsertedValue?.className === 'emoji';
+
+      if (!valueHasBeenPlacedNextToAnEmoji) return;
+
+      const currentText = selection?.anchorNode?.textContent;
+
+      const emoji = currentText?.match(emojiRegex)[0];
+
+      elementThatIsNextToTheInsertedValue.textContent = emoji;
+
+      const emojiIndex = currentText?.indexOf(emoji);
+      const valueHasBeenPlacedToTheRightOfTheEmoji = emojiIndex === 0;
+
+      const insertPosition: InsertPosition =
+        valueHasBeenPlacedToTheRightOfTheEmoji ? 'afterend' : 'beforebegin';
+
       const textWithoutEmoji = currentText?.replace(emojiRegex, '');
 
-      const emojiElement = selection?.anchorNode?.parentElement;
+      elementThatIsNextToTheInsertedValue?.insertAdjacentText(
+        insertPosition,
+        textWithoutEmoji
+      );
 
-      emojiElement?.insertAdjacentText('afterend', textWithoutEmoji);
+      const sibling = valueHasBeenPlacedToTheRightOfTheEmoji
+        ? 'nextSibling'
+        : 'previousSibling';
+
+      const selectionRange = selection?.getRangeAt(0);
+
+      selectionRange?.setStartAfter(
+        elementThatIsNextToTheInsertedValue[sibling]
+      );
+
+      preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = true;
+
+      const timeToPreventInputEventFromRunningTwiceBecauseOfInputMethodEditor = 0;
+
+      setTimeout(() => {
+        preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = false;
+      }, timeToPreventInputEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
 
     const events = [
@@ -191,10 +243,7 @@ export function MessageInput() {
         type: 'input',
         func: handleValuesWithoutEmojis,
       },
-    ] as unknown as {
-      type: string;
-      func: EventListenerOrEventListenerObject;
-    }[];
+    ] as unknown as Events;
 
     const messageInput = ref.current;
 
