@@ -13,15 +13,36 @@
         color: transparent;
       }
     </style>
-    <script
+    <!-- <script
       src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
   </head>
   <body>
-    🏳‍🌈
+    <h1>Hello world</h1>
   </body>
   <script>
-    twemoji.parse(document.body);
+    // twemoji.parse(document.body);
+
+    const emoji = '👩🏿‍🚒';
+
+    const codePoints = [...emoji].map((_, i) =>
+      emoji.codePointAt(i).toString(16)
+    );
+
+    console.log(codePoints);
+
+    const twemoji = codePoints.join('-');
+
+    const url = `https://twemoji.maxcdn.com/v/14.0.2/svg/${twemoji}.svg`;
+
+    const img = new Image();
+    img.src = url;
+
+    if (img.complete) {
+      console.log('it exists');
+    } else {
+      console.log('it does not exist');
+    }
   </script>
 </html>

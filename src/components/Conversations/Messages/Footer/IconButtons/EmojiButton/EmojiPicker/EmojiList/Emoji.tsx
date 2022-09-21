@@ -17,10 +17,7 @@ export function Emoji({ emoji, name }: EmojiProps) {
 
   const messageInputRef = useMessageInputRef();
 
-  const twemoji =
-    emoji === '👁️‍🗨️'
-      ? 'https://raw.githubusercontent.com/twitter/twemoji/ad3d3d669bb3697946577247ebb15818f09c6c91/assets/svg/1f441-200d-1f5e8.svg'
-      : twemojiParse(emoji)[0].url;
+  const twemoji = twemojiParse(emoji)[0].url;
 
   function handleSelectEmoji() {
     function addEmojiInRecentCategory() {

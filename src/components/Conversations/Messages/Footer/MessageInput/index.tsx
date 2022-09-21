@@ -2,7 +2,7 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
-import getEmojiRegex from 'emoji-regex';
+import emojiRegex from 'twemoji-parser/dist/lib/regex';
 
 type Styles = {
   default: any;
@@ -38,8 +38,6 @@ export function MessageInput() {
       const newValue = e.data;
 
       if (!newValue) return;
-
-      const emojiRegex = getEmojiRegex();
 
       const emojis = newValue.match(emojiRegex);
 
@@ -184,8 +182,6 @@ export function MessageInput() {
 
       const newValue = e.data;
 
-      const emojiRegex = getEmojiRegex();
-
       const thereAreEmojis = emojiRegex.test(newValue);
 
       if (thereAreEmojis) return;
@@ -274,7 +270,7 @@ export function MessageInput() {
       ref={ref}
       borderRadius='10px'
       py={styles.HSpacing}
-      fontFamily='Roboto, Noto Emoji, sans-serif'
+      fontFamily='Roboto, sans-serif'
       bg={useColorModeValue('white', 'blackAlpha.500')}
       borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
       contentEditable
@@ -309,10 +305,10 @@ export function MessageInput() {
           borderLeftWidth: '4px',
         },
         '.emoji': {
-          letterSpacing: '1px',
           bgRepeat: 'no-repeat',
           bgPos: 'center',
           color: 'transparent',
+          fontFamily: 'Noto Emoji, sans-serif',
           caretColor: useColorModeValue(
             'var(--chakra-colors-gray-900)',
             'var(--chakra-colors-gray-50)'
