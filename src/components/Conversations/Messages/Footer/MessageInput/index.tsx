@@ -156,44 +156,7 @@ export function MessageInput() {
             ''
           );
 
-          console.log(newValueWithTwemojis);
-
-          // let newValueWithTwemojis = '';
-
-          // for (const i in twemojis) {
-          //   const index = Number(i);
-
-          //   const twemoji = twemojis[index];
-
-          //   const rangeOfCharactersThatTheEmojiOccupies = {
-          //     start: twemoji.indices[0],
-          //     end: twemoji.indices[1],
-          //   };
-
-          //   const isFirst = index === 0;
-
-          //   if (isFirst) {
-          //     newValueWithTwemojis += newValueFormatted.substring(
-          //       0,
-          //       rangeOfCharactersThatTheEmojiOccupies.start
-          //     );
-          //   }
-
-          //   const nextTwemoji = twemojis[index + 1] as EmojiEntity | undefined;
-
-          //   const rangeOfCharactersThatTheNextEmojiOccupies = {
-          //     end: nextTwemoji?.indices[0],
-          //   };
-
-          //   const element = `<span class='emoji' style='background-image: url(${twemoji.url})'>${twemoji.text}</span>`;
-
-          //   newValueWithTwemojis +=
-          //     element +
-          //     newValueFormatted.substring(
-          //       rangeOfCharactersThatTheEmojiOccupies.end,
-          //       rangeOfCharactersThatTheNextEmojiOccupies.end
-          //     );
-          // }
+          template.innerHTML = newValueWithTwemojis;
 
           content = template.content;
         } else {
