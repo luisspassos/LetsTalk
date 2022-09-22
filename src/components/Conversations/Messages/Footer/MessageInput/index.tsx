@@ -28,6 +28,8 @@ export function MessageInput() {
       return emojiRegex;
     }
 
+    const timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor = 0;
+
     async function handleEmojis(e: InputEvent) {
       if (preventHandleInputMethodEditorFromRunningTwice) {
         e.preventDefault();
@@ -149,11 +151,9 @@ export function MessageInput() {
 
       preventHandleInputMethodEditorFromRunningTwice = true;
 
-      const timeToPreventHandleInputMethodEditorFromRunningTwice = 0;
-
       setTimeout(() => {
         preventHandleInputMethodEditorFromRunningTwice = false;
-      }, timeToPreventHandleInputMethodEditorFromRunningTwice);
+      }, timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
 
     let preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = false;
@@ -209,11 +209,9 @@ export function MessageInput() {
 
       preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = true;
 
-      const timeToPreventInputEventFromRunningTwiceBecauseOfInputMethodEditor = 0;
-
       setTimeout(() => {
         preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = false;
-      }, timeToPreventInputEventFromRunningTwiceBecauseOfInputMethodEditor);
+      }, timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
 
     const events = [
