@@ -116,93 +116,84 @@ export function MessageInput() {
 
           const twemojis = twemojiParser(newValueFormatted);
 
-          let newValueWithTwemojis = '';
+          const newValueWithTwemojis = twemojis.reduce(
+            (prevValue, twemoji, index) => {
+              let value = '';
 
-          for (const i in twemojis) {
-            const index = Number(i);
+              const rangeOfCharactersThatTheEmojiOccupies = {
+                start: twemoji.indices[0],
+                end: twemoji.indices[1],
+              };
 
-            const twemoji = twemojis[index];
+              const isFirst = index === 0;
 
-            const rangeOfCharactersThatTheEmojiOccupies = {
-              start: twemoji.indices[0],
-              end: twemoji.indices[1],
-            };
+              if (isFirst) {
+                value += newValueFormatted.substring(
+                  0,
+                  rangeOfCharactersThatTheEmojiOccupies.start
+                );
+              }
 
-            const isFirst = index === 0;
+              const nextTwemoji = twemojis[index + 1] as
+                | EmojiEntity
+                | undefined;
 
-            if (isFirst) {
-              newValueWithTwemojis += newValueFormatted.substring(
-                0,
-                rangeOfCharactersThatTheEmojiOccupies.start
-              );
-            }
+              const rangeOfCharactersThatTheNextEmojiOccupies = {
+                end: nextTwemoji?.indices[0],
+              };
 
-            const nextTwemoji: EmojiEntity | undefined = twemojis[index + 1];
+              const element = `<span class='emoji' style='background-image: url(${twemoji.url})'>${twemoji.text}</span>`;
 
-            const rangeOfCharactersThatTheNextEmojiOccupies = {
-              end: nextTwemoji.indices[0],
-            };
+              value +=
+                element +
+                newValueFormatted.substring(
+                  rangeOfCharactersThatTheEmojiOccupies.end,
+                  rangeOfCharactersThatTheNextEmojiOccupies.end
+                );
 
-            const element = `<span class='emoji' style='background-image: url(${twemoji.url})'>${twemoji.text}</span>`;
-
-            newValueWithTwemojis +=
-              element +
-              newValueFormatted.substring(
-                rangeOfCharactersThatTheEmojiOccupies.end,
-                rangeOfCharactersThatTheNextEmojiOccupies.end
-              );
-          }
+              return prevValue + value;
+            },
+            ''
+          );
 
           console.log(newValueWithTwemojis);
 
-          // const twemojisFormatted = twemojis.map(({ text, url, indices }) => {
-          //   const element = `<span class='emoji' style='background-image: url(${url})'>${text}</span>`;
+          // let newValueWithTwemojis = '';
 
-          //   return {
-          //     element,
-          //     indices,
+          // for (const i in twemojis) {
+          //   const index = Number(i);
+
+          //   const twemoji = twemojis[index];
+
+          //   const rangeOfCharactersThatTheEmojiOccupies = {
+          //     start: twemoji.indices[0],
+          //     end: twemoji.indices[1],
           //   };
-          // });
 
-          // const charsWithoutEmojis = newValueFormatted.split(emojiRegex);
+          //   const isFirst = index === 0;
 
-          // const twemojisPromises = emojis.map((emoji) => {
-          //   const twemoji = getTwemoji(emoji);
+          //   if (isFirst) {
+          //     newValueWithTwemojis += newValueFormatted.substring(
+          //       0,
+          //       rangeOfCharactersThatTheEmojiOccupies.start
+          //     );
+          //   }
 
-          //   return twemoji;
-          // });
+          //   const nextTwemoji = twemojis[index + 1] as EmojiEntity | undefined;
 
-          // const twemojis = await Promise.all(twemojisPromises);
+          //   const rangeOfCharactersThatTheNextEmojiOccupies = {
+          //     end: nextTwemoji?.indices[0],
+          //   };
 
-          // const twemojiElements = twemojis.map((twemoji) => {
           //   const element = `<span class='emoji' style='background-image: url(${twemoji.url})'>${twemoji.text}</span>`;
 
-          //   return element;
-          // });
-
-          // const newChars: string[] = [];
-
-          // const insertTwemojis = () => {
-          //   for (const index in charsWithoutEmojis) {
-          //     const char = charsWithoutEmojis[index];
-
-          //     newChars.push(char);
-
-          //     const isLast = charsWithoutEmojis.length - 1 === Number(index);
-
-          //     if (isLast) break;
-
-          //     const twemoji = twemojiElements[index];
-
-          //     newChars.push(twemoji);
-          //   }
-          // };
-
-          // insertTwemojis();
-
-          // const newValueHTML = newChars.join('');
-
-          // template.innerHTML = newValueHTML;
+          //   newValueWithTwemojis +=
+          //     element +
+          //     newValueFormatted.substring(
+          //       rangeOfCharactersThatTheEmojiOccupies.end,
+          //       rangeOfCharactersThatTheNextEmojiOccupies.end
+          //     );
+          // }
 
           content = template.content;
         } else {
