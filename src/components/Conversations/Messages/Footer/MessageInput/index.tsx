@@ -2,21 +2,12 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
-import emojiRegex from 'twemoji-parser/dist/lib/regex';
 import { EmojiEntity } from 'twemoji-parser';
 
 type Styles = {
   default: any;
   HSpacing: string;
 };
-
-type SpecialTwemojis = Record<
-  string,
-  {
-    text: string;
-    url: string;
-  }
->;
 
 type Events = {
   type: string;
@@ -29,6 +20,14 @@ export function MessageInput() {
   useEffect(() => {
     let preventHandleInputMethodEditorFromRunningTwice = false;
 
+    async function getEmojiRegex() {
+      const emojiRegex: RegExp = (
+        await import('twemoji-parser/dist/lib/regex' as any)
+      ).default;
+
+      return emojiRegex;
+    }
+
     async function handleEmojis(e: InputEvent) {
       if (preventHandleInputMethodEditorFromRunningTwice) {
         e.preventDefault();
@@ -40,9 +39,11 @@ export function MessageInput() {
 
       if (!newValue) return;
 
-      const emojis = newValue.match(emojiRegex);
+      const emojiRegex = await getEmojiRegex();
 
-      if (emojis) {
+      const thereAreEmojis = emojiRegex.test(newValue);
+
+      if (thereAreEmojis) {
         const selection = getSelection();
         const selectionRange = selection?.getRangeAt(0);
 
@@ -71,37 +72,12 @@ export function MessageInput() {
 
         positionSelectionIfValueHasBeenPlacedCloseToAnEmoji();
 
-        const getTwemoji = async (emoji: string) => {
-          const specialTwemojis: SpecialTwemojis = {
-            '👁️‍🗨️': {
-              text: '👁️‍🗨️',
-              url: 'https://twemoji.maxcdn.com/v/latest/svg/1f441-200d-1f5e8.svg',
-            },
-            '🏳‍🌈': {
-              text: '🏳️‍🌈',
-              url: 'https://twemoji.maxcdn.com/v/latest/svg/1f3f3-fe0f-200d-1f308.svg',
-            },
-          };
-
-          const specialTwemoji = specialTwemojis[newValue];
-
-          const getTwemoji = async () => {
-            const { parse: parse } = await import('twemoji-parser');
-
-            const twemoji = parse(emoji)[0];
-
-            return twemoji;
-          };
-
-          const twemoji = specialTwemoji || (await getTwemoji());
-
-          return twemoji;
-        };
-
         const thereAreOtherCharactersOtherThanEmoji = newValue.replace(
           emojiRegex,
           ''
         );
+
+        const { parse: twemojiParser } = await import('twemoji-parser');
 
         let content;
 
@@ -111,8 +87,6 @@ export function MessageInput() {
 
           // innerHTML format some characters to HTML
           const newValueFormatted = template.innerHTML;
-
-          const { parse: twemojiParser } = await import('twemoji-parser');
 
           const twemojis = twemojiParser(newValueFormatted);
 
@@ -160,7 +134,7 @@ export function MessageInput() {
 
           content = template.content;
         } else {
-          const twemoji = await getTwemoji(newValue);
+          const twemoji = twemojiParser(newValue)[0];
 
           const twemojiElement = document.createElement('span');
           twemojiElement.className = 'emoji';
@@ -189,6 +163,7 @@ export function MessageInput() {
 
       const newValue = e.data;
 
+      const emojiRegex = await getEmojiRegex();
       const thereAreEmojis = emojiRegex.test(newValue);
 
       if (thereAreEmojis) return;
