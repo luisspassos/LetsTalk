@@ -150,12 +150,25 @@ export function MessageInput() {
       }, timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
 
+    const messageInput = ref.current;
+
     let preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = false;
 
     async function handleValuesWithoutEmojis(e: InputEvent) {
       if (preventInputEventFromRunningTwiceBecauseOfInputMethodEditor) return;
 
       const newValue = e.data;
+
+      const isDeletion = !newValue;
+
+      if (isDeletion) {
+        const isEmpty = !messageInput?.textContent;
+        const thereIsHTML = messageInput?.innerHTML;
+
+        if (isEmpty && thereIsHTML) messageInput.textContent = '';
+
+        return;
+      }
 
       const emojiRegex = getEmojiRegex();
       const thereAreEmojis = emojiRegex.test(newValue);
@@ -218,8 +231,6 @@ export function MessageInput() {
         func: handleValuesWithoutEmojis,
       },
     ] as unknown as Events;
-
-    const messageInput = ref.current;
 
     // addEventListener is for preventing bugs
     for (const event of events) {
