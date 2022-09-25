@@ -41,110 +41,112 @@ export function MessageInput() {
       const emojiRegex = getEmojiRegex();
       const thereAreEmojis = emojiRegex.test(newValue);
 
-      if (!thereAreEmojis) return;
+      if (thereAreEmojis) {
+        const selection = getSelection();
+        const selectionRange = selection?.getRangeAt(0);
 
-      const selection = getSelection();
-      const selectionRange = selection?.getRangeAt(0);
+        const positionSelectionIfValueHasBeenPlacedCloseToAnEmoji = () => {
+          const elementThatIsCloseToTheValueToBeInserted =
+            selection?.anchorNode?.parentElement;
 
-      const positionSelectionIfValueHasBeenPlacedCloseToAnEmoji = () => {
-        const elementThatIsCloseToTheValueToBeInserted =
-          selection?.anchorNode?.parentElement;
+          const valueHasBeenPlacedCloseToAnEmoji =
+            elementThatIsCloseToTheValueToBeInserted?.className === 'emoji';
 
-        const valueHasBeenPlacedCloseToAnEmoji =
-          elementThatIsCloseToTheValueToBeInserted?.className === 'emoji';
+          if (valueHasBeenPlacedCloseToAnEmoji) {
+            const valueHasBeenPlacedAtTheBeginningOfTheInput =
+              selection?.anchorOffset === 0;
 
-        if (valueHasBeenPlacedCloseToAnEmoji) {
-          const valueHasBeenPlacedAtTheBeginningOfTheInput =
-            selection?.anchorOffset === 0;
-
-          if (valueHasBeenPlacedAtTheBeginningOfTheInput) {
-            selectionRange?.setStartBefore(
-              elementThatIsCloseToTheValueToBeInserted
-            );
-          } else {
-            selectionRange?.setStartAfter(
-              elementThatIsCloseToTheValueToBeInserted
-            );
-          }
-        }
-      };
-
-      positionSelectionIfValueHasBeenPlacedCloseToAnEmoji();
-
-      const thereAreOtherCharactersOtherThanEmoji = newValue.replace(
-        emojiRegex,
-        ''
-      );
-
-      const { parse: twemojiParser } = await import('twemoji-parser');
-
-      let content;
-
-      if (thereAreOtherCharactersOtherThanEmoji) {
-        const template = document.createElement('template');
-        template.content.textContent = newValue;
-
-        // innerHTML format some characters to HTML
-        const newValueFormatted = template.innerHTML;
-
-        const twemojis = twemojiParser(newValueFormatted);
-
-        const newValueWithTwemojis = twemojis.reduce(
-          (prevValue, twemoji, index) => {
-            let value = '';
-
-            const rangeOfCharactersThatTheEmojiOccupies = {
-              start: twemoji.indices[0],
-              end: twemoji.indices[1],
-            };
-
-            const isFirst = index === 0;
-
-            if (isFirst) {
-              const strBeforeTheFirstEmoji = newValueFormatted.substring(
-                0,
-                rangeOfCharactersThatTheEmojiOccupies.start
+            if (valueHasBeenPlacedAtTheBeginningOfTheInput) {
+              selectionRange?.setStartBefore(
+                elementThatIsCloseToTheValueToBeInserted
               );
-
-              value += strBeforeTheFirstEmoji;
+            } else {
+              selectionRange?.setStartAfter(
+                elementThatIsCloseToTheValueToBeInserted
+              );
             }
+          }
+        };
 
-            const nextTwemoji = twemojis[index + 1] as EmojiEntity | undefined;
+        positionSelectionIfValueHasBeenPlacedCloseToAnEmoji();
 
-            const rangeOfCharactersThatTheNextEmojiOccupies = {
-              end: nextTwemoji?.indices[0],
-            };
-
-            const element = `<span class='emoji' style='background-image: url(${twemoji.url})'>${twemoji.text}</span>`;
-
-            const stringBetweenCurrentEmojiAndNextEmoji =
-              newValueFormatted.substring(
-                rangeOfCharactersThatTheEmojiOccupies.end,
-                rangeOfCharactersThatTheNextEmojiOccupies.end
-              );
-
-            value += element + stringBetweenCurrentEmojiAndNextEmoji;
-
-            return prevValue + value;
-          },
+        const thereAreOtherCharactersOtherThanEmoji = newValue.replace(
+          emojiRegex,
           ''
         );
 
-        template.innerHTML = newValueWithTwemojis;
+        const { parse: twemojiParser } = await import('twemoji-parser');
 
-        content = template.content;
-      } else {
-        const twemoji = twemojiParser(newValue)[0];
+        let content;
 
-        const twemojiElement = document.createElement('span');
-        twemojiElement.className = 'emoji';
-        twemojiElement.textContent = twemoji.text;
-        twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
+        if (thereAreOtherCharactersOtherThanEmoji) {
+          const template = document.createElement('template');
+          template.content.textContent = newValue;
 
-        content = twemojiElement;
+          // innerHTML format some characters to HTML
+          const newValueFormatted = template.innerHTML;
+
+          const twemojis = twemojiParser(newValueFormatted);
+
+          const newValueWithTwemojis = twemojis.reduce(
+            (prevValue, twemoji, index) => {
+              let value = '';
+
+              const rangeOfCharactersThatTheEmojiOccupies = {
+                start: twemoji.indices[0],
+                end: twemoji.indices[1],
+              };
+
+              const isFirst = index === 0;
+
+              if (isFirst) {
+                const strBeforeTheFirstEmoji = newValueFormatted.substring(
+                  0,
+                  rangeOfCharactersThatTheEmojiOccupies.start
+                );
+
+                value += strBeforeTheFirstEmoji;
+              }
+
+              const nextTwemoji = twemojis[index + 1] as
+                | EmojiEntity
+                | undefined;
+
+              const rangeOfCharactersThatTheNextEmojiOccupies = {
+                end: nextTwemoji?.indices[0],
+              };
+
+              const element = `<span class='emoji' style='background-image: url(${twemoji.url})'>${twemoji.text}</span>`;
+
+              const stringBetweenCurrentEmojiAndNextEmoji =
+                newValueFormatted.substring(
+                  rangeOfCharactersThatTheEmojiOccupies.end,
+                  rangeOfCharactersThatTheNextEmojiOccupies.end
+                );
+
+              value += element + stringBetweenCurrentEmojiAndNextEmoji;
+
+              return prevValue + value;
+            },
+            ''
+          );
+
+          template.innerHTML = newValueWithTwemojis;
+
+          content = template.content;
+        } else {
+          const twemoji = twemojiParser(newValue)[0];
+
+          const twemojiElement = document.createElement('span');
+          twemojiElement.className = 'emoji';
+          twemojiElement.textContent = twemoji.text;
+          twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
+
+          content = twemojiElement;
+        }
+
+        selectionRange?.insertNode(content);
       }
-
-      selectionRange?.insertNode(content);
 
       preventHandleEmojisFromRunningTwice = true;
 
@@ -184,17 +186,9 @@ export function MessageInput() {
       const fontTagHasBeenInserted =
         messageInput?.firstChild?.nodeName === 'FONT';
 
-      const isInputMethodEditor = e.inputType === 'insertCompositionText';
-
       if (fontTagHasBeenInserted) {
         const removeFontTag = () => {
           const text = messageInput.textContent;
-
-          if (isInputMethodEditor) {
-            messageInput.textContent = '';
-
-            return;
-          }
 
           messageInput.textContent = text;
 
@@ -257,6 +251,8 @@ export function MessageInput() {
           setSelection();
         }
       }
+
+      const isInputMethodEditor = e.inputType === 'insertCompositionText';
 
       if (!isInputMethodEditor) return;
 
