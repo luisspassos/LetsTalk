@@ -184,8 +184,10 @@ export function MessageInput() {
 
       // it's a browser bug
       const fontTag = messageInput?.querySelector('font');
+      const fontTagIsChildOfMessageInput =
+        fontTag?.parentElement === messageInput;
 
-      if (fontTag) {
+      if (fontTagIsChildOfMessageInput) {
         // IF REMOVE STYLES FONT, FONT TAG ISN'T INSERTED
 
         const text = fontTag.textContent as string;
