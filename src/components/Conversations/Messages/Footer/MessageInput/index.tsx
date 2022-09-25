@@ -183,24 +183,26 @@ export function MessageInput() {
       const selection = getSelection();
 
       // it's a browser bug
-      const fontTagIsTheOnlyElementOfTheInput =
-        messageInput?.firstChild?.nodeName === 'FONT';
+      const fontTag = messageInput?.querySelector('font');
 
-      if (fontTagIsTheOnlyElementOfTheInput) {
+      if (fontTag) {
+        // IF REMOVE STYLES FONT, FONT TAG ISN'T INSERTED
+
+        const text = fontTag.textContent as string;
+        const textNode = document.createTextNode(text);
+
         const removeFontTag = () => {
-          const text = messageInput.textContent;
+          messageInput?.replaceChild(textNode, fontTag);
+        };
 
-          messageInput.textContent = text;
+        const restoreSelection = () => {
+          const selectionRange = selection?.getRangeAt(0);
 
-          const restoreSelection = () => {
-            selection?.selectAllChildren(messageInput);
-            selection?.collapseToEnd();
-          };
-
-          restoreSelection();
+          selectionRange?.setStartAfter(textNode);
         };
 
         removeFontTag();
+        restoreSelection();
       } else {
         const elementThatIsNextToTheInsertedValue =
           selection?.anchorNode?.parentElement;
@@ -209,41 +211,49 @@ export function MessageInput() {
         const twemoji = elementThatIsNextToTheInsertedValue?.closest('.emoji');
 
         if (twemoji) {
-          const currentText = twemoji.textContent;
+          const putInsertedValueOutsideOfTwemoji = () => {
+            const currentText = twemoji.textContent as string;
 
-          const emoji = currentText?.match(emojiRegex)[0];
+            const emoji = currentText.match(emojiRegex)?.[0] as string;
 
-          const removeInsertedValue = () => {
-            twemoji.textContent = emoji;
+            const removeInsertedValue = () => {
+              twemoji.textContent = emoji;
+            };
+
+            removeInsertedValue();
+
+            const emojiIndex = currentText.indexOf(emoji);
+            const valueHasBeenPlacedToTheRightOfTheEmoji = emojiIndex === 0;
+
+            const insertPosition: InsertPosition =
+              valueHasBeenPlacedToTheRightOfTheEmoji
+                ? 'afterend'
+                : 'beforebegin';
+
+            const textWithoutEmoji = currentText.replace(emojiRegex, '');
+
+            const addTextOutsideElement = () => {
+              twemoji.insertAdjacentText(insertPosition, textWithoutEmoji);
+            };
+
+            addTextOutsideElement();
+
+            const setSelection = () => {
+              const sibling = valueHasBeenPlacedToTheRightOfTheEmoji
+                ? 'nextSibling'
+                : 'previousSibling';
+
+              const selectionRange = selection?.getRangeAt(0);
+
+              const referenceElement = twemoji[sibling] as ChildNode;
+
+              selectionRange?.setStartAfter(referenceElement);
+            };
+
+            setSelection();
           };
 
-          removeInsertedValue();
-
-          const emojiIndex = currentText?.indexOf(emoji);
-          const valueHasBeenPlacedToTheRightOfTheEmoji = emojiIndex === 0;
-
-          const insertPosition: InsertPosition =
-            valueHasBeenPlacedToTheRightOfTheEmoji ? 'afterend' : 'beforebegin';
-
-          const textWithoutEmoji = currentText?.replace(emojiRegex, '');
-
-          const addTextOutsideElement = () => {
-            twemoji.insertAdjacentText(insertPosition, textWithoutEmoji);
-          };
-
-          addTextOutsideElement();
-
-          const setSelection = () => {
-            const sibling = valueHasBeenPlacedToTheRightOfTheEmoji
-              ? 'nextSibling'
-              : 'previousSibling';
-
-            const selectionRange = selection?.getRangeAt(0);
-
-            selectionRange?.setStartAfter(twemoji[sibling]);
-          };
-
-          setSelection();
+          putInsertedValueOutsideOfTwemoji();
         }
       }
 
