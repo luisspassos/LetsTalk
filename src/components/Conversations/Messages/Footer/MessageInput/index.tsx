@@ -205,53 +205,46 @@ export function MessageInput() {
         const elementThatIsNextToTheInsertedValue =
           selection?.anchorNode?.parentElement;
 
-        const valueHasBeenPlacedNextToAnEmoji =
-          elementThatIsNextToTheInsertedValue?.className === 'emoji';
+        // get the emoji if the value has been inserted next to it
+        const twemoji = elementThatIsNextToTheInsertedValue?.closest('.emoji');
 
-        // if (valueHasBeenPlacedNextToAnEmoji) {
-        const currentText = selection?.anchorNode?.textContent;
+        if (twemoji) {
+          const currentText = twemoji.textContent;
 
-        const [emoji] = currentText?.match(emojiRegex);
+          const emoji = currentText?.match(emojiRegex)[0];
 
-        console.log(emoji);
+          const removeInsertedValue = () => {
+            twemoji.textContent = emoji;
+          };
 
-        const removeInsertedValue = () => {
-          elementThatIsNextToTheInsertedValue.textContent = emoji;
-        };
+          removeInsertedValue();
 
-        removeInsertedValue();
+          const emojiIndex = currentText?.indexOf(emoji);
+          const valueHasBeenPlacedToTheRightOfTheEmoji = emojiIndex === 0;
 
-        const emojiIndex = currentText?.indexOf(emoji);
-        const valueHasBeenPlacedToTheRightOfTheEmoji = emojiIndex === 0;
+          const insertPosition: InsertPosition =
+            valueHasBeenPlacedToTheRightOfTheEmoji ? 'afterend' : 'beforebegin';
 
-        const insertPosition: InsertPosition =
-          valueHasBeenPlacedToTheRightOfTheEmoji ? 'afterend' : 'beforebegin';
+          const textWithoutEmoji = currentText?.replace(emojiRegex, '');
 
-        const textWithoutEmoji = currentText?.replace(emojiRegex, '');
+          const addTextOutsideElement = () => {
+            twemoji.insertAdjacentText(insertPosition, textWithoutEmoji);
+          };
 
-        const addTextOutsideElement = () => {
-          elementThatIsNextToTheInsertedValue?.insertAdjacentText(
-            insertPosition,
-            textWithoutEmoji
-          );
-        };
+          addTextOutsideElement();
 
-        addTextOutsideElement();
+          const setSelection = () => {
+            const sibling = valueHasBeenPlacedToTheRightOfTheEmoji
+              ? 'nextSibling'
+              : 'previousSibling';
 
-        const setSelection = () => {
-          const sibling = valueHasBeenPlacedToTheRightOfTheEmoji
-            ? 'nextSibling'
-            : 'previousSibling';
+            const selectionRange = selection?.getRangeAt(0);
 
-          const selectionRange = selection?.getRangeAt(0);
+            selectionRange?.setStartAfter(twemoji[sibling]);
+          };
 
-          selectionRange?.setStartAfter(
-            elementThatIsNextToTheInsertedValue[sibling]
-          );
-        };
-
-        setSelection();
-        // }
+          setSelection();
+        }
       }
 
       const isInputMethodEditor = e.inputType === 'insertCompositionText';
@@ -265,24 +258,6 @@ export function MessageInput() {
       }, timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
 
-    function A(e: KeyboardEvent) {
-      const key = e.key;
-      const keys = ['Backspace', 'Delete'];
-
-      const isDeletion = keys.includes(key);
-
-      if (!isDeletion) return;
-
-      e.preventDefault();
-
-      const selection = getSelection();
-
-      const offset = selection?.anchorOffset;
-
-      selection?.extend(messageInput?.firstChild, offset - 1);
-      selection?.deleteFromDocument();
-    }
-
     const events = [
       {
         type: 'beforeinput',
@@ -292,10 +267,6 @@ export function MessageInput() {
         type: 'input',
         func: handleValuesWithoutEmojisAndDeletion,
       },
-      // {
-      //   type: 'keydown',
-      //   func: A,
-      // },
     ] as unknown as Events;
 
     // addEventListener is for preventing bugs
