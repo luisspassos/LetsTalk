@@ -26,10 +26,6 @@ export function MessageInput() {
     let preventHandleEmojisFromRunningTwice = false;
 
     async function handleEmojis(e: InputEvent) {
-      const isInputMethodEditor = e.inputType === 'insertCompositionText';
-
-      if (isInputMethodEditor) e.preventDefault();
-
       if (preventHandleEmojisFromRunningTwice) {
         e.preventDefault();
 
@@ -105,10 +101,12 @@ export function MessageInput() {
             const isFirst = index === 0;
 
             if (isFirst) {
-              value += newValueFormatted.substring(
+              const strBeforeTheFirstEmoji = newValueFormatted.substring(
                 0,
                 rangeOfCharactersThatTheEmojiOccupies.start
               );
+
+              value += strBeforeTheFirstEmoji;
             }
 
             const nextTwemoji = twemojis[index + 1] as EmojiEntity | undefined;
@@ -119,12 +117,13 @@ export function MessageInput() {
 
             const element = `<span class='emoji' style='background-image: url(${twemoji.url})'>${twemoji.text}</span>`;
 
-            value +=
-              element +
+            const stringBetweenCurrentEmojiAndNextEmoji =
               newValueFormatted.substring(
                 rangeOfCharactersThatTheEmojiOccupies.end,
                 rangeOfCharactersThatTheNextEmojiOccupies.end
               );
+
+            value += element + stringBetweenCurrentEmojiAndNextEmoji;
 
             return prevValue + value;
           },
@@ -156,10 +155,10 @@ export function MessageInput() {
 
     const messageInput = ref.current;
 
-    let preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = false;
+    let preventInputEventFromRunningTwice = false;
 
-    async function handleValuesWithoutEmojis(e: InputEvent) {
-      if (preventInputEventFromRunningTwiceBecauseOfInputMethodEditor) return;
+    async function handleValuesWithoutEmojisAndDeletion(e: InputEvent) {
+      if (preventInputEventFromRunningTwice) return;
 
       const newValue = e.data;
 
@@ -185,57 +184,86 @@ export function MessageInput() {
       const fontTagHasBeenInserted =
         messageInput?.firstChild?.nodeName === 'FONT';
 
+      const isInputMethodEditor = e.inputType === 'insertCompositionText';
+
       if (fontTagHasBeenInserted) {
         const removeFontTag = () => {
-          const message = messageInput.textContent;
+          const text = messageInput.textContent;
 
-          messageInput.textContent = message;
+          if (isInputMethodEditor) {
+            messageInput.textContent = '';
+
+            return;
+          }
+
+          messageInput.textContent = text;
+
+          const restoreSelection = () => {
+            selection?.selectAllChildren(messageInput);
+            selection?.collapseToEnd();
+          };
+
+          restoreSelection();
         };
 
         removeFontTag();
+      } else {
+        const elementThatIsNextToTheInsertedValue =
+          selection?.anchorNode?.parentElement;
+
+        const valueHasBeenPlacedNextToAnEmoji =
+          elementThatIsNextToTheInsertedValue?.className === 'emoji';
+
+        if (valueHasBeenPlacedNextToAnEmoji) {
+          const currentText = selection?.anchorNode?.textContent;
+
+          const [emoji] = currentText?.match(emojiRegex);
+
+          const removeInsertedValue = () => {
+            elementThatIsNextToTheInsertedValue.textContent = emoji;
+          };
+
+          removeInsertedValue();
+
+          const emojiIndex = currentText?.indexOf(emoji);
+          const valueHasBeenPlacedToTheRightOfTheEmoji = emojiIndex === 0;
+
+          const insertPosition: InsertPosition =
+            valueHasBeenPlacedToTheRightOfTheEmoji ? 'afterend' : 'beforebegin';
+
+          const textWithoutEmoji = currentText?.replace(emojiRegex, '');
+
+          const addTextOutsideElement = () => {
+            elementThatIsNextToTheInsertedValue?.insertAdjacentText(
+              insertPosition,
+              textWithoutEmoji
+            );
+          };
+
+          addTextOutsideElement();
+
+          const setSelection = () => {
+            const sibling = valueHasBeenPlacedToTheRightOfTheEmoji
+              ? 'nextSibling'
+              : 'previousSibling';
+
+            const selectionRange = selection?.getRangeAt(0);
+
+            selectionRange?.setStartAfter(
+              elementThatIsNextToTheInsertedValue[sibling]
+            );
+          };
+
+          setSelection();
+        }
       }
 
-      const elementThatIsNextToTheInsertedValue =
-        selection?.anchorNode?.parentElement;
+      if (!isInputMethodEditor) return;
 
-      const valueHasBeenPlacedNextToAnEmoji =
-        elementThatIsNextToTheInsertedValue?.className === 'emoji';
-
-      if (!valueHasBeenPlacedNextToAnEmoji) return;
-
-      const currentText = selection?.anchorNode?.textContent;
-
-      const emoji = currentText?.match(emojiRegex)[0];
-
-      elementThatIsNextToTheInsertedValue.textContent = emoji;
-
-      const emojiIndex = currentText?.indexOf(emoji);
-      const valueHasBeenPlacedToTheRightOfTheEmoji = emojiIndex === 0;
-
-      const insertPosition: InsertPosition =
-        valueHasBeenPlacedToTheRightOfTheEmoji ? 'afterend' : 'beforebegin';
-
-      const textWithoutEmoji = currentText?.replace(emojiRegex, '');
-
-      elementThatIsNextToTheInsertedValue?.insertAdjacentText(
-        insertPosition,
-        textWithoutEmoji
-      );
-
-      const sibling = valueHasBeenPlacedToTheRightOfTheEmoji
-        ? 'nextSibling'
-        : 'previousSibling';
-
-      const selectionRange = selection?.getRangeAt(0);
-
-      selectionRange?.setStartAfter(
-        elementThatIsNextToTheInsertedValue[sibling]
-      );
-
-      preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = true;
+      preventInputEventFromRunningTwice = true;
 
       setTimeout(() => {
-        preventInputEventFromRunningTwiceBecauseOfInputMethodEditor = false;
+        preventInputEventFromRunningTwice = false;
       }, timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
 
@@ -246,7 +274,7 @@ export function MessageInput() {
       },
       {
         type: 'input',
-        func: handleValuesWithoutEmojis,
+        func: handleValuesWithoutEmojisAndDeletion,
       },
     ] as unknown as Events;
 
