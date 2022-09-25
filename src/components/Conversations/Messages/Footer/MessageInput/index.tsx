@@ -183,10 +183,10 @@ export function MessageInput() {
       const selection = getSelection();
 
       // it's a browser bug
-      const fontTagHasBeenInserted =
+      const fontTagIsTheOnlyElementOfTheInput =
         messageInput?.firstChild?.nodeName === 'FONT';
 
-      if (fontTagHasBeenInserted) {
+      if (fontTagIsTheOnlyElementOfTheInput) {
         const removeFontTag = () => {
           const text = messageInput.textContent;
 
