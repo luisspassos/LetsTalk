@@ -165,12 +165,46 @@ export function MessageInput() {
 
       if (textDirectionHasBeenChanged) {
         const changeDirection = () => {
-          const dir = getComputedStyle(messageInput).direction;
+          if (!messageInput) return;
 
-          const newDir = dir === 'ltr' ? 'rtl' : 'ltr';
+          const elementThatSetsTheDirection =
+            messageInput.firstChild as HTMLDivElement;
+
+          const dir = elementThatSetsTheDirection.style.direction;
+
+          messageInput.style.direction = dir;
+
+          const div = messageInput.firstChild;
+          const pa = div?.parentNode;
+          while (div?.firstChild) pa?.insertBefore(div.firstChild, div);
+
+          pa?.removeChild(div);
+
+          // const text = elementThatSetsTheDirection.textContent;
+          // const html = elementThatSetsTheDirection.innerHTML;
+
+          // // it's to prevent a <br> tag alone
+          // const message = text ? html : text;
+
+          // const selection = getSelection();
+          // const nodeWithTheSelection = {
+          //   node: selection?.anchorNode as Node,
+          //   offset: selection?.anchorOffset,
+          // };
+
+          // messageInput.innerHTML = message ?? '';
+
+          // console.log(nodeWithTheSelection);
+
+          // selection?.setPosition(
+          //   nodeWithTheSelection.node,
+          //   nodeWithTheSelection.offset
+          // );
         };
 
         changeDirection();
+
+        return;
       }
 
       if (preventInputEventFromRunningTwice) return;
