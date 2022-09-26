@@ -160,6 +160,19 @@ export function MessageInput() {
     let preventInputEventFromRunningTwice = false;
 
     async function handleValuesWithoutEmojisAndDeletion(e: InputEvent) {
+      const textDirectionHasBeenChanged =
+        e.inputType === 'formatSetBlockTextDirection';
+
+      if (textDirectionHasBeenChanged) {
+        const changeDirection = () => {
+          const dir = getComputedStyle(messageInput).direction;
+
+          const newDir = dir === 'ltr' ? 'rtl' : 'ltr';
+        };
+
+        changeDirection();
+      }
+
       if (preventInputEventFromRunningTwice) return;
 
       const newValue = e.data;
@@ -315,6 +328,7 @@ export function MessageInput() {
       _hover={{
         borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
       }}
+      dir='auto'
       placeholder='Mensagem'
       _selection={{
         bgColor: 'blueAlpha.200',

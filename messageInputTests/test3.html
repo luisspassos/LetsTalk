@@ -5,44 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      .emoji {
-        letter-spacing: 2px;
-        background-repeat: no-repeat;
-        background-position: center;
-        color: transparent;
-      }
-    </style>
-    <!-- <script
-      src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js"
-      crossorigin="anonymous"
-    ></script> -->
+    <style></style>
   </head>
   <body>
-    <h1>Hello world</h1>
+    <div contenteditable style="direction: rtl"></div>
   </body>
   <script>
-    // twemoji.parse(document.body);
+    const contenteditable = document.querySelector('div[contenteditable]');
 
-    const emoji = '👩🏿‍🚒';
-
-    const codePoints = [...emoji].map((_, i) =>
-      emoji.codePointAt(i).toString(16)
-    );
-
-    console.log(codePoints);
-
-    const twemoji = codePoints.join('-');
-
-    const url = `https://twemoji.maxcdn.com/v/14.0.2/svg/${twemoji}.svg`;
-
-    const img = new Image();
-    img.src = url;
-
-    if (img.complete) {
-      console.log('it exists');
-    } else {
-      console.log('it does not exist');
-    }
+    contenteditable.addEventListener('input', (e) => e.preventDefault());
   </script>
 </html>
