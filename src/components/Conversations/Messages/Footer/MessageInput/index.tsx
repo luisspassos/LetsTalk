@@ -2,7 +2,6 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
-import { EmojiEntity } from 'twemoji-parser';
 
 type Styles = {
   default: any;
@@ -86,49 +85,15 @@ export function MessageInput() {
           // innerHTML format some characters to HTML
           const newValueFormatted = template.innerHTML;
 
-          const twemojis = twemojiParser(newValueFormatted);
+          const newValueWithTwemojis = newValueFormatted.replace(
+            emojiRegex,
+            (emoji) => {
+              const url = twemojiParser(emoji)[0].url;
 
-          const newValueWithTwemojis = twemojis.reduce(
-            (prevValue, twemoji, index) => {
-              let value = '';
+              const element = `<span class='emoji' style='background-image: url(${url})'>${emoji}</span>`;
 
-              const rangeOfCharactersThatTheEmojiOccupies = {
-                start: twemoji.indices[0],
-                end: twemoji.indices[1],
-              };
-
-              const isFirst = index === 0;
-
-              if (isFirst) {
-                const strBeforeTheFirstEmoji = newValueFormatted.substring(
-                  0,
-                  rangeOfCharactersThatTheEmojiOccupies.start
-                );
-
-                value += strBeforeTheFirstEmoji;
-              }
-
-              const nextTwemoji = twemojis[index + 1] as
-                | EmojiEntity
-                | undefined;
-
-              const rangeOfCharactersThatTheNextEmojiOccupies = {
-                end: nextTwemoji?.indices[0],
-              };
-
-              const element = `<span class='emoji' style='background-image: url(${twemoji.url})'>${twemoji.text}</span>`;
-
-              const stringBetweenCurrentEmojiAndNextEmoji =
-                newValueFormatted.substring(
-                  rangeOfCharactersThatTheEmojiOccupies.end,
-                  rangeOfCharactersThatTheNextEmojiOccupies.end
-                );
-
-              value += element + stringBetweenCurrentEmojiAndNextEmoji;
-
-              return prevValue + value;
-            },
-            ''
+              return element;
+            }
           );
 
           template.innerHTML = newValueWithTwemojis;
@@ -165,37 +130,40 @@ export function MessageInput() {
 
       if (textDirectionHasBeenChanged) {
         const changeDirection = () => {
-          if (!messageInput) return;
+          const nodes = messageInput?.querySelectorAll(':not(:has(*))');
 
-          const elementThatSetsTheDirection =
-            messageInput.firstChild as HTMLDivElement;
+          console.log(nodes);
 
-          const dir = elementThatSetsTheDirection.style.direction;
-
-          messageInput.style.direction = dir;
-
-          const div = messageInput.firstChild;
-          const pa = div?.parentNode;
-          while (div?.firstChild) pa?.insertBefore(div.firstChild, div);
-
-          pa?.removeChild(div);
-
-          // const text = elementThatSetsTheDirection.textContent;
-          // const html = elementThatSetsTheDirection.innerHTML;
-
-          // // it's to prevent a <br> tag alone
-          // const message = text ? html : text;
-
+          // if (!messageInput) return;
+          // const elementThatSetsTheDirection =
+          //   messageInput.firstChild as HTMLDivElement;
+          // const dir = elementThatSetsTheDirection.style.direction;
           // const selection = getSelection();
           // const nodeWithTheSelection = {
           //   node: selection?.anchorNode as Node,
           //   offset: selection?.anchorOffset,
           // };
-
-          // messageInput.innerHTML = message ?? '';
-
+          // messageInput.style.direction = dir;
+          // const div = messageInput.firstChild;
+          // const pa = div?.parentNode;
+          // while (div?.firstChild) pa?.insertBefore(div.firstChild, div);
+          // pa?.removeChild(div);
           // console.log(nodeWithTheSelection);
-
+          // selection?.setPosition(
+          //   nodeWithTheSelection.node,
+          //   nodeWithTheSelection.offset
+          // );
+          // const text = elementThatSetsTheDirection.textContent;
+          // const html = elementThatSetsTheDirection.innerHTML;
+          // // it's to prevent a <br> tag alone
+          // const message = text ? html : text;
+          // const selection = getSelection();
+          // const nodeWithTheSelection = {
+          //   node: selection?.anchorNode as Node,
+          //   offset: selection?.anchorOffset,
+          // };
+          // messageInput.innerHTML = message ?? '';
+          // console.log(nodeWithTheSelection);
           // selection?.setPosition(
           //   nodeWithTheSelection.node,
           //   nodeWithTheSelection.offset

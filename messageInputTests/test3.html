@@ -8,12 +8,20 @@
     <style></style>
   </head>
   <body>
-    <!-- <div contenteditable style="direction: rtl"></div> -->
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <div class="a">
+      <h1>some random text</h1>
+      <div class="clear"></div>
+      Extract This Text
+      <p></p>
+      But Not This Text
+      <h2></h2>
+    </div>
   </body>
   <script>
-    const contenteditable = document.querySelector('div[contenteditable]');
+    const str = '🤐😪0️⃣2️⃣3️⃣4️⃣🔢🥱🏳‍🌈😏🙂🤩😥';
 
-    contenteditable.addEventListener('input', (e) => e.preventDefault());
+    str.replaceAll(/\p{Emoji_Presentation}/gu, (emoji, i, a, b) =>
+      console.log(emoji, i, a, b)
+    );
   </script>
 </html>
