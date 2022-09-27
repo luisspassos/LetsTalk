@@ -52,6 +52,7 @@ export const theme = extendTheme(
             content: 'attr(placeholder)',
             color: placeholderColor,
             cursor: 'text',
+            display: 'block',
           },
           '::-webkit-scrollbar': {
             width: ['3px', '6px'],

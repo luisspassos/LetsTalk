@@ -34,27 +34,13 @@
         line-height: 50px;
         font-size: 1.3rem;
         padding: 10px;
-        direction: rtl;
+        /* direction: rtl; */
       }
 
       [placeholder]:empty::before {
         content: attr(placeholder);
         color: rgba(245, 245, 245, 0.308);
-      }
-
-      .emoji {
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        color: transparent;
-        caret-color: white;
-        font-family: 'Noto Emoji', sans-serif;
-      }
-
-      /* see this */
-      .emoji::selection {
-        color: transparent;
-        background-color: rgba(0, 0, 255, 0.438);
+        display: block;
       }
     </style>
   </head>
@@ -63,7 +49,12 @@
   </body>
 
   <script>
-    // const contenteditable = document.querySelector('div[contenteditable]');
+    const contenteditable = document.querySelector('div[contenteditable]');
+
+    contenteditable.addEventListener('input', () => {
+      contenteditable.dir = 'rtl';
+      contenteditable.textContent = '';
+    });
 
     // let continueBeforeInputEvent = true;
 
