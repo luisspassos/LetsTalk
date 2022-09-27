@@ -29,12 +29,17 @@
       div[contenteditable] {
         background-color: rgb(26, 26, 26);
         width: 500px;
-        height: 50px;
         border: 1px solid white;
         color: white;
         line-height: 50px;
         font-size: 1.3rem;
-        padding-left: 10px;
+        padding: 10px;
+        direction: rtl;
+      }
+
+      [placeholder]:empty::before {
+        content: attr(placeholder);
+        color: rgba(245, 245, 245, 0.308);
       }
 
       .emoji {
@@ -54,27 +59,26 @@
     </style>
   </head>
   <body>
-    <div contenteditable></div>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <div contenteditable placeholder="Message" dir="auto"></div>
   </body>
 
   <script>
-    const contenteditable = document.querySelector('div[contenteditable]');
+    // const contenteditable = document.querySelector('div[contenteditable]');
 
-    let continueBeforeInputEvent = true;
+    // let continueBeforeInputEvent = true;
 
-    contenteditable.addEventListener('beforeinput', () => {
-      if (!continueBeforeInputEvent) return;
+    // contenteditable.addEventListener('beforeinput', () => {
+    //   if (!continueBeforeInputEvent) return;
 
-      const range = getSelection().getRangeAt(0);
+    //   const range = getSelection().getRangeAt(0);
 
-      console.log(range.startOffset, range.endOffset);
+    //   console.log(range.startOffset, range.endOffset);
 
-      continueBeforeInputEvent = false;
+    //   continueBeforeInputEvent = false;
 
-      setTimeout(() => {
-        continueBeforeInputEvent = true;
-      }, 0);
-    });
+    //   setTimeout(() => {
+    //     continueBeforeInputEvent = true;
+    //   }, 0);
+    // });
   </script>
 </html>

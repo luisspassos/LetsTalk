@@ -223,31 +223,34 @@ export function MessageInput() {
         const changeDirection = async () => {
           if (!messageInput) return;
 
-          const elementThatHasTheDirection =
-            messageInput.firstChild as HTMLDivElement;
-          const dir = elementThatHasTheDirection.style.direction;
+          // messageInput.innerHTML = '';
+          messageInput.dir = 'rtl';
 
-          messageInput.style.direction = dir;
+          // const elementThatHasTheDirection =
+          //   messageInput.firstChild as HTMLDivElement;
+          // const dir = elementThatHasTheDirection.style.direction;
 
-          const text = messageInput.textContent;
+          // messageInput.style.direction = dir;
 
-          let newText = '';
+          // const text = messageInput.textContent;
 
-          if (text) {
-            newText = formatTextToHtml(text);
+          // let newText = '';
 
-            const emojiRegex = getEmojiRegex();
+          // if (text) {
+          //   newText = formatTextToHtml(text);
 
-            const thereAreEmojis = emojiRegex.test(newText);
+          //   const emojiRegex = getEmojiRegex();
 
-            if (thereAreEmojis) newText = await getValueWithTwemojis(newText);
-          }
+          //   const thereAreEmojis = emojiRegex.test(newText);
 
-          const savedSelection = saveSelection(messageInput);
+          //   if (thereAreEmojis) newText = await getValueWithTwemojis(newText);
+          // }
 
-          messageInput.innerHTML = newText;
+          // const savedSelection = saveSelection(messageInput);
 
-          restoreSelection(messageInput, savedSelection);
+          // messageInput.innerHTML = newText;
+
+          // restoreSelection(messageInput, savedSelection);
         };
 
         changeDirection();
