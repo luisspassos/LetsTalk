@@ -225,14 +225,16 @@ export function MessageInput() {
         const changeDirection = async () => {
           if (!messageInput) return;
 
+          const firstChild = messageInput.firstChild;
+
           const elementThatHasTheDirection =
-            messageInput.firstChild as HTMLDivElement | null;
+            firstChild instanceof HTMLDivElement;
 
           const textDirectionHasNotChanged = !elementThatHasTheDirection;
 
           if (textDirectionHasNotChanged) return;
 
-          const dir = elementThatHasTheDirection.style.direction;
+          const dir = firstChild.style.direction;
 
           messageInput.style.direction = dir;
 
