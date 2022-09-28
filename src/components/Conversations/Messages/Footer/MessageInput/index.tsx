@@ -216,15 +216,20 @@ export function MessageInput() {
     let preventInputEventFromRunningTwice = false;
 
     async function handleValuesWithoutEmojisAndDeletion(e: InputEvent) {
-      const textDirectionHasBeenChanged =
+      const someTextDirectionHasBeenSelected =
         e.inputType === 'formatSetBlockTextDirection';
 
-      if (textDirectionHasBeenChanged) {
+      if (someTextDirectionHasBeenSelected) {
         const changeDirection = async () => {
           if (!messageInput) return;
 
           const elementThatHasTheDirection =
-            messageInput.firstChild as HTMLDivElement;
+            messageInput.firstChild as HTMLDivElement | null;
+
+          const textDirectionHasNotChanged = !elementThatHasTheDirection;
+
+          if (textDirectionHasNotChanged) return;
+
           const dir = elementThatHasTheDirection.style.direction;
 
           messageInput.style.direction = dir;

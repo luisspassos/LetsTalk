@@ -34,13 +34,13 @@
         line-height: 50px;
         font-size: 1.3rem;
         padding: 10px;
-        /* direction: rtl; */
       }
 
       [placeholder]:empty::before {
         content: attr(placeholder);
         color: rgba(245, 245, 245, 0.308);
         display: block;
+        cursor: text;
       }
     </style>
   </head>
@@ -52,7 +52,6 @@
     const contenteditable = document.querySelector('div[contenteditable]');
 
     contenteditable.addEventListener('input', () => {
-      contenteditable.dir = 'rtl';
       contenteditable.textContent = '';
     });
 
