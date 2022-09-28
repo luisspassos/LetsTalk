@@ -40,6 +40,8 @@ const getValueWithTwemojis = async (value: string) => {
   return value.replace(emojiRegex, (emoji) => {
     const url = twemojiParser(emoji)[0].url;
 
+    if (!url) return '';
+
     const element = `<span class='emoji' style='background-image: url(${url})'>${emoji}</span>`;
 
     return element;
