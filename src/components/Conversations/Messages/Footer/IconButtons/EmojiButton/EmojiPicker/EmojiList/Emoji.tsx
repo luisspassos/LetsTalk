@@ -112,15 +112,27 @@ export function Emoji({ emoji, name }: EmojiProps) {
       emojiElement.className = 'emoji';
       emojiElement.style.backgroundImage = `url(${twemoji})`;
 
-      const emojiHasBeenPlacedNextToAnEmoji =
-        selection?.anchorNode?.parentElement?.className === 'emoji';
-
       const selectionRange = selection?.getRangeAt(0);
 
-      if (emojiHasBeenPlacedNextToAnEmoji) {
-        const emoji = selection.anchorNode.parentElement;
+      const elementThatIsCloseToTheValueToBeInserted =
+        selection?.anchorNode?.parentElement;
 
-        selectionRange?.setStartAfter(emoji);
+      const valueHasBeenPlacedCloseToAnEmoji =
+        elementThatIsCloseToTheValueToBeInserted?.className === 'emoji';
+
+      if (valueHasBeenPlacedCloseToAnEmoji) {
+        const valueHasBeenPlacedAtTheBeginningOfTheInput =
+          selection?.anchorOffset === 0;
+
+        if (valueHasBeenPlacedAtTheBeginningOfTheInput) {
+          selectionRange?.setStartBefore(
+            elementThatIsCloseToTheValueToBeInserted
+          );
+        } else {
+          selectionRange?.setStartAfter(
+            elementThatIsCloseToTheValueToBeInserted
+          );
+        }
       }
 
       selectionRange?.insertNode(emojiElement);
