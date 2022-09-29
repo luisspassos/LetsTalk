@@ -91,6 +91,22 @@ export function Emoji({ emoji, name }: EmojiProps) {
         putCursorAtTheEnd();
       }
 
+      if (!selection?.isCollapsed) {
+        selection?.deleteFromDocument();
+
+        const removeEmptySpans = () => {
+          const spans = messageInput?.querySelectorAll('span:empty');
+
+          if (!spans) return;
+
+          for (const span of spans) {
+            span.remove();
+          }
+        };
+
+        removeEmptySpans();
+      }
+
       const emojiElement = document.createElement('span');
       emojiElement.textContent = emoji;
       emojiElement.className = 'emoji';

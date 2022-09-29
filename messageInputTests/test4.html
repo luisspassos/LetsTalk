@@ -42,10 +42,15 @@
         display: block;
         cursor: text;
       }
+
+      div:empty {
+        background-color: blue;
+      }
     </style>
   </head>
   <body>
     <div contenteditable placeholder="Message" dir="auto"></div>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
   </body>
 
   <script>
