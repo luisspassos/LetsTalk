@@ -49,16 +49,43 @@
     </style>
   </head>
   <body>
-    <div contenteditable placeholder="Message" dir="auto"></div>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <!-- <div contenteditable placeholder="Message" dir="auto"></div> -->
+    <input style="padding: 10px" type="text" />
   </body>
 
   <script>
-    const contenteditable = document.querySelector('div[contenteditable]');
+    const input = document.querySelector('input');
 
-    contenteditable.addEventListener('input', () => {
-      contenteditable.textContent = '';
+    input.addEventListener('beforeinput', (e) => {
+      e.preventDefault();
+
+      const textNode = document.createTextNode(e.data);
+
+      const selection = getSelection();
+      const selectionRange = selection.getRangeAt(0);
+
+      selection.setPosition(input, 0);
+
+      selectionRange.insertNode(textNode);
+
+      input.readOnly = true;
+
+      setTimeout(() => {
+        input.readOnly = false;
+      }, 0);
     });
+
+    // input.addEventListener('beforeinput', (e) => {
+    //   console.log(e.data);
+
+    //   input.readOnly = true;
+    //   input.readOnly = false;
+    // });
+    // const contenteditable = document.querySelector('div[contenteditable]');
+
+    // contenteditable.addEventListener('input', () => {
+    //   contenteditable.textContent = '';
+    // });
 
     // let continueBeforeInputEvent = true;
 
