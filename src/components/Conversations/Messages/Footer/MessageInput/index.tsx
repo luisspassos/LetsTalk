@@ -146,6 +146,22 @@ export function MessageInput() {
         const selection = getSelection();
         const selectionRange = selection?.getRangeAt(0);
 
+        if (!selection?.isCollapsed) {
+          selection?.deleteFromDocument();
+
+          const removeEmptySpans = () => {
+            const spans = messageInput?.querySelectorAll('span:empty');
+
+            if (!spans) return;
+
+            for (const span of spans) {
+              span.remove();
+            }
+          };
+
+          removeEmptySpans();
+        }
+
         const positionSelectionIfValueHasBeenPlacedCloseToAnEmoji = () => {
           const elementThatIsCloseToTheValueToBeInserted =
             selection?.anchorNode?.parentElement;
