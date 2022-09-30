@@ -71,7 +71,7 @@ export function Emoji({ emoji, name }: EmojiProps) {
       }));
     }
 
-    function insertEmoji() {
+    async function insertEmoji() {
       const messageInput = messageInputRef.current;
 
       const messageInputIsFocused = messageInput === document.activeElement;
@@ -94,48 +94,32 @@ export function Emoji({ emoji, name }: EmojiProps) {
       if (!selection?.isCollapsed) {
         selection?.deleteFromDocument();
 
-        const removeEmptySpans = () => {
-          const spans = messageInput?.querySelectorAll('span:empty');
+        const { removeEmptySpans } = await import(
+          '../../../../../../../../utils/removeEmptySpans'
+        );
 
-          if (!spans) return;
-
-          for (const span of spans) {
-            span.remove();
-          }
-        };
-
-        removeEmptySpans();
+        removeEmptySpans(messageInput);
       }
 
-      const emojiElement = document.createElement('span');
-      emojiElement.textContent = emoji;
-      emojiElement.className = 'emoji';
-      emojiElement.style.backgroundImage = `url(${twemoji})`;
+      const { getTwemojiElement } = await import(
+        '../../../../../../../../utils/getTwemojiElement'
+      );
+
+      const twemojiElement = getTwemojiElement(emoji, twemoji);
 
       const selectionRange = selection?.getRangeAt(0);
 
-      const elementThatIsCloseToTheValueToBeInserted =
-        selection?.anchorNode?.parentElement;
+      const { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } =
+        await import(
+          '../../../../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji'
+        );
 
-      const valueHasBeenPlacedCloseToAnEmoji =
-        elementThatIsCloseToTheValueToBeInserted?.className === 'emoji';
+      positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
+        selection,
+        selectionRange
+      );
 
-      if (valueHasBeenPlacedCloseToAnEmoji) {
-        const valueHasBeenPlacedAtTheBeginningOfTheInput =
-          selection?.anchorOffset === 0;
-
-        if (valueHasBeenPlacedAtTheBeginningOfTheInput) {
-          selectionRange?.setStartBefore(
-            elementThatIsCloseToTheValueToBeInserted
-          );
-        } else {
-          selectionRange?.setStartAfter(
-            elementThatIsCloseToTheValueToBeInserted
-          );
-        }
-      }
-
-      selectionRange?.insertNode(emojiElement);
+      selectionRange?.insertNode(twemojiElement);
       selection?.collapseToEnd();
     }
 

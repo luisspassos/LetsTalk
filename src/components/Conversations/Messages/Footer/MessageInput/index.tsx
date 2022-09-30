@@ -149,43 +149,22 @@ export function MessageInput() {
         if (!selection?.isCollapsed) {
           selection?.deleteFromDocument();
 
-          const removeEmptySpans = () => {
-            const spans = messageInput?.querySelectorAll('span:empty');
+          const { removeEmptySpans } = await import(
+            '../../../../../utils/removeEmptySpans'
+          );
 
-            if (!spans) return;
-
-            for (const span of spans) {
-              span.remove();
-            }
-          };
-
-          removeEmptySpans();
+          removeEmptySpans(messageInput);
         }
 
-        const positionSelectionIfValueHasBeenPlacedCloseToAnEmoji = () => {
-          const elementThatIsCloseToTheValueToBeInserted =
-            selection?.anchorNode?.parentElement;
+        const { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } =
+          await import(
+            '../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji'
+          );
 
-          const valueHasBeenPlacedCloseToAnEmoji =
-            elementThatIsCloseToTheValueToBeInserted?.className === 'emoji';
-
-          if (valueHasBeenPlacedCloseToAnEmoji) {
-            const valueHasBeenPlacedAtTheBeginningOfTheInput =
-              selection?.anchorOffset === 0;
-
-            if (valueHasBeenPlacedAtTheBeginningOfTheInput) {
-              selectionRange?.setStartBefore(
-                elementThatIsCloseToTheValueToBeInserted
-              );
-            } else {
-              selectionRange?.setStartAfter(
-                elementThatIsCloseToTheValueToBeInserted
-              );
-            }
-          }
-        };
-
-        positionSelectionIfValueHasBeenPlacedCloseToAnEmoji();
+        positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
+          selection,
+          selectionRange
+        );
 
         const thereAreOtherCharactersOtherThanEmoji = newValue.replace(
           emojiRegex,
@@ -211,10 +190,11 @@ export function MessageInput() {
 
           const twemoji = twemojiParser(newValue)[0];
 
-          const twemojiElement = document.createElement('span');
-          twemojiElement.className = 'emoji';
-          twemojiElement.textContent = twemoji.text;
-          twemojiElement.style.backgroundImage = `url(${twemoji.url})`;
+          const { getTwemojiElement } = await import(
+            '../../../../../utils/getTwemojiElement'
+          );
+
+          const twemojiElement = getTwemojiElement(twemoji.text, twemoji.url);
 
           content = twemojiElement;
         }
@@ -378,17 +358,11 @@ export function MessageInput() {
             putInsertedValueOutsideOfTwemoji();
           }
 
-          const removeEmptySpans = () => {
-            const spans = messageInput?.querySelectorAll('span:empty');
+          const { removeEmptySpans } = await import(
+            '../../../../../utils/removeEmptySpans'
+          );
 
-            if (!spans) return;
-
-            for (const span of spans) {
-              span.remove();
-            }
-          };
-
-          removeEmptySpans();
+          removeEmptySpans(messageInput);
         }
       }
 
