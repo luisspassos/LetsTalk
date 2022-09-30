@@ -377,6 +377,18 @@ export function MessageInput() {
 
             putInsertedValueOutsideOfTwemoji();
           }
+
+          const removeEmptySpans = () => {
+            const spans = messageInput?.querySelectorAll('span:empty');
+
+            if (!spans) return;
+
+            for (const span of spans) {
+              span.remove();
+            }
+          };
+
+          removeEmptySpans();
         }
       }
 
