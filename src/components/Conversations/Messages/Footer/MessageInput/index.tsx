@@ -2,6 +2,8 @@ import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
 import { colors } from '../../../../../styles/colors';
+import { getTwemojiElement } from '../../../../../utils/getTwemojiElement';
+import { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } from '../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji';
 
 type Styles = {
   default: any;
@@ -156,11 +158,6 @@ export function MessageInput() {
           removeEmptySpans(messageInput);
         }
 
-        const { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } =
-          await import(
-            '../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji'
-          );
-
         positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
           selection,
           selectionRange
@@ -189,10 +186,6 @@ export function MessageInput() {
           const { parse: twemojiParser } = await import('twemoji-parser');
 
           const twemoji = twemojiParser(newValue)[0];
-
-          const { getTwemojiElement } = await import(
-            '../../../../../utils/getTwemojiElement'
-          );
 
           const twemojiElement = getTwemojiElement(twemoji.text, twemoji.url);
 
