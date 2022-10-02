@@ -141,35 +141,68 @@ export function MessageInput() {
       const emojiRegex = getEmojiRegex();
       const hasEmoji = emojiRegex.test(data);
 
-      let content;
-
       const selection = getSelection();
+      const selectionRange = selection?.getRangeAt(0);
 
-      if (hasLineBreak || hasEmoji) {
-        data = formatTextToHtml(data);
+      function insertNode(node: Node) {
+        positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
+          selection,
+          selectionRange
+        );
 
-        if (hasLineBreak) data = data.replace(lineBreakRegex, '<p>');
+        selectionRange?.insertNode(node);
+      }
 
-        if (hasEmoji) data = await getValueWithTwemojis(data);
-
+      function getContent() {
         const template = document.createElement('template');
         template.innerHTML = data;
 
-        content = template.content;
-      } else {
-        const textNode = document.createTextNode(data);
-
-        content = textNode;
+        return template.content;
       }
 
-      const selectionRange = selection?.getRangeAt(0);
+      if (hasLineBreak) {
+        data = formatTextToHtml(data);
 
-      positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
-        selection,
-        selectionRange
-      );
+        if (hasEmoji) data = await getValueWithTwemojis(data);
 
-      selectionRange?.insertNode(content);
+        data = data.replace(lineBreakRegex, '<p>');
+
+        const content = getContent();
+
+        // these nodes must be on the same line
+        const elementThatWillReceiveTheNodesAfterTheContent = content.lastChild;
+
+        insertNode(content);
+
+        const nodeThatEndsTheSelection =
+          elementThatWillReceiveTheNodesAfterTheContent?.lastChild as ChildNode;
+
+        while (elementThatWillReceiveTheNodesAfterTheContent?.nextSibling) {
+          elementThatWillReceiveTheNodesAfterTheContent.appendChild(
+            elementThatWillReceiveTheNodesAfterTheContent?.nextSibling
+          );
+        }
+
+        selectionRange?.setEndAfter(nodeThatEndsTheSelection);
+
+        return;
+      }
+
+      if (hasEmoji) {
+        data = formatTextToHtml(data);
+
+        data = await getValueWithTwemojis(data);
+
+        const content = getContent();
+
+        insertNode(content);
+
+        return;
+      }
+
+      const textNode = document.createTextNode(data);
+
+      insertNode(textNode);
     }
 
     const timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor = 0;

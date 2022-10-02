@@ -42,24 +42,27 @@
         display: block;
         cursor: text;
       }
-
-      div:empty {
-        background-color: blue;
-      }
     </style>
   </head>
   <body>
     <!-- <div contenteditable placeholder="Message" dir="auto"></div> -->
-    <!-- <input style="padding: 10px" type="text" /> -->
-    <textarea cols="30" rows="10"></textarea>
+    <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+    <p>apple</p>
+    <p>potato</p>
+    <p>strawberry</p>
+    <p>orange</p>
+    <p>mango</p>
   </body>
 
   <script>
-    const regex = /&|"|'|<|>/g;
-    const str = '<';
+    const body = document.body;
 
-    console.log(['&'].includes('&a'));
+    let firstChild = body.firstChild;
 
-    const newStr = str.replace(regex, (m) => 'a');
+    while (firstChild) {
+      firstChild.remove();
+
+      firstChild = body.firstChild;
+    }
   </script>
 </html>
