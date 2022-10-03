@@ -175,13 +175,27 @@ export function MessageInput() {
 
           insertNode(content);
 
+          let nodeAfterTheContent =
+            elementThatWillReceiveTheNodesAfterTheContent?.nextSibling;
+
+          const needsInsertNodes = nodeAfterTheContent?.textContent !== '';
+
           const nodeThatEndsTheSelection =
             elementThatWillReceiveTheNodesAfterTheContent?.lastChild as ChildNode;
 
-          while (elementThatWillReceiveTheNodesAfterTheContent?.nextSibling) {
-            elementThatWillReceiveTheNodesAfterTheContent.appendChild(
-              elementThatWillReceiveTheNodesAfterTheContent?.nextSibling
-            );
+          if (needsInsertNodes) {
+            const insertNodes = () => {
+              while (nodeAfterTheContent) {
+                elementThatWillReceiveTheNodesAfterTheContent?.appendChild(
+                  nodeAfterTheContent
+                );
+
+                nodeAfterTheContent =
+                  elementThatWillReceiveTheNodesAfterTheContent?.nextSibling;
+              }
+            };
+
+            insertNodes();
           }
 
           selectionRange?.setEndAfter(nodeThatEndsTheSelection);
