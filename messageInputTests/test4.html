@@ -46,23 +46,30 @@
   </head>
   <body>
     <!-- <div contenteditable placeholder="Message" dir="auto"></div> -->
-    <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
-    <p>apple</p>
-    <p>potato</p>
-    <p>strawberry</p>
-    <p>orange</p>
-    <p>mango</p>
+    <textarea
+      style="padding: 10px; width: 1000px"
+      name=""
+      id=""
+      cols="30"
+      rows="10"
+    ></textarea>
+    <br />
   </body>
 
   <script>
-    const body = document.body;
+    const br = document.querySelector('br');
 
-    let firstChild = body.firstChild;
+    br.appendChild(document.createTextNode('aple'));
 
-    while (firstChild) {
-      firstChild.remove();
+    // const contenteditable = document.querySelector('div[contenteditable]');
 
-      firstChild = body.firstChild;
-    }
+    // contenteditable.addEventListener('paste', (e) => {
+    //   e.preventDefault();
+
+    //   const selection = window.getSelection();
+    //   const selectionRange = selection.getRangeAt(0);
+
+    //   selectionRange.insertNode(document.createTextNode('apple'));
+    // });
   </script>
 </html>

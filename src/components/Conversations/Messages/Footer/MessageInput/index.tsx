@@ -33,7 +33,8 @@ const formatTextToHtml = (text: string) => {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+    .replace(/>/g, '&gt;')
+    .replace(/ /g, '&nbsp;');
 };
 
 const getValueWithTwemojis = async (value: string) => {
@@ -126,6 +127,90 @@ export function MessageInput() {
   const ref = useMessageInputRef();
 
   useEffect(() => {
+    async function insertExternalData(data: string) {
+      const selection = getSelection();
+
+      async function handleInsertData() {
+        const selectionRange = selection?.getRangeAt(0);
+
+        const lineBreaks = ['\r\n', '\n', '\r'];
+        const lineBreakRegex = new RegExp(`(${lineBreaks.join('|')})`, 'gm');
+        const hasLineBreak = lineBreakRegex.test(data);
+
+        const emojiRegex = getEmojiRegex();
+        const hasEmoji = emojiRegex.test(data);
+
+        function insertNode(node: Node) {
+          positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
+            selection,
+            selectionRange
+          );
+
+          selectionRange?.insertNode(node);
+        }
+
+        function getContent() {
+          const template = document.createElement('template');
+          template.innerHTML = data;
+
+          return template.content;
+        }
+
+        if (hasLineBreak) {
+          data = formatTextToHtml(data);
+
+          if (hasEmoji) data = await getValueWithTwemojis(data);
+
+          const endsWithALineBreak = lineBreaks.some((br) => data.endsWith(br));
+
+          const breakElement = endsWithALineBreak ? '<p><br></p>' : '<p>';
+
+          data = data.replace(lineBreakRegex, breakElement);
+
+          const content = getContent();
+
+          // these nodes must be on the same line
+          const elementThatWillReceiveTheNodesAfterTheContent =
+            content.lastChild;
+
+          insertNode(content);
+
+          const nodeThatEndsTheSelection =
+            elementThatWillReceiveTheNodesAfterTheContent?.lastChild as ChildNode;
+
+          while (elementThatWillReceiveTheNodesAfterTheContent?.nextSibling) {
+            elementThatWillReceiveTheNodesAfterTheContent.appendChild(
+              elementThatWillReceiveTheNodesAfterTheContent?.nextSibling
+            );
+          }
+
+          selectionRange?.setEndAfter(nodeThatEndsTheSelection);
+
+          return;
+        }
+
+        if (hasEmoji) {
+          data = formatTextToHtml(data);
+
+          data = await getValueWithTwemojis(data);
+
+          const content = getContent();
+
+          insertNode(content);
+
+          return;
+        }
+
+        const textNode = document.createTextNode(data);
+
+        insertNode(textNode);
+      }
+
+      await handleInsertData();
+
+      return { selection };
+    }
+
     async function handleDrop(e: InputEvent) {
       const isDrop = e.inputType === 'insertFromDrop';
 
@@ -133,76 +218,19 @@ export function MessageInput() {
 
       e.preventDefault();
 
-      let data = e.dataTransfer?.getData('text') as string;
+      const data = e.dataTransfer?.getData('text') as string;
 
-      const lineBreakRegex = /(\r\n|\n|\r)/gm;
-      const hasLineBreak = lineBreakRegex.test(data);
+      await insertExternalData(data);
+    }
 
-      const emojiRegex = getEmojiRegex();
-      const hasEmoji = emojiRegex.test(data);
+    async function handlePaste(e: ClipboardEvent) {
+      e.preventDefault();
 
-      const selection = getSelection();
-      const selectionRange = selection?.getRangeAt(0);
+      const data = e.clipboardData?.getData('text') as string;
 
-      function insertNode(node: Node) {
-        positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
-          selection,
-          selectionRange
-        );
+      const { selection } = await insertExternalData(data);
 
-        selectionRange?.insertNode(node);
-      }
-
-      function getContent() {
-        const template = document.createElement('template');
-        template.innerHTML = data;
-
-        return template.content;
-      }
-
-      if (hasLineBreak) {
-        data = formatTextToHtml(data);
-
-        if (hasEmoji) data = await getValueWithTwemojis(data);
-
-        data = data.replace(lineBreakRegex, '<p>');
-
-        const content = getContent();
-
-        // these nodes must be on the same line
-        const elementThatWillReceiveTheNodesAfterTheContent = content.lastChild;
-
-        insertNode(content);
-
-        const nodeThatEndsTheSelection =
-          elementThatWillReceiveTheNodesAfterTheContent?.lastChild as ChildNode;
-
-        while (elementThatWillReceiveTheNodesAfterTheContent?.nextSibling) {
-          elementThatWillReceiveTheNodesAfterTheContent.appendChild(
-            elementThatWillReceiveTheNodesAfterTheContent?.nextSibling
-          );
-        }
-
-        selectionRange?.setEndAfter(nodeThatEndsTheSelection);
-
-        return;
-      }
-
-      if (hasEmoji) {
-        data = formatTextToHtml(data);
-
-        data = await getValueWithTwemojis(data);
-
-        const content = getContent();
-
-        insertNode(content);
-
-        return;
-      }
-
-      const textNode = document.createTextNode(data);
-
-      insertNode(textNode);
+      selection?.collapseToEnd();
     }
 
     const timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor = 0;
@@ -464,6 +492,10 @@ export function MessageInput() {
       {
         type: 'beforeinput',
         func: handleDrop,
+      },
+      {
+        type: 'paste',
+        func: handlePaste,
       },
     ] as unknown as Events;
 
