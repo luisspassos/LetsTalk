@@ -137,13 +137,6 @@ export function MessageInput() {
       async function handleInsertData() {
         const selectionRange = selection?.getRangeAt(0);
 
-        const lineBreaks = ['\r\n', '\n', '\r'];
-        const lineBreakRegex = new RegExp(`(${lineBreaks.join('|')})`, 'gm');
-        const hasLineBreak = lineBreakRegex.test(data);
-
-        const emojiRegex = getEmojiRegex();
-        const hasEmoji = emojiRegex.test(data);
-
         function insertNode(node: Node) {
           positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
             selection,
@@ -160,49 +153,37 @@ export function MessageInput() {
           return template.content;
         }
 
+        const lineBreaks = ['\r\n', '\n', '\r'];
+        const lineBreakRegex = new RegExp(`(${lineBreaks.join('|')})`, 'gm');
+        const hasLineBreak = lineBreakRegex.test(data);
+
+        const emojiRegex = getEmojiRegex();
+        const hasEmoji = emojiRegex.test(data);
+
         if (hasLineBreak) {
           data = formatTextToHtml(data);
 
           if (hasEmoji) data = await getValueWithTwemojis(data);
 
-          const endsWithALineBreak = lineBreaks.some((br) => data.endsWith(br));
+          const dataEndsWithALineBreak = lineBreaks.some((br) =>
+            data.endsWith(br)
+          );
 
-          const breakElement = endsWithALineBreak ? '<p><br></p>' : '<p>';
+          const element = '<br>';
 
-          data = data.replace(lineBreakRegex, breakElement);
+          const inputEndsWithALineBreak =
+            messageInput?.innerHTML.endsWith(element);
+
+          const lineBreak =
+            inputEndsWithALineBreak && !dataEndsWithALineBreak
+              ? element.repeat(2)
+              : element;
+
+          data = data.replace(lineBreakRegex, element.repeat(2));
 
           const content = getContent();
 
-          // these nodes must be on the same line
-          const elementThatWillReceiveTheNodesAfterTheContent =
-            content.lastChild;
-
           insertNode(content);
-
-          let nodeAfterTheContent =
-            elementThatWillReceiveTheNodesAfterTheContent?.nextSibling;
-
-          const thereAreNodesToInsert = nodeAfterTheContent?.textContent !== '';
-
-          const nodeThatEndsTheSelection =
-            elementThatWillReceiveTheNodesAfterTheContent?.lastChild as ChildNode;
-
-          if (thereAreNodesToInsert) {
-            const insertNodes = () => {
-              while (nodeAfterTheContent) {
-                elementThatWillReceiveTheNodesAfterTheContent?.appendChild(
-                  nodeAfterTheContent
-                );
-
-                nodeAfterTheContent =
-                  elementThatWillReceiveTheNodesAfterTheContent?.nextSibling;
-              }
-            };
-
-            insertNodes();
-          }
-
-          selectionRange?.setEndAfter(nodeThatEndsTheSelection);
 
           return;
         }
