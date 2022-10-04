@@ -13,8 +13,8 @@ type Styles = {
 };
 
 type Events = {
-  type: string;
-  func: EventListenerOrEventListenerObject;
+  type: keyof HTMLElementEventMap;
+  func: Function;
 }[];
 
 type SavedSelection =
@@ -244,13 +244,11 @@ export function MessageInput() {
     async function handlePaste(e: ClipboardEvent) {
       e.preventDefault();
 
-      const selection = getSelection();
-
       removeSelectionContent();
 
       const data = e.clipboardData?.getData('text') as string;
 
-      await insertExternalData(data);
+      const { selection } = await insertExternalData(data);
 
       selection?.collapseToEnd();
     }
@@ -497,8 +495,7 @@ export function MessageInput() {
       }
     }
 
-    // see this
-    const events = [
+    const events: Events = [
       {
         type: 'keydown',
         func: handleDisableKeyboardShortcuts,
@@ -519,17 +516,20 @@ export function MessageInput() {
         type: 'paste',
         func: handlePaste,
       },
-    ] as unknown as Events;
+    ];
 
-    // addEventListener is for preventing bugs
-    for (const event of events) {
-      messageInput?.addEventListener(event.type, event.func);
+    function handleEvents(action: 'remove' | 'add') {
+      // eventListener is for preventing bugs
+
+      for (const event of events) {
+        messageInput?.[`${action}EventListener`](event.type, event.func as any);
+      }
     }
 
+    handleEvents('add');
+
     return () => {
-      for (const event of events) {
-        messageInput?.removeEventListener(event.type, event.func);
-      }
+      handleEvents('remove');
     };
   }, [messageInput, removeEmptySpans, removeSelectionContent]);
 
