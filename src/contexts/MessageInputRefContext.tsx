@@ -4,8 +4,13 @@ type MessageInputRefProviderProps = {
   children: ReactNode;
 };
 
+type MessageInputRefContextType = {
+  ref: RefObject<HTMLDivElement>;
+  messageInput: HTMLDivElement | null;
+};
+
 export const MessageInputRefContext = createContext(
-  {} as RefObject<HTMLDivElement>
+  {} as MessageInputRefContextType
 );
 
 export function MessageInputRefProvider({
@@ -14,7 +19,7 @@ export function MessageInputRefProvider({
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <MessageInputRefContext.Provider value={ref}>
+    <MessageInputRefContext.Provider value={{ messageInput: ref.current, ref }}>
       {children}
     </MessageInputRefContext.Provider>
   );

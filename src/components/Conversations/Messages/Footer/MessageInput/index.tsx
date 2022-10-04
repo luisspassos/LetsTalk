@@ -124,7 +124,7 @@ function restoreSelection(
 }
 
 export function MessageInput() {
-  const ref = useMessageInputRef();
+  const { ref, messageInput } = useMessageInputRef();
 
   useEffect(() => {
     async function insertExternalData(data: string) {
@@ -178,12 +178,12 @@ export function MessageInput() {
           let nodeAfterTheContent =
             elementThatWillReceiveTheNodesAfterTheContent?.nextSibling;
 
-          const needsInsertNodes = nodeAfterTheContent?.textContent !== '';
+          const thereAreNodesToInsert = nodeAfterTheContent?.textContent !== '';
 
           const nodeThatEndsTheSelection =
             elementThatWillReceiveTheNodesAfterTheContent?.lastChild as ChildNode;
 
-          if (needsInsertNodes) {
+          if (thereAreNodesToInsert) {
             const insertNodes = () => {
               while (nodeAfterTheContent) {
                 elementThatWillReceiveTheNodesAfterTheContent?.appendChild(
@@ -240,9 +240,19 @@ export function MessageInput() {
     async function handlePaste(e: ClipboardEvent) {
       e.preventDefault();
 
+      const selection = getSelection();
+
+      selection?.deleteFromDocument();
+
+      const { removeEmptySpans } = await import(
+        '../../../../../utils/removeEmptySpans'
+      );
+
+      removeEmptySpans(messageInput);
+
       const data = e.clipboardData?.getData('text') as string;
 
-      const { selection } = await insertExternalData(data);
+      await insertExternalData(data);
 
       selection?.collapseToEnd();
     }
@@ -324,8 +334,6 @@ export function MessageInput() {
         preventHandleEmojisFromRunningTwice = false;
       }, timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
-
-    const messageInput = ref.current;
 
     let preventInputEventFromRunningTwice = false;
 
@@ -523,7 +531,7 @@ export function MessageInput() {
         messageInput?.removeEventListener(event.type, event.func);
       }
     };
-  }, [ref]);
+  }, [ref, messageInput]);
 
   const styles: Styles = {
     default: useStyleConfig('Textarea'),
