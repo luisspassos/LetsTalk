@@ -1,6 +1,8 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useMessageInput } from '../../../../../contexts/MessageInputContext';
+import { useRemoveEmptySpans } from '../../../../../hooks/useRemoveEmptySpans';
+import { useRemoveSelectionContent } from '../../../../../hooks/useRemoveSelectionContent';
 import { colors } from '../../../../../styles/colors';
 import { getTwemojiElement } from '../../../../../utils/getTwemojiElement';
 import { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } from '../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji';
@@ -125,6 +127,8 @@ function restoreSelection(
 
 export function MessageInput() {
   const { messageInput, setMessageInput } = useMessageInput();
+  const { removeEmptySpans } = useRemoveEmptySpans();
+  const { removeSelectionContent } = useRemoveSelectionContent();
 
   useEffect(() => {
     async function insertExternalData(data: string) {
@@ -242,13 +246,7 @@ export function MessageInput() {
 
       const selection = getSelection();
 
-      selection?.deleteFromDocument();
-
-      const { removeEmptySpans } = await import(
-        '../../../../../utils/removeEmptySpans'
-      );
-
-      removeEmptySpans(messageInput);
+      removeSelectionContent();
 
       const data = e.clipboardData?.getData('text') as string;
 
@@ -281,15 +279,7 @@ export function MessageInput() {
         const selection = getSelection();
         const selectionRange = selection?.getRangeAt(0);
 
-        if (!selection?.isCollapsed) {
-          selection?.deleteFromDocument();
-
-          const { removeEmptySpans } = await import(
-            '../../../../../utils/removeEmptySpans'
-          );
-
-          removeEmptySpans(messageInput);
-        }
+        removeSelectionContent();
 
         positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
           selection,
@@ -482,11 +472,7 @@ export function MessageInput() {
             putInsertedValueOutsideOfTwemoji();
           }
 
-          const { removeEmptySpans } = await import(
-            '../../../../../utils/removeEmptySpans'
-          );
-
-          removeEmptySpans(messageInput);
+          removeEmptySpans();
         }
       }
 
@@ -531,7 +517,7 @@ export function MessageInput() {
         messageInput?.removeEventListener(event.type, event.func);
       }
     };
-  }, [messageInput]);
+  }, [messageInput, removeEmptySpans, removeSelectionContent]);
 
   const styles: Styles = {
     default: useStyleConfig('Textarea'),

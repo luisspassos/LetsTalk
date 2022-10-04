@@ -3,6 +3,7 @@ import { MouseEvent } from 'react';
 import { parse as twemojiParse } from 'twemoji-parser';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useMessageInput } from '../../../../../../../../contexts/MessageInputContext';
+import { useRemoveSelectionContent } from '../../../../../../../../hooks/useRemoveSelectionContent';
 import { EmojiType } from '../../../../../../../../utils/types';
 
 type EmojiProps = {
@@ -14,8 +15,8 @@ export function Emoji({ emoji, name }: EmojiProps) {
   const {
     categories: { setState: setCategories, data: categories },
   } = useEmoji();
-
   const { messageInput } = useMessageInput();
+  const { removeSelectionContent } = useRemoveSelectionContent();
 
   const twemoji = twemojiParse(emoji)[0].url;
 
@@ -89,15 +90,7 @@ export function Emoji({ emoji, name }: EmojiProps) {
         putCursorAtTheEnd();
       }
 
-      if (!selection?.isCollapsed) {
-        selection?.deleteFromDocument();
-
-        const { removeEmptySpans } = await import(
-          '../../../../../../../../utils/removeEmptySpans'
-        );
-
-        removeEmptySpans(messageInput);
-      }
+      removeSelectionContent();
 
       const { getTwemojiElement } = await import(
         '../../../../../../../../utils/getTwemojiElement'
