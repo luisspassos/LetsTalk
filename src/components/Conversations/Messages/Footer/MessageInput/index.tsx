@@ -487,8 +487,22 @@ export function MessageInput() {
       }, timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
 
+    function handleDisableKeyboardShortcuts(e: KeyboardEvent) {
+      const key = e.key;
+
+      const keys = ['u', 'b', 'i'];
+
+      if ((e.metaKey || e.ctrlKey) && keys.includes(key)) {
+        e.preventDefault();
+      }
+    }
+
     // see this
     const events = [
+      {
+        type: 'keydown',
+        func: handleDisableKeyboardShortcuts,
+      },
       {
         type: 'beforeinput',
         func: handleEmojis,
