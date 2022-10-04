@@ -2,7 +2,7 @@ import { Center, Image } from '@chakra-ui/react';
 import { MouseEvent } from 'react';
 import { parse as twemojiParse } from 'twemoji-parser';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
-import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRefContext';
+import { useMessageInput } from '../../../../../../../../contexts/MessageInputContext';
 import { EmojiType } from '../../../../../../../../utils/types';
 
 type EmojiProps = {
@@ -15,7 +15,7 @@ export function Emoji({ emoji, name }: EmojiProps) {
     categories: { setState: setCategories, data: categories },
   } = useEmoji();
 
-  const messageInputRef = useMessageInputRef();
+  const { messageInput } = useMessageInput();
 
   const twemoji = twemojiParse(emoji)[0].url;
 
@@ -72,8 +72,6 @@ export function Emoji({ emoji, name }: EmojiProps) {
     }
 
     async function insertEmoji() {
-      const messageInput = messageInputRef.current;
-
       const messageInputIsFocused = messageInput === document.activeElement;
 
       const selection = getSelection();

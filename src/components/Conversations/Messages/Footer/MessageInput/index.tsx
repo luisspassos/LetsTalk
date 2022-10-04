@@ -1,6 +1,6 @@
 import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { useMessageInputRef } from '../../../../../contexts/MessageInputRefContext';
+import { useMessageInput } from '../../../../../contexts/MessageInputContext';
 import { colors } from '../../../../../styles/colors';
 import { getTwemojiElement } from '../../../../../utils/getTwemojiElement';
 import { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } from '../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji';
@@ -124,7 +124,7 @@ function restoreSelection(
 }
 
 export function MessageInput() {
-  const { ref, messageInput } = useMessageInputRef();
+  const { messageInput, setMessageInput } = useMessageInput();
 
   useEffect(() => {
     async function insertExternalData(data: string) {
@@ -531,7 +531,7 @@ export function MessageInput() {
         messageInput?.removeEventListener(event.type, event.func);
       }
     };
-  }, [ref, messageInput]);
+  }, [messageInput]);
 
   const styles: Styles = {
     default: useStyleConfig('Textarea'),
@@ -541,7 +541,7 @@ export function MessageInput() {
   return (
     <Box
       {...styles.default}
-      ref={ref}
+      ref={(messageInput) => setMessageInput(messageInput)}
       borderRadius='10px'
       py={styles.HSpacing}
       fontFamily='Roboto, sans-serif'

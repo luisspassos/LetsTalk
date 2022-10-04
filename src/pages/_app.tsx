@@ -24,12 +24,12 @@ import { ConversationPopoverProvider } from '../contexts/ConversationPopoverCont
 import { RenamingNameProvider } from '../contexts/RenamingNameContext';
 import { EmojiProvider } from '../contexts/EmojiContext';
 import { MessageFormProvider } from '../contexts/MessageFormContext';
-import { MessageInputRefProvider } from '../contexts/MessageInputRefContext';
+import { MessageInputProvider } from '../contexts/MessageInputContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <MessageInputRefProvider>
+      <MessageInputProvider>
         <MessageFormProvider>
           <EmojiProvider>
             <RenamingNameProvider>
@@ -65,7 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </RenamingNameProvider>
           </EmojiProvider>
         </MessageFormProvider>
-      </MessageInputRefProvider>
+      </MessageInputProvider>
     </AuthProvider>
   );
 }

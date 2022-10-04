@@ -17,11 +17,11 @@ type MessageFormData = {
   message: string;
 };
 
-type MessageInputRef = HTMLTextAreaElement | null;
+type MessageInput = HTMLTextAreaElement | null;
 
 type MessageFormContextType = {
   messageForm: UseFormReturn<MessageFormData, any>;
-  messageInputRef: MutableRefObject<MessageInputRef>;
+  MessageInput: MutableRefObject<MessageInput>;
 };
 
 export const MessageFormContext = createContext({} as MessageFormContextType);
@@ -35,10 +35,10 @@ export function MessageFormProvider({ children }: MessageFormProviderProps) {
     resolver: yupResolver(messageFormSchema),
   });
 
-  const messageInputRef = useRef<MessageInputRef>(null);
+  const MessageInput = useRef<MessageInput>(null);
 
   return (
-    <MessageFormContext.Provider value={{ messageForm, messageInputRef }}>
+    <MessageFormContext.Provider value={{ messageForm, MessageInput }}>
       {children}
     </MessageFormContext.Provider>
   );

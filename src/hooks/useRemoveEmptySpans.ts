@@ -1,6 +1,6 @@
-import { useMessageInputRef } from '../contexts/MessageInputRefContext';
+import { useMessageInput } from '../contexts/MessageInputContext';
 
 export function useRemoveEmptySpans() {
-  const ref = useMessageInputRef();
+  const ref = useMessageInput();
   const;
 }
