@@ -42,17 +42,21 @@
         display: block;
         cursor: text;
       }
+
+      br {
+        content: ' ';
+        margin: 1em;
+        display: block;
+      }
     </style>
   </head>
   <body>
-    <textarea
-      style="padding: 10px"
-      name=""
-      id=""
-      cols="30"
-      rows="10"
-    ></textarea>
+    <p style="background-color: blue">apple<br />dsds</p>
   </body>
 
-  <script></script>
+  <script>
+    const selection = getSelection();
+
+    selection;
+  </script>
 </html>

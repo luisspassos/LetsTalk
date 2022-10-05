@@ -165,25 +165,28 @@ export function MessageInput() {
 
           if (hasEmoji) data = await getValueWithTwemojis(data);
 
-          const dataEndsWithALineBreak = lineBreaks.some((br) =>
-            data.endsWith(br)
-          );
+          const tagName = 'br';
+          const tag = `<${tagName}>`;
 
-          const element = '<br>';
-
-          const inputEndsWithALineBreak =
-            messageInput?.innerHTML.endsWith(element);
-
-          const lineBreak =
-            inputEndsWithALineBreak && !dataEndsWithALineBreak
-              ? element.repeat(2)
-              : element;
-
-          data = data.replace(lineBreakRegex, element.repeat(2));
+          data = data.replace(lineBreakRegex, tag);
 
           const content = getContent();
 
           insertNode(content);
+
+          const insertExtraLineBreakAtEndOfInputIfNeeds = () => {
+            const innerHTML = messageInput?.innerHTML;
+
+            const firstBreakExists = innerHTML?.endsWith(tag);
+            const extraAlreadyExists = innerHTML?.endsWith(tag.repeat(2));
+
+            if (!firstBreakExists || extraAlreadyExists) return;
+
+            const newTag = document.createElement(tagName);
+            messageInput?.appendChild(newTag);
+          };
+
+          insertExtraLineBreakAtEndOfInputIfNeeds();
 
           return;
         }
