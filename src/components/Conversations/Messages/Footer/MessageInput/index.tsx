@@ -6,6 +6,7 @@ import { useRemoveSelectionContent } from '../../../../../hooks/useRemoveSelecti
 import { colors } from '../../../../../styles/colors';
 import { getTwemojiElement } from '../../../../../utils/getTwemojiElement';
 import { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } from '../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji';
+import { parse as twemojiParser } from 'twemoji-parser';
 
 type Styles = {
   default: any;
@@ -39,10 +40,8 @@ const formatTextToHtml = (text: string) => {
     .replace(/ /g, '&nbsp;');
 };
 
-const getValueWithTwemojis = async (value: string) => {
+const getValueWithTwemojis = (value: string) => {
   const emojiRegex = getEmojiRegex();
-
-  const { parse: twemojiParser } = await import('twemoji-parser');
 
   return value.replace(emojiRegex, (emoji) => {
     const url = twemojiParser(emoji)[0].url;
@@ -131,10 +130,10 @@ export function MessageInput() {
   const { removeSelectionContent } = useRemoveSelectionContent();
 
   useEffect(() => {
-    async function insertExternalData(data: string) {
+    function insertExternalData(data: string) {
       const selection = getSelection();
 
-      async function handleInsertData() {
+      function handleInsertData() {
         const selectionRange = selection?.getRangeAt(0);
 
         function insertNode(node: Node) {
@@ -163,7 +162,7 @@ export function MessageInput() {
         if (hasLineBreak) {
           data = formatTextToHtml(data);
 
-          if (hasEmoji) data = await getValueWithTwemojis(data);
+          if (hasEmoji) data = getValueWithTwemojis(data);
 
           const tagName = 'br';
           const tag = `<${tagName}>`;
@@ -194,7 +193,7 @@ export function MessageInput() {
         if (hasEmoji) {
           data = formatTextToHtml(data);
 
-          data = await getValueWithTwemojis(data);
+          data = getValueWithTwemojis(data);
 
           const content = getContent();
 
@@ -208,12 +207,12 @@ export function MessageInput() {
         insertNode(textNode);
       }
 
-      await handleInsertData();
+      handleInsertData();
 
       return { selection };
     }
 
-    async function handleDrop(e: InputEvent) {
+    function handleDrop(e: InputEvent) {
       const isDrop = e.inputType === 'insertFromDrop';
 
       if (!isDrop) return;
@@ -222,17 +221,17 @@ export function MessageInput() {
 
       const data = e.dataTransfer?.getData('text') as string;
 
-      await insertExternalData(data);
+      insertExternalData(data);
     }
 
-    async function handlePaste(e: ClipboardEvent) {
+    function handlePaste(e: ClipboardEvent) {
       e.preventDefault();
 
       removeSelectionContent();
 
       const data = e.clipboardData?.getData('text') as string;
 
-      const { selection } = await insertExternalData(data);
+      const { selection } = insertExternalData(data);
 
       selection?.collapseToEnd();
     }
@@ -241,7 +240,7 @@ export function MessageInput() {
 
     let preventHandleEmojisFromRunningTwice = false;
 
-    async function handleEmojis(e: InputEvent) {
+    function handleEmojis(e: InputEvent) {
       if (preventHandleEmojisFromRunningTwice) {
         e.preventDefault();
 
@@ -278,9 +277,7 @@ export function MessageInput() {
         if (thereAreOtherCharactersOtherThanEmoji) {
           const newValueFormatted = formatTextToHtml(newValue);
 
-          const newValueWithTwemojis = await getValueWithTwemojis(
-            newValueFormatted
-          );
+          const newValueWithTwemojis = getValueWithTwemojis(newValueFormatted);
 
           const template = document.createElement('template');
 
@@ -288,8 +285,6 @@ export function MessageInput() {
 
           content = template.content;
         } else {
-          const { parse: twemojiParser } = await import('twemoji-parser');
-
           const twemoji = twemojiParser(newValue)[0];
 
           const twemojiElement = getTwemojiElement(twemoji.text, twemoji.url);
@@ -309,12 +304,12 @@ export function MessageInput() {
 
     let preventInputEventFromRunningTwice = false;
 
-    async function handleValuesWithoutEmojisAndDeletion(e: InputEvent) {
+    function handleValuesWithoutEmojisAndDeletion(e: InputEvent) {
       const someTextDirectionHasBeenSelected =
         e.inputType === 'formatSetBlockTextDirection';
 
       if (someTextDirectionHasBeenSelected) {
-        const changeDirection = async () => {
+        const changeDirection = () => {
           if (!messageInput) return;
 
           const firstChild = messageInput.firstChild;
@@ -341,7 +336,7 @@ export function MessageInput() {
 
             const thereAreEmojis = emojiRegex.test(newText);
 
-            if (thereAreEmojis) newText = await getValueWithTwemojis(newText);
+            if (thereAreEmojis) newText = getValueWithTwemojis(newText);
           }
 
           const savedSelection = saveSelection(messageInput);
