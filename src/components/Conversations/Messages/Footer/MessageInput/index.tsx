@@ -560,7 +560,7 @@ export function MessageInput() {
         },
         '.emoji': {
           lineHeight: '16px',
-          fontSize: '17px',
+          fontSize: '18px',
           bgRepeat: 'no-repeat',
           bgPos: 'center',
           color: 'transparent',
