@@ -1,9 +1,8 @@
-import { Box, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
+import { Box, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useMessageInput } from '../../../../../contexts/MessageInputContext';
 import { useRemoveEmptySpans } from '../../../../../hooks/useRemoveEmptySpans';
 import { useRemoveSelectionContent } from '../../../../../hooks/useRemoveSelectionContent';
-import { colors } from '../../../../../styles/colors';
 import { getTwemojiElement } from '../../../../../utils/getTwemojiElement';
 import { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } from '../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji';
 import { parse as twemojiParser } from 'twemoji-parser';
@@ -518,62 +517,63 @@ export function MessageInput() {
   };
 
   return (
-    <Box
-      {...styles.default}
-      ref={(messageInput) => setMessageInput(messageInput)}
-      borderRadius='10px'
-      py={styles.HSpacing}
-      fontFamily='Roboto, sans-serif'
-      bg={useColorModeValue('white', 'blackAlpha.500')}
-      borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
-      contentEditable
-      h='auto'
-      minH='0'
-      maxH='200.5px'
-      overflowY='auto'
-      _hover={{
-        borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
-      }}
-      dir='auto'
-      placeholder='Mensagem'
-      _selection={{
-        bgColor: 'blueAlpha.200',
-      }}
-      sx={{
-        '*::selection': {
-          bgColor: 'blueAlpha.200',
-        },
-        '::-webkit-scrollbar': {
-          width: '8px',
-        },
-        '::-webkit-scrollbar-track': {
-          margin: styles.HSpacing,
-        },
-        '::-webkit-scrollbar-thumb': {
-          bgColor: 'transparent',
-          borderLeftColor: useColorModeValue(
-            colors.scrollbar.light,
-            colors.scrollbar.dark
-          ),
-          borderLeftStyle: 'solid',
-          borderLeftWidth: '4px',
-        },
-        '.emoji': {
-          lineHeight: '16px',
-          fontSize: '18px',
-          bgRepeat: 'no-repeat',
-          bgPos: 'center',
-          color: 'transparent',
-          fontFamily: 'Noto Emoji, sans-serif',
-          caretColor: useColorModeValue(
-            'var(--chakra-colors-gray-900)',
-            'var(--chakra-colors-gray-50)'
-          ),
-          '&::selection': {
-            color: 'transparent',
-          },
-        },
-      }}
-    />
+    <Box></Box>
+    // <Box
+    //   {...styles.default}
+    //   ref={(messageInput) => setMessageInput(messageInput)}
+    //   borderRadius='10px'
+    //   py={styles.HSpacing}
+    //   fontFamily='Roboto, sans-serif'
+    //   bg={useColorModeValue('white', 'blackAlpha.500')}
+    //   borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
+    //   contentEditable
+    //   h='auto'
+    //   minH='0'
+    //   maxH='200.5px'
+    //   overflowY='auto'
+    //   _hover={{
+    //     borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.800'),
+    //   }}
+    //   dir='auto'
+    //   placeholder='Mensagem'
+    //   _selection={{
+    //     bgColor: 'blueAlpha.200',
+    //   }}
+    //   sx={{
+    //     '*::selection': {
+    //       bgColor: 'blueAlpha.200',
+    //     },
+    //     '::-webkit-scrollbar': {
+    //       width: '8px',
+    //     },
+    //     '::-webkit-scrollbar-track': {
+    //       margin: styles.HSpacing,
+    //     },
+    //     '::-webkit-scrollbar-thumb': {
+    //       bgColor: 'transparent',
+    //       borderLeftColor: useColorModeValue(
+    //         colors.scrollbar.light,
+    //         colors.scrollbar.dark
+    //       ),
+    //       borderLeftStyle: 'solid',
+    //       borderLeftWidth: '4px',
+    //     },
+    //     '.emoji': {
+    //       lineHeight: '16px',
+    //       fontSize: '18px',
+    //       bgRepeat: 'no-repeat',
+    //       bgPos: 'center',
+    //       color: 'transparent',
+    //       fontFamily: 'Noto Emoji, sans-serif',
+    //       caretColor: useColorModeValue(
+    //         'var(--chakra-colors-gray-900)',
+    //         'var(--chakra-colors-gray-50)'
+    //       ),
+    //       '&::selection': {
+    //         color: 'transparent',
+    //       },
+    //     },
+    //   }}
+    // />
   );
 }
