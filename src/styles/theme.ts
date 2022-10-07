@@ -48,7 +48,7 @@ export const theme = extendTheme(
           '*::placeholder': {
             color: placeholderColor,
           },
-          '*[placeholder]:empty::before': {
+          'div[placeholder]:empty::before': {
             content: 'attr(placeholder)',
             color: placeholderColor,
             cursor: 'text',

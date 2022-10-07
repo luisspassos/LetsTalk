@@ -1,4 +1,4 @@
-import { Box, Flex, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
+import { Box, Flex, useColorModeValue } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useMessageInput } from '../../../../../contexts/MessageInputContext';
 import { useRemoveEmptySpans } from '../../../../../hooks/useRemoveEmptySpans';
@@ -511,23 +511,66 @@ export function MessageInput() {
     };
   }, [messageInput, removeEmptySpans, removeSelectionContent]);
 
-  const styles: Styles = {
-    default: useStyleConfig('Textarea'),
-    HSpacing: '10.5px',
+  const styles = {
+    borderWidth: 1,
+    get py() {
+      const availablePixels = 45;
+      const inputSize = messageInput?.clientHeight as number;
+
+      return (availablePixels - inputSize) / 2 - styles.borderWidth;
+    },
   };
 
   return (
     <Flex
-      alignSelf='stretch'
       align='center'
       flex='1'
+      py={`${styles.py}`}
       px='15px'
       fontFamily='Roboto, sans-serif'
       bg={useColorModeValue('white', 'blackAlpha.500')}
       borderRadius='10px'
-      borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
+      border='1px solid'
+      borderColor={useColorModeValue('blueAlpha.700', 'whiteAlpha.500')}
+      transitionDuration='normal'
+      transitionProperty='common'
+      _hover={{
+        borderColor: useColorModeValue('blueAlpha.700', 'whiteAlpha.600'),
+      }}
+      _focusWithin={{
+        zIndex: 1,
+        borderColor: 'blue.300',
+        boxShadow: '0 0 0 1px var(--chakra-colors-blue-300)',
+      }}
+      _selection={{
+        bgColor: 'blueAlpha.200',
+      }}
+      sx={{
+        '.emoji': {
+          lineHeight: '16px',
+          fontSize: '18px',
+          bgRepeat: 'no-repeat',
+          bgPos: 'center',
+          color: 'transparent',
+          fontFamily: 'Noto Emoji, sans-serif',
+          caretColor: useColorModeValue(
+            'var(--chakra-colors-gray-900)',
+            'var(--chakra-colors-gray-50)'
+          ),
+          '&::selection': {
+            color: 'transparent',
+          },
+        },
+      }}
     >
-      <Box flex='1' outline={0} placeholder='Mensagem' contentEditable />
+      <Box
+        ref={(messageInput) => setMessageInput(messageInput)}
+        flex='1'
+        outline={0}
+        placeholder='Mensagem'
+        contentEditable
+        dir='auto'
+      />
     </Flex>
     // <Box
     //   {...styles.default}
