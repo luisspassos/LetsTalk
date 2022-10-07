@@ -1,4 +1,4 @@
-import { Box, useStyleConfig } from '@chakra-ui/react';
+import { Box, Flex, useColorModeValue, useStyleConfig } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useMessageInput } from '../../../../../contexts/MessageInputContext';
 import { useRemoveEmptySpans } from '../../../../../hooks/useRemoveEmptySpans';
@@ -517,7 +517,18 @@ export function MessageInput() {
   };
 
   return (
-    <Box></Box>
+    <Flex
+      alignSelf='stretch'
+      align='center'
+      flex='1'
+      px='15px'
+      fontFamily='Roboto, sans-serif'
+      bg={useColorModeValue('white', 'blackAlpha.500')}
+      borderRadius='10px'
+      borderColor={useColorModeValue('blueAlpha.700', 'gray.50')}
+    >
+      <Box flex='1' outline={0} placeholder='Mensagem' contentEditable />
+    </Flex>
     // <Box
     //   {...styles.default}
     //   ref={(messageInput) => setMessageInput(messageInput)}
