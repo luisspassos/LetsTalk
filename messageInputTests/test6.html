@@ -5,30 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Emoji&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      main {
-        width: 100px;
-        height: 100px;
-        background-color: red;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      input {
+        font-family: 'Noto Emoji';
       }
     </style>
   </head>
   <body>
-    <main></main>
+    <input type="text" />
   </body>
-
-  <script>
-    const height = document
-      .querySelector('main')
-      .getBoundingClientRect().height;
-
-    console.log(height);
-
-    const newElement = document.createElement('div');
-    newElement.style.width = height + 'px';
-    newElement.style.height = height + 'px';
-    newElement.style.backgroundColor = 'blue';
-
-    document.body.appendChild(newElement);
-  </script>
 </html>

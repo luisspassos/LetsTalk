@@ -7,11 +7,6 @@ import { getTwemojiElement } from '../../../../../utils/getTwemojiElement';
 import { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } from '../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji';
 import { parse as twemojiParser } from 'twemoji-parser';
 
-type Styles = {
-  default: any;
-  HSpacing: string;
-};
-
 type Events = {
   type: keyof HTMLElementEventMap;
   func: Function;
