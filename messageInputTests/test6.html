@@ -5,12 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      main {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
   </head>
   <body>
-    <div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    <main></main>
   </body>
+
+  <script>
+    const height = document
+      .querySelector('main')
+      .getBoundingClientRect().height;
+
+    console.log(height);
+
+    const newElement = document.createElement('div');
+    newElement.style.width = height + 'px';
+    newElement.style.height = height + 'px';
+    newElement.style.backgroundColor = 'blue';
+
+    document.body.appendChild(newElement);
+  </script>
 </html>

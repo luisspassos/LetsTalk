@@ -233,6 +233,18 @@ export function MessageInput() {
       const { selection } = insertExternalData(data);
 
       selection?.collapseToEnd();
+
+      function positionScrollbar() {
+        const span = document.createElement('span');
+
+        selection?.getRangeAt(0).insertNode(span);
+
+        span.scrollIntoView();
+
+        span.remove();
+      }
+
+      positionScrollbar();
     }
 
     const timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor = 0;
@@ -511,11 +523,13 @@ export function MessageInput() {
     };
   }, [messageInput, removeEmptySpans, removeSelectionContent]);
 
+  // see this
   const styles = {
     borderWidth: 1,
     get py() {
       const availablePixels = 45;
-      const inputSize = messageInput?.clientHeight as number;
+
+      const inputSize = messageInput?.getBoundingClientRect().height as number;
 
       return (availablePixels - inputSize) / 2 - styles.borderWidth;
     },
@@ -542,10 +556,10 @@ export function MessageInput() {
         borderColor: 'blue.300',
         boxShadow: '0 0 0 1px var(--chakra-colors-blue-300)',
       }}
-      _selection={{
-        bgColor: 'blueAlpha.200',
-      }}
       sx={{
+        '*::selection': {
+          bgColor: 'blueAlpha.200',
+        },
         '.emoji': {
           lineHeight: '16px',
           fontSize: '18px',
@@ -570,6 +584,8 @@ export function MessageInput() {
         placeholder='Mensagem'
         contentEditable
         dir='auto'
+        maxH='144px'
+        overflow='auto'
       />
     </Flex>
     // <Box

@@ -18,7 +18,7 @@
         box-sizing: border-box;
       }
 
-      /* body {
+      body {
         background-color: black;
         height: 100vh;
         display: flex;
@@ -29,12 +29,16 @@
       div[contenteditable] {
         background-color: rgb(26, 26, 26);
         width: 500px;
+        max-height: 100px;
+        overflow: auto;
         border: 1px solid white;
         color: white;
         line-height: 50px;
         font-size: 1.3rem;
         padding: 10px;
       }
+
+      /*
 
       [placeholder]:empty::before {
         content: attr(placeholder);
@@ -49,13 +53,14 @@
         display: block;
       } */
 
-      body:focus-within {
+      /* body:focus-within {
         background-color: blue;
-      }
+      } */
     </style>
   </head>
   <body>
-    <div style="background-color: blue; padding: 10px">apple</div>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <!-- <div contenteditable></div> -->
   </body>
 
   <script>
