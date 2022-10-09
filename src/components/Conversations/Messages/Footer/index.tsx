@@ -2,18 +2,12 @@ import { Box, Flex, FormControl, HStack } from '@chakra-ui/react';
 import { Divider } from '../../../Divider';
 import { EmojiPicker } from './IconButtons/EmojiButton/EmojiPicker';
 import { RecordButtonAudio } from './Buttons/RecordButtonAudio';
-import { BaseSyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 import { SendMessageButton } from './Buttons/SendMessageButton';
 import { EmojiButton } from './IconButtons/EmojiButton';
 import { FileButton } from './IconButtons/FileButton';
 import { ButtonWrapper } from './ButtonWrapper';
 import { MessageInput } from './MessageInput';
-
-export type HandleSendMessage = (
-  e?: BaseSyntheticEvent<object, any, any> | undefined
-) => Promise<void>;
-
-export type HandleMessageInputSize = () => Promise<void>;
 
 export function Footer() {
   const [thereIsNoMessage, setThereIsNoMessage] = useState(true);
