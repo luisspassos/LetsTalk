@@ -309,60 +309,50 @@ export function MessageInput() {
       }, timeToPreventEventFromRunningTwiceBecauseOfInputMethodEditor);
     }
 
+    function handleTextDirectionChange(e: InputEvent) {
+      const hasChanged = e.inputType === 'formatSetBlockTextDirection';
+
+      if (!hasChanged || !messageInput) return;
+
+      const firstChild = messageInput.firstChild;
+
+      const elementThatHasTheDirection = firstChild instanceof HTMLDivElement;
+
+      const sameTextDirectionHasBeenSelected = !elementThatHasTheDirection;
+
+      if (sameTextDirectionHasBeenSelected) return;
+
+      const dir = firstChild.style.direction;
+
+      messageInput.style.direction = dir;
+
+      const text = messageInput.textContent;
+
+      let newText = '';
+
+      if (text) {
+        newText = formatTextToHtml(text);
+
+        const emojiRegex = getEmojiRegex();
+
+        const thereAreEmojis = emojiRegex.test(newText);
+
+        if (thereAreEmojis) newText = getValueWithTwemojis(newText);
+      }
+
+      const savedSelection = saveSelection(messageInput);
+
+      messageInput.innerHTML = newText;
+
+      restoreSelection(messageInput, savedSelection);
+    }
+
     let preventInputEventFromRunningTwice = false;
 
     function handleValuesWithoutEmojisAndDeletion(e: InputEvent) {
-      const someTextDirectionHasBeenSelected =
-        e.inputType === 'formatSetBlockTextDirection';
-
-      if (someTextDirectionHasBeenSelected) {
-        const changeDirection = () => {
-          if (!messageInput) return;
-
-          const firstChild = messageInput.firstChild;
-
-          const elementThatHasTheDirection =
-            firstChild instanceof HTMLDivElement;
-
-          const textDirectionHasNotChanged = !elementThatHasTheDirection;
-
-          if (textDirectionHasNotChanged) return;
-
-          const dir = firstChild.style.direction;
-
-          messageInput.style.direction = dir;
-
-          const text = messageInput.textContent;
-
-          let newText = '';
-
-          if (text) {
-            newText = formatTextToHtml(text);
-
-            const emojiRegex = getEmojiRegex();
-
-            const thereAreEmojis = emojiRegex.test(newText);
-
-            if (thereAreEmojis) newText = getValueWithTwemojis(newText);
-          }
-
-          const savedSelection = saveSelection(messageInput);
-
-          messageInput.innerHTML = newText;
-
-          restoreSelection(messageInput, savedSelection);
-        };
-
-        changeDirection();
-
-        return;
-      }
-
       if (preventInputEventFromRunningTwice) return;
 
-      const newValue = e.data;
-
-      const isDeletion = !newValue;
+      const isDeletion = e.inputType.includes('delete');
 
       if (isDeletion) {
         const isEmpty = !messageInput?.textContent;
@@ -372,6 +362,10 @@ export function MessageInput() {
 
         return;
       }
+
+      const newValue = e.data;
+
+      if (!newValue) return;
 
       const emojiRegex = getEmojiRegex();
       const thereAreEmojis = emojiRegex.test(newValue);
@@ -501,6 +495,10 @@ export function MessageInput() {
       {
         type: 'paste',
         func: handlePaste,
+      },
+      {
+        type: 'input',
+        func: handleTextDirectionChange,
       },
     ];
 
