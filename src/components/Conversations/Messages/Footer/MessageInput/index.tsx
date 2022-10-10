@@ -135,6 +135,10 @@ export function MessageInput() {
   const { removeSelectionContent } = useRemoveSelectionContent();
 
   useEffect(() => {
+    function isInputMethodEditor(inputType: string) {
+      return inputType === 'insertCompositionText';
+    }
+
     function checkForEmojis(text: string) {
       const emojiRegex = getEmojiRegex();
       const thereAreEmojis = emojiRegex.test(text);
@@ -253,7 +257,7 @@ export function MessageInput() {
 
     let preventHandleEmojisFromRunningTwice = false;
 
-    function handleEmojis(e: InputEvent) {
+    function handleValuesWithEmojisFromInputMethodEditor(e: InputEvent) {
       if (preventHandleEmojisFromRunningTwice) {
         e.preventDefault();
 
@@ -262,7 +266,9 @@ export function MessageInput() {
 
       const newValue = e.data;
 
-      if (!newValue) return;
+      if (!newValue || isInputMethodEditor(e.inputType)) return;
+
+      console.log(newValue);
 
       const { thereAreEmojis, emojiRegex } = checkForEmojis(newValue);
 
@@ -453,9 +459,7 @@ export function MessageInput() {
         }
       }
 
-      const isInputMethodEditor = e.inputType === 'insertCompositionText';
-
-      if (!isInputMethodEditor) return;
+      if (!isInputMethodEditor(e.inputType)) return;
 
       preventInputEventFromRunningTwice = true;
 
@@ -481,7 +485,7 @@ export function MessageInput() {
       },
       {
         type: 'beforeinput',
-        func: handleEmojis,
+        func: handleValuesWithEmojisFromInputMethodEditor,
       },
       {
         type: 'input',
