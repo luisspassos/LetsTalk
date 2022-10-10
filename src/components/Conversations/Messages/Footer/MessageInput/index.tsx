@@ -259,7 +259,7 @@ export function MessageInput() {
 
     function handleValuesWithEmojisFromInputMethodEditor(e: InputEvent) {
       if (preventHandleEmojisFromRunningTwice) {
-        e.preventDefault();
+        e.preventDefault(); // this prevents bugs
 
         return;
       }
@@ -270,7 +270,9 @@ export function MessageInput() {
 
       const { thereAreEmojis, emojiRegex } = checkForEmojis(newValue);
 
-      if (thereAreEmojis) {
+      const insertContent = () => {
+        if (!thereAreEmojis) return;
+
         const selection = getSelection();
         const selectionRange = selection?.getRangeAt(0);
 
@@ -307,7 +309,9 @@ export function MessageInput() {
         }
 
         selectionRange?.insertNode(content);
-      }
+      };
+
+      insertContent();
 
       preventHandleEmojisFromRunningTwice = true;
 
