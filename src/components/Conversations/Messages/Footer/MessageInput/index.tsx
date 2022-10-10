@@ -135,6 +135,13 @@ export function MessageInput() {
   const { removeSelectionContent } = useRemoveSelectionContent();
 
   useEffect(() => {
+    function checkForEmojis(text: string) {
+      const emojiRegex = getEmojiRegex();
+      const thereAreEmojis = emojiRegex.test(text);
+
+      return { thereAreEmojis, emojiRegex };
+    }
+
     function insertExternalData(data: string) {
       const selection = getSelection();
 
@@ -161,14 +168,13 @@ export function MessageInput() {
         const lineBreakRegex = new RegExp(`(${lineBreaks.join('|')})`, 'gm');
         const hasLineBreak = lineBreakRegex.test(data);
 
-        const emojiRegex = getEmojiRegex();
-        const hasEmoji = emojiRegex.test(data);
+        const { thereAreEmojis } = checkForEmojis(data);
 
         data = formatTextToHtml(data, {
           ' ': '&nbsp;',
         });
 
-        if (hasEmoji) data = getValueWithTwemojis(data);
+        if (thereAreEmojis) data = getValueWithTwemojis(data);
 
         if (hasLineBreak) {
           const tagName = 'br';
@@ -256,12 +262,9 @@ export function MessageInput() {
 
       const newValue = e.data;
 
-      const isDeletion = !newValue;
+      if (!newValue) return;
 
-      if (isDeletion) return;
-
-      const emojiRegex = getEmojiRegex();
-      const thereAreEmojis = emojiRegex.test(newValue);
+      const { thereAreEmojis, emojiRegex } = checkForEmojis(newValue);
 
       if (thereAreEmojis) {
         const selection = getSelection();
@@ -333,9 +336,7 @@ export function MessageInput() {
       if (text) {
         newText = formatTextToHtml(text);
 
-        const emojiRegex = getEmojiRegex();
-
-        const thereAreEmojis = emojiRegex.test(newText);
+        const { thereAreEmojis } = checkForEmojis(newText);
 
         if (thereAreEmojis) newText = getValueWithTwemojis(newText);
       }
