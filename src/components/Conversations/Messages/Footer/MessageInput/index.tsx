@@ -356,7 +356,7 @@ export function MessageInput() {
       restoreSelection(messageInput, savedSelection);
     }
 
-    function handleDeletion(e: InputEvent) {
+    function handleCleanUpRestOfHtml(e: InputEvent) {
       const isNotDeletion = !e.inputType.includes('delete');
 
       if (isNotDeletion) return;
@@ -374,8 +374,7 @@ export function MessageInput() {
 
       if (preventInputEventFromRunningTwice || !newValue) return;
 
-      const emojiRegex = getEmojiRegex();
-      const thereAreEmojis = emojiRegex.test(newValue);
+      const { thereAreEmojis, emojiRegex } = checkForEmojis(newValue);
 
       if (!thereAreEmojis) {
         const selection = getSelection();
@@ -480,7 +479,17 @@ export function MessageInput() {
       }
     }
 
+    function handleEmojiDeletion(e: KeyboardEvent) {
+      e.preventDefault();
+
+      console.log(getSelection()?.anchorNode);
+    }
+
     const events: Events = [
+      {
+        type: 'keydown',
+        func: handleEmojiDeletion,
+      },
       {
         type: 'keydown',
         func: handleDisableKeyboardShortcuts,
@@ -507,7 +516,7 @@ export function MessageInput() {
       },
       {
         type: 'input',
-        func: handleDeletion,
+        func: handleCleanUpRestOfHtml,
       },
     ];
 
