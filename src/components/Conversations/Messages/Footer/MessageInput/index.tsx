@@ -347,25 +347,23 @@ export function MessageInput() {
       restoreSelection(messageInput, savedSelection);
     }
 
+    function handleDeletion(e: InputEvent) {
+      const isNotDeletion = !e.inputType.includes('delete');
+
+      if (isNotDeletion) return;
+
+      const isEmpty = !messageInput?.textContent;
+      const thereIsHTML = messageInput?.innerHTML;
+
+      if (isEmpty && thereIsHTML) messageInput.textContent = '';
+    }
+
     let preventInputEventFromRunningTwice = false;
 
     function handleValuesWithoutEmojisAndDeletion(e: InputEvent) {
-      if (preventInputEventFromRunningTwice) return;
-
-      const isDeletion = e.inputType.includes('delete');
-
-      if (isDeletion) {
-        const isEmpty = !messageInput?.textContent;
-        const thereIsHTML = messageInput?.innerHTML;
-
-        if (isEmpty && thereIsHTML) messageInput.textContent = '';
-
-        return;
-      }
-
       const newValue = e.data;
 
-      if (!newValue) return;
+      if (preventInputEventFromRunningTwice || !newValue) return;
 
       const emojiRegex = getEmojiRegex();
       const thereAreEmojis = emojiRegex.test(newValue);
@@ -499,6 +497,10 @@ export function MessageInput() {
       {
         type: 'input',
         func: handleTextDirectionChange,
+      },
+      {
+        type: 'input',
+        func: handleDeletion,
       },
     ];
 
