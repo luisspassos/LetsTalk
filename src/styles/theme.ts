@@ -24,8 +24,8 @@ export const theme = extendTheme(
   }),
   {
     fonts: {
-      heading: 'Poppins, sans-serif',
-      body: 'Poppins, sans-serif',
+      heading: 'Poppins, Noto Color Emoji, sans-serif',
+      body: 'Poppins, Noto Color Emoji, sans-serif',
     },
     fontWeights: {
       bold: 600,
@@ -47,12 +47,6 @@ export const theme = extendTheme(
           },
           '*::placeholder': {
             color: placeholderColor,
-          },
-          'div[placeholder]:empty::before': {
-            content: 'attr(placeholder)',
-            color: placeholderColor,
-            cursor: 'text',
-            display: 'block',
           },
           '::-webkit-scrollbar': {
             width: ['3px', '6px'],
