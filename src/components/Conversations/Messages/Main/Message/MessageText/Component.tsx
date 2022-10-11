@@ -10,6 +10,8 @@ type MessageTextComponentProps = {
   };
 };
 
+export const font = 'Roboto, Noto Color Emoji, sans-serif';
+
 export function MessageTextComponent({
   children,
   contactMessage,
@@ -17,7 +19,7 @@ export function MessageTextComponent({
 }: MessageTextComponentProps) {
   return (
     <Text
-      fontFamily='Roboto, Noto Color Emoji, sans-serif'
+      fontFamily={font}
       borderRadius='7px'
       py={['6px', '8px', '10px']}
       px={['11px', '13px', '15px']}
