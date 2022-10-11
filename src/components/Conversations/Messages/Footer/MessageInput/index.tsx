@@ -386,22 +386,17 @@ export function MessageInput() {
 
         if (fontTagIsChildOfMessageInput) {
           // IF REMOVE STYLES FONT, FONT TAG ISN'T INSERTED
-
-          const text = fontTag.textContent as string;
-          const textNode = document.createTextNode(text);
-
-          const removeFontTag = () => {
-            messageInput?.replaceChild(textNode, fontTag);
-          };
-
-          const restoreSelection = () => {
-            const selectionRange = selection?.getRangeAt(0);
-
-            selectionRange?.setStartAfter(textNode);
-          };
-
-          removeFontTag();
-          restoreSelection();
+          // const text = fontTag.textContent as string;
+          // const textNode = document.createTextNode(text);
+          // const removeFontTag = () => {
+          //   messageInput?.replaceChild(textNode, fontTag);
+          // };
+          // const restoreSelection = () => {
+          //   const selectionRange = selection?.getRangeAt(0);
+          //   selectionRange?.setStartAfter(textNode);
+          // };
+          // removeFontTag();
+          // restoreSelection();
         } else {
           const elementThatIsNextToTheInsertedValue =
             selection?.anchorNode?.parentElement;
@@ -480,9 +475,31 @@ export function MessageInput() {
     }
 
     function handleEmojiDeletion(e: KeyboardEvent) {
-      e.preventDefault();
-
-      console.log(getSelection()?.anchorNode);
+      // const key = e.key;
+      // const selection = getSelection();
+      // console.log(selection);
+      // if (!selection?.isCollapsed) return;
+      // const anchorNode = selection?.anchorNode?.parentElement;
+      // if (key === 'Backspace') {
+      //   const isEmoji = anchorNode?.className === 'emoji';
+      //   if (!isEmoji) return;
+      //   e.preventDefault();
+      //   const selectionRange = selection?.getRangeAt(0);
+      //   selectionRange.setStartAfter(anchorNode.previousSibling?.firstChild);
+      //   // selectionRange.setEndAfter(anchorNode.previousSibling);
+      //   // console.log(getSelection());
+      //   anchorNode.remove();
+      //   // console.log(getSelection());
+      // }
+      // if (key === 'Delete') {
+      // }
+      // const key = e.key;
+      // const selection = getSelection();
+      // const element = selection?.anchorNode?.parentElement;
+      // const isEmoji = element?.className === 'emoji';
+      // if (key !== 'Backspace' || !isEmoji) return;
+      // e.preventDefault();
+      // element.remove();
     }
 
     const events: Events = [
