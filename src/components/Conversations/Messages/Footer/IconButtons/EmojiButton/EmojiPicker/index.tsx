@@ -1,3 +1,5 @@
 export function EmojiPicker() {
-  return <h1>Hello world</h1>;
+  const pickerOptions = { onEmojiSelect: console.log };
+
+  return <Pik />;
 }
