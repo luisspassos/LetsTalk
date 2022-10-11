@@ -14,14 +14,11 @@
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@fontsource/noto-emoji": "^4.5.2",
     "@fontsource/poppins": "^4.5.2",
     "@fontsource/roboto": "^4.5.3",
     "@hookform/resolvers": "^2.8.8",
     "@next/bundle-analyzer": "^12.1.0",
-    "@types/twemoji-parser": "^13.1.1",
     "axios": "^0.26.1",
-    "emoji-regex": "^10.1.0",
     "firebase": "^9.6.8",
     "firebase-admin": "^10.0.2",
     "framer-motion": "^6",
@@ -34,7 +31,6 @@
     "react-hook-form": "^7.27.1",
     "react-icons": "^4.3.1",
     "react-virtual": "^2.10.4",
-    "twemoji-parser": "^14.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {

@@ -2,7 +2,6 @@ import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
 import '@fontsource/roboto/400.css';
-import '@fontsource/noto-emoji/400.css';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
@@ -22,50 +21,41 @@ import { SearchInConversationProvider } from '../contexts/SearchInConversationCo
 import { OnlineAtEventsProvider } from '../contexts/OnlineAtEventsContext';
 import { ConversationPopoverProvider } from '../contexts/ConversationPopoverContext';
 import { RenamingNameProvider } from '../contexts/RenamingNameContext';
-import { EmojiProvider } from '../contexts/EmojiContext';
-import { MessageFormProvider } from '../contexts/MessageFormContext';
-import { MessageInputProvider } from '../contexts/MessageInputContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <MessageInputProvider>
-        <MessageFormProvider>
-          <EmojiProvider>
-            <RenamingNameProvider>
-              <OnlineAtEventsProvider>
-                <SearchInConversationProvider>
-                  <ConversationPopoverProvider>
-                    <ConversationsProvider>
-                      <ConversationsTabProvider>
-                        <AddContactModalProvider>
-                          <BlockUserModalProvider>
-                            <RenameUsernameModalProvider>
-                              <DeleteAccountModalProvider>
-                                <ChangePasswordModalProvider>
-                                  <ChangeEmailModalProvider>
-                                    <TabProvider>
-                                      <FadeInAnimationProvider>
-                                        <ChakraProvider theme={theme}>
-                                          <Component {...pageProps} />
-                                        </ChakraProvider>
-                                      </FadeInAnimationProvider>
-                                    </TabProvider>
-                                  </ChangeEmailModalProvider>
-                                </ChangePasswordModalProvider>
-                              </DeleteAccountModalProvider>
-                            </RenameUsernameModalProvider>
-                          </BlockUserModalProvider>
-                        </AddContactModalProvider>
-                      </ConversationsTabProvider>
-                    </ConversationsProvider>
-                  </ConversationPopoverProvider>
-                </SearchInConversationProvider>
-              </OnlineAtEventsProvider>
-            </RenamingNameProvider>
-          </EmojiProvider>
-        </MessageFormProvider>
-      </MessageInputProvider>
+      <RenamingNameProvider>
+        <OnlineAtEventsProvider>
+          <SearchInConversationProvider>
+            <ConversationPopoverProvider>
+              <ConversationsProvider>
+                <ConversationsTabProvider>
+                  <AddContactModalProvider>
+                    <BlockUserModalProvider>
+                      <RenameUsernameModalProvider>
+                        <DeleteAccountModalProvider>
+                          <ChangePasswordModalProvider>
+                            <ChangeEmailModalProvider>
+                              <TabProvider>
+                                <FadeInAnimationProvider>
+                                  <ChakraProvider theme={theme}>
+                                    <Component {...pageProps} />
+                                  </ChakraProvider>
+                                </FadeInAnimationProvider>
+                              </TabProvider>
+                            </ChangeEmailModalProvider>
+                          </ChangePasswordModalProvider>
+                        </DeleteAccountModalProvider>
+                      </RenameUsernameModalProvider>
+                    </BlockUserModalProvider>
+                  </AddContactModalProvider>
+                </ConversationsTabProvider>
+              </ConversationsProvider>
+            </ConversationPopoverProvider>
+          </SearchInConversationProvider>
+        </OnlineAtEventsProvider>
+      </RenamingNameProvider>
     </AuthProvider>
   );
 }
