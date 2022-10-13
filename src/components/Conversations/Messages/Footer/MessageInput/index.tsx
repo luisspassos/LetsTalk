@@ -45,6 +45,7 @@ export function MessageInput() {
       rows={1}
       fontFamily={font}
       py='10.5px'
+      scrollPadding='10.5px'
       bg={useColorModeValue('white', 'blackAlpha.500')}
       resize='none'
       sx={{
