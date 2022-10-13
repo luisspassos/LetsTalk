@@ -117,7 +117,17 @@ export function Emoji({ emoji }: EmojiProps) {
   // }
 
   return (
-    <Center as='li' w={['36px', '41px', '46px']} h={['36px', '41px', '46px']}>
+    <Center
+      as='li'
+      fontSize={['22px', '25px', '28px']}
+      w={['36px', '41px', '46px']}
+      h={['36px', '41px', '46px']}
+      cursor='pointer'
+      borderRadius='8px'
+      _hover={{
+        bgColor: 'whiteAlpha.400',
+      }}
+    >
       {emoji}
     </Center>
   );
