@@ -4,19 +4,47 @@ import { font } from '../../Main/Message/MessageText/Component';
 
 export function MessageInput() {
   function handleSize(e: ChangeEvent<HTMLTextAreaElement>) {
-    const target = e.target;
+    const textarea = e.target;
 
-    target.style.height = 0;
-    target.style.height = `${target.scrollHeight + 2}px`;
+    const maxHeight = 133;
+    const scrollHeight = textarea.scrollHeight;
+
+    const getMeasure = (number: number) => `${number}px`;
+
+    if (scrollHeight > maxHeight) {
+      textarea.style.height = getMeasure(maxHeight);
+      textarea.style.overflowY = 'auto';
+    } else {
+      const getBorderWidth = () => {
+        const styles = getComputedStyle(textarea);
+
+        const getNumber = (string: string) => parseInt(string, 10);
+
+        const borderWidth =
+          getNumber(styles.borderTopWidth) +
+          getNumber(styles.borderBottomWidth);
+
+        return borderWidth;
+      };
+
+      const borderWidth = getBorderWidth();
+
+      textarea.style.overflowY = 'hidden';
+      textarea.style.height = '0';
+
+      const newScrollHeight = textarea.scrollHeight;
+
+      textarea.style.height = getMeasure(newScrollHeight + borderWidth);
+    }
   }
 
   return (
     <Textarea
-      overflowY='hidden'
       onChange={handleSize}
       placeholder='Mensagem'
-      fontFamily={font}
       rows={1}
+      fontFamily={font}
+      overflowX='hidden'
       py='10.5px'
       bg={useColorModeValue('white', 'blackAlpha.500')}
       resize='none'
