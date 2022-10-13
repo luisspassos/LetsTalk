@@ -44,10 +44,14 @@ export function MessageInput() {
       placeholder='Mensagem'
       rows={1}
       fontFamily={font}
-      overflowX='hidden'
       py='10.5px'
       bg={useColorModeValue('white', 'blackAlpha.500')}
       resize='none'
+      sx={{
+        '::-webkit-scrollbar-thumb': {
+          borderRadius: 'md',
+        },
+      }}
     />
   );
 }
