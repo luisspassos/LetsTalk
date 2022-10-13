@@ -48,11 +48,6 @@ export function MessageInput() {
       scrollPadding='10.5px'
       bg={useColorModeValue('white', 'blackAlpha.500')}
       resize='none'
-      sx={{
-        '::-webkit-scrollbar-thumb': {
-          borderRadius: 'md',
-        },
-      }}
     />
   );
 }
