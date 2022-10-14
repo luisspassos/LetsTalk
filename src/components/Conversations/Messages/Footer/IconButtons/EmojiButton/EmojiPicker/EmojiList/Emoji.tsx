@@ -1,4 +1,6 @@
 import { Center } from '@chakra-ui/react';
+import { MouseEvent } from 'react';
+import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
 
 type EmojiProps = {
   emoji: string;
@@ -6,6 +8,8 @@ type EmojiProps = {
 };
 
 export function Emoji({ emoji }: EmojiProps) {
+  const { ref: messageInputRef } = useMessageInputRef();
+
   // const {
   //   categories: { setState: setCategories, data: categories },
   // } = useEmoji();
@@ -112,12 +116,35 @@ export function Emoji({ emoji }: EmojiProps) {
   //   addEmojiInRecentCategory();
   // }
 
-  // function handleDisableFocusOnClick(e: MouseEvent) {
-  //   e.preventDefault();
-  // }
+  function insertEmoji() {
+    const input = messageInputRef.current;
+
+    const isFocused = document.activeElement === input;
+
+    if (!isFocused) input?.focus();
+
+    const [start, end] = [
+      input?.selectionStart,
+      input?.selectionEnd,
+    ] as number[];
+
+    input?.setRangeText(emoji, start, end, 'end');
+
+    function handleInputSize() {
+      input?.dispatchEvent(new Event('change'));
+    }
+
+    handleInputSize();
+  }
+
+  function handleDisableFocusOnClick(e: MouseEvent) {
+    e.preventDefault();
+  }
 
   return (
     <Center
+      onMouseDown={handleDisableFocusOnClick}
+      onClick={insertEmoji}
       as='li'
       fontSize={['22px', '25px', '28px']}
       w={['36px', '41px', '46px']}

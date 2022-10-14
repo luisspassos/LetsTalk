@@ -7327,10 +7327,6 @@ export const emojis: Record<
       name: 'Bandeira: Uganda',
     },
     {
-      emoji: '🇺🇲',
-      name: 'Bandeira: Ilhas Menores Distantes dos EUA',
-    },
-    {
       emoji: '🇺🇳',
       name: 'Flag: United Nations',
     },

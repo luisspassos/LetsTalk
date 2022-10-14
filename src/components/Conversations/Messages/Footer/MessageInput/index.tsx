@@ -1,8 +1,11 @@
 import { Textarea, useColorModeValue } from '@chakra-ui/react';
 import { ChangeEvent } from 'react';
+import { useMessageInputRef } from '../../../../../contexts/MessageInputRef';
 import { font } from '../../Main/Message/MessageText/Component';
 
 export function MessageInput() {
+  const { ref } = useMessageInputRef();
+
   function handleSize(e: ChangeEvent<HTMLTextAreaElement>) {
     const textarea = e.target;
 
@@ -40,6 +43,7 @@ export function MessageInput() {
 
   return (
     <Textarea
+      ref={ref}
       onChange={handleSize}
       placeholder='Mensagem'
       rows={1}
