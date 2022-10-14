@@ -1,8 +1,10 @@
 import { Center } from '@chakra-ui/react';
 import { MouseEvent } from 'react';
-import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import {
+  createRecentCategory,
+  useEmoji,
+} from '../../../../../../../../contexts/EmojiContext';
 import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
-import { EmojiType } from '../../../../../../../../utils/types';
 
 type EmojiProps = {
   emoji: string;
@@ -16,45 +18,47 @@ export function Emoji({ emoji }: EmojiProps) {
   } = useEmoji();
 
   function handleAddEmojiInRecentCategory() {
-    const categoriesDataClone = [...categories.data];
+    const categoriesData = [...categories.data];
 
-    const newCategoriesData = categoriesDataClone.map((category) => {
-      const returnCategoriesData = (categoryEmojis: EmojiType[]) => ({
-        ...category,
-        emojis: [emoji, ...categoryEmojis],
-      });
+    const recentCategoryExists = categoriesData[0].name === 'Recentes';
 
-      if (category.name !== 'Recentes') return category;
+    if (!recentCategoryExists) {
+      const addCategory = () => {
+        const category = createRecentCategory();
 
-      const emojiExists = category.emojis.some(
-        (categoryEmoji) => emoji === categoryEmoji
+        categoriesData.unshift(category);
+      };
+
+      addCategory();
+    }
+
+    const category = categoriesData[0];
+
+    const emojiExists = category.emojis.includes(emoji);
+
+    if (emojiExists) {
+      // it will remove the existing emoji
+      const emojis = category.emojis.filter(
+        (categoryEmoji) => categoryEmoji !== emoji
       );
 
-      if (emojiExists) {
-        const categoryEmojisFiltered = category.emojis.filter(
-          (categoryEmoji) => categoryEmoji !== emoji
-        );
+      // it will add the emoji in the first position
+      emojis.unshift(emoji);
 
-        return returnCategoriesData(categoryEmojisFiltered);
-      }
-
+      category.emojis = emojis;
+    } else {
       if (category.emojis.length === 25) {
         category.emojis.pop();
       }
 
-      return returnCategoriesData(category.emojis);
-    });
+      category.emojis.unshift(emoji);
+    }
 
-    const recentlyUsedEmojis = newCategoriesData[0].emojis;
-
-    localStorage.setItem(
-      'recentlyUsedEmojis',
-      JSON.stringify(recentlyUsedEmojis)
-    );
+    localStorage.setItem('recentlyUsedEmojis', JSON.stringify(category.emojis));
 
     setCategories((prevState) => ({
       ...prevState,
-      data: newCategoriesData,
+      data: categoriesData,
     }));
   }
 

@@ -1,8 +1,9 @@
 import { FlexProps, Flex } from '@chakra-ui/react';
 import { Emoji } from './Emoji';
+import { Emoji as EmojiType } from '../../../../../../../../contexts/EmojiContext';
 
 type EmojiListProps = {
-  list: string[];
+  list: EmojiType[];
 } & FlexProps;
 
 export function EmojiList({ list, ...rest }: EmojiListProps) {

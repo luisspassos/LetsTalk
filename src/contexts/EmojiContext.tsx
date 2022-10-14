@@ -10,7 +10,7 @@ import {
   useState,
 } from 'react';
 import { IconType } from 'react-icons';
-import { AiOutlineClockCircle, AiOutlineCar } from 'react-icons/ai';
+import { AiOutlineCar, AiOutlineClockCircle } from 'react-icons/ai';
 import { BiFootball } from 'react-icons/bi';
 import { BsFlag } from 'react-icons/bs';
 import { IoFastFoodOutline } from 'react-icons/io5';
@@ -20,22 +20,28 @@ import {
   MdEmojiSymbols,
 } from 'react-icons/md';
 import { RiBearSmileLine } from 'react-icons/ri';
-import { EmojiType } from '../utils/types';
 import { emojis } from '../utils/emojis';
 
 type EmojiProviderProps = {
   children: ReactNode;
 };
 
+export type Emoji = string;
+
+type RawEmoji = {
+  name: string;
+  emoji: string;
+};
+
 type SearchedEmojis = {
-  data: EmojiType[];
+  data: Emoji[];
   isEmpty: boolean;
 };
 
-type CategoryData = {
+export type CategoryData = {
   icon: IconType;
   name: string;
-  emojis: EmojiType[];
+  emojis: Emoji[];
 };
 
 type Categories = {
@@ -65,6 +71,12 @@ type EmojiContextType = {
   };
 };
 
+export const createRecentCategory = (emojis: Emoji[] = []) => ({
+  name: 'Recentes',
+  icon: AiOutlineClockCircle,
+  emojis,
+});
+
 export const EmojiContext = createContext({} as EmojiContextType);
 
 export function EmojiProvider({ children }: EmojiProviderProps) {
@@ -73,93 +85,84 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
     isEmpty: true,
   });
 
-  const [categories, setCategories] = useState({
-    data: [
-      {
-        icon: AiOutlineClockCircle,
-        name: 'Recentes',
-        emojis: [],
-      },
-      {
-        icon: MdOutlineEmojiEmotions,
-        name: 'Smileys e pessoas',
-        emojis: [...emojis['smileys-emotion'], ...emojis['people-body']],
-      },
-      {
-        icon: RiBearSmileLine,
-        name: 'Animais e natureza',
-        emojis: emojis['animals-nature'],
-      },
-      {
-        icon: IoFastFoodOutline,
-        name: 'Comidas e bebidas',
-        emojis: emojis['food-drink'],
-      },
-      {
-        icon: BiFootball,
-        name: 'Atividades',
-        emojis: emojis.activities,
-      },
-      {
-        icon: AiOutlineCar,
-        name: 'Viagens e lugares',
-        emojis: emojis['travel-places'],
-      },
-      {
-        icon: MdOutlineEmojiObjects,
-        name: 'Objetos',
-        emojis: emojis.objects,
-      },
-      {
-        icon: MdEmojiSymbols,
-        name: 'Símbolos',
-        emojis: emojis.symbols,
-      },
-      {
-        icon: BsFlag,
-        name: 'Bandeiras',
-        emojis: emojis.flags,
-      },
-    ],
+  const [categories, setCategories] = useState<Categories>({
+    data: [],
     selectedCategoryIndex: 0,
   });
 
   useEffect(() => {
     function fillCategories() {
-      const categoryNames = [
-        'Recentes',
-        'Smileys e pessoas',
-        'Animais e natureza',
-        'Comidas e bebidas',
-        'Atividades',
-        'Viagens e lugares',
-        'Objetos',
-        'Símbolos',
-        'Bandeiras',
+      const data = [
+        {
+          icon: MdOutlineEmojiEmotions,
+          name: 'Smileys e pessoas',
+          emojis: [...emojis['smileys-emotion'], ...emojis['people-body']],
+        },
+        {
+          icon: RiBearSmileLine,
+          name: 'Animais e natureza',
+          emojis: emojis['animals-nature'],
+        },
+        {
+          icon: IoFastFoodOutline,
+          name: 'Comidas e bebidas',
+          emojis: emojis['food-drink'],
+        },
+        {
+          icon: BiFootball,
+          name: 'Atividades',
+          emojis: emojis.activities,
+        },
+        {
+          icon: AiOutlineCar,
+          name: 'Viagens e lugares',
+          emojis: emojis['travel-places'],
+        },
+        {
+          icon: MdOutlineEmojiObjects,
+          name: 'Objetos',
+          emojis: emojis.objects,
+        },
+        {
+          icon: MdEmojiSymbols,
+          name: 'Símbolos',
+          emojis: emojis.symbols,
+        },
+        {
+          icon: BsFlag,
+          name: 'Bandeiras',
+          emojis: emojis.flags,
+        },
       ];
-      const categoryIcons = [
-        AiOutlineClockCircle,
-        MdOutlineEmojiEmotions,
-        RiBearSmileLine,
-        IoFastFoodOutline,
-        BiFootball,
-        AiOutlineCar,
-        MdOutlineEmojiObjects,
-        MdEmojiSymbols,
-        BsFlag,
-      ];
-      const onlyEmojis = [
-        [...emojis['smileys-emotion'], ...emojis['people-body']],
-        emojis['animals-nature'],
-        emojis['food-drink'],
-        emojis.activities,
-        emojis['travel-places'],
-        emojis.objects,
-        emojis.symbols,
-        emojis.flags,
-      ].map((arr) => arr.map((e) => e.emoji));
 
-      const data = onlyEmojis.map;
+      function getOnlyEmojis(emojis: RawEmoji[]) {
+        return emojis.map(({ emoji }) => emoji);
+      }
+
+      const newData = data.map(({ emojis, name, icon }) => ({
+        icon,
+        name,
+        emojis: getOnlyEmojis(emojis),
+      }));
+
+      function addRecentCategory() {
+        const localStorageData = localStorage.getItem('recentlyUsedEmojis');
+
+        if (!localStorageData) return;
+
+        const emojis: Emoji[] = JSON.parse(localStorageData);
+
+        const category = createRecentCategory(emojis);
+
+        newData.unshift(category);
+      }
+
+      addRecentCategory();
+
+      setCategories((prevState) => ({
+        ...prevState,
+        data: newData,
+      }));
     }
 
     fillCategories();
@@ -168,31 +171,15 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
   const { isOpen, onToggle } = useDisclosure();
 
   const renderFilteredCategoryData = useCallback(
-    (callback) =>
-      categories.data
-        .filter((category) => category.emojis.length !== 0)
-        .map((category, ...rest) => callback(category, ...rest)),
+    (callback) => {
+      const categoriesData = categories.data;
+
+      return categoriesData.map((category, ...rest) =>
+        callback(category, ...rest)
+      );
+    },
     [categories.data]
   );
-
-  useEffect(() => {
-    function getRecentlyUsedEmojis() {
-      const newCategoriesData = [...categories.data];
-
-      const localStorageData = localStorage.getItem('recentlyUsedEmojis');
-
-      const recentlyUsedEmojis: EmojiType[] = localStorageData
-        ? JSON.parse(localStorageData)
-        : [];
-
-      newCategoriesData[0].emojis = recentlyUsedEmojis;
-
-      setCategories((prevState) => ({ ...prevState, data: newCategoriesData }));
-    }
-
-    getRecentlyUsedEmojis();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <EmojiContext.Provider
