@@ -1,122 +1,64 @@
 import { Center } from '@chakra-ui/react';
 import { MouseEvent } from 'react';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
+import { EmojiType } from '../../../../../../../../utils/types';
 
 type EmojiProps = {
   emoji: string;
-  name: string;
 };
 
 export function Emoji({ emoji }: EmojiProps) {
   const { ref: messageInputRef } = useMessageInputRef();
 
-  // const {
-  //   categories: { setState: setCategories, data: categories },
-  // } = useEmoji();
-  // const { messageInput } = useMessageInput();
-  // const { removeSelectionContent } = useRemoveSelectionContent();
+  const {
+    categories: { setState: setCategories, data: categories },
+  } = useEmoji();
 
-  // const twemoji = twemojiParse(emoji)[0].url;
+  function handleAddEmojiInRecentCategory() {
+    const categoriesDataClone = [...categories.data];
 
-  // function handleSelectEmoji() {
-  //   function addEmojiInRecentCategory() {
-  //     const categoriesDataClone = [...categories.data];
+    const newCategoriesData = categoriesDataClone.map((category) => {
+      const returnCategoriesData = (categoryEmojis: EmojiType[]) => ({
+        ...category,
+        emojis: [emoji, ...categoryEmojis],
+      });
 
-  //     const newCategoriesData = categoriesDataClone.map((category) => {
-  //       const returnCategoriesData = (categoryEmojis: EmojiType[]) => ({
-  //         ...category,
-  //         emojis: [
-  //           {
-  //             emoji,
-  //             name,
-  //           },
-  //           ...categoryEmojis,
-  //         ],
-  //       });
+      if (category.name !== 'Recentes') return category;
 
-  //       if (category.name !== 'Recentes') {
-  //         return category;
-  //       }
+      const emojiExists = category.emojis.some(
+        (categoryEmoji) => emoji === categoryEmoji
+      );
 
-  //       const emojiExists = category.emojis.some(
-  //         (emoji) => emoji.name === name
-  //       );
+      if (emojiExists) {
+        const categoryEmojisFiltered = category.emojis.filter(
+          (categoryEmoji) => categoryEmoji !== emoji
+        );
 
-  //       if (emojiExists) {
-  //         const categoryEmojisFiltered = category.emojis.filter(
-  //           ({ emoji: categoryEmoji }) => categoryEmoji !== emoji
-  //         );
+        return returnCategoriesData(categoryEmojisFiltered);
+      }
 
-  //         return returnCategoriesData(categoryEmojisFiltered);
-  //       }
+      if (category.emojis.length === 25) {
+        category.emojis.pop();
+      }
 
-  //       if (category.emojis.length === 25) {
-  //         category.emojis.pop();
-  //       }
+      return returnCategoriesData(category.emojis);
+    });
 
-  //       return returnCategoriesData(category.emojis);
-  //     });
+    const recentlyUsedEmojis = newCategoriesData[0].emojis;
 
-  //     const recentlyUsedEmojis = newCategoriesData[0].emojis;
+    localStorage.setItem(
+      'recentlyUsedEmojis',
+      JSON.stringify(recentlyUsedEmojis)
+    );
 
-  //     localStorage.setItem(
-  //       'recentlyUsedEmojis',
-  //       JSON.stringify(recentlyUsedEmojis)
-  //     );
+    setCategories((prevState) => ({
+      ...prevState,
+      data: newCategoriesData,
+    }));
+  }
 
-  //     setCategories((prevState) => ({
-  //       ...prevState,
-  //       data: newCategoriesData,
-  //     }));
-  //   }
-
-  //   async function insertEmoji() {
-  //     const messageInputIsFocused = messageInput === document.activeElement;
-
-  //     const selection = getSelection();
-
-  //     function putCursorAtTheEnd() {
-  //       if (!messageInput) return;
-
-  //       selection?.selectAllChildren(messageInput);
-  //       selection?.collapseToEnd();
-  //     }
-
-  //     if (!messageInputIsFocused) {
-  //       messageInput?.focus();
-
-  //       putCursorAtTheEnd();
-  //     }
-
-  //     removeSelectionContent();
-
-  //     const { getTwemojiElement } = await import(
-  //       '../../../../../../../../utils/getTwemojiElement'
-  //     );
-
-  //     const twemojiElement = getTwemojiElement(emoji, twemoji);
-
-  //     const selectionRange = selection?.getRangeAt(0);
-
-  //     const { positionSelectionIfValueHasBeenPlacedCloseToAnEmoji } =
-  //       await import(
-  //         '../../../../../../../../utils/positionSelectionIfValueHasBeenPlacedCloseToAnEmoji'
-  //       );
-
-  //     positionSelectionIfValueHasBeenPlacedCloseToAnEmoji(
-  //       selection,
-  //       selectionRange
-  //     );
-
-  //     selectionRange?.insertNode(twemojiElement);
-  //     selection?.collapseToEnd();
-  //   }
-
-  //   insertEmoji();
-  //   addEmojiInRecentCategory();
-  // }
-
-  function insertEmoji() {
+  function handleInsertEmoji() {
     const input = messageInputRef.current;
 
     const isFocused = document.activeElement === input;
@@ -131,7 +73,7 @@ export function Emoji({ emoji }: EmojiProps) {
     input?.setRangeText(emoji, start, end, 'end');
 
     function handleInputSize() {
-      input?.dispatchEvent(new Event('change'));
+      input?.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
     handleInputSize();
@@ -144,7 +86,10 @@ export function Emoji({ emoji }: EmojiProps) {
   return (
     <Center
       onMouseDown={handleDisableFocusOnClick}
-      onClick={insertEmoji}
+      onClick={() => {
+        handleInsertEmoji();
+        handleAddEmojiInRecentCategory();
+      }}
       as='li'
       fontSize={['22px', '25px', '28px']}
       w={['36px', '41px', '46px']}

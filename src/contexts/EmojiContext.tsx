@@ -35,10 +35,7 @@ type SearchedEmojis = {
 type CategoryData = {
   icon: IconType;
   name: string;
-  emojis: {
-    emoji: string;
-    name: string;
-  }[];
+  emojis: EmojiType[];
 };
 
 type Categories = {
@@ -126,6 +123,47 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
     ],
     selectedCategoryIndex: 0,
   });
+
+  useEffect(() => {
+    function fillCategories() {
+      const categoryNames = [
+        'Recentes',
+        'Smileys e pessoas',
+        'Animais e natureza',
+        'Comidas e bebidas',
+        'Atividades',
+        'Viagens e lugares',
+        'Objetos',
+        'Símbolos',
+        'Bandeiras',
+      ];
+      const categoryIcons = [
+        AiOutlineClockCircle,
+        MdOutlineEmojiEmotions,
+        RiBearSmileLine,
+        IoFastFoodOutline,
+        BiFootball,
+        AiOutlineCar,
+        MdOutlineEmojiObjects,
+        MdEmojiSymbols,
+        BsFlag,
+      ];
+      const onlyEmojis = [
+        [...emojis['smileys-emotion'], ...emojis['people-body']],
+        emojis['animals-nature'],
+        emojis['food-drink'],
+        emojis.activities,
+        emojis['travel-places'],
+        emojis.objects,
+        emojis.symbols,
+        emojis.flags,
+      ].map((arr) => arr.map((e) => e.emoji));
+
+      const data = onlyEmojis.map;
+    }
+
+    fillCategories();
+  }, []);
 
   const { isOpen, onToggle } = useDisclosure();
 
