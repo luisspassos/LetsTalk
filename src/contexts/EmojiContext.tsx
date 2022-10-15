@@ -28,7 +28,7 @@ type EmojiProviderProps = {
 
 export type Emoji = string;
 
-export type RawEmoji = {
+type RawEmoji = {
   name: string;
   emoji: string;
 };
@@ -50,8 +50,6 @@ type Categories = {
 };
 
 type EmojiContextType = {
-  emoji: string;
-  setEmoji: Dispatch<SetStateAction<string>>;
   searchedEmojis: {
     data: SearchedEmojis;
     setState: Dispatch<SetStateAction<SearchedEmojis>>;
@@ -91,8 +89,6 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
     data: [],
     selectedCategoryIndex: 0,
   });
-
-  const [emoji, setEmoji] = useState('💚');
 
   useEffect(() => {
     function fillCategories() {
@@ -188,8 +184,6 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
   return (
     <EmojiContext.Provider
       value={{
-        emoji,
-        setEmoji,
         searchedEmojis: {
           data: searchedEmojis,
           setState: setSearchedEmojis,

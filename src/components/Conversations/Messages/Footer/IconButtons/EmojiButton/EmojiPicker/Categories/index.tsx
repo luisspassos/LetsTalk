@@ -1,9 +1,11 @@
 import { Box, Flex } from '@chakra-ui/react';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import { CategoryButton } from './CategoryButton';
 
 export function Categories() {
-  // const {
-  //   categories: { data: categories, renderFilteredCategoryData },
-  // } = useEmoji();
+  const {
+    categories: { data: categories, renderFilteredCategoryData },
+  } = useEmoji();
 
   return (
     <Box>
@@ -15,7 +17,7 @@ export function Categories() {
           },
         }}
       >
-        {/* {renderFilteredCategoryData(({ icon, name }, i) => (
+        {renderFilteredCategoryData(({ icon, name }, i) => (
           <CategoryButton
             selectedCategoryIndex={categories.selectedCategoryIndex}
             index={i}
@@ -23,7 +25,7 @@ export function Categories() {
             aria-label={name}
             key={name}
           />
-        ))} */}
+        ))}
       </Flex>
     </Box>
   );
