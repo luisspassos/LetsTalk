@@ -14,7 +14,9 @@ export function Emoji({ emoji }: EmojiProps) {
   const { ref: messageInputRef } = useMessageInputRef();
 
   const {
-    categories: { setState: setCategories, data: categories },
+    categories: { data: categories },
+    setEmoji,
+    emoji: otherEMoji,
   } = useEmoji();
 
   function handleAddEmojiInRecentCategory() {
@@ -56,10 +58,12 @@ export function Emoji({ emoji }: EmojiProps) {
 
     localStorage.setItem('recentlyUsedEmojis', JSON.stringify(category.emojis));
 
-    setCategories((prevState) => ({
-      ...prevState,
-      data: categoriesData,
-    }));
+    setEmoji(emoji);
+
+    // setCategories((prevState) => ({
+    //   ...prevState,
+    //   data: categoriesData,
+    // }));
   }
 
   function handleInsertEmoji() {
