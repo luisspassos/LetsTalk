@@ -6,12 +6,18 @@ import { CategoryTitle } from './Categories/CategoryTitle';
 import { Categories } from './Categories';
 import { useEmoji } from '../../../../../../../contexts/EmojiContext';
 import { Emoji } from './EmojiList/Emoji';
-import { memo, ReactNode, useRef } from 'react';
+import { memo, ReactNode, useCallback, useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 
 const Flex = memo(({ children }: { children: ReactNode }) => {
   return <ChakraFlex>{children}</ChakraFlex>;
 });
+
+const sizes = [
+  55, 18, 46, 46, 46, 46, 18, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46,
+  46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46,
+  46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46,
+];
 
 export function EmojiPicker() {
   const {
@@ -215,7 +221,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='12'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -236,7 +242,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='13'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -257,7 +263,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='14'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -278,7 +284,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='15'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -299,7 +305,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='16'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -320,7 +326,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='17'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -341,7 +347,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='18'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -362,7 +368,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='19'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -383,7 +389,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='20'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -404,7 +410,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='21'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -425,7 +431,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='22'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -446,7 +452,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='23'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -467,7 +473,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='24'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -488,7 +494,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='25'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -509,7 +515,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='26'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -530,7 +536,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='27'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -551,7 +557,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='28'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -572,7 +578,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='29'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -593,7 +599,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='30'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -614,7 +620,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='31'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -635,7 +641,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='32'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -656,7 +662,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='33'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -677,7 +683,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='34'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -698,7 +704,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='35'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -719,7 +725,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='36'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -740,7 +746,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='37'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -761,7 +767,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='38'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -782,7 +788,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='39'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -803,7 +809,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='40'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -824,7 +830,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='41'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -845,7 +851,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='42'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -866,7 +872,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='43'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -887,7 +893,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='44'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -908,7 +914,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='45'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -929,7 +935,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='46'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -950,7 +956,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='48'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -971,7 +977,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='49'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -992,7 +998,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
+    <Flex key='50'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -1013,490 +1019,7 @@ export function EmojiPicker() {
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
     </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-      <Emoji emoji='😍' />
-    </Flex>,
-    <Flex key='11'>
+    <Flex key='51'>
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
       <Emoji emoji='😍' />
@@ -1524,6 +1047,7 @@ export function EmojiPicker() {
   const rowVirtualizer = useVirtual({
     size: components.length,
     parentRef,
+    estimateSize: useCallback((i) => sizes[i], []),
     overscan: 0,
   });
 
@@ -1548,12 +1072,12 @@ export function EmojiPicker() {
             {rowVirtualizer.virtualItems.map((virtualRow) => (
               <div
                 key={virtualRow.index}
-                ref={virtualRow.measureRef}
                 style={{
                   position: 'absolute',
                   top: 0,
                   left: 0,
                   width: '100%',
+                  height: `${sizes[virtualRow.index]}px`,
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
