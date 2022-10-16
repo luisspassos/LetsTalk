@@ -1,4 +1,4 @@
-import { Collapse, Flex } from '@chakra-ui/react';
+import { Collapse, Flex as ChakraFlex } from '@chakra-ui/react';
 
 import { Divider } from '../../../../../../Divider';
 import { SearchInput } from './SearchInput';
@@ -6,8 +6,12 @@ import { CategoryTitle } from './Categories/CategoryTitle';
 import { Categories } from './Categories';
 import { useEmoji } from '../../../../../../../contexts/EmojiContext';
 import { Emoji } from './EmojiList/Emoji';
-import { useRef } from 'react';
+import { memo, ReactNode, useRef } from 'react';
 import { useVirtual } from 'react-virtual';
+
+const Flex = memo(({ children }: { children: ReactNode }) => {
+  return <ChakraFlex>{children}</ChakraFlex>;
+});
 
 export function EmojiPicker() {
   const {
@@ -1520,11 +1524,12 @@ export function EmojiPicker() {
   const rowVirtualizer = useVirtual({
     size: components.length,
     parentRef,
+    overscan: 0,
   });
 
   return (
     <Collapse in={isOpen} unmountOnExit>
-      <Flex h='300px' w='100%' direction='column'>
+      <ChakraFlex h='300px' w='100%' direction='column'>
         <Divider />
         <Categories />
         <div
@@ -1557,7 +1562,7 @@ export function EmojiPicker() {
             ))}
           </div>
         </div>
-      </Flex>
+      </ChakraFlex>
     </Collapse>
   );
 }

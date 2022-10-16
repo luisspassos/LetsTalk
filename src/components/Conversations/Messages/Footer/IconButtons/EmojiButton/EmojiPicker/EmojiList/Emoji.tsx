@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react';
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 import {
   createRecentCategory,
   useEmoji,
@@ -10,7 +10,7 @@ type EmojiProps = {
   emoji: string;
 };
 
-export function Emoji({ emoji }: EmojiProps) {
+function EmojiComponent({ emoji }: EmojiProps) {
   const { ref: messageInputRef } = useMessageInputRef();
 
   const {
@@ -56,10 +56,10 @@ export function Emoji({ emoji }: EmojiProps) {
 
     localStorage.setItem('recentlyUsedEmojis', JSON.stringify(category.emojis));
 
-    setCategories((prevState) => ({
-      ...prevState,
-      data: categoriesData,
-    }));
+    // setCategories((prevState) => ({
+    //   ...prevState,
+    //   data: categoriesData,
+    // }));
   }
 
   function handleInsertEmoji() {
@@ -108,3 +108,5 @@ export function Emoji({ emoji }: EmojiProps) {
     </Center>
   );
 }
+
+export const Emoji = memo(EmojiComponent);
