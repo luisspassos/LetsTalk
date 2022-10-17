@@ -1,11 +1,10 @@
-import { Box } from '@chakra-ui/react';
+import { Box, useBreakpointValue } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 import { emojis } from '../../../../../../../../utils/emojis';
+import { Emoji, size as emojiSize } from './Emoji';
 
 const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
-
-const emojiWidth = 46;
 
 const emojiCount = 1848;
 
@@ -13,6 +12,8 @@ export function Scroll() {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const width = parentRef.current?.clientWidth;
+
+  const emojiWidth = useBreakpointValue(emojiSize);
 
   const emojisPerRow = Math.floor(width / emojiWidth);
   const rowCount = Math.ceil(emojiCount / emojisPerRow);
@@ -36,11 +37,11 @@ export function Scroll() {
             display='flex'
             transform={`translateY(${item.start}px)`}
           >
-            {/* {allEmojis
+            {allEmojis
               .filter((_, i) => i < emojisPerRow)
               .map((emoji) => (
-                // <Emoji emoji={emoji.emoji} />
-              ))} */}
+                <Emoji key={emoji.emoji} emoji={emoji.emoji} />
+              ))}
           </Box>
         ))}
       </Box>

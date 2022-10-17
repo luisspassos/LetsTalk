@@ -1,17 +1,16 @@
 import { Center } from '@chakra-ui/react';
-import { memo, MouseEvent, useRef } from 'react';
+import { memo, MouseEvent } from 'react';
 import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
 
 type EmojiProps = {
   emoji: string;
 };
 
+export const size = [36, 41, 46];
+const measure = size.map((size) => size + 'px');
+
 function EmojiComponent({ emoji }: EmojiProps) {
   const { ref: messageInputRef } = useMessageInputRef();
-
-  const ref = useRef<HTMLLIElement>(null);
-
-  console.log(getComputedStyle(ref.current).width);
 
   // const {
   //   categories: { setState: setCategories, data: categories },
@@ -89,7 +88,6 @@ function EmojiComponent({ emoji }: EmojiProps) {
 
   return (
     <Center
-      ref={ref}
       onMouseDown={handleDisableFocusOnClick}
       onClick={() => {
         handleInsertEmoji();
@@ -97,8 +95,8 @@ function EmojiComponent({ emoji }: EmojiProps) {
       }}
       as='li'
       fontSize={['22px', '25px', '28px']}
-      w={['36px', '41px', '46px']}
-      h={['36px', '41px', '46px']}
+      w={measure}
+      h={measure}
       cursor='pointer'
       borderRadius='8px'
       _hover={{
