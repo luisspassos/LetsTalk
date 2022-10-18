@@ -1,6 +1,6 @@
 import { Input, useColorModeValue } from '@chakra-ui/react';
 import { useCallback } from 'react';
-import { useEmoji } from '../../../../../../../contexts/EmojiContext';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 
 export function SearchInput() {
   const {
@@ -17,7 +17,7 @@ export function SearchInput() {
         return;
       }
 
-      const { emojis } = await import('../../../../../../../utils/emojis');
+      const { emojis } = await import('../../../../../../../../utils/emojis');
 
       const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
 

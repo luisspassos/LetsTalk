@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
-import { CategoryButton } from './CategoryButton';
+import { Button } from './Button';
 
 export function Categories() {
   const {
@@ -18,7 +18,7 @@ export function Categories() {
         }}
       >
         {renderFilteredCategoryData(({ icon, name }, i) => (
-          <CategoryButton
+          <Button
             selectedCategoryIndex={categories.selectedCategoryIndex}
             index={i}
             categoryIcon={icon}

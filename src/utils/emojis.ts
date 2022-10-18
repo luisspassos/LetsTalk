@@ -5,7 +5,7 @@ export const emojis: Record<
     name: string;
   }[]
 > = {
-  'smileys-emotion': [
+  'Smileys e pessoas': [
     {
       emoji: '😀',
       name: 'Rosto Risonho',
@@ -658,8 +658,6 @@ export const emojis: Record<
       emoji: '💤',
       name: 'Zzz',
     },
-  ],
-  'people-body': [
     {
       emoji: '👋',
       name: 'Mão Acenando',
@@ -2105,7 +2103,7 @@ export const emojis: Record<
       name: 'Pegadas',
     },
   ],
-  'animals-nature': [
+  'Animais e natureza': [
     {
       emoji: '🐵',
       name: 'Rosto De Macaco',
@@ -2683,7 +2681,7 @@ export const emojis: Record<
       name: 'Ninho Com Ovos',
     },
   ],
-  'food-drink': [
+  'Comidas e bebidas': [
     {
       emoji: '🍇',
       name: 'Uvas',
@@ -3213,7 +3211,7 @@ export const emojis: Record<
       name: 'Ânfora',
     },
   ],
-  'travel-places': [
+  'Viagens e lugares': [
     {
       emoji: '🌍',
       name: 'Globo Mostrando Europa E África',
@@ -4087,7 +4085,7 @@ export const emojis: Record<
       name: 'Onda',
     },
   ],
-  activities: [
+  Atividades: [
     {
       emoji: '🎃',
       name: 'Abóbora De Halloween',
@@ -4433,7 +4431,7 @@ export const emojis: Record<
       name: 'Nó',
     },
   ],
-  objects: [
+  Objetos: [
     {
       emoji: '👓',
       name: 'Óculos',
@@ -5455,7 +5453,7 @@ export const emojis: Record<
       name: 'Cartão De Identificação',
     },
   ],
-  symbols: [
+  Símbolos: [
     {
       emoji: '🏧',
       name: 'Símbolo De Caixa Automático',
@@ -6341,7 +6339,7 @@ export const emojis: Record<
       name: 'Botão Quadrado Preto',
     },
   ],
-  flags: [
+  Bandeiras: [
     {
       emoji: '🏁',
       name: 'Bandeira Quadriculada',

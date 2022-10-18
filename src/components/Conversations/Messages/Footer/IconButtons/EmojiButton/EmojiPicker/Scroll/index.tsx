@@ -2,11 +2,9 @@ import { Box, useBreakpointValue } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 import { emojis } from '../../../../../../../../utils/emojis';
+import { CategoryTitle } from './CategoryTitle';
 import { Emoji, size as emojiSize } from './Emoji';
-
-const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
-
-const emojiCount = 1848;
+import { SearchInput } from './SearchInput';
 
 export function Scroll() {
   const parentRef = useRef<HTMLDivElement>(null);
@@ -16,10 +14,37 @@ export function Scroll() {
   const emojiWidth = useBreakpointValue(emojiSize);
 
   const emojisPerRow = Math.floor(width / emojiWidth);
-  const rowCount = Math.ceil(emojiCount / emojisPerRow);
+
+  const components: (JSX.Element | JSX.Element[])[] = [
+    <SearchInput key='searchInput' />,
+  ];
+
+  for (const categoryName in emojis) {
+    components.push(<CategoryTitle text={categoryName} />);
+
+    const category = emojis[categoryName];
+
+    const categoryEmojis: JSX.Element[][] = [[]];
+
+    for (const emoji of category) {
+      const i = categoryEmojis.length - 1;
+
+      if (categoryEmojis[i].length === emojisPerRow) {
+        categoryEmojis.push([]);
+      }
+
+      const newI = categoryEmojis.length - 1;
+
+      categoryEmojis[newI].push(<Emoji emoji={emoji.emoji} />);
+    }
+
+    for (const category of categoryEmojis) {
+      components.push(category);
+    }
+  }
 
   const virtualizer = useVirtual({
-    size: rowCount,
+    size: components.length,
     parentRef,
   });
 
@@ -37,11 +62,7 @@ export function Scroll() {
             display='flex'
             transform={`translateY(${item.start}px)`}
           >
-            {allEmojis
-              .filter((_, i) => i < emojisPerRow)
-              .map((emoji) => (
-                <Emoji key={emoji.emoji} emoji={emoji.emoji} />
-              ))}
+            {components[item.index]}
           </Box>
         ))}
       </Box>

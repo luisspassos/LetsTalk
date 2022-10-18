@@ -8,19 +8,19 @@ import { useCallback } from 'react';
 import { IconType } from 'react-icons';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 
-type CategoryButtonProps = {
+type ButtonProps = {
   categoryIcon: IconType;
   index: number;
   selectedCategoryIndex: number;
 } & IconButtonProps;
 
-export function CategoryButton({
+export function Button({
   'aria-label': ariaLabel,
   selectedCategoryIndex,
   index,
   categoryIcon,
   ...rest
-}: CategoryButtonProps) {
+}: ButtonProps) {
   const {
     searchedEmojis: { data: searchedEmojis },
     categories: { setState: setCategories },
