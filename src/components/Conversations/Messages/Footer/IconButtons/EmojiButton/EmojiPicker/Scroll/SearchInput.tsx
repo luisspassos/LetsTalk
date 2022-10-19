@@ -17,7 +17,9 @@ export function SearchInput() {
         return;
       }
 
-      const { emojis } = await import('../../../../../../../../utils/emojis');
+      const { emojis } = await import(
+        '../../../../../../../../utils/emojiCategories'
+      );
 
       const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
 

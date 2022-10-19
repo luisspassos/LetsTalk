@@ -20,7 +20,7 @@ import {
   MdEmojiSymbols,
 } from 'react-icons/md';
 import { RiBearSmileLine } from 'react-icons/ri';
-import { emojis } from '../utils/emojis';
+import { emojiCategories } from '../utils/emojiCategories';
 
 type EmojiProviderProps = {
   children: ReactNode;
@@ -96,42 +96,42 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
         {
           icon: MdOutlineEmojiEmotions,
           name: 'Smileys e pessoas',
-          emojis: emojis['Smileys e pessoas'],
+          emojis: emojiCategories['Smileys e pessoas'],
         },
         {
           icon: RiBearSmileLine,
           name: 'Animais e natureza',
-          emojis: emojis['Animais e natureza'],
+          emojis: emojiCategories['Animais e natureza'],
         },
         {
           icon: IoFastFoodOutline,
           name: 'Comidas e bebidas',
-          emojis: emojis['Comidas e bebidas'],
+          emojis: emojiCategories['Comidas e bebidas'],
         },
         {
           icon: BiFootball,
           name: 'Atividades',
-          emojis: emojis.Atividades,
+          emojis: emojiCategories.Atividades,
         },
         {
           icon: AiOutlineCar,
           name: 'Viagens e lugares',
-          emojis: emojis['Viagens e lugares'],
+          emojis: emojiCategories['Viagens e lugares'],
         },
         {
           icon: MdOutlineEmojiObjects,
           name: 'Objetos',
-          emojis: emojis.Objetos,
+          emojis: emojiCategories.Objetos,
         },
         {
           icon: MdEmojiSymbols,
           name: 'Símbolos',
-          emojis: emojis.Símbolos,
+          emojis: emojiCategories.Símbolos,
         },
         {
           icon: BsFlag,
           name: 'Bandeiras',
-          emojis: emojis.Bandeiras,
+          emojis: emojiCategories.Bandeiras,
         },
       ];
 

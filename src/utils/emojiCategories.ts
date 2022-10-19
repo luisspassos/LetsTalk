@@ -1,4 +1,4 @@
-export const emojis: Record<
+export const emojiCategories: Record<
   string,
   {
     emoji: string;

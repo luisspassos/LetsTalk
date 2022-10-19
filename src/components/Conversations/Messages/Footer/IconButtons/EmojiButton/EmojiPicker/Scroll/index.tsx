@@ -1,47 +1,59 @@
 import { Box, useBreakpointValue } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useVirtual } from 'react-virtual';
-import { emojis } from '../../../../../../../../utils/emojis';
+import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
 import { CategoryTitle } from './CategoryTitle';
 import { Emoji, size as emojiSize } from './Emoji';
 import { SearchInput } from './SearchInput';
 
+type EmojiRows = JSX.Element[];
+
 export function Scroll() {
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const width = parentRef.current?.clientWidth;
+  const width = parentRef.current?.clientWidth ?? 0;
 
-  const emojiWidth = useBreakpointValue(emojiSize);
+  const emojiWidth = useBreakpointValue(emojiSize) ?? 0;
 
   const emojisPerRow = Math.floor(width / emojiWidth);
 
-  const components: (JSX.Element | JSX.Element[])[] = [
+  const components: (JSX.Element | EmojiRows)[] = [
     <SearchInput key='searchInput' />,
   ];
 
-  for (const categoryName in emojis) {
-    components.push(<CategoryTitle text={categoryName} />);
+  function insertEmojis() {
+    for (const categoryName in emojiCategories) {
+      components.push(<CategoryTitle text={categoryName} />);
 
-    const category = emojis[categoryName];
+      const category = emojiCategories[categoryName];
 
-    const categoryEmojis: JSX.Element[][] = [[]];
+      const emojiRows: EmojiRows[] = [[]];
 
-    for (const emoji of category) {
-      const i = categoryEmojis.length - 1;
+      for (const emoji of category) {
+        const getCurrentEmojiRow = () => {
+          const index = emojiRows.length - 1;
 
-      if (categoryEmojis[i].length === emojisPerRow) {
-        categoryEmojis.push([]);
+          return emojiRows[index];
+        };
+
+        const row = getCurrentEmojiRow();
+
+        const rowIsFilled = row.length === emojisPerRow;
+
+        if (rowIsFilled) emojiRows.push([]);
+
+        const rowToBeFilled = getCurrentEmojiRow();
+
+        rowToBeFilled.push(<Emoji emoji={emoji.emoji} />);
       }
 
-      const newI = categoryEmojis.length - 1;
-
-      categoryEmojis[newI].push(<Emoji emoji={emoji.emoji} />);
-    }
-
-    for (const category of categoryEmojis) {
-      components.push(category);
+      for (const row of emojiRows) {
+        components.push(row);
+      }
     }
   }
+
+  insertEmojis();
 
   const virtualizer = useVirtual({
     size: components.length,
