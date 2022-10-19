@@ -41,8 +41,7 @@ export function SearchInput() {
       bgColor={useColorModeValue('white', 'blackAlpha.200')}
       h='40px'
       flexShrink={0}
-      w='99.5%'
-      mx='auto'
+      w='98.5%'
       onChange={(e) => handleSearchEmoji(e.target.value)}
     />
   );
