@@ -96,42 +96,42 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
         {
           icon: MdOutlineEmojiEmotions,
           name: 'Smileys e pessoas',
-          emojis: [...emojis['smileys-emotion'], ...emojis['people-body']],
+          emojis: emojis['Smileys e pessoas'],
         },
         {
           icon: RiBearSmileLine,
           name: 'Animais e natureza',
-          emojis: emojis['animals-nature'],
+          emojis: emojis['Animais e natureza'],
         },
         {
           icon: IoFastFoodOutline,
           name: 'Comidas e bebidas',
-          emojis: emojis['food-drink'],
+          emojis: emojis['Comidas e bebidas'],
         },
         {
           icon: BiFootball,
           name: 'Atividades',
-          emojis: emojis.activities,
+          emojis: emojis.Atividades,
         },
         {
           icon: AiOutlineCar,
           name: 'Viagens e lugares',
-          emojis: emojis['travel-places'],
+          emojis: emojis['Viagens e lugares'],
         },
         {
           icon: MdOutlineEmojiObjects,
           name: 'Objetos',
-          emojis: emojis.objects,
+          emojis: emojis.Objetos,
         },
         {
           icon: MdEmojiSymbols,
           name: 'Símbolos',
-          emojis: emojis.symbols,
+          emojis: emojis.Símbolos,
         },
         {
           icon: BsFlag,
           name: 'Bandeiras',
-          emojis: emojis.flags,
+          emojis: emojis.Bandeiras,
         },
       ];
 

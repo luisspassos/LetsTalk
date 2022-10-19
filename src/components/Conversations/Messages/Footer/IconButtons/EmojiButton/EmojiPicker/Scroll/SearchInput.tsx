@@ -34,6 +34,7 @@ export function SearchInput() {
     <Input
       placeholder='Pesquisar emoji'
       mt='10px'
+      mb='4px'
       fontSize='15px'
       bgColor={useColorModeValue('white', 'blackAlpha.200')}
       h='40px'

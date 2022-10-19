@@ -46,25 +46,33 @@ export function Scroll() {
   const virtualizer = useVirtual({
     size: components.length,
     parentRef,
+    paddingEnd: 10,
   });
 
   return (
     <Box ref={parentRef} overflow='auto'>
       <Box h={virtualizer.totalSize} w='100%' pos='relative'>
-        {virtualizer.virtualItems.map((item) => (
-          <Box
-            key={item.index}
-            ref={item.measureRef}
-            pos='absolute'
-            top={0}
-            left={0}
-            w='100%'
-            display='flex'
-            transform={`translateY(${item.start}px)`}
-          >
-            {components[item.index]}
-          </Box>
-        ))}
+        {virtualizer.virtualItems.map((item) => {
+          const component = components[item.index];
+
+          const isEmojis = Array.isArray(component);
+
+          return (
+            <Box
+              key={item.index}
+              ref={item.measureRef}
+              pos='absolute'
+              top={0}
+              left={0}
+              display='flex'
+              w='100%'
+              pl={isEmojis ? '10px' : undefined}
+              transform={`translateY(${item.start}px)`}
+            >
+              {component}
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );
