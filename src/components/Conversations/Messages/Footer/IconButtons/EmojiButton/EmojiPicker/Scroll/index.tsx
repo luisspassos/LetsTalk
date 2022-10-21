@@ -1,9 +1,9 @@
-import { Box, Flex, useBreakpointValue } from '@chakra-ui/react';
-import { useRef } from 'react';
-import { useVirtual } from 'react-virtual';
+import { useBreakpointValue } from '@chakra-ui/react';
+import React, { useRef } from 'react';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
 import { CategoryTitle } from './CategoryTitle';
 import { Emoji, size as emojiSize } from './Emoji';
+import { VariableSizeList as List } from 'react-window';
 import { SearchInput } from './SearchInput';
 
 type EmojiRows = JSX.Element[];
@@ -55,36 +55,13 @@ export function Scroll() {
 
   insertEmojis();
 
-  const virtualizer = useVirtual({
-    size: components.length,
-    parentRef,
-    paddingEnd: 10,
-  });
+  const Component = ({ index }) => {
+    return components[index];
+  };
 
   return (
-    <Box ref={parentRef} overflow='auto'>
-      <Box h={virtualizer.totalSize} w='100%' pos='relative'>
-        {virtualizer.virtualItems.map((item) => {
-          const component = components[item.index];
-
-          const isEmojis = Array.isArray(component);
-
-          return (
-            <Flex
-              key={item.key}
-              ref={item.measureRef}
-              pos='absolute'
-              top={0}
-              left={0}
-              w='100%'
-              pl={isEmojis ? '10px' : undefined}
-              transform={`translateY(${item.start}px)`}
-            >
-              {component}
-            </Flex>
-          );
-        })}
-      </Box>
-    </Box>
+    <List height={100} width='100%' itemCount={components.length}>
+      {Component}
+    </List>
   );
 }
