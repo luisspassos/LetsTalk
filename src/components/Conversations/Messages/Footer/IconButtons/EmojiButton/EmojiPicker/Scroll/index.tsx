@@ -1,4 +1,4 @@
-import { Box, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Flex, useBreakpointValue } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
@@ -44,7 +44,7 @@ export function Scroll() {
 
         const rowToBeFilled = getCurrentEmojiRow();
 
-        rowToBeFilled.push(<Emoji emoji={emoji.emoji} />);
+        rowToBeFilled.push(<Emoji emoji={emoji.emoji} key={emoji.emoji} />);
       }
 
       for (const row of emojiRows) {
@@ -70,19 +70,18 @@ export function Scroll() {
           const isEmojis = Array.isArray(component);
 
           return (
-            <Box
-              key={item.index}
+            <Flex
+              key={item.key}
               ref={item.measureRef}
               pos='absolute'
               top={0}
               left={0}
-              display='flex'
               w='100%'
               pl={isEmojis ? '10px' : undefined}
               transform={`translateY(${item.start}px)`}
             >
               {component}
-            </Box>
+            </Flex>
           );
         })}
       </Box>
