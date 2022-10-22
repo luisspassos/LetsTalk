@@ -1,29 +1,25 @@
-import { Box, Flex, useBreakpointValue } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useVirtual } from 'react-virtual';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
-import { CategoryTitle } from './CategoryTitle';
-import { Emoji, size as emojiSize } from './Emoji';
-import { SearchInput } from './SearchInput';
+import { Emoji } from './Emoji';
 
 type EmojiRows = JSX.Element[];
 
 export function Scroll() {
+  const { emojiSize: emojiWidth } = useEmoji();
+
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const width = parentRef.current?.clientWidth ?? 0;
-
-  const emojiWidth = useBreakpointValue(emojiSize) ?? 0;
+  const width = parentRef.current?.clientWidth || 0;
 
   const emojisPerRow = Math.floor(width / emojiWidth);
 
-  const components: (JSX.Element | EmojiRows)[] = [
-    <SearchInput key='searchInput' />,
-  ];
+  const components: (JSX.Element | EmojiRows)[] = [];
 
   function insertEmojis() {
     for (const categoryName in emojiCategories) {
-      components.push(<CategoryTitle text={categoryName} />);
+      components.push(<h3>{categoryName}</h3>);
 
       const category = emojiCategories[categoryName];
 
@@ -44,7 +40,7 @@ export function Scroll() {
 
         const rowToBeFilled = getCurrentEmojiRow();
 
-        rowToBeFilled.push(<Emoji emoji={emoji.emoji} key={emoji.emoji} />);
+        rowToBeFilled.push(<Emoji key={emoji.emoji}>{emoji.emoji}</Emoji>);
       }
 
       for (const row of emojiRows) {
@@ -59,32 +55,42 @@ export function Scroll() {
     size: components.length,
     parentRef,
     paddingEnd: 10,
+    overscan: 0,
   });
 
   return (
-    <Box ref={parentRef} overflow='auto'>
-      <Box h={virtualizer.totalSize} w='100%' pos='relative'>
+    <div ref={parentRef} style={{ overflow: 'auto', scrollBehavior: 'smooth' }}>
+      <div
+        style={{
+          height: virtualizer.totalSize,
+          width: '100%',
+          position: 'relative',
+        }}
+      >
         {virtualizer.virtualItems.map((item) => {
           const component = components[item.index];
 
           const isEmojis = Array.isArray(component);
 
           return (
-            <Flex
+            <div
               key={item.key}
               ref={item.measureRef}
-              pos='absolute'
-              top={0}
-              left={0}
-              w='100%'
-              pl={isEmojis ? '10px' : undefined}
-              transform={`translateY(${item.start}px)`}
+              style={{
+                display: 'flex',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                paddingLeft: isEmojis ? '10px' : undefined,
+                transform: `translateY(${item.start}px)`,
+              }}
             >
               {component}
-            </Flex>
+            </div>
           );
         })}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }

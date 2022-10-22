@@ -1,16 +1,13 @@
-import { Center } from '@chakra-ui/react';
-import { memo, MouseEvent } from 'react';
-import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 
 type EmojiProps = {
-  emoji: string;
+  children: string;
 };
 
-export const size = [36, 41, 46];
-const measure = size.map((size) => size + 'px');
+export function Emoji({ children }: EmojiProps) {
+  const { emojiSize } = useEmoji();
 
-function EmojiComponent({ emoji }: EmojiProps) {
-  const { ref: messageInputRef } = useMessageInputRef();
+  // const { ref: messageInputRef } = useMessageInputRef();
 
   // const {
   //   categories: { setState: setCategories, data: categories },
@@ -61,51 +58,60 @@ function EmojiComponent({ emoji }: EmojiProps) {
   //   // }));
   // }
 
-  function handleInsertEmoji() {
-    const input = messageInputRef.current;
+  // function handleInsertEmoji() {
+  //   const input = messageInputRef.current;
 
-    const isFocused = document.activeElement === input;
+  //   const isFocused = document.activeElement === input;
 
-    if (!isFocused) input?.focus();
+  //   if (!isFocused) input?.focus();
 
-    const [start, end] = [
-      input?.selectionStart,
-      input?.selectionEnd,
-    ] as number[];
+  //   const [start, end] = [
+  //     input?.selectionStart,
+  //     input?.selectionEnd,
+  //   ] as number[];
 
-    input?.setRangeText(emoji, start, end, 'end');
+  //   input?.setRangeText(emoji, start, end, 'end');
 
-    function handleInputSize() {
-      input?.dispatchEvent(new Event('change', { bubbles: true }));
-    }
+  //   function handleInputSize() {
+  //     input?.dispatchEvent(new Event('change', { bubbles: true }));
+  //   }
 
-    handleInputSize();
-  }
+  //   handleInputSize();
+  // }
 
-  function handleDisableFocusOnClick(e: MouseEvent) {
-    e.preventDefault();
-  }
+  // function handleDisableFocusOnClick(e: MouseEvent) {
+  //   e.preventDefault();
+  // }
 
   return (
-    <Center
-      onMouseDown={handleDisableFocusOnClick}
-      onClick={() => {
-        handleInsertEmoji();
-        // handleAddEmojiInRecentCategory();
-      }}
-      as='li'
-      fontSize={['22px', '25px', '28px']}
-      w={measure}
-      h={measure}
-      cursor='pointer'
-      borderRadius='8px'
-      _hover={{
-        bgColor: 'whiteAlpha.400',
+    <span
+      style={{
+        width: emojiSize + 'px',
+        height: emojiSize + 'px',
+        cursor: 'pointer',
+        borderRadius: '8px',
+        fontSize: '28px',
       }}
     >
-      {emoji}
-    </Center>
+      {children}
+    </span>
+    // <Center
+    //   onMouseDown={handleDisableFocusOnClick}
+    //   onClick={() => {
+    //     handleInsertEmoji();
+    //     // handleAddEmojiInRecentCategory();
+    //   }}
+    //   as='li'
+    //   fontSize={['22px', '25px', '28px']}
+    //   w={measure}
+    //   h={measure}
+    //   cursor='pointer'
+    //   borderRadius='8px'
+    //   _hover={{
+    //     bgColor: 'whiteAlpha.400',
+    //   }}
+    // >
+    //   {emoji}
+    // </Center>
   );
 }
-
-export const Emoji = memo(EmojiComponent);
