@@ -1,12 +1,22 @@
 import { memo } from 'react';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 
 type EmojiProps = {
   children: string;
-  size: number;
-  fontSize: string;
 };
 
-function EmojiComponent({ children, fontSize, size }: EmojiProps) {
+function getValueWithMeasure(value: number) {
+  return value + 'px';
+}
+
+function EmojiComponent({ children }: EmojiProps) {
+  const { emojiPickerStyles } = useEmoji();
+
+  const styles = {
+    size: getValueWithMeasure(emojiPickerStyles.emojiSize),
+    fontSize: getValueWithMeasure(emojiPickerStyles.fontSize),
+  };
+
   // const { ref: messageInputRef } = useMessageInputRef();
 
   // const {
@@ -86,11 +96,11 @@ function EmojiComponent({ children, fontSize, size }: EmojiProps) {
   return (
     <span
       style={{
-        width: size + 'px',
-        height: size + 'px',
+        width: styles.size,
+        height: styles.size,
         cursor: 'pointer',
         borderRadius: '8px',
-        fontSize: fontSize,
+        fontSize: styles.fontSize,
       }}
     >
       {children}

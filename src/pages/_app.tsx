@@ -28,39 +28,39 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <MessageInputRefProvider>
-        <EmojiProvider>
-          <RenamingNameProvider>
-            <OnlineAtEventsProvider>
-              <SearchInConversationProvider>
-                <ConversationPopoverProvider>
-                  <ConversationsProvider>
-                    <ConversationsTabProvider>
-                      <AddContactModalProvider>
-                        <BlockUserModalProvider>
-                          <RenameUsernameModalProvider>
-                            <DeleteAccountModalProvider>
-                              <ChangePasswordModalProvider>
-                                <ChangeEmailModalProvider>
-                                  <TabProvider>
-                                    <FadeInAnimationProvider>
-                                      <ChakraProvider theme={theme}>
+        <RenamingNameProvider>
+          <OnlineAtEventsProvider>
+            <SearchInConversationProvider>
+              <ConversationPopoverProvider>
+                <ConversationsProvider>
+                  <ConversationsTabProvider>
+                    <AddContactModalProvider>
+                      <BlockUserModalProvider>
+                        <RenameUsernameModalProvider>
+                          <DeleteAccountModalProvider>
+                            <ChangePasswordModalProvider>
+                              <ChangeEmailModalProvider>
+                                <TabProvider>
+                                  <FadeInAnimationProvider>
+                                    <ChakraProvider theme={theme}>
+                                      <EmojiProvider>
                                         <Component {...pageProps} />
-                                      </ChakraProvider>
-                                    </FadeInAnimationProvider>
-                                  </TabProvider>
-                                </ChangeEmailModalProvider>
-                              </ChangePasswordModalProvider>
-                            </DeleteAccountModalProvider>
-                          </RenameUsernameModalProvider>
-                        </BlockUserModalProvider>
-                      </AddContactModalProvider>
-                    </ConversationsTabProvider>
-                  </ConversationsProvider>
-                </ConversationPopoverProvider>
-              </SearchInConversationProvider>
-            </OnlineAtEventsProvider>
-          </RenamingNameProvider>
-        </EmojiProvider>
+                                      </EmojiProvider>
+                                    </ChakraProvider>
+                                  </FadeInAnimationProvider>
+                                </TabProvider>
+                              </ChangeEmailModalProvider>
+                            </ChangePasswordModalProvider>
+                          </DeleteAccountModalProvider>
+                        </RenameUsernameModalProvider>
+                      </BlockUserModalProvider>
+                    </AddContactModalProvider>
+                  </ConversationsTabProvider>
+                </ConversationsProvider>
+              </ConversationPopoverProvider>
+            </SearchInConversationProvider>
+          </OnlineAtEventsProvider>
+        </RenamingNameProvider>
       </MessageInputRefProvider>
     </AuthProvider>
   );

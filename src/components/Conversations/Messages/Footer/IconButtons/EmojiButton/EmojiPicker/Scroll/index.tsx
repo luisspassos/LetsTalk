@@ -1,6 +1,6 @@
-import { useBreakpointValue } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useVirtual } from 'react-virtual';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
 import { Emoji } from './Emoji';
 
@@ -11,12 +11,9 @@ export function Scroll() {
 
   const width = parentRef.current?.clientWidth || 0;
 
-  const emojiStyle = {
-    size: useBreakpointValue([36, 41, 46]) || 0,
-    fontSize: useBreakpointValue(['22px', '25px', '28px']) || '0px',
-  };
+  const { emojiPickerStyles } = useEmoji();
 
-  const emojisPerRow = Math.floor(width / emojiStyle.size);
+  const emojisPerRow = Math.floor(width / emojiPickerStyles.emojiSize);
 
   const components: (JSX.Element | EmojiRows)[] = [];
 
@@ -43,11 +40,7 @@ export function Scroll() {
 
         const rowToBeFilled = getCurrentEmojiRow();
 
-        rowToBeFilled.push(
-          <Emoji fontSize={emojiStyle.fontSize} size={emojiStyle.size} key={emoji.emoji}>
-            {emoji.emoji}
-          </Emoji>
-        );
+        rowToBeFilled.push(<Emoji key={emoji.emoji}>{emoji.emoji}</Emoji>);
       }
 
       for (const row of emojiRows) {

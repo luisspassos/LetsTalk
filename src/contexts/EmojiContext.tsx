@@ -1,4 +1,4 @@
-import { useDisclosure } from '@chakra-ui/react';
+import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import {
   createContext,
   Dispatch,
@@ -69,6 +69,10 @@ type EmojiContextType = {
     isOpen: boolean;
     onToggle: () => void;
   };
+  emojiPickerStyles: {
+    emojiSize: number;
+    fontSize: number;
+  };
 };
 
 export const createRecentCategory = (emojis: Emoji[] = []) => ({
@@ -84,6 +88,11 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
     data: [],
     isEmpty: true,
   });
+
+  const emojiPickerStyles = {
+    emojiSize: useBreakpointValue([36, 41, 46]) || 0,
+    fontSize: useBreakpointValue([22, 25, 28]) || 0,
+  };
 
   const [categories, setCategories] = useState<Categories>({
     data: [],
@@ -197,6 +206,7 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
           isOpen,
           onToggle,
         },
+        emojiPickerStyles,
       }}
     >
       {children}
