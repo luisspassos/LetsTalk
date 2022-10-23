@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
+import { CategoryTitle } from './CategoryTitle';
 import { Emoji } from './Emoji';
 
 type EmojiRows = JSX.Element[];
@@ -19,7 +20,7 @@ export function Scroll() {
 
   function insertEmojis() {
     for (const categoryName in emojiCategories) {
-      components.push(<h3>{categoryName}</h3>);
+      components.push(<CategoryTitle text={categoryName} />);
 
       const category = emojiCategories[categoryName];
 
