@@ -22,7 +22,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const {
-    searchedEmojis: { data: searchedEmojis },
+    searchedEmojis: { searchedEmojis },
     categories: { setState: setCategories },
   } = useEmoji();
 
@@ -35,7 +35,7 @@ export function Button({
     index === 0
       ? {
           content: '""',
-          h: !searchedEmojis.isEmpty ? '0px' : '4px',
+          h: searchedEmojis.length ? '0px' : '4px',
           pos: 'absolute',
           bottom: 0,
           bg: 'gray.300',
@@ -85,7 +85,7 @@ export function Button({
   return (
     <IconButton
       color={
-        selectedCategoryIndex === index && searchedEmojis.isEmpty
+        selectedCategoryIndex === index && !searchedEmojis.length
           ? color.selected
           : color.default
       }

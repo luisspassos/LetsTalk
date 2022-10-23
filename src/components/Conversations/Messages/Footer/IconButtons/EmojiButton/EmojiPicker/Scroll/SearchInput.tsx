@@ -1,13 +1,53 @@
 import { Input, useColorModeValue } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+
+function formatValue(value: string) {
+  // remove accents
+  value = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  value = value.toLowerCase().trim();
+
+  return value;
+}
 
 export function SearchInput() {
-  const [search, setSearch] = useState('');
+  const {
+    searchedEmojis: { setSearchedEmojis },
+  } = useEmoji();
 
-  useEffect(() => {
-    console.log(search);
-  }, [search]);
+  async function handleSearch(search: string) {
+    if (!search) {
+      setSearchedEmojis({
+        data: [],
+        isEmpty: true,
+      });
 
+      return;
+    }
+
+    const formattedSearch = formatValue(search);
+
+    const { emojiCategories } = await import(
+      '../../../../../../../../utils/emojiCategories'
+    );
+
+    const emojis = Object.keys(emojiCategories).flatMap(
+      (e) => emojiCategories[e]
+    );
+
+    const searchedEmojis = emojis
+      .filter(({ name }) => {
+        const formattedName = formatValue(name);
+
+        return formattedName.includes(formattedSearch);
+      })
+      .map((emoji) => emoji.emoji);
+
+    setSearchedEmojis({
+      data: searchedEmojis,
+      isEmpty: searchedEmojis.length === 0 ? true : false,
+    });
+  }
   // const {
   //   searchedEmojis: { setState: setSearchedEmojis },
   // } = useEmoji();
@@ -48,8 +88,7 @@ export function SearchInput() {
       h='40px'
       flexShrink={0}
       w='98.5%'
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
+      onChange={(e) => handleSearch(e.target.value)}
     />
   );
 }

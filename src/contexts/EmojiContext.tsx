@@ -51,8 +51,8 @@ type Categories = {
 
 type EmojiContextType = {
   searchedEmojis: {
-    data: SearchedEmojis;
-    setState: Dispatch<SetStateAction<SearchedEmojis>>;
+    searchedEmojis: SearchedEmojis;
+    setSearchedEmojis: Dispatch<SetStateAction<SearchedEmojis>>;
   };
   categories: {
     data: Categories;
@@ -194,8 +194,8 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
     <EmojiContext.Provider
       value={{
         searchedEmojis: {
-          data: searchedEmojis,
-          setState: setSearchedEmojis,
+          searchedEmojis,
+          setSearchedEmojis,
         },
         categories: {
           data: categories,

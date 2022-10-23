@@ -13,7 +13,10 @@ export function Scroll() {
 
   const width = parentRef.current?.clientWidth || 0;
 
-  const { emojiPickerStyles } = useEmoji();
+  const {
+    emojiPickerStyles,
+    searchedEmojis: { searchedEmojis },
+  } = useEmoji();
 
   const emojisPerRow = Math.floor(width / emojiPickerStyles.emojiSize);
 
