@@ -1,36 +1,41 @@
 import { Input, useColorModeValue } from '@chakra-ui/react';
-import { useCallback } from 'react';
-import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import { useEffect, useState } from 'react';
 
 export function SearchInput() {
-  const {
-    searchedEmojis: { setState: setSearchedEmojis },
-  } = useEmoji();
+  const [search, setSearch] = useState('');
 
-  const handleSearchEmoji = useCallback(
-    async (search: string) => {
-      const searchFormatted = search.toLowerCase().trim();
+  useEffect(() => {
+    console.log(search);
+  }, [search]);
 
-      if (!searchFormatted) {
-        setSearchedEmojis({ data: [], isEmpty: true });
+  // const {
+  //   searchedEmojis: { setState: setSearchedEmojis },
+  // } = useEmoji();
 
-        return;
-      }
+  // const handleSearchEmoji = useCallback(
+  //   async (search: string) => {
+  //     const searchFormatted = search.toLowerCase().trim();
 
-      const { emojis } = await import(
-        '../../../../../../../../utils/emojiCategories'
-      );
+  //     if (!searchFormatted) {
+  //       setSearchedEmojis({ data: [], isEmpty: true });
 
-      const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
+  //       return;
+  //     }
 
-      const searchedEmojis = allEmojis.filter(({ name }) =>
-        name.toLowerCase().includes(searchFormatted)
-      );
+  //     const { emojis } = await import(
+  //       '../../../../../../../../utils/emojiCategories'
+  //     );
 
-      setSearchedEmojis({ data: searchedEmojis, isEmpty: false });
-    },
-    [setSearchedEmojis]
-  );
+  //     const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
+
+  //     const searchedEmojis = allEmojis.filter(({ name }) =>
+  //       name.toLowerCase().includes(searchFormatted)
+  //     );
+
+  //     setSearchedEmojis({ data: searchedEmojis, isEmpty: false });
+  //   },
+  //   [setSearchedEmojis]
+  // );
 
   return (
     <Input
@@ -42,7 +47,8 @@ export function SearchInput() {
       h='40px'
       flexShrink={0}
       w='98.5%'
-      onChange={(e) => handleSearchEmoji(e.target.value)}
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
     />
   );
 }
