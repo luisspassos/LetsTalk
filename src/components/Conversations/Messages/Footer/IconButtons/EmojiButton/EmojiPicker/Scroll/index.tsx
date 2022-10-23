@@ -4,6 +4,7 @@ import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
 import { CategoryTitle } from './CategoryTitle';
 import { Emoji } from './Emoji';
+import { SearchInput } from './SearchInput';
 
 type EmojiRows = JSX.Element[];
 
@@ -16,7 +17,9 @@ export function Scroll() {
 
   const emojisPerRow = Math.floor(width / emojiPickerStyles.emojiSize);
 
-  const components: (JSX.Element | EmojiRows)[] = [];
+  const components: (JSX.Element | EmojiRows)[] = [
+    <SearchInput key='searchInput' />,
+  ];
 
   function insertEmojis() {
     for (const categoryName in emojiCategories) {
