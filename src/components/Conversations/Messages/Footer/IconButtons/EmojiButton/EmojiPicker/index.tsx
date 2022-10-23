@@ -10,7 +10,7 @@ export function EmojiPicker() {
   } = useEmoji();
 
   return (
-    <Collapse in={isOpen} unmountOnExit>
+    <Collapse in={isOpen}>
       <Divider />
       <Categories />
       <ChakraFlex h='300px' w='100%' direction='column'>
