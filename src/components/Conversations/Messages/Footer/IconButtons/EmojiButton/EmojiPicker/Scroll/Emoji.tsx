@@ -1,16 +1,22 @@
-import { memo } from 'react';
+import { memo, MouseEvent as ReactMouseEvent, useState } from 'react';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
 
 type EmojiProps = {
   children: string;
 };
 
+type MouseDownEvent = ReactMouseEvent<HTMLSpanElement, MouseEvent>;
+
 function getValueWithMeasure(value: number) {
   return value + 'px';
 }
 
-function EmojiComponent({ children }: EmojiProps) {
+function EmojiComponent({ children: emoji }: EmojiProps) {
   const { emojiPickerStyles } = useEmoji();
+  const { ref: messageInputRef } = useMessageInputRef();
+
+  const [hover, setHover] = useState(false);
 
   const styles = {
     size: getValueWithMeasure(emojiPickerStyles.emojiSize),
@@ -68,30 +74,38 @@ function EmojiComponent({ children }: EmojiProps) {
   //   // }));
   // }
 
-  // function handleInsertEmoji() {
-  //   const input = messageInputRef.current;
+  function handleInsertEmoji() {
+    const input = messageInputRef.current;
 
-  //   const isFocused = document.activeElement === input;
+    const isFocused = document.activeElement === input;
 
-  //   if (!isFocused) input?.focus();
+    if (!isFocused) input?.focus();
 
-  //   const [start, end] = [
-  //     input?.selectionStart,
-  //     input?.selectionEnd,
-  //   ] as number[];
+    const [start, end] = [
+      input?.selectionStart,
+      input?.selectionEnd,
+    ] as number[];
 
-  //   input?.setRangeText(emoji, start, end, 'end');
+    input?.setRangeText(emoji, start, end, 'end');
 
-  //   function handleInputSize() {
-  //     input?.dispatchEvent(new Event('change', { bubbles: true }));
-  //   }
+    function handleInputSize() {
+      input?.dispatchEvent(new Event('change', { bubbles: true }));
+    }
 
-  //   handleInputSize();
-  // }
+    handleInputSize();
+  }
 
-  // function handleDisableFocusOnClick(e: MouseEvent) {
-  //   e.preventDefault();
-  // }
+  function handleDisableFocusOnClick(e: MouseDownEvent) {
+    e.preventDefault();
+  }
+
+  function handleAddHover() {
+    setHover(true);
+  }
+
+  function handleRemoveHover() {
+    setHover(false);
+  }
 
   return (
     <span
@@ -101,9 +115,19 @@ function EmojiComponent({ children }: EmojiProps) {
         cursor: 'pointer',
         borderRadius: '8px',
         fontSize: styles.fontSize,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: hover
+          ? 'var(--chakra-colors-whiteAlpha-400)'
+          : undefined,
       }}
+      onClick={handleInsertEmoji}
+      onMouseDown={handleDisableFocusOnClick}
+      onMouseEnter={handleAddHover}
+      onMouseOut={handleRemoveHover}
     >
-      {children}
+      {emoji}
     </span>
     // <Center
     //   onMouseDown={handleDisableFocusOnClick}
