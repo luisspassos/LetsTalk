@@ -17,10 +17,7 @@ export function SearchInput() {
 
   async function handleSearch(search: string) {
     if (!search) {
-      setSearchedEmojis({
-        data: [],
-        isEmpty: true,
-      });
+      setSearchedEmojis(null);
 
       return;
     }
@@ -43,10 +40,7 @@ export function SearchInput() {
       })
       .map((emoji) => emoji.emoji);
 
-    setSearchedEmojis({
-      data: searchedEmojis,
-      isEmpty: searchedEmojis.length === 0 ? true : false,
-    });
+    setSearchedEmojis(searchedEmojis);
   }
   // const {
   //   searchedEmojis: { setState: setSearchedEmojis },

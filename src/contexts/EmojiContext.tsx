@@ -33,10 +33,7 @@ type RawEmoji = {
   emoji: string;
 };
 
-type SearchedEmojis = {
-  data: Emoji[];
-  isEmpty: boolean;
-};
+type SearchedEmojis = Emoji[] | null;
 
 export type CategoryData = {
   icon: IconType;
@@ -84,10 +81,7 @@ export const createRecentCategory = (emojis: Emoji[] = []) => ({
 export const EmojiContext = createContext({} as EmojiContextType);
 
 export function EmojiProvider({ children }: EmojiProviderProps) {
-  const [searchedEmojis, setSearchedEmojis] = useState<SearchedEmojis>({
-    data: [],
-    isEmpty: true,
-  });
+  const [searchedEmojis, setSearchedEmojis] = useState<SearchedEmojis>(null);
 
   const emojiPickerStyles = {
     emojiSize: useBreakpointValue([36, 41, 46]) || 0,
