@@ -2,9 +2,10 @@ import { useColorModeValue } from '@chakra-ui/react';
 
 type CategoryTitleProps = {
   text: string;
+  func: Function;
 };
 
-export function CategoryTitle({ text }: CategoryTitleProps) {
+export function CategoryTitle({ text, func }: CategoryTitleProps) {
   return (
     <h3
       style={{

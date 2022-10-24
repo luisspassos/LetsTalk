@@ -65,7 +65,9 @@ export function Scroll() {
     }
 
     for (const categoryName in emojiCategories) {
-      components.push(<CategoryTitle text={categoryName} />);
+      components.push(
+        <CategoryTitle func={virtualizer?.scrollToIndex} text={categoryName} />
+      );
 
       const category = emojiCategories[categoryName];
 

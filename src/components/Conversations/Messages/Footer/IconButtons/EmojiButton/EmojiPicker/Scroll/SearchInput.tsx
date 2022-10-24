@@ -42,34 +42,6 @@ export function SearchInput() {
 
     setSearchedEmojis(searchedEmojis);
   }
-  // const {
-  //   searchedEmojis: { setState: setSearchedEmojis },
-  // } = useEmoji();
-
-  // const handleSearchEmoji = useCallback(
-  //   async (search: string) => {
-  //     const searchFormatted = search.toLowerCase().trim();
-
-  //     if (!searchFormatted) {
-  //       setSearchedEmojis({ data: [], isEmpty: true });
-
-  //       return;
-  //     }
-
-  //     const { emojis } = await import(
-  //       '../../../../../../../../utils/emojiCategories'
-  //     );
-
-  //     const allEmojis = Object.keys(emojis).flatMap((e) => emojis[e]);
-
-  //     const searchedEmojis = allEmojis.filter(({ name }) =>
-  //       name.toLowerCase().includes(searchFormatted)
-  //     );
-
-  //     setSearchedEmojis({ data: searchedEmojis, isEmpty: false });
-  //   },
-  //   [setSearchedEmojis]
-  // );
 
   return (
     <Input
