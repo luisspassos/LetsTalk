@@ -1,9 +1,19 @@
-import { createContext, useContext } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
+
+type ScrollProviderProps = {
+  children: ReactNode;
+};
 
 export const ScrollContext = createContext({});
 
-export function ScrollProvider() {
-  return <ScrollContext.Provider></ScrollContext.Provider>;
+export function ScrollProvider({ children }: ScrollProviderProps) {
+  const [scrollToIndex, setScrollToIndex] = useState();
+
+  return (
+    <ScrollContext.Provider value={{ scrollToIndex, setScrollToIndex }}>
+      {children}
+    </ScrollContext.Provider>
+  );
 }
 
 export function useScroll() {
