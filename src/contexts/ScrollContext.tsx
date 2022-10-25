@@ -4,6 +4,12 @@ type ScrollProviderProps = {
   children: ReactNode;
 };
 
+type Scrol
+
+type ScrollContextType = {
+  scroll
+}
+
 export const ScrollContext = createContext({});
 
 export function ScrollProvider({ children }: ScrollProviderProps) {
