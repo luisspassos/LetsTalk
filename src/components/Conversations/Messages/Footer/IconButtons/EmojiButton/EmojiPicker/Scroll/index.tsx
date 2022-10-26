@@ -1,9 +1,10 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 import {
   useEmoji,
   Emoji as EmojiType,
 } from '../../../../../../../../contexts/EmojiContext';
+import { useScroll } from '../../../../../../../../contexts/ScrollContext';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
 import { CategoryTitle } from './CategoryTitle';
 import { Emoji } from './Emoji';
@@ -65,9 +66,7 @@ export function Scroll() {
     }
 
     for (const categoryName in emojiCategories) {
-      components.push(
-        <CategoryTitle func={virtualizer?.scrollToIndex} text={categoryName} />
-      );
+      components.push(<CategoryTitle text={categoryName} />);
 
       const category = emojiCategories[categoryName];
 
@@ -89,6 +88,12 @@ export function Scroll() {
     paddingEnd: 10,
     overscan: 0,
   });
+
+  const { setScrollToIndex, scrollToIndex } = useScroll();
+
+  useEffect(() => {
+    setScrollToIndex(virtualizer.scrollToIndex);
+  }, [setScrollToIndex, virtualizer.scrollToIndex]);
 
   return (
     <div ref={parentRef} style={{ overflow: 'auto', scrollBehavior: 'smooth' }}>

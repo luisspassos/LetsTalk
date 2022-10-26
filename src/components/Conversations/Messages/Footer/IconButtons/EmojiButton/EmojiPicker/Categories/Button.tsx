@@ -6,6 +6,7 @@ import {
 } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import { useScroll } from '../../../../../../../../contexts/ScrollContext';
 
 type ButtonProps = {
   categoryIcon: IconType;
@@ -19,6 +20,8 @@ export function Button({
   const {
     searchedEmojis: { searchedEmojis },
   } = useEmoji();
+
+  const { scrollToIndex } = useScroll();
 
   const color = {
     selected: useColorModeValue('blackAlpha.800', 'whiteAlpha.800'),
@@ -41,6 +44,7 @@ export function Button({
 
   return (
     <IconButton
+      // onClick={() => scrollToIndex(30)}
       color={0 === 0 && !searchedEmojis ? color.selected : color.default}
       title={ariaLabel}
       aria-label={ariaLabel}

@@ -1,21 +1,16 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
+import { useVirtual } from 'react-virtual';
 
 type ScrollProviderProps = {
   children: ReactNode;
 };
 
-type Scrol
-
-type ScrollContextType = {
-  scroll
-}
-
 export const ScrollContext = createContext({});
 
 export function ScrollProvider({ children }: ScrollProviderProps) {
-  const [scrollToIndex, setScrollToIndex] = useState();
+  const virtualizer = useVirtual;
 
-  return (
+  virtualizer.return(
     <ScrollContext.Provider value={{ scrollToIndex, setScrollToIndex }}>
       {children}
     </ScrollContext.Provider>
