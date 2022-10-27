@@ -10,9 +10,11 @@ import { useScroll } from '../../../../../../../../contexts/ScrollContext';
 
 type ButtonProps = {
   categoryIcon: IconType;
+  index: number;
 } & IconButtonProps;
 
 export function Button({
+  index,
   'aria-label': ariaLabel,
   categoryIcon,
   ...rest
@@ -21,7 +23,13 @@ export function Button({
     searchedEmojis: { searchedEmojis },
   } = useEmoji();
 
-  const { scrollToIndex } = useScroll();
+  const { virtualizer, components } = useScroll();
+
+  const categories = components.filter(
+    (component) => component.key === 'category'
+  );
+
+  const categoryIndices = categories.map((c) => components.indexOf(c));
 
   const color = {
     selected: useColorModeValue('blackAlpha.800', 'whiteAlpha.800'),
@@ -44,7 +52,9 @@ export function Button({
 
   return (
     <IconButton
-      // onClick={() => scrollToIndex(30)}
+      onClick={() =>
+        virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' })
+      }
       color={0 === 0 && !searchedEmojis ? color.selected : color.default}
       title={ariaLabel}
       aria-label={ariaLabel}

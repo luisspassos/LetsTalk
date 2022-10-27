@@ -39,8 +39,8 @@ export function Categories() {
           },
         }}
       >
-        {categories.map(({ icon, name }) => (
-          <Button categoryIcon={icon} aria-label={name} key={name} />
+        {categories.map(({ icon, name }, i) => (
+          <Button index={i} categoryIcon={icon} aria-label={name} key={name} />
         ))}
       </Flex>
     </Box>

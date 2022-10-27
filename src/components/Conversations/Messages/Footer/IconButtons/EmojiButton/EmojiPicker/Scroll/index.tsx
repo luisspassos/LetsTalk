@@ -1,99 +1,7 @@
-import { useEffect, useRef } from 'react';
-import { useVirtual } from 'react-virtual';
-import {
-  useEmoji,
-  Emoji as EmojiType,
-} from '../../../../../../../../contexts/EmojiContext';
 import { useScroll } from '../../../../../../../../contexts/ScrollContext';
-import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
-import { CategoryTitle } from './CategoryTitle';
-import { Emoji } from './Emoji';
-import { SearchInput } from './SearchInput';
-
-type EmojiRow = JSX.Element[];
 
 export function Scroll() {
-  const parentRef = useRef<HTMLDivElement>(null);
-
-  const width = parentRef.current?.clientWidth || 0;
-
-  const {
-    emojiPickerStyles,
-    searchedEmojis: { searchedEmojis },
-  } = useEmoji();
-
-  const emojisPerRow = Math.floor(width / emojiPickerStyles.emojiSize);
-
-  const components: (JSX.Element | EmojiRow)[] = [
-    <SearchInput key='searchInput' />,
-  ];
-
-  function insertEmojis() {
-    function fillEmojiRows(emoji: EmojiType, rows: EmojiRow[]) {
-      const getCurrentEmojiRow = () => {
-        const index = rows.length - 1;
-
-        return rows[index];
-      };
-
-      const row = getCurrentEmojiRow();
-
-      const rowIsFilled = row.length === emojisPerRow;
-
-      if (rowIsFilled) rows.push([]);
-
-      const rowToBeFilled = getCurrentEmojiRow();
-
-      rowToBeFilled.push(<Emoji key={emoji}>{emoji}</Emoji>);
-    }
-
-    function fillComponents(emojiRows: EmojiRow[]) {
-      for (const row of emojiRows) {
-        components.push(row);
-      }
-    }
-
-    if (searchedEmojis) {
-      const emojiRows: EmojiRow[] = [[]];
-
-      for (const emoji of searchedEmojis) {
-        fillEmojiRows(emoji, emojiRows);
-      }
-
-      fillComponents(emojiRows);
-
-      return;
-    }
-
-    for (const categoryName in emojiCategories) {
-      components.push(<CategoryTitle text={categoryName} />);
-
-      const category = emojiCategories[categoryName];
-
-      const emojiRows: EmojiRow[] = [[]];
-
-      for (const { emoji } of category) {
-        fillEmojiRows(emoji, emojiRows);
-      }
-
-      fillComponents(emojiRows);
-    }
-  }
-
-  insertEmojis();
-
-  const virtualizer = useVirtual({
-    size: components.length,
-    parentRef,
-    paddingEnd: 10,
-    overscan: 0,
-  });
-
-  const { setScrollToIndex, scrollToIndex } = useScroll();
-
-  useEffect(() => {
-    setScrollToIndex(virtualizer.scrollToIndex);
-  }, [setScrollToIndex, virtualizer.scrollToIndex]);
+  const { components, parentRef, virtualizer } = useScroll();
 
   return (
     <div ref={parentRef} style={{ overflow: 'auto', scrollBehavior: 'smooth' }}>
@@ -105,6 +13,8 @@ export function Scroll() {
         }}
       >
         {virtualizer.virtualItems.map((item) => {
+          console.log(item.measureRef((el) => console.log(el)));
+
           const component = components[item.index];
 
           const isEmojis = Array.isArray(component);
