@@ -13,8 +13,6 @@ export function Scroll() {
         }}
       >
         {virtualizer.virtualItems.map((item) => {
-          console.log(item.measureRef((el) => console.log(el)));
-
           const component = components[item.index];
 
           const isEmojis = Array.isArray(component);

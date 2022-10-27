@@ -29,6 +29,8 @@ export function Button({
     (component) => component.key === 'category'
   );
 
+  const currentIndex = virtualizer.virtualItems[0].index;
+
   const categoryIndices = categories.map((c) => components.indexOf(c));
 
   const color = {
