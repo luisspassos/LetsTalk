@@ -33,13 +33,17 @@ export function Button({
 
   const categoryIndices = categories.map((c) => components.indexOf(c));
 
+  const a = categoryIndices.filter((index) => currentIndex >= index);
+
+  const b = categoryIndices.indexOf(a.pop()) || 0;
+
   const color = {
     selected: useColorModeValue('blackAlpha.800', 'whiteAlpha.800'),
     default: useColorModeValue('blackAlpha.600', 'whiteAlpha.600'),
   };
 
   const selectedCategoryBar =
-    0 === 0
+    index === b
       ? {
           content: '""',
           h: searchedEmojis ? '0px' : '4px',
@@ -57,7 +61,7 @@ export function Button({
       onClick={() =>
         virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' })
       }
-      color={0 === 0 && !searchedEmojis ? color.selected : color.default}
+      color={index === b && !searchedEmojis ? color.selected : color.default}
       title={ariaLabel}
       aria-label={ariaLabel}
       variant='unstyled'
