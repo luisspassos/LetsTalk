@@ -18,6 +18,7 @@
     "@fontsource/roboto": "^4.5.3",
     "@hookform/resolvers": "^2.8.8",
     "@next/bundle-analyzer": "^12.1.0",
+    "@react-hook/resize-observer": "^1.2.6",
     "axios": "^0.26.1",
     "firebase": "^9.6.8",
     "firebase-admin": "^10.0.2",
