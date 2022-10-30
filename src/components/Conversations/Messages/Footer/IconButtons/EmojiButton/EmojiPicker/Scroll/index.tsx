@@ -3,7 +3,9 @@ import { useScroll } from '../../../../../../../../contexts/ScrollContext';
 
 export function Scroll() {
   const { components, parentRef, virtualizer } = useScroll();
-  const { searchedEmojis } = useEmoji();
+  const {
+    searchedEmojis: { searchedEmojis },
+  } = useEmoji();
 
   return (
     <div ref={parentRef} style={{ overflow: 'auto', scrollBehavior: 'smooth' }}>

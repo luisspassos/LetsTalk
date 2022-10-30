@@ -12,7 +12,7 @@ function formatValue(value: string) {
 
 export function SearchInput() {
   const {
-    searchedEmojis: { setSearchedEmojis },
+    searchedEmojis: { setSearchedEmojis, searchedEmojis },
   } = useEmoji();
 
   async function handleSearch(search: string) {
@@ -47,7 +47,7 @@ export function SearchInput() {
     <Input
       placeholder='Pesquisar emoji'
       mt='10px'
-      mb='4px'
+      mb={searchedEmojis ? '8px' : '4px'}
       ml='1px'
       fontSize='15px'
       bgColor={useColorModeValue('white', 'blackAlpha.200')}
