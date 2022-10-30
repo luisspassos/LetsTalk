@@ -1,4 +1,4 @@
-import { Box, Flex, FormControl, HStack } from '@chakra-ui/react';
+import { Box, Flex, HStack } from '@chakra-ui/react';
 import { Divider } from '../../../Divider';
 import { EmojiPicker } from './IconButtons/EmojiButton/EmojiPicker';
 import { RecordButtonAudio } from './Buttons/RecordButtonAudio';
@@ -70,7 +70,7 @@ export function Footer() {
 
   return (
     <Box display='inline-block' as='footer'>
-      <FormControl as='form' mt='auto'>
+      <Box mt='auto'>
         <EmojiPicker />
         <Divider />
         <Flex py='15px' align='end' justify='start' pos='relative'>
@@ -93,7 +93,7 @@ export function Footer() {
             />
           )}
         </Flex>
-      </FormControl>
+      </Box>
     </Box>
   );
 }

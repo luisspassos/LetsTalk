@@ -1,7 +1,9 @@
+import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useScroll } from '../../../../../../../../contexts/ScrollContext';
 
 export function Scroll() {
   const { components, parentRef, virtualizer } = useScroll();
+  const { searchedEmojis } = useEmoji();
 
   return (
     <div ref={parentRef} style={{ overflow: 'auto', scrollBehavior: 'smooth' }}>
@@ -28,7 +30,7 @@ export function Scroll() {
                 left: 0,
                 width: '100%',
                 paddingRight: '10px',
-                paddingLeft: isEmojis ? '10px' : undefined,
+                paddingLeft: isEmojis && !searchedEmojis ? '10px' : undefined,
                 transform: `translateY(${item.start}px)`,
               }}
             >
