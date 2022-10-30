@@ -27,6 +27,7 @@ export function Scroll() {
                 top: 0,
                 left: 0,
                 width: '100%',
+                paddingRight: '10px',
                 paddingLeft: isEmojis ? '10px' : undefined,
                 transform: `translateY(${item.start}px)`,
               }}

@@ -53,7 +53,7 @@ export function SearchInput() {
       bgColor={useColorModeValue('white', 'blackAlpha.200')}
       h='40px'
       flexShrink={0}
-      w='98.5%'
+      // w='99%'
       onChange={(e) => handleSearch(e.target.value)}
     />
   );
