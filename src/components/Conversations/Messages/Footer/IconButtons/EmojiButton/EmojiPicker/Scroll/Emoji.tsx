@@ -1,4 +1,4 @@
-import { memo, MouseEvent as ReactMouseEvent, useState } from 'react';
+import { MouseEvent as ReactMouseEvent, useState } from 'react';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
 
@@ -12,7 +12,7 @@ function getValueWithMeasure(value: number) {
   return value + 'px';
 }
 
-function EmojiComponent({ children: emoji }: EmojiProps) {
+export function Emoji({ children: emoji }: EmojiProps) {
   const { emojiPickerStyles } = useEmoji();
   const { ref: messageInputRef } = useMessageInputRef();
 
@@ -150,4 +150,4 @@ function EmojiComponent({ children: emoji }: EmojiProps) {
   );
 }
 
-export const Emoji = memo(EmojiComponent);
+// export const Emoji = memo(EmojiComponent);

@@ -11,8 +11,9 @@ import {
 import { RiBearSmileLine } from 'react-icons/ri';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
 import { Button } from './Button';
+import { SelectedBar } from './SelectedBar';
 
-const icons = [
+export const icons = [
   MdOutlineEmojiEmotions,
   RiBearSmileLine,
   IoFastFoodOutline,
@@ -33,12 +34,14 @@ export function Categories() {
     <Box>
       <Flex
         overflowX='auto'
+        position='relative'
         sx={{
           '&::-webkit-scrollbar': {
             display: 'none',
           },
         }}
       >
+        <SelectedBar />
         {categories.map(({ icon, name }, i) => (
           <Button index={i} categoryIcon={icon} aria-label={name} key={name} />
         ))}

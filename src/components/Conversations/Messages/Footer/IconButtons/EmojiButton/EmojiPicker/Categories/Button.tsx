@@ -42,19 +42,19 @@ export function Button({
     default: useColorModeValue('blackAlpha.600', 'whiteAlpha.600'),
   };
 
-  const selectedCategoryBar =
-    index === b
-      ? {
-          content: '""',
-          h: searchedEmojis ? '0px' : '4px',
-          pos: 'absolute',
-          bottom: 0,
-          bg: 'gray.300',
-          transition: '0.2s',
-          transform: `translateX(${0 * 100}%)`,
-          w: '100%',
-        }
-      : undefined;
+  // const selectedCategoryBar =
+  //   index === b
+  //     ? {
+  //         content: '""',
+  //         h: searchedEmojis ? '0px' : '4px',
+  //         pos: 'absolute',
+  //         bottom: 0,
+  //         bg: 'gray.300',
+  //         transition: '0.2s',
+  //         transform: `translateX(${0 * 100}%)`,
+  //         w: '100%',
+  //       }
+  //     : undefined;
 
   return (
     <IconButton
@@ -73,7 +73,7 @@ export function Button({
       _focus={{
         boxShadow: 'none',
       }}
-      _before={selectedCategoryBar}
+      // _before={selectedCategoryBar}
       d='flex'
       icon={<Icon as={categoryIcon} />}
       {...rest}
