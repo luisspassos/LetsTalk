@@ -11,31 +11,21 @@ import { useScroll } from '../../../../../../../../contexts/ScrollContext';
 type ButtonProps = {
   categoryIcon: IconType;
   index: number;
+  b: number;
 } & IconButtonProps;
 
 export function Button({
   index,
-  'aria-label': ariaLabel,
   categoryIcon,
+  b,
+  'aria-label': ariaLabel,
   ...rest
 }: ButtonProps) {
   const {
     searchedEmojis: { searchedEmojis },
   } = useEmoji();
 
-  const { virtualizer, components } = useScroll();
-
-  const categories = components.filter(
-    (component) => component.key === 'category'
-  );
-
-  const currentIndex = virtualizer.virtualItems[0].index;
-
-  const categoryIndices = categories.map((c) => components.indexOf(c));
-
-  const a = categoryIndices.filter((index) => currentIndex >= index);
-
-  const b = categoryIndices.indexOf(a.pop()) || 0;
+  const { virtualizer } = useScroll();
 
   const color = {
     selected: useColorModeValue('blackAlpha.800', 'whiteAlpha.800'),
@@ -58,9 +48,9 @@ export function Button({
 
   return (
     <IconButton
-      onClick={() =>
-        virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' })
-      }
+      // onClick={() =>
+      //   virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' })
+      // }
       color={index === b && !searchedEmojis ? color.selected : color.default}
       title={ariaLabel}
       aria-label={ariaLabel}

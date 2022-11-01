@@ -9,6 +9,7 @@ import {
   MdOutlineEmojiObjects,
 } from 'react-icons/md';
 import { RiBearSmileLine } from 'react-icons/ri';
+import { useScroll } from '../../../../../../../../contexts/ScrollContext';
 import { emojiCategories } from '../../../../../../../../utils/emojiCategories';
 import { Button } from './Button';
 import { SelectedBar } from './SelectedBar';
@@ -30,6 +31,22 @@ const categories = Object.keys(emojiCategories).map((category, i) => ({
 }));
 
 export function Categories() {
+  const { virtualizer, components } = useScroll();
+
+  const categoryComponents = components.filter(
+    (component) => component.key === 'category'
+  );
+
+  const currentIndex = virtualizer.virtualItems[0].index;
+
+  const categoryIndices = categoryComponents.map((c) => components.indexOf(c));
+
+  const a = categoryIndices.filter((index) => currentIndex >= index);
+
+  const b = categoryIndices.indexOf(a.pop());
+
+  const c = b === -1 ? 0 : b;
+
   return (
     <Box>
       <Flex
@@ -41,9 +58,15 @@ export function Categories() {
           },
         }}
       >
-        <SelectedBar />
+        <SelectedBar b={c} />
         {categories.map(({ icon, name }, i) => (
-          <Button index={i} categoryIcon={icon} aria-label={name} key={name} />
+          <Button
+            b={c}
+            index={i}
+            categoryIcon={icon}
+            aria-label={name}
+            key={name}
+          />
         ))}
       </Flex>
     </Box>
