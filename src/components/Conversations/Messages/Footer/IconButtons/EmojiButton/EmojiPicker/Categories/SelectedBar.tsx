@@ -8,14 +8,16 @@ type SelectedBarProps = {
 };
 
 export function SelectedBar({ b }: SelectedBarProps) {
-  const { searchedEmojis } = useEmoji();
+  const {
+    searchedEmojis: { searchedEmojis },
+  } = useEmoji();
 
   const categoriesLength = icons.length;
   const width = `${100 / categoriesLength}%`;
 
   return (
     <Box
-      h={'4px'}
+      h={searchedEmojis ? '0px' : '4px'}
       pos='absolute'
       bottom={0}
       bgColor='gray.300'
