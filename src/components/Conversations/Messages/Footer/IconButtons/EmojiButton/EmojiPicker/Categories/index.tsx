@@ -61,9 +61,10 @@ export function Categories() {
         <SelectedBar b={c} />
         {categories.map(({ icon, name }, i) => (
           <Button
+            categoryIndices={categoryIndices}
             b={c}
             index={i}
-            categoryIcon={icon}
+            CategoryIcon={icon}
             aria-label={name}
             key={name}
           />
