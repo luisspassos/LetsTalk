@@ -6,25 +6,29 @@ import { Emoji } from '../components/Conversations/Messages/Footer/IconButtons/E
 import { emojiCategories } from '../utils/emojiCategories';
 import { useEmoji, Emoji as EmojiType } from './EmojiContext';
 
-type ScrollProviderProps = {
+type EmojiPickerScrollProviderProps = {
   children: ReactNode;
 };
 
-type ScrollContextType = {
-  parentRef: RefObject<HTMLDivElement>;
-  virtualizer: any;
-  components: (JSX.Element | EmojiRow)[];
-};
+type CategoryIndices = number[];
 
-function easeInOutQuint(t: number) {
-  return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
-}
+type EmojiPickerScrollContextType = {
+  parentRef: RefObject<HTMLDivElement>;
+  virtualizer: ReturnType<typeof useVirtual>;
+  components: (JSX.Element | EmojiRow)[];
+  categoryIndices: CategoryIndices;
+  selectedCategoryPosition: number;
+};
 
 type EmojiRow = JSX.Element[];
 
-export const ScrollContext = createContext({} as ScrollContextType);
+export const EmojiPickerScrollContext = createContext(
+  {} as EmojiPickerScrollContextType
+);
 
-export function ScrollProvider({ children }: ScrollProviderProps) {
+export function EmojiPickerScrollProvider({
+  children,
+}: EmojiPickerScrollProviderProps) {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const width = parentRef.current?.clientWidth || 0;
@@ -40,7 +44,9 @@ export function ScrollProvider({ children }: ScrollProviderProps) {
     <SearchInput key='searchInput' />,
   ];
 
-  function insertEmojis() {
+  const categoryIndices: CategoryIndices = [];
+
+  function insertEmojisAndInsertCategoryIndices() {
     function fillEmojiRows(emoji: EmojiType, rows: EmojiRow[]) {
       const getCurrentEmojiRow = () => {
         const index = rows.length - 1;
@@ -78,7 +84,13 @@ export function ScrollProvider({ children }: ScrollProviderProps) {
     }
 
     for (const categoryName in emojiCategories) {
-      components.push(<CategoryTitle key='category' text={categoryName} />);
+      const categoryTitle = (
+        <CategoryTitle key='category' text={categoryName} />
+      );
+
+      components.push(categoryTitle);
+
+      categoryIndices.push(components.indexOf(categoryTitle));
 
       const category = emojiCategories[categoryName];
 
@@ -91,7 +103,7 @@ export function ScrollProvider({ children }: ScrollProviderProps) {
       fillComponents(emojiRows);
     }
   }
-  insertEmojis();
+  insertEmojisAndInsertCategoryIndices();
 
   const virtualizer = useVirtual({
     size: components.length,
@@ -100,15 +112,35 @@ export function ScrollProvider({ children }: ScrollProviderProps) {
     overscan: 0,
   });
 
+  const currentIndex = virtualizer.virtualItems[0].index;
+
+  const currentCategoryIndex =
+    categoryIndices.find((categoryIndex, i) => {
+      const nextCategoryIndex = categoryIndices[i + 1] ?? Infinity;
+
+      return currentIndex >= categoryIndex && currentIndex < nextCategoryIndex;
+    }) ?? categoryIndices[0];
+
+  const selectedCategoryPosition =
+    categoryIndices.indexOf(currentCategoryIndex);
+
   return (
-    <ScrollContext.Provider value={{ virtualizer, components, parentRef }}>
+    <EmojiPickerScrollContext.Provider
+      value={{
+        virtualizer,
+        components,
+        parentRef,
+        categoryIndices,
+        selectedCategoryPosition,
+      }}
+    >
       {children}
-    </ScrollContext.Provider>
+    </EmojiPickerScrollContext.Provider>
   );
 }
 
-export function useScroll() {
-  const data = useContext(ScrollContext);
+export function useEmojiPickerScroll() {
+  const data = useContext(EmojiPickerScrollContext);
 
   return data;
 }

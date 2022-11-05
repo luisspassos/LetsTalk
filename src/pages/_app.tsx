@@ -23,7 +23,7 @@ import { ConversationPopoverProvider } from '../contexts/ConversationPopoverCont
 import { RenamingNameProvider } from '../contexts/RenamingNameContext';
 import { EmojiProvider } from '../contexts/EmojiContext';
 import { MessageInputRefProvider } from '../contexts/MessageInputRef';
-import { ScrollProvider } from '../contexts/ScrollContext';
+import { EmojiPickerScrollProvider } from '../contexts/EmojiPickerScrollContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -45,9 +45,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                                   <FadeInAnimationProvider>
                                     <ChakraProvider theme={theme}>
                                       <EmojiProvider>
-                                        <ScrollProvider>
+                                        <EmojiPickerScrollProvider>
                                           <Component {...pageProps} />
-                                        </ScrollProvider>
+                                        </EmojiPickerScrollProvider>
                                       </EmojiProvider>
                                     </ChakraProvider>
                                   </FadeInAnimationProvider>

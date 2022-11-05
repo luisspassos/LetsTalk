@@ -1,8 +1,8 @@
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
-import { useScroll } from '../../../../../../../../contexts/ScrollContext';
+import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
 
 export function Scroll() {
-  const { components, parentRef, virtualizer } = useScroll();
+  const { components, parentRef, virtualizer } = useEmojiPickerScroll();
   const {
     searchedEmojis: { searchedEmojis },
   } = useEmoji();

@@ -1,15 +1,14 @@
 import { icons } from '.';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
 import { transition } from './Button';
 
-type SelectedBarProps = {
-  b: number;
-};
-
-export function SelectedBar({ b }: SelectedBarProps) {
+export function SelectedBar() {
   const {
     searchedEmojis: { searchedEmojis },
   } = useEmoji();
+
+  const { selectedCategoryPosition } = useEmojiPickerScroll();
 
   const categoriesLength = icons.length;
   const width = `${100 / categoriesLength}%`;
@@ -21,7 +20,7 @@ export function SelectedBar({ b }: SelectedBarProps) {
         position: 'absolute',
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
-        transform: `translateX(${b * 100}%)`,
+        transform: `translateX(${selectedCategoryPosition * 100}%)`,
         transition,
         width,
       }}
