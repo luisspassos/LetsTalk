@@ -3211,6 +3211,352 @@ export const emojiCategories: Record<
       name: 'Ânfora',
     },
   ],
+  Atividades: [
+    {
+      emoji: '🎃',
+      name: 'Abóbora De Halloween',
+    },
+    {
+      emoji: '🎄',
+      name: 'Árvore De Natal',
+    },
+    {
+      emoji: '🎆',
+      name: 'Fogos De Artifício',
+    },
+    {
+      emoji: '🎇',
+      name: 'Vela Estrela',
+    },
+    {
+      emoji: '🧨',
+      name: 'Bombinha',
+    },
+    {
+      emoji: '✨',
+      name: 'Brilhos',
+    },
+    {
+      emoji: '🎈',
+      name: 'Balão',
+    },
+    {
+      emoji: '🎉',
+      name: 'Cone De Festa',
+    },
+    {
+      emoji: '🎊',
+      name: 'Confete',
+    },
+    {
+      emoji: '🎋',
+      name: 'Árvore De Tanabata',
+    },
+    {
+      emoji: '🎍',
+      name: 'Decoração De Pinhos',
+    },
+    {
+      emoji: '🎎',
+      name: 'Bonecas Japonesas',
+    },
+    {
+      emoji: '🎏',
+      name: 'Bandeira De Carpas',
+    },
+    {
+      emoji: '🎐',
+      name: 'Carrilhão De Vento',
+    },
+    {
+      emoji: '🎑',
+      name: 'Contemplação Da Lua',
+    },
+    {
+      emoji: '🧧',
+      name: 'Envelope Vermelho',
+    },
+    {
+      emoji: '🎀',
+      name: 'Laço De Fita',
+    },
+    {
+      emoji: '🎁',
+      name: 'Presente',
+    },
+    {
+      emoji: '🎗️',
+      name: 'Fita De Lembrete',
+    },
+    {
+      emoji: '🎟️',
+      name: 'Ingresso De Cinema',
+    },
+    {
+      emoji: '🎫',
+      name: 'Ingresso',
+    },
+    {
+      emoji: '🎖️',
+      name: 'Medalha Militar',
+    },
+    {
+      emoji: '🏆',
+      name: 'Troféu',
+    },
+    {
+      emoji: '🏅',
+      name: 'Medalha Esportiva',
+    },
+    {
+      emoji: '🥇',
+      name: 'Medalha De Ouro',
+    },
+    {
+      emoji: '🥈',
+      name: 'Medalha De Prata',
+    },
+    {
+      emoji: '🥉',
+      name: 'Medalha De Bronze',
+    },
+    {
+      emoji: '⚽',
+      name: 'Bola De Futebol',
+    },
+    {
+      emoji: '⚾',
+      name: 'Bola De Beisebol',
+    },
+    {
+      emoji: '🥎',
+      name: 'Softbol',
+    },
+    {
+      emoji: '🏀',
+      name: 'Bola De Basquete',
+    },
+    {
+      emoji: '🏐',
+      name: 'Bola De Vôlei',
+    },
+    {
+      emoji: '🏈',
+      name: 'Bola De Futebol Americano',
+    },
+    {
+      emoji: '🏉',
+      name: 'Bola De Rugby',
+    },
+    {
+      emoji: '🎾',
+      name: 'Tênis',
+    },
+    {
+      emoji: '🥏',
+      name: 'Frisbee',
+    },
+    {
+      emoji: '🎳',
+      name: 'Boliche',
+    },
+    {
+      emoji: '🏏',
+      name: 'Críquete',
+    },
+    {
+      emoji: '🏑',
+      name: 'Hóquei De Campo',
+    },
+    {
+      emoji: '🏒',
+      name: 'Hóquei No Gelo',
+    },
+    {
+      emoji: '🥍',
+      name: 'Lacrosse',
+    },
+    {
+      emoji: '🏓',
+      name: 'Pingue-Pongue',
+    },
+    {
+      emoji: '🏸',
+      name: 'Badminton',
+    },
+    {
+      emoji: '🥊',
+      name: 'Luva De Boxe',
+    },
+    {
+      emoji: '🥋',
+      name: 'Quimono De Artes Marciais',
+    },
+    {
+      emoji: '🥅',
+      name: 'Gol',
+    },
+    {
+      emoji: '⛳',
+      name: 'Bandeira No Buraco',
+    },
+    {
+      emoji: '⛸️',
+      name: 'Patins De Gelo',
+    },
+    {
+      emoji: '🎣',
+      name: 'Pesca',
+    },
+    {
+      emoji: '🤿',
+      name: 'Máscara De Mergulho',
+    },
+    {
+      emoji: '🎽',
+      name: 'Camiseta De Corrida',
+    },
+    {
+      emoji: '🎿',
+      name: 'Esqui',
+    },
+    {
+      emoji: '🛷',
+      name: 'Trenó',
+    },
+    {
+      emoji: '🥌',
+      name: 'Pedra De Curling',
+    },
+    {
+      emoji: '🎯',
+      name: 'No Alvo',
+    },
+    {
+      emoji: '🪀',
+      name: 'Ioiô',
+    },
+    {
+      emoji: '🪁',
+      name: 'Pipa',
+    },
+    {
+      emoji: '🎱',
+      name: 'Bilhar',
+    },
+    {
+      emoji: '🔮',
+      name: 'Bola De Cristal',
+    },
+    {
+      emoji: '🪄',
+      name: 'Varinha Mágica',
+    },
+    {
+      emoji: '🧿',
+      name: 'Olho Grego',
+    },
+    {
+      emoji: '🪬',
+      name: 'Mão Hamsá',
+    },
+    {
+      emoji: '🎮',
+      name: 'Videogame',
+    },
+    {
+      emoji: '🕹️',
+      name: 'Joystick',
+    },
+    {
+      emoji: '🎰',
+      name: 'Caça-Níquel',
+    },
+    {
+      emoji: '🎲',
+      name: 'Jogo De Dado',
+    },
+    {
+      emoji: '🧩',
+      name: 'Quebra-Cabeça',
+    },
+    {
+      emoji: '🧸',
+      name: 'Ursinho De Pelúcia',
+    },
+    {
+      emoji: '🪅',
+      name: 'Pinhata',
+    },
+    {
+      emoji: '🪩',
+      name: 'Bola Espelhada',
+    },
+    {
+      emoji: '🪆',
+      name: 'boneca Russa',
+    },
+    {
+      emoji: '♠️',
+      name: 'Naipe De Espadas',
+    },
+    {
+      emoji: '♥️',
+      name: 'Naipe De Copas',
+    },
+    {
+      emoji: '♦️',
+      name: 'Naipe De Ouros',
+    },
+    {
+      emoji: '♣️',
+      name: 'Naipe De Paus',
+    },
+    {
+      emoji: '♟️',
+      name: 'Peão De Xadrez',
+    },
+    {
+      emoji: '🃏',
+      name: 'Curinga',
+    },
+    {
+      emoji: '🀄',
+      name: 'Dragão Vermelho De Mahjong',
+    },
+    {
+      emoji: '🎴',
+      name: 'Carta De Flores',
+    },
+    {
+      emoji: '🎭',
+      name: 'Máscara',
+    },
+    {
+      emoji: '🖼️',
+      name: 'Quadro Emoldurado',
+    },
+    {
+      emoji: '🎨',
+      name: 'Paleta De Tintas',
+    },
+    {
+      emoji: '🧵',
+      name: 'Carretel',
+    },
+    {
+      emoji: '🪡',
+      name: 'Agulha De Costura',
+    },
+    {
+      emoji: '🧶',
+      name: 'Novelo',
+    },
+    {
+      emoji: '🪢',
+      name: 'Nó',
+    },
+  ],
   'Viagens e lugares': [
     {
       emoji: '🌍',
@@ -4083,352 +4429,6 @@ export const emojiCategories: Record<
     {
       emoji: '🌊',
       name: 'Onda',
-    },
-  ],
-  Atividades: [
-    {
-      emoji: '🎃',
-      name: 'Abóbora De Halloween',
-    },
-    {
-      emoji: '🎄',
-      name: 'Árvore De Natal',
-    },
-    {
-      emoji: '🎆',
-      name: 'Fogos De Artifício',
-    },
-    {
-      emoji: '🎇',
-      name: 'Vela Estrela',
-    },
-    {
-      emoji: '🧨',
-      name: 'Bombinha',
-    },
-    {
-      emoji: '✨',
-      name: 'Brilhos',
-    },
-    {
-      emoji: '🎈',
-      name: 'Balão',
-    },
-    {
-      emoji: '🎉',
-      name: 'Cone De Festa',
-    },
-    {
-      emoji: '🎊',
-      name: 'Confete',
-    },
-    {
-      emoji: '🎋',
-      name: 'Árvore De Tanabata',
-    },
-    {
-      emoji: '🎍',
-      name: 'Decoração De Pinhos',
-    },
-    {
-      emoji: '🎎',
-      name: 'Bonecas Japonesas',
-    },
-    {
-      emoji: '🎏',
-      name: 'Bandeira De Carpas',
-    },
-    {
-      emoji: '🎐',
-      name: 'Carrilhão De Vento',
-    },
-    {
-      emoji: '🎑',
-      name: 'Contemplação Da Lua',
-    },
-    {
-      emoji: '🧧',
-      name: 'Envelope Vermelho',
-    },
-    {
-      emoji: '🎀',
-      name: 'Laço De Fita',
-    },
-    {
-      emoji: '🎁',
-      name: 'Presente',
-    },
-    {
-      emoji: '🎗️',
-      name: 'Fita De Lembrete',
-    },
-    {
-      emoji: '🎟️',
-      name: 'Ingresso De Cinema',
-    },
-    {
-      emoji: '🎫',
-      name: 'Ingresso',
-    },
-    {
-      emoji: '🎖️',
-      name: 'Medalha Militar',
-    },
-    {
-      emoji: '🏆',
-      name: 'Troféu',
-    },
-    {
-      emoji: '🏅',
-      name: 'Medalha Esportiva',
-    },
-    {
-      emoji: '🥇',
-      name: 'Medalha De Ouro',
-    },
-    {
-      emoji: '🥈',
-      name: 'Medalha De Prata',
-    },
-    {
-      emoji: '🥉',
-      name: 'Medalha De Bronze',
-    },
-    {
-      emoji: '⚽',
-      name: 'Bola De Futebol',
-    },
-    {
-      emoji: '⚾',
-      name: 'Bola De Beisebol',
-    },
-    {
-      emoji: '🥎',
-      name: 'Softbol',
-    },
-    {
-      emoji: '🏀',
-      name: 'Bola De Basquete',
-    },
-    {
-      emoji: '🏐',
-      name: 'Bola De Vôlei',
-    },
-    {
-      emoji: '🏈',
-      name: 'Bola De Futebol Americano',
-    },
-    {
-      emoji: '🏉',
-      name: 'Bola De Rugby',
-    },
-    {
-      emoji: '🎾',
-      name: 'Tênis',
-    },
-    {
-      emoji: '🥏',
-      name: 'Frisbee',
-    },
-    {
-      emoji: '🎳',
-      name: 'Boliche',
-    },
-    {
-      emoji: '🏏',
-      name: 'Críquete',
-    },
-    {
-      emoji: '🏑',
-      name: 'Hóquei De Campo',
-    },
-    {
-      emoji: '🏒',
-      name: 'Hóquei No Gelo',
-    },
-    {
-      emoji: '🥍',
-      name: 'Lacrosse',
-    },
-    {
-      emoji: '🏓',
-      name: 'Pingue-Pongue',
-    },
-    {
-      emoji: '🏸',
-      name: 'Badminton',
-    },
-    {
-      emoji: '🥊',
-      name: 'Luva De Boxe',
-    },
-    {
-      emoji: '🥋',
-      name: 'Quimono De Artes Marciais',
-    },
-    {
-      emoji: '🥅',
-      name: 'Gol',
-    },
-    {
-      emoji: '⛳',
-      name: 'Bandeira No Buraco',
-    },
-    {
-      emoji: '⛸️',
-      name: 'Patins De Gelo',
-    },
-    {
-      emoji: '🎣',
-      name: 'Pesca',
-    },
-    {
-      emoji: '🤿',
-      name: 'Máscara De Mergulho',
-    },
-    {
-      emoji: '🎽',
-      name: 'Camiseta De Corrida',
-    },
-    {
-      emoji: '🎿',
-      name: 'Esqui',
-    },
-    {
-      emoji: '🛷',
-      name: 'Trenó',
-    },
-    {
-      emoji: '🥌',
-      name: 'Pedra De Curling',
-    },
-    {
-      emoji: '🎯',
-      name: 'No Alvo',
-    },
-    {
-      emoji: '🪀',
-      name: 'Ioiô',
-    },
-    {
-      emoji: '🪁',
-      name: 'Pipa',
-    },
-    {
-      emoji: '🎱',
-      name: 'Bilhar',
-    },
-    {
-      emoji: '🔮',
-      name: 'Bola De Cristal',
-    },
-    {
-      emoji: '🪄',
-      name: 'Varinha Mágica',
-    },
-    {
-      emoji: '🧿',
-      name: 'Olho Grego',
-    },
-    {
-      emoji: '🪬',
-      name: 'Mão Hamsá',
-    },
-    {
-      emoji: '🎮',
-      name: 'Videogame',
-    },
-    {
-      emoji: '🕹️',
-      name: 'Joystick',
-    },
-    {
-      emoji: '🎰',
-      name: 'Caça-Níquel',
-    },
-    {
-      emoji: '🎲',
-      name: 'Jogo De Dado',
-    },
-    {
-      emoji: '🧩',
-      name: 'Quebra-Cabeça',
-    },
-    {
-      emoji: '🧸',
-      name: 'Ursinho De Pelúcia',
-    },
-    {
-      emoji: '🪅',
-      name: 'Pinhata',
-    },
-    {
-      emoji: '🪩',
-      name: 'Bola Espelhada',
-    },
-    {
-      emoji: '🪆',
-      name: 'boneca Russa',
-    },
-    {
-      emoji: '♠️',
-      name: 'Naipe De Espadas',
-    },
-    {
-      emoji: '♥️',
-      name: 'Naipe De Copas',
-    },
-    {
-      emoji: '♦️',
-      name: 'Naipe De Ouros',
-    },
-    {
-      emoji: '♣️',
-      name: 'Naipe De Paus',
-    },
-    {
-      emoji: '♟️',
-      name: 'Peão De Xadrez',
-    },
-    {
-      emoji: '🃏',
-      name: 'Curinga',
-    },
-    {
-      emoji: '🀄',
-      name: 'Dragão Vermelho De Mahjong',
-    },
-    {
-      emoji: '🎴',
-      name: 'Carta De Flores',
-    },
-    {
-      emoji: '🎭',
-      name: 'Máscara',
-    },
-    {
-      emoji: '🖼️',
-      name: 'Quadro Emoldurado',
-    },
-    {
-      emoji: '🎨',
-      name: 'Paleta De Tintas',
-    },
-    {
-      emoji: '🧵',
-      name: 'Carretel',
-    },
-    {
-      emoji: '🪡',
-      name: 'Agulha De Costura',
-    },
-    {
-      emoji: '🧶',
-      name: 'Novelo',
-    },
-    {
-      emoji: '🪢',
-      name: 'Nó',
     },
   ],
   Objetos: [
