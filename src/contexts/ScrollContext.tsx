@@ -1,11 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  RefObject,
-  useCallback,
-  useContext,
-  useRef,
-} from 'react';
+import { createContext, ReactNode, RefObject, useContext, useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 import { SearchInput } from '../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
 import { CategoryTitle } from '../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/CategoryTitle';
@@ -100,40 +93,11 @@ export function ScrollProvider({ children }: ScrollProviderProps) {
   }
   insertEmojis();
 
-  const scrollingRef = useRef(0);
-
-  const scrollToFn = useCallback((offset, defaultScrollTo) => {
-    const duration = 1000;
-    const start = parentRef.current?.scrollTop;
-    const startTime = (scrollingRef.current = Date.now());
-
-    const run = () => {
-      if (scrollingRef.current !== startTime) return;
-      const now = Date.now();
-      const elapsed = now - startTime;
-      const progress = easeInOutQuint(Math.min(elapsed / duration, 1));
-
-      if (!start) return;
-
-      const interpolated = start + (offset - start) * progress;
-
-      if (elapsed < duration) {
-        defaultScrollTo(interpolated);
-        requestAnimationFrame(run);
-      } else {
-        defaultScrollTo(interpolated);
-      }
-    };
-
-    requestAnimationFrame(run);
-  }, []);
-
   const virtualizer = useVirtual({
     size: components.length,
     parentRef,
     paddingEnd: 10,
     overscan: 0,
-    scrollToFn,
   });
 
   return (

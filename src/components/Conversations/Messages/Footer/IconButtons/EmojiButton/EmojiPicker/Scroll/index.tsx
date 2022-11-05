@@ -8,7 +8,7 @@ export function Scroll() {
   } = useEmoji();
 
   return (
-    <div ref={parentRef} style={{ overflow: 'auto' }}>
+    <div ref={parentRef} style={{ overflow: 'auto', scrollBehavior: 'smooth' }}>
       <div
         style={{
           height: virtualizer.totalSize,
