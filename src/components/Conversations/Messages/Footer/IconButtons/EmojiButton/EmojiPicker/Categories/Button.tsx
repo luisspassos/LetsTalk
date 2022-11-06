@@ -24,7 +24,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const {
-    searchedEmojis: { searchedEmojis },
+    searchedEmojis: { search },
   } = useEmoji();
   const { virtualizer } = useEmojiPickerScroll();
   const { selectedCategoryPosition, categoryIndices } = useEmojiPickerScroll();
@@ -45,7 +45,7 @@ export function Button({
   };
 
   const isSelected = index === selectedCategoryPosition;
-  const searchIsEmpty = !searchedEmojis;
+  const searchIsEmpty = !search;
 
   return (
     <button
