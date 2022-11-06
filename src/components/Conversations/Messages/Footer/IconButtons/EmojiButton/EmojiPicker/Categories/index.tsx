@@ -33,6 +33,8 @@ export function Categories() {
   return (
     <Box>
       <Flex
+        align='start'
+        justify='start'
         overflowX='auto'
         position='relative'
         sx={{

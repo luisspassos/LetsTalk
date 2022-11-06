@@ -1,7 +1,7 @@
 import { icons } from '.';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
-import { transition } from './Button';
+import { sharedStyles } from './Button';
 
 export function SelectedBar() {
   const {
@@ -21,8 +21,8 @@ export function SelectedBar() {
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
         transform: `translateX(${selectedCategoryPosition * 100}%)`,
-        transition,
         width,
+        ...sharedStyles,
       }}
     />
   );

@@ -12,7 +12,10 @@ type ButtonProps = {
   HTMLButtonElement
 >;
 
-export const transition = '.2s';
+export const sharedStyles = {
+  transition: '0.2s',
+  minWidth: '50px',
+};
 
 export function Button({
   index,
@@ -49,13 +52,12 @@ export function Button({
       style={{
         color: isSelected && searchIsEmpty ? color.selected : color.default,
         flex: 1,
-        minWidth: '50px',
         height: '45px',
         fontSize: '22px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        transition,
+        ...sharedStyles,
       }}
       title={ariaLabel}
       aria-label={ariaLabel}
