@@ -5,7 +5,7 @@ import { sharedStyles } from './Button';
 
 export function SelectedBar() {
   const {
-    searchedEmojis: { searchedEmojis },
+    searchedEmojis: { search },
   } = useEmoji();
 
   const { selectedCategoryPosition } = useEmojiPickerScroll();
@@ -16,7 +16,7 @@ export function SelectedBar() {
   return (
     <div
       style={{
-        height: searchedEmojis ? '0px' : '4px',
+        height: search ? '0px' : '4px',
         position: 'absolute',
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',

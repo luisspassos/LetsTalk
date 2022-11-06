@@ -33,8 +33,6 @@ type RawEmoji = {
   emoji: string;
 };
 
-type SearchedEmojis = Emoji[] | null;
-
 export type CategoryData = {
   icon: IconType;
   name: string;
@@ -48,8 +46,9 @@ type Categories = {
 
 type EmojiContextType = {
   searchedEmojis: {
-    searchedEmojis: SearchedEmojis;
-    setSearchedEmojis: Dispatch<SetStateAction<SearchedEmojis>>;
+    data: Emoji[];
+    search: string;
+    setSearch: Dispatch<SetStateAction<string>>;
   };
   categories: {
     data: Categories;
@@ -72,6 +71,17 @@ type EmojiContextType = {
   };
 };
 
+export function formatValue(value: string) {
+  // remove accents
+  value = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  value = value.toLowerCase().trim();
+
+  return value;
+}
+
+const emojis = Object.keys(emojiCategories).flatMap((e) => emojiCategories[e]);
+
 export const createRecentCategory = (emojis: Emoji[] = []) => ({
   name: 'Recentes',
   icon: AiOutlineClockCircle,
@@ -81,7 +91,15 @@ export const createRecentCategory = (emojis: Emoji[] = []) => ({
 export const EmojiContext = createContext({} as EmojiContextType);
 
 export function EmojiProvider({ children }: EmojiProviderProps) {
-  const [searchedEmojis, setSearchedEmojis] = useState<SearchedEmojis>(null);
+  const [search, setSearch] = useState('');
+
+  const searchedEmojis = emojis
+    .filter(({ name }) => {
+      const formattedName = formatValue(name);
+
+      return formattedName.includes(search);
+    })
+    .map((emoji) => emoji.emoji);
 
   const emojiPickerStyles = {
     emojiSize: useBreakpointValue([36, 41, 46]) || 0,
@@ -188,8 +206,9 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
     <EmojiContext.Provider
       value={{
         searchedEmojis: {
-          searchedEmojis,
-          setSearchedEmojis,
+          data: searchedEmojis,
+          search,
+          setSearch,
         },
         categories: {
           data: categories,

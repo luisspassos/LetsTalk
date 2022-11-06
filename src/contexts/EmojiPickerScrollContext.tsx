@@ -35,7 +35,8 @@ export function EmojiPickerScrollProvider({
 
   const {
     emojiPickerStyles,
-    searchedEmojis: { searchedEmojis },
+    searchedEmojis,
+    searchedEmojis: { search },
   } = useEmoji();
 
   const emojisPerRow = Math.floor(width / emojiPickerStyles.emojiSize);
@@ -71,10 +72,10 @@ export function EmojiPickerScrollProvider({
       }
     }
 
-    if (searchedEmojis) {
+    if (search) {
       const emojiRows: EmojiRow[] = [[]];
 
-      for (const emoji of searchedEmojis) {
+      for (const emoji of searchedEmojis.data) {
         fillEmojiRows(emoji, emojiRows);
       }
 

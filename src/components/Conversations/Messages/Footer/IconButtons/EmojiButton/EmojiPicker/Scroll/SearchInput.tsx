@@ -1,58 +1,31 @@
 import { Input, useColorModeValue } from '@chakra-ui/react';
-import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
-
-function formatValue(value: string) {
-  // remove accents
-  value = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-  value = value.toLowerCase().trim();
-
-  return value;
-}
+import {
+  useEmoji,
+  formatValue,
+} from '../../../../../../../../contexts/EmojiContext';
 
 export function SearchInput() {
   const {
-    searchedEmojis: { setSearchedEmojis, searchedEmojis },
+    searchedEmojis: { setSearch, search },
   } = useEmoji();
 
-  async function handleSearch(search: string) {
-    if (!search) {
-      setSearchedEmojis(null);
-
-      return;
-    }
-
+  function handleSearch(search: string) {
     const formattedSearch = formatValue(search);
 
-    const { emojiCategories } = await import(
-      '../../../../../../../../utils/emojiCategories'
-    );
-
-    const emojis = Object.keys(emojiCategories).flatMap(
-      (e) => emojiCategories[e]
-    );
-
-    const searchedEmojis = emojis
-      .filter(({ name }) => {
-        const formattedName = formatValue(name);
-
-        return formattedName.includes(formattedSearch);
-      })
-      .map((emoji) => emoji.emoji);
-
-    setSearchedEmojis(searchedEmojis);
+    setSearch(formattedSearch);
   }
 
   return (
     <Input
       placeholder='Pesquisar emoji'
       mt='10px'
-      mb={searchedEmojis ? '8px' : '4px'}
+      mb={search ? '8px' : '4px'}
       ml='1px'
       fontSize='15px'
       bgColor={useColorModeValue('white', 'blackAlpha.200')}
       h='40px'
       flexShrink={0}
+      value={search}
       onChange={(e) => handleSearch(e.target.value)}
     />
   );

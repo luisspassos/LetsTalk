@@ -4,7 +4,7 @@ import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPick
 export function Scroll() {
   const { components, parentRef, virtualizer } = useEmojiPickerScroll();
   const {
-    searchedEmojis: { searchedEmojis },
+    searchedEmojis: { search },
   } = useEmoji();
 
   return (
@@ -32,7 +32,7 @@ export function Scroll() {
                 left: 0,
                 width: '100%',
                 paddingRight: '10px',
-                paddingLeft: isEmojis && !searchedEmojis ? '10px' : undefined,
+                paddingLeft: isEmojis && !search ? '10px' : undefined,
                 transform: `translateY(${item.start}px)`,
               }}
             >
