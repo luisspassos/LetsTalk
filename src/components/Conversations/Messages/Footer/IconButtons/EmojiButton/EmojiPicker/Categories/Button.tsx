@@ -1,5 +1,10 @@
 import { useColorModeValue } from '@chakra-ui/react';
-import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  useEffect,
+  useState,
+} from 'react';
 import { IconType } from 'react-icons';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
@@ -24,13 +29,26 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const {
-    searchedEmojis: { search },
+    searchedEmojis: { search, setSearch },
   } = useEmoji();
-  const { virtualizer } = useEmojiPickerScroll();
-  const { selectedCategoryPosition, categoryIndices } = useEmojiPickerScroll();
+
+  const { selectedCategoryPosition, categoryIndices, virtualizer } =
+    useEmojiPickerScroll();
+
+  const [num, setNum] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (num && !search) {
+      virtualizer.scrollToIndex(categoryIndices[num], { align: 'start' });
+
+      setNum(null);
+    }
+  }, [search, categoryIndices, virtualizer, num]);
 
   function handleScrollToCategory() {
-    virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' });
+    setNum(index);
+    setSearch('');
+    // virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' });
   }
 
   const color = {
