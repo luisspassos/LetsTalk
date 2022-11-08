@@ -16,11 +16,12 @@ export function SelectedBar() {
   return (
     <div
       style={{
-        height: search ? '0px' : '4px',
+        height: search.current ? '0px' : '4px',
         position: 'absolute',
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
         transform: `translateX(${selectedCategoryPosition * 100}%)`,
+        transitionProperty: search.prev ? 'height' : undefined,
         width,
         ...sharedStyles,
       }}

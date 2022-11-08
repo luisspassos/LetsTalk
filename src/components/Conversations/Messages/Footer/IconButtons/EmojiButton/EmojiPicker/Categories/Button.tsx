@@ -48,9 +48,10 @@ export function Button({
   function handleScrollToCategory() {
     if (search) {
       setNum(index);
-      setSearch((prevState) => {
-        ...
-      });
+      setSearch((prevState) => ({
+        current: '',
+        prev: prevState.current,
+      }));
     }
 
     virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' });

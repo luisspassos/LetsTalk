@@ -12,7 +12,10 @@ export function SearchInput() {
   function handleSearch(search: string) {
     const formattedSearch = formatValue(search);
 
-    setSearch(formattedSearch);
+    setSearch((prevState) => ({
+      current: formattedSearch,
+      prev: prevState.current,
+    }));
   }
 
   return (
@@ -25,7 +28,7 @@ export function SearchInput() {
       bgColor={useColorModeValue('white', 'blackAlpha.200')}
       h='40px'
       flexShrink={0}
-      value={search}
+      value={search.current}
       onChange={(e) => handleSearch(e.target.value)}
     />
   );
