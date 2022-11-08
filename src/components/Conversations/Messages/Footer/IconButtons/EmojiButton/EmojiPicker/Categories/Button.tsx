@@ -46,9 +46,14 @@ export function Button({
   }, [search, categoryIndices, virtualizer, num]);
 
   function handleScrollToCategory() {
-    setNum(index);
-    setSearch('');
-    // virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' });
+    if (search) {
+      setNum(index);
+      setSearch((prevState) => {
+        ...
+      });
+    }
+
+    virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' });
   }
 
   const color = {

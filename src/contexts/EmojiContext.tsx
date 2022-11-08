@@ -44,11 +44,16 @@ type Categories = {
   selectedCategoryIndex: number;
 };
 
+type Search = {
+  prev: string;
+  current: string;
+};
+
 type EmojiContextType = {
   searchedEmojis: {
     data: Emoji[];
-    search: string;
-    setSearch: Dispatch<SetStateAction<string>>;
+    search: Search;
+    setSearch: Dispatch<SetStateAction<Search>>;
   };
   categories: {
     data: Categories;
@@ -91,13 +96,16 @@ export const createRecentCategory = (emojis: Emoji[] = []) => ({
 export const EmojiContext = createContext({} as EmojiContextType);
 
 export function EmojiProvider({ children }: EmojiProviderProps) {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState({
+    prev: '',
+    current: '',
+  });
 
   const searchedEmojis = emojis
     .filter(({ name }) => {
       const formattedName = formatValue(name);
 
-      return formattedName.includes(search);
+      return formattedName.includes(search.current);
     })
     .map((emoji) => emoji.emoji);
 
