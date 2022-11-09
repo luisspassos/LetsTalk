@@ -2,6 +2,7 @@ export const colors = {
   blueAlpha: {
     900: '#1d243490',
     700: '#1d243470',
+    400: 'rgba(66, 153, 225, 0.6)',
     200: 'rgb(99, 179, 237, 0.35)',
   },
   grayAlpha: {

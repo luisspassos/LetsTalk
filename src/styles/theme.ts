@@ -27,8 +27,8 @@ export const theme = extendTheme(
       heading: 'Poppins, Noto Color Emoji, sans-serif',
       body: 'Poppins, Noto Color Emoji, sans-serif',
     },
-    fontWeights: {
-      bold: 600,
+    shadows: {
+      hereeeeeeeeeeeeeeeeeee: 'Poppins',
     },
     colors,
     styles: {
