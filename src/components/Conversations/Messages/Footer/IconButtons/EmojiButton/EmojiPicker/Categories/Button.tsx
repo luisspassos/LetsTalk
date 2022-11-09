@@ -38,7 +38,7 @@ export function Button({
   const [num, setNum] = useState<number | null>(null);
 
   useEffect(() => {
-    if (num && !search) {
+    if (num && !search.current) {
       virtualizer.scrollToIndex(categoryIndices[num], { align: 'start' });
 
       setNum(null);
@@ -79,7 +79,7 @@ export function Button({
   }
 
   const isSelected = index === selectedCategoryPosition;
-  const searchIsEmpty = !search;
+  const searchIsEmpty = !search.current;
 
   return (
     <button

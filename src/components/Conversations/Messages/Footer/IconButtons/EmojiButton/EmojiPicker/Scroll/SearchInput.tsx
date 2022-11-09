@@ -22,7 +22,7 @@ export function SearchInput() {
     <Input
       placeholder='Pesquisar emoji'
       mt='10px'
-      mb={search ? '8px' : '4px'}
+      mb={search.current ? '8px' : '4px'}
       ml='1px'
       fontSize='15px'
       bgColor={useColorModeValue('white', 'blackAlpha.200')}

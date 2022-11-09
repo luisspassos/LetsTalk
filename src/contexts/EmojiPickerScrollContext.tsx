@@ -72,7 +72,7 @@ export function EmojiPickerScrollProvider({
       }
     }
 
-    if (search) {
+    if (search.current) {
       const emojiRows: EmojiRow[] = [[]];
 
       for (const emoji of searchedEmojis.data) {
@@ -104,6 +104,7 @@ export function EmojiPickerScrollProvider({
       fillComponents(emojiRows);
     }
   }
+
   insertEmojisAndInsertCategoryIndices();
 
   const virtualizer = useVirtual({
@@ -122,7 +123,9 @@ export function EmojiPickerScrollProvider({
       return currentIndex >= categoryIndex && currentIndex < nextCategoryIndex;
     }) ?? categoryIndices[0];
 
-  const selectedCategoryPosition = search
+  console.log(categoryIndices);
+
+  const selectedCategoryPosition = search.current
     ? 0
     : categoryIndices.indexOf(currentCategoryIndex);
 
