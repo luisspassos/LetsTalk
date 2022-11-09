@@ -15,6 +15,8 @@ export const themeConfig: ThemeConfig = {
   useSystemColorMode: true,
 };
 
+const boxShadow = `0 0 0 3px ${colors.blueAlpha[400]}`;
+
 export const theme = extendTheme(
   withDefaultProps({
     defaultProps: {
@@ -28,7 +30,8 @@ export const theme = extendTheme(
       body: 'Poppins, Noto Color Emoji, sans-serif',
     },
     shadows: {
-      hereeeeeeeeeeeeeeeeeee: 'Poppins',
+      outline: boxShadow,
+      'inner-blue': `inset ${boxShadow}`,
     },
     colors,
     styles: {

@@ -1,4 +1,4 @@
-import { IconButton, useColorModeValue } from '@chakra-ui/react';
+import { useColorModeValue } from '@chakra-ui/react';
 import {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
@@ -74,37 +74,36 @@ export function Button({
     setFocus(true);
   }
 
-  // function handleRemoveFocus() {
-  //   setFocus(false);
-  // }
+  function handleRemoveFocus() {
+    setFocus(false);
+  }
 
   const isSelected = index === selectedCategoryPosition;
   const searchIsEmpty = !search;
 
   return (
-    <IconButton flex='1' icon={<CategoryIcon />} aria-label={ariaLabel ?? ''} />
-
-    // <button
-    //   style={{
-    //     color: isSelected && searchIsEmpty ? color.selected : color.default,
-    //     flex: 1,
-    //     height: '45px',
-    //     fontSize: '22px',
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     outline: 0,
-    //     boxShadow: focus ? 'var(--chakra-shadows-outline)' : undefined,
-    //     ...sharedStyles,
-    //   }}
-    //   title={ariaLabel}
-    //   aria-label={ariaLabel}
-    //   onClick={handleScrollToCategory}
-    //   onFocus={handleAddFocus}
-    //   // onBlur={handleRemoveFocus}
-    //   {...rest}
-    // >
-    //   <CategoryIcon />
-    // </button>
+    <button
+      style={{
+        color: isSelected && searchIsEmpty ? color.selected : color.default,
+        flex: 1,
+        height: '45px',
+        fontSize: '22px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        outline: 0,
+        boxShadow: focus ? 'var(--chakra-shadows-inner-blue)' : undefined,
+        borderRadius: '8px',
+        ...sharedStyles,
+      }}
+      title={ariaLabel}
+      aria-label={ariaLabel}
+      onClick={handleScrollToCategory}
+      onFocus={handleAddFocus}
+      onBlur={handleRemoveFocus}
+      {...rest}
+    >
+      <CategoryIcon />
+    </button>
   );
 }
