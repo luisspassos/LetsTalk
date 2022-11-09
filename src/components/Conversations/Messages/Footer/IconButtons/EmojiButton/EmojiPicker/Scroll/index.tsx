@@ -32,7 +32,7 @@ export function Scroll() {
                 left: 0,
                 width: '100%',
                 paddingRight: '10px',
-                paddingLeft: isEmojis && !search ? '10px' : undefined,
+                paddingLeft: isEmojis && !search.current ? '10px' : undefined,
                 transform: `translateY(${item.start}px)`,
               }}
             >
