@@ -123,8 +123,6 @@ export function EmojiPickerScrollProvider({
       return currentIndex >= categoryIndex && currentIndex < nextCategoryIndex;
     }) ?? categoryIndices[0];
 
-  console.log(categoryIndices);
-
   const selectedCategoryPosition = search
     ? 0
     : categoryIndices.indexOf(currentCategoryIndex);

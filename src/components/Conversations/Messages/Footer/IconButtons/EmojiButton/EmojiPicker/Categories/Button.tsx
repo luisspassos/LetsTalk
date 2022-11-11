@@ -1,16 +1,26 @@
 import { useColorModeValue } from '@chakra-ui/react';
-import { ButtonHTMLAttributes, DetailedHTMLProps, useState } from 'react';
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { IconType } from 'react-icons';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
 
-type ButtonProps = {
-  CategoryIcon: IconType;
-  index: number;
-} & DetailedHTMLProps<
+type DefaultButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
+
+type ButtonProps = {
+  CategoryIcon: IconType;
+  index: number;
+} & DefaultButtonProps;
+
+type SelectedCategory = null | number;
 
 export const sharedStyles = {
   transition: '0.2s',
@@ -24,14 +34,43 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const {
-    searchedEmojis: { search },
+    searchedEmojis: { search, setSearch },
   } = useEmoji();
 
   const { selectedCategoryPosition, categoryIndices, virtualizer } =
     useEmojiPickerScroll();
 
+  const [selectedCategoryIndex, setSelectedCategoryIndex] =
+    useState<SelectedCategory>(null);
+
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      virtualizer.scrollToIndex(index, { align: 'start' });
+    },
+    [virtualizer]
+  );
+
+  useEffect(() => {
+    function goToCategoryIfThereIsSearch() {
+      if (!selectedCategoryIndex || search) return;
+
+      scrollToIndex(categoryIndices[selectedCategoryIndex]);
+
+      setSelectedCategoryIndex(null);
+    }
+
+    goToCategoryIfThereIsSearch();
+  }, [selectedCategoryIndex, scrollToIndex, search, categoryIndices]);
+
   function handleScrollToCategory() {
-    virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' });
+    if (search) {
+      setSearch('');
+      setSelectedCategoryIndex(index);
+
+      return;
+    }
+
+    scrollToIndex(categoryIndices[index]);
   }
 
   const color = {
