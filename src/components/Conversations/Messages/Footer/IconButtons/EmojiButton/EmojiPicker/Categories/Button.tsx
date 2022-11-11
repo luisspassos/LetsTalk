@@ -1,10 +1,5 @@
 import { useColorModeValue } from '@chakra-ui/react';
-import {
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  useEffect,
-  useState,
-} from 'react';
+import { ButtonHTMLAttributes, DetailedHTMLProps, useState } from 'react';
 import { IconType } from 'react-icons';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
@@ -29,31 +24,13 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const {
-    searchedEmojis: { search, setSearch },
+    searchedEmojis: { search },
   } = useEmoji();
 
   const { selectedCategoryPosition, categoryIndices, virtualizer } =
     useEmojiPickerScroll();
 
-  const [num, setNum] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (num && !search.current) {
-      virtualizer.scrollToIndex(categoryIndices[num], { align: 'start' });
-
-      setNum(null);
-    }
-  }, [search, categoryIndices, virtualizer, num]);
-
   function handleScrollToCategory() {
-    if (search) {
-      setNum(index);
-      setSearch((prevState) => ({
-        current: '',
-        prev: prevState.current,
-      }));
-    }
-
     virtualizer.scrollToIndex(categoryIndices[index], { align: 'start' });
   }
 
@@ -79,7 +56,7 @@ export function Button({
   }
 
   const isSelected = index === selectedCategoryPosition;
-  const searchIsEmpty = !search.current;
+  const searchIsEmpty = !search;
 
   return (
     <button

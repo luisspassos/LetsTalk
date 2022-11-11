@@ -12,23 +12,20 @@ export function SearchInput() {
   function handleSearch(search: string) {
     const formattedSearch = formatValue(search);
 
-    setSearch((prevState) => ({
-      current: formattedSearch,
-      prev: prevState.current,
-    }));
+    setSearch(formattedSearch);
   }
 
   return (
     <Input
       placeholder='Pesquisar emoji'
       mt='10px'
-      mb={search.current ? '8px' : '4px'}
+      mb={search ? '8px' : '4px'}
       ml='1px'
       fontSize='15px'
       bgColor={useColorModeValue('white', 'blackAlpha.200')}
       h='40px'
       flexShrink={0}
-      value={search.current}
+      value={search}
       onChange={(e) => handleSearch(e.target.value)}
     />
   );
