@@ -52,7 +52,7 @@ export function Button({
 
   useEffect(() => {
     function goToCategoryIfThereIsSearch() {
-      if (!selectedCategoryIndex || search) return;
+      if (selectedCategoryIndex === null || search) return;
 
       scrollToIndex(categoryIndices[selectedCategoryIndex]);
 

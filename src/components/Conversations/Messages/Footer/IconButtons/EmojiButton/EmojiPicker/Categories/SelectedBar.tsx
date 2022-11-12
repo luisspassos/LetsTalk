@@ -1,4 +1,3 @@
-import { icons } from '.';
 import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
 import { sharedStyles } from './Button';
@@ -6,12 +5,13 @@ import { sharedStyles } from './Button';
 export function SelectedBar() {
   const {
     searchedEmojis: { search },
+    categories,
   } = useEmoji();
 
   const { selectedCategoryPosition, selectedCategoryIndex } =
     useEmojiPickerScroll();
 
-  const categoriesLength = icons.length;
+  const categoriesLength = categories.data.length;
   const width = `${100 / categoriesLength}%`;
 
   return (

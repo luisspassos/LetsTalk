@@ -4,22 +4,12 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
-  useCallback,
   useContext,
   useEffect,
   useState,
 } from 'react';
-import { IconType } from 'react-icons';
-import { AiOutlineCar, AiOutlineClockCircle } from 'react-icons/ai';
-import { BiFootball } from 'react-icons/bi';
-import { BsFlag } from 'react-icons/bs';
-import { IoFastFoodOutline } from 'react-icons/io5';
-import {
-  MdOutlineEmojiEmotions,
-  MdOutlineEmojiObjects,
-  MdEmojiSymbols,
-} from 'react-icons/md';
-import { RiBearSmileLine } from 'react-icons/ri';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+
 import { emojiCategories } from '../utils/emojiCategories';
 
 type EmojiProviderProps = {
@@ -28,40 +18,23 @@ type EmojiProviderProps = {
 
 export type Emoji = string;
 
-type RawEmoji = {
-  name: string;
-  emoji: string;
-};
-
-export type CategoryData = {
-  icon: IconType;
-  name: string;
-  emojis: Emoji[];
-};
-
-type Categories = {
-  data: CategoryData[];
-  selectedCategoryIndex: number;
-};
-
 type Search = string;
 
+type EmojiCategory = typeof emojiCategories[0];
+
+type Category = Omit<EmojiCategory, 'emojis'> & {
+  emojis: string[];
+};
+
 type EmojiContextType = {
+  categories: {
+    data: Category[];
+    set: Dispatch<SetStateAction<Category[]>>;
+  };
   searchedEmojis: {
     data: Emoji[];
     search: Search;
     setSearch: Dispatch<SetStateAction<Search>>;
-  };
-  categories: {
-    data: Categories;
-    setState: Dispatch<SetStateAction<Categories>>;
-    renderFilteredCategoryData: (
-      callback: (
-        category: CategoryData,
-        index: number,
-        array: CategoryData[]
-      ) => JSX.Element
-    ) => JSX.Element[];
   };
   togglePicker: {
     isOpen: boolean;
@@ -82,7 +55,7 @@ export function formatValue(value: string) {
   return value;
 }
 
-const emojis = Object.keys(emojiCategories).flatMap((e) => emojiCategories[e]);
+const emojis = emojiCategories.flatMap(({ emojis }) => emojis);
 
 export const createRecentCategory = (emojis: Emoji[] = []) => ({
   name: 'Recentes',
@@ -93,79 +66,13 @@ export const createRecentCategory = (emojis: Emoji[] = []) => ({
 export const EmojiContext = createContext({} as EmojiContextType);
 
 export function EmojiProvider({ children }: EmojiProviderProps) {
-  const [search, setSearch] = useState('');
-
-  const searchedEmojis = emojis
-    .filter(({ name }) => {
-      const formattedName = formatValue(name);
-
-      return formattedName.includes(search);
-    })
-    .map((emoji) => emoji.emoji);
-
-  const emojiPickerStyles = {
-    emojiSize: useBreakpointValue([36, 41, 46]) || 0,
-    fontSize: useBreakpointValue([22, 25, 28]) || 0,
-  };
-
-  const [categories, setCategories] = useState<Categories>({
-    data: [],
-    selectedCategoryIndex: 0,
-  });
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     function fillCategories() {
-      const data = [
-        {
-          icon: MdOutlineEmojiEmotions,
-          name: 'Smileys e pessoas',
-          emojis: emojiCategories['Smileys e pessoas'],
-        },
-        {
-          icon: RiBearSmileLine,
-          name: 'Animais e natureza',
-          emojis: emojiCategories['Animais e natureza'],
-        },
-        {
-          icon: IoFastFoodOutline,
-          name: 'Comidas e bebidas',
-          emojis: emojiCategories['Comidas e bebidas'],
-        },
-        {
-          icon: BiFootball,
-          name: 'Atividades',
-          emojis: emojiCategories.Atividades,
-        },
-        {
-          icon: AiOutlineCar,
-          name: 'Viagens e lugares',
-          emojis: emojiCategories['Viagens e lugares'],
-        },
-        {
-          icon: MdOutlineEmojiObjects,
-          name: 'Objetos',
-          emojis: emojiCategories.Objetos,
-        },
-        {
-          icon: MdEmojiSymbols,
-          name: 'Símbolos',
-          emojis: emojiCategories.Símbolos,
-        },
-        {
-          icon: BsFlag,
-          name: 'Bandeiras',
-          emojis: emojiCategories.Bandeiras,
-        },
-      ];
-
-      function getOnlyEmojis(emojis: RawEmoji[]) {
-        return emojis.map(({ emoji }) => emoji);
-      }
-
-      const newData = data.map(({ emojis, name, icon }) => ({
-        icon,
-        name,
-        emojis: getOnlyEmojis(emojis),
+      const newCategories = emojiCategories.map(({ emojis, ...rest }) => ({
+        ...rest,
+        emojis: emojis.map(({ emoji }) => emoji),
       }));
 
       function addRecentCategory() {
@@ -177,32 +84,33 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
 
         const category = createRecentCategory(emojis);
 
-        newData.unshift(category);
+        newCategories.unshift(category);
       }
 
       addRecentCategory();
 
-      setCategories((prevState) => ({
-        ...prevState,
-        data: newData,
-      }));
+      setCategories(newCategories);
     }
 
     fillCategories();
   }, []);
 
+  const [search, setSearch] = useState('');
+
+  const searchedEmojis = emojis
+    .filter(({ name }) => {
+      const formattedName = formatValue(name);
+
+      return formattedName.includes(search);
+    })
+    .map(({ emoji }) => emoji);
+
+  const emojiPickerStyles = {
+    emojiSize: useBreakpointValue([36, 41, 46]) || 0,
+    fontSize: useBreakpointValue([22, 25, 28]) || 0,
+  };
+
   const { isOpen, onToggle } = useDisclosure();
-
-  const renderFilteredCategoryData = useCallback(
-    (callback) => {
-      const categoriesData = categories.data;
-
-      return categoriesData.map((category, ...rest) =>
-        callback(category, ...rest)
-      );
-    },
-    [categories.data]
-  );
 
   return (
     <EmojiContext.Provider
@@ -214,8 +122,7 @@ export function EmojiProvider({ children }: EmojiProviderProps) {
         },
         categories: {
           data: categories,
-          setState: setCategories,
-          renderFilteredCategoryData,
+          set: setCategories,
         },
         togglePicker: {
           isOpen,

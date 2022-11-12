@@ -1,5 +1,8 @@
 import { MouseEvent as ReactMouseEvent, useState } from 'react';
-import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import {
+  createRecentCategory,
+  useEmoji,
+} from '../../../../../../../../contexts/EmojiContext';
 import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
 
 type EmojiProps = {
@@ -23,56 +26,49 @@ export function Emoji({ children: emoji }: EmojiProps) {
     fontSize: getValueWithMeasure(emojiPickerStyles.fontSize),
   };
 
-  // const { ref: messageInputRef } = useMessageInputRef();
+  const { categories } = useEmoji();
 
-  // const {
-  //   categories: { setState: setCategories, data: categories },
-  // } = useEmoji();
+  function handleAddEmojiInRecentCategory() {
+    const categoriesData = [...categories.data];
 
-  // function handleAddEmojiInRecentCategory() {
-  //   const categoriesData = [...categories.data];
+    const recentCategoryExists = categoriesData[0].name === 'Recentes';
 
-  //   const recentCategoryExists = categoriesData[0].name === 'Recentes';
+    if (!recentCategoryExists) {
+      const addCategory = () => {
+        const category = createRecentCategory();
 
-  //   if (!recentCategoryExists) {
-  //     const addCategory = () => {
-  //       const category = createRecentCategory();
+        categoriesData.unshift(category);
+      };
 
-  //       categoriesData.unshift(category);
-  //     };
+      addCategory();
+    }
 
-  //     addCategory();
-  //   }
+    const category = categoriesData[0];
 
-  //   const category = categoriesData[0];
+    const emojiExists = category.emojis.includes(emoji);
 
-  //   const emojiExists = category.emojis.includes(emoji);
+    if (emojiExists) {
+      // it will remove the existing emoji
+      const emojis = category.emojis.filter(
+        (categoryEmoji) => categoryEmoji !== emoji
+      );
 
-  //   if (emojiExists) {
-  //     // it will remove the existing emoji
-  //     const emojis = category.emojis.filter(
-  //       (categoryEmoji) => categoryEmoji !== emoji
-  //     );
+      // it will add the emoji in the first position
+      emojis.unshift(emoji);
 
-  //     // it will add the emoji in the first position
-  //     emojis.unshift(emoji);
+      category.emojis = emojis;
+    } else {
+      if (category.emojis.length === 25) {
+        category.emojis.pop();
+      }
 
-  //     category.emojis = emojis;
-  //   } else {
-  //     if (category.emojis.length === 25) {
-  //       category.emojis.pop();
-  //     }
+      category.emojis.unshift(emoji);
+    }
 
-  //     category.emojis.unshift(emoji);
-  //   }
+    localStorage.setItem('recentlyUsedEmojis', JSON.stringify(category.emojis));
 
-  //   localStorage.setItem('recentlyUsedEmojis', JSON.stringify(category.emojis));
-
-  //   // setCategories((prevState) => ({
-  //   //   ...prevState,
-  //   //   data: categoriesData,
-  //   // }));
-  // }
+    categories.set(categoriesData);
+  }
 
   function handleInsertEmoji() {
     const input = messageInputRef.current;
@@ -122,32 +118,15 @@ export function Emoji({ children: emoji }: EmojiProps) {
           ? 'var(--chakra-colors-whiteAlpha-400)'
           : undefined,
       }}
-      onClick={handleInsertEmoji}
+      onClick={() => {
+        handleInsertEmoji();
+        handleAddEmojiInRecentCategory();
+      }}
       onMouseDown={handleDisableFocusOnClick}
       onMouseEnter={handleAddHover}
       onMouseOut={handleRemoveHover}
     >
       {emoji}
     </span>
-    // <Center
-    //   onMouseDown={handleDisableFocusOnClick}
-    //   onClick={() => {
-    //     handleInsertEmoji();
-    //     // handleAddEmojiInRecentCategory();
-    //   }}
-    //   as='li'
-    //   fontSize={['22px', '25px', '28px']}
-    //   w={measure}
-    //   h={measure}
-    //   cursor='pointer'
-    //   borderRadius='8px'
-    //   _hover={{
-    //     bgColor: 'whiteAlpha.400',
-    //   }}
-    // >
-    //   {emoji}
-    // </Center>
   );
 }
-
-// export const Emoji = memo(EmojiComponent);

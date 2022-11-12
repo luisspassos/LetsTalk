@@ -12,7 +12,6 @@ import { useVirtual } from 'react-virtual';
 import { SearchInput } from '../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
 import { CategoryTitle } from '../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/CategoryTitle';
 import { Emoji } from '../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/Emoji';
-import { emojiCategories } from '../utils/emojiCategories';
 import { useEmoji, Emoji as EmojiType } from './EmojiContext';
 
 type EmojiPickerScrollProviderProps = {
@@ -53,6 +52,7 @@ export function EmojiPickerScrollProvider({
     emojiPickerStyles,
     searchedEmojis,
     searchedEmojis: { search },
+    categories,
   } = useEmoji();
 
   const emojisPerRow = Math.floor(width / emojiPickerStyles.emojiSize);
@@ -100,20 +100,16 @@ export function EmojiPickerScrollProvider({
       return;
     }
 
-    for (const categoryName in emojiCategories) {
-      const categoryTitle = (
-        <CategoryTitle key='category' text={categoryName} />
-      );
+    for (const { name, emojis } of categories.data) {
+      const categoryTitle = <CategoryTitle key='category' text={name} />;
 
       components.push(categoryTitle);
 
       categoryIndices.push(components.indexOf(categoryTitle));
 
-      const category = emojiCategories[categoryName];
-
       const emojiRows: EmojiRow[] = [[]];
 
-      for (const { emoji } of category) {
+      for (const emoji of emojis) {
         fillEmojiRows(emoji, emojiRows);
       }
 
