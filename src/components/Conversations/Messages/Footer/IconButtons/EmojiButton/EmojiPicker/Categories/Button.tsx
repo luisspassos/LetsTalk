@@ -20,8 +20,6 @@ type ButtonProps = {
   index: number;
 } & DefaultButtonProps;
 
-type SelectedCategory = null | number;
-
 export const sharedStyles = {
   transitionDuration: '0.2s',
   minWidth: '50px',
@@ -37,11 +35,13 @@ export function Button({
     searchedEmojis: { search, setSearch },
   } = useEmoji();
 
-  const { selectedCategoryPosition, categoryIndices, virtualizer } =
-    useEmojiPickerScroll();
-
-  const [selectedCategoryIndex, setSelectedCategoryIndex] =
-    useState<SelectedCategory>(null);
+  const {
+    selectedCategoryPosition,
+    categoryIndices,
+    virtualizer,
+    selectedCategoryIndex,
+    setSelectedCategoryIndex,
+  } = useEmojiPickerScroll();
 
   const scrollToIndex = useCallback(
     (index: number) => {
@@ -56,11 +56,19 @@ export function Button({
 
       scrollToIndex(categoryIndices[selectedCategoryIndex]);
 
-      setSelectedCategoryIndex(null);
+      setTimeout(() => {
+        setSelectedCategoryIndex(null);
+      }, 200);
     }
 
     goToCategoryIfThereIsSearch();
-  }, [selectedCategoryIndex, scrollToIndex, search, categoryIndices]);
+  }, [
+    selectedCategoryIndex,
+    scrollToIndex,
+    search,
+    categoryIndices,
+    setSelectedCategoryIndex,
+  ]);
 
   function handleScrollToCategory() {
     if (search) {

@@ -8,7 +8,8 @@ export function SelectedBar() {
     searchedEmojis: { search },
   } = useEmoji();
 
-  const { selectedCategoryPosition } = useEmojiPickerScroll();
+  const { selectedCategoryPosition, selectedCategoryIndex } =
+    useEmojiPickerScroll();
 
   const categoriesLength = icons.length;
   const width = `${100 / categoriesLength}%`;
@@ -21,7 +22,7 @@ export function SelectedBar() {
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
         transform: `translateX(${selectedCategoryPosition * 100}%)`,
-        // transitionProperty: firstRender ? 'height' : undefined,
+        transitionProperty: selectedCategoryIndex ? 'height' : undefined,
         width,
         ...sharedStyles,
       }}
