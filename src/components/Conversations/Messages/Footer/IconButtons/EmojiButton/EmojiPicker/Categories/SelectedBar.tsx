@@ -21,6 +21,7 @@ export function SelectedBar() {
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
         transform: `translateX(${selectedCategoryPosition * 100}%)`,
+        // transitionProperty: firstRender ? 'height' : undefined,
         width,
         ...sharedStyles,
       }}

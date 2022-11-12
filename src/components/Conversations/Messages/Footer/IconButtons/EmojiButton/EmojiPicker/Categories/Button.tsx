@@ -23,7 +23,7 @@ type ButtonProps = {
 type SelectedCategory = null | number;
 
 export const sharedStyles = {
-  transition: '0.2s',
+  transitionDuration: '0.2s',
   minWidth: '50px',
 };
 
