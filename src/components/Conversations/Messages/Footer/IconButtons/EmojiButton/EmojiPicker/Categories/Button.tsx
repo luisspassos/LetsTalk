@@ -7,8 +7,7 @@ import {
   useState,
 } from 'react';
 import { IconType } from 'react-icons';
-import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
-import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
+import { useEmojiPicker } from '../../../../../../../../contexts/EmojiPickerContext';
 
 type DefaultButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -32,16 +31,14 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const {
+    scroll: {
+      virtualizer,
+      selectedCategoryIndex,
+      categoryIndices,
+      currentCategoryPosition,
+    },
     searchedEmojis: { search, setSearch },
-  } = useEmoji();
-
-  const {
-    selectedCategoryPosition,
-    categoryIndices,
-    virtualizer,
-    selectedCategoryIndex,
-    setSelectedCategoryIndex,
-  } = useEmojiPickerScroll();
+  } = useEmojiPicker();
 
   const scrollToIndex = useCallback(
     (index: number) => {
@@ -52,28 +49,22 @@ export function Button({
 
   useEffect(() => {
     function goToCategoryIfThereIsSearch() {
-      if (selectedCategoryIndex === null || search) return;
+      if (selectedCategoryIndex.data === null || search) return;
 
-      scrollToIndex(categoryIndices[selectedCategoryIndex]);
+      scrollToIndex(categoryIndices[selectedCategoryIndex.data]);
 
       setTimeout(() => {
-        setSelectedCategoryIndex(null);
+        selectedCategoryIndex.set(null);
       }, 200);
     }
 
     goToCategoryIfThereIsSearch();
-  }, [
-    selectedCategoryIndex,
-    scrollToIndex,
-    search,
-    categoryIndices,
-    setSelectedCategoryIndex,
-  ]);
+  }, [categoryIndices, scrollToIndex, search, selectedCategoryIndex]);
 
   function handleScrollToCategory() {
     if (search) {
       setSearch('');
-      setSelectedCategoryIndex(index);
+      selectedCategoryIndex.set(index);
 
       return;
     }
@@ -102,7 +93,7 @@ export function Button({
     setFocus(false);
   }
 
-  const isSelected = index === selectedCategoryPosition;
+  const isSelected = index === currentCategoryPosition;
   const searchIsEmpty = !search;
 
   return (

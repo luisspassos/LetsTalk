@@ -1,11 +1,11 @@
 import { Box, Flex } from '@chakra-ui/react';
-import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
+import { useEmojiPicker } from '../../../../../../../../contexts/EmojiPickerContext';
 
 import { Button } from './Button';
 import { SelectedBar } from './SelectedBar';
 
 export function Categories() {
-  const { categories } = useEmoji();
+  const { categories } = useEmojiPicker();
 
   return (
     <Box>

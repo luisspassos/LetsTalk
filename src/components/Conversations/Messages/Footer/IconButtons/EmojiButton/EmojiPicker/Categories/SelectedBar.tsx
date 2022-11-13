@@ -1,15 +1,12 @@
-import { useEmoji } from '../../../../../../../../contexts/EmojiContext';
-import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPickerScrollContext';
+import { useEmojiPicker } from '../../../../../../../../contexts/EmojiPickerContext';
 import { sharedStyles } from './Button';
 
 export function SelectedBar() {
   const {
     searchedEmojis: { search },
     categories,
-  } = useEmoji();
-
-  const { selectedCategoryPosition, selectedCategoryIndex } =
-    useEmojiPickerScroll();
+    scroll: { currentCategoryPosition, selectedCategoryIndex },
+  } = useEmojiPicker();
 
   const categoriesLength = categories.data.length;
   const width = `${100 / categoriesLength}%`;
@@ -21,8 +18,8 @@ export function SelectedBar() {
         position: 'absolute',
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
-        transform: `translateX(${selectedCategoryPosition * 100}%)`,
-        transitionProperty: selectedCategoryIndex ? 'height' : undefined,
+        transform: `translateX(${currentCategoryPosition * 100}%)`,
+        transitionProperty: selectedCategoryIndex.data ? 'height' : undefined,
         width,
         ...sharedStyles,
       }}

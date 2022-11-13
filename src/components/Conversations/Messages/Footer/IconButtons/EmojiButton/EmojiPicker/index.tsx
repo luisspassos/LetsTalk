@@ -1,5 +1,5 @@
 import { Collapse, Flex as ChakraFlex } from '@chakra-ui/react';
-import { useEmoji } from '../../../../../../../contexts/EmojiContext';
+import { useEmojiPicker } from '../../../../../../../contexts/EmojiPickerContext';
 import { Divider } from '../../../../../../Divider';
 import { Categories } from './Categories';
 import { Scroll } from './Scroll';
@@ -7,7 +7,7 @@ import { Scroll } from './Scroll';
 export function EmojiPicker() {
   const {
     togglePicker: { isOpen },
-  } = useEmoji();
+  } = useEmojiPicker();
 
   return (
     <Collapse in={isOpen} unmountOnExit>

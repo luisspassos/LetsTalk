@@ -21,9 +21,8 @@ import { SearchInConversationProvider } from '../contexts/SearchInConversationCo
 import { OnlineAtEventsProvider } from '../contexts/OnlineAtEventsContext';
 import { ConversationPopoverProvider } from '../contexts/ConversationPopoverContext';
 import { RenamingNameProvider } from '../contexts/RenamingNameContext';
-import { EmojiProvider } from '../contexts/EmojiContext';
 import { MessageInputRefProvider } from '../contexts/MessageInputRef';
-import { EmojiPickerScrollProvider } from '../contexts/EmojiPickerScrollContext';
+import { EmojiPickerProvider } from '../contexts/EmojiPickerContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -44,11 +43,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                                 <TabProvider>
                                   <FadeInAnimationProvider>
                                     <ChakraProvider theme={theme}>
-                                      <EmojiProvider>
-                                        <EmojiPickerScrollProvider>
-                                          <Component {...pageProps} />
-                                        </EmojiPickerScrollProvider>
-                                      </EmojiProvider>
+                                      <EmojiPickerProvider>
+                                        <Component {...pageProps} />
+                                      </EmojiPickerProvider>
                                     </ChakraProvider>
                                   </FadeInAnimationProvider>
                                 </TabProvider>

@@ -1,8 +1,8 @@
 import { MouseEvent as ReactMouseEvent, useState } from 'react';
 import {
   createRecentCategory,
-  useEmoji,
-} from '../../../../../../../../contexts/EmojiContext';
+  useEmojiPicker,
+} from '../../../../../../../../contexts/EmojiPickerContext';
 import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
 
 type EmojiProps = {
@@ -16,17 +16,19 @@ function getValueWithMeasure(value: number) {
 }
 
 export function Emoji({ children: emoji }: EmojiProps) {
-  const { emojiPickerStyles } = useEmoji();
+  const {
+    categories,
+    scroll: { emojiStyles },
+  } = useEmojiPicker();
+
   const { ref: messageInputRef } = useMessageInputRef();
 
   const [hover, setHover] = useState(false);
 
   const styles = {
-    size: getValueWithMeasure(emojiPickerStyles.emojiSize),
-    fontSize: getValueWithMeasure(emojiPickerStyles.fontSize),
+    size: getValueWithMeasure(emojiStyles.emojiSize),
+    fontSize: getValueWithMeasure(emojiStyles.fontSize),
   };
-
-  const { categories } = useEmoji();
 
   function handleAddEmojiInRecentCategory() {
     const categoriesData = [...categories.data];

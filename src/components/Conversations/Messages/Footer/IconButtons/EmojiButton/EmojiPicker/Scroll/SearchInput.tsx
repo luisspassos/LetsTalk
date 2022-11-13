@@ -1,16 +1,16 @@
 import { Input, useColorModeValue } from '@chakra-ui/react';
 import {
-  useEmoji,
-  formatValue,
-} from '../../../../../../../../contexts/EmojiContext';
+  formatValueForSearch,
+  useEmojiPicker,
+} from '../../../../../../../../contexts/EmojiPickerContext';
 
 export function SearchInput() {
   const {
     searchedEmojis: { setSearch, search },
-  } = useEmoji();
+  } = useEmojiPicker();
 
   function handleSearch(search: string) {
-    const formattedSearch = formatValue(search);
+    const formattedSearch = formatValueForSearch(search);
 
     setSearch(formattedSearch);
   }
