@@ -1,10 +1,12 @@
-import { useEmojiPicker } from '../../../../../../../../contexts/EmojiPickerContext';
+import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
+import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 
 export function Scroll() {
   const {
-    scroll: { virtualizer, components, parentRef },
     searchedEmojis: { search },
-  } = useEmojiPicker();
+  } = useSearchedEmojis();
+
+  const { components, virtualizer, parentRef } = useEmojiPickerScroll();
 
   return (
     <div ref={parentRef} style={{ overflow: 'auto' }}>

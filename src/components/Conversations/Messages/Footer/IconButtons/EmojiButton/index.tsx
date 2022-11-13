@@ -1,12 +1,10 @@
 import { IoMdClose } from 'react-icons/io';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { InputIconButton } from '../';
-import { useEmojiPicker } from '../../../../../../contexts/EmojiPickerContext';
+import { useToggleEmojiPicker } from '../../../../../../contexts/EmojiPicker/ToggleEmojiPickerContext';
 
 export function EmojiButton() {
-  const {
-    togglePicker: { isOpen, onToggle },
-  } = useEmojiPicker();
+  const { isOpen, onToggle } = useToggleEmojiPicker();
 
   return (
     <InputIconButton

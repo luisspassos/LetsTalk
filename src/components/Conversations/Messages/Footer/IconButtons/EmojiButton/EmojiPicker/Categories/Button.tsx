@@ -7,7 +7,8 @@ import {
   useState,
 } from 'react';
 import { IconType } from 'react-icons';
-import { useEmojiPicker } from '../../../../../../../../contexts/EmojiPickerContext';
+import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
+import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 
 type DefaultButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -31,14 +32,15 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const {
-    scroll: {
-      virtualizer,
-      selectedCategoryIndex,
-      categoryIndices,
-      currentCategoryPosition,
-    },
+    virtualizer,
+    selectedCategoryIndex,
+    categoryIndices,
+    currentCategoryPosition,
+  } = useEmojiPickerScroll();
+
+  const {
     searchedEmojis: { search, setSearch },
-  } = useEmojiPicker();
+  } = useSearchedEmojis();
 
   const scrollToIndex = useCallback(
     (index: number) => {

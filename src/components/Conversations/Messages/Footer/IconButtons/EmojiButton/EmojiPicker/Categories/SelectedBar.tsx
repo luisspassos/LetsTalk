@@ -1,12 +1,15 @@
-import { useEmojiPicker } from '../../../../../../../../contexts/EmojiPickerContext';
+import { useCategories } from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
+import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
+import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 import { sharedStyles } from './Button';
 
 export function SelectedBar() {
+  const { categories } = useCategories();
   const {
     searchedEmojis: { search },
-    categories,
-    scroll: { currentCategoryPosition, selectedCategoryIndex },
-  } = useEmojiPicker();
+  } = useSearchedEmojis();
+  const { currentCategoryPosition, selectedCategoryIndex } =
+    useEmojiPickerScroll();
 
   const categoriesLength = categories.data.length;
   const width = `${100 / categoriesLength}%`;

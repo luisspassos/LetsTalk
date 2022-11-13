@@ -1,8 +1,9 @@
-import { MouseEvent as ReactMouseEvent, useState } from 'react';
+import { memo, MouseEvent as ReactMouseEvent, useState } from 'react';
 import {
   createRecentCategory,
-  useEmojiPicker,
-} from '../../../../../../../../contexts/EmojiPickerContext';
+  useCategories,
+} from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
+import { useEmojiStyles } from '../../../../../../../../contexts/EmojiPicker/EmojiStylesContext';
 import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
 
 type EmojiProps = {
@@ -15,11 +16,10 @@ function getValueWithMeasure(value: number) {
   return value + 'px';
 }
 
-export function Emoji({ children: emoji }: EmojiProps) {
-  const {
-    categories,
-    scroll: { emojiStyles },
-  } = useEmojiPicker();
+function EmojiComponent({ children: emoji }: EmojiProps) {
+  const { categories } = useCategories();
+
+  const { emojiStyles } = useEmojiStyles();
 
   const { ref: messageInputRef } = useMessageInputRef();
 
@@ -132,3 +132,5 @@ export function Emoji({ children: emoji }: EmojiProps) {
     </span>
   );
 }
+
+export const Emoji = memo(EmojiComponent);
