@@ -6,7 +6,7 @@ export function Scroll() {
     searchedEmojis: { search },
   } = useSearchedEmojis();
 
-  const { components, virtualizer, parentRef } = useEmojiPickerScroll();
+  const { virtualizer, parentRef, components } = useEmojiPickerScroll();
 
   return (
     <div ref={parentRef} style={{ overflow: 'auto' }}>

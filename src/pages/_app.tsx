@@ -27,6 +27,7 @@ import { EmojiStylesProvider } from '../contexts/EmojiPicker/EmojiStylesContext'
 import { CategoriesProvider } from '../contexts/EmojiPicker/CategoriesContext';
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
 import { SearchedEmojisProvider } from '../contexts/EmojiPicker/SearchedEmojiContext';
+import { SelectedCategoryIndexProvider } from '../contexts/EmojiPicker/SelectedCategoryIndexContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -47,17 +48,19 @@ function MyApp({ Component, pageProps }: AppProps) {
                                 <TabProvider>
                                   <FadeInAnimationProvider>
                                     <ChakraProvider theme={theme}>
-                                      <SearchedEmojisProvider>
-                                        <CategoriesProvider>
+                                      <SelectedCategoryIndexProvider>
+                                        <SearchedEmojisProvider>
                                           <EmojiStylesProvider>
-                                            <EmojiPickerScrollProvider>
-                                              <ToggleEmojiPickerProvider>
-                                                <Component {...pageProps} />
-                                              </ToggleEmojiPickerProvider>
-                                            </EmojiPickerScrollProvider>
+                                            <CategoriesProvider>
+                                              <EmojiPickerScrollProvider>
+                                                <ToggleEmojiPickerProvider>
+                                                  <Component {...pageProps} />
+                                                </ToggleEmojiPickerProvider>
+                                              </EmojiPickerScrollProvider>
+                                            </CategoriesProvider>
                                           </EmojiStylesProvider>
-                                        </CategoriesProvider>
-                                      </SearchedEmojisProvider>
+                                        </SearchedEmojisProvider>
+                                      </SelectedCategoryIndexProvider>
                                     </ChakraProvider>
                                   </FadeInAnimationProvider>
                                 </TabProvider>

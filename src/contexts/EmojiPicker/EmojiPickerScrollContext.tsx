@@ -1,43 +1,28 @@
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  RefObject,
-  SetStateAction,
-  useContext,
-  useRef,
-  useState,
-} from 'react';
+import { createContext, ReactNode, RefObject, useContext, useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 import { SearchInput } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
 import { CategoryTitle } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/CategoryTitle';
 import { Emoji } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/Emoji';
-
 import { useEmojiStyles } from './EmojiStylesContext';
 import { Emoji as EmojiType, useCategories } from './CategoriesContext';
+
 import { useSearchedEmojis } from './SearchedEmojiContext';
 
-type EmojiRow = JSX.Element[];
-
-type SelectedCategoryIndex = null | number;
-
-type CategoryIndices = number[];
-
 type EmojiPickerScrollContextType = {
-  parentRef: RefObject<HTMLDivElement>;
   virtualizer: ReturnType<typeof useVirtual>;
-  components: (JSX.Element | EmojiRow)[];
-  categoryIndices: CategoryIndices;
   currentCategoryPosition: number;
-  selectedCategoryIndex: {
-    data: SelectedCategoryIndex;
-    set: Dispatch<SetStateAction<SelectedCategoryIndex>>;
-  };
+  parentRef: RefObject<HTMLDivElement>;
+  components: (JSX.Element | EmojiRow)[];
+  categoryIndices: number[];
 };
 
 type EmojiPickerScrollProviderProps = {
   children: ReactNode;
 };
+
+type EmojiRow = JSX.Element[];
+
+type CategoryIndices = number[];
 
 export const EmojiPickerScrollContext = createContext(
   {} as EmojiPickerScrollContextType
@@ -46,20 +31,16 @@ export const EmojiPickerScrollContext = createContext(
 export function EmojiPickerScrollProvider({
   children,
 }: EmojiPickerScrollProviderProps) {
-  const { categories } = useCategories();
-
   const {
     searchedEmojis: { search },
     searchedEmojis,
   } = useSearchedEmojis();
 
-  // its used when there is search
-  const [selectedCategoryIndex, setSelectedCategoryIndex] =
-    useState<SelectedCategoryIndex>(null);
+  const { categories } = useCategories();
 
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const width = parentRef.current?.clientWidth || 0;
+  const width = parentRef.current?.clientWidth ?? 0;
 
   const { emojiStyles } = useEmojiStyles();
 
@@ -128,37 +109,33 @@ export function EmojiPickerScrollProvider({
   insertEmojisAndInsertCategoryIndices();
 
   const virtualizer = useVirtual({
-    size: components.length,
-    parentRef,
+    size: components?.length ?? 0,
+    parentRef: parentRef,
     paddingEnd: 10,
     overscan: 0,
   });
 
-  const currentIndex = virtualizer.virtualItems[0].index;
+  const currentIndex = virtualizer.virtualItems[0]?.index;
 
   const currentCategoryIndex =
-    categoryIndices.find((categoryIndex, i) => {
+    categoryIndices?.find((categoryIndex, i) => {
       const nextCategoryIndex = categoryIndices[i + 1] ?? 999;
 
       return currentIndex >= categoryIndex && currentIndex < nextCategoryIndex;
-    }) ?? categoryIndices[0];
+    }) ?? categoryIndices?.[0];
 
   const currentCategoryPosition = search
     ? 0
-    : categoryIndices.indexOf(currentCategoryIndex);
+    : categoryIndices?.indexOf(currentCategoryIndex);
 
   return (
     <EmojiPickerScrollContext.Provider
       value={{
         virtualizer,
-        components,
-        parentRef,
-        categoryIndices,
         currentCategoryPosition,
-        selectedCategoryIndex: {
-          data: selectedCategoryIndex,
-          set: setSelectedCategoryIndex,
-        },
+        parentRef,
+        components,
+        categoryIndices,
       }}
     >
       {children}

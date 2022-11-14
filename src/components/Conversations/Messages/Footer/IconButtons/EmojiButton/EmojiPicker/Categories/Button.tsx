@@ -10,6 +10,7 @@ import {
 import { IconType } from 'react-icons';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
+import { useSelectedCategoryIndex } from '../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
 
 type DefaultButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -32,12 +33,10 @@ export function Button({
   'aria-label': ariaLabel,
   ...rest
 }: ButtonProps) {
-  const {
-    virtualizer,
-    selectedCategoryIndex,
-    categoryIndices,
-    currentCategoryPosition,
-  } = useEmojiPickerScroll();
+  const { virtualizer, currentCategoryPosition, categoryIndices } =
+    useEmojiPickerScroll();
+
+  const { selectedCategoryIndex } = useSelectedCategoryIndex();
 
   return (
     <ButtonComponent
