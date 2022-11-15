@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { useVirtual } from 'react-virtual';
-import { useA } from '../../../../../../../../contexts/EmojiPicker/AContext';
 import {
   useCategories,
   Emoji as EmojiType,
 } from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
 import { useEmojiStyles } from '../../../../../../../../contexts/EmojiPicker/EmojiStylesContext';
+import { useScrollToIndex } from '../../../../../../../../contexts/EmojiPicker/ScrollToIndex';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 import { CategoryTitle } from './CategoryTitle';
 import { Emoji } from './Emoji';
@@ -113,11 +113,11 @@ export function Scroll() {
     ? 0
     : categoryIndices?.indexOf(currentCategoryIndex);
 
-  const { setCurrent } = useA();
+  const { setScrollToIndex } = useScrollToIndex();
 
   useEffect(() => {
-    setCurrent(currentCategoryPositionA);
-  }, [currentCategoryPositionA, setCurrent]);
+    setScrollToIndex(virtualizer.scrollToIndex);
+  }, [virtualizer.scrollToIndex, setScrollToIndex]);
 
   return (
     <div ref={parentRef} style={{ overflow: 'auto' }}>

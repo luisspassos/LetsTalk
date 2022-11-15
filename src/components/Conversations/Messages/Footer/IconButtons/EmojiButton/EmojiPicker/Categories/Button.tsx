@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 import { IconType } from 'react-icons';
-import { useA } from '../../../../../../../../contexts/EmojiPicker/AContext';
+import { useScrollToIndex } from '../../../../../../../../contexts/EmojiPicker/ScrollToIndex';
 
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 import { useSelectedCategoryIndex } from '../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
@@ -25,7 +25,6 @@ type ButtonProps = {
 
 export const sharedStyles = {
   transitionDuration: '0.2s',
-  minWidth: '50px',
 };
 
 function ButtonComponent({
@@ -34,39 +33,52 @@ function ButtonComponent({
   'aria-label': ariaLabel,
   ...rest
 }: ButtonProps) {
-  const { selectedCategoryIndex } = useSelectedCategoryIndex();
+  const { selectedCategoryIndex, setSelectedCategoryIndex } =
+    useSelectedCategoryIndex();
 
   const {
     searchedEmojis: { search, setSearch },
   } = useSearchedEmojis();
 
-  const scrollToIndex = useCallback((index: number) => {
-    scrollToIndexFunc(index, { align: 'start' });
-  }, []);
+  const { scrollToIndex } = useScrollToIndex();
+
+  const scrollToIndexFormatted = useCallback(
+    (index: number) => {
+      if (!scrollToIndex) return;
+
+      scrollToIndex(index, { align: 'start' });
+    },
+    [scrollToIndex]
+  );
 
   useEffect(() => {
     function goToCategoryIfThereIsSearch() {
-      if (selectedCategoryIndex.data === null || search) return;
+      if (selectedCategoryIndex === null || search) return;
 
-      obj.scrollToIndexFunc(categoryIndices[selectedCategoryIndex.data]);
+      scrollToIndexFormatted(categoryIndices[selectedCategoryIndex]);
 
       setTimeout(() => {
-        selectedCategoryIndex.set(null);
+        setSelectedCategoryIndex(null);
       }, 200);
     }
 
     goToCategoryIfThereIsSearch();
-  }, [scrollToIndex, search, selectedCategoryIndex]);
+  }, [
+    scrollToIndexFormatted,
+    search,
+    selectedCategoryIndex,
+    setSelectedCategoryIndex,
+  ]);
 
   function handleScrollToCategory() {
     if (search) {
       setSearch('');
-      selectedCategoryIndex.set(index);
+      setSelectedCategoryIndex(index);
 
       return;
     }
 
-    scrollToIndex(obj.categoryIndices[index]);
+    scrollToIndexFormatted(obj.categoryIndices[index]);
   }
 
   const color = {
@@ -90,9 +102,7 @@ function ButtonComponent({
     setFocus(false);
   }
 
-  const { current } = useA();
-
-  const isSelected = index === current;
+  const isSelected = index === true;
   const searchIsEmpty = !search;
 
   return (

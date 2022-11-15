@@ -14,10 +14,8 @@ type SelectedCategoryIndexProviderProps = {
 };
 
 type SelectedCategoryIndexContextType = {
-  selectedCategoryIndex: {
-    data: SelectedCategoryIndex;
-    set: Dispatch<SetStateAction<SelectedCategoryIndex>>;
-  };
+  selectedCategoryIndex: SelectedCategoryIndex;
+  setSelectedCategoryIndex: Dispatch<SetStateAction<SelectedCategoryIndex>>;
 };
 
 export const SelectedCategoryIndexContext = createContext(
@@ -34,10 +32,8 @@ export function SelectedCategoryIndexProvider({
   return (
     <SelectedCategoryIndexContext.Provider
       value={{
-        selectedCategoryIndex: {
-          data: selectedCategoryIndex,
-          set: setSelectedCategoryIndex,
-        },
+        selectedCategoryIndex,
+        setSelectedCategoryIndex,
       }}
     >
       {children}

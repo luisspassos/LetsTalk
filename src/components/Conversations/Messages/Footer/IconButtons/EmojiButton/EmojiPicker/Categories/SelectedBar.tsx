@@ -1,4 +1,3 @@
-import { useA } from '../../../../../../../../contexts/EmojiPicker/AContext';
 import { useCategories } from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 import { useSelectedCategoryIndex } from '../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
@@ -9,8 +8,6 @@ export function SelectedBar() {
   const {
     searchedEmojis: { search },
   } = useSearchedEmojis();
-
-  const { current } = useA();
 
   const { selectedCategoryIndex } = useSelectedCategoryIndex();
 
@@ -24,8 +21,8 @@ export function SelectedBar() {
         position: 'absolute',
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
-        transform: `translateX(${current * 100}%)`,
-        transitionProperty: selectedCategoryIndex.data ? 'height' : undefined,
+        transform: `translateX(${0 * 100}%)`,
+        transitionProperty: selectedCategoryIndex ? 'height' : undefined,
         width,
         ...sharedStyles,
       }}
