@@ -1,22 +1,24 @@
-import { createContext, createRef, ReactNode, useContext } from 'react';
+import { createContext, ReactNode, RefObject, useContext, useRef } from 'react';
 
 type EmojiPickerScrollRefProviderProps = {
   children: ReactNode;
 };
 
-type EmojiPickerScrollRefContextType = {};
+type EmojiPickerScrollRefContextType = {
+  ref: RefObject<HTMLDivElement>;
+};
 
 export const EmojiPickerScrollRefContext = createContext(
   {} as EmojiPickerScrollRefContextType
 );
 
-const ref = createRef();
-
 export function EmojiPickerScrollRefProvider({
   children,
 }: EmojiPickerScrollRefProviderProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
-    <EmojiPickerScrollRefContext.Provider value={{}}>
+    <EmojiPickerScrollRefContext.Provider value={{ ref }}>
       {children}
     </EmojiPickerScrollRefContext.Provider>
   );

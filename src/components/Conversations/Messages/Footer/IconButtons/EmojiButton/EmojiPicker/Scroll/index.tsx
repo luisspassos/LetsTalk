@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useVirtual } from 'react-virtual';
 import {
   useCategories,
   Emoji as EmojiType,
 } from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
+import { useEmojiPickerScrollRef } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollRef';
 import { useEmojiStyles } from '../../../../../../../../contexts/EmojiPicker/EmojiStylesContext';
 import { useScrollToIndex } from '../../../../../../../../contexts/EmojiPicker/ScrollToIndex';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
@@ -23,9 +24,9 @@ export function Scroll() {
 
   const { categories } = useCategories();
 
-  const parentRef = useRef<HTMLDivElement>(null);
+  const { ref } = useEmojiPickerScrollRef();
 
-  const width = parentRef.current?.clientWidth ?? 0;
+  const width = ref.current?.clientWidth ?? 0;
 
   const { emojiStyles } = useEmojiStyles();
 
@@ -95,7 +96,7 @@ export function Scroll() {
 
   const virtualizer = useVirtual({
     size: components?.length ?? 0,
-    parentRef: parentRef,
+    parentRef: ref,
     paddingEnd: 10,
     overscan: 0,
   });
@@ -120,7 +121,7 @@ export function Scroll() {
   }, [virtualizer.scrollToIndex, setScrollToIndex]);
 
   return (
-    <div ref={parentRef} style={{ overflow: 'auto' }}>
+    <div ref={ref} style={{ overflow: 'auto' }}>
       <div
         style={{
           height: virtualizer.totalSize,
