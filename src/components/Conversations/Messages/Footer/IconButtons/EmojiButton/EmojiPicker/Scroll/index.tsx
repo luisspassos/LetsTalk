@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useVirtual } from 'react-virtual';
 import {
   useCategories,
@@ -13,7 +13,7 @@ import { SearchInput } from './SearchInput';
 
 type EmojiRow = JSX.Element[];
 
-type CategoryIndices = number[];
+type Components = (JSX.Element | EmojiRow)[];
 
 export function Scroll() {
   const {
@@ -31,67 +31,67 @@ export function Scroll() {
 
   const emojisPerRow = Math.floor(width / emojiStyles.emojiSize);
 
-  const components: (JSX.Element | EmojiRow)[] = [
-    <SearchInput key='searchInput' />,
-  ];
+  const components: Components = useMemo(() => {
+    const data: Components = [<SearchInput key='searchInput' />];
 
-  const categoryIndices: CategoryIndices = [];
+    function insertEmojisAndInsertCategoryIndices() {
+      function fillEmojiRows(emoji: EmojiType, rows: EmojiRow[]) {
+        const getCurrentEmojiRow = () => {
+          const index = rows.length - 1;
 
-  function insertEmojisAndInsertCategoryIndices() {
-    function fillEmojiRows(emoji: EmojiType, rows: EmojiRow[]) {
-      const getCurrentEmojiRow = () => {
-        const index = rows.length - 1;
+          return rows[index];
+        };
 
-        return rows[index];
-      };
+        const row = getCurrentEmojiRow();
 
-      const row = getCurrentEmojiRow();
+        const rowIsFilled = row.length === emojisPerRow;
 
-      const rowIsFilled = row.length === emojisPerRow;
+        if (rowIsFilled) rows.push([]);
 
-      if (rowIsFilled) rows.push([]);
+        const rowToBeFilled = getCurrentEmojiRow();
 
-      const rowToBeFilled = getCurrentEmojiRow();
+        rowToBeFilled.push(<Emoji key={emoji}>{emoji}</Emoji>);
+      }
 
-      rowToBeFilled.push(<Emoji key={emoji}>{emoji}</Emoji>);
-    }
+      function fillComponents(emojiRows: EmojiRow[]) {
+        for (const row of emojiRows) {
+          data.push(row);
+        }
+      }
 
-    function fillComponents(emojiRows: EmojiRow[]) {
-      for (const row of emojiRows) {
-        components.push(row);
+      if (search) {
+        const emojiRows: EmojiRow[] = [[]];
+
+        for (const emoji of searchedEmojis.data) {
+          fillEmojiRows(emoji, emojiRows);
+        }
+
+        fillComponents(emojiRows);
+
+        return;
+      }
+
+      for (const { name, emojis } of categories.data) {
+        const categoryTitle = <CategoryTitle text={name} />;
+
+        data.push(categoryTitle);
+
+        // categoryIndices.push(components.indexOf(categoryTitle));
+
+        const emojiRows: EmojiRow[] = [[]];
+
+        for (const emoji of emojis) {
+          fillEmojiRows(emoji, emojiRows);
+        }
+
+        fillComponents(emojiRows);
       }
     }
 
-    if (search) {
-      const emojiRows: EmojiRow[] = [[]];
+    insertEmojisAndInsertCategoryIndices();
 
-      for (const emoji of searchedEmojis.data) {
-        fillEmojiRows(emoji, emojiRows);
-      }
-
-      fillComponents(emojiRows);
-
-      return;
-    }
-
-    for (const { name, emojis } of categories.data) {
-      const categoryTitle = <CategoryTitle text={name} />;
-
-      components.push(categoryTitle);
-
-      categoryIndices.push(components.indexOf(categoryTitle));
-
-      const emojiRows: EmojiRow[] = [[]];
-
-      for (const emoji of emojis) {
-        fillEmojiRows(emoji, emojiRows);
-      }
-
-      fillComponents(emojiRows);
-    }
-  }
-
-  insertEmojisAndInsertCategoryIndices();
+    return data;
+  }, [categories.data, emojisPerRow, search, searchedEmojis.data]);
 
   const virtualizer = useVirtual({
     size: components?.length ?? 0,
@@ -100,18 +100,18 @@ export function Scroll() {
     overscan: 0,
   });
 
-  const currentIndex = virtualizer.virtualItems[0]?.index;
+  // const currentIndex = virtualizer.virtualItems[0]?.index;
 
-  const currentCategoryIndex =
-    categoryIndices?.find((categoryIndex, i) => {
-      const nextCategoryIndex = categoryIndices[i + 1] ?? 999;
+  // const currentCategoryIndex =
+  //   categoryIndices?.find((categoryIndex, i) => {
+  //     const nextCategoryIndex = categoryIndices[i + 1] ?? 999;
 
-      return currentIndex >= categoryIndex && currentIndex < nextCategoryIndex;
-    }) ?? categoryIndices?.[0];
+  //     return currentIndex >= categoryIndex && currentIndex < nextCategoryIndex;
+  //   }) ?? categoryIndices?.[0];
 
-  const currentCategoryPositionA = search
-    ? 0
-    : categoryIndices?.indexOf(currentCategoryIndex);
+  // const currentCategoryPositionA = search
+  //   ? 0
+  //   : categoryIndices?.indexOf(currentCategoryIndex);
 
   const { setScrollToIndex } = useScrollToIndex();
 
