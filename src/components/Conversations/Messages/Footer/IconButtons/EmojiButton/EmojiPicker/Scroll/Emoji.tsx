@@ -1,4 +1,4 @@
-import { memo, MouseEvent as ReactMouseEvent, useState } from 'react';
+import { MouseEvent as ReactMouseEvent, useState } from 'react';
 import {
   createRecentCategory,
   useCategories,
@@ -16,7 +16,7 @@ function getValueWithMeasure(value: number) {
   return value + 'px';
 }
 
-function EmojiComponent({ children: emoji }: EmojiProps) {
+export function Emoji({ children: emoji }: EmojiProps) {
   const { categories } = useCategories();
 
   const { emojiStyles } = useEmojiStyles();
@@ -132,5 +132,3 @@ function EmojiComponent({ children: emoji }: EmojiProps) {
     </span>
   );
 }
-
-export const Emoji = memo(EmojiComponent);

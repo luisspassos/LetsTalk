@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 import { IconType } from 'react-icons';
-import { useScrollToIndex } from '../../../../../../../../contexts/EmojiPicker/ScrollToIndex';
+import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
 
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 import { useSelectedCategoryIndex } from '../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
@@ -40,12 +40,14 @@ function ButtonComponent({
     searchedEmojis: { search, setSearch },
   } = useSearchedEmojis();
 
-  const { scrollToIndex } = useScrollToIndex();
+  const {
+    virtualizer: { scrollToIndex },
+    categoryIndices,
+    currentCategoryPosition,
+  } = useEmojiPickerScroll();
 
   const scrollToIndexFormatted = useCallback(
     (index: number) => {
-      if (!scrollToIndex) return;
-
       scrollToIndex(index, { align: 'start' });
     },
     [scrollToIndex]
@@ -64,6 +66,7 @@ function ButtonComponent({
 
     goToCategoryIfThereIsSearch();
   }, [
+    categoryIndices,
     scrollToIndexFormatted,
     search,
     selectedCategoryIndex,
@@ -78,7 +81,7 @@ function ButtonComponent({
       return;
     }
 
-    scrollToIndexFormatted(obj.categoryIndices[index]);
+    scrollToIndexFormatted(categoryIndices[index]);
   }
 
   const color = {
@@ -102,7 +105,7 @@ function ButtonComponent({
     setFocus(false);
   }
 
-  const isSelected = index === true;
+  const isSelected = index === currentCategoryPosition;
   const searchIsEmpty = !search;
 
   return (

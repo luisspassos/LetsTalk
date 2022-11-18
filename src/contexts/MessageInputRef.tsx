@@ -1,11 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  RefObject,
-  useContext,
-  useEffect,
-  useRef,
-} from 'react';
+import { createContext, ReactNode, RefObject, useContext, useRef } from 'react';
 
 type MessageInputRefProviderProps = {
   children: ReactNode;
@@ -23,10 +16,6 @@ export function MessageInputRefProvider({
   children,
 }: MessageInputRefProviderProps) {
   const ref = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    console.log(ref);
-  }, []);
 
   return (
     <MessageInputRefContext.Provider value={{ ref }}>

@@ -27,8 +27,7 @@ import { EmojiStylesProvider } from '../contexts/EmojiPicker/EmojiStylesContext'
 import { CategoriesProvider } from '../contexts/EmojiPicker/CategoriesContext';
 import { SearchedEmojisProvider } from '../contexts/EmojiPicker/SearchedEmojiContext';
 import { SelectedCategoryIndexProvider } from '../contexts/EmojiPicker/SelectedCategoryIndexContext';
-import { ScrollToIndexProvider } from '../contexts/EmojiPicker/ScrollToIndex';
-import { EmojiPickerScrollRefProvider } from '../contexts/EmojiPicker/EmojiPickerScrollRef';
+import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -54,11 +53,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                                           <EmojiStylesProvider>
                                             <CategoriesProvider>
                                               <ToggleEmojiPickerProvider>
-                                                <ScrollToIndexProvider>
-                                                  <EmojiPickerScrollRefProvider>
-                                                    <Component {...pageProps} />
-                                                  </EmojiPickerScrollRefProvider>
-                                                </ScrollToIndexProvider>
+                                                <EmojiPickerScrollProvider>
+                                                  <Component {...pageProps} />
+                                                </EmojiPickerScrollProvider>
                                               </ToggleEmojiPickerProvider>
                                             </CategoriesProvider>
                                           </EmojiStylesProvider>
