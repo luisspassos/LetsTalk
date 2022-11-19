@@ -1,24 +1,8 @@
-import {
-  createContext,
-  ReactNode,
-  RefObject,
-  useContext,
-  useMemo,
-  useRef,
-} from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 import { useVirtual } from 'react-virtual';
-import { SearchInput } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
-import { CategoryTitle } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/CategoryTitle';
-import { Emoji } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/Emoji';
-import { useCategories, Emoji as EmojiType } from './CategoriesContext';
-import { useEmojiStyles } from './EmojiStylesContext';
+import { useEmojiPickerScrollComponents } from './EmojiPickerScrollComponents';
+import { useEmojiPickerScrollRef } from './EmojiPickerScrollRef';
 import { useSearchedEmojis } from './SearchedEmojiContext';
-
-type EmojiRow = JSX.Element[];
-
-type Components = (JSX.Element | EmojiRow)[];
-
-type CategoryIndicies = number[];
 
 type EmojiPickerScrollProviderProps = {
   children: ReactNode;
@@ -26,9 +10,6 @@ type EmojiPickerScrollProviderProps = {
 
 type EmojiPickerScrollContextType = {
   virtualizer: ReturnType<typeof useVirtual>;
-  parentRef: RefObject<HTMLDivElement>;
-  components: Components;
-  categoryIndices: CategoryIndicies;
   currentCategoryPosition: number;
 };
 
@@ -41,81 +22,11 @@ export function EmojiPickerScrollProvider({
 }: EmojiPickerScrollProviderProps) {
   const {
     searchedEmojis: { search },
-    searchedEmojis,
   } = useSearchedEmojis();
 
-  const { categories } = useCategories();
+  const { components, categoryIndices } = useEmojiPickerScrollComponents();
 
-  const { emojiStyles } = useEmojiStyles();
-
-  const parentRef = useRef<HTMLDivElement>(null);
-
-  const width = parentRef.current?.clientWidth ?? 0;
-
-  const emojisPerRow = Math.floor(width / emojiStyles.emojiSize);
-
-  const { categoryIndices, components } = useMemo(() => {
-    const components: Components = [<SearchInput key='searchInput' />];
-    const categoryIndices: number[] = [];
-
-    function insertEmojisAndInsertCategoryIndices() {
-      function fillEmojiRows(emoji: EmojiType, rows: EmojiRow[]) {
-        const getCurrentEmojiRow = () => {
-          const index = rows.length - 1;
-
-          return rows[index];
-        };
-
-        const row = getCurrentEmojiRow();
-
-        const rowIsFilled = row.length === emojisPerRow;
-
-        if (rowIsFilled) rows.push([]);
-
-        const rowToBeFilled = getCurrentEmojiRow();
-
-        rowToBeFilled.push(<Emoji key={emoji}>{emoji}</Emoji>);
-      }
-
-      function fillComponents(emojiRows: EmojiRow[]) {
-        for (const row of emojiRows) {
-          components.push(row);
-        }
-      }
-
-      if (search) {
-        const emojiRows: EmojiRow[] = [[]];
-
-        for (const emoji of searchedEmojis.data) {
-          fillEmojiRows(emoji, emojiRows);
-        }
-
-        fillComponents(emojiRows);
-
-        return;
-      }
-
-      for (const { name, emojis } of categories.data) {
-        const categoryTitle = <CategoryTitle text={name} />;
-
-        components.push(categoryTitle);
-
-        categoryIndices.push(components.indexOf(categoryTitle));
-
-        const emojiRows: EmojiRow[] = [[]];
-
-        for (const emoji of emojis) {
-          fillEmojiRows(emoji, emojiRows);
-        }
-
-        fillComponents(emojiRows);
-      }
-    }
-
-    insertEmojisAndInsertCategoryIndices();
-
-    return { components, categoryIndices };
-  }, [categories.data, emojisPerRow, search, searchedEmojis.data]);
+  const { parentRef } = useEmojiPickerScrollRef();
 
   const virtualizer = useVirtual({
     size: components.length,
@@ -141,9 +52,6 @@ export function EmojiPickerScrollProvider({
     <EmojiPickerScrollContext.Provider
       value={{
         virtualizer,
-        parentRef,
-        components,
-        categoryIndices,
         currentCategoryPosition,
       }}
     >

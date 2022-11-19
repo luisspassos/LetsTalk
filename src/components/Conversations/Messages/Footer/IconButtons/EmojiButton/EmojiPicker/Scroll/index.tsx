@@ -1,11 +1,17 @@
+import { useEmojiPickerScrollComponents } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollComponents';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
+import { useEmojiPickerScrollRef } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollRef';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 
 export function Scroll() {
-  const { parentRef, virtualizer, components } = useEmojiPickerScroll();
+  const { virtualizer } = useEmojiPickerScroll();
   const {
     searchedEmojis: { search },
   } = useSearchedEmojis();
+
+  const { components } = useEmojiPickerScrollComponents();
+
+  const { parentRef } = useEmojiPickerScrollRef();
 
   return (
     <div ref={parentRef} style={{ overflow: 'auto' }}>

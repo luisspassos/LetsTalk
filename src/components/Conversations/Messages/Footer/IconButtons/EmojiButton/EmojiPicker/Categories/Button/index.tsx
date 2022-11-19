@@ -1,4 +1,3 @@
-import { useColorModeValue } from '@chakra-ui/react';
 import {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
@@ -8,10 +7,12 @@ import {
   useState,
 } from 'react';
 import { IconType } from 'react-icons';
-import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
+import { useEmojiPickerScrollComponents } from '../../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollComponents';
+import { useEmojiPickerScrollToIndex } from '../../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollToIndex';
 
-import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
-import { useSelectedCategoryIndex } from '../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
+import { useSearchedEmojis } from '../../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
+import { useSelectedCategoryIndex } from '../../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
+import { Icon } from './Icon';
 
 type DefaultButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -40,11 +41,9 @@ function ButtonComponent({
     searchedEmojis: { search, setSearch },
   } = useSearchedEmojis();
 
-  const {
-    virtualizer: { scrollToIndex },
-    categoryIndices,
-    currentCategoryPosition,
-  } = useEmojiPickerScroll();
+  const { scrollToIndex } = useEmojiPickerScrollToIndex();
+
+  const { categoryIndices } = useEmojiPickerScrollComponents();
 
   const scrollToIndexFormatted = useCallback(
     (index: number) => {
@@ -84,17 +83,6 @@ function ButtonComponent({
     scrollToIndexFormatted(categoryIndices[index]);
   }
 
-  const color = {
-    selected: useColorModeValue(
-      'var(--chakra-colors-blackAlpha-800)',
-      'var(--chakra-colors-whiteAlpha-800)'
-    ),
-    default: useColorModeValue(
-      'var(--chakra-colors-blackAlpha-600)',
-      'var(--chakra-colors-whiteAlpha-600)'
-    ),
-  };
-
   const [focus, setFocus] = useState(false);
 
   function handleAddFocus() {
@@ -105,13 +93,9 @@ function ButtonComponent({
     setFocus(false);
   }
 
-  const isSelected = index === currentCategoryPosition;
-  const searchIsEmpty = !search;
-
   return (
     <button
       style={{
-        color: isSelected && searchIsEmpty ? color.selected : color.default,
         flex: 1,
         height: '45px',
         fontSize: '22px',
@@ -130,7 +114,7 @@ function ButtonComponent({
       onBlur={handleRemoveFocus}
       {...rest}
     >
-      <CategoryIcon />
+      <Icon IconComponent={CategoryIcon} index={index} />
     </button>
   );
 }

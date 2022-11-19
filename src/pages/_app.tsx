@@ -28,6 +28,9 @@ import { CategoriesProvider } from '../contexts/EmojiPicker/CategoriesContext';
 import { SearchedEmojisProvider } from '../contexts/EmojiPicker/SearchedEmojiContext';
 import { SelectedCategoryIndexProvider } from '../contexts/EmojiPicker/SelectedCategoryIndexContext';
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
+import { EmojiPickerScrollComponentsProvider } from '../contexts/EmojiPicker/EmojiPickerScrollComponents';
+import { EmojiPickerScrollRefProvider } from '../contexts/EmojiPicker/EmojiPickerScrollRef';
+import { EmojiPickerScrollToIndexProvider } from '../contexts/EmojiPicker/EmojiPickerScrollToIndex';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -53,9 +56,17 @@ function MyApp({ Component, pageProps }: AppProps) {
                                           <EmojiStylesProvider>
                                             <CategoriesProvider>
                                               <ToggleEmojiPickerProvider>
-                                                <EmojiPickerScrollProvider>
-                                                  <Component {...pageProps} />
-                                                </EmojiPickerScrollProvider>
+                                                <EmojiPickerScrollRefProvider>
+                                                  <EmojiPickerScrollComponentsProvider>
+                                                    <EmojiPickerScrollProvider>
+                                                      <EmojiPickerScrollToIndexProvider>
+                                                        <Component
+                                                          {...pageProps}
+                                                        />
+                                                      </EmojiPickerScrollToIndexProvider>
+                                                    </EmojiPickerScrollProvider>
+                                                  </EmojiPickerScrollComponentsProvider>
+                                                </EmojiPickerScrollRefProvider>
                                               </ToggleEmojiPickerProvider>
                                             </CategoriesProvider>
                                           </EmojiStylesProvider>
