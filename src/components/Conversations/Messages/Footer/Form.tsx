@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import { RecordButtonAudio } from './Buttons/RecordButtonAudio';
+import { RecordAudioButton } from './Buttons/RecordAudioButton';
 import { SendMessageButton } from './Buttons/SendMessageButton';
 import { MessageInput } from './MessageInput';
 
@@ -14,7 +14,7 @@ export function Form() {
       {message ? (
         <SendMessageButton setMessage={setMessage} />
       ) : (
-        <RecordButtonAudio />
+        <RecordAudioButton />
       )}
     </>
   );

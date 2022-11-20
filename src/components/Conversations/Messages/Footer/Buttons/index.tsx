@@ -12,7 +12,12 @@ type ButtonProps = {
 } & Omit<IconButtonProps, 'icon' | 'aria-label'>;
 
 export function Button({ icon, label, ...rest }: ButtonProps) {
-  const bg = useColorModeValue('blue.900', 'gray.400');
+  const styles = {
+    bg: useColorModeValue('blue.900', 'gray.400'),
+    active: {
+      bg: useColorModeValue('blueAlpha.900', 'gray.500'),
+    },
+  };
 
   return (
     <IconButton
@@ -23,14 +28,14 @@ export function Button({ icon, label, ...rest }: ButtonProps) {
       borderRadius='15px'
       ml={['11px', '13px', '15px']}
       color='white'
-      bg={bg}
+      bg={styles.bg}
       aria-label={label}
       icon={<Icon as={icon} />}
       _hover={{
-        bg: bg,
+        bg: styles.bg,
       }}
       _active={{
-        bg: useColorModeValue('blueAlpha.900', 'gray.500'),
+        bg: styles.active,
       }}
       {...rest}
     />
