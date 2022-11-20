@@ -56,7 +56,7 @@ export function EmojiPickerScrollProvider({
 
   const { categoryIndices, components } = useMemo(() => {
     const components: Components = [<SearchInput key='searchInput' />];
-    const categoryIndices: number[] = [];
+    const categoryIndices: CategoryIndicies = [];
 
     function insertEmojisAndInsertCategoryIndices() {
       function fillEmojiRows(emoji: EmojiType, rows: EmojiRow[]) {
