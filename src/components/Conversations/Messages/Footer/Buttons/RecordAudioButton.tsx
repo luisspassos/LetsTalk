@@ -1,6 +1,6 @@
 import { AiFillAudio } from 'react-icons/ai';
-import { Button } from '..';
-import { Tooltip } from '../../../../../Tooltip';
+import { Button } from '.';
+import { Tooltip } from '../../../../Tooltip';
 
 const label = 'Gravar áudio';
 
