@@ -2,7 +2,6 @@ import { useColorModeValue } from '@chakra-ui/react';
 import {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
-  memo,
   useCallback,
   useEffect,
   useState,
@@ -27,7 +26,7 @@ export const sharedStyles = {
   transitionDuration: '0.2s',
 };
 
-function ButtonComponent({
+export function Button({
   index,
   CategoryIcon,
   'aria-label': ariaLabel,
@@ -134,5 +133,3 @@ function ButtonComponent({
     </button>
   );
 }
-
-export const Button = memo(ButtonComponent);
