@@ -1,25 +1,26 @@
-import { IoIosSend } from 'react-icons/io';
+import { MdSend } from 'react-icons/md';
 import { Button } from '.';
-import { HandleMessageInputSize, HandleSendMessage } from '..';
+import { useSetMessageInputSize } from '../../../../../hooks/useSetMessageInputSize';
+import { SetMessage } from '../Form';
 
 type SendMessageButtonProps = {
-  handleSendMessage: HandleSendMessage;
-  handleMessageInputSize: HandleMessageInputSize;
+  setMessage: SetMessage;
 };
 
-export function SendMessageButton({
-  handleSendMessage,
-  handleMessageInputSize,
-}: SendMessageButtonProps) {
+export function SendMessageButton({ setMessage }: SendMessageButtonProps) {
+  const { setMessageInputSize } = useSetMessageInputSize();
+
+  function handleSendMessage() {
+    setMessage('');
+    setMessageInputSize();
+  }
+
   return (
     <Button
-      fontSize='30px'
-      icon={IoIosSend}
+      onClick={handleSendMessage}
+      fontSize='24px'
+      icon={MdSend}
       label='Enviar mensagem'
-      onClick={async () => {
-        await handleSendMessage();
-        await handleMessageInputSize();
-      }}
     />
   );
 }

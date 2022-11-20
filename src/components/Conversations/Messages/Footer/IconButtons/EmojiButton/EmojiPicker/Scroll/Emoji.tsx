@@ -5,6 +5,7 @@ import {
 } from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
 import { useEmojiStyles } from '../../../../../../../../contexts/EmojiPicker/EmojiStylesContext';
 import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
+import { useSetMessageInputSize } from '../../../../../../../../hooks/useSetMessageInputSize';
 
 type EmojiProps = {
   children: string;
@@ -22,6 +23,8 @@ export function Emoji({ children: emoji }: EmojiProps) {
   const { emojiStyles } = useEmojiStyles();
 
   const { ref: messageInputRef } = useMessageInputRef();
+
+  const { setMessageInputSize } = useSetMessageInputSize();
 
   const [hover, setHover] = useState(false);
 
@@ -86,11 +89,7 @@ export function Emoji({ children: emoji }: EmojiProps) {
 
     input?.setRangeText(emoji, start, end, 'end');
 
-    function handleInputSize() {
-      input?.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-
-    handleInputSize();
+    setMessageInputSize();
   }
 
   function handleDisableFocusOnClick(e: MouseDownEvent) {

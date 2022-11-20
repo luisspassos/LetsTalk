@@ -2,8 +2,16 @@ import { Textarea, useColorModeValue } from '@chakra-ui/react';
 import useResizeObserver from '@react-hook/resize-observer';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRef';
 import { font } from '../../Main/Message/MessageText/Component';
+import { SetMessage } from '../Form';
 
-function handleSize(textarea: EventTarget & HTMLTextAreaElement) {
+type MessageInputProps = {
+  message: string;
+  setMessage: SetMessage;
+};
+
+type Textarea = EventTarget & HTMLTextAreaElement;
+
+function handleSize(textarea: Textarea) {
   const maxHeight = 133;
   const scrollHeight = textarea.scrollHeight;
 
@@ -35,7 +43,7 @@ function handleSize(textarea: EventTarget & HTMLTextAreaElement) {
   }
 }
 
-export function MessageInput() {
+export function MessageInput({ setMessage, message }: MessageInputProps) {
   const { ref } = useMessageInputRef();
 
   useResizeObserver(ref, () => {
@@ -49,7 +57,11 @@ export function MessageInput() {
   return (
     <Textarea
       ref={ref}
-      onChange={(e) => handleSize(e.target)}
+      onChange={(e) => {
+        handleSize(e.target);
+        setMessage(e.target.value);
+      }}
+      value={message}
       placeholder='Mensagem'
       rows={1}
       fontFamily={font}
