@@ -2,13 +2,18 @@ import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPick
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 
 export function Scroll() {
-  const { virtualizer, components, parentRef } = useEmojiPickerScroll();
+  const { virtualizer, components, setParentRef } = useEmojiPickerScroll();
   const {
     searchedEmojis: { search },
   } = useSearchedEmojis();
 
   return (
-    <div ref={parentRef} style={{ overflow: 'auto' }}>
+    <div
+      ref={(div) => {
+        setParentRef({ current: div });
+      }}
+      style={{ overflow: 'auto' }}
+    >
       <div
         style={{
           height: virtualizer.totalSize,

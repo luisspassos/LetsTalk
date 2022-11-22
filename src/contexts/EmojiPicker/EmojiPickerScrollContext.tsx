@@ -1,10 +1,11 @@
 import {
   createContext,
+  Dispatch,
   ReactNode,
-  RefObject,
+  SetStateAction,
   useContext,
   useMemo,
-  useRef,
+  useState,
 } from 'react';
 import { useVirtual } from 'react-virtual';
 import { SearchInput } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
@@ -20,13 +21,16 @@ type Components = (JSX.Element | EmojiRow)[];
 
 type CategoryIndicies = number[];
 
+type ParentRef = { current: HTMLDivElement | null };
+
 type EmojiPickerScrollProviderProps = {
   children: ReactNode;
 };
 
 type EmojiPickerScrollContextType = {
   virtualizer: ReturnType<typeof useVirtual>;
-  parentRef: RefObject<HTMLDivElement>;
+  setParentRef: Dispatch<SetStateAction<ParentRef>>;
+  parentRef: ParentRef;
   components: Components;
   categoryIndices: CategoryIndicies;
   currentCategoryPosition: number;
@@ -48,7 +52,7 @@ export function EmojiPickerScrollProvider({
 
   const { emojiStyles } = useEmojiStyles();
 
-  const parentRef = useRef<HTMLDivElement>(null);
+  const [parentRef, setParentRef] = useState<ParentRef>({ current: null });
 
   const width = parentRef.current?.clientWidth ?? 0;
 
@@ -142,6 +146,7 @@ export function EmojiPickerScrollProvider({
       value={{
         virtualizer,
         parentRef,
+        setParentRef,
         components,
         categoryIndices,
         currentCategoryPosition,
