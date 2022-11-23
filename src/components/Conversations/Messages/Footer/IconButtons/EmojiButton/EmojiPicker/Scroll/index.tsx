@@ -1,19 +1,21 @@
+import { useEffect, useRef } from 'react';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 
 export function Scroll() {
+  const ref = useRef<HTMLDivElement>(null);
+
   const { virtualizer, components, setParentRef } = useEmojiPickerScroll();
   const {
     searchedEmojis: { search },
   } = useSearchedEmojis();
 
+  useEffect(() => {
+    setParentRef(ref);
+  }, [setParentRef]);
+
   return (
-    <div
-      ref={(div) => {
-        setParentRef({ current: div });
-      }}
-      style={{ overflow: 'auto' }}
-    >
+    <div ref={ref} style={{ overflow: 'auto' }}>
       <div
         style={{
           height: virtualizer.totalSize,
