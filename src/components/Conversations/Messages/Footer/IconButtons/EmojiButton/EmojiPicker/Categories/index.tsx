@@ -22,7 +22,7 @@ export function Categories() {
       >
         <SelectedBar />
         {categories.data.map(({ icon, name }, i) => (
-          <Button index={i} CategoryIcon={icon} aria-label={name} key={name} />
+          <Button index={i} Icon={icon} aria-label={name} key={name} />
         ))}
       </Flex>
     </Box>

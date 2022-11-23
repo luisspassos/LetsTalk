@@ -7,10 +7,9 @@ import {
   useState,
 } from 'react';
 import { IconType } from 'react-icons';
-import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
-
-import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
-import { useSelectedCategoryIndex } from '../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
+import { useEmojiPickerScroll } from '../../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
+import { useSearchedEmojis } from '../../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
+import { useSelectedCategoryIndex } from '../../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
 
 type DefaultButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -18,7 +17,7 @@ type DefaultButtonProps = DetailedHTMLProps<
 >;
 
 type ButtonProps = {
-  CategoryIcon: IconType;
+  Icon: IconType;
   index: number;
 } & DefaultButtonProps;
 
@@ -28,7 +27,7 @@ export const sharedStyles = {
 
 export function Button({
   index,
-  CategoryIcon,
+  Icon,
   'aria-label': ariaLabel,
   ...rest
 }: ButtonProps) {
@@ -129,7 +128,7 @@ export function Button({
       onBlur={handleRemoveFocus}
       {...rest}
     >
-      <CategoryIcon />
+      <Icon />
     </button>
   );
 }
