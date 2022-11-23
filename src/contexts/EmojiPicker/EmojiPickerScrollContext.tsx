@@ -33,7 +33,6 @@ type EmojiPickerScrollContextType = {
   parentRef: ParentRef;
   components: Components;
   categoryIndices: CategoryIndicies;
-  setParentRef: Dispatch<any>;
   currentCategoryPosition: number;
 };
 
@@ -53,7 +52,7 @@ export function EmojiPickerScrollProvider({
 
   const { emojiStyles } = useEmojiStyles();
 
-  const [parentRef, setParentRef] = useState<any>({ current: null });
+  const [parentRef, setParentRef] = useState<ParentRef>({ current: null });
 
   const width = parentRef?.current?.clientWidth ?? 0;
 
@@ -61,7 +60,7 @@ export function EmojiPickerScrollProvider({
 
   const { categoryIndices, components } = useMemo(() => {
     const components: Components = [<SearchInput key='searchInput' />];
-    const categoryIndices: number[] = [];
+    const categoryIndices: CategoryIndicies = [];
 
     function insertEmojisAndInsertCategoryIndices() {
       function fillEmojiRows(emoji: EmojiType, rows: EmojiRow[]) {
