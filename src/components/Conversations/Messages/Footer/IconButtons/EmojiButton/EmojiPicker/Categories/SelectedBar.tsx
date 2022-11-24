@@ -1,7 +1,8 @@
 import { useCategories } from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
+import { useIndexSelectedFromEmojiPickerCategories } from '../../../../../../../../contexts/EmojiPicker/IndexSelectedFromEmojiPickerCategoriesContext';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
-import { useSelectedCategoryIndex } from '../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
+
 import { sharedStyles } from './Button';
 
 export function SelectedBar() {
@@ -10,7 +11,7 @@ export function SelectedBar() {
     searchedEmojis: { search },
   } = useSearchedEmojis();
   const { currentCategoryPosition } = useEmojiPickerScroll();
-  const { selectedCategoryIndex } = useSelectedCategoryIndex();
+  const { selectedCategoryIndex } = useIndexSelectedFromEmojiPickerCategories();
 
   const categoriesLength = categories.data.length;
   const width = `${100 / categoriesLength}%`;

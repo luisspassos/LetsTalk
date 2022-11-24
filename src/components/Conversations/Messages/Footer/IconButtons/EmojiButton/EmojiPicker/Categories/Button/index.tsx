@@ -8,7 +8,7 @@ import {
 import { IconType } from 'react-icons';
 import { useEmojiPickerScroll } from '../../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
 import { useSearchedEmojis } from '../../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
-import { useSelectedCategoryIndex } from '../../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
+import { useIndexSelectedFromEmojiPickerCategories } from '../../../../../../../../../contexts/EmojiPicker/IndexSelectedFromEmojiPickerCategoriesContext';
 import { Icon } from './Icon';
 
 type DefaultButtonProps = DetailedHTMLProps<
@@ -34,7 +34,7 @@ export function Button({
   'aria-label': ariaLabel,
   ...rest
 }: ButtonProps) {
-  const { selectedCategoryIndex } = useSelectedCategoryIndex();
+  const { selectedCategoryIndex } = useIndexSelectedFromEmojiPickerCategories();
 
   const {
     searchedEmojis: { search, setSearch },
