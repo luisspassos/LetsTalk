@@ -10,6 +10,7 @@ import { IconType } from 'react-icons';
 import { useEmojiPickerScroll } from '../../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
 import { useSearchedEmojis } from '../../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 import { useSelectedCategoryIndex } from '../../../../../../../../../contexts/EmojiPicker/SelectedCategoryIndexContext';
+import { Icon } from './Icon';
 
 type DefaultButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -17,7 +18,7 @@ type DefaultButtonProps = DetailedHTMLProps<
 >;
 
 type ButtonProps = {
-  Icon: IconType;
+  CategoryIcon: IconType;
   index: number;
 } & DefaultButtonProps;
 
@@ -27,7 +28,7 @@ export const sharedStyles = {
 
 export function Button({
   index,
-  Icon,
+  CategoryIcon,
   'aria-label': ariaLabel,
   ...rest
 }: ButtonProps) {
@@ -128,7 +129,7 @@ export function Button({
       onBlur={handleRemoveFocus}
       {...rest}
     >
-      <Icon />
+      <Icon IconComponent={CategoryIcon} index={index} />
     </button>
   );
 }
