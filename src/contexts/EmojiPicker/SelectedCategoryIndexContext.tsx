@@ -24,8 +24,6 @@ export function SelectedCategoryIndexProvider({
   children,
 }: SelectedCategoryIndexProviderProps) {
   // its used when there is search
-  // const [selectedCategoryIndex, setSelectedCategoryIndex] =
-  //   useState<SelectedCategoryIndex>(null);
 
   const selectedCategoryIndex = useRef<SelectedCategoryIndex>(null);
 
@@ -33,7 +31,6 @@ export function SelectedCategoryIndexProvider({
     <SelectedCategoryIndexContext.Provider
       value={{
         selectedCategoryIndex,
-        // setSelectedCategoryIndex,
       }}
     >
       {children}

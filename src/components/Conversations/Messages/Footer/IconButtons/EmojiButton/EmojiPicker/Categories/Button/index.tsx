@@ -21,8 +21,11 @@ type ButtonProps = {
   index: number;
 } & DefaultButtonProps;
 
+const transitionDuration = 200; // milliseconds;
+const transitionDurationInSeconds = transitionDuration / 1000 + 's';
+
 export const sharedStyles = {
-  transitionDuration: '0.2s',
+  transitionDuration: transitionDurationInSeconds,
 };
 
 export function Button({
@@ -57,9 +60,7 @@ export function Button({
 
       setTimeout(() => {
         selectedCategoryIndex.current = null;
-
-        // here
-      }, 200);
+      }, transitionDuration);
     }
 
     goToCategoryIfThereIsSearch();
