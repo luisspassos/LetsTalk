@@ -9,8 +9,8 @@ import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
 import { Message } from './Message';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
-import { VirtualizedItemsListWrapper } from '../../../Virtual/VirtualizedItemsListWrapper';
-import { ScrollableBoxOfVirtualizedItems } from '../../../Virtual/ScrollableBoxOfVirtualizedItems';
+import { VirtualizedItemsListWrapper } from '../../../Virtualizer/VirtualizedItemsListWrapper';
+import { ScrollableBoxOfVirtualizedItems } from '../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
 
 type DbMessageData = {
   author: string;
@@ -235,11 +235,14 @@ export function Main() {
     paddingStart: padding,
   });
 
-  const scrollToIndex = useCallback((index: number) => {
-    messageVirtualizer.scrollToIndex(index, {
-      align: 'center',
-    });
-  }, []);
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      messageVirtualizer.scrollToIndex(index, {
+        align: 'center',
+      });
+    },
+    [messageVirtualizer]
+  );
 
   useEffect(() => {
     if (!conversationPopoverIsOpen || !searchText) return;

@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
+import { ScrollableBoxOfVirtualizedItems } from '../../../../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
+import { VirtualizedItemsListWrapper } from '../../../../../../../Virtualizer/VirtualizedItemsListWrapper';
 
 export function Scroll() {
   const ref = useRef<HTMLDivElement>(null);
@@ -15,14 +17,8 @@ export function Scroll() {
   }, [setParentRef]);
 
   return (
-    <div ref={ref} style={{ overflow: 'auto' }}>
-      <div
-        style={{
-          height: virtualizer.totalSize,
-          width: '100%',
-          position: 'relative',
-        }}
-      >
+    <ScrollableBoxOfVirtualizedItems ref={ref}>
+      <VirtualizedItemsListWrapper totalSize={virtualizer.totalSize}>
         {virtualizer.virtualItems.map((item) => {
           const component = components[item.index];
 
@@ -47,7 +43,7 @@ export function Scroll() {
             </div>
           );
         })}
-      </div>
-    </div>
+      </VirtualizedItemsListWrapper>
+    </ScrollableBoxOfVirtualizedItems>
   );
 }

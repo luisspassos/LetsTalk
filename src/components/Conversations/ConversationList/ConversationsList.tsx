@@ -13,8 +13,8 @@ import { useConversations } from '../../../contexts/ConversationsContext';
 import { useVirtual } from 'react-virtual';
 import { Conversation } from './Conversation';
 import { ConversationDivider } from './Conversation/ConversationDivider';
-import { VirtualizedItemsListWrapper } from '../../Virtual/VirtualizedItemsListWrapper';
-import { ScrollableBoxOfVirtualizedItems } from '../../Virtual/ScrollableBoxOfVirtualizedItems';
+import { VirtualizedItemsListWrapper } from '../../Virtualizer/VirtualizedItemsListWrapper';
+import { ScrollableBoxOfVirtualizedItems } from '../../Virtualizer/ScrollableBoxOfVirtualizedItems';
 
 export function ConversationListComponent() {
   const { isOpen } = useConversationsTab();
