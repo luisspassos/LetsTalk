@@ -1,5 +1,6 @@
 import { useColorModeValue } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
+import { sharedStyles } from '.';
 import { useEmojiPickerScroll } from '../../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
 import { useSearchedEmojis } from '../../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 
@@ -29,5 +30,12 @@ export function Icon({ IconComponent, index }: IconProps) {
   const isSelected = index === currentCategoryPosition;
   const searchIsEmpty = !search;
 
-  return <IconComponent color={} />;
+  return (
+    <IconComponent
+      color={isSelected && searchIsEmpty ? color.selected : color.default}
+      style={{
+        transitionDuration: sharedStyles.transitionDuration,
+      }}
+    />
+  );
 }

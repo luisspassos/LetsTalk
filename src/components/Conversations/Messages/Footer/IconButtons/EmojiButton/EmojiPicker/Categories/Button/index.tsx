@@ -1,4 +1,3 @@
-import { useColorModeValue } from '@chakra-ui/react';
 import {
   ButtonHTMLAttributes,
   DetailedHTMLProps,
@@ -32,8 +31,7 @@ export function Button({
   'aria-label': ariaLabel,
   ...rest
 }: ButtonProps) {
-  const { selectedCategoryIndex, setSelectedCategoryIndex } =
-    useSelectedCategoryIndex();
+  const { selectedCategoryIndex } = useSelectedCategoryIndex();
 
   const {
     searchedEmojis: { search, setSearch },
@@ -42,7 +40,6 @@ export function Button({
   const {
     virtualizer: { scrollToIndex },
     categoryIndices,
-    currentCategoryPosition,
   } = useEmojiPickerScroll();
 
   const scrollToIndexFormatted = useCallback(
@@ -54,45 +51,31 @@ export function Button({
 
   useEffect(() => {
     function goToCategoryIfThereIsSearch() {
-      if (selectedCategoryIndex === null || search) return;
+      if (selectedCategoryIndex.current === null || search) return;
 
-      scrollToIndexFormatted(categoryIndices[selectedCategoryIndex]);
+      scrollToIndexFormatted(categoryIndices[selectedCategoryIndex.current]);
 
       setTimeout(() => {
-        setSelectedCategoryIndex(null);
+        selectedCategoryIndex.current = null;
+
+        // here
       }, 200);
     }
 
     goToCategoryIfThereIsSearch();
-  }, [
-    categoryIndices,
-    scrollToIndexFormatted,
-    search,
-    selectedCategoryIndex,
-    setSelectedCategoryIndex,
-  ]);
+  }, [categoryIndices, scrollToIndexFormatted, search, selectedCategoryIndex]);
 
   function handleScrollToCategory() {
     if (search) {
       setSearch('');
-      setSelectedCategoryIndex(index);
+
+      selectedCategoryIndex.current = index;
 
       return;
     }
 
     scrollToIndexFormatted(categoryIndices[index]);
   }
-
-  const color = {
-    selected: useColorModeValue(
-      'var(--chakra-colors-blackAlpha-800)',
-      'var(--chakra-colors-whiteAlpha-800)'
-    ),
-    default: useColorModeValue(
-      'var(--chakra-colors-blackAlpha-600)',
-      'var(--chakra-colors-whiteAlpha-600)'
-    ),
-  };
 
   const [focus, setFocus] = useState(false);
 
@@ -104,13 +87,9 @@ export function Button({
     setFocus(false);
   }
 
-  const isSelected = index === currentCategoryPosition;
-  const searchIsEmpty = !search;
-
   return (
     <button
       style={{
-        color: isSelected && searchIsEmpty ? color.selected : color.default,
         flex: 1,
         height: '45px',
         fontSize: '22px',

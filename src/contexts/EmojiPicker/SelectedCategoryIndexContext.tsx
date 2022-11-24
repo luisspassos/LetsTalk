@@ -1,10 +1,9 @@
 import {
   createContext,
-  Dispatch,
+  MutableRefObject,
   ReactNode,
-  SetStateAction,
   useContext,
-  useState,
+  useRef,
 } from 'react';
 
 type SelectedCategoryIndex = null | number;
@@ -14,8 +13,7 @@ type SelectedCategoryIndexProviderProps = {
 };
 
 type SelectedCategoryIndexContextType = {
-  selectedCategoryIndex: SelectedCategoryIndex;
-  setSelectedCategoryIndex: Dispatch<SetStateAction<SelectedCategoryIndex>>;
+  selectedCategoryIndex: MutableRefObject<SelectedCategoryIndex>;
 };
 
 export const SelectedCategoryIndexContext = createContext(
@@ -26,14 +24,16 @@ export function SelectedCategoryIndexProvider({
   children,
 }: SelectedCategoryIndexProviderProps) {
   // its used when there is search
-  const [selectedCategoryIndex, setSelectedCategoryIndex] =
-    useState<SelectedCategoryIndex>(null);
+  // const [selectedCategoryIndex, setSelectedCategoryIndex] =
+  //   useState<SelectedCategoryIndex>(null);
+
+  const selectedCategoryIndex = useRef<SelectedCategoryIndex>(null);
 
   return (
     <SelectedCategoryIndexContext.Provider
       value={{
         selectedCategoryIndex,
-        setSelectedCategoryIndex,
+        // setSelectedCategoryIndex,
       }}
     >
       {children}
