@@ -1,4 +1,4 @@
-import { Box, useBreakpointValue } from '@chakra-ui/react';
+import { useBreakpointValue } from '@chakra-ui/react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useVirtual } from 'react-virtual';
@@ -11,6 +11,7 @@ import { Message } from './Message';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 import { VirtualizedItemsListWrapper } from '../../../Virtualizer/VirtualizedItemsListWrapper';
 import { ScrollableBoxOfVirtualizedItems } from '../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
+import { Item } from '../../../Virtualizer/Dynamic/Item';
 
 type DbMessageData = {
   author: string;
@@ -241,7 +242,8 @@ export function Main() {
         align: 'center',
       });
     },
-    [messageVirtualizer]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   useEffect(() => {
@@ -289,14 +291,10 @@ export function Main() {
           const message = messages[virtualMessage.index];
 
           return (
-            <Box
-              key={virtualMessage.index}
+            <Item
+              key={virtualMessage.key}
               ref={virtualMessage.measureRef}
-              pos='absolute'
-              top={0}
-              left={0}
-              w='100%'
-              transform={`translateY(${virtualMessage.start}px)`}
+              start={virtualMessage.start}
             >
               <Message
                 messageIndex={virtualMessage.index}
@@ -304,7 +302,7 @@ export function Main() {
                 message={message.message}
                 sentIn={message.sentIn}
               />
-            </Box>
+            </Item>
           );
         })}
       </VirtualizedItemsListWrapper>
