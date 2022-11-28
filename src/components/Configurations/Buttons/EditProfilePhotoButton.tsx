@@ -19,7 +19,7 @@ export function EditProfilePhotoButton() {
     const fileInput = document.createElement('input');
 
     fileInput.type = 'file';
-    fileInput.accept = 'image/png, image/jpeg';
+    fileInput.accept = 'image/*';
 
     const checkThatNoFilesHaveBeenSelected = () => {
       setTimeout(() => {
@@ -41,7 +41,9 @@ export function EditProfilePhotoButton() {
 
         const file = target.files[0];
 
-        if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
+        const isNotAnImage = !file.type.includes('image');
+
+        if (isNotAnImage) {
           errorToast();
           return;
         }
