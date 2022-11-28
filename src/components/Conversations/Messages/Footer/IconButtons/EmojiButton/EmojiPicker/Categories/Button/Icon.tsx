@@ -33,6 +33,7 @@ export function Icon({ IconComponent, index }: IconProps) {
   return (
     <IconComponent
       color={isSelected && searchIsEmpty ? color.selected : color.default}
+      size='clamp(18px, 50%, 22px)'
       style={{
         transitionDuration: sharedStyles.transitionDuration,
       }}

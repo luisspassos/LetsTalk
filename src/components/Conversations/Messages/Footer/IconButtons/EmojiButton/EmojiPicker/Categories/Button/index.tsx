@@ -10,6 +10,7 @@ import { useEmojiPickerScroll } from '../../../../../../../../../contexts/EmojiP
 import { useSearchedEmojis } from '../../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 import { useIndexSelectedFromEmojiPickerCategories } from '../../../../../../../../../contexts/EmojiPicker/IndexSelectedFromEmojiPickerCategoriesContext';
 import { Icon } from './Icon';
+import { useMediaQuery } from '@chakra-ui/react';
 
 type DefaultButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -88,18 +89,23 @@ export function Button({
     setFocus(false);
   }
 
+  const [isSmallerThan430] = useMediaQuery('(max-width: 430px)');
+
+  const styles = {
+    height: isSmallerThan430 ? '40px' : '45px',
+    boxShadow: focus ? 'var(--chakra-shadows-inner-blue)' : undefined,
+  };
+
   return (
     <button
       style={{
         flex: 1,
-        height: '45px',
-        fontSize: '22px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         outline: 0,
-        boxShadow: focus ? 'var(--chakra-shadows-inner-blue)' : undefined,
         borderRadius: '8px',
+        ...styles,
         ...sharedStyles,
       }}
       title={ariaLabel}
