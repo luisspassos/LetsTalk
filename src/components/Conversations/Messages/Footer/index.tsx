@@ -2,9 +2,9 @@ import { Box, Flex, HStack } from '@chakra-ui/react';
 import { Divider } from '../../../Divider';
 import { EmojiPicker } from './IconButtons/EmojiButton/EmojiPicker';
 import { EmojiButton } from './IconButtons/EmojiButton';
-import { FileButton } from './IconButtons/FileButton';
 import { ButtonWrapper } from './ButtonWrapper';
 import { Form } from './Form';
+import { MediaUploadButton } from './IconButtons/MediaUploadButton';
 
 export function Footer() {
   return (
@@ -16,7 +16,7 @@ export function Footer() {
           <ButtonWrapper>
             <HStack mr='10px' spacing='5px'>
               <EmojiButton />
-              <FileButton />
+              <MediaUploadButton />
             </HStack>
           </ButtonWrapper>
           <Form />
