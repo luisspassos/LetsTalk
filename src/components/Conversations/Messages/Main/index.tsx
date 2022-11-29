@@ -1,4 +1,4 @@
-import { useBreakpointValue } from '@chakra-ui/react';
+import { Box, useBreakpointValue } from '@chakra-ui/react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useVirtual } from 'react-virtual';
@@ -9,9 +9,7 @@ import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
 import { Message } from './Message';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
-import { VirtualizedItemsListWrapper } from '../../../Virtualizer/VirtualizedItemsListWrapper';
-import { ScrollableBoxOfVirtualizedItems } from '../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
-import { Item } from '../../../Virtualizer/Dynamic/Item';
+import { Video } from './Video';
 
 type DbMessageData = {
   author: string;
@@ -281,31 +279,44 @@ export function Main() {
   }, [messages2, scrollToIndex, initial, messages.length]);
 
   return (
-    <ScrollableBoxOfVirtualizedItems
-      ref={scrollBoxRef}
-      pr={['14px', '17px', '20px']}
-      mr={['-14px', '-17px', '-20px']}
-    >
-      <VirtualizedItemsListWrapper totalSize={messageVirtualizer.totalSize}>
-        {messageVirtualizer.virtualItems.map((virtualMessage) => {
-          const message = messages[virtualMessage.index];
+    <Box flex='1' overflow='auto'>
+      {messages.map((message, i) => (
+        <Message
+          key={message.id}
+          messageIndex={i}
+          contactMessage={message.contactMessage}
+          message={message.message}
+          sentIn={message.sentIn}
+        />
+      ))}
+      <Video />
+    </Box>
+    // <ScrollableBoxOfVirtualizedItems
+    //   ref={scrollBoxRef}
+    //   pr={['14px', '17px', '20px']}
+    //   mr={['-14px', '-17px', '-20px']}
+    // >
+    //   <VirtualizedItemsListWrapper totalSize={messageVirtualizer.totalSize}>
+    //     {messageVirtualizer.virtualItems.map((virtualMessage) => {
+    //       const message = messages[virtualMessage.index];
 
-          return (
-            <Item
-              key={virtualMessage.key}
-              ref={virtualMessage.measureRef}
-              start={virtualMessage.start}
-            >
-              <Message
-                messageIndex={virtualMessage.index}
-                contactMessage={message.contactMessage}
-                message={message.message}
-                sentIn={message.sentIn}
-              />
-            </Item>
-          );
-        })}
-      </VirtualizedItemsListWrapper>
-    </ScrollableBoxOfVirtualizedItems>
+    //       return (
+    //         <Item
+    //           key={virtualMessage.key}
+    //           ref={virtualMessage.measureRef}
+    //           start={virtualMessage.start}
+    //         >
+    //           <Message
+    //             messageIndex={virtualMessage.index}
+    //             contactMessage={message.contactMessage}
+    //             message={message.message}
+    //             sentIn={message.sentIn}
+    //           />
+    //         </Item>
+    //       );
+    //     })}
+    //     <Box as='video'></Box>
+    //   </VirtualizedItemsListWrapper>
+    // </ScrollableBoxOfVirtualizedItems>
   );
 }

@@ -1,5 +1,6 @@
 import { Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
+import { font } from '../../../Footer/MessageInput';
 
 type MessageTextComponentProps = {
   children: ReactNode;
@@ -9,8 +10,6 @@ type MessageTextComponentProps = {
     contactMessage: string;
   };
 };
-
-export const font = 'Roboto, Noto Color Emoji, sans-serif';
 
 export function MessageTextComponent({
   children,

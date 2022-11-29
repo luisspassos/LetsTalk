@@ -15,8 +15,6 @@ export function MediaUploadButton() {
     fileInput.accept = '';
 
     fileInput.click();
-
-    // errorToast();
   }
 
   return (

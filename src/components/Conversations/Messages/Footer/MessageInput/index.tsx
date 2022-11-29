@@ -1,8 +1,9 @@
 import { Textarea, useColorModeValue } from '@chakra-ui/react';
 import useResizeObserver from '@react-hook/resize-observer';
 import { useMessageInputRef } from '../../../../../contexts/MessageInputRef';
-import { font } from '../../Main/Message/MessageText/Component';
 import { SetMessage } from '../Form';
+
+export const font = 'Roboto, Noto Color Emoji, sans-serif';
 
 type MessageInputProps = {
   message: string;
