@@ -77,14 +77,14 @@ export function EditProfilePhotoButton() {
         });
 
         await refreshToken();
-
-        setLoading(false);
       } catch {
         const { unknownErrorToast } = await import(
           '../../../utils/Toasts/unknownErrorToast'
         );
 
         unknownErrorToast();
+      } finally {
+        setLoading(false);
       }
     };
 
