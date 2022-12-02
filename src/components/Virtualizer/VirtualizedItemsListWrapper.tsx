@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
 type VirtualizedItemsListWrapperProps = {
@@ -11,8 +10,16 @@ export function VirtualizedItemsListWrapper({
   totalSize,
 }: VirtualizedItemsListWrapperProps) {
   return (
-    <Box h={`${totalSize}px`} pos='relative' w='100%'>
+    // chakra element isn't being used to perform the list
+
+    <div
+      style={{
+        height: totalSize,
+        position: 'relative',
+        width: '100%',
+      }}
+    >
       {children}
-    </Box>
+    </div>
   );
 }

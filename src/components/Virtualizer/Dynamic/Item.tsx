@@ -2,6 +2,7 @@ import {
   DetailedHTMLProps,
   forwardRef,
   HTMLAttributes,
+  memo,
   ReactNode,
 } from 'react';
 
@@ -15,7 +16,7 @@ type ItemProps = {
   children: ReactNode;
 } & DivProps;
 
-export const Item = forwardRef<HTMLDivElement, ItemProps>(
+const ItemComponent = forwardRef<HTMLDivElement, ItemProps>(
   ({ start, style, children, ...rest }, ref) => (
     // chakra element isn't being used to perform the list
 
@@ -36,4 +37,6 @@ export const Item = forwardRef<HTMLDivElement, ItemProps>(
   )
 );
 
-Item.displayName = 'Dynamic Virtualizer Item';
+export const Item = memo(ItemComponent);
+
+ItemComponent.displayName = 'Dynamic Virtualizer Item';
