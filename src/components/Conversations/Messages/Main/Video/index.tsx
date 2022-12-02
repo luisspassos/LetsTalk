@@ -49,14 +49,13 @@ export function Video() {
   return (
     <Stack display='flex' spacing='3px' mt={['14px', '17px', '20px']}>
       <Flex align='end' _before={triangle.styles}>
-        <Box p='5px' bg='gray.400' borderRadius='7px'>
+        <Box maxW='400px' p='5px' bg='gray.400' borderRadius='7px'>
           <Box
             as='video'
-            src='./tiktok.mp4'
-            maxW='400px'
-            maxH='400px'
+            src='http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
             controls
             borderRadius='7px'
+            maxH='400px'
             sx={{
               '&': {
                 colorScheme: 'light dark',
