@@ -1,18 +1,24 @@
-import { Box, BoxProps } from '@chakra-ui/react';
-import { forwardRef, ReactNode } from 'react';
+import {
+  DetailedHTMLProps,
+  forwardRef,
+  HTMLAttributes,
+  ReactNode,
+} from 'react';
 
 type ScrollableBoxOfVirtualizedItemsProps = {
   children: ReactNode;
-} & BoxProps;
+} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export const ScrollableBoxOfVirtualizedItems = forwardRef<
   HTMLDivElement,
   ScrollableBoxOfVirtualizedItemsProps
->(({ children, ...rest }, ref) => {
+>(({ children, style, ...rest }, ref) => {
+  // chakra element isn't being used to perform the list
+
   return (
-    <Box ref={ref} overflowY='auto' {...rest}>
+    <div ref={ref} style={{ overflowY: 'auto', ...style }} {...rest}>
       {children}
-    </Box>
+    </div>
   );
 });
 
