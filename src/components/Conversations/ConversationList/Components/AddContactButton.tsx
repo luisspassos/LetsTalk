@@ -1,6 +1,6 @@
 import { Button, Icon, useColorModeValue } from '@chakra-ui/react';
 import { IoMdAdd } from 'react-icons/io';
-import { useAddContactModal } from '../../../contexts/Modal/AddContactModalContext';
+import { useAddContactModal } from '../../../../contexts/Modal/AddContactModalContext';
 
 export function AddContactButton() {
   const { onOpen } = useAddContactModal();

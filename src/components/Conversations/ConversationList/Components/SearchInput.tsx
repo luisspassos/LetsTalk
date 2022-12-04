@@ -8,12 +8,10 @@ import {
 import { FiSearch } from 'react-icons/fi';
 
 type SearchInputProps = {
-  changeConversationSearchState: (conversationSearch: string) => void;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export function SearchInput({
-  changeConversationSearchState,
-}: SearchInputProps) {
+export function SearchInput({ setSearch }: SearchInputProps) {
   return (
     <InputGroup
       alignItems='center'
@@ -36,7 +34,7 @@ export function SearchInput({
         placeholder='Pesquisar conversa...'
         boxShadow='sm'
         pl={['39px', '42px', '45px']}
-        onChange={(e) => changeConversationSearchState(e.target.value)}
+        onChange={(e) => setSearch(e.target.value)}
       />
     </InputGroup>
   );

@@ -1,12 +1,13 @@
-import { Flex, useColorModeValue, VStack, BoxProps } from '@chakra-ui/react';
+import { Flex, useColorModeValue, VStack } from '@chakra-ui/react';
 import { Avatar } from './Avatar';
 import { Name } from './Name';
 import { LastMessage } from './LastMessage';
 import { LastMessageTime } from './LastMessageTime';
 import { NumberOfUnreadMessages } from './NumberOfUnreadMessages';
-import { useConversations } from '../../../../contexts/ConversationsContext';
+import { useConversations } from '../../../../../../contexts/ConversationsContext';
 import { useCallback } from 'react';
 import { ConversationDivider } from './ConversationDivider';
+import { HTMLProps, Item } from '../../../../../Virtualizer/Dynamic/Item';
 
 type ConversationProps = {
   data: {
@@ -18,13 +19,16 @@ type ConversationProps = {
   conversationHeight: number;
   index: number;
   numberOfConversations: number;
-} & BoxProps;
+  start: number;
+} & HTMLProps;
 
 export function Conversation({
   data: { name, photoURL, updatedAt, lastMessage },
   index,
   numberOfConversations,
   conversationHeight,
+  style,
+  start,
   ...rest
 }: ConversationProps) {
   const lastItem = index === numberOfConversations - 1;
@@ -46,13 +50,14 @@ export function Conversation({
   }, [changeCurrentConversationIndex, conversations, name]);
 
   return (
-    <Flex
-      direction='column'
-      align='center'
-      pos='absolute'
-      top={0}
-      left={0}
-      w='100%'
+    <Item
+      start={start}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        ...style,
+      }}
       {...rest}
     >
       <Flex
@@ -87,6 +92,6 @@ export function Conversation({
         </Flex>
       </Flex>
       {!lastItem && <ConversationDivider mt={0} />}
-    </Flex>
+    </Item>
   );
 }

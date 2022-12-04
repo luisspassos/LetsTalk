@@ -5,7 +5,7 @@ import {
   DrawerCloseButton,
 } from '@chakra-ui/react';
 import { useConversationsTab } from '../../../contexts/ConversationsTabContext';
-import { ConversationListComponent } from './ConversationsList';
+import { Content } from './Content';
 
 export function Drawer() {
   const { isOpen, onClose } = useConversationsTab();
@@ -15,7 +15,7 @@ export function Drawer() {
       <DrawerOverlay />
       <DrawerContent maxW={['265px', '295px', '335px']}>
         <DrawerCloseButton />
-        <ConversationListComponent />
+        <Content />
       </DrawerContent>
     </ChakraDrawer>
   );

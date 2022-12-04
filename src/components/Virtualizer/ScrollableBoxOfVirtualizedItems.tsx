@@ -9,8 +9,10 @@ type ScrollableBoxOfVirtualizedItemsProps = {
   children: ReactNode;
 } & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
+export type Ref = HTMLDivElement;
+
 export const ScrollableBoxOfVirtualizedItems = forwardRef<
-  HTMLDivElement,
+  Ref,
   ScrollableBoxOfVirtualizedItemsProps
 >(({ children, style, ...rest }, ref) => {
   // chakra element isn't being used to perform the list

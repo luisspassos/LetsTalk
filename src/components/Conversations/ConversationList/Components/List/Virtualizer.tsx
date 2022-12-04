@@ -1,0 +1,63 @@
+import { useBreakpointValue } from '@chakra-ui/react';
+import { useCallback, forwardRef } from 'react';
+import { useVirtual } from 'react-virtual';
+import { useConversations } from '../../../../../contexts/ConversationsContext';
+import { Ref } from '../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
+import { VirtualizedItemsListWrapper } from '../../../../Virtualizer/VirtualizedItemsListWrapper';
+import { Conversation } from './Conversation';
+
+type VirtualizerProps = {
+  search: string;
+};
+
+export const Virtualizer = forwardRef<Ref, VirtualizerProps>(
+  ({ search }, parentRef) => {
+    const { conversations } = useConversations();
+
+    const fetchedConversations = conversations.data.filter(({ name }) =>
+      name.includes(search.trim())
+    );
+
+    const conversationHeight = useBreakpointValue([65, 75, 85]) ?? 0;
+
+    const conversationVirtualizer = useVirtual({
+      parentRef,
+      size: fetchedConversations.length,
+      estimateSize: useCallback(
+        () => conversationHeight + 1,
+        [conversationHeight]
+      ),
+    });
+
+    return (
+      <VirtualizedItemsListWrapper
+        totalSize={conversationVirtualizer.totalSize}
+      >
+        {conversationVirtualizer.virtualItems.map((virtualRow) => {
+          const conversation = fetchedConversations[virtualRow.index];
+
+          return (
+            <Conversation
+              start={virtualRow.start}
+              key={virtualRow.key}
+              index={virtualRow.index}
+              numberOfConversations={fetchedConversations.length}
+              conversationHeight={conversationHeight}
+              data={{
+                name: conversation.name,
+                photoURL: conversation.photoURL,
+                lastMessage: conversation.lastMessage,
+                updatedAt: conversation.updatedAt,
+              }}
+              style={{
+                height: `${virtualRow.size}px`,
+              }}
+            />
+          );
+        })}
+      </VirtualizedItemsListWrapper>
+    );
+  }
+);
+
+Virtualizer.displayName = 'Virtualizer';

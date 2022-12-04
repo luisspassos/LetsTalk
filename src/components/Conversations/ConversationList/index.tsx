@@ -1,11 +1,11 @@
 import { useBreakpointValue } from '@chakra-ui/react';
-import { ConversationListComponent } from './ConversationsList';
+import { Content } from './Content';
 import { Drawer } from './Drawer';
 
 export function ConversationList() {
   const Component = useBreakpointValue({
     base: Drawer,
-    md: ConversationListComponent,
+    md: Content,
   }) as React.FC;
 
   return <Component />;
