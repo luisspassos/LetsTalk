@@ -1,6 +1,6 @@
 import { useCategories } from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
-import { useIndexSelectedFromEmojiPickerCategories } from '../../../../../../../../contexts/EmojiPicker/IndexSelectedFromEmojiPickerCategoriesContext';
+import { usePositionSelectedFromEmojiPickerCategories } from '../../../../../../../../contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 
 import { sharedStyles } from './Button';
@@ -11,7 +11,8 @@ export function SelectedBar() {
     searchedEmojis: { search },
   } = useSearchedEmojis();
   const { currentCategoryPosition } = useEmojiPickerScroll();
-  const { selectedCategoryIndex } = useIndexSelectedFromEmojiPickerCategories();
+  const { selectedCategoryPosition } =
+    usePositionSelectedFromEmojiPickerCategories();
 
   const categoriesLength = categories.data.length;
   const width = `${100 / categoriesLength}%`;
@@ -24,7 +25,7 @@ export function SelectedBar() {
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
         transform: `translateX(${currentCategoryPosition * 100}%)`,
-        transitionProperty: selectedCategoryIndex.current
+        transitionProperty: selectedCategoryPosition.current
           ? 'height'
           : undefined,
         width,

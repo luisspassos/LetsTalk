@@ -19,7 +19,7 @@ type EmojiRow = JSX.Element[];
 
 type Components = (JSX.Element | EmojiRow)[];
 
-type CategoryIndicies = number[];
+export type CategoryIndicies = number[];
 
 type ParentRef = { current: HTMLDivElement | null };
 
@@ -27,7 +27,7 @@ type EmojiPickerScrollProviderProps = {
   children: ReactNode;
 };
 
-type EmojiPickerScrollContextType = {
+export type EmojiPickerScrollContextType = {
   virtualizer: ReturnType<typeof useVirtual>;
   setParentRef: Dispatch<SetStateAction<ParentRef>>;
   parentRef: ParentRef;
