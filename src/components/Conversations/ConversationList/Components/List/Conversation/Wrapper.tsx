@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { HTMLProps, Item } from '../../../../../Virtualizer/Dynamic/Item';
+import { HTMLProps, Item } from '../../../../../Virtualizer';
 
 type WrapperProps = {
   start: number;

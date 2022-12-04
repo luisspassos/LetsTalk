@@ -5,7 +5,7 @@ import { LastMessage } from './Content/LastMessage';
 import { LastMessageTime } from './Content/LastMessageTime';
 import { NumberOfUnreadMessages } from './Content/NumberOfUnreadMessages';
 import { ConversationDivider } from './Content/ConversationDivider';
-import { HTMLProps } from '../../../../../Virtualizer/Dynamic/Item';
+import { HTMLProps } from '../../../../../Virtualizer';
 import { Wrapper } from './Wrapper';
 import { Container } from './Container';
 
