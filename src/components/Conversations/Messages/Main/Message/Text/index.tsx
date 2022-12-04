@@ -1,24 +1,22 @@
-import { Text } from '@chakra-ui/react';
+import { Text as ChakraText } from '@chakra-ui/react';
+import { Bg } from '../..';
 import { useSearchInConversation } from '../../../../../../contexts/SearchInConversationContext';
-import { MessageTextComponent } from './Component';
+import { TextComponent } from './Component';
 
-type MessageTextProps = {
+type TextProps = {
   text: string;
   contactMessage?: boolean;
-  bg: {
-    default: string;
-    contactMessage: string;
-  };
+  bg: Bg;
 };
 
-export function MessageText({ bg, text, contactMessage }: MessageTextProps) {
+export function Text({ bg, text, contactMessage }: TextProps) {
   const { searchText } = useSearchInConversation();
 
   if (!searchText) {
     return (
-      <MessageTextComponent bg={bg} contactMessage={contactMessage}>
+      <TextComponent bg={bg} contactMessage={contactMessage}>
         {text}
-      </MessageTextComponent>
+      </TextComponent>
     );
   }
 
@@ -26,14 +24,14 @@ export function MessageText({ bg, text, contactMessage }: MessageTextProps) {
   const textParts = text.split(searchedTextRegex);
 
   return (
-    <MessageTextComponent bg={bg} contactMessage={contactMessage}>
+    <TextComponent bg={bg} contactMessage={contactMessage}>
       {textParts.filter(String).map((part) => {
         return searchedTextRegex.test(part) ? (
-          <Text as='mark'>{part}</Text>
+          <ChakraText as='mark'>{part}</ChakraText>
         ) : (
-          <Text as='span'>{part}</Text>
+          <ChakraText as='span'>{part}</ChakraText>
         );
       })}
-    </MessageTextComponent>
+    </TextComponent>
   );
 }

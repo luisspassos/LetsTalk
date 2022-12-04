@@ -2,7 +2,7 @@ import { Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { font } from '../../../Footer/MessageInput';
 
-type MessageTextComponentProps = {
+type TextComponentProps = {
   children: ReactNode;
   contactMessage?: boolean;
   bg: {
@@ -11,11 +11,11 @@ type MessageTextComponentProps = {
   };
 };
 
-export function MessageTextComponent({
+export function TextComponent({
   children,
   contactMessage,
   bg,
-}: MessageTextComponentProps) {
+}: TextComponentProps) {
   return (
     <Text
       fontFamily={font}

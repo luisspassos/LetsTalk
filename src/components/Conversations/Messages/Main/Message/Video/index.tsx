@@ -1,5 +1,5 @@
 import { Box, Flex, Stack, useColorModeValue } from '@chakra-ui/react';
-import { SentIn } from '../Message/SentIn';
+import { SentIn } from '../SentIn';
 
 export function Video() {
   const bg = {

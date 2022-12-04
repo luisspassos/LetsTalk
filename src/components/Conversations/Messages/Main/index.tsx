@@ -1,4 +1,4 @@
-import { Box, useBreakpointValue } from '@chakra-ui/react';
+import { Box, useBreakpointValue, useColorModeValue } from '@chakra-ui/react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useVirtual } from 'react-virtual';
@@ -7,9 +7,9 @@ import { useConversations } from '../../../../contexts/ConversationsContext';
 import { useSearchInConversation } from '../../../../contexts/SearchInConversationContext';
 import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
-import { Message } from './Message';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
-import { Video } from './Video';
+import { Message } from './Message';
+import { Text } from './Message/Text';
 
 type DbMessageData = {
   author: string;
@@ -17,11 +17,16 @@ type DbMessageData = {
   sentIn: number;
 };
 
-type Message = {
+export type Message = {
   id: string;
   sentIn: string;
   message: string;
   contactMessage: boolean;
+};
+
+export type Bg = {
+  default: string;
+  contactMessage: string;
 };
 
 export function Main() {
@@ -278,18 +283,28 @@ export function Main() {
     }
   }, [messages2, scrollToIndex, initial, messages.length]);
 
+  const bg: Bg = {
+    default: useColorModeValue('300', '500'),
+    contactMessage: useColorModeValue('200', '400'),
+  };
+
   return (
     <Box flex='1' overflow='auto'>
       {messages.map((message, i) => (
         <Message
+          bg={bg}
           key={message.id}
           messageIndex={i}
           contactMessage={message.contactMessage}
-          message={message.message}
           sentIn={message.sentIn}
-        />
+        >
+          <Text
+            bg={bg}
+            text={message.message}
+            contactMessage={message.contactMessage}
+          />
+        </Message>
       ))}
-      <Video />
     </Box>
     // <ScrollableBoxOfVirtualizedItems
     //   ref={scrollBoxRef}
