@@ -17,6 +17,8 @@ export function SelectedBar() {
   const width = `${100 / categoriesLength}%`;
 
   return (
+    // chakra element isn't being used to perform the list
+
     <div
       style={{
         height: search ? '0px' : '4px',

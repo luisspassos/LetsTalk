@@ -138,6 +138,8 @@ const MemoButton = memo(
     };
 
     return (
+      // chakra element isn't being used to perform the list
+
       <button
         style={{
           flex: 1,

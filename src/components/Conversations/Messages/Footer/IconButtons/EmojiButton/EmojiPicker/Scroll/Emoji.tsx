@@ -105,6 +105,8 @@ export function Emoji({ children: emoji }: EmojiProps) {
   }
 
   return (
+    // chakra element isn't being used to perform the list
+
     <span
       style={{
         width: styles.size,

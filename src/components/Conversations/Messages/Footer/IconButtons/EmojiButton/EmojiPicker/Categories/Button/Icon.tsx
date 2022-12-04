@@ -50,6 +50,8 @@ const MemoIcon = memo(
     const searchIsEmpty = !search;
 
     return (
+      // chakra element isn't being used to perform the list
+
       <span
         style={{
           color: isSelected && searchIsEmpty ? color.selected : color.default,

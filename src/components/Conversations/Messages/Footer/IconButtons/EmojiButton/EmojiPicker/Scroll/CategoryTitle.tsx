@@ -6,6 +6,8 @@ type CategoryTitleProps = {
 
 export function CategoryTitle({ text }: CategoryTitleProps) {
   return (
+    // chakra element isn't being used to perform the list
+
     <h3
       style={{
         fontWeight: '400',
