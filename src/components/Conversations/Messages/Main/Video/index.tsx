@@ -1,5 +1,5 @@
 import { Box, Flex, Stack, useColorModeValue } from '@chakra-ui/react';
-import { CreatedAt } from '../Message/CreatedAt';
+import { SentIn } from '../Message/SentIn';
 
 export function Video() {
   const bg = {
@@ -49,7 +49,7 @@ export function Video() {
   return (
     <Stack display='flex' spacing='3px' mt={['14px', '17px', '20px']}>
       <Flex align='end' _before={triangle.styles}>
-        <Box maxW='400px' p='5px' bg='gray.400' borderRadius='7px'>
+        <Box maxW='400px' p='4px' bg='gray.400' borderRadius='7px'>
           <Box
             as='video'
             src='http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
@@ -64,7 +64,7 @@ export function Video() {
           ></Box>
         </Box>
       </Flex>
-      <CreatedAt text='20:00' />
+      <SentIn text='20:00' />
     </Stack>
   );
 }

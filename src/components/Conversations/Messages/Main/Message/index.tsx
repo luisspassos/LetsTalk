@@ -1,6 +1,6 @@
 import { useColorModeValue, Stack, Flex } from '@chakra-ui/react';
-import { CreatedAt } from './CreatedAt';
 import { MessageText } from './MessageText';
+import { SentIn } from './SentIn';
 
 type MessageProps = {
   contactMessage: boolean;
@@ -74,7 +74,7 @@ export function Message({
       >
         <MessageText bg={bg} text={message} contactMessage={contactMessage} />
       </Flex>
-      <CreatedAt text={sentIn} />
+      <SentIn text={sentIn} />
     </Stack>
   );
 }
