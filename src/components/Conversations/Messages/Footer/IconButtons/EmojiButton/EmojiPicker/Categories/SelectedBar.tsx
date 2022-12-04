@@ -2,8 +2,7 @@ import { useCategories } from '../../../../../../../../contexts/EmojiPicker/Cate
 import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
 import { usePositionSelectedFromEmojiPickerCategories } from '../../../../../../../../contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
 import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
-
-import { sharedStyles } from './Button';
+import { transitionDurationInSeconds } from './Button';
 
 export function SelectedBar() {
   const { categories } = useCategories();
@@ -25,11 +24,11 @@ export function SelectedBar() {
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
         transform: `translateX(${currentCategoryPosition * 100}%)`,
+        transitionDuration: transitionDurationInSeconds,
         transitionProperty: selectedCategoryPosition.current
           ? 'height'
           : undefined,
         width,
-        ...sharedStyles,
       }}
     />
   );

@@ -35,11 +35,7 @@ type MemoButtonProps = {
 } & DefaultButtonProps;
 
 const transitionDuration = 200; // milliseconds;
-const transitionDurationInSeconds = transitionDuration / 1000 + 's';
-
-export const sharedStyles = {
-  transitionDuration: transitionDurationInSeconds,
-};
+export const transitionDurationInSeconds = transitionDuration / 1000 + 's';
 
 export function Button({
   index,
@@ -145,13 +141,9 @@ const MemoButton = memo(
       <button
         style={{
           flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           outline: 0,
           borderRadius: '8px',
           ...styles,
-          ...sharedStyles,
         }}
         title={ariaLabel}
         aria-label={ariaLabel}

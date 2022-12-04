@@ -1,7 +1,7 @@
 import { useColorModeValue } from '@chakra-ui/react';
 import { memo } from 'react';
 import { IconType } from 'react-icons';
-import { sharedStyles } from '.';
+import { transitionDurationInSeconds } from '.';
 import {
   EmojiPickerScrollContextType,
   useEmojiPickerScroll,
@@ -50,13 +50,19 @@ const MemoIcon = memo(
     const searchIsEmpty = !search;
 
     return (
-      <IconComponent
-        color={isSelected && searchIsEmpty ? color.selected : color.default}
-        size='clamp(18px, 50%, 22px)'
+      <span
         style={{
-          transitionDuration: sharedStyles.transitionDuration,
+          color: isSelected && searchIsEmpty ? color.selected : color.default,
+          transitionDuration: transitionDurationInSeconds,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
-      />
+      >
+        <IconComponent size='clamp(18px, 50%, 22px)' />
+      </span>
     );
   }
 );
