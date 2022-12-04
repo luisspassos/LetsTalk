@@ -95,6 +95,8 @@ const MemoButton = memo(
 
     useEffect(() => {
       function goToCategoryIfThereIsSearch() {
+        if (selectedCategoryPosition.current === null || search) return;
+
         scrollToIndexFormatted(selectedCategoryIndex);
 
         setTimeout(() => {
