@@ -1,19 +1,10 @@
 import { Input, useColorModeValue } from '@chakra-ui/react';
-import {
-  formatValueForSearch,
-  useSearchedEmojis,
-} from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
+import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
 
 export function SearchInput() {
   const {
     searchedEmojis: { search, setSearch },
   } = useSearchedEmojis();
-
-  function handleSearch(search: string) {
-    const formattedSearch = formatValueForSearch(search);
-
-    setSearch(formattedSearch);
-  }
 
   return (
     <Input
@@ -26,7 +17,7 @@ export function SearchInput() {
       h='40px'
       flexShrink={0}
       value={search}
-      onChange={(e) => handleSearch(e.target.value)}
+      onChange={(e) => setSearch(e.target.value)}
     />
   );
 }

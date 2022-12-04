@@ -46,8 +46,9 @@ export function SearchedEmojisProvider({
   const searchedEmojis = emojis
     .filter(({ name }) => {
       const formattedName = formatValueForSearch(name);
+      const formattedSearch = formatValueForSearch(search);
 
-      return formattedName.includes(search);
+      return formattedName.includes(formattedSearch);
     })
     .map(({ emoji }) => emoji);
 
