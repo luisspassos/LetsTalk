@@ -12,9 +12,9 @@ export function List({ search }: ListProps) {
   const parentRef = useRef<Ref>(null);
 
   return (
-    <Parent ref={parentRef}>
+    <Parent parentRef={parentRef}>
       <DividerUnderTitle />
-      <Virtualizer ref={parentRef} search={search} />
+      <Virtualizer parentRef={parentRef} search={search} />
     </Parent>
   );
 }
