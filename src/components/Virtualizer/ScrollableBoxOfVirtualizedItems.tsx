@@ -1,27 +1,26 @@
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-  ReactNode,
-} from 'react';
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+
+export type HTMLProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>;
 
 type ScrollableBoxOfVirtualizedItemsProps = {
   children: ReactNode;
-} & DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+} & HTMLProps;
 
 export type Ref = HTMLDivElement;
 
-export const ScrollableBoxOfVirtualizedItems = forwardRef<
-  Ref,
-  ScrollableBoxOfVirtualizedItemsProps
->(({ children, style, ...rest }, ref) => {
-  // chakra element isn't being used to perform the list
-
+export function ScrollableBoxOfVirtualizedItems({
+  children,
+  style,
+  ...rest
+}: ScrollableBoxOfVirtualizedItemsProps) {
   return (
-    <div ref={ref} style={{ overflowY: 'auto', ...style }} {...rest}>
+    <div style={{ overflowY: 'auto', ...style }} {...rest}>
       {children}
     </div>
   );
-});
+}
 
 ScrollableBoxOfVirtualizedItems.displayName = 'ScrollableBoxOfVirtualizedItems';

@@ -1,33 +1,29 @@
 import { useBreakpointValue } from '@chakra-ui/react';
-import { forwardRef, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import {
-  Ref,
+  HTMLProps,
   ScrollableBoxOfVirtualizedItems,
 } from '../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
 
 type ParentProps = {
   children: ReactNode;
-};
+} & HTMLProps;
 
-export const Parent = forwardRef<Ref, ParentProps>(
-  ({ children }, parentRef) => {
-    const styles = {
-      pb: useBreakpointValue(['6px', '8px', '10px']),
-      mx: useBreakpointValue(['-19px', '-22px', '-25px']),
-    };
+export function Parent({ children, ...rest }: ParentProps) {
+  const styles = {
+    pb: useBreakpointValue(['6px', '8px', '10px']),
+    mx: useBreakpointValue(['-19px', '-22px', '-25px']),
+  };
 
-    return (
-      <ScrollableBoxOfVirtualizedItems
-        ref={parentRef}
-        style={{
-          paddingBottom: styles.pb,
-          margin: `0 ${styles.mx}`,
-        }}
-      >
-        {children}
-      </ScrollableBoxOfVirtualizedItems>
-    );
-  }
-);
-
-Parent.displayName = 'Parent';
+  return (
+    <ScrollableBoxOfVirtualizedItems
+      style={{
+        paddingBottom: styles.pb,
+        margin: `0 ${styles.mx}`,
+      }}
+      {...rest}
+    >
+      {children}
+    </ScrollableBoxOfVirtualizedItems>
+  );
+}
