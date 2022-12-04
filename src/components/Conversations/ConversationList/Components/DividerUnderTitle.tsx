@@ -1,4 +1,4 @@
-import { ConversationDivider } from './List/Conversation/ConversationDivider';
+import { ConversationDivider } from './List/Conversation/Content/ConversationDivider';
 
 export function DividerUnderTitle() {
   return (

@@ -1,13 +1,13 @@
-import { Flex, useColorModeValue, VStack } from '@chakra-ui/react';
-import { Avatar } from './Avatar';
-import { Name } from './Name';
-import { LastMessage } from './LastMessage';
-import { LastMessageTime } from './LastMessageTime';
-import { NumberOfUnreadMessages } from './NumberOfUnreadMessages';
-import { useConversations } from '../../../../../../contexts/ConversationsContext';
-import { useCallback } from 'react';
-import { ConversationDivider } from './ConversationDivider';
-import { HTMLProps, Item } from '../../../../../Virtualizer/Dynamic/Item';
+import { Flex, VStack } from '@chakra-ui/react';
+import { Avatar } from './Content/Avatar';
+import { Name } from './Content/Name';
+import { LastMessage } from './Content/LastMessage';
+import { LastMessageTime } from './Content/LastMessageTime';
+import { NumberOfUnreadMessages } from './Content/NumberOfUnreadMessages';
+import { ConversationDivider } from './Content/ConversationDivider';
+import { HTMLProps } from '../../../../../Virtualizer/Dynamic/Item';
+import { Wrapper } from './Wrapper';
+import { Container } from './Container';
 
 type ConversationProps = {
   data: {
@@ -20,7 +20,8 @@ type ConversationProps = {
   index: number;
   numberOfConversations: number;
   start: number;
-} & HTMLProps;
+  style: HTMLProps['style'];
+};
 
 export function Conversation({
   data: { name, photoURL, updatedAt, lastMessage },
@@ -29,52 +30,12 @@ export function Conversation({
   conversationHeight,
   style,
   start,
-  ...rest
 }: ConversationProps) {
   const lastItem = index === numberOfConversations - 1;
 
-  const {
-    currentConversation: {
-      data: currentConversation,
-      changeCurrentConversationIndex,
-    },
-    conversations: { data: conversations },
-  } = useConversations();
-
-  const bg = useColorModeValue('grayAlpha.500', 'whiteAlpha.100');
-
-  const handleChangeCurrentConversation = useCallback(() => {
-    changeCurrentConversationIndex(
-      conversations.findIndex((conversation) => conversation.name === name)
-    );
-  }, [changeCurrentConversationIndex, conversations, name]);
-
   return (
-    <Item
-      start={start}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        ...style,
-      }}
-      {...rest}
-    >
-      <Flex
-        w='100%'
-        px={['19px', '22px', '25px']}
-        alignItems='center'
-        py='7px'
-        h={`${conversationHeight}px`}
-        flexShrink={0}
-        cursor='pointer'
-        transition='0.2s'
-        bg={name === currentConversation?.name ? bg : undefined}
-        _hover={{
-          bg: bg,
-        }}
-        onClick={handleChangeCurrentConversation}
-      >
+    <Wrapper style={style} start={start}>
+      <Container conversationHeight={conversationHeight} name={name}>
         <Avatar photoURL={photoURL} />
         <Flex justify='space-between' flex='1'>
           <VStack
@@ -90,8 +51,8 @@ export function Conversation({
             <NumberOfUnreadMessages number={2} />
           </VStack>
         </Flex>
-      </Flex>
+      </Container>
       {!lastItem && <ConversationDivider mt={0} />}
-    </Item>
+    </Wrapper>
   );
 }
