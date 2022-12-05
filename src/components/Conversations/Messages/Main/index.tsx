@@ -10,6 +10,7 @@ import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 import { Message } from './Message';
 import { Text } from './Message/Text';
+import { NewMessage } from './NewMessage';
 
 type DbMessageData = {
   author: string;
@@ -305,6 +306,8 @@ export function Main() {
           />
         </Message>
       ))}
+
+      <NewMessage />
     </Box>
     // <ScrollableBoxOfVirtualizedItems
     //   ref={scrollBoxRef}
