@@ -1,4 +1,4 @@
-import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { CSSObject, Flex, useColorModeValue } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { Message } from '..';
 
@@ -9,11 +9,11 @@ type ContainerProps = {
 
 export function Container({ contactMessage, children }: ContainerProps) {
   const bg = {
-    default: useColorModeValue('300', '500'),
-    contactMessage: useColorModeValue('200', '400'),
+    default: useColorModeValue('200', '400'),
+    contactMessage: useColorModeValue('300', '500'),
   };
 
-  const triangle = {
+  const triangle: { styles: CSSObject; values: unknown } = {
     values: {
       sizes: ['14px', '17px', '20px'],
       get negativeSizes() {
@@ -26,12 +26,13 @@ export function Container({ contactMessage, children }: ContainerProps) {
       },
     },
     styles: {
+      right: contactMessage ? 0 : 'current',
       position: 'absolute',
       bottom: 0,
       display: 'block',
       content: '""',
-      w: 0,
-      h: 0,
+      // w: 0,
+      // h: 0,
       borderRadius: '4px',
       get borderLeft() {
         return triangle.values.transparentBorder;
@@ -47,23 +48,20 @@ export function Container({ contactMessage, children }: ContainerProps) {
           return `${size} solid var(--chakra-colors-gray-${correctBg})`;
         });
       },
-      get mr() {
-        return contactMessage ? triangle.values.negativeSizes : undefined;
-      },
-      get ml() {
-        return !contactMessage ? triangle.values.negativeSizes : undefined;
-      },
+      // get mr() {
+      //   return contactMessage ? triangle.values.negativeSizes : undefined;
+      // },
+      // get ml() {
+      //   return !contactMessage ? triangle.values.negativeSizes : undefined;
+      // },
     },
   };
 
-  const none = undefined;
-
   return (
     <Flex
-      _before={contactMessage ? triangle.styles : none}
-      _after={!contactMessage ? triangle.styles : none}
-      ml={!contactMessage ? triangle.values.negativeSizes : none}
-      mr={contactMessage ? triangle.values.negativeSizes : none}
+      _before={triangle.styles}
+      ml={!contactMessage ? triangle.values.sizes : 0}
+      mr={contactMessage ? triangle.values.sizes : 0}
       borderRadius='7px'
       bg={contactMessage ? `gray.${bg.contactMessage}` : `gray.${bg.default}`}
       position='relative'

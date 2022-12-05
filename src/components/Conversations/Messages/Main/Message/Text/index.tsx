@@ -3,24 +3,21 @@ import { useSearchInConversation } from '../../../../../../contexts/SearchInConv
 import { TextComponent } from './Component';
 
 type TextProps = {
-  text: string;
-  contactMessage?: boolean;
+  children: string;
 };
 
-export function Text({ text, contactMessage }: TextProps) {
+export function Text({ children: text }: TextProps) {
   const { searchText } = useSearchInConversation();
 
   if (!searchText) {
-    return (
-      <TextComponent contactMessage={contactMessage}>{text}</TextComponent>
-    );
+    return <TextComponent>{text}</TextComponent>;
   }
 
   const searchedTextRegex = new RegExp(`(${searchText})`, 'gi');
   const textParts = text.split(searchedTextRegex);
 
   return (
-    <TextComponent contactMessage={contactMessage}>
+    <TextComponent>
       {textParts.filter(String).map((part) => {
         return searchedTextRegex.test(part) ? (
           <ChakraText as='mark'>{part}</ChakraText>

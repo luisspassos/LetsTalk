@@ -16,11 +16,10 @@ export function Wrapper({
 
   return (
     <Stack
-      alignSelf={!contactMessage ? 'end' : 'current'}
       display='flex'
       spacing='3px'
       mt={isFirst ? 0 : ['14px', '17px', '20px']}
-      align={!contactMessage ? 'end' : 'current'}
+      align={contactMessage ? 'end' : 'current'}
     >
       {children}
     </Stack>

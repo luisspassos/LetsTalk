@@ -4,7 +4,6 @@ import { font } from '../../../Footer/MessageInput';
 
 type TextComponentProps = {
   children: ReactNode;
-  contactMessage?: boolean;
 };
 
 export function TextComponent({ children }: TextComponentProps) {
