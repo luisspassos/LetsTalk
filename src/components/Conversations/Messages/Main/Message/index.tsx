@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import { Bg, Message } from '..';
+import { Message } from '..';
+import { Container } from './Container';
 import { SentIn } from './SentIn';
-import { Triangle } from './Triangle';
 import { Wrapper } from './Wrapper';
 
 type MessageInfo = Omit<Message, 'id' | 'message'>;
@@ -9,7 +9,6 @@ type MessageInfo = Omit<Message, 'id' | 'message'>;
 type MessageProps = {
   messageIndex: number;
   children: ReactNode;
-  bg: Bg;
 } & MessageInfo;
 
 export function Message({
@@ -17,13 +16,10 @@ export function Message({
   contactMessage,
   messageIndex,
   sentIn,
-  bg,
 }: MessageProps) {
   return (
     <Wrapper contactMessage={contactMessage} messageIndex={messageIndex}>
-      <Triangle contactMessage={contactMessage} bg={bg}>
-        {children}
-      </Triangle>
+      <Container contactMessage={contactMessage}>{children}</Container>
       <SentIn text={sentIn} />
     </Wrapper>
   );

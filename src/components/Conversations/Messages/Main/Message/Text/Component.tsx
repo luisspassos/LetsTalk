@@ -5,26 +5,15 @@ import { font } from '../../../Footer/MessageInput';
 type TextComponentProps = {
   children: ReactNode;
   contactMessage?: boolean;
-  bg: {
-    default: string;
-    contactMessage: string;
-  };
 };
 
-export function TextComponent({
-  children,
-  contactMessage,
-  bg,
-}: TextComponentProps) {
+export function TextComponent({ children }: TextComponentProps) {
   return (
     <Text
       fontFamily={font}
-      borderRadius='7px'
       py={['6px', '8px', '10px']}
       px={['11px', '13px', '15px']}
-      maxW={['240px', '300px', '400px']}
       fontSize={['14px', '15px', '16px']}
-      bg={contactMessage ? `gray.${bg.contactMessage}` : `gray.${bg.default}`}
     >
       {children}
     </Text>
