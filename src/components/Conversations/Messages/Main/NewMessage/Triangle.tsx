@@ -6,8 +6,7 @@ type TriangleProps = {
   contactMessage: Message['contactMessage'];
 };
 
-const borderWidth = ['14px', '17px', '20px'];
-const margin = borderWidth.map((w) => '-' + w);
+export const borderWidth = ['14px', '17px', '20px'];
 
 const radius = '4px';
 
@@ -20,8 +19,6 @@ export function Triangle({ color, contactMessage }: TriangleProps) {
       borderBottomLeftRadius={!contactMessage ? radius : 0}
       borderColor='transparent'
       borderBottomColor={color}
-      ml={contactMessage ? margin : 0}
-      mr={!contactMessage ? margin : 0}
     />
   );
 }
