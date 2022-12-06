@@ -7,15 +7,15 @@ import { Wrapper } from './Wrapper';
 type MessageInfo = Omit<Message, 'id' | 'message'>;
 
 type MessageProps = {
-  messageIndex: number;
   children: ReactNode;
+  messageIndex: number;
 } & MessageInfo;
 
 export function Message({
-  children,
   contactMessage,
-  messageIndex,
+  children,
   sentIn,
+  messageIndex,
 }: MessageProps) {
   return (
     <Wrapper contactMessage={contactMessage} messageIndex={messageIndex}>

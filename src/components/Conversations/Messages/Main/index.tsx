@@ -8,9 +8,8 @@ import { useSearchInConversation } from '../../../../contexts/SearchInConversati
 import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
-import { Message } from './Message';
 import { Text } from './Message/Text';
-import { NewMessage } from './NewMessage';
+import { Message } from './Message';
 
 type DbMessageData = {
   author: string;
@@ -291,7 +290,6 @@ export function Main() {
           <Text>{message.message}</Text>
         </Message>
       ))}
-      <NewMessage />
     </Box>
     // <ScrollableBoxOfVirtualizedItems
     //   ref={scrollBoxRef}

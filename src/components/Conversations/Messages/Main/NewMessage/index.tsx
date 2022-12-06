@@ -1,21 +1,26 @@
-import { Box, Flex } from '@chakra-ui/react';
-import { Text } from '../Message/Text';
-import { Triangle } from './Triangle';
+import { ReactNode } from 'react';
+import { Message } from '..';
+import { Container } from './Container';
+import { SentIn } from './SentIn';
+import { Wrapper } from './Wrapper';
 
-export function NewMessage() {
+type MessageInfo = Omit<Message, 'id' | 'message'>;
+
+type MessageProps = {
+  children: ReactNode;
+  messageIndex: number;
+} & MessageInfo;
+
+export function Message({
+  contactMessage,
+  children,
+  sentIn,
+  messageIndex,
+}: MessageProps) {
   return (
-    <Flex>
-      <Box
-        bg='gray.400'
-        borderRadius='7px 7px 0'
-        maxW={['240px', '300px', '400px']}
-      >
-        <Text>
-          Em linhas gerais, numa definição bem abrangente, são sites
-          desenvolvidos sem a dependência de um servidor. 🇬🇧
-        </Text>
-      </Box>
-      <Triangle />
-    </Flex>
+    <Wrapper contactMessage={contactMessage} messageIndex={messageIndex}>
+      <Container contactMessage={contactMessage}>{children}</Container>
+      <SentIn text={sentIn} />
+    </Wrapper>
   );
 }
