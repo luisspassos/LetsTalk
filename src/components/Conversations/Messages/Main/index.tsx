@@ -8,9 +8,7 @@ import { useSearchInConversation } from '../../../../contexts/SearchInConversati
 import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
-import { Text } from './Message/Container/ContentBox/Text';
 import { Message } from './Message';
-import { Video } from './Message/Container/ContentBox/Media/Video';
 import { Image } from './Message/Container/ContentBox/Media/Image';
 
 type DbMessageData = {
@@ -282,7 +280,7 @@ export function Main() {
 
   return (
     <Box flex='1' overflow='auto'>
-      {messages.map((message, i) => (
+      {/* {messages.map((message, i) => (
         <Message
           key={message.id}
           messageIndex={i}
@@ -294,7 +292,7 @@ export function Main() {
       ))}
       <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
         <Video />
-      </Message>
+      </Message> */}
       <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
         <Image />
       </Message>
