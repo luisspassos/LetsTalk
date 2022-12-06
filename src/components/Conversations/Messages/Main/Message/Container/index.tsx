@@ -1,7 +1,8 @@
-import { Flex, Box, useColorModeValue } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { Message } from '..';
-import { borderWidth, Triangle } from './Triangle';
+import { Message } from '../..';
+import { Triangle } from '../Triangle';
+import { ContentBox } from './ContentBox';
 
 type ContainerProps = {
   contactMessage: Message['contactMessage'];
@@ -9,8 +10,6 @@ type ContainerProps = {
 };
 
 export const borderRadius = '7px';
-
-const negativeMargin = borderWidth.map((w) => '-' + w);
 
 export function Container({ contactMessage, children }: ContainerProps) {
   const bgColors = {
@@ -22,16 +21,9 @@ export function Container({ contactMessage, children }: ContainerProps) {
 
   return (
     <Flex flexDir={contactMessage ? 'unset' : 'row-reverse'}>
-      <Box
-        pos='relative'
-        mr={contactMessage ? negativeMargin : 0}
-        ml={!contactMessage ? negativeMargin : 0}
-        bg={bg}
-        borderRadius='7px'
-        maxW={['240px', '300px', '400px']}
-      >
+      <ContentBox bg={bg} contactMessage={contactMessage}>
         {children}
-      </Box>
+      </ContentBox>
       <Triangle contactMessage={contactMessage} color={bg} />
     </Flex>
   );
