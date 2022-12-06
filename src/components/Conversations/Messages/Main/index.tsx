@@ -8,9 +8,10 @@ import { useSearchInConversation } from '../../../../contexts/SearchInConversati
 import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
-import { Text } from './Message/Text';
+import { Text } from './Message/Container/ContentBox/Text';
 import { Message } from './Message';
-import { Video } from './Message/Video';
+import { Video } from './Message/Container/ContentBox/Media/Video';
+import { Image } from './Message/Container/ContentBox/Media/Image';
 
 type DbMessageData = {
   author: string;
@@ -293,6 +294,9 @@ export function Main() {
       ))}
       <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
         <Video />
+      </Message>
+      <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
+        <Image />
       </Message>
     </Box>
     // <ScrollableBoxOfVirtualizedItems

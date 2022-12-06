@@ -9,8 +9,6 @@ type ContainerProps = {
   children: ReactNode;
 };
 
-export const borderRadius = '7px';
-
 export function Container({ contactMessage, children }: ContainerProps) {
   const bgColors = {
     default: useColorModeValue('gray.200', 'gray.400'),

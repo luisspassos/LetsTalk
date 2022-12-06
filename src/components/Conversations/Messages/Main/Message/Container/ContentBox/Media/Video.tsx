@@ -1,22 +1,20 @@
 import { Box } from '@chakra-ui/react';
-import { borderRadius } from '../Container';
+import { Wrapper } from './Wrapper';
 
 export function Video() {
   return (
-    <Box p='5px'>
+    <Wrapper>
       <Box
         as='video'
         src='./tiktok.mp4'
         controls
-        maxH='400px'
-        borderRadius={borderRadius}
         sx={{
           '&': {
             colorScheme: 'light dark',
           },
         }}
       />
-    </Box>
+    </Wrapper>
   );
 }
 

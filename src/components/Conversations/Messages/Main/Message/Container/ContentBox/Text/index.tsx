@@ -1,5 +1,5 @@
 import { Text as ChakraText } from '@chakra-ui/react';
-import { useSearchInConversation } from '../../../../../../contexts/SearchInConversationContext';
+import { useSearchInConversation } from '../../../../../../../../contexts/SearchInConversationContext';
 import { TextComponent } from './Component';
 
 type TextProps = {

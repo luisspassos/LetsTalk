@@ -1,6 +1,6 @@
 import { Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { font } from '../../../Footer/MessageInput';
+import { font } from '../../../../../Footer/MessageInput';
 
 type TextComponentProps = {
   children: ReactNode;
