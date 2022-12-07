@@ -23,7 +23,7 @@ export function Tooltip({ children, label, ariaLabel, ...rest }: TooltipProps) {
       color='gray.50'
       {...rest}
     >
-      {children}
+      <span>{children}</span>
     </ChakraTooltip>
   );
 }
