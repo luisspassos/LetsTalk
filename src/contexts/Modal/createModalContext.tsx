@@ -1,15 +1,14 @@
-import { useDisclosure } from '@chakra-ui/react';
+import { useDisclosure, UseDisclosureReturn } from '@chakra-ui/react';
 import { createContext, ReactNode, useContext } from 'react';
 
 type ModalProviderProps = {
   children: ReactNode;
 };
 
-type ModalContextType = {
-  isOpen: boolean;
-  onClose: () => void;
-  onOpen: () => void;
-};
+type ModalContextType = Pick<
+  UseDisclosureReturn,
+  'isOpen' | 'onOpen' | 'onClose'
+>;
 
 export function createModalContext() {
   const ModalContext = createContext({} as ModalContextType);

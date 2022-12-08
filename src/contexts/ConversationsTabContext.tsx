@@ -1,16 +1,14 @@
-import { useDisclosure } from '@chakra-ui/react';
+import { useDisclosure, UseDisclosureReturn } from '@chakra-ui/react';
 import { createContext, ReactNode, useContext } from 'react';
-import { UseDisclosure } from '../utils/types';
 
 type ConversationsTabProviderProps = {
   children: ReactNode;
 };
 
-type ConversationsTabContextType = {
-  onToggle: UseDisclosure['onToggle'];
-  onClose: UseDisclosure['onClose'];
-  isOpen: UseDisclosure['isOpen'];
-};
+type ConversationsTabContextType = Pick<
+  UseDisclosureReturn,
+  'isOpen' | 'onToggle' | 'onClose'
+>;
 
 export const ConversationsTabContext = createContext(
   {} as ConversationsTabContextType

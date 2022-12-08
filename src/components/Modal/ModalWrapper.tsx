@@ -5,13 +5,14 @@ import {
   ModalContent,
   ModalOverlay,
   useColorModeValue,
+  UseDisclosureReturn,
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { ModalTitle } from './ModalTitle';
 
-type ModalWrapperProps = {
-  isOpen: boolean;
-  onClose: () => void;
+type Disclosure = Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>;
+
+type ModalWrapperProps = Disclosure & {
   modalTitle?: string;
   children: ReactNode;
 };

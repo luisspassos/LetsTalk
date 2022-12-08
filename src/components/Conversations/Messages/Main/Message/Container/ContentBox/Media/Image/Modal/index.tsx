@@ -1,10 +1,13 @@
-import { ModalOverlay, Modal as ChakraModal } from '@chakra-ui/react';
-import { UseDisclosure } from '../../../../../../../../../../utils/types';
+import {
+  ModalOverlay,
+  Modal as ChakraModal,
+  UseDisclosureReturn,
+} from '@chakra-ui/react';
 import { Content } from './Content';
 
-type ModalProps = {
-  isOpen: UseDisclosure['isOpen'];
-  onClose: UseDisclosure['onClose'];
+type Disclosure = Pick<UseDisclosureReturn, 'onClose' | 'isOpen'>;
+
+type ModalProps = Disclosure & {
   imgUrl: string;
 };
 
