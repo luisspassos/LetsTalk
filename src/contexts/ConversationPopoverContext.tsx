@@ -1,5 +1,6 @@
 import { useDisclosure } from '@chakra-ui/react';
 import { createContext, ReactNode, useCallback, useContext } from 'react';
+import { UseDisclosure } from '../utils/types';
 import { useSearchInConversation } from './SearchInConversationContext';
 
 type ConversationPopoverProviderProps = {
@@ -7,9 +8,9 @@ type ConversationPopoverProviderProps = {
 };
 
 type ConversationPopoverContextType = {
-  isOpen: boolean;
-  onClose: () => void;
-  onOpen: () => void;
+  isOpen: UseDisclosure['isOpen'];
+  onClose: UseDisclosure['onClose'];
+  onOpen: UseDisclosure['onOpen'];
 };
 
 export const ConversationPopoverContext = createContext(

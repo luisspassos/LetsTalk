@@ -1,3 +1,5 @@
+import { useDisclosure } from '@chakra-ui/react';
+
 export type ConversationDocWithContactData =
   | {
       users: ConversationUsersId;
@@ -16,3 +18,5 @@ export type ContactsResponse = {
 };
 
 export type OnlineAt = number | 'now';
+
+export type UseDisclosure = ReturnType<typeof useDisclosure>;

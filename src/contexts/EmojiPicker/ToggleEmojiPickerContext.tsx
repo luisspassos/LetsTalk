@@ -1,12 +1,13 @@
 import { useDisclosure } from '@chakra-ui/react';
 import { createContext, ReactNode, useContext } from 'react';
+import { UseDisclosure } from '../../utils/types';
 
 type ToggleEmojiPickerProviderProps = {
   children: ReactNode;
 };
 
 type ToggleEmojiPickerContextType = {
-  isOpen: boolean;
+  isOpen: UseDisclosure['isOpen'];
   onToggle: () => void;
 };
 
