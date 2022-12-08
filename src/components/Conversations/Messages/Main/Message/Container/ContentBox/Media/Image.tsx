@@ -1,9 +1,9 @@
 import {
+  Box,
+  HStack,
   Image as ChakraImage,
   Modal,
-  ModalBody,
   ModalContent,
-  ModalFooter,
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -15,7 +15,7 @@ import { Wrapper } from './Wrapper';
 const url =
   'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=';
 
-const borderRadius = '8px';
+const borderRadius = '5px';
 
 export function Image() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,39 +38,36 @@ export function Image() {
       <Wrapper>
         <ChakraImage src={url} alt='Image' cursor='pointer' onClick={onOpen} />
       </Wrapper>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered
+        motionPreset='slideInBottom'
+      >
         <ModalOverlay bg='blackAlpha.700' />
-        <ModalContent bg='transparent' boxShadow='none' w='auto' my='0'>
-          <ModalBody
-            boxShadow='lg'
-            borderRadius={borderRadius}
-            bg='gray.400'
-            p='5px'
-          >
+        <ModalContent
+          bg='transparent'
+          boxShadow='none'
+          my='0'
+          maxW='auto'
+          w='auto'
+        >
+          <Box borderRadius={borderRadius} bg='gray.400' p='5px' boxShadow='lg'>
             <ChakraImage
-              w='329px'
-              h='493px'
               borderRadius={borderRadius}
+              maxH='500px'
               src={url}
               alt='image'
             />
-          </ModalBody>
-          <ModalFooter
-            onClick={onClose}
-            justifyContent='start'
-            px='0'
-            pb='0'
-            // pt='5px'
-            // gap='3px'
-          >
+          </Box>
+          <HStack as='footer' mt='5px' spacing='2px'>
             <Button aria-label='Fechar modal' icon={<MdOutlineClose />} />
-
             <Button
               aria-label='Fazer download da imagem'
               icon={<HiDownload />}
               onClick={handleDownloadImage}
             />
-          </ModalFooter>
+          </HStack>
         </ModalContent>
       </Modal>
     </>
