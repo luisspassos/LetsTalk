@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Flex,
-  Popover,
-  PopoverTrigger,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Flex, Popover, PopoverTrigger, VStack } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useConversations } from '../../../../contexts/ConversationsContext';
 import { Tooltip } from '../../../Tooltip';
@@ -18,14 +10,17 @@ import { ConversationsTabToggleButton } from './ConversationsTabToggleButton';
 import { onSnapshot } from 'firebase/firestore';
 import { db } from '../../../../services/firebase';
 import { doc } from 'firebase/firestore';
-import { OnlineAt } from '../../../../utils/types';
+import { OnlineAt as OnlineAtType } from '../../../../utils/types';
 import { formatContactOnlineAt } from '../../../../utils/formatDate';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
+import { Wrapper } from './Wrapper';
+import { Avatar } from './Avatar';
+import { OnlineAt } from './OnlineAt';
 
 type OnlineAtFormatted = string;
 
 type ContactDocumentData = {
-  onlineAt: OnlineAt;
+  onlineAt: OnlineAtType;
   uid: string;
 };
 
@@ -58,30 +53,15 @@ export function Header() {
 
   return (
     <>
-      <Flex
-        flexShrink={0}
-        as='header'
-        justify='space-between'
-        minW={0}
-        minH={['55px', '70px', '85px']}
-        py='10px'
-        align='center'
-        gap='9px'
-      >
+      <Wrapper>
         <Flex minW={0} align='center' gap={['12px', '15px', '18px']}>
           <ConversationsTabToggleButton />
 
-          <Avatar
-            w={['42px', '47px', '52px']}
-            h={['42px', '47px', '52px']}
-            src={currentConversation.data?.photoURL ?? undefined}
-          />
+          <Avatar photoURL={currentConversation.data?.photoURL} />
 
           <VStack minW={0} align='start' spacing={0}>
             <ContactName text={currentConversation.data?.name ?? ''} />
-            <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
-              {onlineAt}
-            </Text>
+            <OnlineAt text={onlineAt ?? ''} />
           </VStack>
         </Flex>
         <Popover
@@ -106,7 +86,7 @@ export function Header() {
 
           <ConversationInfoPopover ref={popoverInitialFocusRef} />
         </Popover>
-      </Flex>
+      </Wrapper>
       <Divider />
     </>
   );

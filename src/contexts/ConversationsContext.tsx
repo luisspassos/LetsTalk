@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 
-type ConversationType = {
+export type ConversationType = {
   uid: string;
   photoURL: string | null;
   name: string;
@@ -19,16 +19,14 @@ type ConversationType = {
   isBlocked?: boolean;
 };
 
-export type ConversationsType = ConversationType[];
-
 type ConversationsProviderProps = {
   children: ReactNode;
 };
 
 type ConversationsContextType = {
   conversations: {
-    setConversations: Dispatch<SetStateAction<ConversationsType>>;
-    data: ConversationsType;
+    setConversations: Dispatch<SetStateAction<ConversationType[]>>;
+    data: ConversationType[];
     numberOfConversations: number;
   };
   currentConversation: {
@@ -45,7 +43,7 @@ export const ConversationsContext = createContext(
 export function ConversationsProvider({
   children,
 }: ConversationsProviderProps) {
-  const [conversations, setConversations] = useState<ConversationsType>([]);
+  const [conversations, setConversations] = useState<ConversationType[]>([]);
   const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
 
   const numberOfConversations = useMemo(
