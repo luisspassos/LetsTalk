@@ -4,7 +4,10 @@ import { Tooltip } from './Tooltip';
 export function ConversationsTabToggleButton() {
   return (
     <Tooltip>
-      <Button />
+      {/* this span is for the tooltip to work correctly */}
+      <span>
+        <Button />
+      </span>
     </Tooltip>
   );
 }

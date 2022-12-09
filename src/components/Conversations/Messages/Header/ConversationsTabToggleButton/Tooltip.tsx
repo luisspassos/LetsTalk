@@ -8,7 +8,7 @@ type TooltipProps = {
 
 type TooltipText = {
   text: string;
-  show: boolean;
+  show: true | undefined;
 };
 
 const tooltipMessages = {
@@ -22,7 +22,7 @@ let helpTooltipTimeout: NodeJS.Timeout;
 export function Tooltip({ children }: TooltipProps) {
   const [tooltip, setTooltip] = useState<TooltipText>({
     text: tooltipMessages.closeTab,
-    show: false,
+    show: undefined,
   });
 
   const { isOpen } = useConversationsTab();
@@ -35,7 +35,7 @@ export function Tooltip({ children }: TooltipProps) {
       if (!isOpen && !removeHelpTooltip) {
         helpTooltipTimeout = setTimeout(() => {
           setTooltip({
-            show: false,
+            show: undefined,
             text: tooltipMessages.openTab,
           });
         }, 1000 * 5 /* 5 seconds */);
@@ -56,7 +56,7 @@ export function Tooltip({ children }: TooltipProps) {
       }
 
       setTooltip({
-        show: false,
+        show: undefined,
         text: tooltipMessages.closeTab,
       });
     }
@@ -75,7 +75,7 @@ export function Tooltip({ children }: TooltipProps) {
 
     setTooltip({
       text: tooltipMessages.openTab,
-      show: false,
+      show: undefined,
     });
 
     localStorage.setItem('removeHelpTooltip', 'true');
