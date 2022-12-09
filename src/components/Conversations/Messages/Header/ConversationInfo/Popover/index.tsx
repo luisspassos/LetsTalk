@@ -13,53 +13,51 @@ import { BlockUserButton } from './BlockUser/Button';
 import { CopyUsernameButton } from './CopyUsername/Button';
 import { SearchInput } from './SearchInput';
 
-export const ConversationInfoPopover = forwardRef(
-  (_, ref: ForwardedRef<HTMLInputElement>) => {
-    const { currentConversation } = useConversations();
-    const { onOpen: openConversationPopover } = useConversationPopover();
+export const Content = forwardRef((_, ref: ForwardedRef<HTMLInputElement>) => {
+  const { currentConversation } = useConversations();
+  const { onOpen: openConversationPopover } = useConversationPopover();
 
-    useEffect(() => {
-      function handleOpenPopoverWithKeys(event: KeyboardEvent) {
-        if (event.ctrlKey && event.code.includes('F')) {
-          event.preventDefault();
+  useEffect(() => {
+    function handleOpenPopoverWithKeys(event: KeyboardEvent) {
+      if (event.ctrlKey && event.code.includes('F')) {
+        event.preventDefault();
 
-          openConversationPopover();
-        }
+        openConversationPopover();
       }
+    }
 
-      window.addEventListener('keydown', handleOpenPopoverWithKeys);
+    window.addEventListener('keydown', handleOpenPopoverWithKeys);
 
-      return () => {
-        window.removeEventListener('keydown', handleOpenPopoverWithKeys);
-      };
-    }, [openConversationPopover]);
+    return () => {
+      window.removeEventListener('keydown', handleOpenPopoverWithKeys);
+    };
+  }, [openConversationPopover]);
 
-    const contact = currentConversation.data?.username.split('#');
+  const contact = currentConversation.data?.username.split('#');
 
-    return (
-      <PopoverContent maxW='270px'>
-        <PopoverCloseButton />
-        <PopoverHeader>
-          <HStack>
-            <Text
-              whiteSpace='nowrap'
-              maxW='184px'
-              textOverflow='ellipsis'
-              overflowX='hidden'
-            >
-              {contact?.[0]}
-            </Text>
-            <Text opacity='90%'>#{contact?.[1]}</Text>
-          </HStack>
-        </PopoverHeader>
-        <PopoverBody>
-          <SearchInput ref={ref} />
-          <BlockUserButton />
-          <CopyUsernameButton />
-        </PopoverBody>
-      </PopoverContent>
-    );
-  }
-);
+  return (
+    <PopoverContent maxW='270px'>
+      <PopoverCloseButton />
+      <PopoverHeader>
+        <HStack>
+          <Text
+            whiteSpace='nowrap'
+            maxW='184px'
+            textOverflow='ellipsis'
+            overflowX='hidden'
+          >
+            {contact?.[0]}
+          </Text>
+          <Text opacity='90%'>#{contact?.[1]}</Text>
+        </HStack>
+      </PopoverHeader>
+      <PopoverBody>
+        <SearchInput ref={ref} />
+        <BlockUserButton />
+        <CopyUsernameButton />
+      </PopoverBody>
+    </PopoverContent>
+  );
+});
 
-ConversationInfoPopover.displayName = 'ConversationInfoPopover';
+Content.displayName = 'Content';

@@ -1,10 +1,9 @@
 import { Heading } from '@chakra-ui/react';
+import { useConversations } from '../../../../../contexts/ConversationsContext';
 
-type ContactNameProps = {
-  text: string;
-};
+export function ContactName() {
+  const { currentConversation } = useConversations();
 
-export function ContactName({ text }: ContactNameProps) {
   return (
     <Heading
       w='100%'
@@ -16,7 +15,7 @@ export function ContactName({ text }: ContactNameProps) {
       fontSize={['15px', '16px', '17px']}
       fontWeight={400}
     >
-      {text}
+      {currentConversation.data?.name}
     </Heading>
   );
 }
