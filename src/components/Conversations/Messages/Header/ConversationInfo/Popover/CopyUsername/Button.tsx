@@ -1,9 +1,9 @@
-import { Box, Icon } from '@chakra-ui/react';
+import { Icon } from '@chakra-ui/react';
 import { RiFileCopy2Line } from 'react-icons/ri';
 import { Button } from '../Button';
 import { useCallback, useState } from 'react';
 import { useConversations } from '../../../../../../../contexts/ConversationsContext';
-import { Tooltip } from '../../../../../../Tooltip';
+import { Tooltip } from './Tooltip';
 
 export function CopyUsernameButton() {
   const { currentConversation } = useConversations();
@@ -18,21 +18,13 @@ export function CopyUsernameButton() {
   }, [currentConversation.data?.username]);
 
   return (
-    <Tooltip
-      bg='green.500'
-      label='Copiado!'
-      ariaLabel='Copiado!'
-      isOpen={showTooltip}
-      placement='top'
-    >
-      <Box display='inline-block'>
-        <Button
-          text='Copiar nome do contato'
-          colorScheme='gray'
-          leftIcon={<Icon as={RiFileCopy2Line} />}
-          onClick={handleCopyUsername}
-        />
-      </Box>
+    <Tooltip isOpen={showTooltip}>
+      <Button
+        text='Copiar nome do contato'
+        colorScheme='gray'
+        leftIcon={<Icon as={RiFileCopy2Line} />}
+        onClick={handleCopyUsername}
+      />
     </Tooltip>
   );
 }
