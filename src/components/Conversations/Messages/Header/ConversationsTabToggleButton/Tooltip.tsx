@@ -1,12 +1,14 @@
-import { Icon, IconButton, useColorModeValue } from '@chakra-ui/react';
-import { useCallback, useEffect, useState } from 'react';
-import { HiOutlineUsers, HiUsers } from 'react-icons/hi';
-import { useConversationsTab } from '../../../../contexts/ConversationsTabContext';
-import { Tooltip } from '../../../Tooltip';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { useConversationsTab } from '../../../../../contexts/ConversationsTabContext';
+import { Tooltip as TooltipComponent } from '../../../../Tooltip';
+
+type TooltipProps = {
+  children: ReactNode;
+};
 
 type TooltipText = {
   text: string;
-  show: undefined | true;
+  show: boolean;
 };
 
 const tooltipMessages = {
@@ -17,15 +19,13 @@ const tooltipMessages = {
 
 let helpTooltipTimeout: NodeJS.Timeout;
 
-export function ConversationsTabToggleButton() {
-  const { onToggle, isOpen } = useConversationsTab();
-
+export function Tooltip({ children }: TooltipProps) {
   const [tooltip, setTooltip] = useState<TooltipText>({
     text: tooltipMessages.closeTab,
-    show: undefined,
+    show: false,
   });
 
-  const icon = isOpen ? HiUsers : HiOutlineUsers;
+  const { isOpen } = useConversationsTab();
 
   useEffect(() => {
     function showTooltipMessage() {
@@ -35,7 +35,7 @@ export function ConversationsTabToggleButton() {
       if (!isOpen && !removeHelpTooltip) {
         helpTooltipTimeout = setTimeout(() => {
           setTooltip({
-            show: undefined,
+            show: false,
             text: tooltipMessages.openTab,
           });
         }, 1000 * 5 /* 5 seconds */);
@@ -56,7 +56,7 @@ export function ConversationsTabToggleButton() {
       }
 
       setTooltip({
-        show: undefined,
+        show: false,
         text: tooltipMessages.closeTab,
       });
     }
@@ -75,14 +75,14 @@ export function ConversationsTabToggleButton() {
 
     setTooltip({
       text: tooltipMessages.openTab,
-      show: undefined,
+      show: false,
     });
 
     localStorage.setItem('removeHelpTooltip', 'true');
   }, []);
 
   return (
-    <Tooltip
+    <TooltipComponent
       isOpen={tooltip.show}
       placement='bottom'
       label={tooltip.text}
@@ -93,14 +93,7 @@ export function ConversationsTabToggleButton() {
       pointerEvents='auto'
       cursor='default'
     >
-      <IconButton
-        variant='ghost'
-        fontSize={['28px']}
-        color={useColorModeValue('gray.400', 'gray.200')}
-        icon={<Icon as={icon} />}
-        aria-label='Botão de alternar aba de conversas'
-        onClick={onToggle}
-      />
-    </Tooltip>
+      {children}
+    </TooltipComponent>
   );
 }
