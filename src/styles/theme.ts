@@ -1,4 +1,4 @@
-import { ColorMode, extendTheme, ThemeConfig } from '@chakra-ui/react';
+import { ColorMode, extendTheme, ThemeConfig, Modal } from '@chakra-ui/react';
 import { colors } from './colors';
 
 type GlobalStyleProps = {
@@ -53,3 +53,7 @@ export const theme = extendTheme({
   },
   ...themeConfig,
 });
+
+// default props
+
+Modal.defaultProps = { ...Modal.defaultProps, motionPreset: 'slideInBottom' };
