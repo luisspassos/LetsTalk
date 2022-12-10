@@ -1,6 +1,6 @@
 import { UseFormReturn } from 'react-hook-form/dist/types';
-import { useChangeEmailModal } from '../../../../contexts/Modal/ChangeEmailModalContext';
-import { Buttons as ButtonsComponent } from '../../../Modal/Button/Buttons';
+import { useChangeEmailModal } from '../../../../../contexts/Modal/ChangeEmailModalContext';
+import { Buttons as ButtonsComponent } from '../../../../Modal/Button/Buttons';
 
 type IsSubmitting = UseFormReturn['formState']['isSubmitting'];
 

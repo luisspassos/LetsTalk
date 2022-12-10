@@ -53,12 +53,12 @@ export function Configurations() {
         <Box title='Configurações de conta'>
           <ThemeSelect />
           <ButtonStack>
-            {!isLoggedInWithGoogle && (
-              <>
-                <SwitchEmailButton />
-                <ChangePasswordButton />
-              </>
-            )}
+            {/* {!isLoggedInWithGoogle && (
+              <> */}
+            <SwitchEmailButton />
+            <ChangePasswordButton />
+            {/* </>
+            )} */}
             <DeleteAccountButton />
             <ExitButton />
           </ButtonStack>
