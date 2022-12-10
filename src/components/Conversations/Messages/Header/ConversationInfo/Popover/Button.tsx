@@ -9,7 +9,14 @@ type ButtonProps = {
 
 export function Button({ text, ...rest }: ButtonProps) {
   return (
-    <ChakraButton variant='ghost' fontWeight={400} pl='13px' {...rest}>
+    <ChakraButton
+      justifyContent='start'
+      w='100%'
+      variant='ghost'
+      fontWeight={400}
+      pl='13px'
+      {...rest}
+    >
       {text}
     </ChakraButton>
   );
