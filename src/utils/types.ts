@@ -1,3 +1,5 @@
+import { FieldError } from 'react-hook-form/dist/types';
+
 export type ConversationDocWithContactData =
   | {
       users: ConversationUsersId;
@@ -16,3 +18,5 @@ export type ContactsResponse = {
 };
 
 export type OnlineAt = number | 'now';
+
+export type InputError = FieldError | undefined;

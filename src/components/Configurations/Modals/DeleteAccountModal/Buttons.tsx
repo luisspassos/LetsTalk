@@ -18,7 +18,7 @@ type FirebaseErrorWithoutForm = Record<string, () => void>;
 type Form = UseFormReturn<PasswordFormData>;
 type FormProps = Pick<Form, 'handleSubmit' | 'setError'>;
 
-type IsSubmitting = Form['formState']['isSubmitting'];
+type IsSubmitting = UseFormReturn['formState']['isSubmitting'];
 
 type ButtonsProps = { isSubmitting: IsSubmitting } & FormProps;
 

@@ -1,15 +1,15 @@
-import { Buttons } from '../../Modal/Button/Buttons';
-import { ModalFormControl } from '../../Modal/ModalFormControl';
-import { ModalInput } from '../../Modal/ModalInput';
-import { ModalWrapper } from '../../Modal/ModalWrapper';
+import { ModalFormControl } from '../../../Modal/ModalFormControl';
+import { ModalWrapper } from '../../../Modal/ModalWrapper';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useChangeEmailModal } from '../../../contexts/Modal/ChangeEmailModalContext';
+import { useChangeEmailModal } from '../../../../contexts/Modal/ChangeEmailModalContext';
 import { useMemo } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '../../../../contexts/AuthContext';
+import { EmailInput } from './EmailInput';
+import { Buttons } from './Buttons';
 
-type ChangeEmailFormData = {
+export type ChangeEmailFormData = {
   email: string;
 };
 
@@ -30,10 +30,16 @@ const ChangeEmailFormSchema = yup.object().shape({
     .email('E-mail inválido'),
 });
 
+async function getToast() {
+  const { toast } = await import('../../../../utils/Toasts/toast');
+
+  return { toast };
+}
+
 export const toasts = {
   changeEmail: {
     success: async () => {
-      const { toast } = await import('../../../utils/Toasts/toast');
+      const { toast } = await getToast();
 
       toast({
         title: 'Email atualizado com sucesso!',
@@ -42,7 +48,7 @@ export const toasts = {
       });
     },
     sameEmail: async () => {
-      const { toast } = await import('../../../utils/Toasts/toast');
+      const { toast } = await getToast();
 
       toast({
         title: 'Você já está usando este email!',
@@ -78,7 +84,7 @@ export function ChangeEmailModal() {
           const { updateEmail, sendEmailVerification } = await import(
             'firebase/auth'
           );
-          const { auth } = await import('../../../services/firebase');
+          const { auth } = await import('../../../../services/firebase');
 
           const user = auth.currentUser;
 
@@ -97,7 +103,7 @@ export function ChangeEmailModal() {
 
           if (err instanceof FirebaseError) {
             const { reauthenticationToasts } = await import(
-              '../../../utils/Toasts/reauthenticationToasts'
+              '../../../../utils/Toasts/reauthenticationToasts'
             );
 
             const errors: FormFirebaseError = {
@@ -112,7 +118,7 @@ export function ChangeEmailModal() {
 
             if (!error) {
               const { unknownErrorToast } = await import(
-                '../../../utils/Toasts/unknownErrorToast'
+                '../../../../utils/Toasts/unknownErrorToast'
               );
 
               unknownErrorToast();
@@ -138,23 +144,8 @@ export function ChangeEmailModal() {
   return (
     <ModalWrapper isOpen={isOpen} onClose={onClose} modalTitle='Trocar email'>
       <ModalFormControl onSubmit={handleChangeEmail}>
-        <ModalInput
-          id='email'
-          label='Novo Email'
-          placeholder='Digite seu novo email'
-          error={errors.email}
-          register={register}
-          type='email'
-        />
-        <Buttons
-          cancelButtonProps={{
-            onClick: onClose,
-          }}
-          confirmButtonProps={{
-            isLoading: isSubmitting,
-          }}
-          confirmButtonText='Trocar'
-        />
+        <EmailInput error={errors.email} register={register} />
+        <Buttons isSubmitting={isSubmitting} />
       </ModalFormControl>
     </ModalWrapper>
   );
