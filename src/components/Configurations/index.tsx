@@ -1,33 +1,25 @@
 import { Flex } from '@chakra-ui/react';
 import { Divider } from '../Divider';
 import { PageTitle } from '../PageTitle';
-import { Avatar } from './Avatar';
 import { Box } from './Box';
 import { ButtonStack } from './Buttons/ButtonStack';
 import { ThemeSelect } from './ThemeSelect';
-import { CopyUsernameButton } from './Buttons/CopyUsernameButton';
-import { EditUsernameButton } from './Buttons/EditUsernameButton';
-import { EditProfilePhotoButton } from './Buttons/EditProfilePhotoButton';
-import { InviteToChatButton } from './Buttons/InviteToChatButton';
-import { SwitchEmailButton } from './Buttons/SwitchEmailButton';
-import { ChangePasswordButton } from './Buttons/ChangePasswordButton';
-import { DeleteAccountButton } from './Buttons/DeleteAccountButton';
-import { ExitButton } from './Buttons/ExitButton';
-import { RenameUsernameModal } from './Modals/RenameUsernameModal';
-import { ChangeEmailModal } from './Modals/ChangeEmailModal';
-import { ChangePasswordModal } from './Modals/ChangePasswordModal';
-import { DeleteAccountModal } from './Modals/DeleteAccountModal';
+import { CopyUsernameButton } from './Box/ProfileSettings/Buttons/CopyUsername';
+import { EditUsernameButton } from './Box/ProfileSettings/Buttons/EditUsernameButton';
+import { EditProfilePhotoButton } from './Box/ProfileSettings/Buttons/EditProfilePhoto';
+import { InviteToChatButton } from './Box/ProfileSettings/Buttons/InviteToChat';
+import { SwitchEmailButton } from './Box/AccountSettings/Buttons/SwitchEmail';
+import { ChangePasswordButton } from './Box/AccountSettings/Buttons/ChangePassword';
+import { DeleteAccountButton } from './Box/AccountSettings/Buttons/DeleteAccount';
+import { ExitButton } from './Box/AccountSettings/Buttons/Exit';
 import { useAuth } from '../../contexts/AuthContext';
+import { User } from './User';
 
 export function Configurations() {
   const { isLoggedInWithGoogle } = useAuth();
 
   return (
     <>
-      <DeleteAccountModal />
-      <ChangePasswordModal />
-      <ChangeEmailModal />
-      <RenameUsernameModal />
       <PageTitle pageName='Configurações' />
       <Flex
         wrap='wrap'
@@ -41,7 +33,7 @@ export function Configurations() {
         h='100vh'
       >
         <Box title='Configurações de perfil'>
-          <Avatar />
+          <User />
           <Divider />
           <ButtonStack>
             <CopyUsernameButton />

@@ -2,7 +2,7 @@ import { useRenameUsernameModal } from '../../../../contexts/Modal/RenameUsernam
 import { ModalWrapper } from '../../../Modal/ModalWrapper';
 import { Form } from './Form';
 
-export function RenameUsernameModal() {
+export function Modal() {
   const { isOpen, onClose } = useRenameUsernameModal();
 
   return (

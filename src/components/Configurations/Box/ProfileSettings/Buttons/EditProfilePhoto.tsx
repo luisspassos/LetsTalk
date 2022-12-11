@@ -1,15 +1,15 @@
 import { useCallback, useState } from 'react';
 import { RiImageEditFill } from 'react-icons/ri';
-import { useAuth } from '../../../contexts/AuthContext';
-import { Button } from './Button';
+import { useAuth } from '../../../../../contexts/AuthContext';
+import { Button } from '../../../Buttons/Button';
 
 export const errorToast = async () => {
-  const { toast } = await import('../../../utils/Toasts/toast');
+  const { toast } = await import('../../../../../utils/Toasts/toast');
 
   toast({ status: 'error', title: 'O arquivo selecionado não é uma imagem.' });
 };
 
-export function EditProfilePhotoButton() {
+export function EditProfilePhoto() {
   const { fillUser, user } = useAuth();
   const [loading, setLoading] = useState(false);
 
@@ -49,8 +49,12 @@ export function EditProfilePhotoButton() {
         }
 
         const { updateProfile } = await import('firebase/auth');
-        const { auth, storage } = await import('../../../services/firebase');
-        const { refreshToken } = await import('../../../contexts/AuthContext');
+        const { auth, storage } = await import(
+          '../../../../../services/firebase'
+        );
+        const { refreshToken } = await import(
+          '../../../../../contexts/AuthContext'
+        );
         const { ref, uploadBytes, getDownloadURL } = await import(
           'firebase/storage'
         );
@@ -79,7 +83,7 @@ export function EditProfilePhotoButton() {
         await refreshToken();
       } catch {
         const { unknownErrorToast } = await import(
-          '../../../utils/Toasts/unknownErrorToast'
+          '../../../../../utils/Toasts/unknownErrorToast'
         );
 
         unknownErrorToast();

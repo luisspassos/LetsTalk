@@ -9,6 +9,7 @@ type BoxProps = {
 export function Box({ title, children }: BoxProps) {
   return (
     <ChakraBox
+      as='section'
       p={['24px', '27px', '30px']}
       boxShadow='md'
       borderRadius='20px'

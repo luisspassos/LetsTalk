@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { FiShare2 } from 'react-icons/fi';
-import { toast } from '../../../utils/Toasts/toast';
-import { Button } from './Button';
+import { toast } from '../../../../../utils/Toasts/toast';
+import { Button } from '../../../Buttons/Button';
 
 export const successToastWhenCopying = () =>
   toast({
@@ -11,7 +11,7 @@ export const successToastWhenCopying = () =>
     status: 'success',
   });
 
-export function InviteToChatButton() {
+export function InviteToChat() {
   const handleOpenModal = useCallback(() => {
     const currentUrl = process.env.NEXT_PUBLIC_CURRENT_URL;
 
