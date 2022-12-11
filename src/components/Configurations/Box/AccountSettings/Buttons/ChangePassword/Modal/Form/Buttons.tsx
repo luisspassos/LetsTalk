@@ -1,6 +1,6 @@
-import { useChangePasswordModal } from '../../../../../contexts/Modal/ChangePasswordModalContext';
-import { IsSubmitting } from '../../../../../utils/types';
-import { Buttons as ButtonsComponent } from '../../../../Modal/Button/Buttons';
+import { useChangePasswordModal } from '../../../../../../../../contexts/Modal/ChangePasswordModalContext';
+import { IsSubmitting } from '../../../../../../../../utils/types';
+import { Buttons as ButtonsComponent } from '../../../../../../../Modal/Button/Buttons';
 
 type ButtonsProps = {
   isSubmitting: IsSubmitting;

@@ -2,7 +2,7 @@ import { ModalWrapper } from '../../../Modal/ModalWrapper';
 import { useChangePasswordModal } from '../../../../contexts/Modal/ChangePasswordModalContext';
 import { Form } from './Form';
 
-export function ChangePasswordModal() {
+export function Modal() {
   const { isOpen, onClose } = useChangePasswordModal();
 
   return (

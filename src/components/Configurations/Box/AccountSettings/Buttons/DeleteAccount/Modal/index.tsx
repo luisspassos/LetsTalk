@@ -5,7 +5,7 @@ import { useDeleteAccountModal } from '../../../../contexts/Modal/DeleteAccountM
 import { Content } from './Content';
 import { Header } from './Header';
 
-export function DeleteAccountModal() {
+export function Modal() {
   const { isOpen, onClose } = useDeleteAccountModal();
 
   return (

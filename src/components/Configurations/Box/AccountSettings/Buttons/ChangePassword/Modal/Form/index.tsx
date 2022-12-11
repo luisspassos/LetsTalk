@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { ModalFormControl } from '../../../../Modal/ModalFormControl';
+import { ModalFormControl } from '../../../../../../../Modal/ModalFormControl';
 import * as yup from 'yup';
 import { Inputs } from './Inputs';
 import { Buttons } from './Buttons';
@@ -33,7 +33,9 @@ const ChangePasswordFormSchema = yup.object().shape({
 export const toasts = {
   changePassword: {
     success: async () => {
-      const { toast } = await import('../../../../../utils/Toasts/toast');
+      const { toast } = await import(
+        '../../../../../../../../utils/Toasts/toast'
+      );
 
       toast({ status: 'success', title: 'Senha mudada com sucesso!' });
     },
@@ -55,7 +57,9 @@ export function Form() {
       handleSubmit(async ({ password }) => {
         try {
           const { updatePassword } = await import('firebase/auth');
-          const { auth } = await import('../../../../../services/firebase');
+          const { auth } = await import(
+            '../../../../../../../../services/firebase'
+          );
 
           const user = auth.currentUser;
 
@@ -69,7 +73,7 @@ export function Form() {
 
           if (err instanceof FirebaseError) {
             const { reauthenticationToasts } = await import(
-              '../../../../../utils/Toasts/reauthenticationToasts'
+              '../../../../../../../../utils/Toasts/reauthenticationToasts'
             );
 
             const errors: FormFirebaseError = {
@@ -80,7 +84,7 @@ export function Form() {
 
             if (!error) {
               const { unknownErrorToast } = await import(
-                '../../../../../utils/Toasts/unknownErrorToast'
+                '../../../../../../../../utils/Toasts/unknownErrorToast'
               );
 
               unknownErrorToast();
