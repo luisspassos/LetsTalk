@@ -1,7 +1,7 @@
+import { Button } from 'components/Configurations/Buttons/Button';
 import { useCallback, useState } from 'react';
 import { RiImageEditFill } from 'react-icons/ri';
 import { useAuth } from '../../../../../contexts/AuthContext';
-import { Button } from '../../../Buttons/Button';
 
 export const errorToast = async () => {
   const { toast } = await import('../../../../../utils/Toasts/toast');
@@ -52,9 +52,7 @@ export function EditProfilePhoto() {
         const { auth, storage } = await import(
           '../../../../../services/firebase'
         );
-        const { refreshToken } = await import(
-          '../../../../../contexts/AuthContext'
-        );
+        const { refreshToken } = await import('contexts/AuthContext');
         const { ref, uploadBytes, getDownloadURL } = await import(
           'firebase/storage'
         );
