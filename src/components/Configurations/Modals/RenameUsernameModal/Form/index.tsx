@@ -1,17 +1,16 @@
-import { Buttons } from '../../Modal/Button/Buttons';
-import { ModalFormControl } from '../../Modal/ModalFormControl';
-import { ModalInput } from '../../Modal/ModalInput';
-import { ModalWrapper } from '../../Modal/ModalWrapper';
-import { useRenameUsernameModal } from '../../../contexts/Modal/RenameUsernameModalContext';
-import * as yup from 'yup';
-import { regexs } from '../../../utils/regexs';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
-import { refreshToken, useAuth } from '../../../contexts/AuthContext';
-import { useRenamingName } from '../../../contexts/RenamingNameContext';
+import { useForm } from 'react-hook-form';
+import { refreshToken, useAuth } from '../../../../../contexts/AuthContext';
+import { useRenameUsernameModal } from '../../../../../contexts/Modal/RenameUsernameModalContext';
+import { useRenamingName } from '../../../../../contexts/RenamingNameContext';
+import { regexs } from '../../../../../utils/regexs';
+import { ModalFormControl } from '../../../../Modal/ModalFormControl';
+import { Buttons } from './Buttons';
+import { Input } from './Input';
+import * as yup from 'yup';
 
-type RenameUsernameFormData = {
+export type RenameUsernameFormData = {
   name: string;
 };
 
@@ -23,8 +22,8 @@ const RenameUsernameFormSchema = yup.object().shape({
     .matches(regexs.cannotContainHashtag, 'O nome não pode conter #'),
 });
 
-export function RenameUsernameModal() {
-  const { isOpen, onClose } = useRenameUsernameModal();
+export function Form() {
+  const { onClose } = useRenameUsernameModal();
 
   const {
     register,
@@ -44,7 +43,7 @@ export function RenameUsernameModal() {
         try {
           setRenamingName(true);
 
-          const { auth } = await import('../../../services/firebase');
+          const { auth } = await import('../../../../../services/firebase');
 
           const currentUser = auth.currentUser;
 
@@ -52,11 +51,11 @@ export function RenameUsernameModal() {
 
           const { setDoc, doc, deleteDoc } = await import('firebase/firestore');
           const { updateProfile } = await import('firebase/auth');
-          const { db } = await import('../../../services/firebase');
+          const { db } = await import('../../../../../services/firebase');
 
           if (!user) return;
 
-          const id = user.username.split('#')[1];
+          const [, id] = user.username.split('#');
 
           const newName = `${name}#${id}`;
 
@@ -79,7 +78,7 @@ export function RenameUsernameModal() {
           resetForm();
         } catch {
           const { unknownErrorToast } = await import(
-            '../../../utils/Toasts/unknownErrorToast'
+            '../../../../../utils/Toasts/unknownErrorToast'
           );
 
           unknownErrorToast();
@@ -91,29 +90,9 @@ export function RenameUsernameModal() {
   );
 
   return (
-    <ModalWrapper
-      isOpen={isOpen}
-      onClose={onClose}
-      modalTitle='Trocar nome de usuário'
-    >
-      <ModalFormControl onSubmit={handleRenameUsername}>
-        <ModalInput
-          id='name'
-          label='Nome'
-          placeholder='Coloque seu novo nome'
-          error={errors.name}
-          register={register}
-        />
-        <Buttons
-          confirmButtonProps={{
-            isLoading: isSubmitting,
-          }}
-          cancelButtonProps={{
-            onClick: onClose,
-          }}
-          confirmButtonText='Trocar'
-        />
-      </ModalFormControl>
-    </ModalWrapper>
+    <ModalFormControl onSubmit={handleRenameUsername}>
+      <Input register={register} error={errors.name} />
+      <Buttons isSubmitting={isSubmitting} />
+    </ModalFormControl>
   );
 }
