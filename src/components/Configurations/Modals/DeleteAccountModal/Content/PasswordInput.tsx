@@ -1,7 +1,7 @@
 import { UseFormRegister } from 'react-hook-form/dist/types';
 import { PasswordFormData } from '.';
-import { InputError } from '../../../../utils/types';
-import { ModalInput } from '../../../Modal/ModalInput';
+import { InputError } from '../../../../../utils/types';
+import { ModalInput } from '../../../../Modal/ModalInput';
 
 type PasswordInputProps = {
   error: InputError;
