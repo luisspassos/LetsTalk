@@ -4,6 +4,7 @@ import { useAuth } from '../../../../contexts/AuthContext';
 import { DangerousActionButtons } from '../../../Modal/DangerousAction/DangerousActionButtons';
 import { UseFormReturn } from 'react-hook-form';
 import { useDeleteAccountModal } from '../../../../contexts/Modal/DeleteAccountModalContext';
+import { IsSubmitting } from '../../../../utils/types';
 
 type FormFirebaseError = Record<
   string,
@@ -17,8 +18,6 @@ type FirebaseErrorWithoutForm = Record<string, () => void>;
 
 type Form = UseFormReturn<PasswordFormData>;
 type FormProps = Pick<Form, 'handleSubmit' | 'setError'>;
-
-type IsSubmitting = UseFormReturn['formState']['isSubmitting'];
 
 type ButtonsProps = { isSubmitting: IsSubmitting } & FormProps;
 

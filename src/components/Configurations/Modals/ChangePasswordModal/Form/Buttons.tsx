@@ -1,4 +1,4 @@
-import { useChangeEmailModal } from '../../../../../contexts/Modal/ChangeEmailModalContext';
+import { useChangePasswordModal } from '../../../../../contexts/Modal/ChangePasswordModalContext';
 import { IsSubmitting } from '../../../../../utils/types';
 import { Buttons as ButtonsComponent } from '../../../../Modal/Button/Buttons';
 
@@ -7,7 +7,7 @@ type ButtonsProps = {
 };
 
 export function Buttons({ isSubmitting }: ButtonsProps) {
-  const { onClose } = useChangeEmailModal();
+  const { onClose } = useChangePasswordModal();
 
   return (
     <ButtonsComponent

@@ -1,4 +1,4 @@
-import { FieldError } from 'react-hook-form/dist/types';
+import { FieldError, UseFormReturn } from 'react-hook-form/dist/types';
 
 export type ConversationDocWithContactData =
   | {
@@ -20,3 +20,5 @@ export type ContactsResponse = {
 export type OnlineAt = number | 'now';
 
 export type InputError = FieldError | undefined;
+
+export type IsSubmitting = UseFormReturn['formState']['isSubmitting'];

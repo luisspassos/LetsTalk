@@ -1,15 +1,12 @@
-import { Buttons } from '../../Modal/Button/Buttons';
-import { ModalFormControl } from '../../Modal/ModalFormControl';
-import { ModalInput } from '../../Modal/ModalInput';
-import { ModalWrapper } from '../../Modal/ModalWrapper';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Stack } from '@chakra-ui/react';
-import { useChangePasswordModal } from '../../../contexts/Modal/ChangePasswordModalContext';
 import { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { ModalFormControl } from '../../../../Modal/ModalFormControl';
+import * as yup from 'yup';
+import { Inputs } from './Inputs';
+import { Buttons } from './Buttons';
 
-type ChangePasswordFormData = {
+export type ChangePasswordFormData = {
   password: string;
   password_confirmation: string;
 };
@@ -36,16 +33,14 @@ const ChangePasswordFormSchema = yup.object().shape({
 export const toasts = {
   changePassword: {
     success: async () => {
-      const { toast } = await import('../../../utils/Toasts/toast');
+      const { toast } = await import('../../../../../utils/Toasts/toast');
 
       toast({ status: 'success', title: 'Senha mudada com sucesso!' });
     },
   },
 };
 
-export function ChangePasswordModal() {
-  const { isOpen, onClose } = useChangePasswordModal();
-
+export function Form() {
   const {
     register,
     handleSubmit,
@@ -60,7 +55,7 @@ export function ChangePasswordModal() {
       handleSubmit(async ({ password }) => {
         try {
           const { updatePassword } = await import('firebase/auth');
-          const { auth } = await import('../../../services/firebase');
+          const { auth } = await import('../../../../../services/firebase');
 
           const user = auth.currentUser;
 
@@ -74,7 +69,7 @@ export function ChangePasswordModal() {
 
           if (err instanceof FirebaseError) {
             const { reauthenticationToasts } = await import(
-              '../../../utils/Toasts/reauthenticationToasts'
+              '../../../../../utils/Toasts/reauthenticationToasts'
             );
 
             const errors: FormFirebaseError = {
@@ -85,7 +80,7 @@ export function ChangePasswordModal() {
 
             if (!error) {
               const { unknownErrorToast } = await import(
-                '../../../utils/Toasts/unknownErrorToast'
+                '../../../../../utils/Toasts/unknownErrorToast'
               );
 
               unknownErrorToast();
@@ -109,36 +104,9 @@ export function ChangePasswordModal() {
   );
 
   return (
-    <ModalWrapper isOpen={isOpen} onClose={onClose} modalTitle='Trocar senha'>
-      <ModalFormControl onSubmit={handleChangePassword}>
-        <Stack spacing={['8px', '10px', '12px']}>
-          <ModalInput
-            id='password'
-            label='Novo Senha'
-            placeholder='Digite sua nova senha'
-            error={errors.password}
-            register={register}
-            type='password'
-          />
-          <ModalInput
-            id='password_confirmation'
-            label='Confirme sua senha'
-            placeholder='Confirme sua nova senha'
-            error={errors.password_confirmation}
-            register={register}
-            type='password'
-          />
-        </Stack>
-        <Buttons
-          cancelButtonProps={{
-            onClick: onClose,
-          }}
-          confirmButtonProps={{
-            isLoading: isSubmitting,
-          }}
-          confirmButtonText='Trocar'
-        />
-      </ModalFormControl>
-    </ModalWrapper>
+    <ModalFormControl onSubmit={handleChangePassword}>
+      <Inputs register={register} errors={errors} />
+      <Buttons isSubmitting={isSubmitting} />
+    </ModalFormControl>
   );
 }
