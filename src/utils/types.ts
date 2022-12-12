@@ -1,13 +1,15 @@
 import { FieldError, UseFormReturn } from 'react-hook-form/dist/types';
 
-export type ConversationDocWithContactData =
-  | {
-      users: ConversationUsersId;
-      usersParticipating: [string] | ConversationUsersId;
-    }
-  | undefined;
-
 export type ConversationUsersId = [string, string];
+
+export type FullConversationDocData = {
+  users: ConversationUsersId;
+  usersParticipating: ConversationUsersId | [string];
+};
+
+export type ConversationDocWithContactData =
+  | FullConversationDocData
+  | undefined;
 
 export type ContactsResponse = {
   users: {

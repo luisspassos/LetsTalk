@@ -1,22 +1,21 @@
-import { FieldError, UseFormRegister } from 'react-hook-form';
+import { ModalInput } from 'components/Modal/ModalInput';
+import { UseFormRegister } from 'react-hook-form';
+import { InputError } from 'utils/types';
 import { AddContactFormData } from '.';
-import { ModalInput } from '../../../Modal/ModalInput';
 
 type UserInputProps = {
   register: UseFormRegister<AddContactFormData>;
-  errors: {
-    contactName?: FieldError | undefined;
-  };
+  error: InputError;
 };
 
-export function UserInput({ errors, register }: UserInputProps) {
+export function Input({ error, register }: UserInputProps) {
   return (
     <ModalInput
+      register={register}
+      error={error}
       id='contactName'
-      error={errors.contactName}
       label='Usuário'
       placeholder='Insira um usuário, exemplo: usuario#1234'
-      register={register}
       helperText='O nome de usuário com ID pode ser encontrado nas configurações ou
       clicando na foto na barra ao lado.'
     />
