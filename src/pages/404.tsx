@@ -1,8 +1,18 @@
-import { Flex, Heading, Img, useColorModeValue } from '@chakra-ui/react';
+import {
+  Flex,
+  Heading,
+  Img,
+  useColorMode,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import { BackLink } from 'components/BackLink';
 import { PageTitle } from '../components/PageTitle';
 
 export default function Custom404() {
+  const { colorMode } = useColorMode();
+
+  const src = `/images/page_not_found/${colorMode}.svg`;
+
   return (
     <>
       <PageTitle pageName='404' />
@@ -10,7 +20,7 @@ export default function Custom404() {
         <Img
           w='602px'
           h='400px'
-          src='/images/page_not_found.svg'
+          src={src}
           alt='Pagína não encontrada'
           d={{ base: 'none', xl: 'block' }}
         />
