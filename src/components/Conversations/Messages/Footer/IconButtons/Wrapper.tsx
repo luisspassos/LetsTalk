@@ -5,7 +5,7 @@ type ButtonWrapperProps = {
   children: ReactNode;
 };
 
-export function ButtonWrapper({ children }: ButtonWrapperProps) {
+export function Wrapper({ children }: ButtonWrapperProps) {
   return (
     <Center h='75px' my='-15px' alignSelf='end'>
       {children}

@@ -1,5 +1,5 @@
 import { BiImageAdd } from 'react-icons/bi';
-import { InputIconButton } from '.';
+import { IconButton } from './IconButton';
 
 export const errorToast = async () => {
   const { toast } = await import('../../../../../utils/Toasts/toast');
@@ -18,9 +18,9 @@ export function MediaUploadButton() {
   }
 
   return (
-    <InputIconButton
+    <IconButton
       onClick={handleUploadMedia}
-      ariaLabel='Enviar imagem ou vídeo'
+      aria-label='Enviar imagem ou vídeo'
       Icon={BiImageAdd}
     />
   );

@@ -1,10 +1,8 @@
-import { Box, Flex, HStack } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { Divider } from '../../../Divider';
 import { EmojiPicker } from './IconButtons/EmojiButton/EmojiPicker';
-import { EmojiButton } from './IconButtons/EmojiButton';
-import { ButtonWrapper } from './ButtonWrapper';
 import { Form } from './Form';
-import { MediaUploadButton } from './IconButtons/MediaUploadButton';
+import { IconButtons } from './IconButtons';
 
 export function Footer() {
   return (
@@ -13,12 +11,7 @@ export function Footer() {
         <EmojiPicker />
         <Divider />
         <Flex py='15px' align='end' justify='start' pos='relative'>
-          <ButtonWrapper>
-            <HStack mr='10px' spacing='5px'>
-              <EmojiButton />
-              <MediaUploadButton />
-            </HStack>
-          </ButtonWrapper>
+          <IconButtons />
           <Form />
         </Flex>
       </Box>
