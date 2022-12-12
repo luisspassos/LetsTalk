@@ -7,7 +7,7 @@ export function Avatar() {
   const [copiedUsername, setCopiedUsername] = useState(false);
 
   const { user } = useAuth();
-  const username = user?.username;
+  const username = user?.username ?? '';
 
   function handleCopyUsername(username: string) {
     setCopiedUsername(true);
@@ -39,7 +39,7 @@ export function Avatar() {
         h={['40px', '42px', '48px']}
         cursor='pointer'
         src={user?.picture}
-        onClick={() => handleCopyUsername(username ? username : '')}
+        onClick={() => handleCopyUsername(username)}
       />
     </Tooltip>
   );
