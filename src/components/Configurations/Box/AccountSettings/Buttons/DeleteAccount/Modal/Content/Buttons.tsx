@@ -1,9 +1,9 @@
+import { DangerousActionButtons } from 'components/Modal/DangerousAction/DangerousActionButtons';
+import { useAuth } from 'contexts/AuthContext';
+import { useDeleteAccountModal } from 'contexts/Modal/DeleteAccountModalContext';
 import { useEffect, useMemo, useState } from 'react';
-import { useAuth } from '../../../../../contexts/AuthContext';
-import { DangerousActionButtons } from '../../../../Modal/DangerousAction/DangerousActionButtons';
 import { UseFormReturn } from 'react-hook-form';
-import { useDeleteAccountModal } from '../../../../../contexts/Modal/DeleteAccountModalContext';
-import { IsSubmitting } from '../../../../../utils/types';
+import { IsSubmitting } from 'utils/types';
 
 export type PasswordFormData = {
   password: string;
@@ -45,7 +45,7 @@ export function Buttons({
     () => ({
       constructor: async () => {
         const { deleteUser } = await import('firebase/auth');
-        const { auth } = await import('../../../../../services/firebase');
+        const { auth } = await import('services/firebase');
         const currentUser = auth.currentUser;
 
         if (!currentUser) return;
@@ -53,12 +53,12 @@ export function Buttons({
         await deleteUser(currentUser);
 
         const { doc, deleteDoc } = await import('firebase/firestore');
-        const { db } = await import('../../../../../services/firebase');
+        const { db } = await import('services/firebase');
 
         const { ref, deleteObject } = await import('firebase/storage');
-        const { storage } = await import('../../../../../services/firebase');
+        const { storage } = await import('services/firebase');
         const { checkIfFileExistsInStorage } = await import(
-          '../../../../../utils/checkIfTheFileExistsInStorage'
+          'utils/checkIfTheFileExistsInStorage'
         );
 
         if (!user?.username) return;
@@ -89,7 +89,7 @@ export function Buttons({
 
             if (err instanceof FirebaseError) {
               const { reauthenticationToasts } = await import(
-                '../../../../../utils/Toasts/reauthenticationToasts'
+                'utils/Toasts/reauthenticationToasts'
               );
 
               const errors: FirebaseErrorWithoutForm = {
@@ -100,7 +100,7 @@ export function Buttons({
 
               if (!error) {
                 const { unknownErrorToast } = await import(
-                  '../../../../../utils/Toasts/unknownErrorToast'
+                  'utils/Toasts/unknownErrorToast'
                 );
                 unknownErrorToast();
 
@@ -140,7 +140,7 @@ export function Buttons({
 
               if (!error) {
                 const { unknownErrorToast } = await import(
-                  '../../../../../utils/Toasts/unknownErrorToast'
+                  'utils/Toasts/unknownErrorToast'
                 );
                 unknownErrorToast();
               } else {

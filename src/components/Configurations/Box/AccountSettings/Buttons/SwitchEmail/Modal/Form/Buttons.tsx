@@ -1,6 +1,6 @@
-import { useChangeEmailModal } from '../../../../../contexts/Modal/ChangeEmailModalContext';
-import { IsSubmitting } from '../../../../../utils/types';
-import { Buttons as ButtonsComponent } from '../../../../Modal/Button/Buttons';
+import { Buttons as ButtonsComponent } from 'components/Modal/Button/Buttons';
+import { useChangeEmailModal } from 'contexts/Modal/ChangeEmailModalContext';
+import { IsSubmitting } from 'utils/types';
 
 type ButtonsProps = {
   isSubmitting: IsSubmitting;

@@ -1,7 +1,7 @@
 import { Stack } from '@chakra-ui/react';
+import { DangerousActionIcon } from 'components/Modal/DangerousAction/DangerousActionIcon';
+import { DangerousActionModalTitle } from 'components/Modal/DangerousAction/DangerousActionModalTitle';
 import { RiDeleteBin2Line } from 'react-icons/ri';
-import { DangerousActionIcon } from '../../../Modal/DangerousAction/DangerousActionIcon';
-import { DangerousActionModalTitle } from '../../../Modal/DangerousAction/DangerousActionModalTitle';
 
 export function Header() {
   return (

@@ -1,3 +1,4 @@
+import { Button } from 'components/Configurations/Box/Button';
 import { HiOutlineMail } from 'react-icons/hi';
 import { useChangeEmailModal } from '../../../../../../contexts/Modal/ChangeEmailModalContext';
 import { ChangeEmailModal } from './Modal';

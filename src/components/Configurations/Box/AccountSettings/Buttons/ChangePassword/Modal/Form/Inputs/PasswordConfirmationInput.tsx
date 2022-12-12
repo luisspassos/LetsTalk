@@ -1,7 +1,7 @@
 import { ChangePasswordFormData } from '..';
-import { InputError } from '../../../../../../utils/types';
-import { ModalInput } from '../../../../../Modal/ModalInput';
 import { UseFormRegister } from 'react-hook-form';
+import { ModalInput } from 'components/Modal/ModalInput';
+import { InputError } from 'utils/types';
 
 type PasswordConfirmationInputProps = {
   error: InputError;

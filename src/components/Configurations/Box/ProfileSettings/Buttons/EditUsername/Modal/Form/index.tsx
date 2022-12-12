@@ -1,14 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { refreshToken, useAuth } from '../../../../../contexts/AuthContext';
-import { useRenameUsernameModal } from '../../../../../contexts/Modal/RenameUsernameModalContext';
-import { useRenamingName } from '../../../../../contexts/RenamingNameContext';
-import { regexs } from '../../../../../utils/regexs';
-import { ModalFormControl } from '../../../../Modal/ModalFormControl';
+import { refreshToken, useAuth } from 'contexts/AuthContext';
+import { useRenameUsernameModal } from 'contexts/Modal/RenameUsernameModalContext';
+import { useRenamingName } from 'contexts/RenamingNameContext';
+import { regexs } from 'utils/regexs';
 import { Buttons } from './Buttons';
 import { Input } from './Input';
 import * as yup from 'yup';
+import { ModalFormControl } from 'components/Modal/ModalFormControl';
 
 export type RenameUsernameFormData = {
   name: string;
@@ -43,7 +43,7 @@ export function Form() {
         try {
           setRenamingName(true);
 
-          const { auth } = await import('../../../../../services/firebase');
+          const { auth } = await import('services/firebase');
 
           const currentUser = auth.currentUser;
 
@@ -51,7 +51,7 @@ export function Form() {
 
           const { setDoc, doc, deleteDoc } = await import('firebase/firestore');
           const { updateProfile } = await import('firebase/auth');
-          const { db } = await import('../../../../../services/firebase');
+          const { db } = await import('services/firebase');
 
           if (!user) return;
 
@@ -78,7 +78,7 @@ export function Form() {
           resetForm();
         } catch {
           const { unknownErrorToast } = await import(
-            '../../../../../utils/Toasts/unknownErrorToast'
+            'utils/Toasts/unknownErrorToast'
           );
 
           unknownErrorToast();

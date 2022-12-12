@@ -1,6 +1,6 @@
-import { useRenameUsernameModal } from '../../../../../contexts/Modal/RenameUsernameModalContext';
-import { IsSubmitting } from '../../../../../utils/types';
-import { Buttons as ButtonsComponent } from '../../../../Modal/Button/Buttons';
+import { Buttons as ButtonsComponent } from 'components/Modal/Button/Buttons';
+import { useRenameUsernameModal } from 'contexts/Modal/RenameUsernameModalContext';
+import { IsSubmitting } from 'utils/types';
 
 type ButtonsProps = {
   isSubmitting: IsSubmitting;

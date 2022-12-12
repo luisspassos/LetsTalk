@@ -1,9 +1,9 @@
 import { Flex } from '@chakra-ui/react';
-import { ModalWrapper } from '../../../Modal/ModalWrapper';
 import { WarningText } from './WarningText';
-import { useDeleteAccountModal } from '../../../../contexts/Modal/DeleteAccountModalContext';
 import { Content } from './Content';
 import { Header } from './Header';
+import { ModalWrapper } from 'components/Modal/ModalWrapper';
+import { useDeleteAccountModal } from 'contexts/Modal/DeleteAccountModalContext';
 
 export function Modal() {
   const { isOpen, onClose } = useDeleteAccountModal();

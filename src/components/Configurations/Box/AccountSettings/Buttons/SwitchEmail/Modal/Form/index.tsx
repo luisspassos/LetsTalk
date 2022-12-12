@@ -1,11 +1,11 @@
-import { ModalFormControl } from '../../../../Modal/ModalFormControl';
 import { Buttons } from './Buttons';
 import { EmailInput } from './EmailInput';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../../../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
+import { ModalFormControl } from 'components/Modal/ModalFormControl';
 
 export type ChangeEmailFormData = {
   email: string;
@@ -29,7 +29,7 @@ const ChangeEmailFormSchema = yup.object().shape({
 });
 
 async function getToast() {
-  const { toast } = await import('../../../../../utils/Toasts/toast');
+  const { toast } = await import('utils/Toasts/toast');
 
   return { toast };
 }
@@ -80,7 +80,7 @@ export function Form() {
           const { updateEmail, sendEmailVerification } = await import(
             'firebase/auth'
           );
-          const { auth } = await import('../../../../../services/firebase');
+          const { auth } = await import('services/firebase');
 
           const user = auth.currentUser;
 
@@ -99,7 +99,7 @@ export function Form() {
 
           if (err instanceof FirebaseError) {
             const { reauthenticationToasts } = await import(
-              '../../../../../utils/Toasts/reauthenticationToasts'
+              'utils/Toasts/reauthenticationToasts'
             );
 
             const errors: FormFirebaseError = {
@@ -114,7 +114,7 @@ export function Form() {
 
             if (!error) {
               const { unknownErrorToast } = await import(
-                '../../../../../utils/Toasts/unknownErrorToast'
+                'utils/Toasts/unknownErrorToast'
               );
 
               unknownErrorToast();

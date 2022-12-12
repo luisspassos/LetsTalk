@@ -1,5 +1,7 @@
+import { Button } from 'components/Configurations/Box/Button';
 import { FaPencilAlt } from 'react-icons/fa';
 import { useRenameUsernameModal } from '../../../../../../contexts/Modal/RenameUsernameModalContext';
+import { Modal } from './Modal';
 
 export function EditUsername() {
   const { onOpen } = useRenameUsernameModal();
@@ -11,7 +13,7 @@ export function EditUsername() {
         text='Editar nome de perfil'
         icon={FaPencilAlt}
       />
-      <RenameUsernameModal />
+      <Modal />
     </>
   );
 }

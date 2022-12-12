@@ -1,5 +1,5 @@
-import { useRenameUsernameModal } from '../../../../contexts/Modal/RenameUsernameModalContext';
-import { ModalWrapper } from '../../../Modal/ModalWrapper';
+import { ModalWrapper } from 'components/Modal/ModalWrapper';
+import { useRenameUsernameModal } from 'contexts/Modal/RenameUsernameModalContext';
 import { Form } from './Form';
 
 export function Modal() {

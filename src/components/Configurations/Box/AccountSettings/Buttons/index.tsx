@@ -1,20 +1,23 @@
-import { ButtonStack } from '../../../Buttons/ButtonStack';
-import { ChangePasswordButton } from './ChangePassword';
-import { DeleteAccountButton } from './DeleteAccount';
-import { ExitButton } from './Exit';
-import { SwitchEmailButton } from './SwitchEmail';
+import { useAuth } from 'contexts/AuthContext';
+import { Stack } from '../../Button/Stack';
+import { ChangePassword } from './ChangePassword';
+import { DeleteAccount } from './DeleteAccount';
+import { Exit } from './Exit';
+import { SwitchEmail } from './SwitchEmail';
 
 export function Buttons() {
+  const { isLoggedInWithGoogle } = useAuth();
+
   return (
-    <ButtonStack>
+    <Stack>
       {!isLoggedInWithGoogle && (
         <>
-          <SwitchEmailButton />
-          <ChangePasswordButton />
+          <SwitchEmail />
+          <ChangePassword />
         </>
       )}
-      <DeleteAccountButton />
-      <ExitButton />
-    </ButtonStack>
+      <DeleteAccount />
+      <Exit />
+    </Stack>
   );
 }

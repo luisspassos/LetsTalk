@@ -1,5 +1,5 @@
-import { ModalWrapper } from '../../../Modal/ModalWrapper';
-import { useChangeEmailModal } from '../../../../contexts/Modal/ChangeEmailModalContext';
+import { ModalWrapper } from 'components/Modal/ModalWrapper';
+import { useChangeEmailModal } from 'contexts/Modal/ChangeEmailModalContext';
 import { Form } from './Form';
 
 export function ChangeEmailModal() {

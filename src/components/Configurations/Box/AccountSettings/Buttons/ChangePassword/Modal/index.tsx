@@ -1,5 +1,5 @@
-import { ModalWrapper } from '../../../Modal/ModalWrapper';
-import { useChangePasswordModal } from '../../../../contexts/Modal/ChangePasswordModalContext';
+import { ModalWrapper } from 'components/Modal/ModalWrapper';
+import { useChangePasswordModal } from 'contexts/Modal/ChangePasswordModalContext';
 import { Form } from './Form';
 
 export function Modal() {

@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useAuth } from '../../../../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 import { Buttons } from './Buttons';
 import { PasswordInput } from './PasswordInput';
 
