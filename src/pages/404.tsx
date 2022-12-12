@@ -1,5 +1,5 @@
 import { Flex, Heading, Img, useColorModeValue } from '@chakra-ui/react';
-import { BackLink } from '../components/BackLink';
+import { BackLink } from 'components/BackLink';
 import { PageTitle } from '../components/PageTitle';
 
 export default function Custom404() {

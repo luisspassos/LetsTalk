@@ -9,7 +9,7 @@ import { Conversations } from '../components/Conversations';
 import { Sidebar } from '../components/Sidebar';
 import { UserType, useAuth } from '../contexts/AuthContext';
 import {
-  ConversationsType,
+  ConversationType,
   useConversations,
 } from '../contexts/ConversationsContext';
 import { useDeleteAccountModal } from '../contexts/Modal/DeleteAccountModalContext';
@@ -22,7 +22,7 @@ import { getConversations } from '../utils/getConversations';
 
 type ConversationsPageProps = {
   user: UserType;
-  conversations: ConversationsType;
+  conversations: ConversationType[];
 };
 
 function createLocationchangeEvent() {

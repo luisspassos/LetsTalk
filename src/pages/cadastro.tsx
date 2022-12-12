@@ -1,4 +1,3 @@
-import { Header } from '../components/Header';
 import {
   Stack,
   Heading,
@@ -22,6 +21,7 @@ import { redirectToConversationsPageOrNot } from '../utils/redirectToConversatio
 import { PageTitle } from '../components/PageTitle';
 import { regexs } from '../utils/regexs';
 import { LoginLink } from '../components/Auth/LoginLink';
+import { Header } from 'components/Form/Header';
 
 type FormFirebaseError = Record<
   string,

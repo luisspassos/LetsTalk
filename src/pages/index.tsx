@@ -1,16 +1,13 @@
 import { Stack } from '@chakra-ui/react';
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { DividerOr } from '../components/Form/DividerOr';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
-import { LoginButtonWithGoogle } from '../components/Form/LoginButtonWithGoogle';
 import { Button } from '../components/Form/Button';
 import { RegistrationLink } from '../components/Form/RegistrationLink';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useAuth } from '../contexts/AuthContext';
-import { ManEnteringImg } from '../components/ManEnteringImg';
 import { useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
@@ -20,8 +17,11 @@ import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
 import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
-import { Header } from '../components/Header';
-import { ForgotMyPasswordLink } from '../components/Form/ForgotMyPasswordLink';
+import { Header } from 'components/Form/Header';
+import { DividerOr } from 'components/Form/Login/DividerOr';
+import { ForgotMyPasswordLink } from 'components/Form/Login/ForgotMyPasswordLink';
+import { LoginButtonWithGoogle } from 'components/Form/Login/LoginButtonWithGoogle';
+import { ManEnteringImg } from 'components/Form/Login/ManEnteringImg';
 
 type SignInFormData = {
   email: string;

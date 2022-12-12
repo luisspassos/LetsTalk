@@ -1,10 +1,10 @@
 import { Button, Icon, Spinner, useColorModeValue } from '@chakra-ui/react';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 
-function LoginButtonWithGoogleComponent() {
+export function LoginButtonWithGoogle() {
   const [isLoading, setIsLoading] = useState(false);
 
   function clearIsLoadingState() {
@@ -25,7 +25,7 @@ function LoginButtonWithGoogleComponent() {
       const { GoogleAuthProvider, signInWithPopup } = await import(
         'firebase/auth'
       );
-      const { auth } = await import('../../services/firebase');
+      const { auth } = await import('services/firebase');
       const googleProvider = new GoogleAuthProvider();
 
       const result = await signInWithPopup(auth, googleProvider);
@@ -50,7 +50,7 @@ function LoginButtonWithGoogleComponent() {
       if (error.includes('popup-closed-by-user')) return;
 
       const { unknownErrorToast } = await import(
-        '../../utils/Toasts/unknownErrorToast'
+        'utils/Toasts/unknownErrorToast'
       );
       unknownErrorToast();
     } finally {
@@ -92,5 +92,3 @@ function LoginButtonWithGoogleComponent() {
     </Button>
   );
 }
-
-export const LoginButtonWithGoogle = memo(LoginButtonWithGoogleComponent);

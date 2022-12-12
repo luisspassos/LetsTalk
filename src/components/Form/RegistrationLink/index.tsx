@@ -1,4 +1,5 @@
-import { Link, Text, useColorModeValue } from '@chakra-ui/react';
+import { Text, useColorModeValue } from '@chakra-ui/react';
+import { Link } from './Link';
 
 export function RegistrationLink() {
   return (
