@@ -1,7 +1,7 @@
 import { ButtonProps, useColorModeValue } from '@chakra-ui/react';
 import { Buttons } from '../Button/Buttons';
 
-type DangerousActionButtonsProps = {
+export type DangerousActionButtonsProps = {
   confirmButtonText: string;
   confirmButtonProps?: ButtonProps;
   cancelButtonProps?: ButtonProps;
