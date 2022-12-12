@@ -2,10 +2,10 @@ import { MouseEvent as ReactMouseEvent, useState } from 'react';
 import {
   createRecentCategory,
   useCategories,
-} from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
-import { useEmojiStyles } from '../../../../../../../../contexts/EmojiPicker/EmojiStylesContext';
-import { useMessageInputRef } from '../../../../../../../../contexts/MessageInputRef';
-import { useSetMessageInputSize } from '../../../../../../../../hooks/useSetMessageInputSize';
+} from 'contexts/EmojiPicker/CategoriesContext';
+import { useEmojiStyles } from 'contexts/EmojiPicker/EmojiStylesContext';
+import { useMessageInputRef } from 'contexts/MessageInputRef';
+import { useSetMessageInputSize } from 'hooks/useSetMessageInputSize';
 
 type EmojiProps = {
   children: string;

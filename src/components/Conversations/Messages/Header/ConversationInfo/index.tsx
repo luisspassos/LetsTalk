@@ -1,8 +1,8 @@
 import { Box, Popover, PopoverTrigger } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useConversationPopover } from '../../../../../contexts/ConversationPopoverContext';
-import { Tooltip } from '../../../../Tooltip';
 import { Button } from './Button';
+import { Tooltip } from './Button/Tooltip';
 import { Content } from './Popover';
 
 export function ConversationInfoButton() {
@@ -17,18 +17,12 @@ export function ConversationInfoButton() {
       isOpen={isOpen}
       onClose={onClose}
     >
-      <Tooltip
-        ariaLabel='Informações da conversa'
-        label='Informações da conversa'
-        placement='bottom-start'
-      >
-        <Box display='inline-block'>
-          <PopoverTrigger>
-            <Box display='inline-block'>
-              <Button />
-            </Box>
-          </PopoverTrigger>
-        </Box>
+      <Tooltip>
+        <PopoverTrigger>
+          <Box display='inline-block'>
+            <Button />
+          </Box>
+        </PopoverTrigger>
       </Tooltip>
 
       <Content ref={popoverInitialFocusRef} />

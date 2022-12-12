@@ -1,7 +1,7 @@
-import { useCategories } from '../../../../../../../../contexts/EmojiPicker/CategoriesContext';
-import { useEmojiPickerScroll } from '../../../../../../../../contexts/EmojiPicker/EmojiPickerScrollContext';
-import { usePositionSelectedFromEmojiPickerCategories } from '../../../../../../../../contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
-import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
+import { useCategories } from 'contexts/EmojiPicker/CategoriesContext';
+import { useEmojiPickerScroll } from 'contexts/EmojiPicker/EmojiPickerScrollContext';
+import { usePositionSelectedFromEmojiPickerCategories } from 'contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
+import { useSearchedEmojis } from 'contexts/EmojiPicker/SearchedEmojiContext';
 import { transitionDurationInSeconds } from './Button';
 
 export function SelectedBar() {

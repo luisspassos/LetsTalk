@@ -1,6 +1,6 @@
 import { Icon, IconButton } from '@chakra-ui/react';
 import { IoEllipsisVerticalSharp } from 'react-icons/io5';
-import { useConversationPopover } from '../../../../../contexts/ConversationPopoverContext';
+import { useConversationPopover } from 'contexts/ConversationPopoverContext';
 
 export function Button() {
   const { onOpen } = useConversationPopover();

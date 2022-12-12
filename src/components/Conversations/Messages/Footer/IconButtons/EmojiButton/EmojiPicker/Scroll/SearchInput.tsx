@@ -1,5 +1,5 @@
 import { Input, useColorModeValue } from '@chakra-ui/react';
-import { useSearchedEmojis } from '../../../../../../../../contexts/EmojiPicker/SearchedEmojiContext';
+import { useSearchedEmojis } from 'contexts/EmojiPicker/SearchedEmojiContext';
 
 export function SearchInput() {
   const {
