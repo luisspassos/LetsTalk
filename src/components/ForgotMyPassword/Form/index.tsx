@@ -1,4 +1,39 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { FormWrapper } from 'components/Form/FormWrapper';
+import { useAuth } from 'contexts/AuthContext';
+import { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'utils/Toasts/toast';
+import * as yup from 'yup';
+import { Button } from './Button';
+import { Input } from './Input';
+
+type EmailFormData = {
+  email: string;
+};
+
+type FormFirebaseError = Record<
+  string,
+  {
+    type: keyof EmailFormData;
+    message: string;
+  }
+>;
+
+const emailFormSchema = yup.object().shape({
+  email: yup
+    .string()
+    .trim()
+    .required('E-mail obrigatório')
+    .email('E-mail inválido'),
+});
+
+export const successToastWhenSendingToEmailToChangePassword = () =>
+  toast({
+    title: 'Email enviado',
+    description: 'Cheque seu email para redefinir sua senha',
+    status: 'success',
+  });
 
 export function Form() {
   const {
@@ -38,7 +73,7 @@ export function Form() {
 
             if (!error) {
               const { unknownErrorToast } = await import(
-                '../utils/Toasts/unknownErrorToast'
+                'utils/Toasts/unknownErrorToast'
               );
               unknownErrorToast();
             } else {
@@ -52,5 +87,10 @@ export function Form() {
     [handleSubmit, sendEmailToRecoverPassword, setError]
   );
 
-  return <FormWrapper onSubmit={handleSendEmail}></FormWrapper>;
+  return (
+    <FormWrapper onSubmit={handleSendEmail}>
+      <Input error={errors.email} register={register} />
+      <Button isSubmitting={isSubmitting} />
+    </FormWrapper>
+  );
 }
