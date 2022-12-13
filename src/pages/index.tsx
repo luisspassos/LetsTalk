@@ -8,8 +8,8 @@ import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
 import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
-import { ManEnteringImg } from 'components/Login/ManEnteringImg';
-import { Form } from 'components/Login/Form';
+import { ManEnteringImg } from 'components/LoginPage/ManEnteringImg';
+import { Form } from 'components/LoginPage/Form';
 
 type RouterQuery = {
   error: string;

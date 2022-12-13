@@ -1,4 +1,4 @@
-import { Button } from 'components/Configurations/Box/Button';
+import { Button } from 'components/ConfigurationsPage/Box/Button';
 import { useCallback, useState } from 'react';
 import { RiImageEditFill } from 'react-icons/ri';
 import { useAuth } from '../../../../../contexts/AuthContext';

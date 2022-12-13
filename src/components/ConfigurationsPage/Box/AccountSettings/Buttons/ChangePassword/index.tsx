@@ -1,4 +1,4 @@
-import { Button } from 'components/Configurations/Box/Button';
+import { Button } from 'components/ConfigurationsPage/Box/Button';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { useChangePasswordModal } from '../../../../../../contexts/Modal/ChangePasswordModalContext';
 import { Modal } from './Modal';

@@ -1,3 +1,6 @@
+import { CategoryTitle } from 'components/ConversationsPage/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/CategoryTitle';
+import { Emoji } from 'components/ConversationsPage/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/Emoji';
+import { SearchInput } from 'components/ConversationsPage/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
 import {
   createContext,
   Dispatch,
@@ -8,9 +11,7 @@ import {
   useState,
 } from 'react';
 import { useVirtual } from 'react-virtual';
-import { SearchInput } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
-import { CategoryTitle } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/CategoryTitle';
-import { Emoji } from '../../components/Conversations/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/Emoji';
+
 import { useCategories, Emoji as EmojiType } from './CategoriesContext';
 import { useEmojiStyles } from './EmojiStylesContext';
 import { useSearchedEmojis } from './SearchedEmojiContext';

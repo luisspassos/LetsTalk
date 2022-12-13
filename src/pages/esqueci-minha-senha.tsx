@@ -4,8 +4,8 @@ import { Box } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
-import { Title } from 'components/ForgotMyPassword/Form/Title';
-import { Form } from 'components/ForgotMyPassword/Form';
+import { Title } from 'components/ForgotMyPasswordPage/Form/Title';
+import { Form } from 'components/ForgotMyPasswordPage/Form';
 
 export default function IForgotMyPassword() {
   return (

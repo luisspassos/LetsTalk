@@ -1,4 +1,4 @@
-import { Button } from 'components/Configurations/Box/Button';
+import { Button } from 'components/ConfigurationsPage/Box/Button';
 import { FaPencilAlt } from 'react-icons/fa';
 import { useRenameUsernameModal } from '../../../../../../contexts/Modal/RenameUsernameModalContext';
 import { Modal } from './Modal';

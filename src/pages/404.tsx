@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react';
-import { Description } from 'components/404/Description';
-import { Img } from 'components/404/Img';
+import { Description } from 'components/404Page/Description';
+import { Img } from 'components/404Page/Img';
 import { BackLink } from 'components/BackLink';
 import { PageTitle } from '../components/PageTitle';
 

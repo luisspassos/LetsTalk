@@ -7,12 +7,13 @@ type FormTitleProps = {
 export function FormTitle({ text, ...rest }: FormTitleProps) {
   return (
     <Heading
-      {...rest}
       fontSize={['1.5rem', '1.6rem', '1.8rem']}
       fontWeight={600}
+      mb='1rem'
       color={useColorModeValue('blue.900', 'gray.50')}
       as='h1'
       textAlign='center'
+      {...rest}
     >
       {text}
     </Heading>

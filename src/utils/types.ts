@@ -35,3 +35,8 @@ export type IsSubmitting = UseFormReturn['formState']['isSubmitting'];
 
 export type Errors<T extends FieldValues> =
   UseFormReturn<T>['formState']['errors'];
+
+export type InputsProps<T extends FieldValues> = {
+  register: InputProps['register'];
+  errors: Errors<T>;
+};

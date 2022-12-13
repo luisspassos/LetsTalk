@@ -4,8 +4,8 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import { useEffect, useState } from 'react';
-import { Configurations } from '../components/Configurations';
-import { Conversations } from '../components/Conversations';
+import { Configurations } from '../components/ConfigurationsPage';
+import { Conversations } from '../components/ConversationsPage';
 import { Sidebar } from '../components/Sidebar';
 import { UserType, useAuth } from '../contexts/AuthContext';
 import {

@@ -4,9 +4,9 @@ import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrappe
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
-import { Form } from 'components/Registration/Form';
-import { Description } from 'components/Registration/Description';
-import { LoginLink } from 'components/Registration/LoginLink';
+import { Form } from 'components/RegistrationPage/Form';
+import { Description } from 'components/RegistrationPage/Description';
+import { LoginLink } from 'components/RegistrationPage/LoginLink';
 
 export default function Register() {
   return (
