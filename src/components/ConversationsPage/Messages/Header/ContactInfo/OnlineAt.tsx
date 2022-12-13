@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import { Text, useColorModeValue } from '@chakra-ui/react';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { useConversations } from '../../../../../contexts/ConversationsContext';
@@ -43,7 +43,11 @@ export function OnlineAt() {
   }, [currentConversation.data?.username]);
 
   return (
-    <Text as='time' fontSize={['12px', '13px', '14px']} opacity='80%'>
+    <Text
+      as='time'
+      fontSize={['12px', '13px', '14px']}
+      color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
+    >
       {onlineAt}
     </Text>
   );

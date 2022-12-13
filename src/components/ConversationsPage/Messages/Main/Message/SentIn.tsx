@@ -8,8 +8,7 @@ export function SentIn({ text }: SentInProps) {
   return (
     <Text
       fontSize={['13px', '14px', '15px']}
-      color={useColorModeValue('gray.900', 'gray.50')}
-      opacity='80%'
+      color={useColorModeValue('blackAlpha.800', 'whiteAlpha.700')}
       as='time'
     >
       {text}
