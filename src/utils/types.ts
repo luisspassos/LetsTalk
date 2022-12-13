@@ -1,5 +1,9 @@
 import { UseFormRegister } from 'react-hook-form';
-import { FieldError, UseFormReturn } from 'react-hook-form/dist/types';
+import {
+  FieldError,
+  UseFormReturn,
+  FieldValues,
+} from 'react-hook-form/dist/types';
 
 export type ConversationUsersId = [string, string];
 
@@ -28,3 +32,6 @@ export type InputProps = {
 };
 
 export type IsSubmitting = UseFormReturn['formState']['isSubmitting'];
+
+export type Errors<T extends FieldValues> =
+  UseFormReturn<T>['formState']['errors'];

@@ -2,13 +2,12 @@ import { Stack } from '@chakra-ui/react';
 import { ChangePasswordFormData } from '..';
 import { PasswordConfirmationInput } from './PasswordConfirmationInput';
 import { PasswordInput } from './PasswordInput';
-import { UseFormRegister, UseFormReturn } from 'react-hook-form';
-
-type Errors = UseFormReturn<ChangePasswordFormData>['formState']['errors'];
+import { UseFormRegister } from 'react-hook-form';
+import { Errors } from 'utils/types';
 
 type InputsProps = {
   register: UseFormRegister<ChangePasswordFormData>;
-  errors: Errors;
+  errors: Errors<ChangePasswordFormData>;
 };
 
 export function Inputs({ register, errors }: InputsProps) {

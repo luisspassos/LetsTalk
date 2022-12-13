@@ -4,7 +4,6 @@ import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrappe
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
-import { Header } from 'components/Form/Header';
 import { Form } from 'components/Registration/Form';
 import { Description } from 'components/Registration/Description';
 import { LoginLink } from 'components/Registration/LoginLink';
@@ -14,7 +13,6 @@ export default function Register() {
     <>
       <PageTitle pageName='Cadastro' />
       <AuthPageWrapper>
-        <Header />
         <AuthContentPageWrapper gap='150px'>
           <Stack
             color={useColorModeValue('blue.900', 'gray.50')}

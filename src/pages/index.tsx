@@ -1,14 +1,5 @@
-import { Stack } from '@chakra-ui/react';
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { FormWrapper } from '../components/Form/FormWrapper';
-import { Input } from '../components/Form/Input';
-import { Button } from '../components/Form/Button';
-import { RegistrationLink } from '../components/Form/RegistrationLink';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useAuth } from '../contexts/AuthContext';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
 import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
@@ -17,29 +8,14 @@ import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
 import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
-import { Header } from 'components/Form/Header';
-import { DividerOr } from 'components/Form/Login/DividerOr';
-import { ForgotMyPasswordLink } from 'components/Form/Login/ForgotMyPasswordLink';
-import { LoginButtonWithGoogle } from 'components/Form/Login/LoginButtonWithGoogle';
-import { ManEnteringImg } from 'components/Form/Login/ManEnteringImg';
+import { ManEnteringImg } from 'components/Login/ManEnteringImg';
+import { Form } from 'components/Login/Form';
 
-type SignInFormData = {
-  email: string;
-  password: string;
-};
-
-type FormFirebaseError = Record<
-  string,
-  {
-    type: 'email' | 'password';
-    message: string;
-  }
->;
-
-type LoginProps = {
-  actionCode: string;
+type RouterQuery = {
+  error: string;
+  success: string;
+  oobCode: string;
   mode: string;
-  colorMode: string;
 };
 
 export const toasts = {
@@ -55,12 +31,6 @@ export const toasts = {
       toast({
         status: 'success',
         title: 'Email verificado com sucesso',
-      }),
-    warning: () =>
-      toast({
-        status: 'warning',
-        title: 'Seu email não foi verificado!',
-        description: 'Enviamos um email de verificação para você.',
       }),
   },
   passwordReset: {
@@ -96,171 +66,76 @@ export const toasts = {
   },
 };
 
-const signInFormSchema = yup.object().shape({
-  email: yup
-    .string()
-    .trim()
-    .required('E-mail obrigatório')
-    .email('E-mail inválido'),
-  password: yup.string().required('Senha obrigatória'),
-});
-
-const Login = ({ actionCode, mode }: LoginProps) => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<SignInFormData>({
-    resolver: yupResolver(signInFormSchema),
-  });
-
+const Login = () => {
   const router = useRouter();
-
-  const { signInWithEmailAndPassword } = useAuth();
 
   const {
     error: errorParam,
     success: successParam,
-    mode: modeParam,
-  } = router.query;
+    mode: action,
+    oobCode: actionCode,
+  } = router.query as RouterQuery;
 
   useEffect(() => {
-    if (errorParam || successParam || modeParam) router.replace('/');
-  }, [errorParam, router, successParam, modeParam]);
-
-  // verify email
-  useEffect(() => {
-    if (mode === 'verifyEmail') {
-      (async () => {
-        try {
-          await applyActionCode(auth, actionCode);
-          toasts.emailVerification.success();
-        } catch (err) {
-          toasts.emailVerification.error();
-        }
-      })();
+    function clearUrl() {
+      if (errorParam || successParam || action) router.replace('/');
     }
-  }, [mode, actionCode]);
 
-  // recover email
+    clearUrl();
+  }, [action, errorParam, router, successParam]);
+
   useEffect(() => {
-    if (mode === 'recoverEmail') {
-      (async () => {
-        const { checkActionCode } = await import('firebase/auth');
-
-        try {
-          await checkActionCode(auth, actionCode);
-          await applyActionCode(auth, actionCode);
-          toasts.recoverEmail.success();
-        } catch {
-          toasts.recoverEmail.error();
-        }
-      })();
-    }
-  }, [mode, actionCode]);
-
-  // errors toasts
-  useEffect(() => {
-    if (errorParam === 'passwordreset') {
-      toasts.passwordReset.error();
-    }
-  }, [errorParam]);
-
-  // successes toasts
-  useEffect(() => {
-    if (successParam === 'passwordreset') {
-      toasts.passwordReset.success();
-    }
-  }, [successParam]);
-
-  const handleSignIn = useMemo(
-    () =>
-      handleSubmit(async (data) => {
-        try {
-          const loginResult = await signInWithEmailAndPassword(data);
-
-          const { user } = loginResult;
-
-          if (!user.emailVerified) {
-            const { sendEmailVerification } = await import('firebase/auth');
-
-            if (auth.currentUser) await sendEmailVerification(auth.currentUser);
-            toasts.emailVerification.warning();
-            return;
+    function handleActions() {
+      if (action === 'verifyEmail') {
+        (async () => {
+          try {
+            await applyActionCode(auth, actionCode);
+            toasts.emailVerification.success();
+          } catch (err) {
+            toasts.emailVerification.error();
           }
+        })();
+      }
 
-          await router.push('/conversas');
-        } catch (err) {
-          const { FirebaseError } = await import('firebase/app');
+      if (action === 'recoverEmail') {
+        (async () => {
+          const { checkActionCode } = await import('firebase/auth');
 
-          if (err instanceof FirebaseError) {
-            const errors: FormFirebaseError = {
-              'auth/user-not-found': {
-                type: 'email',
-                message: 'Este usuário não existe',
-              },
-              'auth/wrong-password': {
-                type: 'password',
-                message: 'Senha incorreta',
-              },
-            };
-
-            const error = errors[err.code];
-
-            if (!error) {
-              const { unknownErrorToast } = await import(
-                '../utils/Toasts/unknownErrorToast'
-              );
-              unknownErrorToast();
-            } else {
-              setError(error.type, {
-                message: error.message,
-              });
-            }
+          try {
+            await checkActionCode(auth, actionCode);
+            await applyActionCode(auth, actionCode);
+            toasts.recoverEmail.success();
+          } catch {
+            toasts.recoverEmail.error();
           }
-        }
-      }),
-    [handleSubmit, setError, signInWithEmailAndPassword, router]
-  );
+        })();
+      }
+    }
+
+    handleActions();
+  }, [action, actionCode, errorParam, router, successParam]);
+
+  useEffect(() => {
+    function handleStatusParams() {
+      if (errorParam === 'passwordreset') {
+        toasts.passwordReset.error();
+      }
+
+      if (successParam === 'passwordreset') {
+        toasts.passwordReset.success();
+      }
+    }
+
+    handleStatusParams();
+  }, [errorParam, successParam]);
 
   return (
     <>
       <PageTitle pageName='Login' />
       <AuthPageWrapper>
-        <Header />
         <AuthContentPageWrapper gap='90px'>
           <ManEnteringImg />
-          <FormWrapper onSubmit={handleSignIn}>
-            <LoginButtonWithGoogle />
-            <DividerOr />
-            <Stack spacing={2}>
-              <Input
-                inputProps={{
-                  type: 'email',
-                  placeholder: 'Email...',
-                  ...register('email'),
-                }}
-                id='email'
-                label='Email'
-                error={errors.email}
-              />
-              <Input
-                inputProps={{
-                  placeholder: 'Senha...',
-                  type: 'password',
-                  ...register('password'),
-                }}
-                id='password'
-                label='Senha'
-                error={errors.password}
-              />
-            </Stack>
-            <ForgotMyPasswordLink />
-            <Button isLoading={isSubmitting} type='submit' text='ENTRAR' />
-
-            <RegistrationLink />
-          </FormWrapper>
+          <Form />
         </AuthContentPageWrapper>
       </AuthPageWrapper>
     </>
@@ -270,29 +145,32 @@ const Login = ({ actionCode, mode }: LoginProps) => {
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const { mode, oobCode } = ctx.query;
+  async function handleRedirection() {
+    const { mode: action, oobCode } = ctx.query;
 
-  const redirectionToConversationsOrNot =
-    await redirectToConversationsPageOrNot(ctx);
+    const redirectionToConversationsOrNot =
+      await redirectToConversationsPageOrNot(ctx);
 
-  if (redirectionToConversationsOrNot.redirect) {
-    return redirectionToConversationsOrNot;
+    if (redirectionToConversationsOrNot.redirect) {
+      return redirectionToConversationsOrNot;
+    }
+
+    if (action === 'resetPassword') {
+      return {
+        redirect: {
+          destination: `/trocar-senha/?oobCode=${oobCode}`,
+          permanent: false,
+        },
+      };
+    }
   }
 
-  if (mode === 'resetPassword') {
-    return {
-      redirect: {
-        destination: `/trocar-senha/?oobCode=${oobCode}`,
-        permanent: false,
-      },
-    };
-  }
+  const redirection = await handleRedirection();
+
+  if (redirection) return redirection;
 
   return {
-    props: {
-      mode: mode ?? null,
-      actionCode: oobCode ?? null,
-    },
+    props: {},
   };
 };
 

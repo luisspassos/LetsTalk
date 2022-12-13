@@ -1,4 +1,4 @@
-import { RegistrationLink } from '../../../components/Form/RegistrationLink';
+import { RegistrationLink } from '../../../components/Login/Form/RegistrationLink';
 import { render, screen } from '@testing-library/react';
 
 describe('RegistrationLink component', () => {
