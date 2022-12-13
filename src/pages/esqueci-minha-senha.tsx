@@ -1,19 +1,15 @@
-import { useMemo } from 'react';
 import { BackLink } from '../components/BackLink';
 import { Button } from '../components/Form/Button';
 import { FormWrapper } from '../components/Form/FormWrapper';
 import { Input } from '../components/Form/Input';
-import { FormTitle } from '../components/Form/FormTitle';
 import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useAuth } from '../contexts/AuthContext';
 import { CenterForm } from '../components/Form/CenterForm';
 import { toast } from '../utils/Toasts/toast';
 import { Box } from '@chakra-ui/react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
+import { Title } from 'components/ForgotMyPassword/Form/Title';
 
 type EmailFormData = {
   email: string;
@@ -22,7 +18,7 @@ type EmailFormData = {
 type FormFirebaseError = Record<
   string,
   {
-    type: 'email';
+    type: keyof EmailFormData;
     message: string;
   }
 >;
@@ -43,66 +39,12 @@ export const successToastWhenSendingToEmailToChangePassword = () =>
   });
 
 export default function IForgotMyPassword() {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<EmailFormData>({
-    resolver: yupResolver(emailFormSchema),
-  });
-
-  const { sendEmailToRecoverPassword } = useAuth();
-
-  const handleSendEmail = useMemo(
-    () =>
-      handleSubmit(async (data) => {
-        try {
-          await sendEmailToRecoverPassword(data);
-
-          successToastWhenSendingToEmailToChangePassword();
-        } catch (err) {
-          const { FirebaseError } = await import('firebase/app');
-
-          if (err instanceof FirebaseError) {
-            const errors: FormFirebaseError = {
-              'auth/user-not-found': {
-                type: 'email',
-                message: 'Este usuário não existe',
-              },
-              'auth/too-many-requests': {
-                type: 'email',
-                message: 'Tente novamente mais tarde',
-              },
-            };
-
-            const error = errors[err.code];
-
-            if (!error) {
-              const { unknownErrorToast } = await import(
-                '../utils/Toasts/unknownErrorToast'
-              );
-              unknownErrorToast();
-            } else {
-              setError(error.type, {
-                message: error.message,
-              });
-            }
-          }
-        }
-      }),
-    [handleSubmit, sendEmailToRecoverPassword, setError]
-  );
-
   return (
     <>
       <PageTitle pageName='Esqueci minha senha' />
       <Box overflowX='hidden'>
         <CenterForm>
-          <FormTitle
-            mb='1rem'
-            text='Envie seu email para recuperar sua senha'
-          />
+          <Title />
           <FormWrapper onSubmit={handleSendEmail}>
             <Input
               error={errors.email}

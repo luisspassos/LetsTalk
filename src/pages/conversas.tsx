@@ -148,12 +148,10 @@ export default function ConversationsPage({
   }[tab];
 
   return (
-    <>
-      <Flex minH='100vh'>
-        <Sidebar />
-        <CurrentTab />
-      </Flex>
-    </>
+    <Flex minH='100vh'>
+      <Sidebar />
+      <CurrentTab />
+    </Flex>
   );
 }
 
