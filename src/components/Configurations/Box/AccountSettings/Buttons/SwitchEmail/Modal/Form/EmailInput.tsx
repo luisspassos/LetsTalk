@@ -1,12 +1,7 @@
 import { ModalInput } from 'components/Modal/ModalInput';
-import { UseFormRegister } from 'react-hook-form/dist/types';
-import { InputError } from 'utils/types';
-import { ChangeEmailFormData } from '.';
+import { InputProps } from 'utils/types';
 
-type EmailInputProps = {
-  error: InputError;
-  register: UseFormRegister<ChangeEmailFormData>;
-};
+type EmailInputProps = InputProps;
 
 export function EmailInput({ error, register }: EmailInputProps) {
   return (

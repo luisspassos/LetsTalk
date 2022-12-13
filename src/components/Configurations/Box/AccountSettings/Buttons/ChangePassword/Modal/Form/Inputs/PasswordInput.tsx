@@ -1,12 +1,7 @@
 import { ModalInput } from 'components/Modal/ModalInput';
-import { UseFormRegister } from 'react-hook-form';
-import { InputError } from 'utils/types';
-import { ChangePasswordFormData } from '..';
+import { InputProps } from 'utils/types';
 
-type PasswordInputProps = {
-  error: InputError;
-  register: UseFormRegister<ChangePasswordFormData>;
-};
+type PasswordInputProps = InputProps;
 
 export function PasswordInput({ error, register }: PasswordInputProps) {
   return (

@@ -1,12 +1,7 @@
 import { ModalInput } from 'components/Modal/ModalInput';
-import { UseFormRegister } from 'react-hook-form';
-import { InputError } from 'utils/types';
-import { AddContactFormData } from '.';
+import { InputProps } from 'utils/types';
 
-type UserInputProps = {
-  register: UseFormRegister<AddContactFormData>;
-  error: InputError;
-};
+type UserInputProps = InputProps;
 
 export function Input({ error, register }: UserInputProps) {
   return (
