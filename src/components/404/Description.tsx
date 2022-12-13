@@ -1,6 +1,6 @@
 import { Heading, useColorModeValue } from '@chakra-ui/react';
 
-export function Text() {
+export function Description() {
   return (
     <Heading as='h1' color={useColorModeValue('blue.900', 'gray.50')}>
       Opss! Parece que esta

@@ -1,3 +1,4 @@
+import { UseFormRegister } from 'react-hook-form';
 import { FieldError, UseFormReturn } from 'react-hook-form/dist/types';
 
 export type ConversationUsersId = [string, string];
@@ -21,6 +22,9 @@ export type ContactsResponse = {
 
 export type OnlineAt = number | 'now';
 
-export type InputError = FieldError | undefined;
+export type InputProps = {
+  register: UseFormRegister<any>;
+  error: FieldError | undefined;
+};
 
 export type IsSubmitting = UseFormReturn['formState']['isSubmitting'];
