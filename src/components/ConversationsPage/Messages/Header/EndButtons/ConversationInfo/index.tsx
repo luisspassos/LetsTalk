@@ -5,7 +5,7 @@ import { Button } from './Button';
 import { Tooltip } from './Button/Tooltip';
 import { Content } from './Popover';
 
-export function ConversationInfoButton() {
+export function ConversationInfo() {
   const popoverInitialFocusRef = useRef(null);
 
   const { isOpen, onClose } = useConversationPopover();

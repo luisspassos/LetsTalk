@@ -4,8 +4,8 @@ import { ConversationsTabToggleButton } from './ConversationsTabToggleButton';
 import { Wrapper } from './Wrapper';
 import { Avatar } from './ContactInfo/Avatar';
 import { OnlineAt } from './ContactInfo/OnlineAt';
-import { ConversationInfoButton } from './ConversationInfo';
 import { ContactName } from './ContactInfo/ContactName';
+import { EndButtons } from './EndButtons';
 
 export function Header() {
   return (
@@ -21,7 +21,7 @@ export function Header() {
             <OnlineAt />
           </VStack>
         </Flex>
-        <ConversationInfoButton />
+        <EndButtons />
       </Wrapper>
       <Divider />
     </>
