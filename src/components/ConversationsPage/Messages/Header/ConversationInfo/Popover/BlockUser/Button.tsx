@@ -5,6 +5,7 @@ import { useConversations } from '../../../../../../../contexts/ConversationsCon
 import { useBlockUserModal } from '../../../../../../../contexts/Modal/BlockUserModalContext';
 import { Button } from '../Button';
 import { CgUnblock } from 'react-icons/cg';
+import { Modal } from './Modal';
 
 export function BlockUserButton() {
   const { onOpen } = useBlockUserModal();
@@ -25,12 +26,15 @@ export function BlockUserButton() {
   );
 
   return (
-    <Button
-      mt='5px'
-      colorScheme='red'
-      leftIcon={<Icon as={action.icon} />}
-      onClick={onOpen}
-      text={action.text}
-    />
+    <>
+      <Button
+        mt='5px'
+        colorScheme='red'
+        leftIcon={<Icon as={action.icon} />}
+        onClick={onOpen}
+        text={action.text}
+      />
+      <Modal />
+    </>
   );
 }

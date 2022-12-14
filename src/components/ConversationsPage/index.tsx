@@ -4,7 +4,6 @@ import { PageTitle } from '../PageTitle';
 import { ConversationList } from './ConversationList';
 import { Empty } from './Empty';
 import { Messages } from './Messages';
-import { ToggleBlockUserModal } from './Modals/ToggleBlockUserModal';
 
 export function Conversations() {
   const {
@@ -16,7 +15,6 @@ export function Conversations() {
   return (
     <>
       <PageTitle pageName='Conversas' />
-      <ToggleBlockUserModal />
       <Flex flex='1' minW={0}>
         <ConversationList />
         {existConversations ? <Messages /> : <Empty />}
