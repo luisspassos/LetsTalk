@@ -1,15 +1,17 @@
-import { useTab } from 'contexts/TabContext';
+import { usePageIsSelected } from 'hooks/usePageIsSelected';
+import { useRouter } from 'next/router';
 import { MdMessage, MdOutlineMessage } from 'react-icons/md';
 import { Button } from './Button';
 
 export function ConversationsButton() {
-  const { handleChangeTab, tab } = useTab();
+  const page = 'conversas';
 
-  const isSelected = tab === 'conversations';
+  const router = useRouter();
+  const isSelected = usePageIsSelected(page);
 
   return (
     <Button
-      onClick={() => handleChangeTab('conversations')}
+      onClick={() => router.push(`/${page}`)}
       isSelected={isSelected}
       icon={isSelected ? <MdMessage /> : <MdOutlineMessage />}
       aria-label='Mensagens'

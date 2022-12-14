@@ -1,12 +1,10 @@
-import { Flex } from '@chakra-ui/react';
+import { Wrapper } from 'components/Sidebar/Wrapper';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import { useEffect, useState } from 'react';
-import { Configurations } from '../components/ConfigurationsPage';
 import { Conversations } from '../components/ConversationsPage';
-import { Sidebar } from '../components/Sidebar';
 import { UserType, useAuth } from '../contexts/AuthContext';
 import {
   ConversationType,
@@ -15,10 +13,8 @@ import {
 import { useDeleteAccountModal } from '../contexts/Modal/DeleteAccountModalContext';
 import { useOnlineAtEvents } from '../contexts/OnlineAtEventsContext';
 import { useRenamingName } from '../contexts/RenamingNameContext';
-import { useTab } from '../contexts/TabContext';
 import { db } from '../services/firebase';
 import { auth as adminAuth } from '../services/firebaseAdmin';
-import { getConversations } from '../utils/getConversations';
 
 type ConversationsPageProps = {
   user: UserType;
@@ -53,7 +49,6 @@ export default function ConversationsPage({
   user,
   conversations,
 }: ConversationsPageProps) {
-  const { tab, handleChangeTab } = useTab();
   const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
   const {
     conversations: { setConversations },
@@ -90,7 +85,7 @@ export default function ConversationsPage({
             await router.push('/');
             fillUser(null);
             closeDeleteAccModal();
-            handleChangeTab('conversations');
+            router.push('/conversations');
           }
         }
       );
@@ -109,7 +104,6 @@ export default function ConversationsPage({
     clearAllEvents,
     fillUser,
     closeDeleteAccModal,
-    handleChangeTab,
     renamingName,
   ]);
 
@@ -142,16 +136,10 @@ export default function ConversationsPage({
     };
   }, [takeUserOnline, takeUserOffline, clearAllEvents]);
 
-  const CurrentTab = {
-    conversations: Conversations,
-    configurations: Configurations,
-  }[tab];
-
   return (
-    <Flex minH='100vh'>
-      <Sidebar />
-      <CurrentTab />
-    </Flex>
+    <Wrapper>
+      <Conversations />
+    </Wrapper>
   );
 }
 
@@ -162,19 +150,9 @@ export const getServerSideProps: GetServerSideProps = async (
     const cookies = nookies.get(ctx);
     const user = await adminAuth.verifyIdToken(cookies.token);
 
-    const conversations = await getConversations(user.uid);
-
     if (user) {
-      const newUser = {
-        ...user,
-        username: user.name,
-      };
-
       return {
-        props: {
-          conversations,
-          user: newUser,
-        },
+        props: {},
       };
     }
   } catch (err) {

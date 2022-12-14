@@ -8,7 +8,6 @@ import type { AppProps } from 'next/app';
 import { theme } from '../styles/theme';
 import { AuthProvider } from '../contexts/AuthContext';
 import { FadeInAnimationProvider } from '../contexts/FadeInAnimationContext';
-import { TabProvider } from '../contexts/TabContext';
 import { BlockUserModalProvider } from '../contexts/Modal/BlockUserModalContext';
 import { AddContactModalProvider } from '../contexts/Modal/AddContactModalContext';
 import { ConversationsTabProvider } from '../contexts/ConversationsTabContext';
@@ -45,25 +44,23 @@ function MyApp({ Component, pageProps }: AppProps) {
                           <DeleteAccountModalProvider>
                             <ChangePasswordModalProvider>
                               <ChangeEmailModalProvider>
-                                <TabProvider>
-                                  <FadeInAnimationProvider>
-                                    <ChakraProvider theme={theme}>
-                                      <PositionSelectedFromEmojiPickerCategoriesProvider>
-                                        <SearchedEmojisProvider>
-                                          <EmojiStylesProvider>
-                                            <CategoriesProvider>
-                                              <ToggleEmojiPickerProvider>
-                                                <EmojiPickerScrollProvider>
-                                                  <Component {...pageProps} />
-                                                </EmojiPickerScrollProvider>
-                                              </ToggleEmojiPickerProvider>
-                                            </CategoriesProvider>
-                                          </EmojiStylesProvider>
-                                        </SearchedEmojisProvider>
-                                      </PositionSelectedFromEmojiPickerCategoriesProvider>
-                                    </ChakraProvider>
-                                  </FadeInAnimationProvider>
-                                </TabProvider>
+                                <FadeInAnimationProvider>
+                                  <ChakraProvider theme={theme}>
+                                    <PositionSelectedFromEmojiPickerCategoriesProvider>
+                                      <SearchedEmojisProvider>
+                                        <EmojiStylesProvider>
+                                          <CategoriesProvider>
+                                            <ToggleEmojiPickerProvider>
+                                              <EmojiPickerScrollProvider>
+                                                <Component {...pageProps} />
+                                              </EmojiPickerScrollProvider>
+                                            </ToggleEmojiPickerProvider>
+                                          </CategoriesProvider>
+                                        </EmojiStylesProvider>
+                                      </SearchedEmojisProvider>
+                                    </PositionSelectedFromEmojiPickerCategoriesProvider>
+                                  </ChakraProvider>
+                                </FadeInAnimationProvider>
                               </ChangeEmailModalProvider>
                             </ChangePasswordModalProvider>
                           </DeleteAccountModalProvider>

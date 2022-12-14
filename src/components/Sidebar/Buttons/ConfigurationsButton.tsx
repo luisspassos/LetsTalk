@@ -1,15 +1,17 @@
-import { useTab } from 'contexts/TabContext';
+import { usePageIsSelected } from 'hooks/usePageIsSelected';
+import { useRouter } from 'next/router';
 import { BsGearFill, BsGear } from 'react-icons/bs';
 import { Button } from './Button';
 
 export function ConfigurationsButton() {
-  const { handleChangeTab, tab } = useTab();
+  const page = 'configuracoes';
 
-  const isSelected = tab === 'configurations';
+  const isSelected = usePageIsSelected(page);
+  const router = useRouter();
 
   return (
     <Button
-      onClick={() => handleChangeTab('configurations')}
+      onClick={() => router.push(`/${page}`)}
       isSelected={isSelected}
       icon={isSelected ? <BsGearFill /> : <BsGear />}
       aria-label='Configurações'
