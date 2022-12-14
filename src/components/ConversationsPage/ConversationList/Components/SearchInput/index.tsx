@@ -1,4 +1,5 @@
-import { Icon, InputGroup } from '@chakra-ui/react';
+import { InputGroup } from '@chakra-ui/react';
+import { Icon } from './Icon';
 import { Input } from './Input';
 
 type SearchInputProps = {

@@ -15,7 +15,7 @@ export function Sidebar() {
       py={['16px', '18px', '20px']}
       borderRight={useColorModeValue('unset', '1px solid')}
       borderRightColor={useColorModeValue('unset', 'whiteAlpha.500')}
-      as='aside'
+      as='nav'
     >
       <Box>
         <Avatar />
