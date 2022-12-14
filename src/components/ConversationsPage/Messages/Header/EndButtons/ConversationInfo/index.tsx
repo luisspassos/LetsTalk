@@ -1,6 +1,6 @@
 import { Box, Popover, PopoverTrigger } from '@chakra-ui/react';
 import { useRef } from 'react';
-import { useConversationPopover } from '../../../../../contexts/ConversationPopoverContext';
+import { useConversationPopover } from 'contexts/ConversationPopoverContext';
 import { Button } from './Button';
 import { Tooltip } from './Button/Tooltip';
 import { Content } from './Popover';

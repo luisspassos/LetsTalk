@@ -4,7 +4,7 @@ import { Search } from './Search';
 
 export function EndButtons() {
   return (
-    <Flex>
+    <Flex gap='5px'>
       <Search />
       <ConversationInfo />
     </Flex>

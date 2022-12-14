@@ -1,8 +1,8 @@
 import { Icon } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { BiBlock } from 'react-icons/bi';
-import { useConversations } from '../../../../../../../contexts/ConversationsContext';
-import { useBlockUserModal } from '../../../../../../../contexts/Modal/BlockUserModalContext';
+import { useConversations } from 'contexts/ConversationsContext';
+import { useBlockUserModal } from 'contexts/Modal/BlockUserModalContext';
 import { Button } from '../Button';
 import { CgUnblock } from 'react-icons/cg';
 import { Modal } from './Modal';

@@ -5,7 +5,7 @@ import {
   PopoverHeader,
 } from '@chakra-ui/react';
 import { ForwardedRef, forwardRef, useEffect } from 'react';
-import { useConversationPopover } from '../../../../../../contexts/ConversationPopoverContext';
+import { useConversationPopover } from 'contexts/ConversationPopoverContext';
 import { BlockUserButton } from './BlockUser/Button';
 import { CopyUsernameButton } from './CopyUsername/Button';
 import { SearchInput } from './SearchInput';

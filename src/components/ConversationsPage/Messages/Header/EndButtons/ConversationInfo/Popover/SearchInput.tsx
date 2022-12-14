@@ -1,7 +1,7 @@
 import { InputGroup, InputLeftElement, Icon, Input } from '@chakra-ui/react';
 import { ForwardedRef, forwardRef } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { useSearchInConversation } from '../../../../../../contexts/SearchInConversationContext';
+import { useSearchInConversation } from 'contexts/SearchInConversationContext';
 
 export const SearchInput = forwardRef(
   (_, ref: ForwardedRef<HTMLInputElement>) => {

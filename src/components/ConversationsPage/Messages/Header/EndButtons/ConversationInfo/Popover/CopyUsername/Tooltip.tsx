@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Tooltip as TooltipComponent } from '../../../../../../Tooltip';
+import { Tooltip as TooltipComponent } from 'components/Tooltip';
 import { TooltipProps as ChakraTooltipProps } from '@chakra-ui/react';
 
 type TooltipProps = {

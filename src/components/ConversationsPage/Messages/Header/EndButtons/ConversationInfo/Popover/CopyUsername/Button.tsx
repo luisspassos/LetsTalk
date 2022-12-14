@@ -2,7 +2,7 @@ import { Icon } from '@chakra-ui/react';
 import { RiFileCopy2Line } from 'react-icons/ri';
 import { Button } from '../Button';
 import { useCallback, useState } from 'react';
-import { useConversations } from '../../../../../../../contexts/ConversationsContext';
+import { useConversations } from 'contexts/ConversationsContext';
 import { Tooltip } from './Tooltip';
 
 export function CopyUsernameButton() {
