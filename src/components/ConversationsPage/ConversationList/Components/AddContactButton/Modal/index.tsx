@@ -1,8 +1,8 @@
+import { ModalWrapper } from 'components/Modal/ModalWrapper';
 import { useAddContactModal } from 'contexts/Modal/AddContactModalContext';
-import { ModalWrapper } from '../../../Modal/ModalWrapper';
 import { Form } from './Form';
 
-export function AddContactModal() {
+export function Modal() {
   const { onClose, isOpen } = useAddContactModal();
 
   return (

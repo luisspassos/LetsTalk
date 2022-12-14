@@ -4,7 +4,6 @@ import { PageTitle } from '../PageTitle';
 import { ConversationList } from './ConversationList';
 import { Empty } from './Empty';
 import { Messages } from './Messages';
-import { AddContactModal } from './Modals/AddContactModal';
 import { ToggleBlockUserModal } from './Modals/ToggleBlockUserModal';
 
 export function Conversations() {
@@ -18,7 +17,6 @@ export function Conversations() {
     <>
       <PageTitle pageName='Conversas' />
       <ToggleBlockUserModal />
-      <AddContactModal />
       <Flex flex='1' minW={0}>
         <ConversationList />
         {existConversations ? <Messages /> : <Empty />}
