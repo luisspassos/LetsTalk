@@ -5,12 +5,9 @@ import {
   SetStateAction,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from 'react';
-import { getConversations } from 'utils/getConversations';
-import { useAuth } from './AuthContext';
 
 export type ConversationType = {
   uid: string;
@@ -48,19 +45,19 @@ export function ConversationsProvider({
 }: ConversationsProviderProps) {
   const [conversations, setConversations] = useState<ConversationType[]>([]);
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
-  useEffect(() => {
-    async function fillConversations() {
-      if (!user?.uid) return;
+  // useEffect(() => {
+  //   async function fillConversations() {
+  //     if (!user?.uid) return;
 
-      const conversations = await getConversations(user?.uid);
+  //     const conversations = await getConversations(user?.uid);
 
-      setConversations(conversations);
-    }
+  //     setConversations(conversations);
+  //   }
 
-    fillConversations();
-  }, [user?.uid]);
+  //   fillConversations();
+  // }, [user?.uid]);
 
   const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
 

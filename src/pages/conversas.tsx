@@ -1,5 +1,20 @@
-import { UserType } from '../contexts/AuthContext';
-import { ConversationType } from '../contexts/ConversationsContext';
+import { Conversations } from 'components/ConversationsPage';
+import { Wrapper } from 'components/Sidebar/Wrapper';
+import { useDeleteAccountModal } from 'contexts/Modal/DeleteAccountModalContext';
+import { useOnlineAtEvents } from 'contexts/OnlineAtEventsContext';
+import { useRenamingName } from 'contexts/RenamingNameContext';
+import { onSnapshot, doc } from 'firebase/firestore';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import { db } from 'services/firebase';
+import { useAuth, UserType } from '../contexts/AuthContext';
+import {
+  ConversationType,
+  useConversations,
+} from '../contexts/ConversationsContext';
+import nookies from 'nookies';
+import { redirectToUserIfNoUser } from 'utils/redirectToUserIfNoUser';
 
 type ConversationsPageProps = {
   user: UserType;
@@ -34,121 +49,99 @@ export default function ConversationsPage({
   user,
   conversations,
 }: ConversationsPageProps) {
-  // const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
-  // const {
-  //   conversations: { setConversations },
-  // } = useConversations();
-  // const { takeUserOffline, takeUserOnline, setUserOnlineAt, clearAllEvents } =
-  //   useOnlineAtEvents();
-  // const router = useRouter();
-  // const { onClose: closeDeleteAccModal } = useDeleteAccountModal();
-  // const { renamingName } = useRenamingName();
+  const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
+  const {
+    conversations: { setConversations },
+  } = useConversations();
+  const { takeUserOffline, takeUserOnline, setUserOnlineAt, clearAllEvents } =
+    useOnlineAtEvents();
+  const router = useRouter();
+  const { onClose: closeDeleteAccModal } = useDeleteAccountModal();
+  const { renamingName } = useRenamingName();
 
-  // const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
+  const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
-  // useEffect(() => {
-  //   fillUser(user);
-  //   setConversations(conversations);
-  // }, [conversations, fillUser, setConversations, user]);
+  useEffect(() => {
+    fillUser(user);
+  }, [conversations, fillUser, setConversations, user]);
 
-  // useEffect(() => {
-  //   function checkIfUserAccHasBeenDeleted() {
-  //     if (!contextUser) return;
+  useEffect(() => {
+    function checkIfUserAccHasBeenDeleted() {
+      if (!contextUser) return;
 
-  //     let ignoreInitialOnSnapshot = true;
+      let ignoreInitialOnSnapshot = true;
 
-  //     const unsub = onSnapshot(
-  //       doc(db, 'users', contextUser.username),
-  //       async (doc) => {
-  //         if (ignoreInitialOnSnapshot) {
-  //           ignoreInitialOnSnapshot = false;
-  //           return;
-  //         }
-  //         if (!doc.exists() && !renamingName) {
-  //           nookies.destroy({}, 'token');
-  //           clearAllEvents();
-  //           await router.push('/');
-  //           fillUser(null);
-  //           closeDeleteAccModal();
-  //           router.push('/conversations');
-  //         }
-  //       }
-  //     );
+      if (!contextUser.displayName) return;
 
-  //     return unsub;
-  //   }
+      const unsub = onSnapshot(
+        doc(db, 'users', contextUser.displayName),
+        async (doc) => {
+          if (ignoreInitialOnSnapshot) {
+            ignoreInitialOnSnapshot = false;
+            return;
+          }
+          if (!doc.exists() && !renamingName) {
+            nookies.destroy({}, 'token');
+            clearAllEvents();
+            await router.push('/');
+            fillUser(null);
+            closeDeleteAccModal();
+            router.push('/conversations');
+          }
+        }
+      );
 
-  //   const unsub = checkIfUserAccHasBeenDeleted();
+      return unsub;
+    }
 
-  //   return () => {
-  //     unsub && unsub();
-  //   };
-  // }, [
-  //   contextUser,
-  //   router,
-  //   clearAllEvents,
-  //   fillUser,
-  //   closeDeleteAccModal,
-  //   renamingName,
-  // ]);
+    const unsub = checkIfUserAccHasBeenDeleted();
 
-  // useEffect(() => {
-  //   (async () => {
-  //     // it will only add the user in the db when starting the application
+    return () => {
+      unsub && unsub();
+    };
+  }, [
+    contextUser,
+    router,
+    clearAllEvents,
+    fillUser,
+    closeDeleteAccModal,
+    renamingName,
+  ]);
 
-  //     if (!ignoreAddingUserInDb && user) {
-  //       await addUsernameInDb(user.username, user.uid);
-  //       setIgnoreAddingUserInDb(true);
-  //     }
+  useEffect(() => {
+    (async () => {
+      // it will only add the user in the db when starting the application
 
-  //     setUserOnlineAt('now');
-  //   })();
-  // }, [addUsernameInDb, ignoreAddingUserInDb, setUserOnlineAt, user]);
+      if (!ignoreAddingUserInDb && user?.displayName) {
+        await addUsernameInDb(user.displayName, user.uid);
+        setIgnoreAddingUserInDb(true);
+      }
 
-  // useEffect(() => {
-  //   createLocationchangeEvent();
+      setUserOnlineAt('now');
+    })();
+  }, [addUsernameInDb, ignoreAddingUserInDb, setUserOnlineAt, user]);
 
-  //   for (let event of takeUserOffline.events) {
-  //     window.addEventListener(event, takeUserOffline.func);
-  //   }
+  useEffect(() => {
+    createLocationchangeEvent();
 
-  //   for (let event of takeUserOnline.events) {
-  //     window.addEventListener(event, takeUserOnline.func);
-  //   }
+    for (let event of takeUserOffline.events) {
+      window.addEventListener(event, takeUserOffline.func);
+    }
 
-  //   return () => {
-  //     clearAllEvents();
-  //   };
-  // }, [takeUserOnline, takeUserOffline, clearAllEvents]);
+    for (let event of takeUserOnline.events) {
+      window.addEventListener(event, takeUserOnline.func);
+    }
+
+    return () => {
+      clearAllEvents();
+    };
+  }, [takeUserOnline, takeUserOffline, clearAllEvents]);
 
   return (
-    // <Wrapper>
-    //   <Conversations />
-    // </Wrapper>
-    <div></div>
+    <Wrapper>
+      <Conversations />
+    </Wrapper>
   );
 }
 
-// export const getServerSideProps: GetServerSideProps = async (
-//   ctx: GetServerSidePropsContext
-// ) => {
-//   try {
-//     const cookies = nookies.get(ctx);
-//     const user = await adminAuth.verifyIdToken(cookies.token);
-
-//     if (user) {
-//       return {
-//         props: {},
-//       };
-//     }
-//   } catch (err) {
-//     console.log(err);
-//   }
-
-//   return {
-//     redirect: {
-//       destination: '/',
-//       permanent: false,
-//     },
-//   };
-// };
+export const getServerSideProps: GetServerSideProps = redirectToUserIfNoUser;

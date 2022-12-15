@@ -1,5 +1,7 @@
 import { Configurations } from 'components/ConfigurationsPage';
 import { Wrapper } from 'components/Sidebar/Wrapper';
+import { GetServerSideProps } from 'next';
+import { redirectToUserIfNoUser } from 'utils/redirectToUserIfNoUser';
 
 export default function ConfigurationsPage() {
   return (
@@ -8,3 +10,5 @@ export default function ConfigurationsPage() {
     </Wrapper>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = redirectToUserIfNoUser;

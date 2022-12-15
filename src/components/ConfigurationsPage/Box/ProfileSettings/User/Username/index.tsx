@@ -6,7 +6,7 @@ import { Name } from './Name';
 export function Username() {
   const { user } = useAuth();
 
-  const username = user?.username.split('#');
+  const username = user?.displayName?.split('#');
 
   const name = username?.[0] ?? '';
   const id = username?.[1] ?? '';

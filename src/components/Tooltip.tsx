@@ -1,4 +1,5 @@
 import {
+  Box,
   Tooltip as ChakraTooltip,
   TooltipProps as ChakraTooltipProps,
 } from '@chakra-ui/react';
@@ -24,7 +25,9 @@ export function Tooltip({ children, label, ariaLabel, ...rest }: TooltipProps) {
       {...rest}
     >
       {/* this span is for the tooltip to work correctly */}
-      <span>{children}</span>
+      <Box h='min' display='inline-block'>
+        {children}
+      </Box>
     </ChakraTooltip>
   );
 }
