@@ -14,7 +14,7 @@ import {
   useConversations,
 } from '../contexts/ConversationsContext';
 import nookies from 'nookies';
-import { redirectToUserIfNoUser } from 'utils/redirectToUserIfNoUser';
+import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
 
 type ConversationsPageProps = {
   user: UserType;
