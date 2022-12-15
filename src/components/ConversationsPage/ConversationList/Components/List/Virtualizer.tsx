@@ -15,7 +15,7 @@ export function Virtualizer({ search, parentRef }: VirtualizerProps) {
   const { conversations } = useConversations();
 
   const fetchedConversations = conversations.data.filter(({ name }) =>
-    name.includes(search.trim())
+    name?.includes(search.trim())
   );
 
   const conversationHeight = useBreakpointValue([65, 75, 85]) ?? 0;

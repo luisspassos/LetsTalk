@@ -151,11 +151,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
+      if (user) setUser(user);
     });
   }, []);
 
@@ -165,17 +161,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(newUser);
   }, []);
 
-  const isLoggedInWithGoogle = true;
-  // user?.firebase?.sign_in_provider === 'google.com';
-
-  console.log(user);
+  const isLoggedInWithGoogle =
+    user?.providerData[0].providerId === 'google.com';
 
   const signOut = async () => {
+    if (!user?.displayName) return;
+
     const { auth, db } = await import('../services/firebase');
     const { signOut } = await import('firebase/auth');
     const { doc, updateDoc } = await import('firebase/firestore');
-
-    if (!user?.displayName) return;
 
     const userRef = doc(db, 'users', user.displayName);
     updateDoc(userRef, {

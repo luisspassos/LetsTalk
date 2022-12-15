@@ -70,7 +70,7 @@ export function Form() {
 
           if (!user) return;
 
-          if (!contactExists || contactName === user.username) {
+          if (!contactExists || contactName === user.displayName) {
             setError('contactName', {
               message:
                 'Não foi possível adicionar este usuário, talvez ele não exista',

@@ -8,18 +8,9 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { db } from 'services/firebase';
-import { useAuth, UserType } from '../contexts/AuthContext';
-import {
-  ConversationType,
-  useConversations,
-} from '../contexts/ConversationsContext';
+import { useAuth } from '../contexts/AuthContext';
 import nookies from 'nookies';
 import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
-
-type ConversationsPageProps = {
-  user: UserType;
-  conversations: ConversationType[];
-};
 
 function createLocationchangeEvent() {
   let oldPushState = history.pushState;
@@ -45,14 +36,8 @@ function createLocationchangeEvent() {
   });
 }
 
-export default function ConversationsPage({
-  user,
-  conversations,
-}: ConversationsPageProps) {
-  const { fillUser, addUsernameInDb, user: contextUser } = useAuth();
-  const {
-    conversations: { setConversations },
-  } = useConversations();
+export default function ConversationsPage() {
+  const { fillUser, addUsernameInDb, user } = useAuth();
   const { takeUserOffline, takeUserOnline, setUserOnlineAt, clearAllEvents } =
     useOnlineAtEvents();
   const router = useRouter();
@@ -62,19 +47,15 @@ export default function ConversationsPage({
   const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
   useEffect(() => {
-    fillUser(user);
-  }, [conversations, fillUser, setConversations, user]);
-
-  useEffect(() => {
     function checkIfUserAccHasBeenDeleted() {
-      if (!contextUser) return;
+      if (!user) return;
 
       let ignoreInitialOnSnapshot = true;
 
-      if (!contextUser.displayName) return;
+      if (!user.displayName) return;
 
       const unsub = onSnapshot(
-        doc(db, 'users', contextUser.displayName),
+        doc(db, 'users', user.displayName),
         async (doc) => {
           if (ignoreInitialOnSnapshot) {
             ignoreInitialOnSnapshot = false;
@@ -100,12 +81,12 @@ export default function ConversationsPage({
       unsub && unsub();
     };
   }, [
-    contextUser,
     router,
     clearAllEvents,
     fillUser,
     closeDeleteAccModal,
     renamingName,
+    user,
   ]);
 
   useEffect(() => {
@@ -119,7 +100,13 @@ export default function ConversationsPage({
 
       setUserOnlineAt('now');
     })();
-  }, [addUsernameInDb, ignoreAddingUserInDb, setUserOnlineAt, user]);
+  }, [
+    addUsernameInDb,
+    ignoreAddingUserInDb,
+    setUserOnlineAt,
+    user?.displayName,
+    user?.uid,
+  ]);
 
   useEffect(() => {
     createLocationchangeEvent();
