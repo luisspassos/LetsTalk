@@ -11,6 +11,7 @@ import { db } from 'services/firebase';
 import { useAuth } from '../contexts/AuthContext';
 import nookies from 'nookies';
 import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
+import { Loading } from 'components/ConversationsPage/Loading';
 
 function createLocationchangeEvent() {
   let oldPushState = history.pushState;
@@ -125,9 +126,12 @@ export default function ConversationsPage() {
   }, [takeUserOnline, takeUserOffline, clearAllEvents]);
 
   return (
-    <Wrapper>
-      <Conversations />
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Conversations />
+      </Wrapper>
+      <Loading />
+    </>
   );
 }
 
