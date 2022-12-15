@@ -1,7 +1,13 @@
 import { Center, Portal } from '@chakra-ui/react';
 import { Logo } from './Logo';
 
-export function Loading() {
+type LoadingProps = {
+  active: boolean;
+};
+
+export function Loading({ active }: LoadingProps) {
+  if (!active) return null;
+
   return (
     <Portal>
       <Center

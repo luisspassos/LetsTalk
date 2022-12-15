@@ -28,7 +28,6 @@ import { SearchedEmojisProvider } from '../contexts/EmojiPicker/SearchedEmojiCon
 import { PositionSelectedFromEmojiPickerCategoriesProvider } from '../contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
 import RouteLoading from 'next-progress';
-import { Loading } from 'components/Loading';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -59,7 +58,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                                                     showSpinner: false,
                                                   }}
                                                 />
-                                                <Loading />
                                                 <Component {...pageProps} />
                                               </EmojiPickerScrollProvider>
                                             </ToggleEmojiPickerProvider>
