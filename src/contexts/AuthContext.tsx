@@ -1,4 +1,4 @@
-import { User, UserCredential } from 'firebase/auth';
+import { onAuthStateChanged, User, UserCredential } from 'firebase/auth';
 import {
   createContext,
   ReactNode,
@@ -9,7 +9,6 @@ import {
 } from 'react';
 import { auth } from '../services/firebase';
 import nookies from 'nookies';
-import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 import { useRouter } from 'next/router';
 
 export type AuthProviderProps = {
@@ -48,11 +47,7 @@ type AuthContextData = {
   isLoggedInWithGoogle: boolean;
 };
 
-export type UserType =
-  | ({
-      username: string;
-    } & DecodedIdToken)
-  | null;
+export type UserType = User | null;
 
 type SetUsernameParams = {
   user: User;
@@ -153,23 +148,36 @@ export const signInWithEmailAndPassword = async ({
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
+
   const router = useRouter();
 
   const fillUser = useCallback((newUser: UserType) => {
     setUser(newUser);
   }, []);
 
-  const isLoggedInWithGoogle =
-    user?.firebase?.sign_in_provider === 'google.com';
+  const isLoggedInWithGoogle = true;
+  // user?.firebase?.sign_in_provider === 'google.com';
+
+  console.log(user);
 
   const signOut = async () => {
     const { auth, db } = await import('../services/firebase');
     const { signOut } = await import('firebase/auth');
     const { doc, updateDoc } = await import('firebase/firestore');
 
-    if (!user) return;
+    if (!user?.displayName) return;
 
-    const userRef = doc(db, 'users', user.username);
+    const userRef = doc(db, 'users', user.displayName);
     updateDoc(userRef, {
       onlineAt: Date.now(),
     });

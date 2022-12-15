@@ -5,15 +5,18 @@ import {
   SetStateAction,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
+import { getConversations } from 'utils/getConversations';
+import { useAuth } from './AuthContext';
 
 export type ConversationType = {
   uid: string;
   photoURL: string | null;
-  name: string;
-  username: string;
+  name: string | undefined;
+  username: string | undefined;
   updatedAt: string;
   lastMessage: string;
   isBlocked?: boolean;
@@ -44,6 +47,21 @@ export function ConversationsProvider({
   children,
 }: ConversationsProviderProps) {
   const [conversations, setConversations] = useState<ConversationType[]>([]);
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    async function fillConversations() {
+      if (!user?.uid) return;
+
+      const conversations = await getConversations(user?.uid);
+
+      setConversations(conversations);
+    }
+
+    fillConversations();
+  }, [user?.uid]);
+
   const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
 
   const numberOfConversations = useMemo(
