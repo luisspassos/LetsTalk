@@ -27,6 +27,7 @@ import { CategoriesProvider } from '../contexts/EmojiPicker/CategoriesContext';
 import { SearchedEmojisProvider } from '../contexts/EmojiPicker/SearchedEmojiContext';
 import { PositionSelectedFromEmojiPickerCategoriesProvider } from '../contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
+import NextProgress from 'next-progress';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -52,6 +53,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                                           <CategoriesProvider>
                                             <ToggleEmojiPickerProvider>
                                               <EmojiPickerScrollProvider>
+                                                <NextProgress
+                                                  options={{
+                                                    showSpinner: false,
+                                                  }}
+                                                />
                                                 <Component {...pageProps} />
                                               </EmojiPickerScrollProvider>
                                             </ToggleEmojiPickerProvider>
