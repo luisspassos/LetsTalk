@@ -1,3 +1,4 @@
+import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 import { UseFormRegister } from 'react-hook-form';
 import {
   FieldError,
@@ -16,13 +17,7 @@ export type ConversationDocWithContactData =
   | FullConversationDocData
   | undefined;
 
-export type ContactsResponse = {
-  users: {
-    displayName: string;
-    photoURL: string | undefined;
-    uid: string;
-  }[];
-};
+export type ContactsResponse = UserRecord[];
 
 export type OnlineAt = number | 'now';
 

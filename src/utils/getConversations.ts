@@ -6,10 +6,10 @@ import {
   query,
   where,
 } from 'firebase/firestore';
+import { api } from 'services/api';
 import { db } from '../services/firebase';
-import { ConversationUsersId } from '../utils/types';
+import { ContactsResponse, ConversationUsersId } from '../utils/types';
 import { formatContactsUpdatedAt } from './formatDate';
-import { getUsers } from './getUsers';
 
 export type MessageDoc =
   | {
@@ -71,7 +71,9 @@ export async function getConversations(currentUserId: string) {
     updatedAt: formatContactsUpdatedAt(doc.data()?.updatedAt),
   }));
 
-  const contactData = await getUsers(contactsId);
+  const contactData = (
+    await api.get<ContactsResponse>(`getUsers?usersId=${contactsId.join(',')}`)
+  ).data;
 
   const contactDataFormatted = contactData.map(
     ({ displayName, uid, photoURL }, i) => ({

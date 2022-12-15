@@ -120,10 +120,10 @@ export function Form() {
               await api.get<ContactsResponse>(
                 `getUsers?usersId=${contactUserData.uid}`
               )
-            ).data.users;
+            ).data;
 
             const contactDataFormatted = {
-              name: displayName.split('#')[0],
+              name: displayName?.split('#')[0],
               username: displayName,
               photoURL: photoURL ?? null,
               uid,

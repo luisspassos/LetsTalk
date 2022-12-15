@@ -13,7 +13,7 @@ export default async function getUsers(
     const usersIdFormatted = usersId.toString().split(',');
     const users = await getUserData(usersIdFormatted);
 
-    res.status(200).json({ users });
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error });
   }
