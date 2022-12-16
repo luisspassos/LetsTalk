@@ -3,7 +3,7 @@ import { Wrapper } from '../Wrapper';
 import { Modal } from './Modal';
 
 const url =
-  'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=';
+  'https://imgv3.fotor.com/images/blog-cover-image/Image-Upscaler-2.jpg';
 
 export function Image() {
   const { isOpen, onOpen, onClose } = useDisclosure();

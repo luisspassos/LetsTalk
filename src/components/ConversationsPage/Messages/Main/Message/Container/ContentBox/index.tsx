@@ -21,7 +21,7 @@ export function ContentBox({ children, bg, contactMessage }: ContentBoxProps) {
       maxW={['240px', '300px', '400px']}
       sx={{
         '&, & *': {
-          borderRadius: '10px',
+          borderRadius: '5px',
         },
       }}
     >

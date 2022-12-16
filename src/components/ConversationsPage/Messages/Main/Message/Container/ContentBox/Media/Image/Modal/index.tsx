@@ -13,12 +13,7 @@ type ModalProps = Disclosure & {
 
 export function Modal({ isOpen, onClose, imgUrl }: ModalProps) {
   return (
-    <ChakraModal
-      isOpen={isOpen}
-      onClose={onClose}
-      isCentered
-      motionPreset='slideInBottom'
-    >
+    <ChakraModal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay bg='blackAlpha.700' />
       <Content imgUrl={imgUrl} />
     </ChakraModal>

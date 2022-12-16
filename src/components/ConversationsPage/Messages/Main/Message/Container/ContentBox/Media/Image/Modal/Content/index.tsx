@@ -8,7 +8,14 @@ type ContentProps = {
 
 export function Content({ imgUrl }: ContentProps) {
   return (
-    <ModalContent bg='transparent' boxShadow='none' my='0' maxW='auto' w='auto'>
+    <ModalContent
+      p='5px'
+      bg='transparent'
+      boxShadow='none'
+      my='0'
+      maxW='auto'
+      w='auto'
+    >
       <Main url={imgUrl} />
       <Footer />
     </ModalContent>

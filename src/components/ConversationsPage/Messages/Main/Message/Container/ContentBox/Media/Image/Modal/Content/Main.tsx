@@ -8,10 +8,16 @@ type MainProps = {
 
 export function Main({ url }: MainProps) {
   return (
-    <Box borderRadius={borderRadius} bg='gray.400' p='5px' boxShadow='lg'>
+    <Box
+      borderRadius={borderRadius}
+      mr='auto'
+      bg='gray.400'
+      p='5px'
+      boxShadow='lg'
+    >
       <ChakraImage
         borderRadius={borderRadius}
-        maxH='500px'
+        maxH='70vh'
         src={url}
         alt='image'
       />

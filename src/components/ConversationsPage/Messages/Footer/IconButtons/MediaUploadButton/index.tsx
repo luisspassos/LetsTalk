@@ -1,8 +1,9 @@
 import { BiImageAdd } from 'react-icons/bi';
-import { IconButton } from './IconButton';
+import { IconButton } from '../IconButton';
+import { Modal } from './Modal';
 
 export const errorToast = async () => {
-  const { toast } = await import('../../../../../utils/Toasts/toast');
+  const { toast } = await import('utils/Toasts/toast');
 
   toast({ status: 'error', title: 'O arquivo deve ser uma imagem ou vídeo.' });
 };
@@ -18,10 +19,13 @@ export function MediaUploadButton() {
   }
 
   return (
-    <IconButton
-      onClick={handleUploadMedia}
-      aria-label='Enviar imagem ou vídeo'
-      Icon={BiImageAdd}
-    />
+    <>
+      <Modal />
+      <IconButton
+        onClick={handleUploadMedia}
+        aria-label='Enviar imagem ou vídeo'
+        Icon={BiImageAdd}
+      />
+    </>
   );
 }
