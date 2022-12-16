@@ -4,11 +4,11 @@ import {
   ModalContent,
   ModalOverlay,
   useDisclosure,
-  Image as ChakraImage,
   HStack,
   Button,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { Video } from 'components/Video';
 
 const borderRadius = '5px';
 
@@ -18,7 +18,7 @@ export function Modal() {
   const size = useBreakpointValue(['sm', 'md']);
 
   return (
-    <ChakraModal isCentered isOpen={true} onClose={onClose}>
+    <ChakraModal isCentered isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
         p='5px'
@@ -35,21 +35,41 @@ export function Modal() {
           p='5px'
           boxShadow='lg'
         >
-          <ChakraImage
+          {/* <ChakraImage
             borderRadius={borderRadius}
             maxH='60vh'
             src={
-              'https://imgv3.fotor.com/images/blog-cover-image/Image-Upscaler-2.jpg'
-              // './favicon.svg'
+              // 'https://imgv3.fotor.com/images/blog-cover-image/Image-Upscaler-2.jpg'
+              './favicon.svg'
             }
             alt='image'
+          /> */}
+          <Video
+            src='http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+            maxH='60vh'
           />
         </Box>
         <HStack justify='end' as='footer' mt='5px' spacing='3px'>
-          <Button size={size} bg='red.600'>
+          <Button
+            size={size}
+            bg='red.600'
+            _hover={{
+              bg: 'red.700',
+            }}
+            _active={{
+              bg: 'red.700',
+            }}
+            onClick={onClose}
+          >
             CANCELAR
           </Button>
-          <Button size={size} bg='gray.400'>
+          <Button
+            size={size}
+            bg='gray.400'
+            _hover={{
+              bg: 'gray.600',
+            }}
+          >
             ENVIAR
           </Button>
         </HStack>

@@ -1,19 +1,10 @@
-import { Box } from '@chakra-ui/react';
 import { Wrapper } from './Wrapper';
+import { Video as VideoComponent } from 'components/Video';
 
 export function Video() {
   return (
     <Wrapper>
-      <Box
-        as='video'
-        src='./tiktok.mp4'
-        controls
-        sx={{
-          '&': {
-            colorScheme: 'light dark',
-          },
-        }}
-      />
+      <VideoComponent src='./tiktok.mp4' />
     </Wrapper>
   );
 }
