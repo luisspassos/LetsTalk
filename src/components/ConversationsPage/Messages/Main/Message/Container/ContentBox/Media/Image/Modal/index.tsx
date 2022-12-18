@@ -1,21 +1,24 @@
 import {
-  ModalOverlay,
-  Modal as ChakraModal,
-  UseDisclosureReturn,
+  ModalProps as ChakraModalProps,
+  Image as ChakraImage,
 } from '@chakra-ui/react';
-import { Content } from './Content';
+import { Modal as ModalComponent } from 'components/ConversationsPage/Messages/Modal';
+import { FooterProps } from 'components/ConversationsPage/Messages/Modal/Content/Footer';
+import { Footer } from './Footer';
 
-type Disclosure = Pick<UseDisclosureReturn, 'onClose' | 'isOpen'>;
+type ModalProps = Omit<ChakraModalProps, 'children'>;
 
-type ModalProps = Disclosure & {
-  imgUrl: string;
+const url =
+  'https://imgv3.fotor.com/images/blog-cover-image/Image-Upscaler-2.jpg';
+
+const footerProps: FooterProps = {
+  children: <Footer />,
 };
 
-export function Modal({ isOpen, onClose, imgUrl }: ModalProps) {
+export function Modal(props: ModalProps) {
   return (
-    <ChakraModal isOpen={isOpen} onClose={onClose} isCentered>
-      <ModalOverlay bg='blackAlpha.700' />
-      <Content imgUrl={imgUrl} />
-    </ChakraModal>
+    <ModalComponent footerProps={footerProps} {...props}>
+      <ChakraImage maxH='70vh' src={url} alt='image' />
+    </ModalComponent>
   );
 }

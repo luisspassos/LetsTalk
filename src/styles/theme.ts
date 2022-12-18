@@ -56,4 +56,8 @@ export const theme = extendTheme({
 
 // default props
 
-Modal.defaultProps = { ...Modal.defaultProps, motionPreset: 'slideInBottom' };
+Modal.defaultProps = {
+  ...Modal.defaultProps,
+  motionPreset: 'slideInBottom',
+  isCentered: true,
+};

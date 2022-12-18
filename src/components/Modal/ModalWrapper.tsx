@@ -4,27 +4,22 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
+  ModalProps,
   useColorModeValue,
-  UseDisclosureReturn,
 } from '@chakra-ui/react';
-import { ReactNode } from 'react';
 import { ModalTitle } from './ModalTitle';
 
-type Disclosure = Pick<UseDisclosureReturn, 'isOpen' | 'onClose'>;
-
-type ModalWrapperProps = Disclosure & {
+type ModalWrapperProps = ModalProps & {
   modalTitle?: string;
-  children: ReactNode;
 };
 
 export function ModalWrapper({
-  children,
-  isOpen,
-  onClose,
   modalTitle,
+  children,
+  ...rest
 }: ModalWrapperProps) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal {...rest}>
       <ModalOverlay />
       <ModalContent boxShadow={useColorModeValue('lg', 'md')} mx='10px'>
         {modalTitle && <ModalTitle text={modalTitle} />}

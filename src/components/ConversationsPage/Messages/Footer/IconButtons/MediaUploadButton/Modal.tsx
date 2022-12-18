@@ -10,15 +10,13 @@ import {
 } from '@chakra-ui/react';
 import { Video } from 'components/Video';
 
-const borderRadius = '5px';
-
 export function Modal() {
   const { isOpen, onClose } = useDisclosure();
 
   const size = useBreakpointValue(['sm', 'md']);
 
   return (
-    <ChakraModal isCentered isOpen={isOpen} onClose={onClose}>
+    <ChakraModal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
         p='5px'
@@ -29,7 +27,11 @@ export function Modal() {
         w='auto'
       >
         <Box
-          borderRadius={borderRadius}
+          sx={{
+            '&, & *': {
+              borderRadius: '5px',
+            },
+          }}
           mr='auto'
           bg='gray.400'
           p='5px'
