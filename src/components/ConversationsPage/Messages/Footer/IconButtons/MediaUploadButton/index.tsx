@@ -1,3 +1,4 @@
+import { useDisclosure } from '@chakra-ui/react';
 import { BiImageAdd } from 'react-icons/bi';
 import { IconButton } from '../IconButton';
 import { Modal } from './Modal';
@@ -9,18 +10,20 @@ export const errorToast = async () => {
 };
 
 export function MediaUploadButton() {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   function handleUploadMedia() {
-    const fileInput = document.createElement('input');
+    // const fileInput = document.createElement('input');
+    // fileInput.type = 'file';
+    // fileInput.accept = '';
+    // fileInput.click();
 
-    fileInput.type = 'file';
-    fileInput.accept = '';
-
-    fileInput.click();
+    onOpen();
   }
 
   return (
     <>
-      <Modal />
+      <Modal isOpen={isOpen} onClose={onClose} />
       <IconButton
         onClick={handleUploadMedia}
         aria-label='Enviar imagem ou vídeo'

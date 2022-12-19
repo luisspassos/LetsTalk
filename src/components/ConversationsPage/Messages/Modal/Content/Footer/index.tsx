@@ -1,11 +1,13 @@
-import { HStack, StackProps } from '@chakra-ui/react';
+import { HStack, ModalProps, StackProps } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-export type FooterProps = { children: ReactNode } & StackProps;
+export type OnClose = ModalProps['onClose'];
 
-export function Footer({ children, ...rest }: FooterProps) {
+type FooterProps = { children: ReactNode; onClose: OnClose } & StackProps;
+
+export function Footer({ children, onClose, ...rest }: FooterProps) {
   return (
-    <HStack as='footer' mt='5px' spacing='3px' {...rest}>
+    <HStack as='footer' pt='5px' spacing='3px' onClick={onClose} {...rest}>
       {children}
     </HStack>
   );
