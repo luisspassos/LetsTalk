@@ -1,14 +1,11 @@
 import { ModalContent } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { Footer, FooterProps } from './Footer';
-import { Wrapper } from './Wrapper';
 
 type ContentProps = {
   children: ReactNode;
-  footerProps: FooterProps;
 };
 
-export function Content({ children, footerProps }: ContentProps) {
+export function Content({ children }: ContentProps) {
   return (
     <ModalContent
       p='5px'
@@ -18,8 +15,7 @@ export function Content({ children, footerProps }: ContentProps) {
       maxW='auto'
       w='auto'
     >
-      <Wrapper>{children}</Wrapper>
-      <Footer {...footerProps} />
+      {children}
     </ModalContent>
   );
 }

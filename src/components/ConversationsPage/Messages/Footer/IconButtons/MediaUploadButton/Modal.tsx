@@ -38,7 +38,6 @@ export function Modal() {
           boxShadow='lg'
         >
           {/* <ChakraImage
-            borderRadius={borderRadius}
             maxH='60vh'
             src={
               // 'https://imgv3.fotor.com/images/blog-cover-image/Image-Upscaler-2.jpg'
