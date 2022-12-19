@@ -43,36 +43,30 @@ export function Form() {
         try {
           setRenamingName(true);
 
-          const { auth } = await import('services/firebase');
-
-          const currentUser = auth.currentUser;
-
-          if (!currentUser) return;
+          if (!user?.displayName) return;
 
           const { setDoc, doc, deleteDoc } = await import('firebase/firestore');
           const { updateProfile } = await import('firebase/auth');
           const { db } = await import('services/firebase');
 
-          if (!user) return;
-
-          const [, id] = user.username.split('#');
+          const [, id] = user.displayName.split('#');
 
           const newName = `${name}#${id}`;
 
-          await deleteDoc(doc(db, 'users', user.username));
+          await deleteDoc(doc(db, 'users', user.displayName));
 
           await setDoc(doc(db, 'users', newName), {
             uid: user.uid,
             onlineAt: 'now',
           });
 
-          await updateProfile(currentUser, {
+          await updateProfile(user, {
             displayName: newName,
           });
 
           await refreshToken();
 
-          fillUser({ ...user, username: newName });
+          fillUser({ ...user, displayName: newName });
 
           onClose();
           resetForm();
