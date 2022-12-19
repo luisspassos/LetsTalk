@@ -72,7 +72,7 @@ export function EditProfilePhoto() {
 
         if (!user) return;
 
-        fillUser({ ...user, picture: photoUrl });
+        fillUser({ ...user, photoURL: photoUrl });
 
         await updateProfile(currentUser, {
           photoURL: photoUrl,

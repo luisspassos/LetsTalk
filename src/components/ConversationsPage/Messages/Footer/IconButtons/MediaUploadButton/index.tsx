@@ -17,8 +17,7 @@ export function MediaUploadButton() {
     // fileInput.type = 'file';
     // fileInput.accept = '';
     // fileInput.click();
-
-    onOpen();
+    // onOpen();
   }
 
   return (
