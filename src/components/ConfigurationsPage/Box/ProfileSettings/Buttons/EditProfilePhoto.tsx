@@ -39,7 +39,7 @@ export function EditProfilePhoto() {
 
         if (!target.files) return;
 
-        const file = target.files[0];
+        const [file] = target.files;
 
         const isNotAnImage = !file.type.includes('image');
 

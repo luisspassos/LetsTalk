@@ -15,8 +15,8 @@ export function Modal({ imgUrl, ...rest }: ModalProps) {
 
   return (
     <ModalComponent {...rest}>
-      <Wrapper>
-        <ChakraImage maxH='70vh' src={imgUrl} alt='image' />
+      <Wrapper maxH='70vh'>
+        <ChakraImage src={imgUrl} alt='image' />
       </Wrapper>
       <Footer onClose={onClose} />
     </ModalComponent>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input accept="video/*" type="file" id="imgInp" />
+    <video id="blah" src="#" controls></video>
+  </body>
+
+  <script>
+    const blah = document.getElementById('blah');
+    const imgInput = document.getElementById('imgInp');
+
+    imgInp.onchange = (evt) => {
+      const [file] = imgInp.files;
+      if (file) {
+        const src = URL.createObjectURL(file);
+
+        blah.src = src;
+      }
+    };
+  </script>
+</html>
