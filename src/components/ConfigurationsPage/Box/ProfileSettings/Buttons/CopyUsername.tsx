@@ -14,11 +14,11 @@ export function CopyUsername() {
   const { user } = useAuth();
 
   const handleCopyUsername = useCallback(() => {
-    if (!user?.username) return;
+    if (!user?.displayName) return;
 
-    navigator.clipboard.writeText(user.username);
+    navigator.clipboard.writeText(user.displayName);
     successToastWhenCopying();
-  }, [user?.username]);
+  }, [user?.displayName]);
 
   return (
     <Button
