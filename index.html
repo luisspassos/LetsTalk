@@ -7,21 +7,32 @@
     <title>Document</title>
   </head>
   <body>
-    <input accept="video/*" type="file" id="imgInp" />
-    <video id="blah" src="#" controls></video>
+    <h1>Hello Audio 🎤🎙️</h1>
   </body>
-
   <script>
-    const blah = document.getElementById('blah');
-    const imgInput = document.getElementById('imgInp');
+    const audioRecorder = {
+      start: async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          });
 
-    imgInp.onchange = (evt) => {
-      const [file] = imgInp.files;
-      if (file) {
-        const src = URL.createObjectURL(file);
+          return stream;
+        } catch (err) {
+          const errors = {
+            NotAllowedError: 'Você deve dar permissão para gravar áudio.',
+            default: 'Um erro desconhecido aconteceu.',
+          };
 
-        blah.src = src;
-      }
+          const error = errors[err.code] | errors.default;
+
+          console.log(error);
+        }
+      },
+      stop: () => {},
+      cancel: () => {},
     };
+
+    function startAudioRecording() {}
   </script>
 </html>

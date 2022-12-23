@@ -9,7 +9,7 @@ import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 import { Message } from './Message';
-import { Image } from './Message/Container/ContentBox/Media/Image';
+import { Text } from './Message/Container/ContentBox/Text';
 
 type DbMessageData = {
   author: string;
@@ -294,7 +294,13 @@ export function Main() {
         <Video />
       </Message> */}
       <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
-        <Image />
+        <Text>❤️🎙️dd</Text>
+      </Message>
+      <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
+        <Text>❤️</Text>
+      </Message>
+      <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
+        <Text>olaaasdsadas</Text>
       </Message>
     </Box>
     // <ScrollableBoxOfVirtualizedItems
