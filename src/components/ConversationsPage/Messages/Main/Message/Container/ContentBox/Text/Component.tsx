@@ -1,14 +1,26 @@
 import { Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { font } from '../../../../../Footer/MessageInput';
+import getEmojiRegex from 'emoji-regex';
 
 type TextComponentProps = {
   children: ReactNode;
-  isOneEmoji: boolean;
 };
 
-export function TextComponent({ children, isOneEmoji }: TextComponentProps) {
-  const fontSize = isOneEmoji ? '35px' : ['14px', '15px', '16px'];
+export function TextComponent({ children }: TextComponentProps) {
+  const text = children?.toString();
+
+  const emojiRegex = getEmojiRegex();
+
+  const emojis = text?.match(emojiRegex);
+
+  const textWithoutEmoji = text?.replaceAll(emojiRegex, '');
+
+  const isOneEmoji = emojis?.length === 1 && textWithoutEmoji === '';
+
+  const fontSize = isOneEmoji
+    ? ['31px', '33px', '35px']
+    : ['14px', '15px', '16px'];
 
   return (
     <Text
