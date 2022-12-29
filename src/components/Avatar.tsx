@@ -1,18 +1,26 @@
-import {
-  Avatar as ChakraAvatar,
-  AvatarProps as ChakraAvatarProps,
-} from '@chakra-ui/react';
+import { Image, ImageProps } from '@chakra-ui/react';
+import { useState } from 'react';
 
-type AvatarProps = Omit<ChakraAvatarProps, 'src'> & {
+type AvatarProps = Omit<ImageProps, 'src'> & {
   src: string | null | undefined;
 };
 
-export function Avatar({ src, ...props }: AvatarProps) {
+export function Avatar({ src: srcProp, ...props }: AvatarProps) {
+  const [src, setSrc] = useState(srcProp ?? 'images/abstract-user.svg');
+
+  function handleError() {
+    setSrc('images/abstract-user.svg');
+  }
+
   return (
-    <ChakraAvatar
-      bg='none'
-      src={src ?? 'images/abstract-user.svg'}
-      icon={<></>}
+    <Image
+      w='12'
+      h='12'
+      boxShadow='sm'
+      borderRadius='50%'
+      onError={handleError}
+      src={src}
+      alt='Avatar'
       {...props}
     />
   );

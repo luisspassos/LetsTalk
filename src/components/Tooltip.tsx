@@ -24,8 +24,8 @@ export function Tooltip({ children, label, ariaLabel, ...rest }: TooltipProps) {
       color='gray.50'
       {...rest}
     >
-      {/* this span is for the tooltip to work correctly */}
-      <Box h='min' display='inline-block'>
+      {/* this box is for the tooltip to work correctly */}
+      <Box h='min' display='inline-block' borderRadius='full'>
         {children}
       </Box>
     </ChakraTooltip>
