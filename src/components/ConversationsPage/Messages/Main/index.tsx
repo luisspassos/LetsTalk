@@ -10,6 +10,7 @@ import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 import { Message } from './Message';
 import { Text } from './Message/Container/ContentBox/Text';
+import { Audio } from './Audio';
 
 type DbMessageData = {
   author: string;
@@ -301,6 +302,24 @@ export function Main() {
       </Message>
       <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
         <Text>olaaasdsadas</Text>
+      </Message>
+      <Message
+        maxW='350px'
+        w='100%'
+        contactMessage={true}
+        messageIndex={20}
+        sentIn='20:00'
+      >
+        <Audio />
+      </Message>
+      <Message
+        maxW='350px'
+        w='100%'
+        contactMessage={false}
+        messageIndex={20}
+        sentIn='20:00'
+      >
+        <Audio />
       </Message>
     </Box>
     // <ScrollableBoxOfVirtualizedItems
