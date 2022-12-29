@@ -61,9 +61,9 @@ export function Buttons({
           'utils/checkIfTheFileExistsInStorage'
         );
 
-        if (!user?.username) return;
+        if (!user?.displayName) return;
 
-        const userProfileAvatarPath = `usersProfileAvatar/${user.username}`;
+        const userProfileAvatarPath = `usersProfileAvatar/${user.displayName}`;
 
         const userProfileAvatarRef = ref(storage, userProfileAvatarPath);
 
@@ -75,7 +75,7 @@ export function Buttons({
           await deleteObject(userProfileAvatarRef);
         }
 
-        const userRef = doc(db, 'users', user.username);
+        const userRef = doc(db, 'users', user.displayName);
 
         await deleteDoc(userRef);
       },
@@ -158,7 +158,7 @@ export function Buttons({
       setError,
       signInWithEmailAndPassword,
       user?.email,
-      user?.username,
+      user?.displayName,
     ]
   );
 

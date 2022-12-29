@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Tooltip } from '../Tooltip';
-import { Avatar as ChakraAvatar, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import { useAuth } from '../../contexts/AuthContext';
+import { Avatar as ChakraAvatar } from 'components/Avatar';
 
 export function Avatar() {
   const [copiedUsername, setCopiedUsername] = useState(false);
@@ -38,7 +39,7 @@ export function Avatar() {
         w={['40px', '42px', '48px']}
         h={['40px', '42px', '48px']}
         cursor='pointer'
-        src={user?.photoURL ?? undefined}
+        src={undefined}
         onClick={() => handleCopyUsername(username)}
       />
     </Tooltip>

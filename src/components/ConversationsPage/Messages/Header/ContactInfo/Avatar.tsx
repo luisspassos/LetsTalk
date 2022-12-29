@@ -1,5 +1,5 @@
 import { useConversations } from '../../../../../contexts/ConversationsContext';
-import { Avatar as ChakraAvatar } from '@chakra-ui/react';
+import { Avatar as ChakraAvatar } from 'components/Avatar';
 
 const size = ['42px', '47px', '52px'];
 

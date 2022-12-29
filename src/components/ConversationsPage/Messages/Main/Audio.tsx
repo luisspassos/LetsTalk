@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Flex,
   Icon,
@@ -12,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { BsFillMicFill, BsFillPlayFill, BsPauseFill } from 'react-icons/bs';
+import { Avatar } from 'components/Avatar';
 
 export function Audio() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -20,9 +20,8 @@ export function Audio() {
     <Flex align='center' p='10px'>
       <Box pos='relative' mr='11px'>
         <Avatar
-          borderRadius='50%'
-          bg='gray.500'
           // src='https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q='
+          src={undefined}
         />
         <Icon
           fontSize='25px'
@@ -56,11 +55,7 @@ export function Audio() {
         direction='column'
         pos='relative'
       >
-        <Slider
-          maxW='200px'
-          aria-label='Barra de progresso do áudio'
-          defaultValue={0}
-        >
+        <Slider aria-label='Barra de progresso do áudio' defaultValue={0}>
           <SliderTrack bg='whiteAlpha.400'>
             <SliderFilledTrack />
           </SliderTrack>

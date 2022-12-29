@@ -47,7 +47,9 @@ type AuthContextData = {
   isLoggedInWithGoogle: boolean;
 };
 
-export type UserType = User | null;
+export type UserType =
+  | ({ photoURL: string | undefined } & Omit<User, 'photoURL'>)
+  | null;
 
 type SetUsernameParams = {
   user: User;
@@ -151,7 +153,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) setUser(user);
+      if (user === null) return setUser(user);
+
+      const falsyValueAcceptableInAvatar = undefined;
+
+      const newUser = {
+        ...user,
+        photoURL: user?.photoURL ?? falsyValueAcceptableInAvatar,
+      };
+
+      setUser(newUser);
     });
   }, []);
 
