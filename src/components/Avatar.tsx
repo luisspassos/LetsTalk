@@ -1,48 +1,57 @@
-import { Image, ImageProps } from '@chakra-ui/react';
+import { ImageProps, Box, Img } from '@chakra-ui/react';
 import { useState } from 'react';
 
 type AvatarProps = Omit<ImageProps, 'src'> & {
   src: string | null | undefined;
 };
 
-export function Avatar({ src: srcProp, ...props }: AvatarProps) {
+export function Avatar({ src, ...props }: AvatarProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const [src, setSrc] = useState('https://www.svgrepo.com/show/12698/user.svg');
-
-  function handleError() {
-    setSrc('images/abstract-user.svg');
-    setIsLoaded(true);
-  }
 
   function handleLoad() {
     setIsLoaded(true);
   }
 
-  const styles: ImageProps = {
+  const styles = {
     w: '12',
     h: '12',
     borderRadius: '50%',
+    boxShadow: 'sm',
   };
 
   return (
-    // <Skeleton
-    //   isLoaded={isLoaded}
-    //   startColor='gray.400'
-    //   endColor='gray.300'
-    //   {...styles}
-    //   {...props}
-    // >
-    <Image
-      onError={handleError}
-      onLoad={handleLoad}
-      border='1px solid black'
-      src={src}
-      alt='Imagem de perfil'
-      boxShadow='sm'
-      {...styles}
-      {...props}
-    />
-    // </Skeleton>
+    <Box position='relative'>
+      {/* {!isLoaded && (
+        <Flex
+          {...styles}
+          {...props}
+          direction='column'
+          align='center'
+          bg='gray.300'
+          shrink={0}
+          position='absolute'
+          overflow='hidden'
+        >
+          <Box mt='20%' bg='white' w='35%' h='35%' borderRadius='50%' />
+          <Box
+            bg='white'
+            w='75%'
+            h='75%'
+            borderRadius='50%'
+            bottom='-35%'
+            pos='absolute'
+          />
+        </Flex>
+      )} */}
+
+      <Img
+        onLoad={handleLoad}
+        src='images/abstract-user.svg'
+        alt='Imagem de perfil'
+        opacity={isLoaded ? 1 : 0}
+        {...styles}
+        {...props}
+      />
+    </Box>
   );
 }
