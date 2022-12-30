@@ -1,4 +1,4 @@
-import { Image, ImageProps, Skeleton } from '@chakra-ui/react';
+import { Image, ImageProps } from '@chakra-ui/react';
 import { useState } from 'react';
 
 type AvatarProps = Omit<ImageProps, 'src'> & {
@@ -6,26 +6,43 @@ type AvatarProps = Omit<ImageProps, 'src'> & {
 };
 
 export function Avatar({ src: srcProp, ...props }: AvatarProps) {
-  const [src, setSrc] = useState(srcProp ?? 'images/abstract-user.svg');
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const [src, setSrc] = useState('https://www.svgrepo.com/show/12698/user.svg');
 
   function handleError() {
     setSrc('images/abstract-user.svg');
+    setIsLoaded(true);
   }
 
-  function handleLoad() {}
+  function handleLoad() {
+    setIsLoaded(true);
+  }
+
+  const styles: ImageProps = {
+    w: '12',
+    h: '12',
+    borderRadius: '50%',
+  };
 
   return (
-    <Skeleton>
-      <Image
-        w='12'
-        h='12'
-        boxShadow='sm'
-        borderRadius='50%'
-        onError={handleError}
-        src={src}
-        alt='Avatar'
-        {...props}
-      />
-    </Skeleton>
+    // <Skeleton
+    //   isLoaded={isLoaded}
+    //   startColor='gray.400'
+    //   endColor='gray.300'
+    //   {...styles}
+    //   {...props}
+    // >
+    <Image
+      onError={handleError}
+      onLoad={handleLoad}
+      border='1px solid black'
+      src={src}
+      alt='Imagem de perfil'
+      boxShadow='sm'
+      {...styles}
+      {...props}
+    />
+    // </Skeleton>
   );
 }

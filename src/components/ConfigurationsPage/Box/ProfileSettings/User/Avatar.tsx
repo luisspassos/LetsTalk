@@ -6,8 +6,8 @@ export function Avatar() {
 
   return (
     <ChakraAvatar
-      boxShadow='1px 1px 8px 2px'
-      color='blackAlpha.500'
+      // boxShadow='1px 1px 8px 2px'
+      // color='blackAlpha.500'
       src={user?.photoURL}
       w={['54px', '59px', '64px']}
       h={['54px', '59px', '64px']}
