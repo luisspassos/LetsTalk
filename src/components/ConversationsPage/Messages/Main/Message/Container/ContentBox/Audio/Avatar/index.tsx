@@ -4,7 +4,7 @@ import { Image } from './Image';
 
 export function Avatar() {
   return (
-    <Box pos='relative' mr='11px'>
+    <Box pos='relative' mr='.75em' bg='inherit'>
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <Image />
       <Icon />

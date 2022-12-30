@@ -11,7 +11,7 @@ export function Texts({ currentTime, duration }: Texts) {
     <Flex
       left={0}
       right={0}
-      bottom='-7px'
+      bottom='-.5em'
       pos='absolute'
       justify='space-between'
     >

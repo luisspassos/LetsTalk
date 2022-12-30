@@ -1,13 +1,23 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { useState } from 'react';
 import { Avatar } from './Avatar';
-import { Button } from './Button';
+import { PauseButton } from './Buttons/PauseButton';
+import { PlayButton } from './Buttons/PlayButton';
 import { Duration } from './Duration';
 
 export function Audio() {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
-    <Flex align='center' p='10px'>
+    <Flex
+      color={useColorModeValue('gray.400', 'current')}
+      align='center'
+      p='.65em'
+      bg='inherit'
+      borderRadius='inherit'
+    >
       <Avatar />
-      <Button />
+      {isPlaying ? <PauseButton /> : <PlayButton />}
       <Duration />
     </Flex>
   );

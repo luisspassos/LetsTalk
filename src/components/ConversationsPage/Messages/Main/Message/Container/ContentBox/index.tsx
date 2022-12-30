@@ -24,12 +24,13 @@ export function ContentBox({
       mr={contactMessage ? negativeMargin : 0}
       ml={!contactMessage ? negativeMargin : 0}
       maxW={['240px', '300px', '400px']}
+      boxShadow='base'
+      {...chakraProps}
       sx={{
         '&, & > video, & > img': {
           borderRadius: '5px',
         },
       }}
-      {...chakraProps}
     >
       {children}
     </Box>
