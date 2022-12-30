@@ -19,7 +19,6 @@ export function Triangle({ color, contactMessage }: TriangleProps) {
       borderBottomLeftRadius={!contactMessage ? radius : 0}
       borderColor='transparent'
       borderBottomColor={color}
-      zIndex='2'
     />
   );
 }

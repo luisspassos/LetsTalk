@@ -1,4 +1,4 @@
-import { Image, ImageProps } from '@chakra-ui/react';
+import { Image, ImageProps, Skeleton } from '@chakra-ui/react';
 import { useState } from 'react';
 
 type AvatarProps = Omit<ImageProps, 'src'> & {
@@ -12,16 +12,20 @@ export function Avatar({ src: srcProp, ...props }: AvatarProps) {
     setSrc('images/abstract-user.svg');
   }
 
+  function handleLoad() {}
+
   return (
-    <Image
-      w='12'
-      h='12'
-      boxShadow='sm'
-      borderRadius='50%'
-      onError={handleError}
-      src={src}
-      alt='Avatar'
-      {...props}
-    />
+    <Skeleton>
+      <Image
+        w='12'
+        h='12'
+        boxShadow='sm'
+        borderRadius='50%'
+        onError={handleError}
+        src={src}
+        alt='Avatar'
+        {...props}
+      />
+    </Skeleton>
   );
 }
