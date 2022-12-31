@@ -27,7 +27,7 @@ export function Avatar({ src: srcProp, ...props }: AvatarProps) {
 
   return (
     <Skeleton
-      isLoaded={isLoaded}
+      isLoaded={isLoaded || ''}
       startColor='gray.300'
       endColor='gray.400'
       {...props}
