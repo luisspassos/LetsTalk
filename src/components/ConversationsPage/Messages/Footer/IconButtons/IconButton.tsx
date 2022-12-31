@@ -2,6 +2,7 @@ import {
   IconButton as ChakraIconButton,
   Icon as ChakraIcon,
   IconButtonProps as ChakraIconButtonProps,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { Tooltip } from '../../../../Tooltip';
@@ -25,6 +26,12 @@ export function IconButton({
       <ChakraIconButton
         w={['29px', '32px', '35px']}
         h={['29px', '32px', '35px']}
+        _hover={useColorModeValue(
+          {
+            bg: 'blackAlpha.200',
+          },
+          undefined
+        )}
         minWidth={0}
         fontSize={['21px', '23px', '25px']}
         variant='ghost'

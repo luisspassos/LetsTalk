@@ -6,6 +6,7 @@ import {
 import { useEmojiStyles } from 'contexts/EmojiPicker/EmojiStylesContext';
 import { useMessageInputRef } from 'contexts/MessageInputRef';
 import { useSetMessageInputSize } from 'hooks/useSetMessageInputSize';
+import { useColorModeValue } from '@chakra-ui/react';
 
 type EmojiProps = {
   children: string;
@@ -31,6 +32,10 @@ export function Emoji({ children: emoji }: EmojiProps) {
   const styles = {
     size: getValueWithMeasure(emojiStyles.emojiSize),
     fontSize: getValueWithMeasure(emojiStyles.fontSize),
+    bgColor: useColorModeValue(
+      'var(--chakra-colors-blackAlpha-200)',
+      'var(--chakra-colors-whiteAlpha-400)'
+    ),
   };
 
   function handleAddEmojiInRecentCategory() {
@@ -117,9 +122,7 @@ export function Emoji({ children: emoji }: EmojiProps) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: hover
-          ? 'var(--chakra-colors-whiteAlpha-400)'
-          : undefined,
+        backgroundColor: hover ? styles.bgColor : undefined,
       }}
       onClick={() => {
         handleInsertEmoji();
