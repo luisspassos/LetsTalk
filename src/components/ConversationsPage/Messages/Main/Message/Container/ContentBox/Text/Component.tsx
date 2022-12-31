@@ -8,19 +8,25 @@ type TextComponentProps = {
 };
 
 export function TextComponent({ children }: TextComponentProps) {
-  const text = children?.toString();
+  function getFontSize() {
+    const text = children?.toString();
 
-  const emojiRegex = getEmojiRegex();
+    const emojiRegex = getEmojiRegex();
 
-  const emojis = text?.match(emojiRegex);
+    const emojis = text?.match(emojiRegex);
 
-  const textWithoutEmoji = text?.replaceAll(emojiRegex, '');
+    const textWithoutEmoji = text?.replaceAll(emojiRegex, '');
 
-  const isOneEmoji = emojis?.length === 1 && textWithoutEmoji === '';
+    const isOneEmoji = emojis?.length === 1 && textWithoutEmoji === '';
 
-  const fontSize = isOneEmoji
-    ? ['31px', '33px', '35px']
-    : ['14px', '15px', '16px'];
+    const fontSize = isOneEmoji
+      ? ['31px', '33px', '35px']
+      : ['14px', '15px', '16px'];
+
+    return fontSize;
+  }
+
+  const fontSize = getFontSize();
 
   return (
     <Text
