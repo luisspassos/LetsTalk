@@ -11,7 +11,7 @@ export function Loading() {
 
   useEffect(() => {
     function disableLoading() {
-      if (numberOfConversations) setActive(false);
+      if (numberOfConversations !== undefined) setActive(false);
     }
 
     disableLoading();

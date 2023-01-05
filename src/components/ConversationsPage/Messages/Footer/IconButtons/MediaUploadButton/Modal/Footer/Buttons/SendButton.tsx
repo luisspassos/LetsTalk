@@ -7,6 +7,9 @@ export function SendButton() {
       _hover={{
         bg: 'gray.600',
       }}
+      _active={{
+        bg: 'gray.600',
+      }}
     >
       ENVIAR
     </Button>

@@ -15,5 +15,5 @@ export function Content({ content }: ContentProps) {
       <Video src={content.src} />
     );
 
-  return <Wrapper maxH='70vh'>{media}</Wrapper>;
+  return <Wrapper maxH='60vh'>{media}</Wrapper>;
 }

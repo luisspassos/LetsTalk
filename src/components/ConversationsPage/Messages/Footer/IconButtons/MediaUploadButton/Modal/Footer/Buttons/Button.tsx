@@ -7,5 +7,5 @@ import {
 export function Button(props: ButtonProps) {
   const size = useBreakpointValue(['sm', 'md']);
 
-  return <ChakraButton size={size} {...props} />;
+  return <ChakraButton color='gray.50' size={size} {...props} />;
 }
