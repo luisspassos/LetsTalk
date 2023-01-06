@@ -1,14 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="246" viewBox="0 0 200 246">
-  <defs>
-    <clipPath id="clip-path">
-      <rect id="Rectangle_90920" data-name="Rectangle 90920" width="120" height="120" rx="60" transform="translate(-2876 2118)" fill="#f9f9f9"/>
-    </clipPath>
-  </defs>
-  <g id="Group_126563" data-name="Group 126563" transform="translate(2595 -1769)">
-    <rect id="Rectangle_90921" data-name="Rectangle 90921" width="200" height="200" rx="100" transform="translate(-2595 1769)" fill="#b2b4b8"/>
-    <rect id="Rectangle_90919" data-name="Rectangle 90919" width="60" height="60" rx="30" transform="translate(-2525 1826)" fill="#f9f9f9"/>
-    <g id="Mask_Group_21" data-name="Mask Group 21" transform="translate(321 -223)" clip-path="url(#clip-path)">
-      <path id="Path_187770" data-name="Path 187770" d="M100,0A100,100,0,1,1,0,100,100,100,0,0,1,100,0Z" transform="translate(-2916 1992)" fill="#f9f9f9"/>
-    </g>
-  </g>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="200" height="200" rx="100" fill="#B2B4B8"/>
+<mask id="mask0_6_28" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+<rect width="200" height="200" rx="99" fill="black"/>
+</mask>
+<g mask="url(#mask0_6_28)">
+<rect x="15" y="125" width="170" height="170" rx="85" fill="#F9F9F9"/>
+</g>
+<rect x="65" y="44" width="70" height="70" rx="35" fill="#F9F9F9"/>
 </svg>

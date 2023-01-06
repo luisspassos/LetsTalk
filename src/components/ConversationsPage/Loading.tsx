@@ -6,16 +6,16 @@ export function Loading() {
   const [active, setActive] = useState(true);
 
   const {
-    conversations: { numberOfConversations },
+    conversations: { data: conversations },
   } = useConversations();
 
   useEffect(() => {
     function disableLoading() {
-      if (numberOfConversations !== undefined) setActive(false);
+      if (conversations !== null) setActive(false);
     }
 
     disableLoading();
-  }, [numberOfConversations]);
+  }, [conversations]);
 
   return <LoadingComponent active={active} />;
 }

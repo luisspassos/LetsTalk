@@ -22,15 +22,17 @@ export type ConversationType = {
   isBlocked?: boolean;
 };
 
+type Conversations = ConversationType[] | null;
+
 type ConversationsProviderProps = {
   children: ReactNode;
 };
 
 type ConversationsContextType = {
   conversations: {
-    setConversations: Dispatch<SetStateAction<ConversationType[]>>;
-    data: ConversationType[];
-    numberOfConversations: number;
+    setConversations: Dispatch<SetStateAction<Conversations>>;
+    data: Conversations;
+    numberOfConversations: number | undefined;
   };
   currentConversation: {
     index: number;
@@ -46,7 +48,7 @@ export const ConversationsContext = createContext(
 export function ConversationsProvider({
   children,
 }: ConversationsProviderProps) {
-  const [conversations, setConversations] = useState<ConversationType[]>([]);
+  const [conversations, setConversations] = useState<Conversations>(null);
 
   const { user } = useAuth();
 
@@ -65,8 +67,8 @@ export function ConversationsProvider({
   const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
 
   const numberOfConversations = useMemo(
-    () => conversations.length,
-    [conversations.length]
+    () => conversations?.length,
+    [conversations?.length]
   );
 
   const changeCurrentConversationIndex = useCallback((index: number) => {
@@ -74,7 +76,7 @@ export function ConversationsProvider({
   }, []);
 
   const currentConversation = useMemo(
-    () => conversations[currentConversationIndex],
+    () => conversations?.[currentConversationIndex],
     [conversations, currentConversationIndex]
   );
 
