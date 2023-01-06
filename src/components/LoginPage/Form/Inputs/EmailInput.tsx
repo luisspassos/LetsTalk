@@ -9,6 +9,7 @@ export function EmailInput({ error, register }: EmailInputProps) {
       inputProps={{
         type: 'email',
         placeholder: 'Email...',
+        autoComplete: 'email',
         ...register('email'),
       }}
       id='email'

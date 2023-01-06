@@ -9,6 +9,7 @@ export function PasswordInput({ error, register }: PasswordInputProps) {
       inputProps={{
         placeholder: 'Senha...',
         type: 'password',
+        autoComplete: 'current-password',
         ...register('password'),
       }}
       id='password'

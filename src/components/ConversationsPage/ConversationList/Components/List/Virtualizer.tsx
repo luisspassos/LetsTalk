@@ -14,15 +14,17 @@ type VirtualizerProps = {
 export function Virtualizer({ search, parentRef }: VirtualizerProps) {
   const { conversations } = useConversations();
 
-  const fetchedConversations = conversations.data.filter(({ name }) =>
+  const fetchedConversations = conversations.data?.filter(({ name }) =>
     name?.includes(search.trim())
   );
+
+  const fetchedConversationsLength = fetchedConversations?.length ?? 0;
 
   const conversationHeight = useBreakpointValue([65, 75, 85]) ?? 0;
 
   const conversationVirtualizer = useVirtual({
     parentRef,
-    size: fetchedConversations.length,
+    size: fetchedConversations?.length ?? 0,
     estimateSize: useCallback(
       () => conversationHeight + 1,
       [conversationHeight]
@@ -32,20 +34,20 @@ export function Virtualizer({ search, parentRef }: VirtualizerProps) {
   return (
     <VirtualizedItemsListWrapper totalSize={conversationVirtualizer.totalSize}>
       {conversationVirtualizer.virtualItems.map((virtualRow) => {
-        const conversation = fetchedConversations[virtualRow.index];
+        const conversation = fetchedConversations?.[virtualRow.index];
 
         return (
           <Conversation
             start={virtualRow.start}
             key={virtualRow.key}
             index={virtualRow.index}
-            numberOfConversations={fetchedConversations.length}
+            numberOfConversations={fetchedConversationsLength}
             conversationHeight={conversationHeight}
             data={{
-              name: conversation.name,
-              photoURL: conversation.photoURL,
-              lastMessage: conversation.lastMessage,
-              updatedAt: conversation.updatedAt,
+              name: conversation?.name ?? '',
+              photoURL: conversation?.photoURL ?? '',
+              lastMessage: conversation?.lastMessage ?? '',
+              updatedAt: conversation?.updatedAt ?? '',
             }}
             style={{
               height: `${virtualRow.size}px`,
