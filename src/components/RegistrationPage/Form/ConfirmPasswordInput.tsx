@@ -13,6 +13,7 @@ export function ConfirmPasswordInput({
       id='confirmPassword'
       inputProps={{
         placeholder: 'Confirme sua senha...',
+        autoComplete: 'new-password',
         type: 'password',
         ...register('password_confirmation'),
       }}

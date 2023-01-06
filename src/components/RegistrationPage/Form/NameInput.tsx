@@ -10,6 +10,7 @@ export function NameInput({ error, register }: NameInputProps) {
       id='username'
       inputProps={{
         placeholder: 'Nome...',
+        autoComplete: 'username',
         ...register('name'),
       }}
       error={error}

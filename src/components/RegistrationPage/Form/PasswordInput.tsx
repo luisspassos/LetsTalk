@@ -11,6 +11,7 @@ export function PasswordInput({ error, register }: PasswordInputProps) {
       inputProps={{
         type: 'password',
         placeholder: 'Senha...',
+        autoComplete: 'new-password',
         ...register('password'),
       }}
       error={error}
