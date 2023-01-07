@@ -9,7 +9,10 @@ import {
 export function Slider() {
   return (
     <ChakraSlider aria-label='Barra de progresso do áudio' defaultValue={0}>
-      <SliderTrack bg={useColorModeValue('whiteAlpha.700', 'whiteAlpha.400')}>
+      <SliderTrack
+        boxShadow='sm'
+        bg={useColorModeValue('whiteAlpha.700', 'whiteAlpha.400')}
+      >
         <SliderFilledTrack />
       </SliderTrack>
       <SliderThumb />

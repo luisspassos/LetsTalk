@@ -10,7 +10,7 @@ export function Audio() {
 
   return (
     <Flex
-      color={useColorModeValue('gray.400', 'current')}
+      color={useColorModeValue('blue.900', 'current')}
       align='center'
       p='.65em'
       bg='inherit'
