@@ -148,8 +148,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user === null) return setUser(user);
+    function handleLoggedInUser(user: User | null) {
+      if (user === null) return;
 
       const falsyValueAcceptableInAvatar = undefined;
 
@@ -159,7 +159,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       };
 
       setUser(newUser);
-    });
+    }
+
+    const unsubscribe = onAuthStateChanged(auth, handleLoggedInUser);
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const router = useRouter();
@@ -185,6 +191,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     await signOut(auth);
     await router.push('/');
+
     setUser(null);
   };
 
