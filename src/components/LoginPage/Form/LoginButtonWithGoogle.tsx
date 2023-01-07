@@ -1,22 +1,13 @@
 import { Button, Icon, Spinner, useColorModeValue } from '@chakra-ui/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
-import { useAuth } from 'contexts/AuthContext';
+import { setUsername } from 'contexts/AuthContext';
 
 export function LoginButtonWithGoogle() {
   const [isLoading, setIsLoading] = useState(false);
 
-  function clearIsLoadingState() {
-    setIsLoading(false);
-  }
-
-  useEffect(() => {
-    return clearIsLoadingState;
-  }, []);
-
   const router = useRouter();
-  const { setUsername } = useAuth();
 
   const handleSignInWithGoogle = useCallback(async () => {
     try {
@@ -56,7 +47,7 @@ export function LoginButtonWithGoogle() {
     } finally {
       setIsLoading(false);
     }
-  }, [router, setUsername]);
+  }, [router]);
 
   return (
     <Button

@@ -37,10 +37,6 @@ type AuthContextData = {
     email,
   }: SendEmailToRecoverPasswordData) => Promise<void>;
   user: UserType;
-  setUsername: ({
-    user,
-    name,
-  }: SetUsernameParams) => Promise<{ username: string }>;
   fillUser: (newUser: UserType) => void;
   refreshToken: () => Promise<void>;
   addUsernameInDb: AddUsernameInDbFunc;
@@ -226,7 +222,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={{
         refreshToken,
-        setUsername,
         getCurrentUserId,
         fillUser,
         signInWithEmailAndPassword,
