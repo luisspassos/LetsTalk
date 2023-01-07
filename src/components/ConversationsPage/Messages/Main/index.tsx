@@ -11,6 +11,7 @@ import { useConversationPopover } from '../../../../contexts/ConversationPopover
 import { Message } from './Message';
 import { Text } from './Message/Container/ContentBox/Text';
 import { Audio } from './Message/Container/ContentBox/Audio';
+import { styles as parentStyles } from '../index';
 
 type DbMessageData = {
   author: string;
@@ -279,8 +280,13 @@ export function Main() {
     }
   }, [messages2, scrollToIndex, initial, messages.length]);
 
+  const styles = {
+    mr: parentStyles.px.map((val) => '-' + val),
+    pr: parentStyles.px,
+  };
+
   return (
-    <Box flex='1' overflow='auto'>
+    <Box flex='1' overflow='auto' {...styles}>
       {/* {messages.map((message, i) => (
         <Message
           key={message.id}
