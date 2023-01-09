@@ -17,22 +17,16 @@ type Event = {
   ) => any;
 };
 
-function formatTime(time: number) {
-  const timeInMinutes = time / 60;
-  const timeWithTwoDecimalPlaces = timeInMinutes.toFixed(2);
+function formatSecondsAsTime(secs: number) {
+  const hr = Math.floor(secs / 3600);
+  const min = Math.floor((secs - hr * 3600) / 60);
+  let sec: number | string = Math.floor(secs - hr * 3600 - min * 60);
 
-  console.log(time);
-  console.log(timeWithTwoDecimalPlaces);
+  if (sec < 10) {
+    sec = '0' + sec;
+  }
 
-  // const minutes = Math.floor(time / 60);
-  // const seconds = time - minutes * 60;
-
-  // const timeInMinutes = Math.floor(time)  ;
-  // // const timeWithTwoDecimalPlaces = timeInMinutes.toFixed(2);
-  // const timeWithTwoDecimalPlaces = timeInMinutes;
-  // const newTime = timeWithTwoDecimalPlaces.replace('.', ':');
-
-  return timeWithTwoDecimalPlaces;
+  return min + ':' + sec;
 }
 
 export function Duration({ audio }: DurationProps) {
@@ -41,13 +35,13 @@ export function Duration({ audio }: DurationProps) {
 
   useEffect(() => {
     function setAudioDuration() {
-      const formattedDuration = formatTime(audio.duration);
+      const formattedDuration = formatSecondsAsTime(audio.duration);
 
       setDuration(formattedDuration);
     }
 
     function getCurrentTime() {
-      const formattedCurrentTime = formatTime(audio.currentTime);
+      const formattedCurrentTime = formatSecondsAsTime(audio.currentTime);
 
       setCurrentTime(formattedCurrentTime);
     }
@@ -84,7 +78,7 @@ export function Duration({ audio }: DurationProps) {
       direction='column'
       pos='relative'
     >
-      <Slider />
+      <Slider audio={audio} />
       <Texts duration={duration} currentTime={currentTime} />
     </Flex>
   );
