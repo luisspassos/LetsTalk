@@ -12,15 +12,23 @@ export function Slider({ audio }: SliderProps) {
 
   useEffect(() => {
     function getValue() {
-      const newValue = (audio.currentTime / audio.duration) * 100; // is a percentage;
+      const newValue = Math.floor((audio.currentTime / audio.duration) * 100); // is a percentage;
 
       setValue(newValue);
+    }
+
+    function reset() {
+      setValue(0);
     }
 
     const events: Event[] = [
       {
         type: 'timeupdate',
         func: getValue,
+      },
+      {
+        type: 'ended',
+        func: reset,
       },
     ];
 
@@ -32,9 +40,13 @@ export function Slider({ audio }: SliderProps) {
   }, [audio]);
 
   return (
-    <ChakraSlider aria-label='Barra de progresso do áudio' value={value}>
+    <ChakraSlider
+      focusThumbOnChange={false}
+      aria-label='Barra de progresso do áudio'
+      value={value}
+    >
       <SliderTrack />
-      <SliderThumb />
+      <SliderThumb transition='0.1s' />
     </ChakraSlider>
   );
 }

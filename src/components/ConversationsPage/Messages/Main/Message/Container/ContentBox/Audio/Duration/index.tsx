@@ -21,9 +21,11 @@ function formatSecondsAsTime(secs: number) {
   return min + ':' + sec;
 }
 
+const initialValue = '0:00';
+
 export function Duration({ audio }: DurationProps) {
-  const [duration, setDuration] = useState('0:00');
-  const [currentTime, setCurrentTime] = useState('0:00');
+  const [duration, setDuration] = useState(initialValue);
+  const [currentTime, setCurrentTime] = useState(initialValue);
 
   useEffect(() => {
     function setAudioDuration() {
@@ -38,7 +40,9 @@ export function Duration({ audio }: DurationProps) {
       setCurrentTime(formattedCurrentTime);
     }
 
-    function resetAudio() {}
+    function resetAudio() {
+      setCurrentTime(initialValue);
+    }
 
     const events: Event[] = [
       {
@@ -48,6 +52,10 @@ export function Duration({ audio }: DurationProps) {
       {
         type: 'timeupdate',
         func: getCurrentTime,
+      },
+      {
+        type: 'ended',
+        func: resetAudio,
       },
     ];
 

@@ -37,15 +37,15 @@ export function OnlineAtEventsProvider({
 
   const setUserOnlineAt = useCallback(
     async (onlineAt: OnlineAt) => {
-      if (!user?.username) return;
+      if (!user?.displayName) return;
 
-      const userRef = doc(db, 'users', user.username);
+      const userRef = doc(db, 'users', user.displayName);
 
       await updateDoc(userRef, {
         onlineAt: onlineAt,
       });
     },
-    [user?.username]
+    [user?.displayName]
   );
 
   const takeUserOnline = useMemo(
