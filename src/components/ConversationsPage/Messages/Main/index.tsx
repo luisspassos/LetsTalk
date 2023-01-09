@@ -10,7 +10,7 @@ import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 import { Message } from './Message';
 import { Text } from './Message/Container/ContentBox/Text';
-import { Audio } from './Message/Container/ContentBox/Audio';
+import { AudioComponent as Audio } from './Message/Container/ContentBox/Audio';
 import { styles as parentStyles } from '../index';
 
 type DbMessageData = {

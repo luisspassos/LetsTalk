@@ -1,12 +1,11 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
-import { useState } from 'react';
 import { Avatar } from './Avatar';
-import { PauseButton } from './Buttons/PauseButton';
-import { PlayButton } from './Buttons/PlayButton';
+import { CurrentButton } from './Buttons/CurrentButton';
 import { Duration } from './Duration';
 
-export function Audio() {
-  const [isPlaying, setIsPlaying] = useState(false);
+export function AudioComponent() {
+  const audio = new Audio('audio.mp3');
+  audio.preload = 'metadata';
 
   return (
     <Flex
@@ -17,8 +16,8 @@ export function Audio() {
       borderRadius='inherit'
     >
       <Avatar />
-      {isPlaying ? <PauseButton /> : <PlayButton />}
-      <Duration />
+      <CurrentButton audio={audio} />
+      <Duration audio={audio} />
     </Flex>
   );
 }
