@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { PauseButton } from './PauseButton';
 import { PlayButton } from './PlayButton';
 
@@ -10,6 +10,8 @@ export type SetIsPlaying = Dispatch<SetStateAction<boolean>>;
 
 export function CurrentButton({ audio }: CurrentButtonProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {}, []);
 
   const play = audio.play.bind(audio);
   const pause = audio.pause.bind(audio);

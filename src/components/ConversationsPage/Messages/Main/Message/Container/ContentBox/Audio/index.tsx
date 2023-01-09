@@ -3,8 +3,28 @@ import { Avatar } from './Avatar';
 import { CurrentButton } from './Buttons/CurrentButton';
 import { Duration } from './Duration';
 
+type EventType = keyof HTMLMediaElementEventMap;
+
+export type Event = {
+  type: EventType;
+  func: (
+    this: HTMLAudioElement,
+    ev: HTMLMediaElementEventMap[EventType]
+  ) => any;
+};
+
+export function iterateEvents(
+  method: 'remove' | 'add',
+  events: Event[],
+  audio: HTMLAudioElement
+) {
+  for (const { type, func } of events) {
+    audio[`${method}EventListener`](type, func);
+  }
+}
+
 export function AudioComponent() {
-  const audio = new Audio('audio.mp3');
+  const audio = new Audio('horse.wav');
   audio.preload = 'metadata';
 
   return (

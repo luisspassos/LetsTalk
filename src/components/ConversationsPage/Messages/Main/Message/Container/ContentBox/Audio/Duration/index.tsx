@@ -3,18 +3,10 @@ import { useState, useEffect } from 'react';
 import { Slider } from './Slider';
 import { Texts } from './Texts';
 
+import { Event, iterateEvents } from '..';
+
 type DurationProps = {
   audio: HTMLAudioElement;
-};
-
-type EventType = keyof HTMLMediaElementEventMap;
-
-type Event = {
-  type: EventType;
-  func: (
-    this: HTMLAudioElement,
-    ev: HTMLMediaElementEventMap[EventType]
-  ) => any;
 };
 
 function formatSecondsAsTime(secs: number) {
@@ -46,6 +38,8 @@ export function Duration({ audio }: DurationProps) {
       setCurrentTime(formattedCurrentTime);
     }
 
+    function resetAudio() {}
+
     const events: Event[] = [
       {
         type: 'loadedmetadata',
@@ -57,16 +51,10 @@ export function Duration({ audio }: DurationProps) {
       },
     ];
 
-    function iterateEvents(method: 'remove' | 'add') {
-      for (const { type, func } of events) {
-        audio[`${method}EventListener`](type, func);
-      }
-    }
-
-    iterateEvents('add');
+    iterateEvents('add', events, audio);
 
     return () => {
-      iterateEvents('remove');
+      iterateEvents('remove', events, audio);
     };
   }, [audio]);
 
