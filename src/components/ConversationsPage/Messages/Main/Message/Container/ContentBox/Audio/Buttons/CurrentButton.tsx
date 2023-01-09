@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { PauseButton } from './PauseButton';
 import { PlayButton } from './PlayButton';
+import { Event, iterateEvents } from '../../Audio';
 
 type CurrentButtonProps = {
   audio: HTMLAudioElement;
@@ -11,7 +12,24 @@ export type SetIsPlaying = Dispatch<SetStateAction<boolean>>;
 export function CurrentButton({ audio }: CurrentButtonProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    function resetAudio() {
+      setIsPlaying(false);
+    }
+
+    const events: Event[] = [
+      {
+        type: 'ended',
+        func: resetAudio,
+      },
+    ];
+
+    iterateEvents('add', events, audio);
+
+    return () => {
+      iterateEvents('remove', events, audio);
+    };
+  }, [audio]);
 
   const play = audio.play.bind(audio);
   const pause = audio.pause.bind(audio);
