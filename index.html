@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @keyframes slide {
+        from {
+          width: 0%;
+        }
+
+        to {
+          width: 100%;
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slider {
+        width: 500px;
+        height: 40px;
+        border: 2px solid black;
+      }
+
+      .track {
+        background-color: blue;
+        height: 100%;
+        animation: slide 1s linear infinite;
+
+        /* animation-play-state: paused; */
+
+        position: relative;
+
+        display: flex;
+        align-items: center;
+      }
+
+      .thumb {
+        width: 70px;
+        aspect-ratio: 1 / 1;
+        background-color: black;
+        border-radius: 50%;
+
+        position: absolute;
+        right: 0;
+
+        transform: translateX(50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slider">
+      <div class="track">
+        <div class="thumb"></div>
+      </div>
+    </div>
+  </body>
+</html>

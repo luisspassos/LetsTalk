@@ -10,7 +10,7 @@ export function SliderTrack() {
       boxShadow='sm'
       bg={useColorModeValue('whiteAlpha.700', 'whiteAlpha.400')}
     >
-      <SliderFilledTrack />
+      <SliderFilledTrack transition='0.2s' />
     </ChakraSliderTrack>
   );
 }

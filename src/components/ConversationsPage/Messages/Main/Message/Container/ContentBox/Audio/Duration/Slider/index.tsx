@@ -1,4 +1,4 @@
-import { SliderThumb, Slider as ChakraSlider } from '@chakra-ui/react';
+import { Slider as ChakraSlider, SliderThumb } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Event, iterateEvents } from '../..';
 import { SliderTrack } from './SliderTrack';
@@ -12,7 +12,7 @@ export function Slider({ audio }: SliderProps) {
 
   useEffect(() => {
     function getValue() {
-      const newValue = Math.floor((audio.currentTime / audio.duration) * 100); // is a percentage;
+      const newValue = (audio.currentTime / audio.duration) * 100; // is a percentage;
 
       setValue(newValue);
     }
@@ -46,7 +46,7 @@ export function Slider({ audio }: SliderProps) {
       value={value}
     >
       <SliderTrack />
-      <SliderThumb transition='0.1s' />
+      <SliderThumb />
     </ChakraSlider>
   );
 }
