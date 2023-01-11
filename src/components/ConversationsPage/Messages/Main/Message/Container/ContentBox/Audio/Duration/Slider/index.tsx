@@ -8,27 +8,18 @@ type SliderProps = {
 };
 
 export function Slider({ audio }: SliderProps) {
+  const [duration, setDuration] = useState(0);
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    function getValue() {
-      const newValue = (audio.currentTime / audio.duration) * 100; // is a percentage;
-
-      setValue(newValue);
-    }
-
-    function reset() {
-      setValue(0);
+    function getDuration() {
+      setDuration(audio.duration);
     }
 
     const events: Event[] = [
       {
-        type: 'timeupdate',
-        func: getValue,
-      },
-      {
-        type: 'ended',
-        func: reset,
+        type: 'loadedmetadata',
+        func: getDuration,
       },
     ];
 
@@ -39,6 +30,12 @@ export function Slider({ audio }: SliderProps) {
     };
   }, [audio]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setValue(100);
+    }, 5000);
+  }, []);
+
   return (
     <ChakraSlider
       focusThumbOnChange={false}
@@ -46,7 +43,7 @@ export function Slider({ audio }: SliderProps) {
       value={value}
     >
       <SliderTrack />
-      <SliderThumb />
+      <SliderThumb transition={`6s linear`} />
     </ChakraSlider>
   );
 }
