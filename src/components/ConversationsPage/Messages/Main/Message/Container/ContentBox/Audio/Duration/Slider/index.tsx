@@ -1,7 +1,5 @@
-import { Slider as ChakraSlider, SliderThumb } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Event, iterateEvents } from '../..';
-import { SliderTrack } from './SliderTrack';
 
 type SliderProps = {
   audio: HTMLAudioElement;
@@ -16,10 +14,18 @@ export function Slider({ audio }: SliderProps) {
       setDuration(audio.duration);
     }
 
+    function a() {
+      setValue((audio.currentTime / audio.duration) * 100);
+    }
+
     const events: Event[] = [
       {
         type: 'loadedmetadata',
         func: getDuration,
+      },
+      {
+        type: 'timeupdate',
+        func: a,
       },
     ];
 
@@ -30,20 +36,27 @@ export function Slider({ audio }: SliderProps) {
     };
   }, [audio]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setValue(100);
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setValue(100);
+  //   }, 5000);
+  // }, []);
 
   return (
-    <ChakraSlider
-      focusThumbOnChange={false}
-      aria-label='Barra de progresso do áudio'
-      value={value}
-    >
-      <SliderTrack />
-      <SliderThumb transition={`6s linear`} />
-    </ChakraSlider>
+    // <ChakraSlider
+    //   focusThumbOnChange={false}
+    //   aria-label='Barra de progresso do áudio'
+    //   value={value}
+    // >
+    //   <SliderTrack />
+    <input
+      type='range'
+      name=''
+      id=''
+      // value={value}
+      style={{ transition: '5s linear' }}
+    />
+    // {/* <SliderThumb transition={`180s linear`} /> */}
+    // </ChakraSlider>
   );
 }

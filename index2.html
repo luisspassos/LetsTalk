@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Pick a number between 0 and 100
+    <input type="number" value="0" min="0" max="100" />
+    <br /><br />
+    <input type="range" value="0" min="0" max="100" />
+  </body>
+  <script>
+    const _interpSpeed = 20;
+    var interval = setInterval(() => {
+      let range = document.querySelector('input[type=range]');
+
+      //If we don't have a value to interp to, just return
+      if (range.newValue === undefined) return;
+
+      //Convert the string value to an integer
+      let value = parseInt(range.value);
+
+      //Determine whether we need to add or subtract
+      let delta = range.newValue - value;
+      let sign = delta / Math.abs(delta);
+
+      //Add the designated interp amount (linear)
+      let v = value + sign * _interpSpeed;
+
+      //Prevent exceeding the minimum or maximum of the range
+      if (v > parseInt(range.max)) v = parseInt(range.max);
+      else if (v < parseInt(range.min)) v = parseInt(range.min);
+      //Prevent going past the desired value
+      else if (v > range.newValue && sign > 0) v = range.newValue;
+      else if (v < range.newValue && sign < 0) v = range.newValue;
+
+      //Update the value
+      range.value = v;
+
+      //If we've reached the desired value, delete the desired value
+      //so the interval will return at the top of the function.
+      if (range.value == range.newValue) delete range.newValue;
+    }, 1000 / 60);
+
+    // setInterval(() => {
+    //   let range = document.querySelector('input[type=range]');
+
+    //   range.newValue = 20;
+    // }, 1);
+
+    // const input = document.querySelector('input[type=number]');
+
+    // let a = 10;
+
+    // input.value = a;
+
+    const range = document.querySelector('input[type=range]');
+
+    let a = 1;
+
+    setInterval(() => {
+      range.newValue = a + 1;
+
+      a += 1;
+    }, 1000);
+
+    // document
+    //   .querySelector('input[type=number]')
+    //   .addEventListener('keyup', function () {
+    //     let v = parseInt(this.value);
+    //     if (Number.isNaN(v)) v = 0;
+    //     let range = document.querySelector('input[type=range]');
+    //     range.newValue = v;
+    //   });
+  </script>
+</html>
