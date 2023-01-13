@@ -6,9 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      @keyframes slide {
+      :root {
+        --animation-duration: 6s;
+      }
+
+      @keyframes sliderSlide {
         to {
-          transform: translateX(0);
+          transform: translateX(0%);
+        }
+      }
+
+      @keyframes thumbSlide {
+        to {
+          right: 0;
         }
       }
 
@@ -23,6 +33,19 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
+        gap: 50px;
+      }
+
+      input[type='range'] {
+        appearance: none;
+        width: 500px;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .container {
+        position: relative;
       }
 
       .slider {
@@ -30,13 +53,19 @@
         height: 40px;
         border: 2px solid black;
         overflow: hidden;
+
+        display: flex;
+        align-items: center;
+
+        cursor: pointer;
       }
 
       .track {
         background-color: blue;
         height: 100%;
-        animation-name: slide;
-        animation-duration: 5s;
+        width: 100%;
+        animation-name: sliderSlide;
+        animation-duration: var(--animation-duration);
         animation-timing-function: linear;
         animation-iteration-count: infinite;
 
@@ -57,18 +86,59 @@
         border-radius: 50%;
 
         position: absolute;
-        right: 0;
+
+        right: 100%;
+
+        animation-name: thumbSlide;
+        animation-duration: var(--animation-duration);
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+
+        animation-play-state: paused;
 
         transform: translateX(50%);
       }
     </style>
   </head>
   <body>
-    <input type="range" min="1" max="3" step=".1" value="1" class="slider" />
-    <div class="slider">
-      <div class="track">
-        <div class="thumb"></div>
+    <div class="container">
+      <div class="slider">
+        <div class="track"></div>
+        <!-- <div class="thumb"></div> -->
       </div>
     </div>
   </body>
+
+  <script>
+    const container = document.querySelector('.container');
+    const track = document.querySelector('.track');
+
+    function setAudioProgress(e) {
+      const width = e.clientX - container.offsetLeft;
+
+      const percentage = 100 - (width / container.offsetWidth) * 100;
+
+      // track.style.animationName = 'none';
+      track.style.transform = `translateX(-${percentage}%)`;
+      // track.style.animationName = 'sliderSlide';
+    }
+
+    let isHolding = false;
+
+    container.addEventListener('mouseup', () => {
+      isHolding = false;
+    });
+
+    container.addEventListener('mousedown', (e) => {
+      isHolding = true;
+
+      setAudioProgress(e);
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (isHolding === false) return;
+
+      setAudioProgress(e);
+    });
+  </script>
 </html>
