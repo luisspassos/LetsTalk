@@ -35,21 +35,22 @@ export function Slider({ audio }: SliderProps) {
   const animationBase = {
     w: '100%',
     h: '100%',
-    animation: `${slideAnimation} ${duration}s linear`,
+    animation: `${slideAnimation} ${6}s linear`,
     transform: 'translateX(-100%)',
   };
+
+  const thumbSize = '15px';
 
   return (
     <Box pos='relative' cursor='pointer'>
       <Flex
-        w='100%'
-        h='20px'
+        h='5px'
         bg={useColorModeValue('whiteAlpha.700', 'whiteAlpha.400')}
         overflow='hidden'
         borderRadius='20px'
         align='center'
       >
-        <Box bg='blue' pos='relative' {...animationBase} />
+        <Box bg='blue.300' pos='relative' {...animationBase} />
         <Flex
           pos='absolute'
           align='center'
@@ -57,9 +58,9 @@ export function Slider({ audio }: SliderProps) {
           {...animationBase}
         >
           <Box
-            w='20px'
-            h='20px'
-            bg='black'
+            w={thumbSize}
+            h={thumbSize}
+            bg='current'
             borderRadius='50%'
             pos='absolute'
             right='0'
