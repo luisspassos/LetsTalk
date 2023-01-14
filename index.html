@@ -10,15 +10,9 @@
         --animation-duration: 6s;
       }
 
-      @keyframes sliderSlide {
+      @keyframes slide {
         to {
-          transform: translateX(0%);
-        }
-      }
-
-      @keyframes thumbSlide {
-        to {
-          right: 0;
+          transform: translateX(0);
         }
       }
 
@@ -46,6 +40,15 @@
 
       .container {
         position: relative;
+
+        cursor: pointer;
+
+        height: 70px;
+        width: 570px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .slider {
@@ -60,23 +63,29 @@
         cursor: pointer;
       }
 
-      .track {
-        background-color: blue;
+      .animationBase {
         height: 100%;
-        width: 100%;
-        animation-name: sliderSlide;
+        width: 496px;
+
+        animation-name: slide;
         animation-duration: var(--animation-duration);
         animation-timing-function: linear;
-        animation-iteration-count: infinite;
-
-        /* animation-play-state: paused; */
-
-        position: relative;
 
         transform: translateX(-100%);
+      }
+
+      .track {
+        background-color: blue;
+        position: relative;
+      }
+
+      .thumbWrapper {
+        position: absolute;
 
         display: flex;
         align-items: center;
+
+        pointer-events: none;
       }
 
       .thumb {
@@ -86,15 +95,9 @@
         border-radius: 50%;
 
         position: absolute;
+        right: 0;
 
-        right: 100%;
-
-        animation-name: thumbSlide;
-        animation-duration: var(--animation-duration);
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-
-        animation-play-state: paused;
+        cursor: pointer;
 
         transform: translateX(50%);
       }
@@ -103,30 +106,76 @@
   <body>
     <div class="container">
       <div class="slider">
-        <div class="track"></div>
-        <!-- <div class="thumb"></div> -->
+        <div class="animationBase track"></div>
+        <div class="animationBase thumbWrapper">
+          <div class="thumb"></div>
+        </div>
       </div>
     </div>
   </body>
 
   <script>
+    const root = document.querySelector(':root');
     const container = document.querySelector('.container');
     const track = document.querySelector('.track');
+    const thumbWrapper = document.querySelector('.thumbWrapper');
+
+    function setElementToTheStart(e) {
+      e.target.style.transform = 'translateX(-100%)';
+    }
+
+    track.addEventListener('animationend', setElementToTheStart);
+    thumbWrapper.addEventListener('animationend', setElementToTheStart);
+
+    const rootStyles = getComputedStyle(root);
+
+    function getDuration() {
+      const animationDuration = rootStyles.getPropertyValue(
+        '--animation-duration'
+      );
+      const duration = Number(animationDuration.replace('s', ''));
+
+      return duration;
+    }
+
+    let percentageSet;
 
     function setAudioProgress(e) {
-      const width = e.clientX - container.offsetLeft;
+      const widthClicked = e.clientX - container.offsetLeft;
+      const widthInPercentage =
+        100 - (widthClicked / container.offsetWidth) * 100;
 
-      const percentage = 100 - (width / container.offsetWidth) * 100;
+      percentageSet = Math.max(Math.min(widthInPercentage, 100), 0); // the percentage will be between 0 and 100 for the animation to work correctly
 
-      // track.style.animationName = 'none';
-      track.style.transform = `translateX(-${percentage}%)`;
-      // track.style.animationName = 'sliderSlide';
+      track.style.animation = 'none';
+      track.style.transform = `translateX(-${percentageSet}%)`;
+
+      thumbWrapper.style.animation = 'none';
+      thumbWrapper.style.transform = `translateX(-${percentageSet}%)`;
+    }
+
+    function activateAnimation() {
+      track.offsetHeight;
+      track.style.animation = null;
+
+      thumbWrapper.offsetHeight;
+      thumbWrapper.style.animation = null;
+
+      const duration = getDuration();
+      const newDuration = (percentageSet * duration) / 100;
+
+      track.style.animationDuration = `${newDuration}s`;
+      thumbWrapper.style.animationDuration = `${newDuration}s`;
     }
 
     let isHolding = false;
 
-    container.addEventListener('mouseup', () => {
+    document.addEventListener('mouseup', () => {
+      if (isHolding === false) return;
+
       isHolding = false;
+
+      activateAnimation();
     });
 
     container.addEventListener('mousedown', (e) => {
@@ -135,7 +184,7 @@
       setAudioProgress(e);
     });
 
-    container.addEventListener('mousemove', (e) => {
+    document.addEventListener('mousemove', (e) => {
       if (isHolding === false) return;
 
       setAudioProgress(e);
