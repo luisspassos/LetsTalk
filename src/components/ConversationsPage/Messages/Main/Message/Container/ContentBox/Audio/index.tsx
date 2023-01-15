@@ -34,6 +34,7 @@ export function AudioComponent() {
       p='.65em'
       bg='inherit'
       borderRadius='inherit'
+      gap='.9em'
     >
       <Avatar />
       <CurrentButton audio={audio} />

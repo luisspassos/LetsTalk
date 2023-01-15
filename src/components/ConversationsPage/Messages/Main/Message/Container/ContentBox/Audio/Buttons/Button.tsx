@@ -11,7 +11,6 @@ export function Button(props: ButtonProps) {
       minW='0'
       display='inline-flex'
       fontSize='2.2em'
-      mr='.6em'
       {...props}
     />
   );

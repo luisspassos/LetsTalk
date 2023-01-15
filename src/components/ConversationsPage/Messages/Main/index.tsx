@@ -9,7 +9,6 @@ import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 import { Message } from './Message';
-import { Text } from './Message/Container/ContentBox/Text';
 import { AudioComponent as Audio } from './Message/Container/ContentBox/Audio';
 import { styles as parentStyles } from '../index';
 
@@ -300,7 +299,7 @@ export function Main() {
       <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
         <Video />
       </Message> */}
-      <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
+      {/* <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
         <Text>❤️🎙️dd</Text>
       </Message>
       <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
@@ -308,7 +307,7 @@ export function Main() {
       </Message>
       <Message contactMessage={false} messageIndex={20} sentIn='20:00'>
         <Text>olaaasdsadas</Text>
-      </Message>
+      </Message> */}
       <Message
         maxW='350px'
         w='100%'
