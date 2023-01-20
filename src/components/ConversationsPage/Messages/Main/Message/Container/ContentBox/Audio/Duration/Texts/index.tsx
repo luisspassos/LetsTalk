@@ -1,12 +1,12 @@
 import { Flex } from '@chakra-ui/react';
-import { Text } from './Text';
+import { Duration } from '..';
+import { CurrentTime } from './Text/CurrentTime';
 
-type Texts = {
-  currentTime: string;
-  duration: string;
+type TextsProps = {
+  audio: HTMLAudioElement;
 };
 
-export function Texts({ currentTime, duration }: Texts) {
+export function Texts({ audio }: TextsProps) {
   return (
     <Flex
       left={0}
@@ -15,8 +15,8 @@ export function Texts({ currentTime, duration }: Texts) {
       pos='absolute'
       justify='space-between'
     >
-      <Text>{currentTime}</Text>
-      <Text>{duration}</Text>
+      <CurrentTime audio={audio} />
+      <Duration audio={audio} />
     </Flex>
   );
 }

@@ -4,6 +4,7 @@ import { Slider } from './Slider';
 
 import { Event, iterateEvents } from '..';
 import { useAudioDuration } from 'contexts/AudioDurationContext';
+import { Texts } from './Texts';
 
 type DurationProps = {
   audio: HTMLAudioElement;
@@ -40,7 +41,7 @@ export function Duration({ audio }: DurationProps) {
       pos='relative'
     >
       <Slider />
-      {/* <Texts duration={duration} currentTime={currentTime} /> */}
+      <Texts audio={audio} />
     </Flex>
   );
 }
