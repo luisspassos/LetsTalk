@@ -12,7 +12,7 @@ import { Container } from './Container';
 type ConversationProps = {
   data: {
     name: string;
-    photoURL: string | null;
+    photoURL: string;
     updatedAt: string;
     lastMessage: string;
   };

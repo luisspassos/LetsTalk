@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
       :root {
-        --animation-duration: 6s;
+        --animation-duration: 180s;
       }
 
       @keyframes slide {
@@ -29,6 +29,7 @@
         justify-content: center;
         flex-direction: column;
         gap: 50px;
+        background-color: black;
       }
 
       input[type='range'] {
@@ -54,8 +55,9 @@
       .slider {
         width: 500px;
         height: 40px;
-        border: 2px solid black;
         overflow: hidden;
+        background-color: white;
+        border-radius: 20px;
 
         display: flex;
         align-items: center;
@@ -73,7 +75,7 @@
       }
 
       .track {
-        background-color: blue;
+        background-color: lightslategray;
         position: relative;
       }
 
@@ -89,7 +91,7 @@
       .thumb {
         width: 70px;
         aspect-ratio: 1 / 1;
-        background-color: black;
+        background-color: purple;
         border-radius: 50%;
 
         position: absolute;

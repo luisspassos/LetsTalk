@@ -32,7 +32,7 @@ type ConversationsContextType = {
   conversations: {
     setConversations: Dispatch<SetStateAction<Conversations>>;
     data: Conversations;
-    numberOfConversations: number | undefined;
+    numberOfConversations: number;
   };
   currentConversation: {
     index: number;
@@ -67,7 +67,7 @@ export function ConversationsProvider({
   const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
 
   const numberOfConversations = useMemo(
-    () => conversations?.length,
+    () => conversations?.length ?? 0,
     [conversations?.length]
   );
 

@@ -24,7 +24,8 @@ export function iterateEvents(
 }
 
 export function AudioComponent() {
-  const audio = new Audio('audio.mp3');
+  // const audio = new Audio('audio.mp3');
+  const audio = new Audio('*');
   audio.preload = 'metadata';
 
   return (

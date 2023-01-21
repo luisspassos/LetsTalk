@@ -2,7 +2,6 @@ import { Stack } from '@chakra-ui/react';
 import * as yup from 'yup';
 import { FormWrapper } from 'components/Form/FormWrapper';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAuth } from 'contexts/AuthContext';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { regexs } from 'utils/regexs';
@@ -12,6 +11,7 @@ import { PasswordInput } from './PasswordInput';
 import { ConfirmPasswordInput } from './ConfirmPasswordInput';
 import { Button } from 'components/Form/Button';
 import { toast } from 'utils/Toasts/toast';
+import { setUsername } from 'contexts/AuthContext';
 
 type RegistrationFormData = {
   name: string;
@@ -65,8 +65,6 @@ export function Form() {
     resolver: yupResolver(registrationFormSchema),
   });
 
-  const { setUsername } = useAuth();
-
   const handleRegister = useMemo(
     () =>
       handleSubmit(async ({ email, password, name }) => {
@@ -111,7 +109,7 @@ export function Form() {
           }
         }
       }),
-    [handleSubmit, setError, setUsername]
+    [handleSubmit, setError]
   );
 
   return (

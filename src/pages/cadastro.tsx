@@ -17,7 +17,7 @@ export default function Register() {
           <Stack
             color={useColorModeValue('blue.900', 'gray.50')}
             spacing='20px'
-            d={{ base: 'none', xl: 'flex' }}
+            display={{ base: 'none', xl: 'flex' }}
           >
             <Description />
             <LoginLink />
