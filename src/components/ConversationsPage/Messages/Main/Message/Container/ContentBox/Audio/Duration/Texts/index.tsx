@@ -1,12 +1,13 @@
 import { Flex } from '@chakra-ui/react';
-import { Duration } from '..';
 import { CurrentTime } from './Text/CurrentTime';
+import { TotalDuration } from './Text/TotalDuration';
 
 type TextsProps = {
   audio: HTMLAudioElement;
+  duration: HTMLAudioElement['duration'];
 };
 
-export function Texts({ audio }: TextsProps) {
+export function Texts({ audio, duration }: TextsProps) {
   return (
     <Flex
       left={0}
@@ -16,7 +17,7 @@ export function Texts({ audio }: TextsProps) {
       justify='space-between'
     >
       <CurrentTime audio={audio} />
-      <Duration audio={audio} />
+      <TotalDuration duration={duration} />
     </Flex>
   );
 }

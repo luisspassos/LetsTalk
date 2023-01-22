@@ -24,6 +24,10 @@ export function CurrentTime({ audio }: CurrentTimeProps) {
     ];
 
     iterateEvents('add', events, audio);
+
+    return () => {
+      iterateEvents('remove', events, audio);
+    };
   }, [audio]);
 
   return <Text>{currentTime}</Text>;

@@ -39,8 +39,8 @@ export function Duration({ audio }: DurationProps) {
       direction='column'
       pos='relative'
     >
-      <Slider />
-      <Texts audio={audio} />
+      <Slider duration={duration} />
+      <Texts duration={duration} audio={audio} />
     </Flex>
   );
 }
