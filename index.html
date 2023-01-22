@@ -170,7 +170,7 @@
 
     let isHolding = false;
 
-    document.addEventListener('mouseup', () => {
+    window.addEventListener('mouseup', () => {
       if (isHolding === false) return;
 
       isHolding = false;
@@ -184,7 +184,7 @@
       setAudioProgress(e);
     });
 
-    document.addEventListener('mousemove', (e) => {
+    window.addEventListener('mousemove', (e) => {
       if (isHolding === false) return;
 
       setAudioProgress(e);
