@@ -1,5 +1,8 @@
+import { ContainerProps } from '.';
 import { AnimationBox } from './AnimationBox';
 
-export function Track() {
-  return <AnimationBox bg='blue.300' pos='relative' />;
+type TrackProps = ContainerProps;
+
+export function Track(props: TrackProps) {
+  return <AnimationBox bg='blue.300' pos='relative' {...props} />;
 }

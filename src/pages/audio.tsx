@@ -5,7 +5,7 @@ export default function Audiaao() {
   return (
     <Center h='100vh'>
       <Box w='200px'>
-        <Slider />
+        <Slider duration={6} />
       </Box>
     </Center>
   );

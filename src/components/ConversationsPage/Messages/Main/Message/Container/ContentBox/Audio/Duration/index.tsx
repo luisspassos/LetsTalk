@@ -1,9 +1,8 @@
 import { Flex } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { iterateEvents, Event } from '..';
 import { Slider } from './Slider';
 
-import { Event, iterateEvents } from '..';
-import { useAudioDuration } from 'contexts/AudioDurationContext';
 import { Texts } from './Texts';
 
 type DurationProps = {
@@ -11,7 +10,7 @@ type DurationProps = {
 };
 
 export function Duration({ audio }: DurationProps) {
-  const { setDuration } = useAudioDuration();
+  const [duration, setDuration] = useState<HTMLAudioElement['duration']>(0);
 
   useEffect(() => {
     function setAudioDuration() {
@@ -30,7 +29,7 @@ export function Duration({ audio }: DurationProps) {
     return () => {
       iterateEvents('remove', events, audio);
     };
-  }, [audio, setDuration]);
+  }, [audio]);
 
   return (
     <Flex

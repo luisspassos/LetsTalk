@@ -13,6 +13,7 @@ export function Circle() {
       right='0'
       cursor='pointer'
       transform='translateX(50%)'
+      pointerEvents='none'
     />
   );
 }

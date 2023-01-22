@@ -1,9 +1,11 @@
-import { useAudioDuration } from 'contexts/AudioDurationContext';
 import { useEffect, useRef } from 'react';
 import { formatSecondsAsTime, initialValue, Text } from '.';
 
-export function TotalDuration() {
-  const { duration } = useAudioDuration();
+type TotalDurationProps = {
+  duration: HTMLAudioElement['duration'];
+};
+
+export function TotalDuration({ duration }: TotalDurationProps) {
   const formattedDuration = useRef(initialValue);
 
   useEffect(() => {

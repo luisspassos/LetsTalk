@@ -28,7 +28,6 @@ import { SearchedEmojisProvider } from '../contexts/EmojiPicker/SearchedEmojiCon
 import { PositionSelectedFromEmojiPickerCategoriesProvider } from '../contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
 import RouteLoading from 'next-progress';
-import { AudioDurationProvider } from 'contexts/AudioDurationContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -54,14 +53,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                                           <CategoriesProvider>
                                             <ToggleEmojiPickerProvider>
                                               <EmojiPickerScrollProvider>
-                                                <AudioDurationProvider>
-                                                  <RouteLoading
-                                                    options={{
-                                                      showSpinner: false,
-                                                    }}
-                                                  />
-                                                  <Component {...pageProps} />
-                                                </AudioDurationProvider>
+                                                <RouteLoading
+                                                  options={{
+                                                    showSpinner: false,
+                                                  }}
+                                                />
+                                                <Component {...pageProps} />
                                               </EmojiPickerScrollProvider>
                                             </ToggleEmojiPickerProvider>
                                           </CategoriesProvider>

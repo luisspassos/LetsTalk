@@ -2,7 +2,13 @@ import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { Thumb } from './Thumb';
 import { Track } from './Track';
 
-export function Container() {
+export type ContainerProps = {
+  percentage: number;
+  stopAnimation: boolean;
+  duration: HTMLAudioElement['duration'];
+};
+
+export function Container(props: ContainerProps) {
   return (
     <Flex
       h='5px'
@@ -10,8 +16,8 @@ export function Container() {
       overflow='hidden'
       borderRadius='20px'
     >
-      <Track />
-      <Thumb />
+      <Track {...props} />
+      <Thumb {...props} />
     </Flex>
   );
 }
