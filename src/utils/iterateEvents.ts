@@ -2,18 +2,16 @@ type EventMapType = HTMLElementEventMap | WindowEventMap;
 
 type EventType<EventMap extends EventMapType> = keyof EventMap;
 
-export type Event<Target extends EventTarget, EventMap extends EventMapType> = {
+export type Event<EventMap extends EventMapType> = {
   type: EventType<EventMap>;
-  func: (this: Target, ev: EventMap[EventType<EventMap>]) => any;
+  func: Function;
 };
 
 // iterateEvents //
 
-type EventListenerParams = Parameters<EventTarget['addEventListener']>;
-
 type EventParam = {
-  type: EventListenerParams[0];
-  func: EventListenerParams[1];
+  type: string;
+  func: Function;
 };
 
 export function iterateEvents(
@@ -21,7 +19,7 @@ export function iterateEvents(
   events: EventParam[],
   target: EventTarget
 ) {
-  for (const { type, func } of events) {
+  for (const { type, func } of events as any) {
     target[`${method}EventListener`](type, func);
   }
 }

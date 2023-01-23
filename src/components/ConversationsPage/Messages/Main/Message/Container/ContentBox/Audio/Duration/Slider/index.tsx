@@ -1,5 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
-import {
+import React, {
   useEffect,
   useRef,
   MouseEvent as ReactMouseEvent,
@@ -8,6 +8,11 @@ import {
 } from 'react';
 import { Container } from './Container';
 import { thumbSize } from './Container/Thumb/Circle';
+import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
+
+// you can get the EventMap by seeing on the targetElement.addEventListener
+type EventMap = WindowEventMap;
+type Event = EventType<EventMap>;
 
 type SliderProps = {
   duration: HTMLAudioElement['duration'];
@@ -65,12 +70,21 @@ export function Slider({ duration }: SliderProps) {
       setAudioProgress(e);
     }
 
-    window.addEventListener('mouseup', handleSetAudio);
-    window.addEventListener('mousemove', handleMoveAudioProgress);
+    const events: Event[] = [
+      {
+        type: 'mouseup',
+        func: handleSetAudio,
+      },
+      {
+        type: 'mousemove',
+        func: handleMoveAudioProgress,
+      },
+    ];
+
+    iterateEvents('add', events, window);
 
     return () => {
-      window.removeEventListener('mouseup', handleSetAudio);
-      window.removeEventListener('mousemove', handleMoveAudioProgress);
+      iterateEvents('remove', events, window);
     };
   }, [duration, percentage, setAudioProgress]);
 

@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { iterateEvents, Event } from '..';
+import { iterateEvents } from 'utils/iterateEvents';
+import { Event } from '..';
 import { Slider } from './Slider';
 
 import { Texts } from './Texts';

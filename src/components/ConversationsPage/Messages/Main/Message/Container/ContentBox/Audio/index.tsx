@@ -2,26 +2,11 @@ import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { Avatar } from './Avatar';
 import { CurrentButton } from './Buttons/CurrentButton';
 import { Duration } from './Duration';
+import { Event as EventType } from 'utils/iterateEvents';
 
-type EventType = keyof HTMLMediaElementEventMap;
-
-export type Event = {
-  type: EventType;
-  func: (
-    this: HTMLAudioElement,
-    ev: HTMLMediaElementEventMap[EventType]
-  ) => any;
-};
-
-export function iterateEvents(
-  method: 'remove' | 'add',
-  events: Event[],
-  audio: HTMLAudioElement
-) {
-  for (const { type, func } of events) {
-    audio[`${method}EventListener`](type, func);
-  }
-}
+// you can get the EventMap by seeing on the targetElement.addEventListener
+type EventMap = HTMLMediaElementEventMap;
+export type Event = EventType<EventMap>;
 
 export function AudioComponent() {
   const audio = new Audio('audio.mp3');

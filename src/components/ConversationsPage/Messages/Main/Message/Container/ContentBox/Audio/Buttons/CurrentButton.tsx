@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { PauseButton } from './PauseButton';
 import { PlayButton } from './PlayButton';
-import { Event, iterateEvents } from '../../Audio';
+import { Event } from '../../Audio';
+import { iterateEvents } from 'utils/iterateEvents';
 
 type CurrentButtonProps = {
   audio: HTMLAudioElement;

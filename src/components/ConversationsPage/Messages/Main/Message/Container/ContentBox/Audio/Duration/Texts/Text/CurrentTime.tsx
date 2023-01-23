@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { iterateEvents } from 'utils/iterateEvents';
 import { formatSecondsAsTime, initialValue, Text } from '.';
-import { iterateEvents, Event } from '../../..';
+import { Event } from '../../..';
 
 type CurrentTimeProps = {
   audio: HTMLAudioElement;
