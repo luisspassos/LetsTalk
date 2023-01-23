@@ -19,17 +19,15 @@ type SliderProps = {
 };
 
 export function Slider({ duration }: SliderProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isHolding = useRef(false);
-
   const initialValues = {
     animationDuration: duration,
     percentage: 100,
   };
 
-  const [animationDuration, setAnimationDuration] = useState(
-    initialValues.animationDuration
-  );
+  const ref = useRef<HTMLDivElement>(null);
+  const isHolding = useRef(false);
+  const animationDuration = useRef(initialValues.animationDuration);
+
   const [percentage, setPercentage] = useState(initialValues.percentage);
   const [stopAnimation, setStopAnimation] = useState(false);
 
@@ -54,11 +52,11 @@ export function Slider({ duration }: SliderProps) {
       isHolding.current = false;
 
       function activateAnimation() {
-        setStopAnimation(false);
-
         const newAnimationDuration = (percentage * duration) / 100;
 
-        setAnimationDuration(newAnimationDuration);
+        animationDuration.current = newAnimationDuration;
+
+        setStopAnimation(false);
       }
 
       activateAnimation();
@@ -110,7 +108,7 @@ export function Slider({ duration }: SliderProps) {
     >
       <Box w={`calc(100% - ${thumbSize})`} pos='relative'>
         <Container
-          duration={animationDuration}
+          duration={animationDuration.current}
           percentage={percentage}
           stopAnimation={stopAnimation}
         />
