@@ -19,7 +19,7 @@ export function AnimationBox({
   duration,
   ...rest
 }: AnimationBoxProps) {
-  const animation = `${slideAnimation} ${duration}s linear`;
+  const animation = `${slideAnimation} ${duration}s linear paused`;
 
   return (
     <Box
