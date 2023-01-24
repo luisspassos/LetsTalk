@@ -17,9 +17,13 @@ export function AnimationBox({
   percentage,
   stopAnimation,
   duration,
+  isPlaying,
   ...rest
 }: AnimationBoxProps) {
-  const animation = `${slideAnimation} ${duration}s linear paused`;
+  const animationPlayState: AnimationPlayState =
+    isPlaying === true ? 'running' : 'paused';
+
+  const animation = `${slideAnimation} ${duration}s linear ${animationPlayState}`;
 
   return (
     <Box

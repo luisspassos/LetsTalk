@@ -1,8 +1,7 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { Avatar } from './Avatar';
-import { CurrentButton } from './Buttons/CurrentButton';
-import { Duration } from './Duration';
 import { Event as EventType } from 'utils/iterateEvents';
+import { InteractiveElements } from './InteractiveElements';
 
 // you can get the EventMap by seeing on the targetElement.addEventListener
 type EventMap = HTMLMediaElementEventMap;
@@ -22,8 +21,7 @@ export function AudioComponent() {
       gap='.9em'
     >
       <Avatar />
-      <CurrentButton audio={audio} />
-      <Duration audio={audio} />
+      <InteractiveElements audio={audio} />
     </Flex>
   );
 }

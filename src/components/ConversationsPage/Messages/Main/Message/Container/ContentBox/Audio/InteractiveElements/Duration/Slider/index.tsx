@@ -16,9 +16,11 @@ type Event = EventType<EventMap>;
 
 type SliderProps = {
   duration: HTMLAudioElement['duration'];
+  audio: HTMLAudioElement;
+  isPlaying: boolean;
 };
 
-export function Slider({ duration }: SliderProps) {
+export function Slider({ duration, audio, isPlaying }: SliderProps) {
   const initialValues = {
     animationDuration: duration,
     percentage: 100,
@@ -26,7 +28,11 @@ export function Slider({ duration }: SliderProps) {
 
   const ref = useRef<HTMLDivElement>(null);
   const isHolding = useRef(false);
-  const animationDuration = useRef(initialValues.animationDuration);
+  const animationDuration = useRef(0);
+
+  useEffect(() => {
+    animationDuration.current = duration;
+  }, [duration]);
 
   const [percentage, setPercentage] = useState(initialValues.percentage);
   const [stopAnimation, setStopAnimation] = useState(false);
@@ -124,6 +130,8 @@ export function Slider({ duration }: SliderProps) {
           duration={animationDuration.current}
           percentage={percentage}
           stopAnimation={stopAnimation}
+          audio={audio}
+          isPlaying={isPlaying}
         />
       </Box>
     </Flex>

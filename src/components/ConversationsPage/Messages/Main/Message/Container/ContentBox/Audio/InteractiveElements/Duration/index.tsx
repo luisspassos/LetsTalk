@@ -7,9 +7,10 @@ import { Texts } from './Texts';
 
 type DurationProps = {
   audio: HTMLAudioElement;
+  isPlaying: boolean;
 };
 
-export function Duration({ audio }: DurationProps) {
+export function Duration({ audio, isPlaying }: DurationProps) {
   const [duration, setDuration] = useState<HTMLAudioElement['duration']>(0);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export function Duration({ audio }: DurationProps) {
       direction='column'
       pos='relative'
     >
-      <Slider duration={duration} />
+      <Slider isPlaying={isPlaying} duration={duration} audio={audio} />
       <Texts duration={duration} audio={audio} />
     </Flex>
   );

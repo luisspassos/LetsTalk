@@ -1,6 +1,6 @@
 import { BsFillPlayFill } from 'react-icons/bs';
+import { SetIsPlaying } from '..';
 import { Button } from './Button';
-import { SetIsPlaying } from './CurrentButton';
 
 type PlayButtonProps = {
   play: HTMLAudioElement['play'];
