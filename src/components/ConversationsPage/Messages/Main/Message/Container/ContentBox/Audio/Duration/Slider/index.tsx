@@ -36,7 +36,20 @@ export function Slider({ duration }: SliderProps) {
 
     if (slider === null) return;
 
-    const widthClicked = e.clientX - slider.offsetLeft;
+    function getSliderOffsetLeft(el: HTMLElement): number {
+      const offsetParentDoesNotExist = el.offsetParent === null;
+      const offsetParentIsNotAValidElement = !(
+        el.offsetParent instanceof HTMLElement
+      );
+
+      if (offsetParentDoesNotExist || offsetParentIsNotAValidElement) return 0;
+
+      return el ? el.offsetLeft + getSliderOffsetLeft(el.offsetParent) : 0;
+    }
+
+    const sliderOffSetLeft = getSliderOffsetLeft(slider);
+
+    const widthClicked = e.clientX - sliderOffSetLeft;
     const widthInPercentage = 100 - (widthClicked / slider.offsetWidth) * 100;
 
     const newPercentage = Math.max(Math.min(widthInPercentage, 100), 0); // the percentage will be between 0 and 100 for the animation to work correctly
