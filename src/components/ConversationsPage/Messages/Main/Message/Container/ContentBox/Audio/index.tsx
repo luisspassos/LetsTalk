@@ -1,14 +1,9 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { Avatar } from './Avatar';
-import { Event as EventType } from 'utils/iterateEvents';
 import { InteractiveElements } from './InteractiveElements';
 
-// you can get the EventMap by seeing on the targetElement.addEventListener
-type EventMap = HTMLMediaElementEventMap;
-export type Event = EventType<EventMap>;
-
 export function AudioComponent() {
-  const audio = new Audio('audio.mp3');
+  const audio = new Audio('horse.wav');
   audio.preload = 'metadata';
 
   return (

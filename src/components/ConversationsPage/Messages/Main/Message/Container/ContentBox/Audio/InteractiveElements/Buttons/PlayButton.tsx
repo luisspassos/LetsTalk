@@ -5,11 +5,11 @@ import { Button } from './Button';
 type PlayButtonProps = {
   play: HTMLAudioElement['play'];
   setIsPlaying: SetIsPlaying;
+  isPlaying: boolean;
 };
 
-export function PlayButton({ play, setIsPlaying }: PlayButtonProps) {
+export function PlayButton({ play, setIsPlaying, isPlaying }: PlayButtonProps) {
   function handlePlay() {
-    play();
     setIsPlaying(true);
   }
 

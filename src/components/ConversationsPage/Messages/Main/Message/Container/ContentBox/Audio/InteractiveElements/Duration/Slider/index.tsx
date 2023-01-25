@@ -1,5 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
-import React, {
+import {
   useEffect,
   useRef,
   MouseEvent as ReactMouseEvent,
@@ -12,7 +12,7 @@ import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
 
 // you can get the EventMap by seeing on the targetElement.addEventListener
 type EventMap = WindowEventMap;
-type Event = EventType<EventMap>;
+type WindowEvent = EventType<EventMap>;
 
 type SliderProps = {
   duration: HTMLAudioElement['duration'];
@@ -64,6 +64,7 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
     setStopAnimation(true);
   }, []);
 
+  // set window events
   useEffect(() => {
     function handleSetAudio() {
       if (isHolding.current === false) return;
@@ -87,7 +88,7 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
       setAudioProgress(e);
     }
 
-    const events: Event[] = [
+    const events: WindowEvent[] = [
       {
         type: 'mouseup',
         func: handleSetAudio,
@@ -105,6 +106,26 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
     };
   }, [duration, percentage, setAudioProgress]);
 
+  // set audio events
+  // useEffect(() => {
+  //   function restartAnimation() {
+  //     setStopAnimation(false);
+  //   }
+
+  //   const events: AudioEvent[] = [
+  //     {
+  //       type: 'ended',
+  //       func: restartAnimation,
+  //     },
+  //   ];
+
+  //   iterateEvents('add', events, audio);
+
+  //   return () => {
+  //     iterateEvents('remove', events, audio);
+  //   };
+  // }, [audio]);
+
   function handleStartSettingAudio(e: ReactMouseEvent) {
     isHolding.current = true;
 
@@ -112,7 +133,13 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
   }
 
   function restart() {
+    // e: AnimationEvent
+    // const animationDidNotRun = e.elapsedTime === 0;
+
+    // if (animationDidNotRun) return;
+
     setPercentage(initialValues.percentage);
+    // setStopAnimation(true);
   }
 
   return (

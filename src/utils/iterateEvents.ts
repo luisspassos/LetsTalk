@@ -14,12 +14,17 @@ type EventParam = {
   func: Function;
 };
 
+type ListenerEvent = {
+  type: any;
+  func: any;
+};
+
 export function iterateEvents(
   method: 'remove' | 'add',
   events: EventParam[],
   target: EventTarget
 ) {
-  for (const { type, func } of events as any) {
+  for (const { type, func } of events as ListenerEvent[]) {
     target[`${method}EventListener`](type, func);
   }
 }
