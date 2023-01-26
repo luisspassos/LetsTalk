@@ -2,9 +2,9 @@ import { Box, Flex } from '@chakra-ui/react';
 import {
   useEffect,
   useRef,
-  MouseEvent as ReactMouseEvent,
   useState,
   useCallback,
+  MouseEvent as ReactMouseEvent,
 } from 'react';
 import { Container } from './Container';
 import { thumbSize } from './Container/Thumb/Circle';
@@ -71,6 +71,8 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
 
       isHolding.current = false;
 
+      const remainingDuration = (percentage * duration) / 100;
+
       function activateAnimation() {
         const newAnimationDuration = (percentage * duration) / 100;
 
@@ -79,6 +81,13 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
         setStopAnimation(false);
       }
 
+      function setNewAudioCurrentTime() {
+        const currentTime = duration - remainingDuration;
+
+        audio.currentTime = currentTime;
+      }
+
+      setNewAudioCurrentTime();
       activateAnimation();
     }
 
@@ -104,27 +113,7 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
     return () => {
       iterateEvents('remove', events, window);
     };
-  }, [duration, percentage, setAudioProgress]);
-
-  // set audio events
-  // useEffect(() => {
-  //   function restartAnimation() {
-  //     setStopAnimation(false);
-  //   }
-
-  //   const events: AudioEvent[] = [
-  //     {
-  //       type: 'ended',
-  //       func: restartAnimation,
-  //     },
-  //   ];
-
-  //   iterateEvents('add', events, audio);
-
-  //   return () => {
-  //     iterateEvents('remove', events, audio);
-  //   };
-  // }, [audio]);
+  }, [audio, duration, percentage, setAudioProgress]);
 
   function handleStartSettingAudio(e: ReactMouseEvent) {
     isHolding.current = true;
@@ -132,14 +121,15 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
     setAudioProgress(e);
   }
 
-  function restart() {
-    // e: AnimationEvent
-    // const animationDidNotRun = e.elapsedTime === 0;
-
-    // if (animationDidNotRun) return;
-
+  function restartAnimation() {
     setPercentage(initialValues.percentage);
-    // setStopAnimation(true);
+    animationDuration.current = initialValues.animationDuration;
+
+    setStopAnimation(true);
+
+    setTimeout(() => {
+      setStopAnimation(false);
+    });
   }
 
   return (
@@ -149,8 +139,8 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
       h={thumbSize}
       cursor='pointer'
       ref={ref}
-      onAnimationEnd={restart}
       onMouseDown={handleStartSettingAudio}
+      onAnimationEnd={restartAnimation}
     >
       <Box w={`calc(100% - ${thumbSize})`} pos='relative'>
         <Container

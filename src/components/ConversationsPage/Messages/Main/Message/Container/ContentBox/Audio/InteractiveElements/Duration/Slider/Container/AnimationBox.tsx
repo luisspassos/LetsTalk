@@ -23,7 +23,7 @@ export function AnimationBox({
   const animationPlayState: AnimationPlayState =
     isPlaying === true ? 'running' : 'paused';
 
-  const animation = `${slideAnimation} ${duration}s linear infinite ${animationPlayState}`;
+  const animation = `${slideAnimation} ${duration}s linear ${animationPlayState}`;
 
   return (
     <Box

@@ -37,14 +37,8 @@ export function CurrentButton({
   const play = audio.play.bind(audio);
   const pause = audio.pause.bind(audio);
 
-  useEffect(() => {
-    if (isPlaying === true) play();
-  }, [isPlaying, play]);
-
   if (isPlaying)
     return <PauseButton pause={pause} setIsPlaying={setIsPlaying} />;
 
-  return (
-    <PlayButton isPlaying={isPlaying} play={play} setIsPlaying={setIsPlaying} />
-  );
+  return <PlayButton play={play} setIsPlaying={setIsPlaying} />;
 }

@@ -1,4 +1,5 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { Thumb } from './Thumb';
 import { Track } from './Track';
 
 export type ContainerProps = {
@@ -18,7 +19,7 @@ export function Container(props: ContainerProps) {
       borderRadius='20px'
     >
       <Track {...props} />
-      {/* <Thumb {...props} /> */}
+      <Thumb {...props} />
     </Flex>
   );
 }
