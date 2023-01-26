@@ -11,6 +11,12 @@ export function Button(props: ButtonProps) {
       minW='0'
       display='inline-flex'
       fontSize='2.2em'
+      _focus={{
+        boxShadow: 'none',
+      }}
+      _focusVisible={{
+        boxShadow: 'outline',
+      }}
       {...props}
     />
   );
