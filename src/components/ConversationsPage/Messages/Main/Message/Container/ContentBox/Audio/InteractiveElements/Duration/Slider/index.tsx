@@ -9,6 +9,7 @@ import {
 import { Container } from './Container';
 import { thumbSize } from './Container/Thumb/Circle';
 import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
+import { useAudio } from 'contexts/Audio/AudioContext';
 
 // you can get the EventMap by seeing on the targetElement.addEventListener
 type EventMap = WindowEventMap;
@@ -16,11 +17,9 @@ type WindowEvent = EventType<EventMap>;
 
 type SliderProps = {
   duration: HTMLAudioElement['duration'];
-  audio: HTMLAudioElement;
-  isPlaying: boolean;
 };
 
-export function Slider({ duration, audio, isPlaying }: SliderProps) {
+export function Slider({ duration }: SliderProps) {
   const initialValues = {
     animationDuration: duration,
     percentage: 100,
@@ -36,6 +35,8 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
 
   const [percentage, setPercentage] = useState(initialValues.percentage);
   const [stopAnimation, setStopAnimation] = useState(false);
+
+  const { audio } = useAudio();
 
   const setAudioProgress = useCallback((e: MouseEvent | ReactMouseEvent) => {
     const slider = ref.current;
@@ -84,7 +85,9 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
       function setNewAudioCurrentTime() {
         const currentTime = duration - remainingDuration;
 
-        audio.currentTime = currentTime;
+        if (audio === null) return;
+
+        audio.element.currentTime = currentTime;
       }
 
       setNewAudioCurrentTime();
@@ -147,8 +150,6 @@ export function Slider({ duration, audio, isPlaying }: SliderProps) {
           duration={animationDuration.current}
           percentage={percentage}
           stopAnimation={stopAnimation}
-          audio={audio}
-          isPlaying={isPlaying}
         />
       </Box>
     </Flex>

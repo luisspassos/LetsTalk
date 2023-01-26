@@ -3,11 +3,10 @@ import { CurrentTime } from './Text/CurrentTime';
 import { TotalDuration } from './Text/TotalDuration';
 
 type TextsProps = {
-  audio: HTMLAudioElement;
   duration: HTMLAudioElement['duration'];
 };
 
-export function Texts({ audio, duration }: TextsProps) {
+export function Texts({ duration }: TextsProps) {
   return (
     <Flex
       left={0}
@@ -16,7 +15,7 @@ export function Texts({ audio, duration }: TextsProps) {
       pos='absolute'
       justify='space-between'
     >
-      <CurrentTime audio={audio} />
+      <CurrentTime />
       <TotalDuration duration={duration} />
     </Flex>
   );

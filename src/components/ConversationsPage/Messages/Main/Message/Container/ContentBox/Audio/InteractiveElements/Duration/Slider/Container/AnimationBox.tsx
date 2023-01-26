@@ -1,4 +1,5 @@
 import { Box, BoxProps, keyframes } from '@chakra-ui/react';
+import { useAudioIsPlaying } from 'hooks/useAudioIsPlaying';
 import { ReactNode } from 'react';
 import { ContainerProps } from '.';
 
@@ -17,9 +18,10 @@ export function AnimationBox({
   percentage,
   stopAnimation,
   duration,
-  isPlaying,
   ...rest
 }: AnimationBoxProps) {
+  const { isPlaying } = useAudioIsPlaying();
+
   const animationPlayState: AnimationPlayState =
     isPlaying === true ? 'running' : 'paused';
 

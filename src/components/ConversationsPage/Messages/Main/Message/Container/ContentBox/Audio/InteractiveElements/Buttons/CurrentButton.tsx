@@ -1,20 +1,32 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { PauseButton } from './PauseButton';
 import { PlayButton } from './PlayButton';
-import { Event, SetIsPlaying } from '..';
-import { iterateEvents } from 'utils/iterateEvents';
+import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
+import { useAudio, Event } from 'contexts/Audio/AudioContext';
 
-type CurrentButtonProps = {
-  audio: HTMLAudioElement;
-  setIsPlaying: SetIsPlaying;
-  isPlaying: boolean;
-};
+export type SetIsPlaying = (isPlaying: boolean) => void;
 
-export function CurrentButton({
-  audio,
-  setIsPlaying,
-  isPlaying,
-}: CurrentButtonProps) {
+export function CurrentButton() {
+  const { audiosPlaying, setAudiosPlaying } = useAudiosPlaying();
+  const { audio, iterateAudioEvents } = useAudio();
+  const index = audio?.index ?? 0;
+
+  const isPlaying = audiosPlaying[index];
+
+  const setIsPlaying: SetIsPlaying = useCallback(
+    (isPlaying) => {
+      const newAudiosPlaying = audiosPlaying.map((_, i) => {
+        if (index !== i) return false;
+
+        return isPlaying;
+      });
+
+      setAudiosPlaying(newAudiosPlaying);
+    },
+    [audiosPlaying, index, setAudiosPlaying]
+  );
+
+  // set audio events
   useEffect(() => {
     function resetAudio() {
       setIsPlaying(false);
@@ -27,18 +39,33 @@ export function CurrentButton({
       },
     ];
 
-    iterateEvents('add', events, audio);
+    iterateAudioEvents('add', events);
 
     return () => {
-      iterateEvents('remove', events, audio);
+      iterateAudioEvents('remove', events);
     };
-  }, [audio, setIsPlaying]);
+  }, [iterateAudioEvents, setIsPlaying]);
 
-  const play = audio.play.bind(audio);
-  const pause = audio.pause.bind(audio);
+  const play = audio?.element.play.bind(audio.element);
+  const pause = audio?.element.pause.bind(audio.element);
 
-  if (isPlaying)
-    return <PauseButton pause={pause} setIsPlaying={setIsPlaying} />;
+  // handle play and pause
+  useEffect(() => {
+    // to prevent useEffect from executing below code on first render
+    if (isPlaying === null) return;
 
-  return <PlayButton play={play} setIsPlaying={setIsPlaying} />;
+    if (isPlaying === true) {
+      if (play === undefined) return;
+
+      play();
+    } else {
+      if (pause === undefined) return;
+
+      pause();
+    }
+  }, [isPlaying, pause, play]);
+
+  if (isPlaying) return <PauseButton setIsPlaying={setIsPlaying} />;
+
+  return <PlayButton setIsPlaying={setIsPlaying} />;
 }

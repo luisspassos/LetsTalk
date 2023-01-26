@@ -1,15 +1,13 @@
 import { BsPauseFill } from 'react-icons/bs';
-import { SetIsPlaying } from '..';
 import { Button } from './Button';
+import { SetIsPlaying } from './CurrentButton';
 
 type PauseButtonProps = {
-  pause: HTMLAudioElement['pause'];
   setIsPlaying: SetIsPlaying;
 };
 
-export function PauseButton({ pause, setIsPlaying }: PauseButtonProps) {
+export function PauseButton({ setIsPlaying }: PauseButtonProps) {
   function handlePause() {
-    pause();
     setIsPlaying(false);
   }
 

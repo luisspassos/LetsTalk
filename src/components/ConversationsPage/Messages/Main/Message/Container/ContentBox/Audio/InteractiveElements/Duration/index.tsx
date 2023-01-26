@@ -1,21 +1,19 @@
 import { Flex } from '@chakra-ui/react';
+import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import { useEffect, useState } from 'react';
-import { iterateEvents } from 'utils/iterateEvents';
 import { Slider } from './Slider';
-import { Event } from '..';
 import { Texts } from './Texts';
 
-type DurationProps = {
-  audio: HTMLAudioElement;
-  isPlaying: boolean;
-};
+export function Duration() {
+  const { audio, iterateAudioEvents } = useAudio();
 
-export function Duration({ audio, isPlaying }: DurationProps) {
   const [duration, setDuration] = useState<HTMLAudioElement['duration']>(0);
 
   useEffect(() => {
     function setAudioDuration() {
-      setDuration(audio.duration);
+      if (audio?.element.duration === undefined) return;
+
+      setDuration(audio.element.duration);
     }
 
     const events: Event[] = [
@@ -25,12 +23,12 @@ export function Duration({ audio, isPlaying }: DurationProps) {
       },
     ];
 
-    iterateEvents('add', events, audio);
+    iterateAudioEvents('add', events);
 
     return () => {
-      iterateEvents('remove', events, audio);
+      iterateAudioEvents('remove', events);
     };
-  }, [audio]);
+  }, [audio, iterateAudioEvents]);
 
   return (
     <Flex
@@ -40,8 +38,8 @@ export function Duration({ audio, isPlaying }: DurationProps) {
       direction='column'
       pos='relative'
     >
-      <Slider isPlaying={isPlaying} duration={duration} audio={audio} />
-      <Texts duration={duration} audio={audio} />
+      <Slider duration={duration} />
+      <Texts duration={duration} />
     </Flex>
   );
 }

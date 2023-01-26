@@ -1,18 +1,17 @@
+import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import { useEffect, useState } from 'react';
-import { iterateEvents } from 'utils/iterateEvents';
 import { formatSecondsAsTime, initialValue, Text } from '.';
-import { Event } from '../../..';
 
-type CurrentTimeProps = {
-  audio: HTMLAudioElement;
-};
-
-export function CurrentTime({ audio }: CurrentTimeProps) {
+export function CurrentTime() {
   const [currentTime, setCurrentTime] = useState(initialValue);
+
+  const { audio, iterateAudioEvents } = useAudio();
 
   useEffect(() => {
     function getCurrentTime() {
-      const formattedTime = formatSecondsAsTime(audio.currentTime);
+      if (audio === null) return;
+
+      const formattedTime = formatSecondsAsTime(audio.element.currentTime);
 
       setCurrentTime(formattedTime);
     }
@@ -24,12 +23,12 @@ export function CurrentTime({ audio }: CurrentTimeProps) {
       },
     ];
 
-    iterateEvents('add', events, audio);
+    iterateAudioEvents('add', events);
 
     return () => {
-      iterateEvents('remove', events, audio);
+      iterateAudioEvents('remove', events);
     };
-  }, [audio]);
+  }, [audio, iterateAudioEvents]);
 
   return <Text>{currentTime}</Text>;
 }

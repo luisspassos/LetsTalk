@@ -1,10 +1,32 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { useAudio } from 'contexts/Audio/AudioContext';
+import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
+import { useEffect } from 'react';
 import { Avatar } from './Avatar';
 import { InteractiveElements } from './InteractiveElements';
 
-export function AudioComponent() {
-  const audio = new Audio('horse.wav');
-  audio.preload = 'metadata';
+type AudioComponentProps = {
+  index: number;
+};
+
+export function AudioComponent({ index }: AudioComponentProps) {
+  const { setAudio } = useAudio();
+  const { setAudiosPlaying } = useAudiosPlaying();
+
+  useEffect(() => {
+    function initialize() {
+      const audio = new Audio('horse.wav');
+
+      setAudio({
+        element: audio,
+        index,
+      });
+
+      setAudiosPlaying((prevState) => [...prevState, null]);
+    }
+
+    initialize();
+  }, [index, setAudio, setAudiosPlaying]);
 
   return (
     <Flex
@@ -16,7 +38,7 @@ export function AudioComponent() {
       gap='.9em'
     >
       <Avatar />
-      <InteractiveElements audio={audio} />
+      <InteractiveElements />
     </Flex>
   );
 }

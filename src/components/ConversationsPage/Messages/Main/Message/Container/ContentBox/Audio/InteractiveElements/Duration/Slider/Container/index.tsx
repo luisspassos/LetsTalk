@@ -6,8 +6,6 @@ export type ContainerProps = {
   percentage: number;
   stopAnimation: boolean;
   duration: HTMLAudioElement['duration'];
-  audio: HTMLAudioElement;
-  isPlaying: boolean;
 };
 
 export function Container(props: ContainerProps) {

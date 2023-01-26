@@ -1,16 +1,14 @@
 import { BsFillPlayFill } from 'react-icons/bs';
-import { SetIsPlaying } from '..';
 import { Button } from './Button';
+import { SetIsPlaying } from './CurrentButton';
 
 type PlayButtonProps = {
   setIsPlaying: SetIsPlaying;
-  play: HTMLAudioElement['play'];
 };
 
-export function PlayButton({ setIsPlaying, play }: PlayButtonProps) {
+export function PlayButton({ setIsPlaying }: PlayButtonProps) {
   function handlePlay() {
     setIsPlaying(true);
-    play();
   }
 
   return (

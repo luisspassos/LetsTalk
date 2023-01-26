@@ -9,8 +9,9 @@ import { db } from '../../../../services/firebase';
 import { ConversationDocWithContactData } from '../../../../utils/types';
 import { useConversationPopover } from '../../../../contexts/ConversationPopoverContext';
 import { Message } from './Message';
-import { AudioComponent as Audio } from './Message/Container/ContentBox/Audio';
+import { AudioComponent } from './Message/Container/ContentBox/Audio';
 import { styles as parentStyles } from '../index';
+import { AudioProvider } from 'contexts/Audio/AudioContext';
 
 type DbMessageData = {
   author: string;
@@ -315,7 +316,9 @@ export function Main() {
         messageIndex={20}
         sentIn='20:00'
       >
-        <Audio />
+        <AudioProvider>
+          <AudioComponent index={0} />
+        </AudioProvider>
       </Message>
       <Message
         maxW='350px'
@@ -324,7 +327,9 @@ export function Main() {
         messageIndex={20}
         sentIn='20:00'
       >
-        <Audio />
+        <AudioProvider>
+          <AudioComponent index={1} />
+        </AudioProvider>
       </Message>
     </Box>
     // <ScrollableBoxOfVirtualizedItems
