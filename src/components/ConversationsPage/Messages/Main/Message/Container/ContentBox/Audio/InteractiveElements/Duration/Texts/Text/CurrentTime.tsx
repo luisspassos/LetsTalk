@@ -10,7 +10,7 @@ export function CurrentTime() {
   const { positionInPercentage, isHolding } = useAudioPositionInPercentage();
 
   useEffect(() => {
-    if (audio === null) return;
+    if (audio === null || isHolding.current === false) return;
 
     const duration = audio.element.duration;
 
@@ -18,7 +18,7 @@ export function CurrentTime() {
     const formattedNewCurrentTime = formatSecondsAsTime(newCurrentTime);
 
     setCurrentTime(formattedNewCurrentTime);
-  }, [audio, positionInPercentage]);
+  }, [audio, isHolding, positionInPercentage]);
 
   // set audio events
   useEffect(() => {
