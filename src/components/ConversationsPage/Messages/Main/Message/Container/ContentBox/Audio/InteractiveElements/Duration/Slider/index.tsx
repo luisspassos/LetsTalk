@@ -102,6 +102,8 @@ export function Slider({ duration }: SliderProps) {
     function handleMoveAudioProgress(e: MouseEvent) {
       if (isHolding.current === false) return;
 
+      e.preventDefault();
+
       setAudioProgress(e);
     }
 
