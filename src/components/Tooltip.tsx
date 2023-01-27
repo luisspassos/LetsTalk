@@ -1,5 +1,4 @@
 import {
-  Box,
   Tooltip as ChakraTooltip,
   TooltipProps as ChakraTooltipProps,
 } from '@chakra-ui/react';
@@ -14,7 +13,7 @@ type TooltipProps = {
 export function Tooltip({ children, label, ariaLabel, ...rest }: TooltipProps) {
   return (
     <ChakraTooltip
-      maxW='auto'
+      // maxW='0'
       fontSize='15px'
       hasArrow
       placement='right'
@@ -24,10 +23,7 @@ export function Tooltip({ children, label, ariaLabel, ...rest }: TooltipProps) {
       color='gray.50'
       {...rest}
     >
-      {/* this box is for the tooltip to work correctly */}
-      <Box h='min' display='inline-block' borderRadius='full'>
-        {children}
-      </Box>
+      {children}
     </ChakraTooltip>
   );
 }

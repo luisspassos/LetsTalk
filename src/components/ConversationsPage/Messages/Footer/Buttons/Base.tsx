@@ -1,18 +1,21 @@
 import {
   Icon,
   IconButton,
-  IconButtonProps,
+  IconButtonProps as ChakraIconButtonProps,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { forwardRef } from 'react';
 import { IconType } from 'react-icons';
 
-type ButtonProps = {
+export type IconButtonProps = {
   label: string;
-  icon: IconType;
-} & Omit<IconButtonProps, 'icon' | 'aria-label'>;
+} & Omit<ChakraIconButtonProps, 'icon' | 'aria-label'>;
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export type BaseProps = {
+  icon: IconType;
+} & IconButtonProps;
+
+export const Base = forwardRef<HTMLButtonElement, BaseProps>(
   ({ icon, label, ...rest }, ref) => {
     const styles = {
       bg: useColorModeValue('blue.900', 'gray.400'),
@@ -46,4 +49,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = 'Button';
+Base.displayName = 'Base';

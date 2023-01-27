@@ -83,6 +83,7 @@ export function Tooltip({ children }: TooltipProps) {
 
   return (
     <TooltipComponent
+      shouldWrapChildren
       isOpen={tooltip.show}
       placement='bottom'
       label={tooltip.text}
