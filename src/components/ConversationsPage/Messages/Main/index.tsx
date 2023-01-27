@@ -319,7 +319,7 @@ export function Main() {
       >
         <AudioProvider>
           <AudioPositionInPercentageProvider>
-            <AudioComponent index={0} />
+            <AudioComponent index={0} isContact={true} />
           </AudioPositionInPercentageProvider>
         </AudioProvider>
       </Message>
@@ -332,7 +332,7 @@ export function Main() {
       >
         <AudioProvider>
           <AudioPositionInPercentageProvider>
-            <AudioComponent index={1} />
+            <AudioComponent index={1} isContact={false} />
           </AudioPositionInPercentageProvider>
         </AudioProvider>
       </Message>

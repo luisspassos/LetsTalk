@@ -1,4 +1,5 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { Message } from 'components/ConversationsPage/Messages/Main';
 import { useAudio } from 'contexts/Audio/AudioContext';
 import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
 import { useEffect } from 'react';
@@ -7,9 +8,10 @@ import { InteractiveElements } from './InteractiveElements';
 
 type AudioComponentProps = {
   index: number;
+  isContact: Message['contactMessage'];
 };
 
-export function AudioComponent({ index }: AudioComponentProps) {
+export function AudioComponent({ index, isContact }: AudioComponentProps) {
   const { setAudio } = useAudio();
   const { setAudiosPlaying } = useAudiosPlaying();
 
@@ -37,7 +39,7 @@ export function AudioComponent({ index }: AudioComponentProps) {
       borderRadius='inherit'
       gap='.9em'
     >
-      <Avatar />
+      <Avatar isContact={isContact} />
       <InteractiveElements />
     </Flex>
   );

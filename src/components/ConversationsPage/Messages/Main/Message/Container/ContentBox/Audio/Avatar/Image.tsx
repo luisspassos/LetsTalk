@@ -1,12 +1,19 @@
 import { Avatar } from 'components/Avatar';
+import { Message } from 'components/ConversationsPage/Messages/Main';
+import { useAuth } from 'contexts/AuthContext';
+import { useConversations } from 'contexts/ConversationsContext';
 
-export function Image() {
+type Image = {
+  isContact: Message['contactMessage'];
+};
 
+export function Image({ isContact }: Image) {
+  const { user } = useAuth();
+  const {
+    currentConversation: { data: currentConversation },
+  } = useConversations();
 
-  return (
-    <Avatar
-      // src='https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q='
-      src={undefined}
-    />
-  );
+  const src = isContact ? currentConversation?.photoURL : user?.photoURL;
+
+  return <Avatar src={src} />;
 }
