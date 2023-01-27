@@ -1,4 +1,5 @@
 import { Box, BoxProps, keyframes } from '@chakra-ui/react';
+import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useAudioIsPlaying } from 'hooks/useAudioIsPlaying';
 import { ReactNode } from 'react';
 import { ContainerProps } from '.';
@@ -15,11 +16,11 @@ type AnimationBoxProps = {
 
 export function AnimationBox({
   children,
-  percentage,
   stopAnimation,
   duration,
   ...rest
 }: AnimationBoxProps) {
+  const { positionInPercentage } = useAudioPositionInPercentage();
   const { isPlaying } = useAudioIsPlaying();
 
   const animationPlayState: AnimationPlayState =
@@ -32,7 +33,7 @@ export function AnimationBox({
       w='100%'
       h='100%'
       animation={stopAnimation === true ? 'none' : animation}
-      transform={`translateX(-${percentage}%)`}
+      transform={`translateX(-${positionInPercentage}%)`}
       {...rest}
     >
       {children}

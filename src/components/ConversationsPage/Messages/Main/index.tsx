@@ -12,6 +12,7 @@ import { Message } from './Message';
 import { AudioComponent } from './Message/Container/ContentBox/Audio';
 import { styles as parentStyles } from '../index';
 import { AudioProvider } from 'contexts/Audio/AudioContext';
+import { AudioPositionInPercentageProvider } from 'contexts/Audio/AudioPositionInPercentage';
 
 type DbMessageData = {
   author: string;
@@ -317,7 +318,9 @@ export function Main() {
         sentIn='20:00'
       >
         <AudioProvider>
-          <AudioComponent index={0} />
+          <AudioPositionInPercentageProvider>
+            <AudioComponent index={0} />
+          </AudioPositionInPercentageProvider>
         </AudioProvider>
       </Message>
       <Message
@@ -328,7 +331,9 @@ export function Main() {
         sentIn='20:00'
       >
         <AudioProvider>
-          <AudioComponent index={1} />
+          <AudioPositionInPercentageProvider>
+            <AudioComponent index={1} />
+          </AudioPositionInPercentageProvider>
         </AudioProvider>
       </Message>
     </Box>

@@ -3,7 +3,6 @@ import { Thumb } from './Thumb';
 import { Track } from './Track';
 
 export type ContainerProps = {
-  percentage: number;
   stopAnimation: boolean;
   duration: HTMLAudioElement['duration'];
 };

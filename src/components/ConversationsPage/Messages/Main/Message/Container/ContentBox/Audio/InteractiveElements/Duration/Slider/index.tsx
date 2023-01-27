@@ -10,6 +10,10 @@ import { Container } from './Container';
 import { thumbSize } from './Container/Thumb/Circle';
 import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
 import { useAudio } from 'contexts/Audio/AudioContext';
+import {
+  useAudioPositionInPercentage,
+  initialValue as percentageInitialValue,
+} from 'contexts/Audio/AudioPositionInPercentage';
 
 // you can get the EventMap by seeing on the targetElement.addEventListener
 type EventMap = WindowEventMap;
@@ -22,48 +26,51 @@ type SliderProps = {
 export function Slider({ duration }: SliderProps) {
   const initialValues = {
     animationDuration: duration,
-    percentage: 100,
   };
 
   const ref = useRef<HTMLDivElement>(null);
-  const isHolding = useRef(false);
   const animationDuration = useRef(0);
 
   useEffect(() => {
     animationDuration.current = duration;
   }, [duration]);
 
-  const [percentage, setPercentage] = useState(initialValues.percentage);
   const [stopAnimation, setStopAnimation] = useState(false);
 
   const { audio } = useAudio();
+  const { positionInPercentage, setPositionInPercentage, isHolding } =
+    useAudioPositionInPercentage();
 
-  const setAudioProgress = useCallback((e: MouseEvent | ReactMouseEvent) => {
-    const slider = ref.current;
+  const setAudioProgress = useCallback(
+    (e: MouseEvent | ReactMouseEvent) => {
+      const slider = ref.current;
 
-    if (slider === null) return;
+      if (slider === null) return;
 
-    function getSliderOffsetLeft(el: HTMLElement): number {
-      const offsetParentDoesNotExist = el.offsetParent === null;
-      const offsetParentIsNotAValidElement = !(
-        el.offsetParent instanceof HTMLElement
-      );
+      function getSliderOffsetLeft(el: HTMLElement): number {
+        const offsetParentDoesNotExist = el.offsetParent === null;
+        const offsetParentIsNotAValidElement = !(
+          el.offsetParent instanceof HTMLElement
+        );
 
-      if (offsetParentDoesNotExist || offsetParentIsNotAValidElement) return 0;
+        if (offsetParentDoesNotExist || offsetParentIsNotAValidElement)
+          return 0;
 
-      return el ? el.offsetLeft + getSliderOffsetLeft(el.offsetParent) : 0;
-    }
+        return el ? el.offsetLeft + getSliderOffsetLeft(el.offsetParent) : 0;
+      }
 
-    const sliderOffSetLeft = getSliderOffsetLeft(slider);
+      const sliderOffSetLeft = getSliderOffsetLeft(slider);
 
-    const widthClicked = e.clientX - sliderOffSetLeft;
-    const widthInPercentage = 100 - (widthClicked / slider.offsetWidth) * 100;
+      const widthClicked = e.clientX - sliderOffSetLeft;
+      const widthInPercentage = 100 - (widthClicked / slider.offsetWidth) * 100;
 
-    const newPercentage = Math.max(Math.min(widthInPercentage, 100), 0); // the percentage will be between 0 and 100 for the animation to work correctly
+      const newPercentage = Math.max(Math.min(widthInPercentage, 100), 0); // the percentage will be between 0 and 100 for the animation to work correctly
 
-    setPercentage(newPercentage);
-    setStopAnimation(true);
-  }, []);
+      setPositionInPercentage(newPercentage);
+      setStopAnimation(true);
+    },
+    [setPositionInPercentage]
+  );
 
   // set window events
   useEffect(() => {
@@ -72,12 +79,10 @@ export function Slider({ duration }: SliderProps) {
 
       isHolding.current = false;
 
-      const remainingDuration = (percentage * duration) / 100;
+      const remainingDuration = (positionInPercentage * duration) / 100;
 
       function activateAnimation() {
-        const newAnimationDuration = (percentage * duration) / 100;
-
-        animationDuration.current = newAnimationDuration;
+        animationDuration.current = remainingDuration;
 
         setStopAnimation(false);
       }
@@ -116,7 +121,7 @@ export function Slider({ duration }: SliderProps) {
     return () => {
       iterateEvents('remove', events, window);
     };
-  }, [audio, duration, percentage, setAudioProgress]);
+  }, [audio, duration, isHolding, positionInPercentage, setAudioProgress]);
 
   function handleStartSettingAudio(e: ReactMouseEvent) {
     isHolding.current = true;
@@ -125,7 +130,7 @@ export function Slider({ duration }: SliderProps) {
   }
 
   function restartAnimation() {
-    setPercentage(initialValues.percentage);
+    setPositionInPercentage(percentageInitialValue);
     animationDuration.current = initialValues.animationDuration;
 
     setStopAnimation(true);
@@ -148,7 +153,6 @@ export function Slider({ duration }: SliderProps) {
       <Box w={`calc(100% - ${thumbSize})`} pos='relative'>
         <Container
           duration={animationDuration.current}
-          percentage={percentage}
           stopAnimation={stopAnimation}
         />
       </Box>
