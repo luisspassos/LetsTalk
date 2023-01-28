@@ -1,5 +1,5 @@
 import { BsPauseFill } from 'react-icons/bs';
-import { Button } from './Base';
+import { Base } from './Base';
 import { SetIsPlaying } from './CurrentButton';
 
 type PauseButtonProps = {
@@ -12,7 +12,7 @@ export function PauseButton({ setIsPlaying }: PauseButtonProps) {
   }
 
   return (
-    <Button
+    <Base
       onClick={handlePause}
       aria-label='Pausar áudio'
       icon={<BsPauseFill />}

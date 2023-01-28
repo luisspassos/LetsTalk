@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import {
   useEffect,
   useRef,
@@ -7,7 +7,6 @@ import {
   MouseEvent as ReactMouseEvent,
 } from 'react';
 import { Container } from './Container';
-import { thumbSize } from './Container/Thumb/Circle';
 import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
 import { useAudio } from 'contexts/Audio/AudioContext';
 import {
@@ -142,23 +141,31 @@ export function Slider({ duration }: SliderProps) {
     });
   }
 
+  const thumbSize = '15px';
+
   return (
     <Flex
       align='center'
       justify='center'
-      w='100%'
+      w={`calc(100% - ${thumbSize})`}
       h={thumbSize}
       cursor='pointer'
       ref={ref}
       onMouseDown={handleStartSettingAudio}
       onAnimationEnd={restartAnimation}
     >
-      <Box w={`calc(100% - ${thumbSize})`} pos='relative'>
+      <Flex
+        flex='1'
+        align='center'
+        h='100%'
+        w={`calc(100% - ${thumbSize})`}
+        pos='relative'
+      >
         <Container
           duration={animationDuration.current}
           stopAnimation={stopAnimation}
         />
-      </Box>
+      </Flex>
     </Flex>
   );
 }

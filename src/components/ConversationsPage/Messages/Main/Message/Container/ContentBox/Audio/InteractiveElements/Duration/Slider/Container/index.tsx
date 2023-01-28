@@ -10,9 +10,11 @@ export type ContainerProps = {
 export function Container(props: ContainerProps) {
   return (
     <Flex
-      h='5px'
+      flex='1'
+      h='33%'
       bg={useColorModeValue('whiteAlpha.700', 'whiteAlpha.400')}
       overflow='hidden'
+      align='center'
       borderRadius='20px'
     >
       <Track {...props} />

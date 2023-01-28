@@ -33,7 +33,7 @@ export function AnimationBox({
       w='100%'
       h='100%'
       animation={stopAnimation === true ? 'none' : animation}
-      transform={`translateX(-${100}%)`}
+      transform={`translateX(-${positionInPercentage}%)`}
       {...rest}
     >
       {children}

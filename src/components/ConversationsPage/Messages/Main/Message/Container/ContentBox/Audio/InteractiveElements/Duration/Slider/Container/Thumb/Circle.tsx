@@ -1,12 +1,9 @@
 import { Box } from '@chakra-ui/react';
 
-export const thumbSize = '15px';
-
 export function Circle() {
   return (
     <Box
-      w={thumbSize}
-      h={thumbSize}
+      h='100%'
       bg='current'
       borderRadius='50%'
       pos='absolute'
@@ -14,6 +11,11 @@ export function Circle() {
       cursor='pointer'
       transform='translateX(50%)'
       pointerEvents='none'
+      sx={{
+        '&': {
+          aspectRatio: '1 / 1',
+        },
+      }}
     />
   );
 }
