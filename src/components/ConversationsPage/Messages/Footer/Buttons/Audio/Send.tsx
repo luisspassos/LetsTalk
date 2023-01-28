@@ -13,12 +13,24 @@ export function Send({ setCurrentButton }: SendProps) {
   }
 
   return (
-    <Flex w='600px'>
+    <Flex w='700px'>
       <DeleteButton />
-      <Flex align='center' justify='stretch' flex='1'>
+      <Flex
+        align='center'
+        flex='1'
+        bgColor='gray.400'
+        borderRadius='17px'
+        boxShadow='base'
+        border='1px solid'
+        borderColor='blackAlpha.600'
+        gap='10px'
+        px='5px'
+      >
         <PlayButton />
         <Slider />
-        <Text as='time'>3:48</Text>
+        <Text as='time' fontSize='15px' flexShrink={0}>
+          3:48
+        </Text>
       </Flex>
       <Base label='Enviar áudio' onClick={handleSendAudio} />
     </Flex>

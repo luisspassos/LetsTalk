@@ -146,6 +146,7 @@ export function Slider({ duration }: SliderProps) {
     <Flex
       align='center'
       justify='center'
+      w='100%'
       h={thumbSize}
       cursor='pointer'
       ref={ref}
