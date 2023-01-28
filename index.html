@@ -5,230 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      :root {
-        --animation-duration: 6.284239433520426s;
-      }
-
-      @keyframes slide {
-        to {
-          transform: translateX(0);
-        }
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 50px;
-        background-color: black;
-      }
-
-      input[type='range'] {
-        appearance: none;
-        width: 500px;
-        background: transparent;
-        cursor: pointer;
-      }
-
-      .container {
-        position: relative;
-
-        cursor: pointer;
-
-        height: 70px;
-        width: 570px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .slider {
-        width: 500px;
-        height: 40px;
-        overflow: hidden;
-        background-color: white;
-        border-radius: 20px;
-
-        display: flex;
-        align-items: center;
-      }
-
-      .animationBase {
-        height: 100%;
-        width: 496px;
-
-        animation-name: slide;
-        animation-duration: var(--animation-duration);
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-
-        transform: translateX(-100%);
-      }
-
-      .track {
-        background-color: lightslategray;
-        position: relative;
-
-        animation-play-state: paused;
-      }
-
-      .thumbWrapper {
-        position: absolute;
-
-        display: flex;
-        align-items: center;
-
-        pointer-events: none;
-      }
-
-      .thumb {
-        width: 70px;
-        aspect-ratio: 1 / 1;
-        background-color: purple;
-        border-radius: 50%;
-
-        position: absolute;
-        right: 0;
-
-        cursor: pointer;
-
-        transform: translateX(50%);
-      }
-    </style>
   </head>
+  <style>
+    body {
+      font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    @-webkit-keyframes MOVE-BG {
+      from {
+        -webkit-transform: translateX(0);
+      }
+      to {
+        -webkit-transform: translateX(46px);
+      }
+    }
+
+    @keyframes MOVE-BG {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(46px);
+      }
+    }
+
+    .loading {
+      height: auto;
+      text-align: center;
+      color: #4c3f2e;
+      position: relative;
+      overflow: hidden;
+      font-style: italic;
+      width: 200px;
+    }
+
+    .bg {
+      position: absolute;
+      left: -46px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+
+      background: -webkit-repeating-linear-gradient(
+        145deg,
+        #f8e9db 1px,
+        #fff5ed 2px,
+        #fff5ed 11px,
+        #f8e9db 12px,
+        #f8e9db 20px
+      );
+      background: repeating-linear-gradient(
+        -55deg,
+        #f8e9db 1px,
+        #fff5ed 2px,
+        #fff5ed 11px,
+        #f8e9db 12px,
+        #f8e9db 20px
+      );
+
+      animation-name: MOVE-BG;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+  </style>
   <body>
-    <button id="playButton" style="width: 50px; height: 50px; font-size: 30px">
-      ▶️
-    </button>
-    <div class="container">
-      <div class="slider">
-        <div class="animationBase track"></div>
-        <!-- <div class="animationBase thumbWrapper">
-          <div class="thumb"></div>
-        </div> -->
-      </div>
+    <div class="loading animated fadeIn">
+      Loading
+      <div class="bg"></div>
     </div>
   </body>
-
-  <script>
-    const root = document.querySelector(':root');
-    const container = document.querySelector('.container');
-    const track = document.querySelector('.track');
-    const thumbWrapper = document.querySelector('.thumbWrapper');
-    const playButton = document.querySelector('#playButton');
-    const audio = new Audio('public/horse.wav');
-    audio.preload = 'metadata';
-
-    audio.onloadedmetadata = () => {
-      console.log(audio.duration);
-    };
-
-    setInterval(() => {
-      if (audio.paused === false) return;
-
-      playButton.textContent = '▶️';
-      track.style.animationPlayState = 'paused';
-    });
-
-    playButton.addEventListener('click', async () => {
-      const isPlaying = playButton.textContent === '⏸️';
-
-      if (isPlaying) {
-        console.log('aaaa');
-
-        audio.pause();
-        playButton.textContent = '▶️';
-        track.style.animationPlayState = 'paused';
-
-        return;
-      }
-
-      audio.play();
-      track.style.animationPlayState = 'running';
-    });
-
-    audio.onplay = () => {
-      playButton.textContent = '⏸️';
-    };
-
-    function setElementToTheStart(e) {
-      e.target.style.transform = 'translateX(-100%)';
-    }
-
-    track.addEventListener('animationend', setElementToTheStart);
-    thumbWrapper.addEventListener('animationend', setElementToTheStart);
-
-    const rootStyles = getComputedStyle(root);
-
-    function getDuration() {
-      const animationDuration = rootStyles.getPropertyValue(
-        '--animation-duration'
-      );
-      const duration = Number(animationDuration.replace('s', ''));
-
-      return duration;
-    }
-
-    let percentageSet;
-
-    function setAudioProgress(e) {
-      const widthClicked = e.clientX - container.offsetLeft;
-      const widthInPercentage =
-        100 - (widthClicked / container.offsetWidth) * 100;
-
-      percentageSet = Math.max(Math.min(widthInPercentage, 100), 0); // the percentage will be between 0 and 100 for the animation to work correctly
-
-      track.style.animation = 'none';
-      track.style.transform = `translateX(-${percentageSet}%)`;
-
-      thumbWrapper.style.animation = 'none';
-      thumbWrapper.style.transform = `translateX(-${percentageSet}%)`;
-    }
-
-    function activateAnimation() {
-      track.offsetHeight;
-      track.style.animation = null;
-
-      thumbWrapper.offsetHeight;
-      thumbWrapper.style.animation = null;
-
-      const duration = getDuration();
-      const newDuration = (percentageSet * duration) / 100;
-
-      track.style.animationDuration = `${newDuration}s`;
-      thumbWrapper.style.animationDuration = `${newDuration}s`;
-    }
-
-    let isHolding = false;
-
-    window.addEventListener('mouseup', () => {
-      if (isHolding === false) return;
-
-      isHolding = false;
-
-      activateAnimation();
-    });
-
-    container.addEventListener('mousedown', (e) => {
-      isHolding = true;
-
-      setAudioProgress(e);
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (isHolding === false) return;
-
-      setAudioProgress(e);
-    });
-  </script>
 </html>

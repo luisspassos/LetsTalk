@@ -5,24 +5,21 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { Tooltip } from '../../../../Tooltip';
+import { Tooltip } from '../Tooltip';
 
 type IconButtonProps = {
   Icon: IconType;
+  label?: string;
 } & ChakraIconButtonProps;
 
 export function IconButton({
   'aria-label': ariaLabel,
   Icon,
+  label = ariaLabel,
   ...rest
 }: IconButtonProps) {
   return (
-    <Tooltip
-      hasArrow={false}
-      placement='top'
-      ariaLabel={ariaLabel}
-      label={ariaLabel}
-    >
+    <Tooltip ariaLabel={ariaLabel} label={label}>
       <ChakraIconButton
         w={['29px', '32px', '35px']}
         h={['29px', '32px', '35px']}

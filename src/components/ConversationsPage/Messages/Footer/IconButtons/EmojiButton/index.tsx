@@ -9,7 +9,8 @@ export function EmojiButton() {
   return (
     <IconButton
       onClick={onToggle}
-      aria-label={isOpen ? 'Fechar emojis' : 'Emojis'}
+      aria-label={isOpen ? 'Fechar emojis' : 'Abrir emojis'}
+      label={isOpen ? 'Fechar emojis' : 'Emojis'}
       Icon={isOpen ? IoMdClose : MdOutlineEmojiEmotions}
     />
   );

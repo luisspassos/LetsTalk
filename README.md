@@ -77,6 +77,7 @@ Let's Talk is a web chat app like Whatsapp Web, with features like:
 - [ ] see github copilot
 - [ ] delete htmls
 - [ ] see emoji selection
+- [ ] see screen reader
 
 ### Next Project
 

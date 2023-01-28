@@ -4,7 +4,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactElement, ReactNode } from 'react';
 
-type TooltipProps = {
+export type TooltipProps = {
   children: ReactNode;
   label: ReactElement | string;
   ariaLabel: string;
