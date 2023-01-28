@@ -1,10 +1,11 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import { BsFillStopFill, BsPauseCircle } from 'react-icons/bs';
-import { MdDelete } from 'react-icons/md';
 import { Props } from '.';
 import { BaseWithTooltip } from '../BaseWithTooltip';
 import { Button } from './Button';
+import { DeleteButton } from './DeleteButton';
 import { Progress } from './Progress';
+import { Wrapper } from './Wrapper';
 
 type StopProps = Props;
 
@@ -14,8 +15,8 @@ export function Stop({ setCurrentButton }: StopProps) {
   }
 
   return (
-    <Flex align='center' gap='20px' ml='10px'>
-      <Button color='red.300' icon={<MdDelete />} aria-label='Excluir áudio' />
+    <Wrapper>
+      <DeleteButton />
       <Progress />
       <Text as='time' flexShrink={0}>
         2:38
@@ -26,8 +27,7 @@ export function Stop({ setCurrentButton }: StopProps) {
         icon={BsFillStopFill}
         label='Parar áudio'
         fontSize='30px'
-        ml={0}
       />
-    </Flex>
+    </Wrapper>
   );
 }

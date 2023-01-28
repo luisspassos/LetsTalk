@@ -1,17 +1,11 @@
-import { Tooltip } from 'components/Tooltip';
+import { Tooltip } from '../Tooltip';
 import { Base, BaseProps } from './Base';
 
 type BaseWithTooltipProps = BaseProps;
 
 export function BaseWithTooltip(props: BaseWithTooltipProps) {
   return (
-    <Tooltip
-      hasArrow={false}
-      ariaLabel={props.label}
-      label={props.label}
-      placement='top'
-      mr='5px'
-    >
+    <Tooltip ariaLabel={props.label} label={props.label} mr='5px'>
       <Base {...props} />
     </Tooltip>
   );

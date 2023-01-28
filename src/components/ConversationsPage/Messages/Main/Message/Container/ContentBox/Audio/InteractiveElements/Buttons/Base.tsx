@@ -1,8 +1,8 @@
 import { IconButton, IconButtonProps } from '@chakra-ui/react';
 
-type ButtonProps = IconButtonProps;
+type BaseProps = IconButtonProps;
 
-export function Button(props: ButtonProps) {
+export function Base(props: BaseProps) {
   return (
     <IconButton
       variant='unstyled'

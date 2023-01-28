@@ -1,5 +1,4 @@
-import { BsFillPlayFill } from 'react-icons/bs';
-import { Button } from './Button';
+import { Button } from 'components/Audio/Buttons/Play';
 import { SetIsPlaying } from './CurrentButton';
 
 type PlayButtonProps = {
@@ -11,11 +10,5 @@ export function PlayButton({ setIsPlaying }: PlayButtonProps) {
     setIsPlaying(true);
   }
 
-  return (
-    <Button
-      onClick={handlePlay}
-      icon={<BsFillPlayFill />}
-      aria-label='Tocar áudio'
-    />
-  );
+  return <Button onClick={handlePlay} />;
 }

@@ -16,8 +16,8 @@ export function Progress() {
     <Box
       pos='relative'
       overflow='hidden'
-      width='150px'
-      height='12px'
+      width='130px'
+      height='9px'
       borderRadius='30px'
       boxShadow='base'
     >

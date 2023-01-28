@@ -1,5 +1,5 @@
 import { BsPauseFill } from 'react-icons/bs';
-import { Button } from './Button';
+import { Button } from './Base';
 import { SetIsPlaying } from './CurrentButton';
 
 type PauseButtonProps = {
