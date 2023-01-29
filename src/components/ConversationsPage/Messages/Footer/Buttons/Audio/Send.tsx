@@ -29,7 +29,7 @@ export function Send({ setCurrentButton }: SendProps) {
         px='10px'
       >
         <PlayButton fontSize='40px' />
-        <Slider />
+        <Slider height='13px' />
         <Text as='time' fontSize='15px' flexShrink={0}>
           3:48
         </Text>

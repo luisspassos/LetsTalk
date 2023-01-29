@@ -34,6 +34,7 @@ export function Duration() {
     <Flex
       alignSelf='stretch'
       justify='center'
+      align='center'
       flex='1'
       direction='column'
       pos='relative'

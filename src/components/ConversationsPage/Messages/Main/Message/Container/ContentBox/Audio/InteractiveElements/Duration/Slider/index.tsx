@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, LayoutProps } from '@chakra-ui/react';
 import {
   useEffect,
   useRef,
@@ -20,9 +20,10 @@ type WindowEvent = EventType<EventMap>;
 
 type SliderProps = {
   duration: HTMLAudioElement['duration'];
+  height?: LayoutProps['height'];
 };
 
-export function Slider({ duration }: SliderProps) {
+export function Slider({ duration, height = '15px' }: SliderProps) {
   const initialValues = {
     animationDuration: duration,
   };
@@ -141,26 +142,18 @@ export function Slider({ duration }: SliderProps) {
     });
   }
 
-  const thumbSize = '15px';
-
   return (
     <Flex
       align='center'
       justify='center'
-      w={`calc(100% - ${thumbSize})`}
-      h={thumbSize}
+      h={height}
+      w='100%'
       cursor='pointer'
       ref={ref}
       onMouseDown={handleStartSettingAudio}
       onAnimationEnd={restartAnimation}
     >
-      <Flex
-        flex='1'
-        align='center'
-        h='100%'
-        w={`calc(100% - ${thumbSize})`}
-        pos='relative'
-      >
+      <Flex align='center' h='100%' w={`calc(100% - ${height})`} pos='relative'>
         <Container
           duration={animationDuration.current}
           stopAnimation={stopAnimation}
