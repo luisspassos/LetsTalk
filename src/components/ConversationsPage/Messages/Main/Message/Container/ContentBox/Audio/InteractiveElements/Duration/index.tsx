@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react';
+import { Slider } from 'components/Audio/Slider';
 import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import { useEffect, useState } from 'react';
-import { Slider } from './Slider';
 import { Texts } from './Texts';
 
 export function Duration() {

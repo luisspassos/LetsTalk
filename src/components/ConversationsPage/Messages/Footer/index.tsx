@@ -1,8 +1,8 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { Divider } from '../../../Divider';
-import { EmojiPicker } from './IconButtons/EmojiButton/EmojiPicker';
 import { Form } from './Form';
-import { IconButtons } from './IconButtons';
+import { IconButtons } from './LeftButtons';
+import { EmojiPicker } from './LeftButtons/EmojiButton/EmojiPicker';
 
 export function Footer() {
   return (

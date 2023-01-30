@@ -1,6 +1,6 @@
 import { useSetMessageInputSize } from 'hooks/useSetMessageInputSize';
-import { SetMessage } from '../../Form';
-import { Base } from './Base';
+import { SetMessage } from './Form';
+import { Base } from './RightButtonBase/Send/Base';
 
 type SendMessageButtonProps = {
   setMessage: SetMessage;

@@ -1,6 +1,5 @@
-import { CategoryTitle } from 'components/ConversationsPage/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/CategoryTitle';
-import { Emoji } from 'components/ConversationsPage/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/Emoji';
-import { SearchInput } from 'components/ConversationsPage/Messages/Footer/IconButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
+import { SearchInput } from 'components/ConversationsPage/Messages/Footer/LeftButtons/EmojiButton/EmojiPicker/Scroll/SearchInput';
+import { Emoji } from 'components/ConversationsPage/Messages/Footer/LeftButtons/EmojiButton/EmojiPicker/Scroll/Emoji';
 import {
   createContext,
   Dispatch,
@@ -11,10 +10,10 @@ import {
   useState,
 } from 'react';
 import { useVirtual } from 'react-virtual';
-
 import { useCategories, Emoji as EmojiType } from './CategoriesContext';
 import { useEmojiStyles } from './EmojiStylesContext';
 import { useSearchedEmojis } from './SearchedEmojiContext';
+import { CategoryTitle } from 'components/ConversationsPage/Messages/Footer/LeftButtons/EmojiButton/EmojiPicker/Scroll/CategoryTitle';
 
 type EmojiRow = JSX.Element[];
 

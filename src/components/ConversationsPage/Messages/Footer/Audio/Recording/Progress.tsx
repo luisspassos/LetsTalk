@@ -1,4 +1,4 @@
-import { Box, keyframes } from '@chakra-ui/react';
+import { Box, keyframes, useToken } from '@chakra-ui/react';
 
 const progress = keyframes`
   from {
@@ -12,6 +12,8 @@ const progress = keyframes`
 const animation = `${progress} 1.5s infinite linear`;
 
 export function Progress() {
+  const [gray200, gray300] = useToken('colors', ['gray.200', 'gray.300']);
+
   return (
     <Box
       pos='relative'
@@ -28,14 +30,14 @@ export function Progress() {
         top={0}
         bottom={0}
         animation={animation}
-        bg='repeating-linear-gradient(
+        bg={`repeating-linear-gradient(
           -55deg,
-          #afb9c5 1px,
-          #d8dce7 2px,
-          #d8dce7 11px,
-          #afb9c5 12px,
-          #afb9c5 20px
-        )'
+          ${gray300} 1px,
+          ${gray200} 2px,
+          ${gray200} 11px,
+          ${gray300} 12px,
+          ${gray300} 20px
+        )`}
       />
     </Box>
   );

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import { AudioButton } from './Buttons/Audio';
-import { SendMessageButton } from './Buttons/Send/SendMessageButton';
+import { AudioButton } from './Audio';
+import { SendMessageButton } from './SendMessageButton';
 import { MessageInput } from './MessageInput';
 
 export type SetMessage = Dispatch<SetStateAction<string>>;
