@@ -23,7 +23,7 @@ type SliderProps = {
   height?: LayoutProps['height'];
 };
 
-export function Slider({ duration, height = '15px' }: SliderProps) {
+export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
   const initialValues = {
     animationDuration: duration,
   };

@@ -1,6 +1,6 @@
 import { Box, BoxProps, keyframes } from '@chakra-ui/react';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
-import { useAudioIsPlaying } from 'hooks/useAudioIsPlaying';
+import { useAudioIsPlaying } from 'hooks/Audio/useAudioIsPlaying';
 import { ReactNode } from 'react';
 import { ContainerProps } from '.';
 
