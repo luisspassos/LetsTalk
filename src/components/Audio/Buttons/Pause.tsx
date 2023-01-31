@@ -2,7 +2,7 @@ import { BsPauseFill } from 'react-icons/bs';
 import { Base } from './Base';
 import { ButtonProps } from './CurrentButton';
 
-export function Pause({ setIsPlaying, ...rest }: ButtonProps) {
+export function PauseButton({ setIsPlaying, ...rest }: ButtonProps) {
   function handlePause() {
     setIsPlaying(false);
   }

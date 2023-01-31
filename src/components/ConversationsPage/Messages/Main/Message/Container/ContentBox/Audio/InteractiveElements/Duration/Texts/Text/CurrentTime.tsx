@@ -1,7 +1,8 @@
 import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useEffect, useState } from 'react';
-import { formatSecondsAsTime, initialValue, Text } from '.';
+import { formatAudioTime, initialValue } from 'utils/formatAudioTime';
+import { Text } from '.';
 
 export function CurrentTime() {
   const [currentTime, setCurrentTime] = useState(initialValue);
@@ -9,13 +10,14 @@ export function CurrentTime() {
   const { audio, iterateAudioEvents } = useAudio();
   const { positionInPercentage, isHolding } = useAudioPositionInPercentage();
 
+  // set current time
   useEffect(() => {
     if (audio === null || isHolding.current === false) return;
 
     const duration = audio.element.duration;
 
     const newCurrentTime = duration - (positionInPercentage * duration) / 100;
-    const formattedNewCurrentTime = formatSecondsAsTime(newCurrentTime);
+    const formattedNewCurrentTime = formatAudioTime(newCurrentTime);
 
     setCurrentTime(formattedNewCurrentTime);
   }, [audio, isHolding, positionInPercentage]);
@@ -25,7 +27,7 @@ export function CurrentTime() {
     function getCurrentTime() {
       if (audio === null || isHolding.current === true) return;
 
-      const formattedTime = formatSecondsAsTime(audio.element.currentTime);
+      const formattedTime = formatAudioTime(audio.element.currentTime);
 
       setCurrentTime(formattedTime);
     }

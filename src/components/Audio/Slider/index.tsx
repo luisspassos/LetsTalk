@@ -18,7 +18,7 @@ import {
 type EventMap = WindowEventMap;
 type WindowEvent = EventType<EventMap>;
 
-type SliderProps = {
+export type SliderProps = {
   duration: HTMLAudioElement['duration'];
   height?: LayoutProps['height'];
 };

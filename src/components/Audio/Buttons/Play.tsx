@@ -2,7 +2,7 @@ import { BsFillPlayFill } from 'react-icons/bs';
 import { Base } from './Base';
 import { ButtonProps } from './CurrentButton';
 
-export function Button({ setIsPlaying, ...rest }: ButtonProps) {
+export function PlayButton({ setIsPlaying, ...rest }: ButtonProps) {
   function handlePlay() {
     setIsPlaying(true);
   }

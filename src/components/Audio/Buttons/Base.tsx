@@ -1,6 +1,6 @@
 import { IconButton, IconButtonProps } from '@chakra-ui/react';
 
-type BaseProps = IconButtonProps;
+export type BaseProps = IconButtonProps;
 
 export function Base(props: BaseProps) {
   return (

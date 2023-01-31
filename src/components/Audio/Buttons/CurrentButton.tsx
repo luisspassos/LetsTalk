@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from 'react';
-import { PauseButton } from './PauseButton';
-import { PlayButton } from './PlayButton';
 import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
 import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import { IconButtonProps } from '@chakra-ui/react';
+import { PauseButton as PauseButtonComponent } from './Pause';
+import { PlayButton as PlayButtonComponent } from './Play';
 
 type SetIsPlaying = (isPlaying: boolean) => void;
 
@@ -11,7 +11,17 @@ export type ButtonProps = {
   setIsPlaying: SetIsPlaying;
 } & Omit<IconButtonProps, 'aria-label'>;
 
-export function CurrentButton() {
+type Button = (props: ButtonProps) => JSX.Element;
+
+export type CurrentButtonProps = {
+  PlayButton?: Button;
+  PauseButton?: Button;
+};
+
+export function CurrentButton({
+  PauseButton = PauseButtonComponent,
+  PlayButton = PlayButtonComponent,
+}: CurrentButtonProps) {
   const { audiosPlaying, setAudiosPlaying } = useAudiosPlaying();
   const { audio, iterateAudioEvents } = useAudio();
   const index = audio?.index ?? 0;

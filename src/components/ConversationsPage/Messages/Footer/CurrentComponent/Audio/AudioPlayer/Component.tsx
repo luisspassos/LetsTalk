@@ -1,13 +1,14 @@
 import { Flex } from '@chakra-ui/react';
-import { Button as PlayButton } from 'components/Audio/Buttons/Play';
 import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
 import { useInitializeAudio } from 'hooks/Audio/useInitializeAudio';
+import { useMemo } from 'react';
+import { CurrentButton } from './CurrentButton';
 import { Duration } from './Duration';
-import { Slider } from './Slider';
 
 export function Component() {
   const { audiosPlaying } = useAudiosPlaying();
-  const index = audiosPlaying.length;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const index = useMemo(() => audiosPlaying.length, []);
 
   useInitializeAudio('horse.wav', index);
 
@@ -25,8 +26,7 @@ export function Component() {
       px='10px'
       maxW='17.875rem'
     >
-      <PlayButton fontSize='40px' />
-      <Slider />
+      <CurrentButton />
       <Duration />
     </Flex>
   );

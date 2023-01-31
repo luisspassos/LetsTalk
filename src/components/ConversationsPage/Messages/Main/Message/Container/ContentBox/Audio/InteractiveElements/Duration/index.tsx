@@ -1,34 +1,10 @@
 import { Flex } from '@chakra-ui/react';
 import { Slider } from 'components/Audio/Slider';
-import { useAudio, Event } from 'contexts/Audio/AudioContext';
-import { useEffect, useState } from 'react';
+import { useDuration } from 'hooks/Audio/useDuration';
 import { Texts } from './Texts';
 
 export function Duration() {
-  const { audio, iterateAudioEvents } = useAudio();
-
-  const [duration, setDuration] = useState<HTMLAudioElement['duration']>(0);
-
-  useEffect(() => {
-    function setAudioDuration() {
-      if (audio?.element.duration === undefined) return;
-
-      setDuration(audio.element.duration);
-    }
-
-    const events: Event[] = [
-      {
-        type: 'loadedmetadata',
-        func: setAudioDuration,
-      },
-    ];
-
-    iterateAudioEvents('add', events);
-
-    return () => {
-      iterateAudioEvents('remove', events);
-    };
-  }, [audio, iterateAudioEvents]);
+  const { duration } = useDuration();
 
   return (
     <Flex
