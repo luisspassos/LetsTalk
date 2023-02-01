@@ -155,15 +155,7 @@ export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
     return () => {
       iterateEvents('remove', events, window);
     };
-  }, [
-    audio,
-    duration,
-    initialValues.animationDuration,
-    isHolding,
-    positionInPercentage,
-    setAudioProgress,
-    setPositionInPercentage,
-  ]);
+  }, [audio, duration, isHolding, positionInPercentage, setAudioProgress]);
 
   function handleStartSettingAudio(e: ReactMouseEvent) {
     isHolding.current = true;
@@ -180,7 +172,6 @@ export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
       cursor='pointer'
       ref={ref}
       onMouseDown={handleStartSettingAudio}
-      // onAnimationEnd={restartAnimation}
     >
       <Flex align='center' h='100%' w={`calc(100% - ${height})`} pos='relative'>
         <Container

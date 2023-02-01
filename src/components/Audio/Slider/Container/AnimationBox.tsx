@@ -23,8 +23,9 @@ export function AnimationBox({
   const { positionInPercentage } = useAudioPositionInPercentage();
   const { isPlaying } = useAudioIsPlaying();
 
-  const animationPlayState: AnimationPlayState =
-    isPlaying === true ? 'running' : 'paused';
+  const animationPlayState: AnimationPlayState = isPlaying
+    ? 'running'
+    : 'paused';
 
   const animation = `${slideAnimation} ${duration}s linear ${animationPlayState}`;
 
@@ -32,7 +33,7 @@ export function AnimationBox({
     <Box
       w='100%'
       h='100%'
-      animation={stopAnimation ? 'none' : animation}
+      animation={stopAnimation === true ? 'none' : animation}
       transform={`translateX(-${positionInPercentage}%)`}
       {...rest}
     >
