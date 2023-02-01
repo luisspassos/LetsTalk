@@ -41,37 +41,6 @@ export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
   const { positionInPercentage, setPositionInPercentage, isHolding } =
     useAudioPositionInPercentage();
 
-  useEffect(() => {
-    function restartAnimation() {
-      setStopAnimation(true);
-
-      setTimeout(() => {
-        setStopAnimation(false);
-      });
-
-      setPositionInPercentage(percentageInitialValue);
-
-      animationDuration.current = initialValues.animationDuration;
-    }
-
-    const events: Event[] = [
-      {
-        type: 'ended',
-        func: restartAnimation,
-      },
-    ];
-
-    iterateAudioEvents('add', events);
-
-    return () => {
-      iterateAudioEvents('remove', events);
-    };
-  }, [
-    initialValues.animationDuration,
-    iterateAudioEvents,
-    setPositionInPercentage,
-  ]);
-
   const setAudioProgress = useCallback(
     (e: MouseEvent | ReactMouseEvent) => {
       const slider = ref.current;
@@ -102,6 +71,38 @@ export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
     },
     [setPositionInPercentage]
   );
+
+  // set audio events
+  useEffect(() => {
+    function restartAnimation() {
+      setStopAnimation(true);
+
+      setTimeout(() => {
+        setStopAnimation(false);
+      }, 1);
+
+      setPositionInPercentage(percentageInitialValue);
+
+      animationDuration.current = initialValues.animationDuration;
+    }
+
+    const events: Event[] = [
+      {
+        type: 'ended',
+        func: restartAnimation,
+      },
+    ];
+
+    iterateAudioEvents('add', events);
+
+    return () => {
+      iterateAudioEvents('remove', events);
+    };
+  }, [
+    initialValues.animationDuration,
+    iterateAudioEvents,
+    setPositionInPercentage,
+  ]);
 
   // set window events
   useEffect(() => {
