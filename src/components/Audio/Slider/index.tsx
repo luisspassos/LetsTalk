@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { Container } from './Container';
 import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
-import { useAudio } from 'contexts/Audio/AudioContext';
+import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import {
   useAudioPositionInPercentage,
   initialValue as percentageInitialValue,
@@ -37,9 +37,40 @@ export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
 
   const [stopAnimation, setStopAnimation] = useState(false);
 
-  const { audio } = useAudio();
+  const { audio, iterateAudioEvents } = useAudio();
   const { positionInPercentage, setPositionInPercentage, isHolding } =
     useAudioPositionInPercentage();
+
+  useEffect(() => {
+    function restartAnimation() {
+      setStopAnimation(true);
+
+      setTimeout(() => {
+        setStopAnimation(false);
+      });
+
+      setPositionInPercentage(percentageInitialValue);
+
+      animationDuration.current = initialValues.animationDuration;
+    }
+
+    const events: Event[] = [
+      {
+        type: 'ended',
+        func: restartAnimation,
+      },
+    ];
+
+    iterateAudioEvents('add', events);
+
+    return () => {
+      iterateAudioEvents('remove', events);
+    };
+  }, [
+    initialValues.animationDuration,
+    iterateAudioEvents,
+    setPositionInPercentage,
+  ]);
 
   const setAudioProgress = useCallback(
     (e: MouseEvent | ReactMouseEvent) => {
@@ -123,23 +154,20 @@ export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
     return () => {
       iterateEvents('remove', events, window);
     };
-  }, [audio, duration, isHolding, positionInPercentage, setAudioProgress]);
+  }, [
+    audio,
+    duration,
+    initialValues.animationDuration,
+    isHolding,
+    positionInPercentage,
+    setAudioProgress,
+    setPositionInPercentage,
+  ]);
 
   function handleStartSettingAudio(e: ReactMouseEvent) {
     isHolding.current = true;
 
     setAudioProgress(e);
-  }
-
-  function restartAnimation() {
-    setPositionInPercentage(percentageInitialValue);
-    animationDuration.current = initialValues.animationDuration;
-
-    setStopAnimation(true);
-
-    setTimeout(() => {
-      setStopAnimation(false);
-    });
   }
 
   return (
@@ -151,7 +179,7 @@ export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
       cursor='pointer'
       ref={ref}
       onMouseDown={handleStartSettingAudio}
-      onAnimationEnd={restartAnimation}
+      // onAnimationEnd={restartAnimation}
     >
       <Flex align='center' h='100%' w={`calc(100% - ${height})`} pos='relative'>
         <Container

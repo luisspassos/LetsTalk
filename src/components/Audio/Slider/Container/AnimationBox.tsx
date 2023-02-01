@@ -32,7 +32,7 @@ export function AnimationBox({
     <Box
       w='100%'
       h='100%'
-      animation={stopAnimation === true ? 'none' : animation}
+      animation={stopAnimation ? 'none' : animation}
       transform={`translateX(-${positionInPercentage}%)`}
       {...rest}
     >
