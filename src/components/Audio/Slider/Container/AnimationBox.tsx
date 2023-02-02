@@ -1,7 +1,7 @@
 import { Box, BoxProps, keyframes } from '@chakra-ui/react';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useAudioIsPlaying } from 'hooks/Audio/useAudioIsPlaying';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { ContainerProps } from '.';
 
 const slideAnimation = keyframes`
@@ -28,6 +28,10 @@ export function AnimationBox({
     : 'paused';
 
   const animation = `${slideAnimation} ${duration}s linear ${animationPlayState}`;
+
+  useEffect(() => {
+    console.log();
+  }, []);
 
   return (
     <Box
