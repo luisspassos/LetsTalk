@@ -20,6 +20,7 @@ export function Text({ duration }: Props) {
 
   return (
     <ChakraText
+      lineHeight='1'
       as='time'
       w='2rem'
       textAlign='center'

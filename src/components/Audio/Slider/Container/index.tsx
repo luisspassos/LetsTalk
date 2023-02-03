@@ -3,7 +3,7 @@ import { Thumb } from './Thumb';
 import { Track } from './Track';
 
 export type ContainerProps = {
-  stopAnimation: boolean;
+  resetAnimation: boolean;
   duration: HTMLAudioElement['duration'];
 };
 

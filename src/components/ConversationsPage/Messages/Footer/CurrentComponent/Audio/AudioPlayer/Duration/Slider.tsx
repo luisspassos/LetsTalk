@@ -8,5 +8,5 @@ type Props = {
 };
 
 export function Slider({ duration }: Props) {
-  return <SliderComponent duration={duration} height='13px' />;
+  return <SliderComponent duration={duration} height='0.8125rem' />;
 }
