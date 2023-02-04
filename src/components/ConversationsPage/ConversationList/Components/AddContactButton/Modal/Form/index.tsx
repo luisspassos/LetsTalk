@@ -133,7 +133,7 @@ export function Form() {
 
             setConversations((prevState) => [
               contactDataFormatted,
-              ...prevState,
+              ...(prevState ?? []),
             ]);
 
             onClose();

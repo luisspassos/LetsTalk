@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { font } from '../../../../../Footer/Form/MessageInput';
 import getEmojiRegex from 'emoji-regex';
+import { font } from 'components/ConversationsPage/Messages/Footer/CurrentComponent/Message/Form/MessageInput';
 
 type TextComponentProps = {
   children: ReactNode;

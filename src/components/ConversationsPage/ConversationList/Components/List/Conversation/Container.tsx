@@ -24,9 +24,11 @@ export function Container({
   const bg = useColorModeValue('grayAlpha.500', 'whiteAlpha.100');
 
   function handleChangeCurrentConversation() {
-    const newIndex = conversations.findIndex(
+    const newIndex = conversations?.findIndex(
       (conversation) => conversation.name === name
     );
+
+    if (newIndex === undefined) return;
 
     changeCurrentConversationIndex(newIndex);
   }

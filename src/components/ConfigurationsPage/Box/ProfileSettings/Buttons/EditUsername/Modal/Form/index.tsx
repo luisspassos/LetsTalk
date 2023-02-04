@@ -9,6 +9,7 @@ import { Buttons } from './Buttons';
 import { Input } from './Input';
 import * as yup from 'yup';
 import { ModalFormControl } from 'components/Modal/ModalFormControl';
+import { User } from 'firebase/auth';
 
 export type RenameUsernameFormData = {
   name: string;
@@ -60,7 +61,12 @@ export function Form() {
             onlineAt: 'now',
           });
 
-          await updateProfile(user, {
+          const acceptedUser: User = {
+            ...user,
+            photoURL: user.photoURL ?? null,
+          };
+
+          await updateProfile(acceptedUser, {
             displayName: newName,
           });
 

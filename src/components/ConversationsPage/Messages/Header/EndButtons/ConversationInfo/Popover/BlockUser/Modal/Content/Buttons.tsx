@@ -50,6 +50,8 @@ export function Buttons({ confirmButtonText }: ButtonsProps) {
 
   const setIsBlocked = useCallback(
     (isBlocked: boolean) => {
+      if (conversations === null) return;
+
       const conversationsClone = [...conversations];
 
       conversationsClone[currentConversation.index].isBlocked = isBlocked;

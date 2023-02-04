@@ -4,7 +4,10 @@ import { useConversations } from 'contexts/ConversationsContext';
 export function Username() {
   const { currentConversation } = useConversations();
 
-  const contact = currentConversation.data?.username.split('#');
+  const contact = currentConversation.data?.username?.split('#');
+
+  const name = contact?.[0];
+  const id = contact?.[1];
 
   return (
     <HStack>
@@ -14,9 +17,9 @@ export function Username() {
         textOverflow='ellipsis'
         overflowX='hidden'
       >
-        {contact?.[0]}
+        {name}
       </Text>
-      <Text opacity='90%'>#{contact?.[1]}</Text>
+      <Text opacity='90%'>#{id}</Text>
     </HStack>
   );
 }
