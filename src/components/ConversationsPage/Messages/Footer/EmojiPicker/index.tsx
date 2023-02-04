@@ -1,5 +1,5 @@
 import { Collapse, Flex as ChakraFlex } from '@chakra-ui/react';
-import { Divider } from 'components/ConversationsPage/Divider';
+import { Divider } from 'components/Divider';
 import { useToggleEmojiPicker } from 'contexts/EmojiPicker/ToggleEmojiPickerContext';
 import { Categories } from './Categories';
 import { Scroll } from './Scroll';
