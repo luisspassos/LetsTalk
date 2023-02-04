@@ -28,9 +28,15 @@ export const theme = extendTheme({
 
       const placeholderColor = isDark ? 'whiteAlpha.800' : 'blackAlpha.700';
 
+      const scrollbarColor = isDark
+        ? colors.scrollbar.dark
+        : colors.scrollbar.light;
+
       return {
         '*': {
           wordBreak: 'break-word',
+          scrollbarColor: `${scrollbarColor} transparent`,
+          scrollbarWidth: 'thin',
         },
         body: {
           bg: isDark ? 'blue.900' : 'gray.50',
@@ -43,7 +49,7 @@ export const theme = extendTheme({
           width: ['3px', '6px'],
         },
         '::-webkit-scrollbar-thumb': {
-          bgColor: isDark ? colors.scrollbar.dark : colors.scrollbar.light,
+          bgColor: scrollbarColor,
         },
         '#chakra-toast-manager-top-right': {
           alignItems: 'end',

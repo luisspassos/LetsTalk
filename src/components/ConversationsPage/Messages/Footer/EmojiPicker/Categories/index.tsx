@@ -8,17 +8,7 @@ export function Categories() {
 
   return (
     <Box>
-      <Flex
-        align='start'
-        justify='start'
-        overflowX='auto'
-        position='relative'
-        sx={{
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-        }}
-      >
+      <Flex align='start' justify='start' overflowX='auto' position='relative'>
         <SelectedBar />
         {categories.data.map(({ icon, name }, i) => (
           <Button index={i} CategoryIcon={icon} aria-label={name} key={name} />

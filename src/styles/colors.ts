@@ -1,7 +1,6 @@
 export const colors = {
   blueAlpha: {
     900: '#1d243490',
-    700: '#1d243470',
     400: 'rgba(66, 153, 225, 0.6)',
     200: 'rgb(99, 179, 237, 0.35)',
   },
@@ -24,8 +23,12 @@ export const colors = {
     300: '#f37871',
     600: '#b03340',
   },
-  scrollbar: {
-    dark: 'whiteAlpha.500',
-    light: 'blueAlpha.700',
+  get scrollbar() {
+    const blueAlpha700 = `${colors.blue[900]}70`;
+
+    return {
+      dark: 'rgba(255, 255, 255, 0.36)',
+      light: blueAlpha700,
+    };
   },
 };
