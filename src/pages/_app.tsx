@@ -29,6 +29,7 @@ import { PositionSelectedFromEmojiPickerCategoriesProvider } from '../contexts/E
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
 import RouteLoading from 'next-progress';
 import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
+import { Fonts } from 'components/Fonts';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -48,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                               <ChangeEmailModalProvider>
                                 <FadeInAnimationProvider>
                                   <ChakraProvider theme={theme}>
+                                    <Fonts />
                                     <PositionSelectedFromEmojiPickerCategoriesProvider>
                                       <SearchedEmojisProvider>
                                         <EmojiStylesProvider>

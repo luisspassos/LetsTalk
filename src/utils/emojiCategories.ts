@@ -647,7 +647,7 @@ export const emojiCategories = [
         name: 'Balão De Diálogo',
       },
       {
-        emoji: '👁‍🗨',
+        emoji: '👁️‍🗨️',
         name: 'Olho No Balão De Diálogo',
       },
       {

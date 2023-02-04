@@ -16,6 +16,11 @@ const animation = `${float} 4s ease-in-out infinite`;
 
 export function Logo() {
   return (
-    <Img height='85px' animation={animation} src='./favicon.svg' alt='Logo' />
+    <Img
+      height='85px'
+      animation={animation}
+      src='./images/favicon.svg'
+      alt='Logo'
+    />
   );
 }

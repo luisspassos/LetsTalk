@@ -18,7 +18,11 @@ export default function Document() {
           rel='stylesheet'
         />
 
-        <link rel='shortcut icon' href='./favicon.svg' type='image/x-icon' />
+        <link
+          rel='shortcut icon'
+          href='./images/favicon.svg'
+          type='image/x-icon'
+        />
         <link
           rel='apple-touch-icon'
           href='./images/pwa-icons/apple-touch-icon.png'
