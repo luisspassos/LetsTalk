@@ -646,10 +646,11 @@ export const emojiCategories = [
         emoji: '💬',
         name: 'Balão De Diálogo',
       },
-      {
-        emoji: '👁️‍🗨️',
-        name: 'Olho No Balão De Diálogo',
-      },
+      // buggy emoji
+      // {
+      //   emoji: '👁️‍🗨️',
+      //   name: 'Olho No Balão De Diálogo',
+      // },
       {
         emoji: '🗨️',
         name: 'Balão De Diálogo À Esquerda',
