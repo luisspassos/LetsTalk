@@ -112,7 +112,7 @@ export function Emoji({ children: emoji }: EmojiProps) {
   return (
     // chakra element isn't being used to perform the list
 
-    <span
+    <button
       style={{
         width: styles.size,
         height: styles.size,
@@ -133,6 +133,6 @@ export function Emoji({ children: emoji }: EmojiProps) {
       onMouseOut={handleRemoveHover}
     >
       {emoji}
-    </span>
+    </button>
   );
 }

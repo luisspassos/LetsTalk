@@ -4,11 +4,11 @@ import {
   Drawer as ChakraDrawer,
   DrawerCloseButton,
 } from '@chakra-ui/react';
-import { useConversationsTab } from '../../../contexts/ConversationsTabContext';
+import { useTabToggle } from 'contexts/TabToggleContext';
 import { Content } from './Content';
 
 export function Drawer() {
-  const { isOpen, onClose } = useConversationsTab();
+  const { isOpen, onClose } = useTabToggle();
 
   return (
     <ChakraDrawer placement='left' isOpen={isOpen} onClose={onClose}>

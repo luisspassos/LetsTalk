@@ -10,7 +10,6 @@ import { AuthProvider } from '../contexts/AuthContext';
 import { FadeInAnimationProvider } from '../contexts/FadeInAnimationContext';
 import { BlockUserModalProvider } from '../contexts/Modal/BlockUserModalContext';
 import { AddContactModalProvider } from '../contexts/Modal/AddContactModalContext';
-import { ConversationsTabProvider } from '../contexts/ConversationsTabContext';
 import { ConversationsProvider } from '../contexts/ConversationsContext';
 import { RenameUsernameModalProvider } from '../contexts/Modal/RenameUsernameModalContext';
 import { DeleteAccountModalProvider } from '../contexts/Modal/DeleteAccountModalContext';
@@ -29,6 +28,7 @@ import { PositionSelectedFromEmojiPickerCategoriesProvider } from '../contexts/E
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
 import RouteLoading from 'next-progress';
 import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
+import { TabToggleProvider } from 'contexts/TabToggleContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <SearchInConversationProvider>
               <ConversationPopoverProvider>
                 <ConversationsProvider>
-                  <ConversationsTabProvider>
+                  <TabToggleProvider>
                     <AddContactModalProvider>
                       <BlockUserModalProvider>
                         <RenameUsernameModalProvider>
@@ -76,7 +76,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         </RenameUsernameModalProvider>
                       </BlockUserModalProvider>
                     </AddContactModalProvider>
-                  </ConversationsTabProvider>
+                  </TabToggleProvider>
                 </ConversationsProvider>
               </ConversationPopoverProvider>
             </SearchInConversationProvider>

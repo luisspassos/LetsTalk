@@ -1,4 +1,4 @@
-import { useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { useColorModeValue } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 import { IconButton } from './IconButton';
 

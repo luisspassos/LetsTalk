@@ -68,7 +68,7 @@ export function MessageInput({ setMessage, message }: MessageInputProps) {
       fontFamily={font}
       py='10.5px'
       scrollPadding='10.5px'
-      borderColor='blackAlpha.500'
+      borderColor={useColorModeValue('blackAlpha.500', undefined)}
       bg={useColorModeValue('white', 'blackAlpha.500')}
       resize='none'
     />

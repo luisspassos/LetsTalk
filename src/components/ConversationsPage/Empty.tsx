@@ -1,10 +1,10 @@
 import { Flex, Img } from '@chakra-ui/react';
-import { ConversationsTabToggleButton } from './Messages/Header/ConversationsTabToggleButton';
+import { SidebarToggleButton } from './Messages/Header/SidebarToggleButton';
 
 export function Empty() {
   return (
     <Flex flex='1' p='20px'>
-      <ConversationsTabToggleButton />
+      <SidebarToggleButton />
       <Img
         mx='auto'
         alignSelf='center'

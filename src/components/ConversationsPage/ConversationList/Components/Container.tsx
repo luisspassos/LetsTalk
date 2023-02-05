@@ -1,13 +1,13 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { useTabToggle } from 'contexts/TabToggleContext';
 import { ReactNode } from 'react';
-import { useConversationsTab } from '../../../../contexts/ConversationsTabContext';
 
 type ContainerProps = {
   children: ReactNode;
 };
 
 export function Container({ children }: ContainerProps) {
-  const { isOpen } = useConversationsTab();
+  const { isOpen } = useTabToggle();
 
   return (
     <Flex

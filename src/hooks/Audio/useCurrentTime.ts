@@ -1,9 +1,12 @@
+import { Time } from 'components/ConversationsPage/Messages/Footer/CurrentComponent/Audio/AudioPlayer/Duration/Text';
 import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { formatAudioTime } from 'utils/formatAudioTime';
 
-type SetTime = Dispatch<SetStateAction<string>>;
+type SetTime =
+  | Dispatch<SetStateAction<string>>
+  | Dispatch<SetStateAction<Time>>;
 
 export function useCurrentTime(setTime: SetTime) {
   const { audio, iterateAudioEvents } = useAudio();
