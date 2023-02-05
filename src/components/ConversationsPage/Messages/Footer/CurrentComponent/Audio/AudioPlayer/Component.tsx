@@ -25,6 +25,7 @@ export function Component() {
       gap='10px'
       px='10px'
       maxW='17.875rem'
+      color='gray.50'
     >
       <CurrentButton />
       <Duration />

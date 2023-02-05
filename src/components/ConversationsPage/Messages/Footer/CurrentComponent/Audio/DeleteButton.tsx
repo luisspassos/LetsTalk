@@ -1,3 +1,4 @@
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 import { IconButton } from './IconButton';
 
@@ -7,7 +8,7 @@ export function DeleteButton() {
   return (
     <IconButton
       onClick={handleDeleteAudio}
-      color='red.300'
+      color={useColorModeValue('red.600', 'red.300')}
       icon={<MdDelete />}
       aria-label='Excluir áudio'
       mr='-10px'
