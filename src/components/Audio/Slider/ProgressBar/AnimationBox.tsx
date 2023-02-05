@@ -2,7 +2,7 @@ import { Box, BoxProps, keyframes } from '@chakra-ui/react';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useAudioIsPlaying } from 'hooks/Audio/useAudioIsPlaying';
 import { CSSProperties, ReactNode } from 'react';
-import { ContainerProps } from '.';
+import { SharedProps } from '.';
 
 type AnimationStyles = {
   playState: AnimationPlayState;
@@ -12,7 +12,7 @@ type AnimationStyles = {
 type AnimationBoxProps = {
   children?: ReactNode;
 } & BoxProps &
-  ContainerProps;
+  SharedProps;
 
 const slideAnimation = keyframes`
   to { transform: translateX(0); }

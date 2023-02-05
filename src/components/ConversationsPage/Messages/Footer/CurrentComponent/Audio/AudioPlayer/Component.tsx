@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
 import { useInitializeAudio } from 'hooks/Audio/useInitializeAudio';
 import { useMemo } from 'react';
@@ -17,11 +17,11 @@ export function Component() {
       alignSelf='stretch'
       align='center'
       flex='1'
-      bgColor='gray.400'
+      bgColor={useColorModeValue('gray.500', 'gray.400')}
       borderRadius='17px'
       boxShadow='base'
       border='1px solid'
-      borderColor='blackAlpha.600'
+      borderColor={useColorModeValue('whiteAlpha.300', 'blackAlpha.600')}
       gap='10px'
       px='10px'
       maxW='17.875rem'

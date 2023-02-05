@@ -1,4 +1,4 @@
-import { Flex, LayoutProps } from '@chakra-ui/react';
+import { Flex, FlexProps, LayoutProps } from '@chakra-ui/react';
 import {
   useEffect,
   useState,
@@ -6,21 +6,27 @@ import {
   MouseEvent as ReactMouseEvent,
   useRef,
 } from 'react';
-import { Container } from './Container';
+import {} from './';
 import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
 import { useAudio } from 'contexts/Audio/AudioContext';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useResetAnimationWhenAudioEnds } from 'hooks/Audio/useResetAnimationWhenAudioEnds';
+import { ProgressBar } from './ProgressBar';
 
 // you can get the EventMap by seeing on the targetElement.addEventListener
 type WindowEvent = EventType<WindowEventMap>;
 
 export type SliderProps = {
   duration: HTMLAudioElement['duration'];
+  progressBarProps?: FlexProps;
   height?: LayoutProps['height'];
 };
 
-export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
+export function Slider({
+  duration,
+  height = '0.9375rem',
+  progressBarProps,
+}: SliderProps) {
   const animationDuration = useRef(0);
 
   useEffect(() => {
@@ -142,9 +148,10 @@ export function Slider({ duration, height = '0.9375rem' }: SliderProps) {
       onMouseDown={handleStartSettingAudio}
     >
       <Flex align='center' h='100%' w={`calc(100% - ${height})`} pos='relative'>
-        <Container
+        <ProgressBar
           duration={animationDuration.current}
           resetAnimation={resetAnimation}
+          {...progressBarProps}
         />
       </Flex>
     </Flex>

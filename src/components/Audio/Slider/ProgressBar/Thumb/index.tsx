@@ -1,8 +1,8 @@
-import { ContainerProps } from '..';
+import { SharedProps } from '..';
 import { AnimationBox } from '../AnimationBox';
 import { Circle } from './Circle';
 
-type ThumbProps = ContainerProps;
+type ThumbProps = SharedProps;
 
 export function Thumb(props: ThumbProps) {
   return (
