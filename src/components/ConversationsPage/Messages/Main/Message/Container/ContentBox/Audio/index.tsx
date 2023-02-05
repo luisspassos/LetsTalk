@@ -14,7 +14,7 @@ export function AudioComponent({ index, isContact }: AudioComponentProps) {
 
   return (
     <Flex
-      color={useColorModeValue('blue.900', 'current')}
+      color={useColorModeValue('blue.500', 'current')}
       align='center'
       p='.65em'
       bg='inherit'

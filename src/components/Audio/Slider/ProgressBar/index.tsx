@@ -19,7 +19,7 @@ export function ProgressBar({ duration, resetAnimation, ...rest }: Props) {
     <Flex
       flex='1'
       h='33%'
-      bg={useColorModeValue('whiteAlpha.700', 'whiteAlpha.400')}
+      bg={useColorModeValue('gray.50', 'whiteAlpha.400')}
       overflow='hidden'
       align='center'
       borderRadius='20px'

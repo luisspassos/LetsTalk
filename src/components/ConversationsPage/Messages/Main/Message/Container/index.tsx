@@ -17,7 +17,7 @@ export function Container({
 }: ContainerProps) {
   const bgColors = {
     default: useColorModeValue('gray.200', 'gray.400'),
-    contactMessage: useColorModeValue('gray.300', 'gray.500'),
+    contactMessage: useColorModeValue('gray.250', 'gray.500'),
   };
 
   const bg = contactMessage ? bgColors.contactMessage : bgColors.default;
