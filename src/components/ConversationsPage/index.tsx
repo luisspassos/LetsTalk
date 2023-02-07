@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/react';
+import { breakpoints } from 'styles/breakpoints';
 import { useConversations } from '../../contexts/ConversationsContext';
 import { PageTitle } from '../PageTitle';
 import { ConversationList } from './ConversationList';
@@ -15,7 +16,7 @@ export function Conversations() {
   return (
     <>
       <PageTitle pageName='Conversas' />
-      <Flex flex='1' minW={0} maxW='1400px' mx='auto'>
+      <Flex flex='1' minW={0} maxW={breakpoints.last} mx='auto'>
         <ConversationList />
         {existConversations ? <Messages /> : <Empty />}
       </Flex>

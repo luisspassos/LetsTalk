@@ -38,7 +38,7 @@ export function Container({
   return (
     <Flex
       w='100%'
-      px={['19px', '22px', '25px']}
+      // px={['19px', '22px', '25px']}
       alignItems='center'
       py='7px'
       h={`${conversationHeight}px`}

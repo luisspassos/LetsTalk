@@ -13,7 +13,6 @@ type ParentProps = {
 export function Parent({ children, parentRef }: ParentProps) {
   const styles = {
     pb: useBreakpointValue(['6px', '8px', '10px']),
-    mx: useBreakpointValue(['-19px', '-22px', '-25px']),
   };
 
   return (
@@ -21,7 +20,6 @@ export function Parent({ children, parentRef }: ParentProps) {
       ref={parentRef}
       style={{
         paddingBottom: styles.pb,
-        margin: `0 ${styles.mx}`,
       }}
     >
       {children}
