@@ -5,7 +5,7 @@ import { useTabToggle } from 'contexts/TabToggleContext';
 export function Icon() {
   const { isOpen } = useTabToggle();
 
-  const rotate = isOpen ? 0 : '90deg';
+  const rotate = isOpen ? '90deg' : 0;
 
   return (
     <ChakraIcon
