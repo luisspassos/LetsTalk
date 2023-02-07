@@ -15,7 +15,7 @@ export function Conversations() {
   return (
     <>
       <PageTitle pageName='Conversas' />
-      <Flex flex='1' minW={0}>
+      <Flex flex='1' minW={0} maxW='1400px' mx='auto'>
         <ConversationList />
         {existConversations ? <Messages /> : <Empty />}
       </Flex>

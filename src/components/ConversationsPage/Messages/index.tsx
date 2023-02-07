@@ -10,7 +10,6 @@ export const styles = {
 export function Messages() {
   return (
     <Flex
-      maxW='1100px'
       mx='auto'
       h='100vh'
       flex='1'
