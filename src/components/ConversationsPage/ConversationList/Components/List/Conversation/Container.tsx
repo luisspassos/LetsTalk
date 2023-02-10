@@ -1,16 +1,18 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { useConversations } from '../../../../../../contexts/ConversationsContext';
+import { useConversations } from 'contexts/ConversationsContext';
 
 type ContainerProps = {
   children: ReactNode;
   conversationHeight: number;
+  paddingToBeRemoved: string;
   name: string;
 };
 
 export function Container({
   children,
   conversationHeight,
+  paddingToBeRemoved,
   name,
 }: ContainerProps) {
   const {
@@ -38,8 +40,10 @@ export function Container({
   return (
     <Flex
       w='100%'
+      px={paddingToBeRemoved}
       // px={['19px', '22px', '25px']}
       alignItems='center'
+      marginInline={`-${paddingToBeRemoved}`}
       py='7px'
       h={`${conversationHeight}px`}
       flexShrink={0}

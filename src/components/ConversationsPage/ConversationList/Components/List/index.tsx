@@ -1,20 +1,21 @@
 import { useRef } from 'react';
 import { Ref } from '../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
-import { DividerUnderTitle } from '../DividerUnderTitle';
+import { DividerAboveList } from '../DividerAboveList';
 import { Parent } from './Parent';
 import { Virtualizer } from './Virtualizer';
 
 type ListProps = {
   search: string;
+  padding: string;
 };
 
-export function List({ search }: ListProps) {
+export function List({ search, padding }: ListProps) {
   const parentRef = useRef<Ref>(null);
 
   return (
-    <Parent parentRef={parentRef}>
-      <DividerUnderTitle />
-      <Virtualizer parentRef={parentRef} search={search} />
+    <Parent paddingToBeRemoved={padding} parentRef={parentRef}>
+      <DividerAboveList />
+      <Virtualizer padding={padding} parentRef={parentRef} search={search} />
     </Parent>
   );
 }

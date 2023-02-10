@@ -18,6 +18,7 @@ type ConversationProps = {
   };
   conversationHeight: number;
   index: number;
+  paddingToBeRemoved: string;
   numberOfConversations: number;
   start: number;
   style: HTMLProps['style'];
@@ -28,6 +29,7 @@ export function Conversation({
   index,
   numberOfConversations,
   conversationHeight,
+  paddingToBeRemoved,
   style,
   start,
 }: ConversationProps) {
@@ -35,7 +37,11 @@ export function Conversation({
 
   return (
     <Wrapper style={style} start={start}>
-      <Container conversationHeight={conversationHeight} name={name}>
+      <Container
+        paddingToBeRemoved={paddingToBeRemoved}
+        conversationHeight={conversationHeight}
+        name={name}
+      >
         <Avatar photoURL={photoURL} />
         <Flex justify='space-between' flex='1'>
           <VStack

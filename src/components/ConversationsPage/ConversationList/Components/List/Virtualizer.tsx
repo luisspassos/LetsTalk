@@ -1,22 +1,34 @@
 import { useBreakpointValue } from '@chakra-ui/react';
 import { useCallback, RefObject } from 'react';
 import { useVirtual } from 'react-virtual';
-import { useConversations } from '../../../../../contexts/ConversationsContext';
+import {
+  ConversationType,
+  useConversations,
+} from '../../../../../contexts/ConversationsContext';
 import { Ref } from '../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
 import { VirtualizedItemsListWrapper } from '../../../../Virtualizer/VirtualizedItemsListWrapper';
 import { Conversation } from './Conversation';
 
 type VirtualizerProps = {
+  padding: string;
   search: string;
   parentRef: RefObject<Ref>;
 };
 
-export function Virtualizer({ search, parentRef }: VirtualizerProps) {
+export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
   const { conversations } = useConversations();
 
   const fetchedConversations = conversations.data?.filter(({ name }) =>
     name?.includes(search.trim())
   );
+
+  const newFetchedConversations: ConversationType[] | undefined = [];
+
+  for (let i = 0; i < 10; i++) {
+    if (fetchedConversations === undefined) break;
+
+    newFetchedConversations.push(fetchedConversations[0]);
+  }
 
   const fetchedConversationsLength = fetchedConversations?.length ?? 0;
 
@@ -24,7 +36,7 @@ export function Virtualizer({ search, parentRef }: VirtualizerProps) {
 
   const conversationVirtualizer = useVirtual({
     parentRef,
-    size: fetchedConversations?.length ?? 0,
+    size: newFetchedConversations?.length ?? 0,
     estimateSize: useCallback(
       () => conversationHeight + 1,
       [conversationHeight]
@@ -38,6 +50,7 @@ export function Virtualizer({ search, parentRef }: VirtualizerProps) {
 
         return (
           <Conversation
+            paddingToBeRemoved={padding}
             start={virtualRow.start}
             key={virtualRow.key}
             index={virtualRow.index}

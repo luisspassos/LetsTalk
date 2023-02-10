@@ -12,18 +12,22 @@ export function Content() {
 
   return (
     <Container>
-      <Flex
-        direction={{ base: 'column', md: 'row' }}
-        justify='space-between'
-        align={{ base: 'start', md: 'center' }}
-      >
-        <Title />
-        <AddContactButton />
-      </Flex>
+      {(padding) => (
+        <>
+          <Flex
+            direction={{ base: 'column', md: 'row' }}
+            justify='space-between'
+            align={{ base: 'start', md: 'center' }}
+          >
+            <Title />
+            <AddContactButton />
+          </Flex>
 
-      <Divider />
-      <SearchInput setSearch={setSearch} />
-      <List search={search} />
+          <Divider />
+          <SearchInput setSearch={setSearch} />
+          <List search={search} padding={padding} />
+        </>
+      )}
     </Container>
   );
 }

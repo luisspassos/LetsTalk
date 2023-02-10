@@ -8,9 +8,14 @@ import {
 type ParentProps = {
   children: ReactNode;
   parentRef: RefObject<Ref>;
+  paddingToBeRemoved: string;
 };
 
-export function Parent({ children, parentRef }: ParentProps) {
+export function Parent({
+  children,
+  parentRef,
+  paddingToBeRemoved,
+}: ParentProps) {
   const styles = {
     pb: useBreakpointValue(['6px', '8px', '10px']),
   };
@@ -19,6 +24,7 @@ export function Parent({ children, parentRef }: ParentProps) {
     <ScrollableBoxOfVirtualizedItems
       ref={parentRef}
       style={{
+        marginInline: `-${paddingToBeRemoved}`,
         paddingBottom: styles.pb,
       }}
     >
