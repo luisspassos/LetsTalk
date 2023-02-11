@@ -1,3 +1,4 @@
+// you can get the EventMap by seeing on the targetElement.addEventListener
 type EventMapType = HTMLElementEventMap | WindowEventMap;
 
 type EventType<EventMap extends EventMapType> = keyof EventMap;
@@ -6,6 +7,8 @@ export type Event<EventMap extends EventMapType> = {
   type: EventType<EventMap>;
   func: Function;
 };
+
+export type WindowEvent = Event<WindowEventMap>;
 
 // iterateEvents //
 

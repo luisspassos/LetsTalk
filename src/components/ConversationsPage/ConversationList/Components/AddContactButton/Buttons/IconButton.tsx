@@ -18,7 +18,7 @@ export function IconButton({ label }: IconButtonProps) {
       <ChakraIconButton
         onClick={onOpen}
         aria-label={label}
-        icon={<AiOutlineUserAdd />}
+        icon={<AiOutlineUserAdd size='60%' />}
         transitionProperty='unset'
         transitionDuration='200ms'
         _hover={useColorModeValue(
@@ -29,9 +29,13 @@ export function IconButton({ label }: IconButtonProps) {
           undefined
         )}
         boxShadow='base'
-        fontSize='28px'
+        fontSize='20%'
         display={['none', null, 'inline-flex']}
-        size='lg'
+        w='17%'
+        h='unset'
+        sx={{
+          aspectRatio: '1 / 1',
+        }}
       />
     </Tooltip>
   );

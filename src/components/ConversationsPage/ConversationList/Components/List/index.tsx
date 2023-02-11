@@ -13,8 +13,8 @@ export function List({ search, padding }: ListProps) {
   const parentRef = useRef<Ref>(null);
 
   return (
-    <Parent paddingToBeRemoved={padding} parentRef={parentRef}>
-      <DividerAboveList />
+    <Parent padding={padding} parentRef={parentRef}>
+      <DividerAboveList padding={padding} />
       <Virtualizer padding={padding} parentRef={parentRef} search={search} />
     </Parent>
   );

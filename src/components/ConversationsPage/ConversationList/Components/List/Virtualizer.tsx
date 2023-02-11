@@ -50,7 +50,7 @@ export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
 
         return (
           <Conversation
-            paddingToBeRemoved={padding}
+            padding={padding}
             start={virtualRow.start}
             key={virtualRow.key}
             index={virtualRow.index}

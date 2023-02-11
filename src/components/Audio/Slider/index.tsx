@@ -7,14 +7,11 @@ import {
   useRef,
 } from 'react';
 import {} from './';
-import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
+import { iterateEvents, WindowEvent } from 'utils/iterateEvents';
 import { useAudio } from 'contexts/Audio/AudioContext';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useResetAnimationWhenAudioEnds } from 'hooks/Audio/useResetAnimationWhenAudioEnds';
 import { ProgressBar } from './ProgressBar';
-
-// you can get the EventMap by seeing on the targetElement.addEventListener
-type WindowEvent = EventType<WindowEventMap>;
 
 export type SliderProps = {
   duration: HTMLAudioElement['duration'];

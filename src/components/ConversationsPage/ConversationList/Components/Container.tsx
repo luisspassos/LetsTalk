@@ -5,8 +5,9 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import { useTabToggle } from 'contexts/TabToggleContext';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { breakpoints } from 'styles/breakpoints';
+import { iterateEvents, WindowEvent } from 'utils/iterateEvents';
 
 type ContainerProps = {
   children: (padding: string) => JSX.Element;
@@ -15,32 +16,48 @@ type ContainerProps = {
 export function Container({ children }: ContainerProps) {
   const { isOpen } = useTabToggle();
 
+  const ref = useRef<HTMLDivElement>(null);
+  const [padding, setPadding] = useState('');
+
+  function getPadding() {
+    const element = ref.current;
+
+    if (element === null) return;
+
+    const newPadding = getComputedStyle(element).paddingRight;
+
+    setPadding(newPadding);
+  }
+
+  useEffect(() => {
+    getPadding();
+  }, []);
+
+  // set window events
+  useEffect(() => {
+    const events: WindowEvent[] = [
+      {
+        type: 'resize',
+        func: getPadding,
+      },
+    ];
+
+    iterateEvents('add', events, window);
+
+    return () => {
+      iterateEvents('remove', events, window);
+    };
+  }, []);
+
   const [lastBreakpoint] = useMediaQuery(`(min-width: ${breakpoints.last})`);
 
   const styles: ChakraProps = {
-    padding: '2%',
+    padding: 'max(2%, 1.2rem)',
     border: '1px solid',
     get borderLeft() {
       return lastBreakpoint ? styles.border : undefined;
     },
   };
-
-  const ref = useRef<HTMLDivElement>(null);
-  const padding = useRef('');
-
-  useEffect(() => {
-    function getPadding() {
-      const element = ref.current;
-
-      if (element === null) return;
-
-      const newPadding = getComputedStyle(element).paddingRight;
-
-      padding.current = newPadding;
-    }
-
-    getPadding();
-  }, []);
 
   return (
     <Flex
@@ -58,7 +75,7 @@ export function Container({ children }: ContainerProps) {
       borderColor='whiteAlpha.500'
       as='aside'
     >
-      {children(padding.current)}
+      {children(padding)}
     </Flex>
   );
 }

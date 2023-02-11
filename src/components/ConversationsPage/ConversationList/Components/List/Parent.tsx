@@ -1,4 +1,3 @@
-import { useBreakpointValue } from '@chakra-ui/react';
 import { ReactNode, RefObject } from 'react';
 import {
   Ref,
@@ -8,24 +7,16 @@ import {
 type ParentProps = {
   children: ReactNode;
   parentRef: RefObject<Ref>;
-  paddingToBeRemoved: string;
+  padding: string;
 };
 
-export function Parent({
-  children,
-  parentRef,
-  paddingToBeRemoved,
-}: ParentProps) {
-  const styles = {
-    pb: useBreakpointValue(['6px', '8px', '10px']),
-  };
-
+export function Parent({ children, parentRef, padding }: ParentProps) {
   return (
     <ScrollableBoxOfVirtualizedItems
       ref={parentRef}
       style={{
-        marginInline: `-${paddingToBeRemoved}`,
-        paddingBottom: styles.pb,
+        marginInline: `-${padding}`,
+        paddingBottom: '5%',
       }}
     >
       {children}

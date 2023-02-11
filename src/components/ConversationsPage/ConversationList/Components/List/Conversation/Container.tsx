@@ -5,14 +5,14 @@ import { useConversations } from 'contexts/ConversationsContext';
 type ContainerProps = {
   children: ReactNode;
   conversationHeight: number;
-  paddingToBeRemoved: string;
+  padding: string;
   name: string;
 };
 
 export function Container({
   children,
   conversationHeight,
-  paddingToBeRemoved,
+  padding,
   name,
 }: ContainerProps) {
   const {
@@ -40,16 +40,15 @@ export function Container({
   return (
     <Flex
       w='100%'
-      px={paddingToBeRemoved}
-      // px={['19px', '22px', '25px']}
+      px={padding}
       alignItems='center'
-      marginInline={`-${paddingToBeRemoved}`}
+      marginInline={`-${padding}`}
       py='7px'
       h={`${conversationHeight}px`}
       flexShrink={0}
       cursor='pointer'
       transition='0.2s'
-      bg={isSelected ? bg : 'current'}
+      bg={isSelected ? bg : undefined}
       _hover={{
         bg,
       }}

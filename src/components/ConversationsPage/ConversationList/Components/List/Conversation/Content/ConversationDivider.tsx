@@ -1,16 +1,21 @@
 import { DividerProps as ChakraDividerProps } from '@chakra-ui/react';
 import { Divider } from '../../../../../Divider';
 
-type ConversationDividerProps = ChakraDividerProps;
+type ConversationDividerProps = {
+  paddingToBeAdded: string;
+} & ChakraDividerProps;
 
-export function ConversationDivider({ ...props }: ConversationDividerProps) {
+export function ConversationDivider({
+  paddingToBeAdded,
+  ...rest
+}: ConversationDividerProps) {
   return (
     <Divider
-      w={['calc(100% - 38px)', 'calc(100% - 44px)', 'calc(100% - 50px)']}
+      marginInline={paddingToBeAdded}
       borderBottomWidth='1px'
       opacity='40%'
       mb={0}
-      {...props}
+      {...rest}
     />
   );
 }

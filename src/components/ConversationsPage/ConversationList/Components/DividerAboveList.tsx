@@ -1,7 +1,18 @@
 import { ConversationDivider } from './List/Conversation/Content/ConversationDivider';
 
-export function DividerAboveList() {
+type DividerAboveListProps = {
+  padding: string;
+};
+
+export function DividerAboveList({ padding }: DividerAboveListProps) {
   return (
-    <ConversationDivider position='sticky' top={0} left={0} mt={0} mx='auto' />
+    <ConversationDivider
+      paddingToBeAdded={padding}
+      position='sticky'
+      top={0}
+      left={0}
+      mt={0}
+      mx='auto'
+    />
   );
 }

@@ -6,8 +6,9 @@ export function Icon() {
     <InputLeftElement
       h='100%'
       pointerEvents='none'
-      fontSize={['19px', '21px', '23px']}
-      pl={['6px', '8px', '10px']}
+      fontSize='1.2em'
+      w='unset'
+      pl='5%'
     >
       <ChakraIcon as={FiSearch} />
     </InputLeftElement>

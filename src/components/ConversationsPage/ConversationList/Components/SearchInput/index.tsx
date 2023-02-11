@@ -2,7 +2,7 @@ import { InputGroup } from '@chakra-ui/react';
 import { Icon } from './Icon';
 import { Input } from './Input';
 
-type SearchInputProps = {
+export type SearchInputProps = {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 };
 
@@ -14,7 +14,7 @@ export function SearchInput({ setSearch }: SearchInputProps) {
       mb={['13px', '15px', '17px']}
     >
       <Icon />
-      <Input onChange={(e) => setSearch(e.target.value)} />
+      <Input setSearch={setSearch} />
     </InputGroup>
   );
 }
