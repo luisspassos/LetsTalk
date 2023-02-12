@@ -1,4 +1,4 @@
-import { ChakraProps, Image, ImageProps, Skeleton } from '@chakra-ui/react';
+import { ChakraProps, ImageProps, Skeleton, Image } from '@chakra-ui/react';
 import { forwardRef, useEffect, useState } from 'react';
 
 type AvatarProps = Omit<ImageProps, 'src'> & {
@@ -6,7 +6,7 @@ type AvatarProps = Omit<ImageProps, 'src'> & {
 };
 
 export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
-  ({ src, ...props }, ref) => {
+  ({ src, width, w = '12', ...props }, ref) => {
     const abstractUserIcon = 'images/abstract-user.svg';
 
     const [isLoaded, setIsLoaded] = useState(false);
@@ -18,65 +18,48 @@ export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
     }, [src]);
 
     function handleLoad() {
-      // setIsLoaded(true);
+      setIsLoaded(true);
     }
 
     function handleError() {
       setAvatar(abstractUserIcon);
-      // setIsLoaded(true);
+      setIsLoaded(true);
     }
 
     const styles: ChakraProps = {
       borderRadius: '50%',
     };
 
-    if (isLoaded) {
-      return (
+    return (
+      <Skeleton
+        isLoaded={isLoaded || !avatar}
+        startColor='gray.300'
+        endColor='gray.400'
+        w={w}
+        width={width}
+        sx={{
+          '&': {
+            aspectRatio: '1 / 1',
+          },
+        }}
+        ref={ref}
+        {...props}
+        {...styles}
+      >
         <Image
           ref={ref}
           onLoad={handleLoad}
           onError={handleError}
           src={avatar}
-          alt='Imagem de perfil'
           boxShadow='sm'
+          alt='Imagem de perfil'
+          w='100%'
+          h='100%'
           {...styles}
           {...props}
         />
-      );
-    }
-
-    return (
-      <Skeleton
-        {...styles}
-        {...props}
-        startColor='gray.300'
-        endColor='gray.400'
-      />
+      </Skeleton>
     );
-
-    // return (
-    //   <Skeleton
-    //     isLoaded={isLoaded || !avatar}
-    //     startColor='gray.300'
-    //     endColor='gray.400'
-    //     ref={ref}
-    //     // {...props}
-    //     // {...styles}
-    //   >
-    //     <Image
-    //       ref={ref}
-    //       onLoad={handleLoad}
-    //       onError={handleError}
-    //       src={avatar}
-    //       alt='Imagem de perfil'
-    //       w='12'
-    //       h='12'
-    //       boxShadow='sm'
-    //       {...styles}
-    //       {...props}
-    //     />
-    //   </Skeleton>
-    // );
   }
 );
 
