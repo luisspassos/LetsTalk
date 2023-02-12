@@ -58,7 +58,7 @@ export function Conversation({
           </VStack>
         </Flex>
       </Container>
-      {!lastItem && <ConversationDivider mt={0} paddingToBeAdded={padding} />}
+      {!lastItem && <ConversationDivider mt={0} widthToBeRemoved={padding} />}
     </Wrapper>
   );
 }

@@ -7,7 +7,7 @@ type DividerAboveListProps = {
 export function DividerAboveList({ padding }: DividerAboveListProps) {
   return (
     <ConversationDivider
-      paddingToBeAdded={padding}
+      widthToBeRemoved={padding}
       position='sticky'
       top={0}
       left={0}
