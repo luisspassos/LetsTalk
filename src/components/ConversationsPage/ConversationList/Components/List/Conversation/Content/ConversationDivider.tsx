@@ -13,6 +13,7 @@ export function ConversationDivider({
     <Divider
       w={`calc(100% - ${widthToBeRemoved} - ${widthToBeRemoved})`}
       borderBottomWidth='1px'
+      margin='0 auto'
       opacity='40%'
       mb={0}
       {...rest}

@@ -1,12 +1,9 @@
-import { useBreakpointValue } from '@chakra-ui/react';
-import { useCallback, RefObject } from 'react';
-import { useVirtual } from 'react-virtual';
+import { RefObject } from 'react';
 import {
   ConversationType,
   useConversations,
 } from '../../../../../contexts/ConversationsContext';
 import { Ref } from '../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
-import { VirtualizedItemsListWrapper } from '../../../../Virtualizer/VirtualizedItemsListWrapper';
 import { Conversation } from './Conversation';
 
 type VirtualizerProps = {
@@ -22,7 +19,7 @@ export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
     name?.includes(search.trim())
   );
 
-  const newFetchedConversations: ConversationType[] | undefined = [];
+  const newFetchedConversations: ConversationType[] = [];
 
   for (let i = 0; i < 10; i++) {
     if (fetchedConversations === undefined) break;
@@ -30,44 +27,51 @@ export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
     newFetchedConversations.push(fetchedConversations[0]);
   }
 
-  const fetchedConversationsLength = fetchedConversations?.length ?? 0;
-
-  const conversationHeight = useBreakpointValue([65, 75, 85]) ?? 0;
-
-  const conversationVirtualizer = useVirtual({
-    parentRef,
-    size: newFetchedConversations?.length ?? 0,
-    estimateSize: useCallback(
-      () => conversationHeight + 1,
-      [conversationHeight]
-    ),
-  });
+  const fetchedConversationsLength = newFetchedConversations.length;
 
   return (
-    <VirtualizedItemsListWrapper totalSize={conversationVirtualizer.totalSize}>
-      {conversationVirtualizer.virtualItems.map((virtualRow) => {
-        const conversation = fetchedConversations?.[virtualRow.index];
-
-        return (
+    <>
+      {newFetchedConversations.map(
+        ({ lastMessage, name, photoURL, updatedAt, uid }, i) => (
           <Conversation
             padding={padding}
-            start={virtualRow.start}
-            key={virtualRow.key}
-            index={virtualRow.index}
+            key={uid}
+            index={i}
             numberOfConversations={fetchedConversationsLength}
-            conversationHeight={conversationHeight}
             data={{
-              name: conversation?.name ?? '',
-              photoURL: conversation?.photoURL ?? '',
-              lastMessage: conversation?.lastMessage ?? '',
-              updatedAt: conversation?.updatedAt ?? '',
-            }}
-            style={{
-              height: `${virtualRow.size}px`,
+              name: name ?? '',
+              photoURL: photoURL ?? '',
+              lastMessage: lastMessage ?? '',
+              updatedAt: updatedAt ?? '',
             }}
           />
-        );
-      })}
-    </VirtualizedItemsListWrapper>
+        )
+      )}
+    </>
   );
+  // <VirtualizedItemsListWrapper>
+  //   {conversationVirtualizer.virtualItems.map((virtualRow) => {
+  //     const conversation = fetchedConversations?.[virtualRow.index];
+
+  //     return (
+  //       <Conversation
+  //         padding={padding}
+  //         start={virtualRow.start}
+  //         key={virtualRow.key}
+  //         index={virtualRow.index}
+  //         numberOfConversations={fetchedConversationsLength}
+  //         conversationHeight={conversationHeight}
+  //         data={{
+  //           name: conversation?.name ?? '',
+  //           photoURL: conversation?.photoURL ?? '',
+  //           lastMessage: conversation?.lastMessage ?? '',
+  //           updatedAt: conversation?.updatedAt ?? '',
+  //         }}
+  //         style={{
+  //           height: `${virtualRow.size}px`,
+  //         }}
+  //       />
+  //     );
+  //   })}
+  // </VirtualizedItemsListWrapper>
 }

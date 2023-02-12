@@ -4,17 +4,11 @@ import { useConversations } from 'contexts/ConversationsContext';
 
 type ContainerProps = {
   children: ReactNode;
-  conversationHeight: number;
   padding: string;
   name: string;
 };
 
-export function Container({
-  children,
-  conversationHeight,
-  padding,
-  name,
-}: ContainerProps) {
+export function Container({ children, padding, name }: ContainerProps) {
   const {
     currentConversation: {
       data: currentConversation,
@@ -42,9 +36,6 @@ export function Container({
       w='100%'
       px={padding}
       alignItems='center'
-      marginInline={`-${padding}`}
-      py='7px'
-      h={`${conversationHeight}px`}
       flexShrink={0}
       cursor='pointer'
       transition='0.2s'
@@ -53,6 +44,9 @@ export function Container({
         bg,
       }}
       onClick={handleChangeCurrentConversation}
+      sx={{
+        aspectRatio: '1 / 0.27',
+      }}
     >
       {children}
     </Flex>

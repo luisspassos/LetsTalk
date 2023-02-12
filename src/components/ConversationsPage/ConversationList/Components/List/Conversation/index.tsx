@@ -5,8 +5,6 @@ import { LastMessage } from './Content/LastMessage';
 import { LastMessageTime } from './Content/LastMessageTime';
 import { NumberOfUnreadMessages } from './Content/NumberOfUnreadMessages';
 import { ConversationDivider } from './Content/ConversationDivider';
-import { HTMLProps } from '../../../../../Virtualizer';
-import { Wrapper } from './Wrapper';
 import { Container } from './Container';
 
 type ConversationProps = {
@@ -16,32 +14,22 @@ type ConversationProps = {
     updatedAt: string;
     lastMessage: string;
   };
-  conversationHeight: number;
   index: number;
   padding: string;
   numberOfConversations: number;
-  start: number;
-  style: HTMLProps['style'];
 };
 
 export function Conversation({
   data: { name, photoURL, updatedAt, lastMessage },
   index,
   numberOfConversations,
-  conversationHeight,
   padding,
-  style,
-  start,
 }: ConversationProps) {
   const lastItem = index === numberOfConversations - 1;
 
   return (
-    <Wrapper style={style} start={start}>
-      <Container
-        padding={padding}
-        conversationHeight={conversationHeight}
-        name={name}
-      >
+    <>
+      <Container padding={padding} name={name}>
         <Avatar photoURL={photoURL} />
         <Flex justify='space-between' flex='1'>
           <VStack
@@ -59,6 +47,6 @@ export function Conversation({
         </Flex>
       </Container>
       {!lastItem && <ConversationDivider mt={0} widthToBeRemoved={padding} />}
-    </Wrapper>
+    </>
   );
 }
