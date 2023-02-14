@@ -36,11 +36,17 @@ export function Conversation({
             spacing={['-1px', '-0.5px', 0]}
             alignItems='start'
             justify='center'
+            w='100%'
           >
             <Name text={name} />
             <LastMessage text={lastMessage} />
           </VStack>
-          <VStack spacing={['1px', '1.5px', '2px']} h='100%' align='end'>
+          <VStack
+            flexShrink={0}
+            spacing={['1px', '1.5px', '2px']}
+            h='100%'
+            align='end'
+          >
             <LastMessageTime text={updatedAt} />
             <NumberOfUnreadMessages number={2} />
           </VStack>

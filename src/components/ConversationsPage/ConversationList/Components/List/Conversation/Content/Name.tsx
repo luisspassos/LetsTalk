@@ -9,17 +9,24 @@ type NameProps = {
 export function Name({ text }: NameProps) {
   const ref = useRef<HTMLHeadingElement>(null);
 
-  const { fontSize } = useFontSizeBasedOnWidth(ref.current?.parentElement, 2);
+  const { fontSize } = useFontSizeBasedOnWidth(
+    ref.current?.parentElement?.parentElement,
+    12
+  );
 
   return (
     <Heading
       ref={ref}
-      maxW={['110px', '130px', '150px']}
-      isTruncated
+      textOverflow='ellipsis'
+      overflow='hidden'
+      whiteSpace='nowrap'
+      w='80%'
       fontSize={fontSize}
       fontWeight={400}
     >
-      {text}
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut cupiditate
+      culpa sed reiciendis ipsam quam ad ducimus explicabo cum non. Deserunt
+      esse minima placeat enim corporis aut possimus qui voluptatum!
     </Heading>
   );
 }

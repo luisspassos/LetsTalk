@@ -5,19 +5,19 @@ type Element = HTMLElement | undefined | null;
 
 export function useFontSizeBasedOnWidth(
   element: Element,
-  valueThatChangesSize: number
+  valueThatDividesWidth: number
 ) {
   const [fontSize, setFontSize] = useState('');
 
   const getFontSize = useCallback(() => {
     if (element === null || element === undefined) return;
 
-    const newFontSize = element.offsetWidth / valueThatChangesSize;
+    const newFontSize = element.offsetWidth / valueThatDividesWidth;
 
     const fontSize = newFontSize + 'px';
 
     setFontSize(fontSize);
-  }, [element, valueThatChangesSize]);
+  }, [element, valueThatDividesWidth]);
 
   useEffect(() => {
     getFontSize();
