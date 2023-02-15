@@ -11,7 +11,6 @@ export function ContactName() {
       textOverflow='ellipsis'
       overflow='hidden'
       whiteSpace='nowrap'
-      as='h3'
       fontSize={['15px', '16px', '17px']}
       fontWeight={400}
     >

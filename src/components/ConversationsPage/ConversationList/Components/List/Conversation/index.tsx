@@ -1,11 +1,7 @@
-import { Flex, VStack } from '@chakra-ui/react';
 import { Avatar } from './Content/Avatar';
-import { Name } from './Content/Name';
-import { LastMessage } from './Content/LastMessage';
-import { LastMessageTime } from './Content/LastMessageTime';
-import { NumberOfUnreadMessages } from './Content/NumberOfUnreadMessages';
 import { ConversationDivider } from './Content/ConversationDivider';
 import { Container } from './Container';
+import { Name } from './Content/Name';
 
 type ConversationProps = {
   data: {
@@ -31,14 +27,16 @@ export function Conversation({
     <>
       <Container padding={padding} name={name}>
         <Avatar photoURL={photoURL} />
-        <Flex justify='space-between' flex='1'>
-          <VStack
+        <div>
+          <Name text={name} />
+        </div>
+        {/* <Flex w='100%' justifyContent='space-between'> */}
+        {/* <VStack
             spacing={['-1px', '-0.5px', 0]}
             alignItems='start'
             justify='center'
             w='100%'
           >
-            <Name text={name} />
             <LastMessage text={lastMessage} />
           </VStack>
           <VStack
@@ -49,8 +47,8 @@ export function Conversation({
           >
             <LastMessageTime text={updatedAt} />
             <NumberOfUnreadMessages number={2} />
-          </VStack>
-        </Flex>
+          </VStack> */}
+        {/* </Flex> */}
       </Container>
       {!lastItem && <ConversationDivider mt={0} widthToBeRemoved={padding} />}
     </>

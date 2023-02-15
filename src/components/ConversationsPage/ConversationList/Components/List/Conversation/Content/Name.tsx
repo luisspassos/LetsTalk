@@ -20,9 +20,10 @@ export function Name({ text }: NameProps) {
       textOverflow='ellipsis'
       overflow='hidden'
       whiteSpace='nowrap'
-      w='80%'
-      fontSize={fontSize}
+      // fontSize={fontSize}
+      fontSize='17px'
       fontWeight={400}
+      as='h3'
     >
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut cupiditate
       culpa sed reiciendis ipsam quam ad ducimus explicabo cum non. Deserunt

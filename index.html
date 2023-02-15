@@ -14,24 +14,37 @@
 
       .container {
         width: 50%;
+        aspect-ratio: 1 / 1;
         border: 2px solid black;
+
+        display: flex;
       }
 
-      h1 {
+      .content {
+        width: 50%;
+        height: 100%;
+        background-color: red;
+
+        flex-shrink: 0;
+      }
+
+      .text {
         text-overflow: ellipsis;
-        overflow: hidden;
         white-space: nowrap;
+        overflow: hidden;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde,
-        perferendis tempora odio voluptate voluptatum amet minus dicta aperiam
-        illo nihil aspernatur error deleniti assumenda iusto, repellat
-        molestias, incidunt magnam reiciendis.
-      </h1>
+      <div class="content"></div>
+      <div class="text">
+        <h1>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero natus
+          accusamus, cupiditate quae veritatis, quidem iste vel, amet iusto
+          numquam quas fugit earum explicabo at neque omnis debitis eos tempore.
+        </h1>
+      </div>
     </div>
   </body>
 </html>
