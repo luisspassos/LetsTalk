@@ -58,6 +58,8 @@ export function ConversationsProvider({
 
       const conversations = await getConversations(user?.uid);
 
+      console.log(conversations);
+
       setConversations(conversations);
     }
 

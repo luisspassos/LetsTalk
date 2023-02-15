@@ -5,5 +5,5 @@ type AvatarProps = {
 };
 
 export function Avatar({ photoURL }: AvatarProps) {
-  return <ChakraAvatar flexShrink={0} w='18.5%' src={photoURL} mr='5%' />;
+  return <ChakraAvatar flexShrink={0} w='17.5%' src={photoURL} mr='5%' />;
 }

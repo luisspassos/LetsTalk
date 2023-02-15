@@ -16,6 +16,8 @@ export function useFontSizeBasedOnWidth(
 
     const fontSize = newFontSize + 'px';
 
+    console.log(fontSize);
+
     setFontSize(fontSize);
   }, [element, valueThatDividesWidth]);
 

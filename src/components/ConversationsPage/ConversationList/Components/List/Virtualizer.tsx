@@ -24,7 +24,12 @@ export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
   for (let i = 0; i < 10; i++) {
     if (fetchedConversations === undefined) break;
 
-    newFetchedConversations.push(fetchedConversations[0]);
+    const fetchedConversation: ConversationType = {
+      ...fetchedConversations[0],
+      uid: i + '',
+    };
+
+    newFetchedConversations.push(fetchedConversation);
   }
 
   const fetchedConversationsLength = newFetchedConversations.length;

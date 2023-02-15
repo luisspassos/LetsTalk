@@ -1,19 +1,26 @@
-import { Text } from '@chakra-ui/react';
+import { Text, useColorModeValue } from '@chakra-ui/react';
+import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useRef } from 'react';
 
 type LastMessageProps = {
   text: string;
 };
 
 export function LastMessage({ text }: LastMessageProps) {
+  const ref = useRef<HTMLParagraphElement>(null);
+
+  const { fontSize } = useFontSizeBasedOnWidth(ref.current?.parentElement, 9.8);
+
   return (
     <Text
       as='small'
-      maxW={['107px', '127px', '147px']}
+      ref={ref}
+      w='100%'
+      fontSize={fontSize}
       isTruncated
-      fontSize={['12px', '13px', '14px']}
-      opacity='90%'
+      color={useColorModeValue('blackAlpha.800', 'whiteAlpha.700')}
     >
-      {text}
+      🤠🤡🤡🤠dsadasddasdasdsadasdas
     </Text>
   );
 }
