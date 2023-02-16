@@ -1,5 +1,5 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { useConversations } from 'contexts/ConversationsContext';
 
 type ContainerProps = {
@@ -17,6 +17,19 @@ export function Container({ children, padding, name }: ContainerProps) {
     conversations: { data: conversations },
   } = useConversations();
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [offsetWidth, setOffsetWidth] = useState(0);
+
+  useEffect(() => {
+    const element = ref.current;
+    const newOffsetWidth = element?.offsetWidth;
+
+    if (newOffsetWidth === undefined) return;
+
+    setOffsetWidth(newOffsetWidth);
+  }, []);
+
   const bg = useColorModeValue('grayAlpha.500', 'whiteAlpha.100');
 
   function handleChangeCurrentConversation() {
@@ -33,6 +46,7 @@ export function Container({ children, padding, name }: ContainerProps) {
 
   return (
     <Flex
+      ref={ref}
       w='100%'
       px={padding}
       alignItems='center'
