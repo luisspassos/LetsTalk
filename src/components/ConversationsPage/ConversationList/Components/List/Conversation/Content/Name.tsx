@@ -1,22 +1,49 @@
 import { Heading } from '@chakra-ui/react';
-import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
-import { useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { iterateEvents, WindowEvent } from 'utils/iterateEvents';
 
 type NameProps = {
   text: string;
 };
 
 export function Name({ text }: NameProps) {
-  const ref = useRef<HTMLHeadingElement>(null);
+  const [element, setElement] = useState<HTMLHeadingElement | null>(null);
+  const [fontSize, setFontSize] = useState('');
 
-  const { fontSize } = useFontSizeBasedOnWidth(
-    ref.current?.parentElement?.parentElement,
-    12.5
-  );
+  const getFontSize = useCallback(() => {
+    const offsetWidth = element?.parentElement?.parentElement?.offsetWidth;
+
+    if (offsetWidth === undefined) return;
+
+    const newFontSize = offsetWidth / 12.5;
+
+    const fontSizeMeasure = newFontSize + 'px';
+
+    setFontSize(fontSizeMeasure);
+  }, [element?.parentElement?.parentElement?.offsetWidth]);
+
+  useEffect(() => {
+    getFontSize();
+  }, [getFontSize]);
+
+  useEffect(() => {
+    const events: WindowEvent[] = [
+      {
+        type: 'resize',
+        func: getFontSize,
+      },
+    ];
+
+    iterateEvents('add', events, window);
+
+    return () => {
+      iterateEvents('remove', events, window);
+    };
+  }, [getFontSize]);
 
   return (
     <Heading
-      ref={ref}
+      ref={setElement}
       textOverflow='ellipsis'
       overflow='hidden'
       whiteSpace='nowrap'
