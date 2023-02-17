@@ -1,14 +1,46 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useConversations } from 'contexts/ConversationsContext';
 
+export type ChildrenProps = {
+  containerWidth: number;
+};
+
 type ContainerProps = {
-  children: ReactNode;
+  children: (props: ChildrenProps) => JSX.Element;
   padding: string;
   name: string;
 };
 
 export function Container({ children, padding, name }: ContainerProps) {
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  // get container width
+  useEffect(() => {
+    const element = ref.current;
+
+    if (element === null) return;
+
+    function getContainerWidth() {
+      const element = ref.current;
+      const newOffsetWidth = element?.offsetWidth;
+
+      if (newOffsetWidth === undefined) return;
+
+      setContainerWidth(newOffsetWidth);
+    }
+
+    const observer = new ResizeObserver(getContainerWidth);
+
+    observer.observe(element);
+
+    return () => {
+      observer.unobserve(element);
+    };
+  }, []);
+
   const {
     currentConversation: {
       data: currentConversation,
@@ -16,19 +48,6 @@ export function Container({ children, padding, name }: ContainerProps) {
     },
     conversations: { data: conversations },
   } = useConversations();
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  const [offsetWidth, setOffsetWidth] = useState(0);
-
-  useEffect(() => {
-    const element = ref.current;
-    const newOffsetWidth = element?.offsetWidth;
-
-    if (newOffsetWidth === undefined) return;
-
-    setOffsetWidth(newOffsetWidth);
-  }, []);
 
   const bg = useColorModeValue('grayAlpha.500', 'whiteAlpha.100');
 
@@ -52,7 +71,7 @@ export function Container({ children, padding, name }: ContainerProps) {
       alignItems='center'
       flexShrink={0}
       cursor='pointer'
-      transition='0.2s'
+      transition='0.2s background'
       bg={isSelected ? bg : undefined}
       _hover={{
         bg,
@@ -62,7 +81,7 @@ export function Container({ children, padding, name }: ContainerProps) {
         aspectRatio: '1 / 0.27',
       }}
     >
-      {children}
+      {children({ containerWidth })}
     </Flex>
   );
 }

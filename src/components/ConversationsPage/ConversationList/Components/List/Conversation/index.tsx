@@ -30,28 +30,35 @@ export function Conversation({
   return (
     <>
       <Container padding={padding} name={name}>
-        <Avatar photoURL={photoURL} />
-        <Flex minW='0' w='100%' justifyContent='space-between'>
-          <VStack
-            spacing={['-1px', '-0.5px', 0]}
-            alignItems='start'
-            justify='center'
-            minW='0'
-            w='100%'
-          >
-            <Name text={name} />
-            <LastMessage text={lastMessage} />
-          </VStack>
-          <VStack
-            flexShrink={0}
-            spacing={['1px', '1.5px', '2px']}
-            h='100%'
-            align='end'
-          >
-            <LastMessageTime text={updatedAt} />
-            <NumberOfUnreadMessages number={2} />
-          </VStack>
-        </Flex>
+        {({ containerWidth }) => (
+          <>
+            <Avatar photoURL={photoURL} />
+            <Flex minW='0' w='100%' justifyContent='space-between'>
+              <VStack
+                spacing={['-1px', '-0.5px', 0]}
+                alignItems='start'
+                justify='center'
+                minW='0'
+                w='100%'
+              >
+                <Name containerWidth={containerWidth} text={name} />
+                <LastMessage
+                  containerWidth={containerWidth}
+                  text={lastMessage}
+                />
+              </VStack>
+              <VStack
+                flexShrink={0}
+                spacing={['1px', '1.5px', '2px']}
+                h='100%'
+                align='end'
+              >
+                <LastMessageTime text={updatedAt} />
+                <NumberOfUnreadMessages number={2} />
+              </VStack>
+            </Flex>
+          </>
+        )}
       </Container>
       {!lastItem && <ConversationDivider mt={0} widthToBeRemoved={padding} />}
     </>

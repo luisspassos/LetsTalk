@@ -1,22 +1,16 @@
 import { Heading } from '@chakra-ui/react';
 import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
-import { useState } from 'react';
+import { ChildrenProps } from '../Container';
 
 type NameProps = {
   text: string;
-};
+} & ChildrenProps;
 
-export function Name({ text }: NameProps) {
-  const [element, setElement] = useState<HTMLHeadingElement | null>(null);
-
-  const { fontSize } = useFontSizeBasedOnWidth(
-    element?.parentElement?.parentElement,
-    12.5
-  );
+export function Name({ text, containerWidth }: NameProps) {
+  const { fontSize } = useFontSizeBasedOnWidth(containerWidth, 20);
 
   return (
     <Heading
-      ref={setElement}
       textOverflow='ellipsis'
       overflow='hidden'
       whiteSpace='nowrap'

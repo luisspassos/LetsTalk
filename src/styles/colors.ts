@@ -1,4 +1,8 @@
 export const colors = {
+  lastMessage: {
+    dark: '#c2c2c2',
+    light: '#3d3d3d',
+  },
   blueAlpha: {
     900: '#1d243490',
     400: 'rgba(66, 153, 225, 0.6)',
