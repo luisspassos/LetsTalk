@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { resizeObserver } from 'utils/resizeObserver';
 
 type Element = HTMLElement | undefined | null;
 
@@ -27,52 +28,18 @@ export function useFontSizeBasedOnWidth(
 
     if (!elementOrWidth) return;
 
-    const width = elementOrWidth.offsetWidth;
+    const callback = () => {
+      const width = elementOrWidth.offsetWidth;
 
-    const resizeObserver = new ResizeObserver(() => getFontSize(width));
+      getFontSize(width);
+    };
 
-    resizeObserver.observe(elementOrWidth);
+    const { unobserve } = resizeObserver(callback, elementOrWidth);
 
     return () => {
-      resizeObserver.unobserve(elementOrWidth);
+      unobserve();
     };
   }, [elementOrWidth, valueThatDividesWidth]);
 
   return { fontSize };
-
-  // const returnObj = {
-  //   fontSize,
-  // };
-
-  // const getFontSize = useCallback(() => {
-  //   const width = valueReceivedIsAWidth
-  //     ? elementOrWidth
-  //     : elementOrWidth.offsetWidth;
-
-  //   const newFontSize = width / valueThatDividesWidth;
-
-  //   const fontSize = newFontSize + 'px';
-
-  //   setFontSize(fontSize);
-  // }, [elementOrWidth, valueReceivedIsAWidth, valueThatDividesWidth]);
-
-  // useEffect(() => {
-  //   getFontSize();
-  // }, [getFontSize]);
-
-  // // set window events
-  // useEffect(() => {
-  //   const events: WindowEvent[] = [
-  //     {
-  //       type: 'resize',
-  //       func: getFontSize,
-  //     },
-  //   ];
-
-  //   iterateEvents('add', events, window);
-
-  //   return () => {
-  //     iterateEvents('remove', events, window);
-  //   };
-  // }, [getFontSize]);
 }

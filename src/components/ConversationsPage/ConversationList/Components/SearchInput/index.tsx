@@ -1,4 +1,6 @@
 import { InputGroup } from '@chakra-ui/react';
+import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useRef } from 'react';
 import { Icon } from './Icon';
 import { Input } from './Input';
 
@@ -7,8 +9,14 @@ export type SearchInputProps = {
 };
 
 export function SearchInput({ setSearch }: SearchInputProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { fontSize } = useFontSizeBasedOnWidth(ref.current, 17.5);
+
   return (
     <InputGroup
+      fontSize={`max(${fontSize}, 0.9375rem)`}
+      ref={ref}
       alignItems='center'
       justifyContent='center'
       mb={['13px', '15px', '17px']}

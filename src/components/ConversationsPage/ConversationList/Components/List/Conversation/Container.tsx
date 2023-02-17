@@ -1,6 +1,7 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useConversations } from 'contexts/ConversationsContext';
+import { resizeObserver } from 'utils/resizeObserver';
 
 export type ChildrenProps = {
   containerWidth: number;
@@ -32,12 +33,10 @@ export function Container({ children, padding, name }: ContainerProps) {
       setContainerWidth(newOffsetWidth);
     }
 
-    const observer = new ResizeObserver(getContainerWidth);
-
-    observer.observe(element);
+    const { unobserve } = resizeObserver(getContainerWidth, element);
 
     return () => {
-      observer.unobserve(element);
+      unobserve();
     };
   }, []);
 
