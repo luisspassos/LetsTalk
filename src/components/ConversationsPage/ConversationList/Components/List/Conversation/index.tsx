@@ -53,7 +53,10 @@ export function Conversation({
                 h='100%'
                 align='end'
               >
-                <LastMessageTime text={updatedAt} />
+                <LastMessageTime
+                  containerWidth={containerWidth}
+                  text={updatedAt}
+                />
                 <NumberOfUnreadMessages number={2} />
               </VStack>
             </Flex>
