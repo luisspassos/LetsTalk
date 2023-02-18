@@ -1,4 +1,5 @@
 import { useSetMessageInputSize } from 'hooks/useSetMessageInputSize';
+import { useEffect } from 'react';
 import { SetMessage } from '.';
 import { Base } from '../../RightButtonBase/Send/Base';
 
@@ -11,8 +12,13 @@ export function SendMessageButton({ setMessage }: SendMessageButtonProps) {
 
   function handleSendMessage() {
     setMessage('');
-    setMessageInputSize();
   }
+
+  useEffect(() => {
+    return () => {
+      setMessageInputSize();
+    };
+  }, [setMessageInputSize]);
 
   return <Base onClick={handleSendMessage} label='Enviar mensagem' />;
 }

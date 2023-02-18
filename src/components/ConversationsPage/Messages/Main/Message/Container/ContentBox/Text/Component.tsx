@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import getEmojiRegex from 'emoji-regex';
-import { font } from 'components/ConversationsPage/Messages/Footer/CurrentComponent/Message/Form/MessageInput';
+import { fontFamily } from 'components/ConversationsPage/Messages/Footer/CurrentComponent/Message/Form/MessageInput';
 
 type TextComponentProps = {
   children: ReactNode;
@@ -30,7 +30,7 @@ export function TextComponent({ children }: TextComponentProps) {
 
   return (
     <Text
-      fontFamily={font}
+      fontFamily={fontFamily}
       py={['6px', '8px', '10px']}
       px={['11px', '13px', '15px']}
       fontSize={fontSize}

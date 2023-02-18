@@ -87,10 +87,9 @@ export function Emoji({ children: emoji }: EmojiProps) {
 
     if (!isFocused) input?.focus();
 
-    const [start, end] = [
-      input?.selectionStart,
-      input?.selectionEnd,
-    ] as number[];
+    const [start, end] = [input?.selectionStart, input?.selectionEnd];
+
+    if (start === undefined || end === undefined) return;
 
     input?.setRangeText(emoji, start, end, 'end');
 
