@@ -11,9 +11,13 @@ export function useFontSizeBasedOnWidth(
 
   useEffect(() => {
     function getFontSize(width: number) {
-      const newFontSize = width / valueThatDividesWidth;
+      const rem = parseFloat(
+        getComputedStyle(document.documentElement).fontSize
+      );
 
-      const fontSize = newFontSize + 'px';
+      const newFontSize = width / valueThatDividesWidth / rem;
+
+      const fontSize = newFontSize + 'rem';
 
       setFontSize(fontSize);
     }

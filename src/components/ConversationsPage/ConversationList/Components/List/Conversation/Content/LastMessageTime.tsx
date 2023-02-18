@@ -20,7 +20,6 @@ export function LastMessageTime({
       ref={ref}
       as='time'
       fontSize={fontSize}
-      // fontSize='.95vw'
       color={useColorModeValue('blackAlpha.800', 'whiteAlpha.700')}
     >
       22/09/2024
