@@ -1,21 +1,19 @@
 import { DividerProps as ChakraDividerProps } from '@chakra-ui/react';
-import { Divider } from '../../../../../Divider';
+import { Divider as DividerComponent } from '../../../../Divider';
 
-type ConversationDividerProps = {
+type DividerProps = {
   widthToBeRemoved: string;
 } & ChakraDividerProps;
 
-export function ConversationDivider({
-  widthToBeRemoved,
-  ...rest
-}: ConversationDividerProps) {
+export function Divider({ widthToBeRemoved, ...rest }: DividerProps) {
   return (
-    <Divider
+    <DividerComponent
       w={`calc(100% - ${widthToBeRemoved} - ${widthToBeRemoved})`}
       borderBottomWidth='1px'
-      margin='0 auto'
-      opacity='40%'
+      mx='auto'
+      mt={0}
       mb={0}
+      opacity='40%'
       {...rest}
     />
   );

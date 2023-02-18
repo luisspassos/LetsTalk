@@ -1,7 +1,7 @@
 import { Text, useColorModeValue } from '@chakra-ui/react';
 import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
 import { useRef } from 'react';
-import { ChildrenProps } from '../Container';
+import { ChildrenProps } from '../../Container';
 
 type LastMessageTimeProps = {
   text: string;

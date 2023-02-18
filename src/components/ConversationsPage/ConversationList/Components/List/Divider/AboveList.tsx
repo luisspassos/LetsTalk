@@ -1,4 +1,4 @@
-import { ConversationDivider } from './List/Conversation/Content/ConversationDivider';
+import { Divider } from '.';
 
 type DividerAboveListProps = {
   padding: string;
@@ -6,12 +6,11 @@ type DividerAboveListProps = {
 
 export function DividerAboveList({ padding }: DividerAboveListProps) {
   return (
-    <ConversationDivider
+    <Divider
       widthToBeRemoved={padding}
       position='sticky'
       top={0}
       left={0}
-      mt={0}
       mx='auto'
     />
   );
