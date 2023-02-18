@@ -1,23 +1,37 @@
+import { ChakraProps } from '@chakra-ui/react';
+import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
 import { Circle } from '../../../../../../Circle';
+import { ChildrenProps } from '../Container';
 
 type NumberOfUnreadMessagesProps = {
   number: number;
-};
+} & ChildrenProps;
 
 export function NumberOfUnreadMessages({
   number,
+  containerWidth,
 }: NumberOfUnreadMessagesProps) {
+  const { fontSize } = useFontSizeBasedOnWidth(containerWidth, 26);
+
+  const styles: ChakraProps = {
+    w: '1.5em',
+  };
+
   return (
     <Circle
-      px={['1px', '2px', '3px']}
-      minW={['13.5px', '16.5px', '19.5px']}
-      h={['13.5px', '16.5px', '19.5px']}
-      fontSize={['9px', '11px', '13px']}
-      lineHeight={['0px', '0.5px', '1px']}
+      fontSize={fontSize}
+      display='block'
+      textAlign='center'
+      lineHeight={styles.w}
+      sx={{
+        aspectRatio: '1 / 1',
+      }}
       color='white'
       bg='gray.500'
+      pos='relative'
+      {...styles}
     >
-      {number}
+      2
     </Circle>
   );
 }

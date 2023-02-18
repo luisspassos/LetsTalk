@@ -10,15 +10,7 @@ export function Name({ text, containerWidth }: NameProps) {
   const { fontSize } = useFontSizeBasedOnWidth(containerWidth, 20);
 
   return (
-    <Heading
-      textOverflow='ellipsis'
-      overflow='hidden'
-      whiteSpace='nowrap'
-      fontSize={fontSize}
-      w='90%'
-      fontWeight={400}
-      as='h3'
-    >
+    <Heading isTruncated fontSize={fontSize} w='90%' fontWeight={400} as='h3'>
       luissssssssssssssssssssssssssssssssssssss
     </Heading>
   );

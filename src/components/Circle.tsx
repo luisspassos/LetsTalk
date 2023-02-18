@@ -1,4 +1,5 @@
 import {
+  ChakraProps,
   Circle as ChakraCircle,
   SquareProps as ChakraCircleProps,
 } from '@chakra-ui/react';
@@ -6,8 +7,8 @@ import { ReactNode } from 'react';
 
 type CircleProps = {
   children: ReactNode;
-  w?: string;
-  h?: string | string[];
+  w?: ChakraProps['w'];
+  h?: ChakraProps['h'];
 } & ChakraCircleProps;
 
 export function Circle({ children, ...props }: CircleProps) {

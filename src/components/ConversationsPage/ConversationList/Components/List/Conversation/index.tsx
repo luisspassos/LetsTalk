@@ -57,7 +57,24 @@ export function Conversation({
                   containerWidth={containerWidth}
                   text={updatedAt}
                 />
-                <NumberOfUnreadMessages number={2} />
+                <NumberOfUnreadMessages
+                  number={2}
+                  containerWidth={containerWidth}
+                />
+                {/* <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '30%',
+                    lineHeight: 1,
+                    aspectRatio: '1 / 1',
+                    backgroundColor: 'red',
+                    borderRadius: '50%',
+                  }}
+                >
+                  2
+                </div> */}
               </VStack>
             </Flex>
           </>
