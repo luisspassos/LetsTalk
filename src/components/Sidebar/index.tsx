@@ -11,18 +11,16 @@ export function Sidebar() {
       direction='column'
       justify='space-between'
       align='center'
-      px={['11px', '13px', '15px']}
-      py={['16px', '18px', '20px']}
+      py='1.8%'
+      px='1%'
+      w='5.5%'
       borderRight={useColorModeValue('unset', '1px solid')}
       borderRightColor={useColorModeValue('unset', 'whiteAlpha.500')}
       as='nav'
     >
       <Box>
         <Avatar />
-        <VStack
-          spacing={['11px', '13px', '15px']}
-          mt={['22px', '26px', '30px']}
-        >
+        <VStack spacing='32%' mt='64%'>
           <ConversationsButton />
           <ConfigurationsButton />
         </VStack>

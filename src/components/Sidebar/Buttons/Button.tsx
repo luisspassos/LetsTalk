@@ -3,6 +3,8 @@ import {
   IconButtonProps,
 } from '@chakra-ui/react';
 import { Tooltip } from 'components/Tooltip';
+import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useRef } from 'react';
 
 type ButtonProps = {
   isSelected?: boolean;
@@ -13,13 +15,22 @@ export function Button({
   'aria-label': ariaLabel,
   ...rest
 }: ButtonProps) {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  const { fontSize } = useFontSizeBasedOnWidth(ref.current, 1.5);
+
   return (
     <Tooltip ariaLabel={ariaLabel} label={ariaLabel} aria-label={ariaLabel}>
       <ChakraIconButton
+        ref={ref}
         bg={isSelected ? 'whiteAlpha.400' : undefined}
-        w={['34px', '37px', '40px']}
-        h={['34px', '37px', '40px']}
-        fontSize={['26px', '28px', '30px']}
+        w='90%'
+        h='unset'
+        sx={{
+          aspectRatio: '1 / 1',
+        }}
+        // fontSize={['26px', '28px', '30px']}
+        fontSize={fontSize}
         d='flex'
         justifyContent='center'
         alignItems='center'
