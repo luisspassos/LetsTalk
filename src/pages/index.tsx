@@ -113,7 +113,7 @@ const Login = () => {
     }
 
     handleActions();
-  }, [action, actionCode, errorParam, router, successParam]);
+  }, [action, actionCode]);
 
   useEffect(() => {
     function handleStatusParams() {

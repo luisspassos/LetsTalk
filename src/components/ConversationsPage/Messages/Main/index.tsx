@@ -268,17 +268,17 @@ export function Main() {
 
   const [initial, setInitial] = useState(true);
 
-  useEffect(() => {
-    if (initial) {
-      setTimeout(() => {
-        scrollToIndex(messages.length);
-      }, 1);
+  // useEffect(() => {
+  //   if (initial) {
+  //     setTimeout(() => {
+  //       scrollToIndex(messages.length);
+  //     }, 1);
 
-      setInitial(false);
-    } else {
-      scrollToIndex(messages.length);
-    }
-  }, [messages2, scrollToIndex, initial, messages.length]);
+  //     setInitial(false);
+  //   } else {
+  //     scrollToIndex(messages.length);
+  //   }
+  // }, [messages2, scrollToIndex, initial, messages.length]);
 
   const styles = {
     mr: parentStyles.px.map((val) => '-' + val),
