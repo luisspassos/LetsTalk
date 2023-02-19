@@ -36,4 +36,22 @@
       </div>
     </div>
   </body>
+  <script>
+    const persons = {
+      Luis: {
+        age: '15',
+      },
+      Lucas: {
+        age: 16,
+      },
+    };
+
+    for (const key in persons) {
+      const person = persons[key];
+
+      person.message = person.age + 'hi';
+    }
+
+    console.log(persons);
+  </script>
 </html>

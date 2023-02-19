@@ -49,13 +49,17 @@ export function Container({ children }: ContainerProps) {
     };
   }, []);
 
-  const [lastBreakpoint] = useMediaQuery(`(min-width: ${breakpoints.last})`);
+  const [lastBreakpointNum, lastBreakpointMeasure] = breakpoints.last.splitted;
+  const newLastBreakpointNum = lastBreakpointNum + 6;
+  const newLastBreakpoint = newLastBreakpointNum + lastBreakpointMeasure;
+
+  const [isLastBreakpoint] = useMediaQuery(`(min-width: ${newLastBreakpoint})`);
 
   const styles: ChakraProps = {
     padding: 'max(2%, 1.2rem)',
     border: '1px solid',
     get borderLeft() {
-      return lastBreakpoint ? styles.border : undefined;
+      return isLastBreakpoint ? styles.border : undefined;
     },
   };
 
