@@ -6,7 +6,7 @@ type AvatarProps = Omit<ImageProps, 'src'> & {
 };
 
 export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
-  ({ src, width, w = '12', h = '12', height, ...props }, ref) => {
+  ({ src, width, w, h, height, ...props }, ref) => {
     const abstractUserIcon = 'images/abstract-user.svg';
 
     const [isLoaded, setIsLoaded] = useState(false);

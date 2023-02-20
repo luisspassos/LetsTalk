@@ -16,9 +16,7 @@ export function Wrapper({ children }: WrapperProps) {
         aspectRatio: '1 / 0.09',
       }}
       minH='3.4375rem'
-      // py='10px'
       align='center'
-      // gap='9px'
     >
       {children}
     </Flex>

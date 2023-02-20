@@ -1,5 +1,5 @@
 import { Heading } from '@chakra-ui/react';
-import { useConversations } from '../../../../../contexts/ConversationsContext';
+import { useConversations } from '../../../../../../contexts/ConversationsContext';
 
 export function ContactName() {
   const { currentConversation } = useConversations();

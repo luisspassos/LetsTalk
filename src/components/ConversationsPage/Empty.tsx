@@ -1,5 +1,5 @@
 import { Flex, Img } from '@chakra-ui/react';
-import { SidebarToggleButton } from './Messages/Header/SidebarToggleButton';
+import { SidebarToggleButton } from './Messages/Header/FirstContent/SidebarToggleButton';
 
 export function Empty() {
   return (

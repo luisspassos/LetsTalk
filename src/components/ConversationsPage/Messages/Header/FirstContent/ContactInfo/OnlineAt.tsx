@@ -1,10 +1,10 @@
 import { Text, useColorModeValue } from '@chakra-ui/react';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
-import { useConversations } from '../../../../../contexts/ConversationsContext';
-import { db } from '../../../../../services/firebase';
-import { formatContactOnlineAt } from '../../../../../utils/formatDate';
-import { OnlineAt } from '../../../../../utils/types';
+import { useConversations } from '../../../../../../contexts/ConversationsContext';
+import { db } from '../../../../../../services/firebase';
+import { formatContactOnlineAt } from '../../../../../../utils/formatDate';
+import { OnlineAt } from '../../../../../../utils/types';
 
 type OnlineAtFormatted = string;
 
