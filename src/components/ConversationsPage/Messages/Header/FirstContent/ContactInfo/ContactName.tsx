@@ -1,20 +1,25 @@
 import { Heading } from '@chakra-ui/react';
 import { useConversations } from '../../../../../../contexts/ConversationsContext';
+import { ContactInfoProps } from '.';
+import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
 
-export function ContactName() {
+type ContactNameProps = ContactInfoProps;
+
+export function ContactName({ parentWidth }: ContactNameProps) {
   const { currentConversation } = useConversations();
+
+  const { fontSize } = useFontSizeBasedOnWidth(parentWidth, 48);
 
   return (
     <Heading
-      w='100%'
-      maxW='700px'
-      textOverflow='ellipsis'
-      overflow='hidden'
-      whiteSpace='nowrap'
-      fontSize={['15px', '16px', '17px']}
+      w='90%'
+      isTruncated
+      // fontSize={fontSize}
+      fontSize='1em'
       fontWeight={400}
     >
       {currentConversation.data?.name}
+      {/* luisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss🐵❤️😓😒😒 */}
     </Heading>
   );
 }

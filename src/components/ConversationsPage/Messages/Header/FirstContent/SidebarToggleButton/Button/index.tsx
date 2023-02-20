@@ -1,5 +1,6 @@
-import { IconButton, Show } from '@chakra-ui/react';
+import { Show } from '@chakra-ui/react';
 import { useTabToggle } from 'contexts/TabToggleContext';
+import { IconButton } from '../../../IconButton';
 import { Icon } from './Icon';
 
 export function Button() {
@@ -8,7 +9,6 @@ export function Button() {
   return (
     <Show breakpoint='(max-width: 870px)'>
       <IconButton
-        variant='ghost'
         icon={<Icon />}
         aria-label='Botão de alternar aba ao lado'
         onClick={onToggle}

@@ -3,14 +3,18 @@ import { Avatar } from './Avatar';
 import { ContactName } from './ContactName';
 import { OnlineAt } from './OnlineAt';
 
-export function ContactInfo() {
+export type ContactInfoProps = {
+  parentWidth: number;
+};
+
+export function ContactInfo({ parentWidth }: ContactInfoProps) {
   return (
     <>
       <Avatar />
 
       <VStack minW={0} align='start' spacing={0}>
-        <ContactName />
-        <OnlineAt />
+        <ContactName parentWidth={parentWidth} />
+        <OnlineAt parentWidth={parentWidth} />
       </VStack>
     </>
   );

@@ -1,6 +1,7 @@
 import { Text, useColorModeValue } from '@chakra-ui/react';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
+import { ContactInfoProps } from '.';
 import { useConversations } from '../../../../../../contexts/ConversationsContext';
 import { db } from '../../../../../../services/firebase';
 import { formatContactOnlineAt } from '../../../../../../utils/formatDate';
@@ -13,7 +14,9 @@ type ContactDocumentData = {
   uid: string;
 };
 
-export function OnlineAt() {
+type OnlineAtProps = ContactInfoProps;
+
+export function OnlineAt({ parentWidth }: OnlineAtProps) {
   const [onlineAt, setOnlineAt] = useState<OnlineAtFormatted>();
   const { currentConversation } = useConversations();
 
@@ -45,7 +48,7 @@ export function OnlineAt() {
   return (
     <Text
       as='time'
-      fontSize={['12px', '13px', '14px']}
+      fontSize='0.8em'
       color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
     >
       {onlineAt}

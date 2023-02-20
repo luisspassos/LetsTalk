@@ -1,7 +1,6 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
 import { useConversations } from 'contexts/ConversationsContext';
-import { resizeObserver } from 'utils/resizeObserver';
+import { useElementWidth } from 'hooks/useElementWidth';
 
 export type ChildrenProps = {
   containerWidth: number;
@@ -14,31 +13,7 @@ type ContainerProps = {
 };
 
 export function Container({ children, padding, name }: ContainerProps) {
-  const [containerWidth, setContainerWidth] = useState(0);
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  // get container width
-  useEffect(() => {
-    const element = ref.current;
-
-    if (element === null) return;
-
-    function getContainerWidth() {
-      const element = ref.current;
-      const newOffsetWidth = element?.offsetWidth;
-
-      if (newOffsetWidth === undefined) return;
-
-      setContainerWidth(newOffsetWidth);
-    }
-
-    const { unobserve } = resizeObserver(getContainerWidth, element);
-
-    return () => {
-      unobserve();
-    };
-  }, []);
+  const { ref, width: containerWidth } = useElementWidth<HTMLDivElement>();
 
   const {
     currentConversation: {

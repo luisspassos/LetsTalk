@@ -1,4 +1,4 @@
-import { Box, Popover, PopoverTrigger } from '@chakra-ui/react';
+import { Popover, PopoverTrigger } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useConversationPopover } from 'contexts/ConversationPopoverContext';
 import { Button } from './Button';
@@ -17,9 +17,7 @@ export function ConversationInfo() {
       onClose={onClose}
     >
       <PopoverTrigger>
-        <Box display='inline-block'>
-          <Button />
-        </Box>
+        <Button />
       </PopoverTrigger>
 
       <Content ref={popoverInitialFocusRef} />

@@ -1,15 +1,19 @@
-import { IoEllipsisVerticalSharp } from 'react-icons/io5';
 import { useConversationPopover } from 'contexts/ConversationPopoverContext';
-import { Button as ButtonComponent } from '../../Button';
+import { forwardRef } from 'react';
+import { IoEllipsisVerticalSharp } from 'react-icons/io5';
+import { IconButton } from '../../../IconButton';
 
-export function Button() {
+export const Button = forwardRef<HTMLButtonElement>((_, ref) => {
   const { onOpen } = useConversationPopover();
 
   return (
-    <ButtonComponent
+    <IconButton
+      ref={ref}
       icon={<IoEllipsisVerticalSharp />}
       onClick={onOpen}
       aria-label='Informações da conversa'
     />
   );
-}
+});
+
+Button.displayName = 'Button';
