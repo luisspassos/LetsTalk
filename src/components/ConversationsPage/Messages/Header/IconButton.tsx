@@ -11,16 +11,19 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 
     const { fontSize } = useFontSizeBasedOnWidth(element, 1.4);
 
+    function handleRef(node: HTMLButtonElement | null) {
+      setElement(node);
+
+      if (typeof forwardRef === 'function') {
+        forwardRef(node);
+      } else if (forwardRef !== null) {
+        forwardRef.current = node;
+      }
+    }
+
     return (
       <ChakraIconButton
-        ref={(node) => {
-          setElement(node);
-          if (typeof forwardRef === 'function') {
-            forwardRef(node);
-          } else if (forwardRef) {
-            forwardRef.current = node;
-          }
-        }}
+        ref={handleRef}
         sx={{ aspectRatio: '1 / 1' }}
         h='50%'
         fontSize={fontSize}

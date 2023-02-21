@@ -1,6 +1,6 @@
 import { HiSearch } from 'react-icons/hi';
-import { Button } from '../Button';
+import { IconButton } from '../../IconButton';
 
 export function Search() {
-  return <Button aria-label='Pesquisar na conversa' icon={<HiSearch />} />;
+  return <IconButton aria-label='Pesquisar na conversa' icon={<HiSearch />} />;
 }

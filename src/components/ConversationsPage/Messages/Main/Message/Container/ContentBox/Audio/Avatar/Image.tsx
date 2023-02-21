@@ -15,5 +15,5 @@ export function Image({ isContact }: Image) {
 
   const src = isContact ? currentConversation?.photoURL : user?.photoURL;
 
-  return <Avatar src={src} />;
+  return <Avatar w='12' src={src} />;
 }
