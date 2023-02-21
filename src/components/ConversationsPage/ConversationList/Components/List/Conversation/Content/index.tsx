@@ -22,6 +22,7 @@ export function Content({
           lastMessage={lastMessage}
           name={name}
         />
+
         <NumberData containerWidth={containerWidth} updatedAt={updatedAt} />
       </Flex>
     </>

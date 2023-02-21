@@ -67,8 +67,9 @@ export function Container({ children }: ContainerProps) {
     <Flex
       ref={ref}
       display={isOpen ? 'flex' : 'none'}
-      minW='282px'
-      w='26%'
+      minW='17.625rem'
+      flex='1'
+      // w='26%'
       h='100vh'
       bg={useColorModeValue('gray.200', 'blue.900')}
       pt={styles.padding}

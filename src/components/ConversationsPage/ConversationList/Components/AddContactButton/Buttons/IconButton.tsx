@@ -1,10 +1,10 @@
-import { Tooltip } from 'components/Tooltip';
 import { useAddContactModal } from 'contexts/Modal/AddContactModalContext';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import {
   IconButton as ChakraIconButton,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Tooltip } from 'components/Tooltip';
 
 type IconButtonProps = {
   label: string;
@@ -29,7 +29,6 @@ export function IconButton({ label }: IconButtonProps) {
           undefined
         )}
         boxShadow='base'
-        fontSize='20%'
         display={['none', null, 'inline-flex']}
         w='17%'
         h='unset'

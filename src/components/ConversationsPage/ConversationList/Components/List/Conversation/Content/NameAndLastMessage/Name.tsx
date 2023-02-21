@@ -9,6 +9,8 @@ type NameProps = {
 export function Name({ text, containerWidth }: NameProps) {
   const { fontSize } = useFontSizeBasedOnWidth(containerWidth, 20);
 
+  console.log(fontSize);
+
   return (
     <Heading isTruncated fontSize={fontSize} w='90%' fontWeight={400} as='h3'>
       luissssssssssssssssssssssssssssssssssssss

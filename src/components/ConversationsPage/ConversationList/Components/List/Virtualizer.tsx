@@ -54,29 +54,4 @@ export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
       )}
     </>
   );
-  // <VirtualizedItemsListWrapper>
-  //   {conversationVirtualizer.virtualItems.map((virtualRow) => {
-  //     const conversation = fetchedConversations?.[virtualRow.index];
-
-  //     return (
-  //       <Conversation
-  //         padding={padding}
-  //         start={virtualRow.start}
-  //         key={virtualRow.key}
-  //         index={virtualRow.index}
-  //         numberOfConversations={fetchedConversationsLength}
-  //         conversationHeight={conversationHeight}
-  //         data={{
-  //           name: conversation?.name ?? '',
-  //           photoURL: conversation?.photoURL ?? '',
-  //           lastMessage: conversation?.lastMessage ?? '',
-  //           updatedAt: conversation?.updatedAt ?? '',
-  //         }}
-  //         style={{
-  //           height: `${virtualRow.size}px`,
-  //         }}
-  //       />
-  //     );
-  //   })}
-  // </VirtualizedItemsListWrapper>
 }

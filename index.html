@@ -12,16 +12,51 @@
         box-sizing: border-box;
       }
 
-      p {
-        font-size: 1rem;
+      body {
+        display: flex;
+        height: 100vh;
+      }
+
+      .first {
+        background-color: red;
+        flex: 1;
+      }
+
+      .last {
+        background-color: yellow;
+        flex: 1;
+
+        font-size: 5rem;
+
+        display: flex;
+      }
+
+      .last div {
+        width: 50%;
+      }
+
+      .content {
+        background-color: palevioletred;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .content2 {
+        background-color: brown;
       }
     </style>
   </head>
   <body>
-    <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum ab,
-      commodi reiciendis veniam sint fugiat inventore a temporibus. Error
-      officia libero veritatis in voluptas eos dicta ratione at impedit rem?
-    </p>
+    <div class="first"></div>
+    <div class="last">
+      <div class="content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos,
+        voluptate dicta aliquid perferendis at, ipsa corporis inventore velit
+        iure harum dolore quibusdam error modi eligendi adipisci tempora est
+        mollitia! Dolor?
+      </div>
+      <div class="content2"></div>
+    </div>
   </body>
 </html>

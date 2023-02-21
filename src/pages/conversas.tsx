@@ -1,5 +1,4 @@
 import { Conversations } from 'components/ConversationsPage';
-import { Wrapper } from 'components/Sidebar/Wrapper';
 import { useDeleteAccountModal } from 'contexts/Modal/DeleteAccountModalContext';
 import { useOnlineAtEvents } from 'contexts/OnlineAtEventsContext';
 import { useRenamingName } from 'contexts/RenamingNameContext';
@@ -127,9 +126,7 @@ export default function ConversationsPage() {
 
   return (
     <>
-      <Wrapper>
-        <Conversations />
-      </Wrapper>
+      <Conversations />
       <Loading />
     </>
   );
