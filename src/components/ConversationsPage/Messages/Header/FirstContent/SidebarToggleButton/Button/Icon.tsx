@@ -10,9 +10,8 @@ export function Icon() {
   return (
     <ChakraIcon
       as={RiMenuFill}
-      transition='.3s'
+      transition='.3s transform'
       transform={`rotate(${rotate})`}
-      fontSize='1.75rem'
       color={useColorModeValue('gray.400', 'gray.200')}
     />
   );

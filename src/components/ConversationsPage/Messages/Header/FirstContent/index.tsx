@@ -7,7 +7,7 @@ import { SidebarToggleButton } from './SidebarToggleButton';
 export function FirstContent() {
   const { ref, width: parentWidth } = useElementWidth<HTMLDivElement>();
 
-  const { fontSize } = useFontSizeBasedOnWidth(ref.current, 48);
+  const { fontSize } = useFontSizeBasedOnWidth(ref.current?.offsetHeight, 4.7);
 
   return (
     <Flex

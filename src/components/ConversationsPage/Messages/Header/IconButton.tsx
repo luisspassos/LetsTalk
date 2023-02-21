@@ -2,16 +2,19 @@ import {
   IconButton as ChakraIconButton,
   IconButtonProps,
 } from '@chakra-ui/react';
-import { forwardRef, useRef } from 'react';
+import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { forwardRef, useState } from 'react';
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (props, forwardRef) => {
-    const ref = useRef<HTMLButtonElement>(null);
+    const [element, setElement] = useState<HTMLButtonElement | null>(null);
+
+    const { fontSize } = useFontSizeBasedOnWidth(element, 1.4);
 
     return (
       <ChakraIconButton
         ref={(node) => {
-          ref.current = node;
+          setElement(node);
           if (typeof forwardRef === 'function') {
             forwardRef(node);
           } else if (forwardRef) {
@@ -20,6 +23,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         }}
         sx={{ aspectRatio: '1 / 1' }}
         h='50%'
+        fontSize={fontSize}
         variant='ghost'
         minW={0}
         {...props}
