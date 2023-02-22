@@ -1,6 +1,22 @@
-export const breakpoints: Record<
-  'last',
-  { splitted: [number, string]; value: string }
-> = {
-  last: { splitted: [87.5, 'rem'], value: '87.5rem' },
+type Breakpoint = { splitted: [number, string]; value: string };
+
+type Breakpoints = Record<'last' | 'sidebar', Breakpoint>;
+
+function getValueJoined(obj: Breakpoint) {
+  return obj.splitted.join('');
+}
+
+export const breakpoints: Breakpoints = {
+  last: {
+    splitted: [87.5, 'rem'],
+    get value() {
+      return getValueJoined(this);
+    },
+  },
+  sidebar: {
+    splitted: [50, 'rem'],
+    get value() {
+      return getValueJoined(this);
+    },
+  },
 };

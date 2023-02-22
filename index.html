@@ -17,46 +17,36 @@
         height: 100vh;
       }
 
+      aside {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        min-width: 500px;
+      }
+
       .first {
         background-color: red;
+        height: 100%;
         flex: 1;
       }
 
-      .last {
-        background-color: yellow;
+      .second {
+        background-color: blue;
+        height: 100%;
         flex: 1;
-
-        font-size: 5rem;
-
-        display: flex;
       }
 
-      .last div {
-        width: 50%;
-      }
-
-      .content {
-        background-color: palevioletred;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
-      .content2 {
-        background-color: brown;
+      .third {
+        background-color: green;
+        width: 100%;
       }
     </style>
   </head>
   <body>
-    <div class="first"></div>
-    <div class="last">
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos,
-        voluptate dicta aliquid perferendis at, ipsa corporis inventore velit
-        iure harum dolore quibusdam error modi eligendi adipisci tempora est
-        mollitia! Dolor?
-      </div>
-      <div class="content2"></div>
-    </div>
+    <aside>
+      <div class="first"></div>
+      <div class="second"></div>
+    </aside>
+    <div class="third"></div>
   </body>
 </html>

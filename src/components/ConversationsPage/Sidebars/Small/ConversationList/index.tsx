@@ -1,24 +1,20 @@
 import { SearchInput } from './Components/SearchInput';
 import React, { useState } from 'react';
-import { Divider } from '../Divider';
 import { Title } from './Components/Title';
 import { Container } from './Components/Container';
 import { List } from './Components/List';
 import { Flex } from '@chakra-ui/react';
 import { AddContactButton } from './Components/AddContactButton';
+import { Divider } from 'components/ConversationsPage/Divider';
 
-export function Content() {
+export function ConversationList() {
   const [search, setSearch] = useState('');
 
   return (
     <Container>
       {(padding) => (
         <>
-          <Flex
-            direction={{ base: 'column', md: 'row' }}
-            justify='space-between'
-            align={{ base: 'start', md: 'center' }}
-          >
+          <Flex justify='space-between' align='center'>
             <Title />
             <AddContactButton />
           </Flex>

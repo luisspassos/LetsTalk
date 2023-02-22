@@ -24,7 +24,7 @@ export function Button({
       <ChakraIconButton
         ref={ref}
         bg={isSelected ? 'whiteAlpha.400' : undefined}
-        w='90%'
+        w='5%'
         h='unset'
         sx={{
           aspectRatio: '1 / 1',

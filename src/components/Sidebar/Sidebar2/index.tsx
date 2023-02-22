@@ -2,44 +2,42 @@ import {
   Box,
   Flex,
   FlexProps,
+  HStack,
   useColorModeValue,
-  VStack,
 } from '@chakra-ui/react';
+import { ConfigurationsButton } from '../Buttons/ConfigurationsButton';
+import { ConversationsButton } from '../Buttons/ConversationsButton';
 import { Avatar } from './Avatar';
 import { SignOutButton } from './Buttons/SignOutButton';
-import { ConfigurationsButton } from './Buttons/ConfigurationsButton';
-import { ConversationsButton } from './Buttons/ConversationsButton';
 
 type SidebarProps = FlexProps;
 
-export function Sidebar(props: SidebarProps) {
+export function Sidebar2(props: SidebarProps) {
   return (
     <Box
       bg={useColorModeValue('gray.500', 'blue.900')}
-      w='5.5%'
-      minW='4.0625rem'
-      maxW='5.25rem'
+      w='100%'
+      h='100%'
+      borderBottom={useColorModeValue('unset', '1px solid')}
+      borderBottomColor={useColorModeValue('unset', 'whiteAlpha.500')}
       as='nav'
     >
       <Flex
-        direction='column'
         justify='space-between'
         align='center'
         w='100%'
         h='100%'
-        borderRight={useColorModeValue('unset', '1px solid')}
-        borderRightColor={useColorModeValue('unset', 'whiteAlpha.500')}
-        px='17%'
-        py='25%'
+        // px='17%'
+        // py='25%'
         {...props}
       >
-        <Box>
+        <Flex>
           <Avatar />
-          <VStack spacing='32%' mt='64%'>
+          <HStack spacing='32%' mt='64%'>
             <ConversationsButton />
             <ConfigurationsButton />
-          </VStack>
-        </Box>
+          </HStack>
+        </Flex>
         <SignOutButton />
       </Flex>
     </Box>

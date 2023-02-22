@@ -17,6 +17,7 @@ export function Container({ children }: ContainerProps) {
   const { isOpen } = useTabToggle();
 
   const ref = useRef<HTMLDivElement>(null);
+
   const [padding, setPadding] = useState('');
 
   function getPadding() {
@@ -52,7 +53,6 @@ export function Container({ children }: ContainerProps) {
   const [lastBreakpointNum, lastBreakpointMeasure] = breakpoints.last.splitted;
   const newLastBreakpointNum = lastBreakpointNum + 6;
   const newLastBreakpoint = newLastBreakpointNum + lastBreakpointMeasure;
-
   const [isLastBreakpoint] = useMediaQuery(`(min-width: ${newLastBreakpoint})`);
 
   const styles: ChakraProps = {
@@ -68,15 +68,14 @@ export function Container({ children }: ContainerProps) {
       ref={ref}
       display={isOpen ? 'flex' : 'none'}
       minW='17.625rem'
-      w='26%'
+      // w='37%'
+      w='100%'
       h='100%'
       bg={useColorModeValue('gray.200', 'blue.900')}
       pt={styles.padding}
       paddingInline={styles.padding}
       direction='column'
-      borderRight={styles.border}
-      borderLeft={styles.borderLeft}
-      borderColor='whiteAlpha.500'
+      fontSize='1rem'
       as='aside'
     >
       {children(padding)}

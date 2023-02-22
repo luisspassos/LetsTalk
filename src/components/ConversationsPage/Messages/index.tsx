@@ -12,7 +12,7 @@ export function Messages() {
     <Flex
       mx='auto'
       h='100vh'
-      w='70%'
+      flex='1'
       minW={0}
       direction='column'
       bgColor={useColorModeValue('gray.50', 'blue.900')}

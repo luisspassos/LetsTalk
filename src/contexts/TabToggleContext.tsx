@@ -13,9 +13,7 @@ type TabToggleContextType = Pick<
 export const TabToggleContext = createContext({} as TabToggleContextType);
 
 export function TabToggleProvider({ children }: TabToggleProviderProps) {
-  const { onToggle, isOpen, onClose } = useDisclosure({
-    defaultIsOpen: true,
-  });
+  const { onToggle, isOpen, onClose } = useDisclosure();
 
   return (
     <TabToggleContext.Provider value={{ onToggle, isOpen, onClose }}>
