@@ -11,6 +11,7 @@ export function Small() {
       <DrawerContent>
         {/* <Sidebar2 /> */}
         <Box>hi</Box>
+        {/* <Box h='100%'>Hello world</Box> */}
         <ConversationList />
       </DrawerContent>
     </Drawer>
