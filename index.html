@@ -14,39 +14,23 @@
 
       body {
         display: flex;
+        flex-direction: column;
         height: 100vh;
-      }
-
-      aside {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        min-width: 500px;
       }
 
       .first {
         background-color: red;
-        height: 100%;
-        flex: 1;
+        height: 30px;
       }
 
       .second {
         background-color: blue;
         height: 100%;
-        flex: 1;
-      }
-
-      .third {
-        background-color: green;
-        width: 100%;
       }
     </style>
   </head>
   <body>
-    <aside>
-      <div class="first"></div>
-      <div class="second"></div>
-    </aside>
-    <div class="third"></div>
+    <div class="first"></div>
+    <div class="second"></div>
   </body>
 </html>

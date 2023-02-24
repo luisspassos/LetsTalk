@@ -1,4 +1,4 @@
-import { Drawer, DrawerContent, DrawerOverlay } from '@chakra-ui/react';
+import { Box, Drawer, DrawerContent, DrawerOverlay } from '@chakra-ui/react';
 import { useTabToggle } from 'contexts/TabToggleContext';
 import { ConversationList } from './ConversationList';
 
@@ -10,6 +10,7 @@ export function Small() {
       <DrawerOverlay />
       <DrawerContent>
         {/* <Sidebar2 /> */}
+        <Box>hi</Box>
         <ConversationList />
       </DrawerContent>
     </Drawer>

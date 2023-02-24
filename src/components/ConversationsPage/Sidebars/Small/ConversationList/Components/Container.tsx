@@ -70,7 +70,7 @@ export function Container({ children }: ContainerProps) {
       minW='17.625rem'
       // w='37%'
       w='100%'
-      h='100%'
+      // h='100%'
       bg={useColorModeValue('gray.200', 'blue.900')}
       pt={styles.padding}
       paddingInline={styles.padding}
