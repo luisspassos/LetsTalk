@@ -64,7 +64,7 @@ export function Container({ children }: ContainerProps) {
     <Flex
       ref={ref}
       minW='17.625rem'
-      // w='37%'
+      overflowY='auto'
       w='100%'
       h='100%'
       bg={useColorModeValue('gray.200', 'blue.900')}

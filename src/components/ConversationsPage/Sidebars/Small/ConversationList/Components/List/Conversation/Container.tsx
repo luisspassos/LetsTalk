@@ -1,4 +1,4 @@
-import { Box, useColorModeValue } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { useConversations } from 'contexts/ConversationsContext';
 import { useElementWidth } from 'hooks/useElementWidth';
 
@@ -38,23 +38,21 @@ export function Container({ children, padding, name }: ContainerProps) {
   const isSelected = name === currentConversation?.name;
 
   return (
-    <Box h='5em' />
-
-    // <Flex
-    //   ref={ref}
-    //   // px={padding}
-    //   // alignItems='center'
-    //   // flexShrink={0}
-    //   // cursor='pointer'
-    //   // transition='0.2s background'
-    //   // bg={isSelected ? bg : undefined}
-    //   // _hover={{
-    //   //   bg,
-    //   // }}
-    //   // onClick={handleChangeCurrentConversation}
-    //   h='5em'
-    // >
-    //   {children({ containerWidth })}
-    // </Flex>
+    <Flex
+      ref={ref}
+      px={padding}
+      alignItems='center'
+      flexShrink={0}
+      cursor='pointer'
+      transition='0.2s background'
+      bg={isSelected ? bg : undefined}
+      _hover={{
+        bg,
+      }}
+      onClick={handleChangeCurrentConversation}
+      h='5em'
+    >
+      {children({ containerWidth })}
+    </Flex>
   );
 }

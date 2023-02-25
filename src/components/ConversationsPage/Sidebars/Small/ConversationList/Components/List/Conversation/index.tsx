@@ -1,4 +1,5 @@
 import { Container } from './Container';
+import { Content } from './Content';
 import { Divider } from './Divider';
 
 export type ConversationProps = {
@@ -22,10 +23,9 @@ export function Conversation({
   return (
     <>
       <Container padding={padding} name={data.name}>
-        {() => <></>}
-        {/* {({ containerWidth }) => (
+        {({ containerWidth }) => (
           <Content containerWidth={containerWidth} data={data} />
-        )} */}
+        )}
       </Container>
       <Divider
         index={index}
