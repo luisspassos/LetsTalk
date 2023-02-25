@@ -1,10 +1,5 @@
-import {
-  Box,
-  Flex,
-  FlexProps,
-  HStack,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Flex, FlexProps, HStack } from '@chakra-ui/react';
+import { useMobileConversationListDividerColor } from 'hooks/Colors/useMobileConversationListDividerColor';
 import { ConfigurationsButton } from '../Buttons/ConfigurationsButton';
 import { ConversationsButton } from '../Buttons/ConversationsButton';
 import { Avatar } from './Avatar';
@@ -13,24 +8,18 @@ import { SignOutButton } from './Buttons/SignOutButton';
 type SidebarProps = FlexProps;
 
 export function Sidebar2(props: SidebarProps) {
+  const { color: borderColor } = useMobileConversationListDividerColor();
+
   return (
     <Box
-      bg={useColorModeValue('gray.500', 'blue.900')}
       w='100%'
-      h='5em'
-      borderBottom={useColorModeValue('unset', '1px solid')}
-      borderBottomColor={useColorModeValue('unset', 'whiteAlpha.500')}
+      h='4.5em'
+      flexShrink={0}
+      borderBottom='1px solid'
+      borderBottomColor={borderColor}
       as='nav'
     >
-      <Flex
-        justify='space-between'
-        align='center'
-        w='100%'
-        h='100%'
-        // px='17%'
-        // py='25%'
-        {...props}
-      >
+      <Flex justify='space-between' align='center' w='100%' h='100%' {...props}>
         <Flex>
           <Avatar />
           <HStack spacing='32%' mt='64%'>

@@ -37,4 +37,10 @@ export const colors = {
       light: blueAlpha700,
     };
   },
+  get mobileConversationListDivider() {
+    return {
+      dark: 'var(--chakra-colors-whiteAlpha-500)',
+      light: 'var(--chakra-colors-blackAlpha-400)',
+    };
+  },
 };

@@ -1,9 +1,4 @@
-import {
-  ChakraProps,
-  Flex,
-  useColorModeValue,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { ChakraProps, Flex, useMediaQuery } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { breakpoints } from 'styles/breakpoints';
 import { iterateEvents, WindowEvent } from 'utils/iterateEvents';
@@ -57,7 +52,7 @@ export function Container({ children }: ContainerProps) {
   const [isLastBreakpoint] = useMediaQuery(`(min-width: ${newLastBreakpoint})`);
 
   const styles: ChakraProps = {
-    padding: 'max(2%, 1.2em)',
+    padding: '1.2em',
     border: '1px solid',
     get borderLeft() {
       return isLastBreakpoint ? styles.border : undefined;
@@ -71,9 +66,7 @@ export function Container({ children }: ContainerProps) {
       overflowY='auto'
       w='100%'
       h='100%'
-      bg={useColorModeValue('gray.200', 'blue.900')}
       pt={styles.padding}
-      paddingInline={styles.padding}
       direction='column'
       as='aside'
     >

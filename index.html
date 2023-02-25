@@ -12,52 +12,22 @@
         box-sizing: border-box;
       }
 
-      body {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
+      :root {
+        --red: #ff0000;
+        --my-red: var(--red);
       }
 
-      .first {
-        background-color: red;
-        height: 30px;
-        flex-shrink: 0;
-      }
-
-      .second {
-        background-color: blue;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .scroll {
-        overflow-y: auto;
-      }
-
-      .content {
-        background-color: black;
-        border-bottom: 1px solid white;
-        height: 10em;
+      p {
+        color: var(--my-red);
       }
     </style>
   </head>
   <body>
-    <div class="first">aaa</div>
-    <div class="second">
-      <input type="text" />
-      <div class="scroll">
-        <div class="content"></div>
-        <div class="content"></div>
-        <div class="content"></div>
-        <div class="content"></div>
-        <div class="content"></div>
-        <div class="content"></div>
-        <div class="content"></div>
-        <div class="content"></div>
-        <div class="content"></div>
-        <div class="content"></div>
-      </div>
-    </div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic suscipit,
+      tempora sunt sed, laboriosam error, sequi delectus repellendus ut aut id?
+      Dolore repudiandae, vitae nisi consectetur praesentium dignissimos
+      mollitia perferendis!
+    </p>
   </body>
 </html>
