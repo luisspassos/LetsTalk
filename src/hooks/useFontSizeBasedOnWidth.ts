@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { resizeObserver } from 'utils/resizeObserver';
 
 type Element = HTMLElement | undefined | null;
+type Ref = RefObject<HTMLElement>;
+
+type RefOrElementOrWidth = Ref | Element | number;
 
 export function useFontSizeBasedOnWidth(
-  elementOrWidth: Element | number,
+  valueThatGivesWidth: RefOrElementOrWidth,
   valueThatDividesWidth: number
 ) {
   const [fontSize, setFontSize] = useState('1rem');
@@ -22,28 +25,36 @@ export function useFontSizeBasedOnWidth(
       setFontSize(fontSize);
     }
 
-    const isWidth = typeof elementOrWidth === 'number';
+    const isWidth = typeof valueThatGivesWidth === 'number';
 
     if (isWidth) {
-      getFontSize(elementOrWidth);
+      getFontSize(valueThatGivesWidth);
 
       return;
     }
 
-    if (!elementOrWidth) return;
+    if (!valueThatGivesWidth) return;
+
+    const isNotRef = valueThatGivesWidth instanceof HTMLElement;
+
+    const element = isNotRef
+      ? valueThatGivesWidth
+      : valueThatGivesWidth.current;
+
+    if (element === null) return;
 
     const callback = () => {
-      const width = elementOrWidth.offsetWidth;
+      const width = element?.offsetWidth;
 
       getFontSize(width);
     };
 
-    const { unobserve } = resizeObserver(callback, elementOrWidth);
+    const { unobserve } = resizeObserver(callback, element);
 
     return () => {
       unobserve();
     };
-  }, [elementOrWidth, valueThatDividesWidth]);
+  }, [valueThatDividesWidth, valueThatGivesWidth]);
 
   return { fontSize };
 }

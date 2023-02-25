@@ -17,7 +17,7 @@ export function Button({
 }: ButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
 
-  const { fontSize } = useFontSizeBasedOnWidth(ref.current, 1.5);
+  const { fontSize } = useFontSizeBasedOnWidth(ref, 1.5);
 
   return (
     <Tooltip ariaLabel={ariaLabel} label={ariaLabel} aria-label={ariaLabel}>
@@ -30,7 +30,7 @@ export function Button({
           aspectRatio: '1 / 1',
         }}
         fontSize={fontSize}
-        d='flex'
+        display='flex'
         justifyContent='center'
         alignItems='center'
         color='white'
