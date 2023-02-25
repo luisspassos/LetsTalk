@@ -3,6 +3,7 @@ import {
   Ref,
 } from 'components/Virtualizer/ScrollableBoxOfVirtualizedItems';
 import { ReactNode, RefObject } from 'react';
+import { styles } from '../../..';
 
 type ParentProps = {
   children: ReactNode;
@@ -15,7 +16,7 @@ export function Parent({ children, parentRef, padding }: ParentProps) {
     <ScrollableBoxOfVirtualizedItems
       ref={parentRef}
       style={{
-        marginInline: `-${padding}`,
+        marginInline: `-${styles.px}`,
         paddingBottom: '1em',
       }}
     >

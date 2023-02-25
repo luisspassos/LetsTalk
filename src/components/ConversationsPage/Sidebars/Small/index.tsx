@@ -1,4 +1,5 @@
 import {
+  ChakraProps,
   Drawer,
   DrawerContent,
   DrawerOverlay,
@@ -7,6 +8,10 @@ import {
 import { Sidebar2 } from 'components/Sidebar/Sidebar2';
 import { useTabToggle } from 'contexts/TabToggleContext';
 import { ConversationList } from './ConversationList';
+
+export const styles: ChakraProps = {
+  px: '1.2em',
+};
 
 export function Small() {
   const { isOpen, onClose } = useTabToggle();
@@ -17,7 +22,7 @@ export function Small() {
       <DrawerContent
         bg={useColorModeValue('gray.200', 'blue.900')}
         fontSize='1rem'
-        px='1.2em'
+        px={styles.px}
       >
         <Sidebar2 />
         <ConversationList />
