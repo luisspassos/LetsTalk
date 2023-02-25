@@ -8,8 +8,12 @@ import { useEffect, useRef, useState } from 'react';
 import { breakpoints } from 'styles/breakpoints';
 import { iterateEvents, WindowEvent } from 'utils/iterateEvents';
 
+type ChildrenProps = {
+  padding: string;
+};
+
 type ContainerProps = {
-  children: (padding: string) => JSX.Element;
+  children: (props: ChildrenProps) => JSX.Element;
 };
 
 export function Container({ children }: ContainerProps) {
@@ -71,10 +75,9 @@ export function Container({ children }: ContainerProps) {
       pt={styles.padding}
       paddingInline={styles.padding}
       direction='column'
-      fontSize='1rem'
       as='aside'
     >
-      {children(padding)}
+      {children({ padding })}
     </Flex>
   );
 }

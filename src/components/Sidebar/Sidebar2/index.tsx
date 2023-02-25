@@ -17,7 +17,7 @@ export function Sidebar2(props: SidebarProps) {
     <Box
       bg={useColorModeValue('gray.500', 'blue.900')}
       w='100%'
-      h='100%'
+      h='5em'
       borderBottom={useColorModeValue('unset', '1px solid')}
       borderBottomColor={useColorModeValue('unset', 'whiteAlpha.500')}
       as='nav'

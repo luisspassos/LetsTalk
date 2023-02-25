@@ -12,7 +12,7 @@ export function ConversationList() {
 
   return (
     <Container>
-      {(padding) => (
+      {({ padding }) => (
         <>
           <Flex justify='space-between' align='center'>
             <Title />
