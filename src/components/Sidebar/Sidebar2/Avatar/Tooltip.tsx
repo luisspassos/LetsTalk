@@ -17,7 +17,6 @@ export function Tooltip({
 }: TooltipProps) {
   return (
     <ChakraTooltip
-      shouldWrapChildren
       bg={copiedUsername ? 'green.500' : undefined}
       label={
         copiedUsername ? (

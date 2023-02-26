@@ -17,15 +17,14 @@ export function Button({
 }: ButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
 
-  const { fontSize } = useFontSizeBasedOnWidth(ref.current, 1.5);
+  const { fontSize } = useFontSizeBasedOnWidth(ref, 1.5);
 
   return (
     <Tooltip ariaLabel={ariaLabel} label={ariaLabel} aria-label={ariaLabel}>
       <ChakraIconButton
         ref={ref}
         bg={isSelected ? 'whiteAlpha.400' : undefined}
-        w='5%'
-        h='unset'
+        h='60%'
         sx={{
           aspectRatio: '1 / 1',
         }}

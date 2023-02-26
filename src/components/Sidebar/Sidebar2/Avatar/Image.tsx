@@ -18,9 +18,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
 
     return (
       <Avatar
-        // w='100%'
-        // h='100%'
-        w='12px'
+        h='60%'
         cursor='pointer'
         src={user?.photoURL}
         onClick={handleCopyUsername}
