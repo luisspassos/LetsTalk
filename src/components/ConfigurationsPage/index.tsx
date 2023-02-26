@@ -13,10 +13,13 @@ export function Configurations() {
         flex='1'
         align='center'
         justify='center'
-        columnGap='min(5%, 80px)'
+        // columnGap='min(5%, 80px)'
+        columnGap='5rem'
         rowGap='30px'
+        // rowGap='2rem'
         overflow='auto'
         h='100vh'
+        fontSize='1rem'
       >
         <ProfileSettings />
         <AccountSettings />

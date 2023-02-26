@@ -17,7 +17,7 @@ export function Button({ text, icon, onClick, ...rest }: ButtonProps) {
     <ChakraButton
       justifyContent='start'
       variant='ghost'
-      gap={['0px', '12px', '15px']}
+      gap='4%'
       fontSize={['14px', '15px', '16px']}
       leftIcon={<Icon fontSize={['18', '19px', '20px']} as={icon} />}
       fontWeight={400}

@@ -10,7 +10,7 @@ export function Box({ title, children }: BoxProps) {
   return (
     <ChakraBox
       as='section'
-      p={['24px', '27px', '30px']}
+      p={['1.2rem', '27px', '30px']}
       boxShadow='md'
       borderRadius='20px'
       minH={['400px', '530px']}
