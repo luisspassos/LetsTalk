@@ -28,7 +28,6 @@ export function Container({ children }: ContainerProps) {
       overflowY='auto'
       h='100%'
       mx={`-${styles.padding}`}
-      pt={styles.padding}
       direction='column'
       as='aside'
     >

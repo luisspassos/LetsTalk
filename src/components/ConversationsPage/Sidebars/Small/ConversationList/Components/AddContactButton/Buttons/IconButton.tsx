@@ -29,7 +29,6 @@ export function IconButton({ label }: IconButtonProps) {
           undefined
         )}
         boxShadow='base'
-        // display={['none', null, 'inline-flex']}
         display='inline-flex'
         w='2.73625rem'
         h='unset'

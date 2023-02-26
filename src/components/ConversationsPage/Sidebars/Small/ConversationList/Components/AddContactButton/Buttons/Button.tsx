@@ -13,7 +13,6 @@ export function Button({ text }: ButtonProps) {
     <ChakraButton
       onClick={onOpen}
       width='15em'
-      my='5px'
       justifyContent='start'
       boxShadow='base'
       height={['36px', '10']}

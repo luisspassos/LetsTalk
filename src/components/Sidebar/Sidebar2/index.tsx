@@ -1,5 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { useMobileConversationListDividerColor } from 'hooks/Colors/useMobileConversationListDividerColor';
+import { ConfigurationsButton } from './Buttons/ConfigurationsButton';
+import { ConversationsButton } from './Buttons/ConversationsButton';
 import { Avatar } from './Avatar';
 import { SignOutButton } from './Buttons/SignOutButton';
 
@@ -16,13 +18,13 @@ export function Sidebar2() {
       as='nav'
     >
       <Flex justify='space-between' align='center' w='100%' h='100%'>
-        {/* <Flex> */}
-        <Avatar />
-        {/* <HStack spacing='32%' mt='64%'>
+        <Flex h='100%' align='center' w='100%'>
+          <Avatar />
+          <Flex flex='1' h='100%' align='center' ml='1.2em' gap='.3em'>
             <ConversationsButton />
             <ConfigurationsButton />
-          </HStack> */}
-        {/* </Flex> */}
+          </Flex>
+        </Flex>
         <SignOutButton />
       </Flex>
     </Box>

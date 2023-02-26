@@ -15,11 +15,11 @@ export function ConversationList() {
     <Container>
       <>
         <Box px={styles.px}>
-          <Flex justify='space-between' align='center'>
+          <Flex pt='1em' pb='.6em' justify='space-between' align='center'>
             <Title />
             <AddContactButton />
           </Flex>
-          <Divider />
+          <Divider mt={0} />
           <SearchInput setSearch={setSearch} />
         </Box>
         <List search={search} />
