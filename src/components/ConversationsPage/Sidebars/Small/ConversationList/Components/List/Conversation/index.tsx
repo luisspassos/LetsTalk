@@ -10,7 +10,6 @@ export type ConversationProps = {
     lastMessage: string;
   };
   index: number;
-  padding: string;
   numberOfConversations: number;
 };
 
@@ -18,20 +17,15 @@ export function Conversation({
   data,
   index,
   numberOfConversations,
-  padding,
 }: ConversationProps) {
   return (
     <>
-      <Container padding={padding} name={data.name}>
+      <Container name={data.name}>
         {({ containerWidth }) => (
           <Content containerWidth={containerWidth} data={data} />
         )}
       </Container>
-      <Divider
-        index={index}
-        numberOfConversations={numberOfConversations}
-        widthToBeRemoved={padding}
-      />
+      <Divider index={index} numberOfConversations={numberOfConversations} />
     </>
   );
 }

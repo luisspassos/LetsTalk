@@ -1,13 +1,14 @@
 import { DividerProps as ChakraDividerProps } from '@chakra-ui/react';
 import { Divider as DividerComponent } from 'components/ConversationsPage/Divider';
+import { styles } from 'components/ConversationsPage/Sidebars/Small';
 import { useMobileConversationListDividerColor } from 'hooks/Colors/useMobileConversationListDividerColor';
 
-type DividerProps = {
-  widthToBeRemoved: string;
-} & ChakraDividerProps;
+type DividerProps = ChakraDividerProps;
 
-export function Divider({ widthToBeRemoved, ...rest }: DividerProps) {
+export function Divider({ ...rest }: DividerProps) {
   const { color } = useMobileConversationListDividerColor();
+
+  const widthToBeRemoved = styles.px;
 
   return (
     <DividerComponent

@@ -12,22 +12,42 @@
         box-sizing: border-box;
       }
 
-      :root {
-        --red: #ff0000;
-        --my-red: var(--red);
+      body {
+        padding-inline: 10px;
+        background-color: red;
       }
 
-      p {
-        color: var(--my-red);
+      .scroll {
+        height: 100vh;
+        /* overflow-y: auto; */
+      }
+
+      .content {
+        height: 10em;
+        background-color: black;
+        border-bottom: 1px solid white;
+      }
+
+      input {
+        width: 100%;
+        outline: 0;
+        box-shadow: 0 0 0 5px blue;
       }
     </style>
   </head>
   <body>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic suscipit,
-      tempora sunt sed, laboriosam error, sequi delectus repellendus ut aut id?
-      Dolore repudiandae, vitae nisi consectetur praesentium dignissimos
-      mollitia perferendis!
-    </p>
+    <div class="scroll">
+      <input type="text" />
+      <div class="content"></div>
+      <div class="content"></div>
+      <div class="content"></div>
+      <div class="content"></div>
+      <div class="content"></div>
+      <div class="content"></div>
+      <div class="content"></div>
+      <div class="content"></div>
+      <div class="content"></div>
+      <div class="content"></div>
+    </div>
   </body>
 </html>

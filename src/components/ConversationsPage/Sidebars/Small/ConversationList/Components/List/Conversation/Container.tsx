@@ -1,4 +1,5 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { styles } from 'components/ConversationsPage/Sidebars/Small';
 import { useConversations } from 'contexts/ConversationsContext';
 import { useElementWidth } from 'hooks/useElementWidth';
 
@@ -8,11 +9,10 @@ export type ChildrenProps = {
 
 type ContainerProps = {
   children: (props: ChildrenProps) => JSX.Element;
-  padding: string;
   name: string;
 };
 
-export function Container({ children, padding, name }: ContainerProps) {
+export function Container({ children, name }: ContainerProps) {
   const { ref, width: containerWidth } = useElementWidth<HTMLDivElement>();
 
   const {
@@ -40,7 +40,7 @@ export function Container({ children, padding, name }: ContainerProps) {
   return (
     <Flex
       ref={ref}
-      px={padding}
+      px={styles.px}
       alignItems='center'
       flexShrink={0}
       cursor='pointer'

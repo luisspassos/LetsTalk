@@ -1,18 +1,14 @@
-import { RefObject } from 'react';
 import {
   ConversationType,
   useConversations,
 } from 'contexts/ConversationsContext';
 import { Conversation } from './Conversation';
-import { Ref } from 'components/Virtualizer/ScrollableBoxOfVirtualizedItems';
 
 type VirtualizerProps = {
-  padding: string;
   search: string;
-  parentRef: RefObject<Ref>;
 };
 
-export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
+export function Virtualizer({ search }: VirtualizerProps) {
   const { conversations } = useConversations();
 
   const fetchedConversations = conversations.data?.filter(({ name }) =>
@@ -39,7 +35,6 @@ export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
       {newFetchedConversations.map(
         ({ lastMessage, name, photoURL, updatedAt, uid }, i) => (
           <Conversation
-            padding={padding}
             key={uid}
             index={i}
             numberOfConversations={fetchedConversationsLength}

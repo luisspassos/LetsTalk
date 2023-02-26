@@ -3,27 +3,27 @@ import React, { useState } from 'react';
 import { Title } from './Components/Title';
 import { Container } from './Components/Container';
 import { List } from './Components/List';
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { AddContactButton } from './Components/AddContactButton';
 import { Divider } from 'components/ConversationsPage/Divider';
+import { styles } from '..';
 
 export function ConversationList() {
   const [search, setSearch] = useState('');
 
   return (
     <Container>
-      {({ padding }) => (
-        <>
+      <>
+        <Box px={styles.px}>
           <Flex justify='space-between' align='center'>
             <Title />
             <AddContactButton />
           </Flex>
-
           <Divider />
           <SearchInput setSearch={setSearch} />
-          <List search={search} padding={padding} />
-        </>
-      )}
+        </Box>
+        <List search={search} />
+      </>
     </Container>
   );
 }

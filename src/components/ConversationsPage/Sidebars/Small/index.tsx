@@ -1,5 +1,4 @@
 import {
-  ChakraProps,
   Drawer,
   DrawerContent,
   DrawerOverlay,
@@ -9,7 +8,11 @@ import { Sidebar2 } from 'components/Sidebar/Sidebar2';
 import { useTabToggle } from 'contexts/TabToggleContext';
 import { ConversationList } from './ConversationList';
 
-export const styles: ChakraProps = {
+type Styles = {
+  px: string;
+};
+
+export const styles: Styles = {
   px: '1.2em',
 };
 
