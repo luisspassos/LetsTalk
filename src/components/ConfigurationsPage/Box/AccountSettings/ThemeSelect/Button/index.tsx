@@ -12,9 +12,11 @@ import { Content } from './Content';
 export const Button = forwardRef<MenuButtonProps, 'button'>((props, ref) => {
   return (
     <MenuButton
-      w={['134px', '139px', '144px']}
-      h={['30px', '35px', '40px']}
-      px={['10px', '13px', '16px']}
+      maxW='8em'
+      w='100%'
+      h='2em'
+      fontSize='unset'
+      px='.6em'
       bgColor={useColorModeValue(undefined, 'blackAlpha.300')}
       _hover={{
         bgColor: useColorModeValue(undefined, 'blackAlpha.400'),

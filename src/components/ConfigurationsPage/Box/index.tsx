@@ -10,16 +10,18 @@ export function Box({ title, children }: BoxProps) {
   return (
     <ChakraBox
       as='section'
-      p={['1.2rem', '27px', '30px']}
+      p='1.4em'
       boxShadow='md'
-      borderRadius='20px'
-      minH={['400px', '530px']}
+      borderRadius='1em'
       bg={useColorModeValue('white', 'blackAlpha.500')}
-      flex='1'
-      minW={{ base: '200px', sm: '300px' }}
-      maxW='450px'
+      minH='25em'
+      h='auto'
+      w='100%'
+      // minW={{ base: '12em', sm: '17em' }}
+      // minW='17em'
+      maxW='22.13em'
     >
-      <Heading fontSize={['19px', '21px', '23px']} as='h1'>
+      <Heading fontSize='1.15em' as='h1'>
         {title}
       </Heading>
       {children}

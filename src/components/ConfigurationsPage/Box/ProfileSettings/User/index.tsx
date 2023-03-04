@@ -4,12 +4,7 @@ import { Username } from './Username';
 
 export function User() {
   return (
-    <Flex
-      display='flex'
-      align='center'
-      my={['11px', '13px', '15px']}
-      gap='10px'
-    >
+    <Flex display='flex' align='center' my='.75em' gap='.5em'>
       <Avatar />
       <Username />
     </Flex>

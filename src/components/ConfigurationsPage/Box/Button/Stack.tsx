@@ -6,5 +6,5 @@ type ButtonStack = {
 };
 
 export function Stack({ children }: ButtonStack) {
-  return <ChakraStack mt={['14px', '17px', '20px']}>{children}</ChakraStack>;
+  return <ChakraStack mt='1em'>{children}</ChakraStack>;
 }

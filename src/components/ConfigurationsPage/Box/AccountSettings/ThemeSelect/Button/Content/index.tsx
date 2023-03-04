@@ -4,7 +4,7 @@ import { Text } from './Text';
 
 export function Content() {
   return (
-    <HStack>
+    <HStack spacing='.7em'>
       <Icon />
       <Text />
     </HStack>

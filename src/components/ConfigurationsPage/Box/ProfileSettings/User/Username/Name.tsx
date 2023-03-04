@@ -7,12 +7,9 @@ type NameProps = {
 export function Name({ text }: NameProps) {
   return (
     <Text
-      whiteSpace='nowrap'
-      overflow='hidden'
-      textOverflow='ellipsis'
-      maxW='316px'
+      noOfLines={1}
       w='100%'
-      fontSize={['16px', '17px', '18px']}
+      fontSize='.9em'
       fontWeight='600'
       as='strong'
       title={text}

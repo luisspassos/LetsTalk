@@ -18,11 +18,16 @@ export function Button({ text, icon, onClick, ...rest }: ButtonProps) {
       justifyContent='start'
       variant='ghost'
       gap='4%'
-      fontSize={['14px', '15px', '16px']}
-      leftIcon={<Icon fontSize={['18', '19px', '20px']} as={icon} />}
+      py='3%'
+      h='unset'
+      fontSize='.8em'
+      leftIcon={<Icon fontSize='1.2em' as={icon} />}
       fontWeight={400}
       onClick={onClick}
-      px={['7px', '13px', '16px']}
+      px='5%'
+      whiteSpace='unset'
+      textAlign='left'
+      minW={0}
       {...rest}
     >
       {text}

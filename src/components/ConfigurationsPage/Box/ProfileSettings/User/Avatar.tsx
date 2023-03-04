@@ -1,16 +1,15 @@
 import { useAuth } from '../../../../../contexts/AuthContext';
-import { Avatar as ChakraAvatar } from 'components/Avatar';
+import { Avatar as AvatarComponent } from 'components/Avatar';
 
 export function Avatar() {
   const { user } = useAuth();
 
   return (
-    <ChakraAvatar
-      // boxShadow='1px 1px 8px 2px'
-      // color='blackAlpha.500'
+    <AvatarComponent
       src={user?.photoURL}
-      w={['54px', '59px', '64px']}
-      h={['54px', '59px', '64px']}
+      boxShadow='md'
+      w='3.2em'
+      flexShrink={0}
     />
   );
 }

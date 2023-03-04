@@ -8,7 +8,8 @@ export function Id({ text }: IdProps) {
   return (
     <Text
       color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
-      fontSize={['12px', '13px', '14px']}
+      // fontSize={['12px', '13px', '14px']}
+      fontSize='.7em'
       as='small'
     >
       #{text}
