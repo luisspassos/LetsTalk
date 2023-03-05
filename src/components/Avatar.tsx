@@ -44,7 +44,6 @@ export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
             aspectRatio: '1 / 1',
           },
         }}
-        ref={ref}
         {...props}
         {...styles}
       >

@@ -15,23 +15,23 @@ export function Tooltip({
   username,
   children,
 }: TooltipProps) {
+  const label = copiedUsername ? (
+    'Nome de usuário copiado!'
+  ) : (
+    <Text isTruncated maxW={['300px', '350px', '400px']}>
+      Copiar nome de usuário | {username}
+    </Text>
+  );
+
+  const ariaLabel = copiedUsername
+    ? 'Nome de usuário copiado!'
+    : `Copiar Nome de usuário. ${username}`;
+
   return (
     <ChakraTooltip
       bg={copiedUsername ? 'green.500' : undefined}
-      label={
-        copiedUsername ? (
-          'Nome de usuário copiado!'
-        ) : (
-          <Text isTruncated maxW={['300px', '350px', '400px']}>
-            Copiar nome de usuário | {username}
-          </Text>
-        )
-      }
-      ariaLabel={
-        copiedUsername
-          ? 'Nome de usuário copiado!'
-          : `Copiar Nome de usuário. ${username}`
-      }
+      label={label}
+      ariaLabel={ariaLabel}
       closeOnClick={false}
       onClose={() => setCopiedUsername(false)}
     >

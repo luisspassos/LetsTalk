@@ -1,6 +1,6 @@
 import { DividerProps as ChakraDividerProps } from '@chakra-ui/react';
 import { Divider as DividerComponent } from 'components/ConversationsPage/Divider';
-import { styles } from 'components/ConversationsPage/Sidebars/Small';
+import { styles } from 'components/ConversationsPage/Sidebars/SmallScreen';
 import { useMobileConversationListDividerColor } from 'hooks/Colors/useMobileConversationListDividerColor';
 
 type DividerProps = ChakraDividerProps;

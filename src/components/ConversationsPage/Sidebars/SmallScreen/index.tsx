@@ -16,11 +16,11 @@ export const styles: Styles = {
   px: '1.2em',
 };
 
-export function Small() {
+export function SmallScreen() {
   const { isOpen, onClose } = useTabToggle();
 
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} size='full'>
+    <Drawer isOpen={isOpen} onClose={onClose} size='full' autoFocus={false}>
       <DrawerOverlay />
       <DrawerContent
         bg={useColorModeValue('gray.200', 'blue.900')}

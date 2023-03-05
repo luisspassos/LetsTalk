@@ -7,9 +7,9 @@ import { InviteToChat } from './InviteToChat';
 export function Buttons() {
   return (
     <Stack>
-      <CopyUsername />
       <EditUsername />
       <EditProfilePhoto />
+      <CopyUsername />
       <InviteToChat />
     </Stack>
   );

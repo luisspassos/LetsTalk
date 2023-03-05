@@ -1,5 +1,5 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
-import { styles } from 'components/ConversationsPage/Sidebars/Small';
+import { styles } from 'components/ConversationsPage/Sidebars/SmallScreen';
 import { useConversations } from 'contexts/ConversationsContext';
 import { useElementWidth } from 'hooks/useElementWidth';
 
