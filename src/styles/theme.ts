@@ -17,6 +17,9 @@ export const theme = extendTheme({
     heading: 'Poppins, Noto Color Emoji, sans-serif',
     body: 'Poppins, Noto Color Emoji, sans-serif',
   },
+  fontSizes: {
+    'configurations-page-md': '.8em',
+  },
   shadows: {
     outline: boxShadow,
     'inner-blue': `inset ${boxShadow}`,
