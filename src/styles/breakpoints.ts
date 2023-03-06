@@ -8,7 +8,7 @@ function getValueJoined(obj: Breakpoint) {
 
 export const breakpoints: Breakpoints = {
   last: {
-    splitted: [87.5, 'rem'],
+    splitted: [100.5, 'rem'],
     get value() {
       return getValueJoined(this);
     },
