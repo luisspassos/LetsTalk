@@ -4,7 +4,6 @@ import {
   useColorModeValue,
   useMediaQuery,
 } from '@chakra-ui/react';
-import { useTabToggle } from 'contexts/TabToggleContext';
 import { useEffect, useRef, useState } from 'react';
 import { breakpoints } from 'styles/breakpoints';
 import { iterateEvents, WindowEvent } from 'utils/iterateEvents';
@@ -14,8 +13,6 @@ type ContainerProps = {
 };
 
 export function Container({ children }: ContainerProps) {
-  const { isOpen } = useTabToggle();
-
   const ref = useRef<HTMLDivElement>(null);
   const [padding, setPadding] = useState('');
 
@@ -66,10 +63,9 @@ export function Container({ children }: ContainerProps) {
   return (
     <Flex
       ref={ref}
-      display={isOpen ? 'flex' : 'none'}
       minW='17.625rem'
       w='26%'
-      h='100%'
+      h='100vh'
       bg={useColorModeValue('gray.200', 'blue.900')}
       pt={styles.padding}
       paddingInline={styles.padding}
