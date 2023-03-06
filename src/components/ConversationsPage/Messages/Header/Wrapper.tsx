@@ -12,11 +12,7 @@ export function Wrapper({ children }: WrapperProps) {
       as='header'
       justify='space-between'
       minW={0}
-      sx={{
-        aspectRatio: '1 / 0.09',
-      }}
-      // minH='3.4375rem'
-      minH='65px'
+      h='5rem'
       align='center'
     >
       {children}

@@ -17,7 +17,7 @@ export function FirstContent() {
       h='100%'
       minW={0}
       align='center'
-      gap='2%'
+      gap='1em'
     >
       <SidebarToggleButton />
       <ContactInfo parentWidth={parentWidth} />
