@@ -12,8 +12,9 @@ export function Wrapper({ children }: WrapperProps) {
       as='header'
       justify='space-between'
       minW={0}
-      h='5rem'
+      minH={['4.5rem', '5rem']}
       align='center'
+      gap='.4rem'
     >
       {children}
     </Flex>

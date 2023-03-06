@@ -25,8 +25,9 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       <ChakraIconButton
         ref={handleRef}
         sx={{ aspectRatio: '1 / 1' }}
-        h='50%'
         fontSize={fontSize}
+        h='50%'
+        flexShrink={0}
         variant='ghost'
         minW={0}
         {...props}

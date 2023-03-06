@@ -12,24 +12,34 @@
         box-sizing: border-box;
       }
 
-      html {
-        font-size: calc(0.9375rem + 0.390625vw);
+      .wrapper {
+        max-width: 50%;
+        overflow: hidden;
       }
 
-      p {
-        line-height: 1.5;
+      .marquee {
+        white-space: nowrap;
+        overflow: hidden;
+        display: inline-block;
+        animation: marquee 5s linear infinite;
+      }
+
+      .marquee p {
+        display: inline-block;
+      }
+
+      @keyframes marquee {
+        100% {
+          transform: translate3d(-50%, 0, 0);
+        }
       }
     </style>
   </head>
   <body>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas animi
-      aliquid eveniet sint deleniti porro quam rem saepe? Quisquam magnam
-      commodi aliquid animi adipisci molestias nam sequi. Tempore, inventore
-      veniam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
-      cum similique commodi soluta consequatur est inventore. Beatae dignissimos
-      debitis a aut nam aliquam exercitationem, cumque earum, fugit ducimus
-      architecto aspernatur.😓😒😝❤️🙉
-    </p>
+    <div class="wrapper">
+      <div class="marquee">
+        <p>❤️❤️ddsadasdsadsadas</p>
+      </div>
+    </div>
   </body>
 </html>
