@@ -1,6 +1,7 @@
-import { Text, useColorModeValue } from '@chakra-ui/react';
+import { Flex, keyframes, Text, useColorModeValue } from '@chakra-ui/react';
+import useResizeObserver from '@react-hook/resize-observer';
 import { onSnapshot, doc } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ContactInfoProps } from '.';
 import { useConversations } from '../../../../../../contexts/ConversationsContext';
 import { db } from '../../../../../../services/firebase';
@@ -15,6 +16,16 @@ type ContactDocumentData = {
 };
 
 type OnlineAtProps = ContactInfoProps;
+
+const marquee = keyframes`
+  0% {
+    margin-left: 100%;
+  } 100% {
+    transform: translateX(-100%);
+  }
+`;
+
+const animation = `${marquee} 6s linear infinite`;
 
 export function OnlineAt({ parentWidth }: OnlineAtProps) {
   const [onlineAt, setOnlineAt] = useState<OnlineAtFormatted>();
@@ -45,13 +56,36 @@ export function OnlineAt({ parentWidth }: OnlineAtProps) {
     };
   }, [currentConversation.data?.username]);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  const [isOverflown, setIsOverflown] = useState(false);
+
+  function getIsOverflown() {
+    const wrapper = wrapperRef.current;
+    const text = textRef.current;
+
+    if (wrapper === null || text === null) return;
+
+    const newIsOverflown = text.offsetWidth > wrapper.offsetWidth;
+
+    setIsOverflown(newIsOverflown);
+  }
+
+  useResizeObserver(wrapperRef, getIsOverflown);
+
   return (
-    <Text
-      as='time'
-      fontSize='0.8em'
-      color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
-    >
-      {onlineAt}
-    </Text>
+    <Flex overflow='hidden' w='100%' ref={wrapperRef}>
+      <Text
+        as='time'
+        ref={textRef}
+        fontSize='0.8em'
+        color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
+        whiteSpace='nowrap'
+        animation={isOverflown ? animation : undefined}
+      >
+        {onlineAt}
+      </Text>
+    </Flex>
   );
 }

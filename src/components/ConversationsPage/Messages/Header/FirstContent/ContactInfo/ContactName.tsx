@@ -11,13 +11,7 @@ export function ContactName({ parentWidth }: ContactNameProps) {
   const { fontSize } = useFontSizeBasedOnWidth(parentWidth, 48);
 
   return (
-    <Heading
-      w='90%'
-      isTruncated
-      // fontSize={fontSize}
-      fontSize='1em'
-      fontWeight={400}
-    >
+    <Heading w='100%' isTruncated fontSize='1em' fontWeight={400}>
       {/* {currentConversation.data?.name} */}
       luisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss🐵❤️😓😒😒
     </Heading>
