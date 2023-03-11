@@ -15,7 +15,7 @@ type Measure = Ref | Element | number;
 
 export function useFontSizeBasedOnMeasurement(
   measurement: Measure,
-  valueThatDividesMeasure: number
+  valueThatDividesMeasurement: number
 ) {
   const [fontSize, setFontSize] = useState('1rem');
 
@@ -25,7 +25,7 @@ export function useFontSizeBasedOnMeasurement(
         getComputedStyle(document.documentElement).fontSize
       );
 
-      const newFontSize = width / valueThatDividesMeasure / rem;
+      const newFontSize = width / valueThatDividesMeasurement / rem;
 
       const fontSize = newFontSize + 'rem';
 
@@ -59,7 +59,7 @@ export function useFontSizeBasedOnMeasurement(
     return () => {
       unobserve();
     };
-  }, [measurement, valueThatDividesMeasure]);
+  }, [measurement, valueThatDividesMeasurement]);
 
   return { fontSize };
 }
