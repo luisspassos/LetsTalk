@@ -12,34 +12,45 @@
         box-sizing: border-box;
       }
 
-      .wrapper {
-        max-width: 50%;
-        overflow: hidden;
-      }
-
-      .marquee {
-        white-space: nowrap;
-        overflow: hidden;
-        display: inline-block;
-        animation: marquee 5s linear infinite;
-      }
-
-      .marquee p {
-        display: inline-block;
+      :root {
+        --marquee-duration: 2s;
       }
 
       @keyframes marquee {
-        100% {
-          transform: translate3d(-50%, 0, 0);
+        to {
+          transform: translateX(100%);
         }
+      }
+
+      @keyframes marquee2 {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translate(100%);
+        }
+      }
+
+      .container {
+        display: inline-block;
+        overflow: hidden;
+      }
+
+      .container time {
+        display: inline-block;
+        animation-name: marquee, marquee2;
+        animation-duration: var(--marquee-duration),
+          calc(var(--marquee-duration) * 2);
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-delay: 0s, var(--marquee-duration);
       }
     </style>
   </head>
   <body>
-    <div class="wrapper">
-      <div class="marquee">
-        <p>❤️❤️ddsadasdsadsadas</p>
-      </div>
+    <div class="container">
+      <!-- <time>online em 20/10/2020 as 23:55</time> -->
+      <time>❤️❤️❤️🎤🎤dasdsaddsaimage.png</time>
     </div>
   </body>
 </html>
