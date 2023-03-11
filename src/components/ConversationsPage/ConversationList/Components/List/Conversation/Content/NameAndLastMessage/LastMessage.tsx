@@ -1,5 +1,5 @@
 import { Text, useColorModeValue } from '@chakra-ui/react';
-import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { ChildrenProps } from '../../Container';
 
 type LastMessageProps = {
@@ -7,7 +7,7 @@ type LastMessageProps = {
 } & ChildrenProps;
 
 export function LastMessage({ text, containerWidth }: LastMessageProps) {
-  const { fontSize } = useFontSizeBasedOnWidth(containerWidth, 23);
+  const { fontSize } = useFontSizeBasedOnMeasurement(containerWidth, 23);
 
   return (
     <Text

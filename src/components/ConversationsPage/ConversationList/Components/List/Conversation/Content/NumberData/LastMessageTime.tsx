@@ -1,5 +1,5 @@
 import { Text, useColorModeValue } from '@chakra-ui/react';
-import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { useRef } from 'react';
 import { ChildrenProps } from '../../Container';
 
@@ -13,7 +13,7 @@ export function LastMessageTime({
 }: LastMessageTimeProps) {
   const ref = useRef<HTMLParagraphElement>(null);
 
-  const { fontSize } = useFontSizeBasedOnWidth(containerWidth, 25);
+  const { fontSize } = useFontSizeBasedOnMeasurement(containerWidth, 25);
 
   return (
     <Text

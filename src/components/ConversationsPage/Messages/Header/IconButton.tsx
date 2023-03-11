@@ -2,14 +2,14 @@ import {
   IconButton as ChakraIconButton,
   IconButtonProps,
 } from '@chakra-ui/react';
-import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { forwardRef, useState } from 'react';
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (props, forwardRef) => {
     const [element, setElement] = useState<HTMLButtonElement | null>(null);
 
-    const { fontSize } = useFontSizeBasedOnWidth(element, 1.4);
+    const { fontSize } = useFontSizeBasedOnMeasurement(element, 1.4);
 
     function handleRef(node: HTMLButtonElement | null) {
       setElement(node);

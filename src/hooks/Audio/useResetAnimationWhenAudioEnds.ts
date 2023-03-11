@@ -69,7 +69,7 @@ export function useResetAnimationWhenAudioEnds({
     }
 
     continueAnimationReset();
-  }, [animationDuration, animationIsRestarting, setResetAnimation]);
+  }, [animationIsRestarting, setResetAnimation]);
 
   // set document events
   useEffect(() => {

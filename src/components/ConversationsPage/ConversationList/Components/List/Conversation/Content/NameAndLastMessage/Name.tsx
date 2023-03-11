@@ -1,5 +1,5 @@
 import { Heading } from '@chakra-ui/react';
-import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { ChildrenProps } from '../../Container';
 
 type NameProps = {
@@ -7,7 +7,7 @@ type NameProps = {
 } & ChildrenProps;
 
 export function Name({ text, containerWidth }: NameProps) {
-  const { fontSize } = useFontSizeBasedOnWidth(containerWidth, 20);
+  const { fontSize } = useFontSizeBasedOnMeasurement(containerWidth, 20);
 
   console.log(fontSize);
 

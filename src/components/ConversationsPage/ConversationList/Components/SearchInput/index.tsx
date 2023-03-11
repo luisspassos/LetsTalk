@@ -1,5 +1,5 @@
 import { InputGroup } from '@chakra-ui/react';
-import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { useRef } from 'react';
 import { Icon } from './Icon';
 import { Input } from './Input';
@@ -11,7 +11,7 @@ export type SearchInputProps = {
 export function SearchInput({ setSearch }: SearchInputProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const { fontSize } = useFontSizeBasedOnWidth(ref.current, 17.5);
+  const { fontSize } = useFontSizeBasedOnMeasurement(ref.current, 17.5);
 
   return (
     <InputGroup

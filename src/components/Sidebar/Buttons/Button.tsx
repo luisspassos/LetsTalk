@@ -3,7 +3,7 @@ import {
   IconButtonProps,
 } from '@chakra-ui/react';
 import { Tooltip } from 'components/Tooltip';
-import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { useRef } from 'react';
 
 type ButtonProps = {
@@ -17,7 +17,7 @@ export function Button({
 }: ButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
 
-  const { fontSize } = useFontSizeBasedOnWidth(ref, 1.5);
+  const { fontSize } = useFontSizeBasedOnMeasurement(ref, 1.5);
 
   return (
     <Tooltip ariaLabel={ariaLabel} label={ariaLabel} aria-label={ariaLabel}>

@@ -1,5 +1,5 @@
 import { ChakraProps } from '@chakra-ui/react';
-import { useFontSizeBasedOnWidth } from 'hooks/useFontSizeBasedOnWidth';
+import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { Circle } from '../../../../../../../Circle';
 import { ChildrenProps } from '../../Container';
 
@@ -11,7 +11,7 @@ export function NumberOfUnreadMessages({
   number,
   containerWidth,
 }: NumberOfUnreadMessagesProps) {
-  const { fontSize } = useFontSizeBasedOnWidth(containerWidth, 26);
+  const { fontSize } = useFontSizeBasedOnMeasurement(containerWidth, 26);
 
   const styles: ChakraProps = {
     w: '1.5em',
