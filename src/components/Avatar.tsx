@@ -1,7 +1,7 @@
 import { ChakraProps, ImageProps, Skeleton, Image } from '@chakra-ui/react';
 import { forwardRef, useEffect, useState } from 'react';
 
-type AvatarProps = Omit<ImageProps, 'src'> & {
+export type AvatarProps = Omit<ImageProps, 'src'> & {
   src: string | null | undefined;
 };
 

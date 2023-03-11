@@ -1,18 +1,10 @@
-import {
-  Box,
-  Flex,
-  FlexProps,
-  useColorModeValue,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Flex, useColorModeValue, VStack } from '@chakra-ui/react';
 import { Avatar } from './Avatar';
 import { SignOutButton } from './Buttons/SignOutButton';
 import { ConfigurationsButton } from './Buttons/ConfigurationsButton';
 import { ConversationsButton } from './Buttons/ConversationsButton';
 
-type SidebarProps = FlexProps;
-
-export function Sidebar(props: SidebarProps) {
+export function Sidebar() {
   return (
     <Box
       bg={useColorModeValue('gray.500', 'blue.900')}
@@ -31,7 +23,6 @@ export function Sidebar(props: SidebarProps) {
         borderRightColor={useColorModeValue('unset', 'whiteAlpha.500')}
         px='17%'
         py='25%'
-        {...props}
       >
         <Box>
           <Avatar />
