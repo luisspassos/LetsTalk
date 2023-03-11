@@ -2,7 +2,6 @@ import { Flex, keyframes, Text, useColorModeValue } from '@chakra-ui/react';
 import useResizeObserver from '@react-hook/resize-observer';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
-import { ContactInfoProps } from '.';
 import { useConversations } from '../../../../../../contexts/ConversationsContext';
 import { db } from '../../../../../../services/firebase';
 import { formatContactOnlineAt } from '../../../../../../utils/formatDate';
@@ -15,8 +14,6 @@ type ContactDocumentData = {
   uid: string;
 };
 
-type OnlineAtProps = ContactInfoProps;
-
 const marquee = keyframes`
   0% {
     margin-left: 100%;
@@ -27,7 +24,7 @@ const marquee = keyframes`
 
 const animation = `${marquee} 6s linear infinite`;
 
-export function OnlineAt({ parentWidth }: OnlineAtProps) {
+export function OnlineAt() {
   const [onlineAt, setOnlineAt] = useState<OnlineAtFormatted>();
   const { currentConversation } = useConversations();
 
