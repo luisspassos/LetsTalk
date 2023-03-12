@@ -1,5 +1,5 @@
 import { Sidebar } from 'components/Sidebar';
-import { ConversationList } from '../ConversationList';
+import { ConversationList } from './ConversationList';
 
 export function Default() {
   return (

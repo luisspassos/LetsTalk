@@ -1,6 +1,6 @@
 import { ChakraProps } from '@chakra-ui/react';
 import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
-import { Circle } from '../../../../../../../Circle';
+import { Circle } from 'components/Circle';
 import { ChildrenProps } from '../../Container';
 
 type NumberOfUnreadMessagesProps = {

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Ref } from '../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
+import { Ref } from 'components/Virtualizer/ScrollableBoxOfVirtualizedItems';
 import { DividerAboveList } from './Divider/AboveList';
 import { Parent } from './Parent';
 import { Virtualizer } from './Virtualizer';

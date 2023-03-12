@@ -2,8 +2,8 @@ import { RefObject } from 'react';
 import {
   ConversationType,
   useConversations,
-} from '../../../../../contexts/ConversationsContext';
-import { Ref } from '../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
+} from 'contexts/ConversationsContext';
+import { Ref } from 'components/Virtualizer/ScrollableBoxOfVirtualizedItems';
 import { Conversation } from './Conversation';
 
 type VirtualizerProps = {

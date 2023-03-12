@@ -1,5 +1,5 @@
 import { DividerProps as ChakraDividerProps } from '@chakra-ui/react';
-import { Divider as DividerComponent } from '../../../../Divider';
+import { Divider as DividerComponent } from 'components/ConversationsPage/Divider';
 
 type DividerProps = {
   widthToBeRemoved: string;

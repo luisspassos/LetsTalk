@@ -2,7 +2,7 @@ import { ReactNode, RefObject } from 'react';
 import {
   Ref,
   ScrollableBoxOfVirtualizedItems,
-} from '../../../../Virtualizer/ScrollableBoxOfVirtualizedItems';
+} from 'components/Virtualizer/ScrollableBoxOfVirtualizedItems';
 
 type ParentProps = {
   children: ReactNode;
