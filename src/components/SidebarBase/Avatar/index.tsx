@@ -1,9 +1,14 @@
 import { useAuth } from 'contexts/AuthContext';
 import { useState } from 'react';
 import { Tooltip } from './Tooltip';
-import { Avatar as AvatarComponent } from 'components/Avatar';
+import {
+  Avatar as AvatarComponent,
+  AvatarPropsWithoutSrc,
+} from 'components/Avatar';
 
-export function Avatar() {
+type AvatarProps = AvatarPropsWithoutSrc;
+
+export function Avatar(props: AvatarProps) {
   const [copiedUsername, setCopiedUsername] = useState(false);
 
   const { user } = useAuth();
@@ -21,8 +26,8 @@ export function Avatar() {
       username={username}
     >
       <AvatarComponent
-        h='60%'
         cursor='pointer'
+        {...props}
         src={user?.photoURL}
         onClick={handleCopyUsername}
       />

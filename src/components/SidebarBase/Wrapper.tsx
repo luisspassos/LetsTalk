@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 type WrapperProps = {
   children: ReactNode;
   boxProps: BoxProps;
-  flexProps: FlexProps;
+  flexProps?: FlexProps;
 };
 
 export function Wrapper({ boxProps, children, flexProps }: WrapperProps) {

@@ -4,7 +4,7 @@ import {
   DrawerOverlay,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { Sidebar2 } from 'components/Sidebar/Sidebar2';
+import { Sidebar } from './Sidebar';
 import { useTabToggle } from 'contexts/TabToggleContext';
 import { ConversationList } from './ConversationList';
 
@@ -27,7 +27,7 @@ export function SmallScreen() {
         fontSize='1rem'
         px={styles.px}
       >
-        <Sidebar2 />
+        <Sidebar />
         <ConversationList />
       </DrawerContent>
     </Drawer>
