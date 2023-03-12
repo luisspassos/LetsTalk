@@ -1,33 +1,70 @@
-import { SearchInput } from './Components/SearchInput';
-import React, { useState } from 'react';
-import { Title } from './Components/Title';
-import { Container } from './Components/Container';
-import { List } from './Components/List';
-import { Flex } from '@chakra-ui/react';
-import { AddContactButton } from './Components/AddContactButton';
+import { ChakraProps, Flex, useColorModeValue } from '@chakra-ui/react';
 import { Divider } from 'components/ConversationsPage/Divider';
+import { useRef, useState, useEffect } from 'react';
+import { WindowEvent, iterateEvents } from 'utils/iterateEvents';
+import { Base } from '../../ConversationsListBase';
+import { AddContactButton } from './Components/AddContactButton';
+import { ContentBasedOnSearch } from './Components/ContentBasedOnSearch';
+import { Title } from './Components/Title';
 
 export function ConversationList() {
-  const [search, setSearch] = useState('');
+  const ref = useRef<HTMLDivElement>(null);
+  const [padding, setPadding] = useState('');
+
+  function getPadding() {
+    const element = ref.current;
+
+    if (element === null) return;
+
+    const newPadding = getComputedStyle(element).paddingRight;
+
+    setPadding(newPadding);
+  }
+
+  useEffect(() => {
+    getPadding();
+  }, []);
+
+  // set window events
+  useEffect(() => {
+    const events: WindowEvent[] = [
+      {
+        type: 'resize',
+        func: getPadding,
+      },
+    ];
+
+    iterateEvents('add', events, window);
+
+    return () => {
+      iterateEvents('remove', events, window);
+    };
+  }, []);
+
+  const styles: ChakraProps = {
+    padding: 'max(2%, 1.2rem)',
+    border: '1px solid',
+  };
 
   return (
-    <Container>
-      {(padding) => (
-        <>
-          <Flex
-            direction={{ base: 'column', md: 'row' }}
-            justify='space-between'
-            align={{ base: 'start', md: 'center' }}
-          >
-            <Title />
-            <AddContactButton />
-          </Flex>
+    <Base
+      componentRef={ref}
+      borderRight={styles.border}
+      borderColor='whiteAlpha.500'
+      minW='17.625rem'
+      w='25%'
+      h='100vh'
+      bg={useColorModeValue('gray.200', 'blue.900')}
+      pt={styles.padding}
+      paddingInline={styles.padding}
+    >
+      <Flex justify='space-between' align='center'>
+        <Title />
+        <AddContactButton />
+      </Flex>
 
-          <Divider />
-          <SearchInput setSearch={setSearch} />
-          <List search={search} padding={padding} />
-        </>
-      )}
-    </Container>
+      <Divider />
+      <ContentBasedOnSearch padding={padding} />
+    </Base>
   );
 }
