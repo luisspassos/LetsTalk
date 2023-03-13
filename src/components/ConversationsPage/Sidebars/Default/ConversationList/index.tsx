@@ -1,11 +1,10 @@
-import { ChakraProps, Flex, useColorModeValue } from '@chakra-ui/react';
+import { ChakraProps, useColorModeValue } from '@chakra-ui/react';
 import { Divider } from 'components/ConversationsPage/Divider';
 import { useRef, useState, useEffect } from 'react';
 import { WindowEvent, iterateEvents } from 'utils/iterateEvents';
 import { Base } from '../../ConversationsListBase';
-import { AddContactButton } from './Components/AddContactButton';
 import { ContentBasedOnSearch } from './Components/ContentBasedOnSearch';
-import { Title } from './Components/Title';
+import { FirstContent } from './FirstContent';
 
 export function ConversationList() {
   const ref = useRef<HTMLDivElement>(null);
@@ -58,10 +57,7 @@ export function ConversationList() {
       pt={styles.padding}
       paddingInline={styles.padding}
     >
-      <Flex justify='space-between' align='center'>
-        <Title />
-        <AddContactButton />
-      </Flex>
+      <FirstContent />
 
       <Divider />
       <ContentBasedOnSearch padding={padding} />

@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/react';
+import { Base } from 'components/ConversationsPage/Sidebars/ConversationsListBase/FirstContent/Title';
 import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { useRef } from 'react';
 
@@ -10,9 +10,5 @@ export function Title() {
     9.2
   );
 
-  return (
-    <Heading ref={ref} as='h1' fontWeight={400} fontSize={fontSize}>
-      Conversas
-    </Heading>
-  );
+  return <Base componentRef={ref} fontSize={fontSize} />;
 }
