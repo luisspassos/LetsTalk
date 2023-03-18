@@ -1,12 +1,9 @@
 import { Button as ChakraButton } from '@chakra-ui/react';
 import { useAddContactModal } from 'contexts/Modal/AddContactModalContext';
 import { AiOutlineUserAdd } from 'react-icons/ai';
+import { label } from 'components/ConversationsPage/Sidebars/ConversationsListBase/FirstContent/AddContactButton/IconButton';
 
-type ButtonProps = {
-  text: string;
-};
-
-export function Button({ text }: ButtonProps) {
+export function Button() {
   const { onOpen } = useAddContactModal();
 
   return (
@@ -20,7 +17,7 @@ export function Button({ text }: ButtonProps) {
       fontSize={['15px', 'md']}
       leftIcon={<AiOutlineUserAdd size='1.4em' />}
     >
-      {text}
+      {label}
     </ChakraButton>
   );
 }

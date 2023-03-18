@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Base } from '../../ConversationsListBase';
 import { styles as sharedStyles } from '..';
 import { SearchInput } from './SearchInput';
-import { List } from './Components/List';
+import { List } from './List';
 import { FirstContent } from './FirstContent';
 import { DividerBelowTitle } from './DividerBelowTitle';
 

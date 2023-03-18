@@ -3,16 +3,15 @@ import { Button } from './Button';
 import { IconButton } from './IconButton';
 
 export function Buttons() {
-  const text = 'Adicionar contato';
   const breakpoint = '28.25em';
 
   return (
     <>
       <Show breakpoint={`(max-width: ${breakpoint})`}>
-        <IconButton label={text} />
+        <IconButton />
       </Show>
       <Hide breakpoint={`(max-width: ${breakpoint})`}>
-        <Button text={text} />
+        <Button />
       </Hide>
     </>
   );
