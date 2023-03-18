@@ -10,7 +10,9 @@ type InputProps = {
   setSearch: SearchInputProps['setSearch'];
 } & ChakraInputProps;
 
-export function Input({ setSearch, ...rest }: InputProps) {
+export type Input = typeof Base;
+
+export function Base({ setSearch, ...rest }: InputProps) {
   function handleSearch(e: ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
   }
@@ -22,8 +24,6 @@ export function Input({ setSearch, ...rest }: InputProps) {
       placeholder='Pesquisar conversa...'
       boxShadow='base'
       fontSize='1em'
-      h='unset'
-      pl='15%'
       onChange={handleSearch}
       sx={{
         aspectRatio: '1 / 0.17',

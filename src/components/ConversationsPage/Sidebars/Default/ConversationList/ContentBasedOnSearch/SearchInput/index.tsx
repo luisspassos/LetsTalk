@@ -1,11 +1,14 @@
-import { InputGroup } from '@chakra-ui/react';
 import { useFontSizeBasedOnMeasurement } from 'hooks/useFontSizeBasedOnMeasurement';
 import { useRef } from 'react';
+import {
+  Base,
+  SearchInputProps as BaseProps,
+} from 'components/ConversationsPage/Sidebars/ConversationsListBase/SearchInput';
 import { Icon } from './Icon';
 import { Input } from './Input';
 
-export type SearchInputProps = {
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
+type SearchInputProps = {
+  setSearch: BaseProps['setSearch'];
 };
 
 export function SearchInput({ setSearch }: SearchInputProps) {
@@ -14,15 +17,12 @@ export function SearchInput({ setSearch }: SearchInputProps) {
   const { fontSize } = useFontSizeBasedOnMeasurement(ref.current, 17.5);
 
   return (
-    <InputGroup
+    <Base
+      componentRef={ref}
       fontSize={`max(${fontSize}, 0.9375rem)`}
-      ref={ref}
-      alignItems='center'
-      justifyContent='center'
-      mb={['13px', '15px', '17px']}
-    >
-      <Icon />
-      <Input setSearch={setSearch} />
-    </InputGroup>
+      setSearch={setSearch}
+      Icon={Icon}
+      Input={Input}
+    />
   );
 }

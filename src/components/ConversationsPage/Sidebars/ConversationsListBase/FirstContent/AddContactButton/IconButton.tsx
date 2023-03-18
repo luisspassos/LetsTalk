@@ -2,22 +2,24 @@ import { useAddContactModal } from 'contexts/Modal/AddContactModalContext';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import {
   IconButton as ChakraIconButton,
+  IconButtonProps,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Tooltip } from 'components/Tooltip';
 
-type IconButtonProps = {
-  label: string;
+export const label = 'Adicionar contato';
+
+type BaseProps = {
+  width: IconButtonProps['width'];
 };
 
-export function IconButton({ label }: IconButtonProps) {
+export function Base(props: BaseProps) {
   const { onOpen } = useAddContactModal();
 
   return (
     <Tooltip ariaLabel={label} label={label} hasArrow={false}>
       <ChakraIconButton
         onClick={onOpen}
-        aria-label={label}
         icon={<AiOutlineUserAdd size='60%' />}
         transitionProperty='unset'
         transitionDuration='200ms'
@@ -29,12 +31,13 @@ export function IconButton({ label }: IconButtonProps) {
           undefined
         )}
         boxShadow='base'
-        display={['none', null, 'inline-flex']}
-        w='17%'
+        display='inline-flex'
         h='unset'
         sx={{
           aspectRatio: '1 / 1',
         }}
+        aria-label={label}
+        {...props}
       />
     </Tooltip>
   );

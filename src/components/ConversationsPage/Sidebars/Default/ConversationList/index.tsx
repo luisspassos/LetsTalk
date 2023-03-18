@@ -1,9 +1,9 @@
 import { ChakraProps, useColorModeValue } from '@chakra-ui/react';
-import { Divider } from 'components/ConversationsPage/Divider';
 import { useRef, useState, useEffect } from 'react';
 import { WindowEvent, iterateEvents } from 'utils/iterateEvents';
 import { Base } from '../../ConversationsListBase';
-import { ContentBasedOnSearch } from './Components/ContentBasedOnSearch';
+import { ContentBasedOnSearch } from './ContentBasedOnSearch';
+import { DividerBelowTitle } from './DividerBelowTitle';
 import { FirstContent } from './FirstContent';
 
 export function ConversationList() {
@@ -59,7 +59,7 @@ export function ConversationList() {
     >
       <FirstContent />
 
-      <Divider />
+      <DividerBelowTitle />
       <ContentBasedOnSearch padding={padding} />
     </Base>
   );

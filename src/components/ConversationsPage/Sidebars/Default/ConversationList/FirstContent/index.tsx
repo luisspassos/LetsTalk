@@ -1,5 +1,5 @@
 import { Base } from 'components/ConversationsPage/Sidebars/ConversationsListBase/FirstContent';
-import { AddContactButton } from '../Components/AddContactButton';
+import { AddContactButton } from './AddContactButton';
 import { Title } from './Title';
 
 export function FirstContent() {
