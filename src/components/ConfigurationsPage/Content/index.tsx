@@ -1,13 +1,10 @@
-import { useMediaQuery, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { AccountSettings } from './Box/AccountSettings';
 import { ProfileSettings } from './Box/ProfileSettings';
 
 export function Content() {
-  const [isLargerThan41] = useMediaQuery('(min-width: 50em)');
-
   return (
     <Flex
-      direction={isLargerThan41 ? 'row' : 'column'}
       p='20px'
       flex='1'
       align='center'
@@ -17,6 +14,13 @@ export function Content() {
       overflow='auto'
       minH='100vh'
       fontSize='calc(0.9375rem + 0.390625vw)'
+      sx={{
+        '&': {
+          '@media (max-width: 50em)': {
+            flexDirection: 'column',
+          },
+        },
+      }}
     >
       <ProfileSettings />
       <AccountSettings />
