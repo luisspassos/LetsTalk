@@ -15,7 +15,7 @@ export function List({ search, padding }: ListProps) {
   return (
     <Parent padding={padding} parentRef={parentRef}>
       <DividerAboveList padding={padding} />
-      <Virtualizer padding={padding} parentRef={parentRef} search={search} />
+      <Virtualizer padding={padding} search={search} />
     </Parent>
   );
 }

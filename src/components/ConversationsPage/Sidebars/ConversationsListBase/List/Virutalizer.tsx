@@ -2,11 +2,10 @@ import {
   ConversationType,
   useConversations,
 } from 'contexts/ConversationsContext';
-import { Component } from 'utils/types';
 
 type VirtualizerProps = {
   search: string;
-  Conversation: Component;
+  Conversation: { component: () => JSX.Element };
 };
 
 export function Virtualizer({ search, Conversation }: VirtualizerProps) {

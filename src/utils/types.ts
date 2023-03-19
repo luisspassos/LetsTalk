@@ -44,5 +44,3 @@ export type ExcludeFromTuple<T extends readonly any[], E> = T extends [
     ? ExcludeFromTuple<R, E>
     : [F, ...ExcludeFromTuple<R, E>]
   : [];
-
-export type Component = () => JSX.Element;

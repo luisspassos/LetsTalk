@@ -1,18 +1,15 @@
-import { RefObject } from 'react';
 import {
   ConversationType,
   useConversations,
 } from 'contexts/ConversationsContext';
-import { Ref } from 'components/Virtualizer/ScrollableBoxOfVirtualizedItems';
 import { Conversation } from './Conversation';
 
 type VirtualizerProps = {
   padding: string;
   search: string;
-  parentRef: RefObject<Ref>;
 };
 
-export function Virtualizer({ search, parentRef, padding }: VirtualizerProps) {
+export function Virtualizer({ search, padding }: VirtualizerProps) {
   const { conversations } = useConversations();
 
   const fetchedConversations = conversations.data?.filter(({ name }) =>

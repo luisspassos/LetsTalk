@@ -1,8 +1,7 @@
-import { Component } from 'utils/types';
 import { Modal } from './Modal';
 
 type AddContactButtonProps = {
-  Buttons: Component;
+  Buttons: () => JSX.Element;
 };
 
 export function Base({ Buttons }: AddContactButtonProps) {
