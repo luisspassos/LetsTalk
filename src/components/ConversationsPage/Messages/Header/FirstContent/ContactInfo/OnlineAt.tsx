@@ -76,7 +76,7 @@ export function OnlineAt() {
       <Text
         as='time'
         ref={textRef}
-        fontSize='0.8em'
+        fontSize='0.83em'
         color={useColorModeValue('blackAlpha.800', 'whiteAlpha.800')}
         whiteSpace='nowrap'
         animation={isOverflown ? animation : undefined}
