@@ -1,8 +1,8 @@
 import { Props } from '..';
-import { AudioPlayer } from '../AudioPlayer';
 import { DeleteButton } from '../DeleteButton';
 import { StopButton } from '../StopButton';
 import { Wrapper } from '../Wrapper';
+import { AudioPlayer } from './AudioPlayer';
 import { UnpauseButton } from './UnpauseButton';
 
 type PausedProps = Props;

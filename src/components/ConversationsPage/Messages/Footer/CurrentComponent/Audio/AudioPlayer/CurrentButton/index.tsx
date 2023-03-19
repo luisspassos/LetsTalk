@@ -4,7 +4,8 @@ import { PauseButton } from './Pause';
 import { PlayButton } from './Play';
 
 export const styles: ChakraProps = {
-  fontSize: '40px',
+  fontSize: '1.8rem',
+  flexShrink: 0,
 };
 
 export function CurrentButton() {

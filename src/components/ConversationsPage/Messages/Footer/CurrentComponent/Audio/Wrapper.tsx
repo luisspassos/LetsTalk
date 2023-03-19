@@ -8,7 +8,7 @@ export function Wrapper({ children, ...rest }: WrapperProps) {
       align='center'
       justify='end'
       flex='1'
-      gap='20px'
+      gap={['.9rem', '1.25rem']}
       {...rest}
       sx={{
         'button:last-child': {

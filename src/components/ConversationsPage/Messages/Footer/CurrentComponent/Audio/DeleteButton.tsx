@@ -11,7 +11,6 @@ export function DeleteButton() {
       color={useColorModeValue('red.600', 'red.300')}
       icon={<MdDelete />}
       aria-label='Excluir áudio'
-      mr='-10px'
     />
   );
 }

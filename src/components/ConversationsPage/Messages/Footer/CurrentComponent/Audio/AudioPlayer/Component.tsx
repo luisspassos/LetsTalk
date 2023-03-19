@@ -1,11 +1,15 @@
-import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react';
 import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
 import { useInitializeAudio } from 'hooks/Audio/useInitializeAudio';
 import { useMemo } from 'react';
 import { CurrentButton } from './CurrentButton';
 import { Duration } from './Duration';
 
-export function Component() {
+export type ComponentProps = FlexProps;
+
+export const spacing = '10px';
+
+export function Component(props: ComponentProps) {
   const { audiosPlaying } = useAudiosPlaying();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const index = useMemo(() => audiosPlaying.length, []);
@@ -22,10 +26,11 @@ export function Component() {
       boxShadow='base'
       border='1px solid'
       borderColor={useColorModeValue('whiteAlpha.300', 'blackAlpha.600')}
-      gap='10px'
-      px='10px'
+      gap={spacing}
+      px={spacing}
       maxW='17.875rem'
       color='gray.50'
+      {...props}
     >
       <CurrentButton />
       <Duration />

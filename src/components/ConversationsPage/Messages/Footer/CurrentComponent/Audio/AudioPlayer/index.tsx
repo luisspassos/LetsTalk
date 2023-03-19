@@ -1,10 +1,12 @@
 import { AudioContextsProvider } from 'components/Audio/AudioContextsProvider';
-import { Component } from './Component';
+import { Component, ComponentProps } from './Component';
 
-export function AudioPlayer() {
+type AudioPlayerProps = ComponentProps;
+
+export function AudioPlayer(props: AudioPlayerProps) {
   return (
     <AudioContextsProvider>
-      <Component />
+      <Component {...props} />
     </AudioContextsProvider>
   );
 }
