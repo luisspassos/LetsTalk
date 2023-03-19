@@ -1,6 +1,6 @@
 import { ChakraProps, useColorModeValue } from '@chakra-ui/react';
-import { useRef, useState, useEffect } from 'react';
-import { WindowEvent, iterateEvents } from 'utils/iterateEvents';
+import useResizeObserver from '@react-hook/resize-observer';
+import { useRef, useState } from 'react';
 import { Base } from '../../ConversationsListBase';
 import { ContentBasedOnSearch } from './ContentBasedOnSearch';
 import { DividerBelowTitle } from './DividerBelowTitle';
@@ -20,25 +20,7 @@ export function ConversationList() {
     setPadding(newPadding);
   }
 
-  useEffect(() => {
-    getPadding();
-  }, []);
-
-  // set window events
-  useEffect(() => {
-    const events: WindowEvent[] = [
-      {
-        type: 'resize',
-        func: getPadding,
-      },
-    ];
-
-    iterateEvents('add', events, window);
-
-    return () => {
-      iterateEvents('remove', events, window);
-    };
-  }, []);
+  useResizeObserver(ref, getPadding);
 
   const styles: ChakraProps = {
     padding: 'max(2%, 1.2rem)',
