@@ -1,4 +1,5 @@
 import { UseToastOptions } from '@chakra-ui/react';
+import { useAudioRecording } from 'contexts/AudioRecordingContext';
 import { AiFillAudio } from 'react-icons/ai';
 import { SetIsRecordingAudio } from '../..';
 import { BaseWithTooltip } from '../../RightButtonBase/BaseWithTooltip';
@@ -19,6 +20,8 @@ type Errors = Record<
 export function RecordAudioButton({
   setIsRecordingAudio,
 }: RecordAudioButtonProps) {
+  const { mediaRecorder } = useAudioRecording();
+
   async function handleRecordAudio() {
     try {
       const methodsDontWork = !(
@@ -36,13 +39,15 @@ export function RecordAudioButton({
       }
 
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
+      const newMediaRecorder = new MediaRecorder(stream);
 
-      mediaRecorder.addEventListener('start', () => {
+      mediaRecorder.current = newMediaRecorder;
+
+      newMediaRecorder.addEventListener('start', () => {
         setIsRecordingAudio(true);
       });
 
-      mediaRecorder.start();
+      newMediaRecorder.start();
     } catch (e) {
       if (!(e instanceof Error)) return;
 

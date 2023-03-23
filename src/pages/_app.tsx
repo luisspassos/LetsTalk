@@ -29,6 +29,7 @@ import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerSc
 import RouteLoading from 'next-progress';
 import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
 import { TabToggleProvider } from 'contexts/TabToggleContext';
+import { AudioRecordingProvider } from 'contexts/AudioRecordingContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -55,12 +56,14 @@ function MyApp({ Component, pageProps }: AppProps) {
                                             <ToggleEmojiPickerProvider>
                                               <EmojiPickerScrollProvider>
                                                 <AudiosPlayingProvider>
-                                                  <RouteLoading
-                                                    options={{
-                                                      showSpinner: false,
-                                                    }}
-                                                  />
-                                                  <Component {...pageProps} />
+                                                  <AudioRecordingProvider>
+                                                    <RouteLoading
+                                                      options={{
+                                                        showSpinner: false,
+                                                      }}
+                                                    />
+                                                    <Component {...pageProps} />
+                                                  </AudioRecordingProvider>
                                                 </AudiosPlayingProvider>
                                               </EmojiPickerScrollProvider>
                                             </ToggleEmojiPickerProvider>
