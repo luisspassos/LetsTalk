@@ -1,3 +1,4 @@
+import { UseToastOptions } from '@chakra-ui/react';
 import { AiFillAudio } from 'react-icons/ai';
 import { SetIsRecordingAudio } from '../..';
 import { BaseWithTooltip } from '../../RightButtonBase/BaseWithTooltip';
@@ -46,15 +47,42 @@ export function RecordAudioButton({
       if (!(e instanceof Error)) return;
 
       const errors: Errors = {
-        MethodsDontWorkError: 'Use'
+        UnknownError: 'Ocorreu um erro desconhecido',
+        MethodsDontWorkError:
+          'Para gravar áudio, use navegadores mais recentes como Chrome e Firefox',
         NotAllowedError: 'A gravação de áudio não foi autorizada',
         default: {
           title: e.name,
-          message: e.message ?? 'Não foi possível iniciar a gravação de áudio',
+          message:
+            e.message === ''
+              ? 'Não foi possível iniciar a gravação de áudio'
+              : e.message,
         },
       };
 
       const error = errors[e.name] || errors.default;
+
+      const { toast } = await import('utils/Toasts/toast');
+      const defaultProps: UseToastOptions = {
+        status: 'error',
+      };
+
+      const hasNoTitle = typeof error === 'string';
+
+      if (hasNoTitle) {
+        toast({
+          ...defaultProps,
+          description: error,
+        });
+
+        return;
+      }
+
+      toast({
+        ...defaultProps,
+        title: error.title,
+        description: error.message,
+      });
     }
   }
 
