@@ -3,8 +3,12 @@ import {
   MutableRefObject,
   ReactNode,
   useContext,
+  useEffect,
   useRef,
 } from 'react';
+import { Event, iterateEvents } from 'utils/iterateEvents';
+
+type RecorderEvent = Event<MediaRecorderEventMap>;
 
 type MediaRecorderType = MediaRecorder | null;
 
@@ -24,6 +28,32 @@ export function AudioRecordingProvider({
   children,
 }: AudioRecordingProviderProps) {
   const mediaRecorder = useRef<MediaRecorderType>(null);
+  const audioBlob = useRef<Blob | null>(null);
+
+  useEffect(() => {
+    const recorder = mediaRecorder.current;
+
+    if (recorder === null) return;
+
+    function getAudioBlob(e: BlobEvent) {
+      audioBlob.current = e.data;
+
+      console.log(e.data);
+    }
+
+    const events: RecorderEvent[] = [
+      {
+        type: 'dataavailable',
+        func: getAudioBlob,
+      },
+    ];
+
+    iterateEvents('add', events, recorder);
+
+    return () => {
+      iterateEvents('remove', events, recorder);
+    };
+  }, []);
 
   return (
     <AudioRecordingContext.Provider value={{ mediaRecorder }}>

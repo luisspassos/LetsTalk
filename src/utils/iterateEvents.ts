@@ -1,5 +1,8 @@
 // you can get the EventMap by seeing on the targetElement.addEventListener
-type EventMapType = HTMLElementEventMap | WindowEventMap;
+type EventMapType =
+  | HTMLElementEventMap
+  | WindowEventMap
+  | MediaRecorderEventMap;
 
 type EventType<EventMap extends EventMapType> = keyof EventMap;
 

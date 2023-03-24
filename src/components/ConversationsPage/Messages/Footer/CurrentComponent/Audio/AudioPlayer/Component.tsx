@@ -2,8 +2,7 @@ import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react';
 import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
 import { useAudioRecording } from 'contexts/AudioRecordingContext';
 import { useInitializeAudio } from 'hooks/Audio/useInitializeAudio';
-import { useEffect, useMemo } from 'react';
-import { iterateEvents } from 'utils/iterateEvents';
+import { useMemo } from 'react';
 import { CurrentButton } from './CurrentButton';
 import { Duration } from './Duration';
 
@@ -18,11 +17,11 @@ export function Component(props: ComponentProps) {
 
   const { mediaRecorder } = useAudioRecording();
 
-  useEffect(() => {
-    const events = [{}];
-
-    iterateEvents();
-  }, []);
+  // useEffect(() => {
+  //   mediaRecorder.current?.addEventListener('dataavailable', (e) => {
+  //     console.log(e.data);
+  //   });
+  // }, [mediaRecorder]);
 
   useInitializeAudio('horse.wav', index);
 
