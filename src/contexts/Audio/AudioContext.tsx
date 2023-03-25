@@ -6,15 +6,11 @@ import {
   useContext,
   useState,
 } from 'react';
-import { Event as EventType, iterateEvents } from 'utils/iterateEvents';
-import { ExcludeFromTuple } from 'utils/types';
-
-type IterateEventsParams = ExcludeFromTuple<
-  Parameters<typeof iterateEvents>,
-  EventTarget
->;
-
-type IterateAudioEvents = (...params: IterateEventsParams) => void;
+import {
+  Event as EventType,
+  iterateEvents,
+  IterateEventsWithoutTarget,
+} from 'utils/iterateEvents';
 
 // you can get the EventMap by seeing on the targetElement.addEventListener
 type EventMap = HTMLMediaElementEventMap;
@@ -32,7 +28,7 @@ type AudioProviderProps = {
 type AudioContextType = {
   audio: Audio;
   setAudio: Dispatch<SetStateAction<Audio>>;
-  iterateAudioEvents: IterateAudioEvents;
+  iterateAudioEvents: IterateEventsWithoutTarget;
 };
 
 export const AudioContext = createContext({} as AudioContextType);
@@ -40,11 +36,11 @@ export const AudioContext = createContext({} as AudioContextType);
 export function AudioProvider({ children }: AudioProviderProps) {
   const [audio, setAudio] = useState<Audio>(null);
 
-  function iterateAudioEvents(...params: IterateEventsParams) {
+  const iterateAudioEvents: IterateEventsWithoutTarget = (...params) => {
     if (audio?.element === undefined) return;
 
     iterateEvents(...params, audio?.element);
-  }
+  };
 
   return (
     <AudioContext.Provider value={{ audio, setAudio, iterateAudioEvents }}>

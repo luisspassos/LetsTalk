@@ -1,6 +1,6 @@
 import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react';
 import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
-import { useAudioRecording } from 'contexts/AudioRecordingContext';
+import { useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
 import { useInitializeAudio } from 'hooks/Audio/useInitializeAudio';
 import { useMemo } from 'react';
 import { CurrentButton } from './CurrentButton';
@@ -15,15 +15,14 @@ export function Component(props: ComponentProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const index = useMemo(() => audiosPlaying.length, []);
 
-  const { mediaRecorder } = useAudioRecording();
+  const { audioBlob } = useAudioRecording();
+  const audioSrc = useMemo(() => {
+    if (audioBlob.current === null) return;
 
-  // useEffect(() => {
-  //   mediaRecorder.current?.addEventListener('dataavailable', (e) => {
-  //     console.log(e.data);
-  //   });
-  // }, [mediaRecorder]);
+    return URL.createObjectURL(audioBlob.current);
+  }, [audioBlob]);
 
-  useInitializeAudio('horse.wav', index);
+  useInitializeAudio(audioSrc ?? '', index);
 
   return (
     <Flex

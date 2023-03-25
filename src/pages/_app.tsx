@@ -29,7 +29,7 @@ import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerSc
 import RouteLoading from 'next-progress';
 import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
 import { TabToggleProvider } from 'contexts/TabToggleContext';
-import { AudioRecordingProvider } from 'contexts/AudioRecordingContext';
+import { AudioRecordingProvider } from 'contexts/Audio/AudioRecordingContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

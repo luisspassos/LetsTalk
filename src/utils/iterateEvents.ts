@@ -1,3 +1,5 @@
+import { ExcludeFromTuple } from './types';
+
 // you can get the EventMap by seeing on the targetElement.addEventListener
 type EventMapType =
   | HTMLElementEventMap
@@ -34,3 +36,12 @@ export function iterateEvents(
     target[`${method}EventListener`](type, func);
   }
 }
+
+type IterateEventsParamsWithoutTarget = ExcludeFromTuple<
+  Parameters<typeof iterateEvents>,
+  EventTarget
+>;
+
+export type IterateEventsWithoutTarget = (
+  ...params: IterateEventsParamsWithoutTarget
+) => void;

@@ -1,4 +1,4 @@
-import { useAudioRecording } from 'contexts/AudioRecordingContext';
+import { useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
 import { BsFillStopFill } from 'react-icons/bs';
 import { Props } from '.';
 import { BaseWithTooltip } from '../RightButtonBase/BaseWithTooltip';
@@ -9,16 +9,14 @@ export function StopButton({ setCurrentComponent }: StopButtonProps) {
   const { mediaRecorder } = useAudioRecording();
 
   function handleStopAudio() {
-    const recorder = mediaRecorder.current;
-
-    recorder?.addEventListener('stop', () => {
+    mediaRecorder.value?.addEventListener('stop', () => {
       setCurrentComponent('send');
     });
 
-    recorder?.stop();
+    mediaRecorder.value?.stop();
 
     function stopStream() {
-      const tracks = recorder?.stream.getTracks();
+      const tracks = mediaRecorder.value?.stream.getTracks();
 
       if (tracks === undefined) return;
 

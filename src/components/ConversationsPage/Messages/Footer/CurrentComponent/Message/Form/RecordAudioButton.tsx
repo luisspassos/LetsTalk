@@ -1,5 +1,5 @@
 import { UseToastOptions } from '@chakra-ui/react';
-import { useAudioRecording } from 'contexts/AudioRecordingContext';
+import { useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
 import { AiFillAudio } from 'react-icons/ai';
 import { SetIsRecordingAudio } from '../..';
 import { BaseWithTooltip } from '../../RightButtonBase/BaseWithTooltip';
@@ -41,7 +41,7 @@ export function RecordAudioButton({
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const newMediaRecorder = new MediaRecorder(stream);
 
-      mediaRecorder.current = newMediaRecorder;
+      mediaRecorder.set(newMediaRecorder);
 
       newMediaRecorder.addEventListener('start', () => {
         setIsRecordingAudio(true);
