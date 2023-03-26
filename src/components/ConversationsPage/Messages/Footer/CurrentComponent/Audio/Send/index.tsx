@@ -12,7 +12,10 @@ type SendProps = {
 export function Send({ setCurrentComponent, setIsRecordingAudio }: SendProps) {
   return (
     <Wrapper>
-      <DeleteButton />
+      <DeleteButton
+        setIsRecordingAudio={setIsRecordingAudio}
+        setCurrentComponent={setCurrentComponent}
+      />
       <AudioPlayer />
       <SendButton
         setIsRecordingAudio={setIsRecordingAudio}

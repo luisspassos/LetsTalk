@@ -10,7 +10,7 @@ const components = {
   paused: Paused,
 };
 
-type CurrentComponent = keyof typeof components;
+export type CurrentComponent = keyof typeof components;
 
 export type Props = {
   setCurrentComponent: Dispatch<SetStateAction<CurrentComponent>>;

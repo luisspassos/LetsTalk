@@ -5,13 +5,22 @@ import { Duration } from './Duration';
 import { StopButton } from '../StopButton';
 import { PauseButton } from './PauseButton';
 import { Props } from '..';
+import { SetIsRecordingAudio } from '../..';
 
-type RecordingProps = Props;
+type RecordingProps = {
+  setIsRecordingAudio: SetIsRecordingAudio;
+} & Props;
 
-export function Recording({ setCurrentComponent }: RecordingProps) {
+export function Recording({
+  setCurrentComponent,
+  setIsRecordingAudio,
+}: RecordingProps) {
   return (
     <Wrapper>
-      <DeleteButton />
+      <DeleteButton
+        setIsRecordingAudio={setIsRecordingAudio}
+        setCurrentComponent={setCurrentComponent}
+      />
       <Progress />
       <Duration />
       <PauseButton setCurrentComponent={setCurrentComponent} />
