@@ -1,5 +1,6 @@
 import { UseToastOptions } from '@chakra-ui/react';
 import { useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
+import { useEffect, useState } from 'react';
 import { AiFillAudio } from 'react-icons/ai';
 import { SetIsRecordingAudio } from '../..';
 import { BaseWithTooltip } from '../../RightButtonBase/BaseWithTooltip';
@@ -21,74 +22,89 @@ export function RecordAudioButton({
   setIsRecordingAudio,
 }: RecordAudioButtonProps) {
   const { mediaRecorder } = useAudioRecording();
+  const [isLoading, setIsLoading] = useState(false);
 
-  async function handleRecordAudio() {
-    try {
-      const methodsDontWork = !(
-        navigator.mediaDevices && navigator.mediaDevices.getUserMedia
-      );
+  useEffect(() => {
+    if (isLoading === false || mediaRecorder.value !== null) return;
 
-      if (methodsDontWork) {
-        const message =
-          'mediaDevices API or getUserMedia method is not supported in this browser.';
+    async function continueHandleRecordAudio() {
+      try {
+        const methodsDontWork = !(
+          navigator.mediaDevices && navigator.mediaDevices.getUserMedia
+        );
 
-        const e = new Error(message);
-        e.name = 'MethodsDontWorkError';
+        if (methodsDontWork) {
+          const message =
+            'mediaDevices API or getUserMedia method is not supported in this browser.';
 
-        throw e;
-      }
+          const e = new Error(message);
+          e.name = 'MethodsDontWorkError';
 
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const newMediaRecorder = new MediaRecorder(stream);
+          throw e;
+        }
 
-      mediaRecorder.set(newMediaRecorder);
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+        const newMediaRecorder = new MediaRecorder(stream);
 
-      newMediaRecorder.addEventListener('start', () => {
-        setIsRecordingAudio(true);
-      });
+        mediaRecorder.set(newMediaRecorder);
 
-      newMediaRecorder.start();
-    } catch (e) {
-      if (!(e instanceof Error)) return;
-
-      const errors: Errors = {
-        UnknownError: 'Ocorreu um erro desconhecido',
-        MethodsDontWorkError:
-          'Para gravar áudio, use navegadores mais recentes como Chrome e Firefox',
-        NotAllowedError: 'A gravação de áudio não foi autorizada',
-        default: {
-          title: e.name,
-          message:
-            e.message === ''
-              ? 'Não foi possível iniciar a gravação de áudio'
-              : e.message,
-        },
-      };
-
-      const error = errors[e.name] || errors.default;
-
-      const { toast } = await import('utils/Toasts/toast');
-      const defaultProps: UseToastOptions = {
-        status: 'error',
-      };
-
-      const hasNoTitle = typeof error === 'string';
-
-      if (hasNoTitle) {
-        toast({
-          ...defaultProps,
-          description: error,
+        newMediaRecorder.addEventListener('start', () => {
+          setIsRecordingAudio(true);
         });
 
-        return;
-      }
+        newMediaRecorder.start();
+      } catch (e) {
+        if (!(e instanceof Error)) return;
 
-      toast({
-        ...defaultProps,
-        title: error.title,
-        description: error.message,
-      });
+        const errors: Errors = {
+          UnknownError: 'Ocorreu um erro desconhecido',
+          MethodsDontWorkError:
+            'Para gravar áudio, use navegadores mais recentes como Chrome e Firefox',
+          NotAllowedError: 'A gravação de áudio não foi autorizada',
+          default: {
+            title: e.name,
+            message:
+              e.message === ''
+                ? 'Não foi possível iniciar a gravação de áudio'
+                : e.message,
+          },
+        };
+
+        const error = errors[e.name] || errors.default;
+
+        const { toast } = await import('utils/Toasts/toast');
+        const defaultProps: UseToastOptions = {
+          status: 'error',
+        };
+
+        const hasNoTitle = typeof error === 'string';
+
+        if (hasNoTitle) {
+          toast({
+            ...defaultProps,
+            description: error,
+          });
+
+          return;
+        }
+
+        toast({
+          ...defaultProps,
+          title: error.title,
+          description: error.message,
+        });
+      } finally {
+        setIsLoading(false);
+      }
     }
+
+    continueHandleRecordAudio();
+  }, [isLoading, mediaRecorder, setIsRecordingAudio]);
+
+  async function handleRecordAudio() {
+    setIsLoading(true);
   }
 
   return (
@@ -96,6 +112,7 @@ export function RecordAudioButton({
       onClick={handleRecordAudio}
       icon={AiFillAudio}
       label='Gravar áudio'
+      isLoading={isLoading}
     />
   );
 }

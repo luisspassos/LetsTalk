@@ -16,6 +16,7 @@ export function useStopAudio({
   function stopAudio() {
     mediaRecorder.value?.addEventListener('stop', () => {
       setCurrentComponent(componentToDisplay);
+      mediaRecorder.set(null);
     });
 
     mediaRecorder.value?.stop();
