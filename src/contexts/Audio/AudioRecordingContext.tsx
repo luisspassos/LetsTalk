@@ -1,13 +1,11 @@
 import {
   createContext,
   Dispatch,
-  MutableRefObject,
   ReactNode,
   SetStateAction,
   useCallback,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 import {
@@ -31,7 +29,7 @@ type AudioRecordingContextType = {
     value: MediaRecorderType;
     set: Dispatch<SetStateAction<MediaRecorderType>>;
   };
-  audioBlob: MutableRefObject<AudioBlob>;
+  audioBlob: AudioBlob;
   iterateRecorderEvents: IterateEventsWithoutTarget;
 };
 
@@ -43,7 +41,7 @@ export function AudioRecordingProvider({
   children,
 }: AudioRecordingProviderProps) {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorderType>(null);
-  const audioBlob = useRef<AudioBlob>(null);
+  const [audioBlob, setAudioBlob] = useState<AudioBlob>(null);
 
   const iterateRecorderEvents: IterateEventsWithoutTarget = useCallback(
     (...params) => {
@@ -59,7 +57,9 @@ export function AudioRecordingProvider({
     if (mediaRecorder === null) return;
 
     async function getAudioBlob(e: BlobEvent) {
-      audioBlob.current = e.data;
+      console.log(e.data);
+
+      setAudioBlob(e.data);
     }
 
     const events: RecorderEvent[] = [

@@ -16,13 +16,13 @@ export function Component(props: ComponentProps) {
   const index = useMemo(() => audiosPlaying.length, []);
 
   const { audioBlob } = useAudioRecording();
-  const audioSrc = useMemo(() => {
-    if (audioBlob.current === null) return;
 
-    return URL.createObjectURL(audioBlob.current);
-  }, [audioBlob]);
+  const audioSrc = useMemo(
+    () => (audioBlob === null ? '' : URL.createObjectURL(audioBlob)),
+    [audioBlob]
+  );
 
-  useInitializeAudio(audioSrc ?? '', index);
+  useInitializeAudio(audioSrc, index);
 
   return (
     <Flex

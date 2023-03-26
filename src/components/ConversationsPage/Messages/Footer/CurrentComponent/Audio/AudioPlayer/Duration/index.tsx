@@ -10,9 +10,9 @@ export function Duration() {
 
   useEffect(() => {
     async function getDuration() {
-      if (audioBlob.current === null) return;
+      if (audioBlob === null) return;
 
-      const newDuration = await getBlobDuration(audioBlob.current);
+      const newDuration = await getBlobDuration(audioBlob);
 
       setDuration(newDuration);
     }

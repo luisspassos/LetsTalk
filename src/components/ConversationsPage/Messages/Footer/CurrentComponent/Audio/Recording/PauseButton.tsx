@@ -1,3 +1,4 @@
+import { useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
 import { BsPauseCircle } from 'react-icons/bs';
 import { Props } from '..';
 import { IconButton } from '../IconButton';
@@ -5,8 +6,15 @@ import { IconButton } from '../IconButton';
 type PauseButtonProps = Props;
 
 export function PauseButton({ setCurrentComponent }: PauseButtonProps) {
+  const { mediaRecorder } = useAudioRecording();
+
   function handlePause() {
-    setCurrentComponent('paused');
+    mediaRecorder.value?.addEventListener('pause', () => {
+      mediaRecorder.value?.requestData();
+      setCurrentComponent('paused');
+    });
+
+    mediaRecorder.value?.pause();
   }
 
   return (
