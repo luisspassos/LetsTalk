@@ -11,12 +11,13 @@ export function useStopAudio({
   componentToDisplay,
   setCurrentComponent,
 }: Params) {
-  const { mediaRecorder } = useAudioRecording();
+  const { mediaRecorder, setAudioBlobs } = useAudioRecording();
 
   function stopAudio() {
     mediaRecorder.value?.addEventListener('stop', () => {
       setCurrentComponent(componentToDisplay);
       mediaRecorder.set(null);
+      setAudioBlobs([]);
     });
 
     mediaRecorder.value?.stop();

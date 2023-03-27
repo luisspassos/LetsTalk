@@ -30,6 +30,7 @@ type AudioRecordingContextType = {
     set: Dispatch<SetStateAction<MediaRecorderType>>;
   };
   audioBlob: AudioBlob;
+  setAudioBlobs: Dispatch<SetStateAction<Blob[]>>;
   iterateRecorderEvents: IterateEventsWithoutTarget;
 };
 
@@ -41,7 +42,13 @@ export function AudioRecordingProvider({
   children,
 }: AudioRecordingProviderProps) {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorderType>(null);
-  const [audioBlob, setAudioBlob] = useState<AudioBlob>(null);
+  const [audioBlobs, setAudioBlobs] = useState<Blob[]>([]);
+  const audioBlob =
+    !mediaRecorder?.mimeType || audioBlobs.length === 0
+      ? null
+      : new Blob(audioBlobs, {
+          type: mediaRecorder.mimeType,
+        });
 
   const iterateRecorderEvents: IterateEventsWithoutTarget = useCallback(
     (...params) => {
@@ -57,9 +64,7 @@ export function AudioRecordingProvider({
     if (mediaRecorder === null) return;
 
     async function getAudioBlob(e: BlobEvent) {
-      console.log(e.data);
-
-      setAudioBlob(e.data);
+      setAudioBlobs((prev) => [...prev, e.data]);
     }
 
     const events: RecorderEvent[] = [
@@ -80,7 +85,8 @@ export function AudioRecordingProvider({
     <AudioRecordingContext.Provider
       value={{
         mediaRecorder: { value: mediaRecorder, set: setMediaRecorder },
-        audioBlob,
+        audioBlob: audioBlob,
+        setAudioBlobs,
         iterateRecorderEvents,
       }}
     >
