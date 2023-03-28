@@ -1,13 +1,11 @@
 import {
   createContext,
   Dispatch,
-  MutableRefObject,
   ReactNode,
   SetStateAction,
   useCallback,
   useContext,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 import {
@@ -35,8 +33,10 @@ type AudioRecordingContextType = {
   };
   duration: {
     valueInSeconds: number;
-    set: Dispatch<SetStateAction<number>>;
-    start: MutableRefObject<DurationStart>;
+    durations: {
+      value: number[];
+      set: Dispatch<SetStateAction<number[]>>;
+    };
   };
   audioBlob: AudioBlob;
   setAudioBlobs: Dispatch<SetStateAction<Blob[]>>;
@@ -61,9 +61,12 @@ export function AudioRecordingProvider({
           type: mediaRecorder.mimeType,
         });
 
-  const [duration, setDuration] = useState(0); // in milliseconds;
-  const durationInSeconds = duration / 1000;
-  const durationStart = useRef<DurationStart>(null);
+  const [durations, setDurations] = useState([]); // in milliseconds;
+  const durationInSeconds = durations.reduce((acc, currentValue) => {
+    const seconds = currentValue / 1000;
+
+    return acc + seconds;
+  });
 
   const resetAudioRecording = () => {
     setAudioBlobs([]);
@@ -106,9 +109,8 @@ export function AudioRecordingProvider({
       value={{
         mediaRecorder: { value: mediaRecorder, set: setMediaRecorder },
         duration: {
+          durations: { value: durations, set: setDurations },
           valueInSeconds: durationInSeconds,
-          set: setDuration,
-          start: durationStart,
         },
         audioBlob: audioBlob,
         setAudioBlobs,

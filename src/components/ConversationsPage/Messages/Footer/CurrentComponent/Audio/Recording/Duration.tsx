@@ -8,21 +8,23 @@ export function Duration() {
   const formattedDuration = formatAudioTime(duration.valueInSeconds);
 
   useEffect(() => {
-    function setStart() {
-      const start = Date.now();
-      duration.start.current = start;
-    }
-
-    if (duration.start.current === null) {
-      setStart();
-    }
-
     let interval: NodeJS.Timer | null = null;
 
-    function increaseDuration() {
-      if (duration.start.current === null) return;
+    const currentIndex = duration.durations.value.length - 1;
 
-      duration.set(Date.now() - duration.start.current);
+    const start = Date.now();
+
+    function increaseDuration() {
+      const newDurations = [...duration.durations.value];
+
+      const newMilliseconds = Date.now() - start;
+
+      newDurations[currentIndex] = newMilliseconds;
+
+      set;
+      // if (duration.start.current === null) return;
+
+      // duration.set(Date.now() - duration.start.current);
     }
 
     interval = setInterval(increaseDuration, 1);
