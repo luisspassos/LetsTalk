@@ -2,7 +2,7 @@ import { IconButtonProps as ChakraIconButtonProps } from '@chakra-ui/react';
 import { Tooltip } from '../Tooltip';
 import { IconButton as IconButtonComponent } from 'components/IconButton';
 
-type IconButtonProps = {
+export type IconButtonProps = {
   icon: ChakraIconButtonProps['icon'];
 } & ChakraIconButtonProps;
 

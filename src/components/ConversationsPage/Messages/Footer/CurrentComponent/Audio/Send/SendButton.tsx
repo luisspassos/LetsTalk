@@ -1,18 +1,13 @@
-import { Props } from '..';
-import { SetIsRecordingAudio } from '../..';
+import { ResetRecording } from '.';
 import { Base } from '../../RightButtonBase/Send/Base';
 
 type SendButtonProps = {
-  setIsRecordingAudio: SetIsRecordingAudio;
-} & Props;
+  resetRecording: ResetRecording;
+};
 
-export function SendButton({
-  setCurrentComponent,
-  setIsRecordingAudio,
-}: SendButtonProps) {
+export function SendButton({ resetRecording }: SendButtonProps) {
   function handleSendAudio() {
-    setCurrentComponent('recording');
-    setIsRecordingAudio(false);
+    resetRecording();
   }
 
   return <Base label='Enviar áudio' onClick={handleSendAudio} />;
