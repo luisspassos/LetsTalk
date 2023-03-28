@@ -14,6 +14,8 @@ export function Duration() {
 
       const newDuration = await getBlobDuration(audioBlob);
 
+      console.log(newDuration);
+
       setDuration(newDuration);
     }
 

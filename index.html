@@ -8,19 +8,27 @@
   </head>
   <body></body>
   <script>
-    let time = 0;
-    let time2 = 0;
+    // let time = 0;
+    // let time2 = 0;
+
+    // setInterval(() => {
+    //   time += 1;
+
+    //   console.log(time / 1000);
+    // }, 1);
+
+    // setInterval(() => {
+    //   time2 += 1;
+
+    //   console.log(time2);
+    // }, 1000);
+
+    const start = Date.now();
 
     setInterval(() => {
-      time += 10;
+      const millis = Date.now() - start;
 
-      console.log(time / 100);
-    }, 100);
-
-    setInterval(() => {
-      time2 += 1;
-
-      console.log(time2);
-    }, 1000);
+      console.log(millis / 1000);
+    }, 1);
   </script>
 </html>
