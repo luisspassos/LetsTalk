@@ -6,6 +6,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import {
@@ -16,7 +17,7 @@ import {
 
 export type RecorderEvent = Event<MediaRecorderEventMap>;
 
-type DurationStart = number | null;
+type Durations = number[];
 
 type MediaRecorderType = MediaRecorder | null;
 
@@ -34,10 +35,11 @@ type AudioRecordingContextType = {
   duration: {
     valueInSeconds: number;
     durations: {
-      value: number[];
-      set: Dispatch<SetStateAction<number[]>>;
+      value: Durations;
+      set: Dispatch<SetStateAction<Durations>>;
     };
   };
+  setDurations: Dispatch<SetStateAction<Durations>>;
   audioBlob: AudioBlob;
   setAudioBlobs: Dispatch<SetStateAction<Blob[]>>;
   resetAudioRecording: () => void;
@@ -61,12 +63,13 @@ export function AudioRecordingProvider({
           type: mediaRecorder.mimeType,
         });
 
-  const [durations, setDurations] = useState([]); // in milliseconds;
+  const [durations, setDurations] = useState<Durations>([]); // in milliseconds;
+
   const durationInSeconds = durations.reduce((acc, currentValue) => {
     const seconds = currentValue / 1000;
 
     return acc + seconds;
-  });
+  }, 0);
 
   const resetAudioRecording = () => {
     setAudioBlobs([]);
@@ -109,11 +112,17 @@ export function AudioRecordingProvider({
       value={{
         mediaRecorder: { value: mediaRecorder, set: setMediaRecorder },
         duration: {
-          durations: { value: durations, set: setDurations },
+          durations: {
+            value: durations,
+            set: useMemo(() => {
+              setDurations;
+            }, []),
+          },
           valueInSeconds: durationInSeconds,
         },
         audioBlob: audioBlob,
         setAudioBlobs,
+        setDurations: setDurations,
         resetAudioRecording,
         iterateRecorderEvents,
       }}

@@ -4,37 +4,44 @@ import { useEffect } from 'react';
 import { formatAudioTime } from 'utils/formatAudioTime';
 
 export function Duration() {
-  const { duration } = useAudioRecording();
+  const { setDurations, duration } = useAudioRecording();
   const formattedDuration = formatAudioTime(duration.valueInSeconds);
 
+  console.log(duration.durations.value);
+
   useEffect(() => {
-    let interval: NodeJS.Timer | null = null;
-
-    const currentIndex = duration.durations.value.length - 1;
-
     const start = Date.now();
 
-    function increaseDuration() {
-      const newDurations = [...duration.durations.value];
+    setInterval(() => {
+      setDurations([Date.now() - start]);
+    }, 1);
+  }, [setDurations]);
 
-      const newMilliseconds = Date.now() - start;
+  // useEffect(() => {
+  //   let interval: NodeJS.Timer | null = null;
 
-      newDurations[currentIndex] = newMilliseconds;
+  //   newDurations.push(0);
 
-      set;
-      // if (duration.start.current === null) return;
+  //   const currentIndex = newDurations.length - 1;
 
-      // duration.set(Date.now() - duration.start.current);
-    }
+  //   const start = Date.now();
 
-    interval = setInterval(increaseDuration, 1);
+  //   function increaseDuration() {
+  //     const newMilliseconds = Date.now() - start;
 
-    return () => {
-      if (interval === null) return;
+  //     newDurations[currentIndex] = newMilliseconds;
 
-      clearInterval(interval);
-    };
-  }, [duration, duration.start]);
+  //     duration.durations.set(newDurations);
+  //   }
+
+  //   interval = setInterval(increaseDuration, 1);
+
+  //   return () => {
+  //     if (interval === null) return;
+
+  //     clearInterval(interval);
+  //   };
+  // }, [duration.durations, newDurations]);
 
   return (
     <Text as='time' flexShrink={0}>
