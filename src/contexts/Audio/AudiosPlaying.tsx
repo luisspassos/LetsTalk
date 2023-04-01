@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 
-type AudioPlaying = boolean | null;
+export type AudioPlaying = boolean | null;
 
 type AudiosPlayingProviderProps = {
   children: ReactNode;

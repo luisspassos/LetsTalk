@@ -1,15 +1,10 @@
-import { useCallback, useEffect } from 'react';
-import { useAudiosPlaying } from 'contexts/Audio/AudiosPlaying';
+import { useEffect } from 'react';
 import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import { IconButtonProps } from '@chakra-ui/react';
 import { PauseButton as PauseButtonComponent } from './Pause';
 import { PlayButton as PlayButtonComponent } from './Play';
 
-type SetIsPlaying = (isPlaying: boolean) => void;
-
-export type ButtonProps = {
-  setIsPlaying: SetIsPlaying;
-} & Omit<IconButtonProps, 'aria-label'>;
+export type ButtonProps = Omit<IconButtonProps, 'aria-label'>;
 
 type Button = (props: ButtonProps) => JSX.Element;
 
@@ -22,24 +17,7 @@ export function CurrentButton({
   PauseButton = PauseButtonComponent,
   PlayButton = PlayButtonComponent,
 }: CurrentButtonProps) {
-  const { audiosPlaying, setAudiosPlaying } = useAudiosPlaying();
-  const { audio, iterateAudioEvents } = useAudio();
-  const index = audio?.index ?? 0;
-
-  const isPlaying = audiosPlaying[index];
-
-  const setIsPlaying: SetIsPlaying = useCallback(
-    (isPlaying) => {
-      const newAudiosPlaying = audiosPlaying.map((_, i) => {
-        if (index !== i) return false;
-
-        return isPlaying;
-      });
-
-      setAudiosPlaying(newAudiosPlaying);
-    },
-    [audiosPlaying, index, setAudiosPlaying]
-  );
+  const { audio, iterateAudioEvents, isPlaying, setIsPlaying } = useAudio();
 
   // set audio events
   useEffect(() => {
@@ -64,16 +42,6 @@ export function CurrentButton({
   const play = audio?.element.play.bind(audio.element);
   const pause = audio?.element.pause.bind(audio.element);
 
-  useEffect(() => {
-    function stopAudioWhenComponentDisappaers() {
-      if (pause === undefined) return;
-
-      pause();
-    }
-
-    return stopAudioWhenComponentDisappaers;
-  }, [pause]);
-
   // handle play and pause
   useEffect(() => {
     // to prevent useEffect from executing below code on first render
@@ -90,7 +58,7 @@ export function CurrentButton({
     }
   }, [isPlaying, pause, play]);
 
-  if (isPlaying) return <PauseButton setIsPlaying={setIsPlaying} />;
+  if (isPlaying) return <PauseButton />;
 
-  return <PlayButton setIsPlaying={setIsPlaying} />;
+  return <PlayButton />;
 }
