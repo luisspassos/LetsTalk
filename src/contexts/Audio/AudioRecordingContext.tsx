@@ -58,7 +58,6 @@ export function AudioRecordingProvider({
         });
 
   const [durations, setDurations] = useState<Durations>([]); // in milliseconds;
-
   const durationInSeconds = durations.reduce((acc, currentValue) => {
     const seconds = currentValue / 1000;
 
@@ -68,6 +67,7 @@ export function AudioRecordingProvider({
   const resetAudioRecording = () => {
     setAudioBlobs([]);
     setMediaRecorder(null);
+    setDurations([]);
   };
 
   const iterateRecorderEvents: IterateEventsWithoutTarget = useCallback(

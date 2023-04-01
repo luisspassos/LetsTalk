@@ -13,7 +13,6 @@ export type TooltipProps = {
 export function Tooltip({ children, label, ariaLabel, ...rest }: TooltipProps) {
   return (
     <ChakraTooltip
-      // maxW='0'
       fontSize='15px'
       hasArrow
       placement='right'
