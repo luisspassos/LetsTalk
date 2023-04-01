@@ -6,7 +6,6 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import {
@@ -32,14 +31,9 @@ type AudioRecordingContextType = {
     value: MediaRecorderType;
     set: Dispatch<SetStateAction<MediaRecorderType>>;
   };
-  duration: {
-    valueInSeconds: number;
-    durations: {
-      value: Durations;
-      set: Dispatch<SetStateAction<Durations>>;
-    };
-  };
+  durations: Durations;
   setDurations: Dispatch<SetStateAction<Durations>>;
+  durationInSeconds: number;
   audioBlob: AudioBlob;
   setAudioBlobs: Dispatch<SetStateAction<Blob[]>>;
   resetAudioRecording: () => void;
@@ -111,18 +105,11 @@ export function AudioRecordingProvider({
     <AudioRecordingContext.Provider
       value={{
         mediaRecorder: { value: mediaRecorder, set: setMediaRecorder },
-        duration: {
-          durations: {
-            value: durations,
-            set: useMemo(() => {
-              setDurations;
-            }, []),
-          },
-          valueInSeconds: durationInSeconds,
-        },
+        durations: durations,
+        durationInSeconds: durationInSeconds,
+        setDurations: setDurations,
         audioBlob: audioBlob,
         setAudioBlobs,
-        setDurations: setDurations,
         resetAudioRecording,
         iterateRecorderEvents,
       }}

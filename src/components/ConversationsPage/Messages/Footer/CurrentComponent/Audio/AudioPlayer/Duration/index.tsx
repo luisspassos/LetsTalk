@@ -1,26 +1,9 @@
 import { useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
-import { useEffect, useState } from 'react';
 import { Slider } from './Slider';
 import { Text } from './Text';
-import getBlobDuration from 'get-blob-duration';
 
 export function Duration() {
-  const { audioBlob } = useAudioRecording();
-  const [duration, setDuration] = useState(0);
-
-  useEffect(() => {
-    async function getDuration() {
-      if (audioBlob === null) return;
-
-      const newDuration = await getBlobDuration(audioBlob);
-
-      console.log(newDuration);
-
-      setDuration(newDuration);
-    }
-
-    getDuration();
-  }, [audioBlob]);
+  const { durationInSeconds: duration } = useAudioRecording();
 
   return (
     <>
