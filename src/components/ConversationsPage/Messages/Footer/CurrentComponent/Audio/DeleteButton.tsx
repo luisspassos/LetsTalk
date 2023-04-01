@@ -1,6 +1,6 @@
 import { useColorModeValue } from '@chakra-ui/react';
 import { useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
-import { useStopAudio } from 'hooks/useStopAudio';
+import { useStopAudio } from 'hooks/Audio/useStopAudio';
 import { MdDelete } from 'react-icons/md';
 import { Props } from '.';
 import { SetIsRecordingAudio } from '..';

@@ -8,6 +8,13 @@ type SetTime =
   | Dispatch<SetStateAction<string>>
   | Dispatch<SetStateAction<Time>>;
 
+/**
+ * A React hook that gets the current time of the audio when it changes or when holding and dragging the slider
+ *
+ * @param setTime the setState of the current time to update the currentTime.
+ * @param audioDuration It's optional. If not provided, the duration will be taken from the audio.element.
+ */
+
 export function useCurrentTime(setTime: SetTime, audioDuration?: number) {
   const { audio, iterateAudioEvents } = useAudio();
   const { positionInPercentage, isHolding } = useAudioPositionInPercentage();

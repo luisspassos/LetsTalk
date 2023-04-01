@@ -1,4 +1,4 @@
-import { useStopAudio } from 'hooks/useStopAudio';
+import { useStopAudio } from 'hooks/Audio/useStopAudio';
 import { BsFillStopFill } from 'react-icons/bs';
 import { Props } from '.';
 import { BaseWithTooltip } from '../RightButtonBase/BaseWithTooltip';
