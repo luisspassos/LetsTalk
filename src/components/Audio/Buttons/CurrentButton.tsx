@@ -42,6 +42,17 @@ export function CurrentButton({
   const play = audio?.element.play.bind(audio.element);
   const pause = audio?.element.pause.bind(audio.element);
 
+  useEffect(() => {
+    function stopAudioWhenComponentLeavesScreen() {
+      if (isPlaying !== true || pause === undefined) return;
+
+      setIsPlaying(false);
+      pause();
+    }
+
+    return stopAudioWhenComponentLeavesScreen;
+  }, [isPlaying, pause, setIsPlaying]);
+
   // handle play and pause
   useEffect(() => {
     // to prevent useEffect from executing below code on first render

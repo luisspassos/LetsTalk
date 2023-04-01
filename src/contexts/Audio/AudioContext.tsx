@@ -5,7 +5,6 @@ import {
   SetStateAction,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from 'react';
 import {
@@ -61,16 +60,6 @@ export function AudioProvider({ children }: AudioProviderProps) {
     },
     [audiosPlaying, index, setAudiosPlaying]
   );
-
-  useEffect(() => {
-    return () => {
-      console.log(isPlaying);
-
-      if (isPlaying !== true) return;
-
-      setIsPlaying(false);
-    };
-  }, [isPlaying, setIsPlaying]);
 
   const iterateAudioEvents: IterateEventsWithoutTarget = (...params) => {
     if (audio?.element === undefined) return;
