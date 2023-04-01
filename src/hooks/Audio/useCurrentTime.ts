@@ -8,7 +8,7 @@ type SetTime =
   | Dispatch<SetStateAction<string>>
   | Dispatch<SetStateAction<Time>>;
 
-export function useCurrentTime(setTime: SetTime) {
+export function useCurrentTime(setTime: SetTime, audioDuration?: number) {
   const { audio, iterateAudioEvents } = useAudio();
   const { positionInPercentage, isHolding } = useAudioPositionInPercentage();
 
@@ -16,7 +16,8 @@ export function useCurrentTime(setTime: SetTime) {
     function setCurrentTimeWhenHolding() {
       if (audio === null || isHolding.current === false) return;
 
-      const duration = audio.element.duration;
+      const duration =
+        audioDuration !== undefined ? audioDuration : audio.element.duration;
 
       const newCurrentTime = duration - (positionInPercentage * duration) / 100;
       const formattedNewCurrentTime = formatAudioTime(newCurrentTime);
@@ -25,7 +26,7 @@ export function useCurrentTime(setTime: SetTime) {
     }
 
     setCurrentTimeWhenHolding();
-  }, [audio, isHolding, positionInPercentage, setTime]);
+  }, [audio, audioDuration, isHolding, positionInPercentage, setTime]);
 
   // set audio events
   useEffect(() => {

@@ -28,7 +28,7 @@ export function Text({ duration }: Props) {
     setTime(formattedDuration);
   }, [duration]);
 
-  useCurrentTime(setTime);
+  useCurrentTime(setTime, duration);
 
   if (time === null)
     return (
