@@ -37,8 +37,15 @@ export function Duration() {
   }, [newDurations, setDurations]);
 
   return (
-    <Text as='time' flexShrink={0} w='40px' textAlign='center'>
-      {formattedDuration}
+    <Text
+      as='time'
+      maxWidth='100%'
+      flexShrink={0}
+      noOfLines={1}
+      minW='40px'
+      textAlign='center'
+    >
+      9909099:00:00dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
     </Text>
   );
 }
