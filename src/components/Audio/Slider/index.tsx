@@ -5,13 +5,15 @@ import {
   useCallback,
   MouseEvent as ReactMouseEvent,
   useRef,
+  TouchEvent,
 } from 'react';
-import {} from './';
 import { iterateEvents, WindowEvent } from 'utils/iterateEvents';
 import { useAudio } from 'contexts/Audio/AudioContext';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useResetAnimationWhenAudioEnds } from 'hooks/Audio/useResetAnimationWhenAudioEnds';
 import { ProgressBar } from './ProgressBar';
+
+type MouseEvents = MouseEvent | ReactMouseEvent;
 
 export type SliderProps = {
   duration: HTMLAudioElement['duration'];
@@ -39,7 +41,7 @@ export function Slider({
     useAudioPositionInPercentage();
 
   const setAudioProgress = useCallback(
-    (e: MouseEvent | ReactMouseEvent) => {
+    (e: MouseEvents | TouchEvent) => {
       const slider = ref.current;
 
       if (slider === null) return;
@@ -58,7 +60,14 @@ export function Slider({
 
       const sliderOffSetLeft = getSliderOffsetLeft(slider);
 
-      const widthClicked = e.clientX - sliderOffSetLeft;
+      function isMouseEvent(e: any): e is MouseEvents {
+        return 'clientX' in e;
+      }
+
+      const clientX = isMouseEvent(e) ? e.clientX : e.touches[0].clientX;
+
+      const widthClicked = clientX - sliderOffSetLeft;
+
       const widthInPercentage = 100 - (widthClicked / slider.offsetWidth) * 100;
 
       const newPercentage = Math.max(Math.min(widthInPercentage, 100), 0); // the percentage will be between 0 and 100 for the animation to work correctly
@@ -113,6 +122,14 @@ export function Slider({
         type: 'mousemove',
         func: handleMoveAudioProgress,
       },
+      {
+        type: 'touchend',
+        func: handleSetAudio,
+      },
+      {
+        type: 'touchmove',
+        func: handleMoveAudioProgress,
+      },
     ];
 
     iterateEvents('add', events, window);
@@ -122,7 +139,7 @@ export function Slider({
     };
   }, [audio, duration, isHolding, positionInPercentage, setAudioProgress]);
 
-  function handleStartSettingAudio(e: ReactMouseEvent) {
+  function handleStartSettingAudio(e: ReactMouseEvent | TouchEvent) {
     isHolding.current = true;
 
     setAudioProgress(e);
@@ -143,6 +160,7 @@ export function Slider({
       cursor='pointer'
       ref={ref}
       onMouseDown={handleStartSettingAudio}
+      onTouchStart={handleStartSettingAudio}
     >
       <Flex align='center' h='100%' w={`calc(100% - ${height})`} pos='relative'>
         <ProgressBar
