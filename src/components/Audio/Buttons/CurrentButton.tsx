@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAudio, Event } from 'contexts/Audio/AudioContext';
 import { IconButtonProps } from '@chakra-ui/react';
 import { PauseButton as PauseButtonComponent } from './Pause';
@@ -7,9 +7,10 @@ import { PlayButton as PlayButtonComponent } from './Play';
 export type ButtonProps = Omit<IconButtonProps, 'aria-label'>;
 
 type Button = (props: ButtonProps) => JSX.Element;
+type PlayButton = typeof PlayButtonComponent;
 
 export type CurrentButtonProps = {
-  PlayButton?: Button;
+  PlayButton?: PlayButton;
   PauseButton?: Button;
 };
 
@@ -19,16 +20,26 @@ export function CurrentButton({
 }: CurrentButtonProps) {
   const { audio, iterateAudioEvents, isPlaying, setIsPlaying } = useAudio();
 
+  const isPuttingToPlay = useRef(false);
+
   // set audio events
   useEffect(() => {
     function resetAudio() {
       setIsPlaying(false);
     }
 
+    function a() {
+      isPuttingToPlay.current = false;
+    }
+
     const events: Event[] = [
       {
         type: 'ended',
         func: resetAudio,
+      },
+      {
+        type: 'play',
+        func: a,
       },
     ];
 
@@ -44,7 +55,14 @@ export function CurrentButton({
 
   useEffect(() => {
     function stopAudioWhenComponentLeavesScreen() {
-      if (isPlaying !== true || pause === undefined) return;
+      if (
+        isPlaying !== true ||
+        pause === undefined ||
+        isPuttingToPlay.current === true
+      )
+        return;
+
+      console.log(isPuttingToPlay.current);
 
       setIsPlaying(false);
       pause();
@@ -71,5 +89,5 @@ export function CurrentButton({
 
   if (isPlaying) return <PauseButton />;
 
-  return <PlayButton />;
+  return <PlayButton isPuttingToPlay={isPuttingToPlay} />;
 }
