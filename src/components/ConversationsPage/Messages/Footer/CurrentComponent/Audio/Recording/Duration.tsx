@@ -45,7 +45,7 @@ export function Duration() {
       minW='40px'
       textAlign='center'
     >
-      9909099:00:00dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+      1:00:00
     </Text>
   );
 }

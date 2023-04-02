@@ -15,10 +15,8 @@ export function Content() {
       minH='100vh'
       fontSize='calc(0.9375rem + 0.390625vw)'
       sx={{
-        '&': {
-          '@media (max-width: 50em)': {
-            flexDirection: 'column',
-          },
+        '@media (max-width: 50em)': {
+          flexDirection: 'column',
         },
       }}
     >

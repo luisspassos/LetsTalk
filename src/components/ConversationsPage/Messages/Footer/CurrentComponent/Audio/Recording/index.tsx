@@ -1,4 +1,4 @@
-import { Wrapper } from '../Wrapper';
+import { gap, Wrapper } from '../Wrapper';
 import { DeleteButton } from '../DeleteButton';
 import { Progress } from './Progress';
 import { Duration } from './Duration';
@@ -6,6 +6,7 @@ import { StopButton } from '../StopButton';
 import { PauseButton } from './PauseButton';
 import { Props } from '..';
 import { SetIsRecordingAudio } from '../..';
+import { Flex } from '@chakra-ui/react';
 
 type RecordingProps = {
   setIsRecordingAudio: SetIsRecordingAudio;
@@ -21,8 +22,10 @@ export function Recording({
         setIsRecordingAudio={setIsRecordingAudio}
         setCurrentComponent={setCurrentComponent}
       />
-      <Progress />
-      <Duration />
+      <Flex minW={0} align='center' gap={gap} justify='end'>
+        <Progress />
+        <Duration />
+      </Flex>
       <PauseButton setCurrentComponent={setCurrentComponent} />
       <StopButton setCurrentComponent={setCurrentComponent} />
     </Wrapper>

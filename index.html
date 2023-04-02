@@ -13,35 +13,33 @@
       }
 
       .container {
+        min-width: 0;
         max-width: 700px;
         height: 200px;
-        min-width: 0;
         display: flex;
         justify-content: end;
       }
 
-      .wrapper {
-        display: flex;
-        min-width: 0;
-        /* width: 100%; */
-      }
-
-      .wrapper p {
+      .container p {
         min-width: 40px;
-        flex-shrink: 0;
         text-align: center;
         overflow: hidden;
+        flex-shrink: 0;
         white-space: nowrap;
         text-overflow: ellipsis;
         max-width: 100%;
       }
 
       .example {
-        min-width: 0;
-        max-width: 200px;
-        width: 100%;
+        width: 200px;
         height: 100%;
         background-color: red;
+        container-type: inline-size;
+      }
+
+      .wrapper {
+        display: flex;
+        min-width: 0;
       }
     </style>
   </head>
@@ -50,9 +48,8 @@
       <button>Hello</button>
       <div class="wrapper">
         <div class="example"></div>
-        <p>19:00</p>
+        <p>20:000000000000000ssssssssssssssssssssssssssss</p>
       </div>
-
       <button>Hello</button>
     </div>
   </body>
