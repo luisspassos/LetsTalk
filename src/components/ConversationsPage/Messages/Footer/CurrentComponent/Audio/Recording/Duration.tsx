@@ -45,7 +45,7 @@ export function Duration() {
       minW='40px'
       textAlign='center'
     >
-      1:00:00
+      {formattedDuration}
     </Text>
   );
 }
