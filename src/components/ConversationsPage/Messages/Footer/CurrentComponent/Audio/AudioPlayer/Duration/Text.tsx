@@ -15,7 +15,7 @@ type Props = {
 export type Time = string | null;
 
 const styles: ChakraProps = {
-  minW: '2rem',
+  minW: '2.8125rem',
   flexShrink: 0,
 };
 
@@ -45,7 +45,7 @@ export function Text({ duration }: Props) {
       fontSize='0.9375rem'
       {...styles}
     >
-      10:00:00
+      {time}
     </ChakraText>
   );
 }
