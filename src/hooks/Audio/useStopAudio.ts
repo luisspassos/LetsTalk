@@ -11,7 +11,7 @@ export function useStopAudio({
   componentToDisplay,
   setCurrentComponent,
 }: Params) {
-  const { mediaRecorder } = useAudioRecording();
+  const { mediaRecorder, stopStream } = useAudioRecording();
 
   function stopAudio() {
     if (setCurrentComponent === undefined) return;
@@ -21,16 +21,6 @@ export function useStopAudio({
     });
 
     mediaRecorder.value?.stop();
-
-    function stopStream() {
-      const tracks = mediaRecorder.value?.stream.getTracks();
-
-      if (tracks === undefined) return;
-
-      for (const track of tracks) {
-        track.stop();
-      }
-    }
 
     stopStream();
   }

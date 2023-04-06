@@ -38,6 +38,7 @@ type AudioRecordingContextType = {
   setAudioBlobs: Dispatch<SetStateAction<Blob[]>>;
   resetAudioRecording: () => void;
   iterateRecorderEvents: IterateEventsWithoutTarget;
+  stopStream: () => void;
 };
 
 export const AudioRecordingContext = createContext(
@@ -48,6 +49,26 @@ export function AudioRecordingProvider({
   children,
 }: AudioRecordingProviderProps) {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorderType>(null);
+
+  const stopStream = useCallback(() => {
+    const tracks = mediaRecorder?.stream.getTracks();
+
+    if (tracks === undefined) return;
+
+    for (const track of tracks) {
+      track.stop();
+    }
+  }, [mediaRecorder?.stream]);
+
+  useEffect(() => {
+    function StopAudioWhenLeavingPage() {
+      if (mediaRecorder === null) return;
+
+      stopStream();
+    }
+
+    return StopAudioWhenLeavingPage;
+  }, [mediaRecorder, stopStream]);
 
   const [audioBlobs, setAudioBlobs] = useState<Blob[]>([]);
   const audioBlob =
@@ -112,6 +133,7 @@ export function AudioRecordingProvider({
         setAudioBlobs,
         resetAudioRecording,
         iterateRecorderEvents,
+        stopStream,
       }}
     >
       {children}

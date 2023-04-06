@@ -12,6 +12,7 @@ import nookies from 'nookies';
 import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
 import { Loading } from 'components/ConversationsPage/Loading';
 import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
+import { AudioRecordingProvider } from 'contexts/Audio/AudioRecordingContext';
 
 function createLocationchangeEvent() {
   let oldPushState = history.pushState;
@@ -127,9 +128,11 @@ export default function ConversationsPage() {
 
   return (
     <>
-      <AudiosPlayingProvider>
-        <Conversations />
-      </AudiosPlayingProvider>
+      <AudioRecordingProvider>
+        <AudiosPlayingProvider>
+          <Conversations />
+        </AudiosPlayingProvider>
+      </AudioRecordingProvider>
       <Loading />
     </>
   );

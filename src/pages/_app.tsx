@@ -28,7 +28,6 @@ import { PositionSelectedFromEmojiPickerCategoriesProvider } from '../contexts/E
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
 import RouteLoading from 'next-progress';
 import { TabToggleProvider } from 'contexts/TabToggleContext';
-import { AudioRecordingProvider } from 'contexts/Audio/AudioRecordingContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -54,14 +53,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                                           <CategoriesProvider>
                                             <ToggleEmojiPickerProvider>
                                               <EmojiPickerScrollProvider>
-                                                <AudioRecordingProvider>
-                                                  <RouteLoading
-                                                    options={{
-                                                      showSpinner: false,
-                                                    }}
-                                                  />
-                                                  <Component {...pageProps} />
-                                                </AudioRecordingProvider>
+                                                <RouteLoading
+                                                  options={{
+                                                    showSpinner: false,
+                                                  }}
+                                                />
+                                                <Component {...pageProps} />
                                               </EmojiPickerScrollProvider>
                                             </ToggleEmojiPickerProvider>
                                           </CategoriesProvider>
