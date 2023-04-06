@@ -11,6 +11,7 @@ import { useAuth } from '../contexts/AuthContext';
 import nookies from 'nookies';
 import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
 import { Loading } from 'components/ConversationsPage/Loading';
+import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
 
 function createLocationchangeEvent() {
   let oldPushState = history.pushState;
@@ -126,7 +127,9 @@ export default function ConversationsPage() {
 
   return (
     <>
-      <Conversations />
+      <AudiosPlayingProvider>
+        <Conversations />
+      </AudiosPlayingProvider>
       <Loading />
     </>
   );

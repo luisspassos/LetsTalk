@@ -27,7 +27,6 @@ import { SearchedEmojisProvider } from '../contexts/EmojiPicker/SearchedEmojiCon
 import { PositionSelectedFromEmojiPickerCategoriesProvider } from '../contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
 import { EmojiPickerScrollProvider } from '../contexts/EmojiPicker/EmojiPickerScrollContext';
 import RouteLoading from 'next-progress';
-import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
 import { TabToggleProvider } from 'contexts/TabToggleContext';
 import { AudioRecordingProvider } from 'contexts/Audio/AudioRecordingContext';
 
@@ -55,16 +54,14 @@ function MyApp({ Component, pageProps }: AppProps) {
                                           <CategoriesProvider>
                                             <ToggleEmojiPickerProvider>
                                               <EmojiPickerScrollProvider>
-                                                <AudiosPlayingProvider>
-                                                  <AudioRecordingProvider>
-                                                    <RouteLoading
-                                                      options={{
-                                                        showSpinner: false,
-                                                      }}
-                                                    />
-                                                    <Component {...pageProps} />
-                                                  </AudioRecordingProvider>
-                                                </AudiosPlayingProvider>
+                                                <AudioRecordingProvider>
+                                                  <RouteLoading
+                                                    options={{
+                                                      showSpinner: false,
+                                                    }}
+                                                  />
+                                                  <Component {...pageProps} />
+                                                </AudioRecordingProvider>
                                               </EmojiPickerScrollProvider>
                                             </ToggleEmojiPickerProvider>
                                           </CategoriesProvider>
