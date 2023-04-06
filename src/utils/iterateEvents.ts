@@ -45,3 +45,20 @@ type IterateEventsParamsWithoutTarget = ExcludeFromTuple<
 export type IterateEventsWithoutTarget = (
   ...params: IterateEventsParamsWithoutTarget
 ) => void;
+
+type Handler<EventMap extends EventMapType> = <E extends keyof EventMap>(
+  type: E,
+  func: (e: EventMap[E]) => void
+) => {
+  type: E;
+  func: (e: EventMap[E]) => void;
+};
+
+type Eveents<EventMap extends EventMapType> = Handler<EventMap>[];
+
+const handler: Handler<WindowEventMap> = (type, func) =>  {
+  return { type, func };
+}
+
+
+const events: Eveents<WindowEventMap> = [<handle]
