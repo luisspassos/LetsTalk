@@ -46,103 +46,53 @@ export type IterateEventsWithoutTarget = (
   ...params: IterateEventsParamsWithoutTarget
 ) => void;
 
-// function myAddEventHandler<E extends keyof WindowEventMap>(
-//   type: E,
-//   func: (e: WindowEventMap[E]) => any
-// ) {
-//   return '';
-// }
+type Base<T extends keyof WindowEventMap> = {
+  type: T;
+  func: (e: WindowEventMap[T]) => any;
+};
 
-// function myAddEventHandler<E extends keyof WindowEventMap>([{ func, type }]: {
-//   type: E;
-//   func: (e: WindowEventMap[E]) => any;
-// }[]) {
-//   return '';
-// }
+type MaybeTypes<Tuple extends [...Base<keyof WindowEventMap>[]]> = {
+  [Index in keyof Tuple]: Base<Tuple[Index]['type']>;
+} & { length: Tuple['length'] };
 
-// myAddEventHandler([{ type: 'afterprint', func: (e) => {} }, { type: 'abort', func: (e) => {} }]);
-
-// ///
-
-// type BothEqual<T extends Base<any>> =
-//   T['func'] extends WindowEventMap[T['type']]
-//     ? WindowEventMap[T['type']] extends T['func']
-//       ? T
-//       : never
-//     : never;
-
-// type Validation<
-//   Arr extends Array<unknown>,
-//   Result extends Array<unknown> = []
-// > = Arr extends []
-//   ? []
-//   : Arr extends [infer H extends Base<any>]
-//   ? [...Result, BothEqual<H>]
-//   : Arr extends [infer Head extends Base<any>, ...infer Tail]
-//   ? Validation<[...Tail], [...Result, BothEqual<Head>]>
-//   : Readonly<Result>;
-
-// type Result = Validation<
-//   [{ type: 'click'; func: TouchEvent }, { type: ''; func: MouseEvent }]
-// >;
-
-// ///
-
-// type Validation<
-//   Arr extends Array<unknown>,
-//   Result extends Array<unknown> = []
-// > = Arr extends []
-//   ? []
-//   : Arr extends [infer H extends Base<any>]
-//   ? [...Result, Base<H['type']>]
-//   : Arr extends [infer Head extends Base<any>, ...infer Tail]
-//   ? Validation<[...Tail], [...Result, Base<Head['type']>]>
-//   : Readonly<Result>;
-
-// type Result = Validation<
+// type Result = MaybeTypes<
 //   [
 //     {
 //       type: 'click';
-//       func: (e: TouchEvent) => {};
+//       func: (e) => {};
 //     }
 //   ]
 // >;
 
-// function f<T extends keyof WindowEventMap>(a: {
-//   type: T;
-//   func: (e: WindowEventMap[T]) => any;
-// }) {
-//   return a;
-// }
+function handler<Arr extends [...Base<keyof WindowEventMap>[]]>(
+  arr: MaybeTypes<Arr>
+) {}
 
-// const event = f({
-//   type: 'click',
-//   func: (e: TouchEvent) => {},
-// });
+handler([
+  {
+    type: 'afterprint',
+    func(e) {},
+  } as const,
+]);
 
-// type BothEqual<T extends Base<any>> = Parameters<
-//   T['func']
-// >[0] extends WindowEventMap[T['type']]
-//   ? WindowEventMap[T['type']] extends Parameters<T['func']>[0]
-//     ? T
-//     : never
-//   : never;
+const events: MaybeTypes<MediaRecorderEventMap, ['d']> = [
+  {
+    type: '',
+    func(e) {},
+  },
+];
 
-// type Base<K extends keyof WindowEventMap> = {
-//   type: K;
-//   func: (e: WindowEventMap[K]) => any;
-// };
+const event = 'd';
 
-// function handler<EventMap extends EventMapType>(
-//   type: keyof EventMapType,
-//   func: (e: EventMap[keyof EventMapType]) => void
-// ) {
-//   return { type, func };
-// }
+type Q<T> = T extends keyof WindowEventMap
+  ? {
+      type: T;
+      func: (e: WindowEventMap[T]) => any;
+    }
+  : string;
 
-// const events = [
-//   handler<WindowEventMap>('', (e) => {}),
-//   handler<WindowEventMap>('animationend', (e) => {}),
-// ];
+function hanlder<T>(a: Q<T>) {
+  return a;
+}
 
-// handler;
+hanlder('click' as 'click');
