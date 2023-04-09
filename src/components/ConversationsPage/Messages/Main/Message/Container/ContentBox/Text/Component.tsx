@@ -34,6 +34,11 @@ export function TextComponent({ children }: TextComponentProps) {
       py={['6px', '8px', '10px']}
       px={['11px', '13px', '15px']}
       fontSize={fontSize}
+      overflow='hidden'
+      display='-webkit-box'
+      sx={{
+        WebkitLineClamp: 20,
+      }}
     >
       {children}
     </Text>
