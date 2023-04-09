@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Form/Button';
 import { FormWrapper } from 'components/Form/FormWrapper';
-import { useAuth } from 'contexts/AuthContext';
+import { signInWithEmailAndPassword } from 'contexts/AuthContext';
 import router from 'next/router';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -57,8 +57,6 @@ export function Form() {
     resolver: yupResolver(signInFormSchema),
   });
 
-  const { signInWithEmailAndPassword } = useAuth();
-
   const handleSignIn = useMemo(
     () =>
       handleSubmit(async (data) => {
@@ -106,7 +104,7 @@ export function Form() {
           }
         }
       }),
-    [handleSubmit, setError, signInWithEmailAndPassword]
+    [handleSubmit, setError]
   );
 
   return (

@@ -1,4 +1,4 @@
-import { onAuthStateChanged, User, UserCredential } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import {
   createContext,
   ReactNode,
@@ -8,8 +8,8 @@ import {
   useState,
 } from 'react';
 import { auth } from '../services/firebase';
-import nookies from 'nookies';
 import { useRouter } from 'next/router';
+import nookies from 'nookies';
 
 export type AuthProviderProps = {
   children: ReactNode;
@@ -29,16 +29,11 @@ type AddUsernameInDbFunc = (username: string, uid: string) => Promise<void>;
 type AuthContextData = {
   getCurrentUserId: () => Promise<number>;
   signOut: () => Promise<void>;
-  signInWithEmailAndPassword: ({
-    email,
-    password,
-  }: SignInData) => Promise<UserCredential>;
   sendEmailToRecoverPassword: ({
     email,
   }: SendEmailToRecoverPasswordData) => Promise<void>;
   user: UserType;
   fillUser: (newUser: UserType) => void;
-  refreshToken: () => Promise<void>;
   addUsernameInDb: AddUsernameInDbFunc;
   isLoggedInWithGoogle: boolean;
 };
@@ -53,11 +48,6 @@ type SetUsernameParams = {
 };
 
 export const AuthContext = createContext({} as AuthContextData);
-
-export const refreshToken = async () => {
-  const user = auth.currentUser;
-  if (user) await user.getIdToken(true);
-};
 
 export const getCurrentUserId = async () => {
   const { db } = await import('../services/firebase');
@@ -111,8 +101,6 @@ export const setUsername = async ({ user, name }: SetUsernameParams) => {
   await updateProfile(user, {
     displayName: username,
   });
-
-  await refreshToken();
 
   return { username };
 };
@@ -168,14 +156,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
   }, []);
 
-  const router = useRouter();
-
   const fillUser = useCallback((newUser: UserType) => {
     setUser(newUser);
   }, []);
 
   const isLoggedInWithGoogle =
     user?.providerData[0].providerId === 'google.com';
+
+  const router = useRouter();
 
   const signOut = async () => {
     if (!user?.displayName) return;
@@ -214,6 +202,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   useEffect(() => {
+    const refreshToken = async () => {
+      const user = auth.currentUser;
+      if (user) await user.getIdToken(true);
+    };
+
     function tokenRefreshEvery1Hour() {
       const handle = setInterval(async () => {
         await refreshToken();
@@ -228,10 +221,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <AuthContext.Provider
       value={{
-        refreshToken,
         getCurrentUserId,
         fillUser,
-        signInWithEmailAndPassword,
         sendEmailToRecoverPassword,
         signOut,
         user,

@@ -1,5 +1,5 @@
 import { DangerousActionButtons } from 'components/Modal/DangerousAction/DangerousActionButtons';
-import { useAuth } from 'contexts/AuthContext';
+import { signInWithEmailAndPassword, useAuth } from 'contexts/AuthContext';
 import { useDeleteAccountModal } from 'contexts/Modal/DeleteAccountModalContext';
 import { useEffect, useMemo, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
@@ -29,7 +29,7 @@ export function Buttons({
   setError,
   isSubmitting,
 }: ButtonsProps) {
-  const { user, signInWithEmailAndPassword, isLoggedInWithGoogle } = useAuth();
+  const { user, isLoggedInWithGoogle } = useAuth();
   const { onClose } = useDeleteAccountModal();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -153,13 +153,7 @@ export function Buttons({
         });
       },
     }),
-    [
-      handleSubmit,
-      setError,
-      signInWithEmailAndPassword,
-      user?.email,
-      user?.displayName,
-    ]
+    [handleSubmit, setError, user?.displayName, user?.email]
   );
 
   const action = isLoggedInWithGoogle

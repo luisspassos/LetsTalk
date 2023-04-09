@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { refreshToken, useAuth } from 'contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 import { useRenameUsernameModal } from 'contexts/Modal/RenameUsernameModalContext';
 import { useRenamingName } from 'contexts/RenamingNameContext';
 import { regexs } from 'utils/regexs';
@@ -69,8 +69,6 @@ export function Form() {
           await updateProfile(acceptedUser, {
             displayName: newName,
           });
-
-          await refreshToken();
 
           fillUser({ ...user, displayName: newName });
 

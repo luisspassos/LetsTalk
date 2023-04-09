@@ -50,7 +50,6 @@ export function EditProfilePhoto() {
 
         const { updateProfile } = await import('firebase/auth');
         const { auth, storage } = await import('services/firebase');
-        const { refreshToken } = await import('contexts/AuthContext');
         const { ref, uploadBytes, getDownloadURL } = await import(
           'firebase/storage'
         );
@@ -75,8 +74,6 @@ export function EditProfilePhoto() {
         await updateProfile(currentUser, {
           photoURL: photoUrl,
         });
-
-        await refreshToken();
       } catch {
         const { unknownErrorToast } = await import(
           'utils/Toasts/unknownErrorToast'
