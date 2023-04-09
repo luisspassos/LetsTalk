@@ -32,7 +32,7 @@ export function Virtualizer({ search, Conversation }: VirtualizerProps) {
 
   return (
     <>
-      {newFetchedConversations.map(
+      {/* {newFetchedConversations.map(
         ({ lastMessage, name, photoURL, updatedAt, uid }, i) => (
           <Conversation
             key={uid}
@@ -46,7 +46,7 @@ export function Virtualizer({ search, Conversation }: VirtualizerProps) {
             }}
           />
         )
-      )}
+      )} */}
     </>
   );
 }
