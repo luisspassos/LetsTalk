@@ -51,7 +51,7 @@ export function LoginButtonWithGoogle() {
 
   return (
     <Button
-      h='48px'
+      h='auto'
       whiteSpace='initial'
       py='6px'
       borderWidth={2}

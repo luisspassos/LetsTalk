@@ -7,8 +7,6 @@ export async function redirectToUserIfNoUser(ctx: GetServerSidePropsContext) {
     const cookies = nookies.get(ctx);
     const user = await adminAuth.verifyIdToken(cookies.token);
 
-    console.log(cookies);
-
     if (user) {
       return {
         props: {},
