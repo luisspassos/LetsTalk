@@ -8,15 +8,13 @@ import {
   useState,
 } from 'react';
 import {
-  Event as EventType,
+  handler,
   iterateEvents,
   IterateEventsWithoutTarget,
 } from 'utils/iterateEvents';
 import { AudioPlaying, useAudiosPlaying } from './AudiosPlaying';
 
-// you can get the EventMap by seeing on the targetElement.addEventListener
-type EventMap = HTMLMediaElementEventMap;
-export type Event = EventType<EventMap>;
+export const h = handler<HTMLMediaElementEventMap>();
 
 type Audio = {
   index: number;

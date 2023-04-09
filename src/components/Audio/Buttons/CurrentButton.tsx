@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAudio, Event } from 'contexts/Audio/AudioContext';
+import { useAudio, h } from 'contexts/Audio/AudioContext';
 import { IconButtonProps } from '@chakra-ui/react';
 import { PauseButton as PauseButtonComponent } from './Pause';
 import { PlayButton as PlayButtonComponent } from './Play';
@@ -26,11 +26,11 @@ export function CurrentButton({
       setIsPlaying(false);
     }
 
-    const events: Event[] = [
-      {
+    const events = [
+      h({
         type: 'ended',
         func: resetAudio,
-      },
+      }),
     ];
 
     iterateAudioEvents('add', events);

@@ -1,9 +1,7 @@
-import {
-  RecorderEvent,
-  useAudioRecording,
-} from 'contexts/Audio/AudioRecordingContext';
+import { h, useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
 import { useEffect, useRef } from 'react';
 import { BsPlayCircle } from 'react-icons/bs';
+import { Event } from 'utils/iterateEvents';
 import { Props } from '..';
 import { IconButton } from '../IconButton';
 
@@ -11,7 +9,7 @@ type UnpauseButtonProps = Props;
 
 export function UnpauseButton({ setCurrentComponent }: UnpauseButtonProps) {
   const { mediaRecorder, iterateRecorderEvents } = useAudioRecording();
-  const events = useRef<RecorderEvent[]>([]);
+  const events = useRef<Event[]>([]);
 
   useEffect(() => {
     return () => {
@@ -25,10 +23,10 @@ export function UnpauseButton({ setCurrentComponent }: UnpauseButtonProps) {
     }
 
     events.current = [
-      {
+      h({
         type: 'resume',
         func: resume,
-      },
+      }),
     ];
 
     iterateRecorderEvents('add', events.current);

@@ -1,4 +1,4 @@
-import { useAudio, Event } from 'contexts/Audio/AudioContext';
+import { useAudio, h } from 'contexts/Audio/AudioContext';
 import { useState, useEffect } from 'react';
 
 export function useDuration() {
@@ -13,11 +13,11 @@ export function useDuration() {
       setDuration(audio.element.duration);
     }
 
-    const events: Event[] = [
-      {
+    const events = [
+      h({
         type: 'loadedmetadata',
         func: setAudioDuration,
-      },
+      }),
     ];
 
     iterateAudioEvents('add', events);

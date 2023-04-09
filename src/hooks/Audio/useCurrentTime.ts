@@ -1,5 +1,5 @@
 import { Time } from 'components/ConversationsPage/Messages/Footer/CurrentComponent/Audio/AudioPlayer/Duration/Text';
-import { useAudio, Event } from 'contexts/Audio/AudioContext';
+import { h, useAudio } from 'contexts/Audio/AudioContext';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { formatAudioTime } from 'utils/formatAudioTime';
@@ -45,11 +45,11 @@ export function useCurrentTime(setTime: SetTime, audioDuration?: number) {
       setTime(formattedTime);
     }
 
-    const events: Event[] = [
-      {
+    const events = [
+      h({
         type: 'timeupdate',
         func: getCurrentTime,
-      },
+      }),
     ];
 
     iterateAudioEvents('add', events);

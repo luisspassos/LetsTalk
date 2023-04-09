@@ -5,9 +5,9 @@ import {
   useCallback,
   MouseEvent as ReactMouseEvent,
   useRef,
-  TouchEvent,
+  TouchEvent as ReactTouchEvent,
 } from 'react';
-import { iterateEvents, WindowEvent } from 'utils/iterateEvents';
+import { handler, iterateEvents } from 'utils/iterateEvents';
 import { useAudio } from 'contexts/Audio/AudioContext';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useResetAnimationWhenAudioEnds } from 'hooks/Audio/useResetAnimationWhenAudioEnds';
@@ -41,7 +41,7 @@ export function Slider({
     useAudioPositionInPercentage();
 
   const setAudioProgress = useCallback(
-    (e: MouseEvents | TouchEvent) => {
+    (e: MouseEvents | TouchEvent | ReactTouchEvent) => {
       const slider = ref.current;
 
       if (slider === null) return;
@@ -105,7 +105,7 @@ export function Slider({
       activateAnimation();
     }
 
-    function handleMoveAudioProgress(e: MouseEvent) {
+    function handleMoveAudioProgress(e: MouseEvent | TouchEvent) {
       if (isHolding.current === false) return;
 
       e.preventDefault();
@@ -113,23 +113,25 @@ export function Slider({
       setAudioProgress(e);
     }
 
-    const events: WindowEvent[] = [
-      {
+    const h = handler<WindowEventMap>();
+
+    const events = [
+      h({
         type: 'mouseup',
         func: handleSetAudio,
-      },
-      {
+      }),
+      h({
         type: 'mousemove',
         func: handleMoveAudioProgress,
-      },
-      {
+      }),
+      h({
         type: 'touchend',
         func: handleSetAudio,
-      },
-      {
+      }),
+      h({
         type: 'touchmove',
         func: handleMoveAudioProgress,
-      },
+      }),
     ];
 
     iterateEvents('add', events, window);
@@ -139,7 +141,7 @@ export function Slider({
     };
   }, [audio, duration, isHolding, positionInPercentage, setAudioProgress]);
 
-  function handleStartSettingAudio(e: ReactMouseEvent | TouchEvent) {
+  function handleStartSettingAudio(e: ReactMouseEvent | ReactTouchEvent) {
     isHolding.current = true;
 
     setAudioProgress(e);

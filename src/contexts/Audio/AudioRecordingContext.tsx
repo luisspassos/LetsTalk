@@ -9,12 +9,10 @@ import {
   useState,
 } from 'react';
 import {
-  Event,
+  handler,
   iterateEvents,
   IterateEventsWithoutTarget,
 } from 'utils/iterateEvents';
-
-export type RecorderEvent = Event<MediaRecorderEventMap>;
 
 type Durations = number[];
 
@@ -40,6 +38,8 @@ type AudioRecordingContextType = {
   iterateRecorderEvents: IterateEventsWithoutTarget;
   stopStream: () => void;
 };
+
+export const h = handler<MediaRecorderEventMap>();
 
 export const AudioRecordingContext = createContext(
   {} as AudioRecordingContextType
@@ -108,11 +108,13 @@ export function AudioRecordingProvider({
       setAudioBlobs((prev) => [...prev, e.data]);
     }
 
-    const events: RecorderEvent[] = [
-      {
+    const h = handler<MediaRecorderEventMap>();
+
+    const events = [
+      h({
         type: 'dataavailable',
         func: getAudioBlob,
-      },
+      }),
     ];
 
     iterateRecorderEvents('add', events);

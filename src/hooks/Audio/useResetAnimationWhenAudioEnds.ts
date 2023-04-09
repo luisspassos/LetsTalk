@@ -1,4 +1,4 @@
-import { useAudio, Event as AudioEvent } from 'contexts/Audio/AudioContext';
+import { h, useAudio } from 'contexts/Audio/AudioContext';
 import {
   useAudioPositionInPercentage,
   initialValue as percentageInitialValue,
@@ -12,15 +12,13 @@ import {
   useRef,
   useState,
 } from 'react';
-import { iterateEvents, Event as EventType } from 'utils/iterateEvents';
+import { iterateEvents, handler } from 'utils/iterateEvents';
 
 type UseResetAnimationWhenAudioEndsParams = {
   animationDuration: MutableRefObject<number>;
   audioDuration: HTMLAudioElement['duration'];
   setResetAnimation: Dispatch<SetStateAction<boolean>>;
 };
-
-type DocumentEvent = EventType<DocumentEventMap>;
 
 export function useResetAnimationWhenAudioEnds({
   animationDuration,
@@ -83,11 +81,13 @@ export function useResetAnimationWhenAudioEnds({
       pageIsBlurredAndAudioEnded.current = false;
     }
 
-    const events: DocumentEvent[] = [
-      {
+    const h = handler<DocumentEventMap>();
+
+    const events = [
+      h({
         type: 'visibilitychange',
         func: resetAnimationWhenReturningToPage,
-      },
+      }),
     ];
 
     iterateEvents('add', events, document);
@@ -113,11 +113,11 @@ export function useResetAnimationWhenAudioEnds({
       restartAnimation();
     }
 
-    const events: AudioEvent[] = [
-      {
+    const events = [
+      h({
         type: 'ended',
         func: restartAnimationWhenAudioEnds,
-      },
+      }),
     ];
 
     iterateAudioEvents('add', events);
