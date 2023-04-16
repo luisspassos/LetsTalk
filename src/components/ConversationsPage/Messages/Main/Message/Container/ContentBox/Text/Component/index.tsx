@@ -57,24 +57,7 @@ export function TextComponent({ children }: TextComponentProps) {
       px={['11px', '13px', '15px']}
     >
       <Text fontFamily={fontFamily} noOfLines={noOfLines} ref={ref}>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ullam
-        eveniet ex culpa soluta optio reprehenderit velit quis rerum sed totam
-        nesciunt nemo, id beatae blanditiis maxime consequatur amet suscipit.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ullam
-        eveniet ex culpa soluta optio reprehenderit velit quis rerum sed totam
-        nesciunt nemo, id beatae blanditiis maxime consequatur amet suscipit.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ullam
-        eveniet ex culpa soluta optio reprehenderit velit quis rerum sed totam
-        nesciunt nemo, id beatae blanditiis maxime consequatur amet suscipit.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ullam
-        eveniet ex culpa soluta optio reprehenderit velit quis rerum sed totam
-        nesciunt nemo, id beatae blanditiis maxime consequatur amet suscipit.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ullam
-        eveniet ex culpa soluta optio reprehenderit velit quis rerum sed totam
-        nesciunt nemo, id beatae blanditiis maxime consequatur amet suscipit.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ullam
-        eveniet ex culpa soluta optio reprehenderit velit quis rerum sed totam
-        nesciunt nemo, id beatae blanditiis maxime consequatur amet suscipit.
+        {children}
       </Text>
       {readMore && <ReadMoreButton setNoOfLines={setNoOfLines} />}
     </Box>
