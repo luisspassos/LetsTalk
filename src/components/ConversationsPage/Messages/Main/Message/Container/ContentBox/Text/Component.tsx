@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import getEmojiRegex from 'emoji-regex';
 import { fontFamily } from 'components/ConversationsPage/Messages/Footer/CurrentComponent/Message/Form/MessageInput';
@@ -29,18 +29,22 @@ export function TextComponent({ children }: TextComponentProps) {
   const fontSize = getFontSize();
 
   return (
-    <Text
-      fontFamily={fontFamily}
+    <Box
+      bgColor='inherit'
       py={['6px', '8px', '10px']}
       px={['11px', '13px', '15px']}
-      fontSize={fontSize}
-      overflow='hidden'
-      display='-webkit-box'
-      sx={{
-        WebkitLineClamp: 20,
-      }}
     >
-      {children}
-    </Text>
+      <Text
+        fontFamily={fontFamily}
+        fontSize={fontSize}
+        noOfLines={18}
+        bgColor='inherit'
+      >
+        {children}
+      </Text>
+      <Button variant='unstyled' fontWeight='normal' color='blue.100'>
+        Read more
+      </Button>
+    </Box>
   );
 }
