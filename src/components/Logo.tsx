@@ -30,7 +30,7 @@ export function Logo() {
           data-name="Let's Talk"
           transform='translate(0 54)'
           fontSize='51'
-          fontFamily='Poppins-Bold, Poppins'
+          fontFamily='Poppins-Bold, Poppins, sans-serif'
           fontWeight='700'
           letterSpacing='0.04em'
         >

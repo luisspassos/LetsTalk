@@ -137,6 +137,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     function handleLoggedInUser(user: User | null) {
+      console.log(user);
+
       if (user === null) return;
 
       const falsyValueAcceptableInAvatar = undefined;
