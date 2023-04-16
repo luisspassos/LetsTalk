@@ -27,7 +27,7 @@ export function MessageInput({ setMessage, message }: MessageInputProps) {
       value={message}
       placeholder='Mensagem'
       rows={1}
-      fontFamily={fontFamily}
+      fontFamily='message'
       py='10.5px'
       scrollPadding='10.5px'
       borderColor={useColorModeValue('blackAlpha.500', undefined)}

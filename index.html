@@ -11,25 +11,45 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    } 
+    }
 
-    #paragraph {
-      width: 300px;
+    #page {
+      display: grid;
+      width: 100%;
+      height: 200px;
+      grid-template:
+        [header-left] 'head head' 30px [header-right]
+        [main-left] 'head  main' 1fr [main-right]
+        [footer-left] 'nav  foot' 30px [footer-right]
+        / 120px 1fr;
+    }
+
+    header {
+      background-color: lime;
+      grid-area: head;
+    }
+
+    nav {
+      background-color: lightblue;
+      grid-area: nav;
+    }
+
+    main {
+      background-color: yellow;
+      grid-area: main;
+    }
+
+    footer {
+      background-color: red;
+      grid-area: foot;
     }
   </style>
   <body>
-    <p id="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
-    <script>
-      const html = document
-        .getElementById('paragraph')
-        .innerHTML.split("\n");
-      console.log(html[html.length - 1]);
-    </script>
+    <section id="page">
+      <header>Header</header>
+      <nav>Navigation</nav>
+      <main>Main area</main>
+      <footer>Footer</footer>
+    </section>
   </body>
 </html>
