@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from 'contexts/AuthContext';
+import { getNameAndId, useAuth } from 'contexts/AuthContext';
 import { useRenameUsernameModal } from 'contexts/Modal/RenameUsernameModalContext';
 import { useRenamingName } from 'contexts/RenamingNameContext';
 import { regexs } from 'utils/regexs';
@@ -50,7 +50,7 @@ export function Form() {
           const { updateProfile } = await import('firebase/auth');
           const { db } = await import('services/firebase');
 
-          const [, id] = user.displayName.split('#');
+          const { id } = getNameAndId(user.displayName);
 
           const newName = `${name}#${id}`;
 

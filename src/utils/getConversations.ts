@@ -1,3 +1,4 @@
+import { getNameAndId } from 'contexts/AuthContext';
 import {
   collection,
   doc,
@@ -79,7 +80,7 @@ export async function getConversations(currentUserId: string) {
     ({ displayName, uid, photoURL }, i) => ({
       uid,
       photoURL: photoURL ?? null,
-      name: displayName?.split('#')[0],
+      name: getNameAndId(displayName ?? '')['name'],
       username: displayName,
       updatedAt: contactInformation[i].updatedAt,
       lastMessage: lastMessages[i],

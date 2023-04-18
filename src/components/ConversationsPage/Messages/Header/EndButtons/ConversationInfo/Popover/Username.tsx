@@ -1,13 +1,13 @@
 import { HStack, Text } from '@chakra-ui/react';
+import { getNameAndId } from 'contexts/AuthContext';
 import { useConversations } from 'contexts/ConversationsContext';
 
 export function Username() {
   const { currentConversation } = useConversations();
 
-  const contact = currentConversation.data?.username?.split('#');
+  if (currentConversation.data?.username === undefined) return null;
 
-  const name = contact?.[0];
-  const id = contact?.[1];
+  const { name, id } = getNameAndId(currentConversation.data.username);
 
   return (
     <HStack>

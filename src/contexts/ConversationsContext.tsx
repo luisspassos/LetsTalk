@@ -54,7 +54,7 @@ export function ConversationsProvider({
 
   useEffect(() => {
     async function fillConversations() {
-      if (!user?.uid) return;
+      if (user?.uid === undefined) return;
 
       const conversations = await getConversations(user?.uid);
 
@@ -62,7 +62,7 @@ export function ConversationsProvider({
     }
 
     fillConversations();
-  }, [user?.uid]);
+  }, [user, user?.displayName, user?.uid]);
 
   const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
 

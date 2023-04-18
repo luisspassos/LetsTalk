@@ -8,8 +8,8 @@ import {
   useState,
 } from 'react';
 import { auth } from '../services/firebase';
-import { useRouter } from 'next/router';
 import nookies from 'nookies';
+import { useRouter } from 'next/router';
 
 export type AuthProviderProps = {
   children: ReactNode;
@@ -27,14 +27,9 @@ type SendEmailToRecoverPasswordData = {
 type AddUsernameInDbFunc = (username: string, uid: string) => Promise<void>;
 
 type AuthContextData = {
-  getCurrentUserId: () => Promise<number>;
   signOut: () => Promise<void>;
-  sendEmailToRecoverPassword: ({
-    email,
-  }: SendEmailToRecoverPasswordData) => Promise<void>;
   user: UserType;
   fillUser: (newUser: UserType) => void;
-  addUsernameInDb: AddUsernameInDbFunc;
   isLoggedInWithGoogle: boolean;
 };
 
@@ -47,7 +42,18 @@ type SetUsernameParams = {
   name: string;
 };
 
+type GetNameAndId = (username: string) => {
+  name: string;
+  id: string | undefined;
+};
+
 export const AuthContext = createContext({} as AuthContextData);
+
+export const getNameAndId: GetNameAndId = (username) => {
+  const [name, id] = username.split('#');
+
+  return { name, id };
+};
 
 export const getCurrentUserId = async () => {
   const { db } = await import('../services/firebase');
@@ -135,11 +141,18 @@ export const signInWithEmailAndPassword = async ({
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
 
+  const router = useRouter();
+
   useEffect(() => {
     function handleLoggedInUser(user: User | null) {
-      console.log(user);
+      if (user === null) {
+        if (router.pathname !== '/') {
+          router.push('/');
+          return;
+        }
 
-      if (user === null) return;
+        return;
+      }
 
       const falsyValueAcceptableInAvatar = undefined;
 
@@ -156,7 +169,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [router]);
 
   const fillUser = useCallback((newUser: UserType) => {
     setUser(newUser);
@@ -164,8 +177,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const isLoggedInWithGoogle =
     user?.providerData[0].providerId === 'google.com';
-
-  const router = useRouter();
 
   const signOut = async () => {
     if (!user?.displayName) return;
@@ -180,7 +191,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     });
 
     await signOut(auth);
-    await router.push('/');
+    // await router.push('/');
 
     setUser(null);
   };
@@ -223,12 +234,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <AuthContext.Provider
       value={{
-        getCurrentUserId,
         fillUser,
-        sendEmailToRecoverPassword,
         signOut,
         user,
-        addUsernameInDb,
         isLoggedInWithGoogle,
       }}
     >

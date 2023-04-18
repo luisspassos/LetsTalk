@@ -1,15 +1,14 @@
 import { Stack } from '@chakra-ui/react';
-import { useAuth } from 'contexts/AuthContext';
+import { getNameAndId, useAuth } from 'contexts/AuthContext';
 import { Id } from './Id';
 import { Name } from './Name';
 
 export function Username() {
   const { user } = useAuth();
 
-  const username = user?.displayName?.split('#');
+  if (user?.displayName === undefined || user.displayName === null) return null;
 
-  const name = username?.[0] ?? '';
-  const id = username?.[1] ?? '';
+  const { name, id } = getNameAndId(user.displayName);
 
   return (
     <Stack minW={0} spacing={0}>

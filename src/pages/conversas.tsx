@@ -2,13 +2,14 @@ import { Conversations } from 'components/ConversationsPage';
 import { useDeleteAccountModal } from 'contexts/Modal/DeleteAccountModalContext';
 import { useOnlineAtEvents } from 'contexts/OnlineAtEventsContext';
 import { useRenamingName } from 'contexts/RenamingNameContext';
-import { onSnapshot, doc } from 'firebase/firestore';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { db } from 'services/firebase';
-import { useAuth } from '../contexts/AuthContext';
-import nookies from 'nookies';
+import {
+  addUsernameInDb,
+  getNameAndId,
+  useAuth,
+} from '../contexts/AuthContext';
 import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
 import { Loading } from 'components/ConversationsPage/Loading';
 import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
@@ -39,7 +40,7 @@ function createLocationchangeEvent() {
 }
 
 export default function ConversationsPage() {
-  const { fillUser, addUsernameInDb, user } = useAuth();
+  const { fillUser, user } = useAuth();
   const { takeUserOffline, takeUserOnline, setUserOnlineAt, clearAllEvents } =
     useOnlineAtEvents();
   const router = useRouter();
@@ -48,67 +49,65 @@ export default function ConversationsPage() {
 
   const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
 
-  useEffect(() => {
-    function checkIfUserAccHasBeenDeleted() {
-      if (!user) return;
+  // useEffect(() => {
+  //   function checkIfUserAccHasBeenDeleted() {
+  //     if (!user) return;
 
-      let ignoreInitialOnSnapshot = true;
+  //     let ignoreInitialOnSnapshot = true;
 
-      if (!user.displayName) return;
+  //     if (!user.displayName) return;
 
-      const unsub = onSnapshot(
-        doc(db, 'users', user.displayName),
-        async (doc) => {
-          if (ignoreInitialOnSnapshot) {
-            ignoreInitialOnSnapshot = false;
-            return;
-          }
-          if (!doc.exists() && !renamingName) {
-            nookies.destroy({}, 'token');
-            clearAllEvents();
-            await router.push('/');
-            fillUser(null);
-            closeDeleteAccModal();
-            router.push('/conversations');
-          }
-        }
-      );
+  //     const unsub = onSnapshot(
+  //       doc(db, 'users', user.displayName),
+  //       async (doc) => {
+  //         if (ignoreInitialOnSnapshot) {
+  //           ignoreInitialOnSnapshot = false;
+  //           return;
+  //         }
+  //         if (!doc.exists() && !renamingName) {
+  //           nookies.destroy({}, 'token');
+  //           clearAllEvents();
+  //           await router.push('/');
+  //           fillUser(null);
+  //           closeDeleteAccModal();
+  //           router.push('/conversations');
+  //         }
+  //       }
+  //     );
 
-      return unsub;
-    }
+  //     return unsub;
+  //   }
 
-    const unsub = checkIfUserAccHasBeenDeleted();
+  //   const unsub = checkIfUserAccHasBeenDeleted();
 
-    return () => {
-      unsub && unsub();
-    };
-  }, [
-    router,
-    clearAllEvents,
-    fillUser,
-    closeDeleteAccModal,
-    renamingName,
-    user,
-  ]);
+  //   return () => {
+  //     unsub && unsub();
+  //   };
+  // }, [
+  //   router,
+  //   clearAllEvents,
+  //   fillUser,
+  //   closeDeleteAccModal,
+  //   renamingName,
+  //   user,
+  // ]);
 
   useEffect(() => {
     (async () => {
       // it will only add the user in the db when starting the application
 
       if (!ignoreAddingUserInDb && user?.displayName) {
+        const { id: userId } = getNameAndId(user.displayName);
+
+        if (userId === undefined) return;
+
         await addUsernameInDb(user.displayName, user.uid);
         setIgnoreAddingUserInDb(true);
       }
 
       setUserOnlineAt('now');
     })();
-  }, [
-    addUsernameInDb,
-    ignoreAddingUserInDb,
-    setUserOnlineAt,
-    user?.displayName,
-    user?.uid,
-  ]);
+  }, [ignoreAddingUserInDb, setUserOnlineAt, user?.displayName, user?.uid]);
 
   useEffect(() => {
     createLocationchangeEvent();
