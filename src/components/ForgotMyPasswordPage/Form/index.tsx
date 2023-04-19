@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormWrapper } from 'components/Form/FormWrapper';
-import { useAuth } from 'contexts/AuthContext';
+import { sendEmailToRecoverPassword } from 'contexts/AuthContext';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'utils/Toasts/toast';
@@ -45,8 +45,6 @@ export function Form() {
     resolver: yupResolver(emailFormSchema),
   });
 
-  const { sendEmailToRecoverPassword } = useAuth();
-
   const handleSendEmail = useMemo(
     () =>
       handleSubmit(async (data) => {
@@ -84,7 +82,7 @@ export function Form() {
           }
         }
       }),
-    [handleSubmit, sendEmailToRecoverPassword, setError]
+    [handleSubmit, setError]
   );
 
   return (

@@ -19,10 +19,12 @@ type TakeUserOfflineOrOnline = {
   func: () => void;
 };
 
+type SetUserOnlineAt = (onlineAt?: OnlineAt) => Promise<void>;
+
 type OnlineAtEventsContextType = {
   takeUserOffline: TakeUserOfflineOrOnline;
   takeUserOnline: TakeUserOfflineOrOnline;
-  setUserOnlineAt: (onlineAt: OnlineAt) => Promise<void>;
+  setUserOnlineAt: SetUserOnlineAt;
   clearAllEvents: () => void;
 };
 
@@ -35,8 +37,8 @@ export function OnlineAtEventsProvider({
 }: OnlineAtEventsProviderProps) {
   const { user } = useAuth();
 
-  const setUserOnlineAt = useCallback(
-    async (onlineAt: OnlineAt) => {
+  const setUserOnlineAt: SetUserOnlineAt = useCallback(
+    async (onlineAt = Date.now()) => {
       if (!user?.displayName) return;
 
       const userRef = doc(db, 'users', user.displayName);

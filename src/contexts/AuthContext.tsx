@@ -10,6 +10,7 @@ import {
 import { auth } from '../services/firebase';
 import nookies from 'nookies';
 import { useRouter } from 'next/router';
+import { useOnlineAtEvents } from './OnlineAtEventsContext';
 
 export type AuthProviderProps = {
   children: ReactNode;
@@ -34,7 +35,10 @@ type AuthContextData = {
 };
 
 export type UserType =
-  | ({ photoURL: string | undefined } & Omit<User, 'photoURL'>)
+  | ({
+      photoURL: string | undefined;
+      nameAndId: ReturnType<GetNameAndId>;
+    } & Omit<User, 'photoURL'>)
   | null;
 
 type SetUsernameParams = {
@@ -42,7 +46,7 @@ type SetUsernameParams = {
   name: string;
 };
 
-type GetNameAndId = (username: string) => {
+type GetNameAndId = (username: string | null | undefined) => {
   name: string;
   id: string | undefined;
 };
@@ -50,6 +54,8 @@ type GetNameAndId = (username: string) => {
 export const AuthContext = createContext({} as AuthContextData);
 
 export const getNameAndId: GetNameAndId = (username) => {
+  if (!username) throw 'Username does not exist';
+
   const [name, id] = username.split('#');
 
   return { name, id };
@@ -140,6 +146,7 @@ export const signInWithEmailAndPassword = async ({
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
+  const { setUserOnlineAt } = useOnlineAtEvents();
 
   const router = useRouter();
 
@@ -159,6 +166,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const newUser = {
         ...user,
         photoURL: user?.photoURL ?? falsyValueAcceptableInAvatar,
+        nameAndId: getNameAndId(user?.displayName),
       };
 
       setUser(newUser);
@@ -181,14 +189,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const signOut = async () => {
     if (!user?.displayName) return;
 
-    const { auth, db } = await import('../services/firebase');
+    const { auth } = await import('../services/firebase');
     const { signOut } = await import('firebase/auth');
-    const { doc, updateDoc } = await import('firebase/firestore');
 
-    const userRef = doc(db, 'users', user.displayName);
-    updateDoc(userRef, {
-      onlineAt: Date.now(),
-    });
+    setUserOnlineAt();
 
     await signOut(auth);
     // await router.push('/');

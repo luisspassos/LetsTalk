@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { getNameAndId, useAuth } from 'contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 import { useRenameUsernameModal } from 'contexts/Modal/RenameUsernameModalContext';
 import { useRenamingName } from 'contexts/RenamingNameContext';
 import { regexs } from 'utils/regexs';
@@ -9,7 +9,6 @@ import { Buttons } from './Buttons';
 import { Input } from './Input';
 import * as yup from 'yup';
 import { ModalFormControl } from 'components/Modal/ModalFormControl';
-import { User } from 'firebase/auth';
 
 export type RenameUsernameFormData = {
   name: string;
@@ -48,9 +47,9 @@ export function Form() {
 
           const { setDoc, doc, deleteDoc } = await import('firebase/firestore');
           const { updateProfile } = await import('firebase/auth');
-          const { db } = await import('services/firebase');
+          const { db, auth } = await import('services/firebase');
 
-          const { id } = getNameAndId(user.displayName);
+          const { id } = user.nameAndId;
 
           const newName = `${name}#${id}`;
 
@@ -61,12 +60,9 @@ export function Form() {
             onlineAt: 'now',
           });
 
-          const acceptedUser: User = {
-            ...user,
-            photoURL: user.photoURL ?? null,
-          };
+          if (auth.currentUser === null) throw 'user is null';
 
-          await updateProfile(acceptedUser, {
+          await updateProfile(auth.currentUser, {
             displayName: newName,
           });
 
@@ -74,7 +70,9 @@ export function Form() {
 
           onClose();
           resetForm();
-        } catch {
+        } catch (e) {
+          console.log(e);
+
           const { unknownErrorToast } = await import(
             'utils/Toasts/unknownErrorToast'
           );
@@ -84,7 +82,7 @@ export function Form() {
           setRenamingName(false);
         }
       }),
-    [handleSubmit, user, onClose, resetForm, fillUser, setRenamingName]
+    [fillUser, handleSubmit, onClose, resetForm, setRenamingName, user]
   );
 
   return (

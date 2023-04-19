@@ -5,11 +5,7 @@ import { useRenamingName } from 'contexts/RenamingNameContext';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import {
-  addUsernameInDb,
-  getNameAndId,
-  useAuth,
-} from '../contexts/AuthContext';
+import { addUsernameInDb, useAuth } from '../contexts/AuthContext';
 import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
 import { Loading } from 'components/ConversationsPage/Loading';
 import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
@@ -96,10 +92,10 @@ export default function ConversationsPage() {
     (async () => {
       // it will only add the user in the db when starting the application
 
-      if (!ignoreAddingUserInDb && user?.displayName) {
-        const { id: userId } = getNameAndId(user.displayName);
+      if (!ignoreAddingUserInDb && user?.nameAndId && user?.displayName) {
+        const { id } = user?.nameAndId;
 
-        if (userId === undefined) return;
+        if (id === undefined) return;
 
         await addUsernameInDb(user.displayName, user.uid);
         setIgnoreAddingUserInDb(true);
@@ -107,7 +103,13 @@ export default function ConversationsPage() {
 
       setUserOnlineAt('now');
     })();
-  }, [ignoreAddingUserInDb, setUserOnlineAt, user?.displayName, user?.uid]);
+  }, [
+    ignoreAddingUserInDb,
+    setUserOnlineAt,
+    user?.displayName,
+    user?.nameAndId,
+    user?.uid,
+  ]);
 
   useEffect(() => {
     createLocationchangeEvent();

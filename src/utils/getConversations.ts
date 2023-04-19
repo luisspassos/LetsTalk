@@ -80,7 +80,7 @@ export async function getConversations(currentUserId: string) {
     ({ displayName, uid, photoURL }, i) => ({
       uid,
       photoURL: photoURL ?? null,
-      name: getNameAndId(displayName ?? '')['name'],
+      name: getNameAndId(displayName)['name'],
       username: displayName,
       updatedAt: contactInformation[i].updatedAt,
       lastMessage: lastMessages[i],

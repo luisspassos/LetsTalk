@@ -52,4 +52,22 @@
       <footer>Footer</footer>
     </section>
   </body>
+
+  <script>
+    function a() {
+      throw 'usdasdasder';
+    }
+
+    function b() {
+      try {
+        a();
+
+        console.log('Hello');
+      } catch (e) {
+        console.log(typeof e);
+      }
+    }
+
+    b();
+  </script>
 </html>
