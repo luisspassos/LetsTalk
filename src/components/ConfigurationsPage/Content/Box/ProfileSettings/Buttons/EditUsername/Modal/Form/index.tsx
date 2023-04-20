@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from 'contexts/AuthContext';
+import { getNameAndId, useAuth } from 'contexts/AuthContext';
 import { useRenameUsernameModal } from 'contexts/Modal/RenameUsernameModalContext';
 import { useRenamingName } from 'contexts/RenamingNameContext';
 import { regexs } from 'utils/regexs';
@@ -66,13 +66,15 @@ export function Form() {
             displayName: newName,
           });
 
-          fillUser({ ...user, displayName: newName });
+          fillUser({
+            ...user,
+            displayName: newName,
+            nameAndId: getNameAndId(newName),
+          });
 
           onClose();
           resetForm();
         } catch (e) {
-          console.log(e);
-
           const { unknownErrorToast } = await import(
             'utils/Toasts/unknownErrorToast'
           );
