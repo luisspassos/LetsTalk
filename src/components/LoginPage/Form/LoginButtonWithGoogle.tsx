@@ -23,19 +23,17 @@ export function LoginButtonWithGoogle() {
 
       const { user } = result;
 
-      const name = user.displayName as string;
+      const { getAdditionalUserInfo } = await import('firebase/auth');
 
-      if (result) {
-        const { getAdditionalUserInfo } = await import('firebase/auth');
+      const additionalUserInfo = getAdditionalUserInfo(result);
 
-        const additionalUserInfo = getAdditionalUserInfo(result);
+      if (additionalUserInfo?.isNewUser) {
+        const name = user.displayName ?? 'Usuário';
 
-        if (additionalUserInfo?.isNewUser) {
-          await setUsername({ user, name });
-        }
-
-        await router.push('/conversas');
+        await setUsername({ user, name });
       }
+
+      await router.push('/conversas');
     } catch (err) {
       const error = String(err);
       if (error.includes('popup-closed-by-user')) return;
