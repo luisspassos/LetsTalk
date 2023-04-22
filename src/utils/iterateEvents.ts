@@ -21,9 +21,9 @@ type EventMapType =
 
 // iterateEvents //
 
-export function iterateEvents<E extends Event[]>(
+export function iterateEvents(
   method: 'remove' | 'add',
-  events: E,
+  events: Event[],
   target: EventTarget
 ) {
   for (const { type, func } of events) {
@@ -39,3 +39,14 @@ type IterateEventsParamsWithoutTarget = ExcludeFromTuple<
 export type IterateEventsWithoutTarget = (
   ...params: IterateEventsParamsWithoutTarget
 ) => void;
+
+// Window
+
+export const windowHandler = handler<WindowEventMap>();
+
+export const iterateWindowEvents: IterateEventsWithoutTarget = (
+  method,
+  events
+) => {
+  iterateEvents(method, events, window);
+};

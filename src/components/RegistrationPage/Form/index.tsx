@@ -11,7 +11,6 @@ import { PasswordInput } from './PasswordInput';
 import { ConfirmPasswordInput } from './ConfirmPasswordInput';
 import { Button } from 'components/Form/Button';
 import { toast } from 'utils/Toasts/toast';
-import { setUsername } from 'contexts/AuthContext';
 
 type RegistrationFormData = {
   name: string;
@@ -80,7 +79,13 @@ export function Form() {
           );
 
           await sendEmailVerification(user);
-          await setUsername({ user, name });
+
+          const { setUsername, addUsernameInDb } = await import(
+            'contexts/AuthContext'
+          );
+
+          const { username } = await setUsername({ user, name });
+          await addUsernameInDb(username, user.uid);
 
           successToastWhenRegistering();
         } catch (err) {

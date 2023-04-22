@@ -1,11 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Form/Button';
 import { FormWrapper } from 'components/Form/FormWrapper';
-import { signInWithEmailAndPassword } from 'contexts/AuthContext';
+import { signInWithEmailAndPassword, useAuth } from 'contexts/AuthContext';
 import router from 'next/router';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { auth } from 'services/firebase';
 import { toast } from 'utils/Toasts/toast';
 import * as yup from 'yup';
 import { DividerOr } from './DividerOr';
@@ -57,6 +56,8 @@ export function Form() {
     resolver: yupResolver(signInFormSchema),
   });
 
+  const { initializeUser } = useAuth();
+
   const handleSignIn = useMemo(
     () =>
       handleSubmit(async (data) => {
@@ -68,10 +69,14 @@ export function Form() {
           if (!user.emailVerified) {
             const { sendEmailVerification } = await import('firebase/auth');
 
-            if (auth.currentUser) await sendEmailVerification(auth.currentUser);
+            await sendEmailVerification(user);
             toasts.emailVerification.warning();
             return;
           }
+
+          initializeUser({
+            user,
+          });
 
           await router.push('/conversas');
         } catch (err) {
@@ -104,7 +109,7 @@ export function Form() {
           }
         }
       }),
-    [handleSubmit, setError]
+    [handleSubmit, initializeUser, setError]
   );
 
   return (

@@ -1,4 +1,4 @@
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import {
   createContext,
   ReactNode,
@@ -9,12 +9,7 @@ import {
 } from 'react';
 import { auth } from '../services/firebase';
 import nookies from 'nookies';
-import { useRouter } from 'next/router';
-import { useOnlineAtEvents } from './OnlineAtEventsContext';
-
-export type AuthProviderProps = {
-  children: ReactNode;
-};
+import { useSetUserOnlineAt } from 'hooks/useSetUserOnlineAt';
 
 type SignInData = {
   email: string;
@@ -27,12 +22,7 @@ type SendEmailToRecoverPasswordData = {
 
 type AddUsernameInDbFunc = (username: string, uid: string) => Promise<void>;
 
-type AuthContextData = {
-  signOut: () => Promise<void>;
-  user: UserType;
-  fillUser: (newUser: UserType) => void;
-  isLoggedInWithGoogle: boolean;
-};
+type InitializeUser = (params: { username?: string; user: User }) => void;
 
 export type UserType =
   | ({
@@ -49,6 +39,18 @@ type SetUsernameParams = {
 type GetNameAndId = (username: string | null | undefined) => {
   name: string;
   id: string | undefined;
+};
+
+export type AuthProviderProps = {
+  children: ReactNode;
+};
+
+type AuthContextData = {
+  signOut: () => Promise<void>;
+  user: UserType;
+  fillUser: (newUser: UserType) => void;
+  isLoggedInWithGoogle: boolean;
+  initializeUser: InitializeUser;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -100,7 +102,6 @@ export const addUsernameInDb: AddUsernameInDbFunc = async (username, uid) => {
 
   await setDoc(usernameRef, {
     uid,
-    onlineAt: Date.now(),
   });
 };
 
@@ -146,58 +147,38 @@ export const signInWithEmailAndPassword = async ({
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserType>(null);
-  const { setUserOnlineAt } = useOnlineAtEvents();
-
-  const router = useRouter();
-
-  useEffect(() => {
-    function handleLoggedInUser(user: User | null) {
-      if (user === null) {
-        if (router.pathname !== '/') {
-          router.push('/');
-          return;
-        }
-
-        return;
-      }
-
-      const falsyValueAcceptableInAvatar = undefined;
-
-      const newUser = {
-        ...user,
-        photoURL: user?.photoURL ?? falsyValueAcceptableInAvatar,
-        nameAndId: getNameAndId(user?.displayName),
-      };
-
-      setUser(newUser);
-    }
-
-    const unsubscribe = onAuthStateChanged(auth, handleLoggedInUser);
-
-    return () => {
-      unsubscribe();
-    };
-  }, [router]);
+  const { setUserOnlineAt } = useSetUserOnlineAt();
 
   const fillUser = useCallback((newUser: UserType) => {
     setUser(newUser);
   }, []);
 
+  const initializeUser: InitializeUser = useCallback(
+    ({ user, username = user.displayName }) => {
+      const falsyValueAcceptableInAvatar = undefined;
+
+      const formattedUser: UserType = {
+        ...user,
+        displayName: username,
+        photoURL: user.photoURL ?? falsyValueAcceptableInAvatar,
+        nameAndId: getNameAndId(username),
+      };
+
+      fillUser(formattedUser);
+    },
+    [fillUser]
+  );
+
   const isLoggedInWithGoogle =
     user?.providerData[0].providerId === 'google.com';
 
   const signOut = async () => {
-    if (!user?.displayName) return;
-
     const { auth } = await import('../services/firebase');
     const { signOut } = await import('firebase/auth');
 
     setUserOnlineAt();
 
     await signOut(auth);
-    // await router.push('/');
-
-    setUser(null);
   };
 
   useEffect(() => {
@@ -242,6 +223,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         signOut,
         user,
         isLoggedInWithGoogle,
+        initializeUser,
       }}
     >
       {children}

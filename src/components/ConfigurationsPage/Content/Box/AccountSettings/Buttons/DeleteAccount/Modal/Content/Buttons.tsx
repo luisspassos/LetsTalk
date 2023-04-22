@@ -45,23 +45,22 @@ export function Buttons({
     () => ({
       constructor: async () => {
         const { deleteUser } = await import('firebase/auth');
-        const { auth } = await import('services/firebase');
-        const currentUser = auth.currentUser;
-
-        if (!currentUser) return;
-
-        await deleteUser(currentUser);
-
+        const { auth, storage, db } = await import('services/firebase');
         const { doc, deleteDoc } = await import('firebase/firestore');
-        const { db } = await import('services/firebase');
-
         const { ref, deleteObject } = await import('firebase/storage');
-        const { storage } = await import('services/firebase');
         const { checkIfFileExistsInStorage } = await import(
           'utils/checkIfTheFileExistsInStorage'
         );
 
-        if (!user?.displayName) return;
+        const currentUser = auth.currentUser;
+
+        if (!currentUser || !user?.displayName) return;
+
+        deleteUser(currentUser);
+
+        const userRef = doc(db, 'users', user.displayName);
+
+        deleteDoc(userRef);
 
         const userProfileAvatarPath = `usersProfileAvatar/${user.displayName}`;
 
@@ -72,12 +71,10 @@ export function Buttons({
         );
 
         if (avatarExists) {
-          await deleteObject(userProfileAvatarRef);
+          deleteObject(userProfileAvatarRef);
         }
 
-        const userRef = doc(db, 'users', user.displayName);
-
-        await deleteDoc(userRef);
+        onClose();
       },
       get userLoggedInWithGoogle() {
         return async () => {
@@ -110,7 +107,7 @@ export function Buttons({
               error();
             }
           } finally {
-            setIsLoading(false);
+            // setIsLoading(false);
           }
         };
       },
@@ -153,7 +150,7 @@ export function Buttons({
         });
       },
     }),
-    [handleSubmit, setError, user?.displayName, user?.email]
+    [handleSubmit, onClose, setError, user?.displayName, user?.email]
   );
 
   const action = isLoggedInWithGoogle

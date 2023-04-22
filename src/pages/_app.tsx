@@ -16,7 +16,6 @@ import { DeleteAccountModalProvider } from '../contexts/Modal/DeleteAccountModal
 import { ChangePasswordModalProvider } from '../contexts/Modal/ChangePasswordModalContext';
 import { ChangeEmailModalProvider } from '../contexts/Modal/ChangeEmailModalContext';
 import { SearchInConversationProvider } from '../contexts/SearchInConversationContext';
-import { OnlineAtEventsProvider } from '../contexts/OnlineAtEventsContext';
 import { ConversationPopoverProvider } from '../contexts/ConversationPopoverContext';
 import { RenamingNameProvider } from '../contexts/RenamingNameContext';
 import { MessageInputRefProvider } from '../contexts/MessageInputRef';
@@ -34,50 +33,48 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <MessageInputRefProvider>
         <RenamingNameProvider>
-          <OnlineAtEventsProvider>
-            <SearchInConversationProvider>
-              <ConversationPopoverProvider>
-                <ConversationsProvider>
-                  <TabToggleProvider>
-                    <AddContactModalProvider>
-                      <BlockUserModalProvider>
-                        <RenameUsernameModalProvider>
-                          <DeleteAccountModalProvider>
-                            <ChangePasswordModalProvider>
-                              <ChangeEmailModalProvider>
-                                <FadeInAnimationProvider>
-                                  <ChakraProvider theme={theme}>
-                                    <PositionSelectedFromEmojiPickerCategoriesProvider>
-                                      <SearchedEmojisProvider>
-                                        <EmojiStylesProvider>
-                                          <CategoriesProvider>
-                                            <ToggleEmojiPickerProvider>
-                                              <EmojiPickerScrollProvider>
-                                                <RouteLoading
-                                                  options={{
-                                                    showSpinner: false,
-                                                  }}
-                                                />
-                                                <Component {...pageProps} />
-                                              </EmojiPickerScrollProvider>
-                                            </ToggleEmojiPickerProvider>
-                                          </CategoriesProvider>
-                                        </EmojiStylesProvider>
-                                      </SearchedEmojisProvider>
-                                    </PositionSelectedFromEmojiPickerCategoriesProvider>
-                                  </ChakraProvider>
-                                </FadeInAnimationProvider>
-                              </ChangeEmailModalProvider>
-                            </ChangePasswordModalProvider>
-                          </DeleteAccountModalProvider>
-                        </RenameUsernameModalProvider>
-                      </BlockUserModalProvider>
-                    </AddContactModalProvider>
-                  </TabToggleProvider>
-                </ConversationsProvider>
-              </ConversationPopoverProvider>
-            </SearchInConversationProvider>
-          </OnlineAtEventsProvider>
+          <SearchInConversationProvider>
+            <ConversationPopoverProvider>
+              <ConversationsProvider>
+                <TabToggleProvider>
+                  <AddContactModalProvider>
+                    <BlockUserModalProvider>
+                      <RenameUsernameModalProvider>
+                        <DeleteAccountModalProvider>
+                          <ChangePasswordModalProvider>
+                            <ChangeEmailModalProvider>
+                              <FadeInAnimationProvider>
+                                <ChakraProvider theme={theme}>
+                                  <PositionSelectedFromEmojiPickerCategoriesProvider>
+                                    <SearchedEmojisProvider>
+                                      <EmojiStylesProvider>
+                                        <CategoriesProvider>
+                                          <ToggleEmojiPickerProvider>
+                                            <EmojiPickerScrollProvider>
+                                              <RouteLoading
+                                                options={{
+                                                  showSpinner: false,
+                                                }}
+                                              />
+                                              <Component {...pageProps} />
+                                            </EmojiPickerScrollProvider>
+                                          </ToggleEmojiPickerProvider>
+                                        </CategoriesProvider>
+                                      </EmojiStylesProvider>
+                                    </SearchedEmojisProvider>
+                                  </PositionSelectedFromEmojiPickerCategoriesProvider>
+                                </ChakraProvider>
+                              </FadeInAnimationProvider>
+                            </ChangeEmailModalProvider>
+                          </ChangePasswordModalProvider>
+                        </DeleteAccountModalProvider>
+                      </RenameUsernameModalProvider>
+                    </BlockUserModalProvider>
+                  </AddContactModalProvider>
+                </TabToggleProvider>
+              </ConversationsProvider>
+            </ConversationPopoverProvider>
+          </SearchInConversationProvider>
         </RenamingNameProvider>
       </MessageInputRefProvider>
     </AuthProvider>

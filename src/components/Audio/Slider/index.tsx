@@ -7,7 +7,7 @@ import {
   useRef,
   TouchEvent as ReactTouchEvent,
 } from 'react';
-import { handler, iterateEvents } from 'utils/iterateEvents';
+import { iterateWindowEvents, windowHandler } from 'utils/iterateEvents';
 import { useAudio } from 'contexts/Audio/AudioContext';
 import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
 import { useResetAnimationWhenAudioEnds } from 'hooks/Audio/useResetAnimationWhenAudioEnds';
@@ -113,31 +113,29 @@ export function Slider({
       setAudioProgress(e);
     }
 
-    const h = handler<WindowEventMap>();
-
     const events = [
-      h({
+      windowHandler({
         type: 'mouseup',
         func: handleSetAudio,
       }),
-      h({
+      windowHandler({
         type: 'mousemove',
         func: handleMoveAudioProgress,
       }),
-      h({
+      windowHandler({
         type: 'touchend',
         func: handleSetAudio,
       }),
-      h({
+      windowHandler({
         type: 'touchmove',
         func: handleMoveAudioProgress,
       }),
     ];
 
-    iterateEvents('add', events, window);
+    iterateWindowEvents('add', events);
 
     return () => {
-      iterateEvents('remove', events, window);
+      iterateWindowEvents('remove', events);
     };
   }, [audio, duration, isHolding, positionInPercentage, setAudioProgress]);
 

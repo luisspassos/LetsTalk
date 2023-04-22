@@ -1,15 +1,16 @@
 import { Conversations } from 'components/ConversationsPage';
-import { useDeleteAccountModal } from 'contexts/Modal/DeleteAccountModalContext';
-import { useOnlineAtEvents } from 'contexts/OnlineAtEventsContext';
-import { useRenamingName } from 'contexts/RenamingNameContext';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { addUsernameInDb, useAuth } from '../contexts/AuthContext';
+import { useEffect } from 'react';
 import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
-import { Loading } from 'components/ConversationsPage/Loading';
 import { AudiosPlayingProvider } from 'contexts/Audio/AudiosPlaying';
 import { AudioRecordingProvider } from 'contexts/Audio/AudioRecordingContext';
+import { useOnAuthStateChanged } from 'hooks/useOnAuthStateChanged';
+import { useSetUserOnlineAt } from 'hooks/useSetUserOnlineAt';
+import { handler, iterateWindowEvents } from 'utils/iterateEvents';
+
+type WindowEventMapType = WindowEventMap & {
+  locationchange: Event;
+};
 
 function createLocationchangeEvent() {
   let oldPushState = history.pushState;
@@ -36,106 +37,60 @@ function createLocationchangeEvent() {
 }
 
 export default function ConversationsPage() {
-  const { fillUser, user } = useAuth();
-  const { takeUserOffline, takeUserOnline, setUserOnlineAt, clearAllEvents } =
-    useOnlineAtEvents();
-  const router = useRouter();
-  const { onClose: closeDeleteAccModal } = useDeleteAccountModal();
-  const { renamingName } = useRenamingName();
+  const { setUserOnlineAt } = useSetUserOnlineAt();
 
-  const [ignoreAddingUserInDb, setIgnoreAddingUserInDb] = useState(false);
+  useOnAuthStateChanged();
 
-  // useEffect(() => {
-  //   function checkIfUserAccHasBeenDeleted() {
-  //     if (!user) return;
-
-  //     let ignoreInitialOnSnapshot = true;
-
-  //     if (!user.displayName) return;
-
-  //     const unsub = onSnapshot(
-  //       doc(db, 'users', user.displayName),
-  //       async (doc) => {
-  //         if (ignoreInitialOnSnapshot) {
-  //           ignoreInitialOnSnapshot = false;
-  //           return;
-  //         }
-  //         if (!doc.exists() && !renamingName) {
-  //           nookies.destroy({}, 'token');
-  //           clearAllEvents();
-  //           await router.push('/');
-  //           fillUser(null);
-  //           closeDeleteAccModal();
-  //           router.push('/conversations');
-  //         }
-  //       }
-  //     );
-
-  //     return unsub;
-  //   }
-
-  //   const unsub = checkIfUserAccHasBeenDeleted();
-
-  //   return () => {
-  //     unsub && unsub();
-  //   };
-  // }, [
-  //   router,
-  //   clearAllEvents,
-  //   fillUser,
-  //   closeDeleteAccModal,
-  //   renamingName,
-  //   user,
-  // ]);
-
-  useEffect(() => {
-    (async () => {
-      // it will only add the user in the db when starting the application
-
-      if (!ignoreAddingUserInDb && user?.nameAndId && user?.displayName) {
-        const { id } = user?.nameAndId;
-
-        if (id === undefined) return;
-
-        await addUsernameInDb(user.displayName, user.uid);
-        setIgnoreAddingUserInDb(true);
-      }
-
-      setUserOnlineAt('now');
-    })();
-  }, [
-    ignoreAddingUserInDb,
-    setUserOnlineAt,
-    user?.displayName,
-    user?.nameAndId,
-    user?.uid,
-  ]);
-
+  // handle user online at
   useEffect(() => {
     createLocationchangeEvent();
 
-    for (let event of takeUserOffline.events) {
-      window.addEventListener(event, takeUserOffline.func);
+    function takeUserOnline() {
+      setUserOnlineAt('now');
     }
 
-    for (let event of takeUserOnline.events) {
-      window.addEventListener(event, takeUserOnline.func);
+    takeUserOnline();
+
+    function takeUserOffline() {
+      // removed focus event to avoid bugs
+      window.removeEventListener('focus', takeUserOnline);
+      setUserOnlineAt();
     }
+
+    const h = handler<WindowEventMapType>();
+
+    const events = [
+      h({
+        type: 'focus',
+        func: takeUserOnline,
+      }),
+      h({
+        type: 'beforeunload',
+        func: takeUserOffline,
+      }),
+      h({
+        type: 'locationchange',
+        func: takeUserOffline,
+      }),
+      h({
+        type: 'unload',
+        func: takeUserOffline,
+      }),
+    ];
+
+    iterateWindowEvents('add', events);
 
     return () => {
-      clearAllEvents();
+      iterateWindowEvents('remove', events);
     };
-  }, [takeUserOnline, takeUserOffline, clearAllEvents]);
+  }, [setUserOnlineAt]);
 
   return (
-    <>
-      <AudioRecordingProvider>
-        <AudiosPlayingProvider>
-          <Conversations />
-        </AudiosPlayingProvider>
-      </AudioRecordingProvider>
-      <Loading />
-    </>
+    <AudioRecordingProvider>
+      <AudiosPlayingProvider>
+        <Conversations />
+      </AudiosPlayingProvider>
+    </AudioRecordingProvider>
   );
 }
 
