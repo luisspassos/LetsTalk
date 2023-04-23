@@ -24,6 +24,12 @@ type FormProps = Pick<Form, 'handleSubmit' | 'setError'>;
 
 type ButtonsProps = { isSubmitting: IsSubmitting } & FormProps;
 
+async function unknownError() {
+  const { unknownErrorToast } = await import('utils/Toasts/unknownErrorToast');
+
+  unknownErrorToast();
+}
+
 export function Buttons({
   handleSubmit,
   setError,
@@ -44,40 +50,45 @@ export function Buttons({
   const deleteAccount = useMemo(
     () => ({
       constructor: async () => {
-        const { deleteUser } = await import('firebase/auth');
         const { auth } = await import('services/firebase');
+
         const currentUser = auth.currentUser;
 
-        if (!currentUser) return;
+        if (currentUser === null) return;
+
+        const { deleteUser } = await import('firebase/auth');
 
         await deleteUser(currentUser);
 
-        const { doc, deleteDoc } = await import('firebase/firestore');
-        const { db } = await import('services/firebase');
+        if (user?.displayName === null || user === null) return;
 
-        const { ref, deleteObject } = await import('firebase/storage');
-        const { storage } = await import('services/firebase');
-        const { checkIfFileExistsInStorage } = await import(
-          'utils/checkIfTheFileExistsInStorage'
-        );
+        const [
+          { db, storage },
+          { doc, deleteDoc },
+          { ref },
+          { checkIfFileExistsInStorage },
+        ] = await Promise.all([
+          import('services/firebase'),
+          import('firebase/firestore'),
+          import('firebase/storage'),
+          import('utils/checkIfTheFileExistsInStorage'),
+        ]);
 
-        if (!user?.displayName) return;
+        const userRef = doc(db, 'users', user.displayName);
 
         const userProfileAvatarPath = `usersProfileAvatar/${user.displayName}`;
-
         const userProfileAvatarRef = ref(storage, userProfileAvatarPath);
 
-        const avatarExists = await checkIfFileExistsInStorage(
-          userProfileAvatarPath
-        );
+        const [avatarExists] = await Promise.all([
+          checkIfFileExistsInStorage(userProfileAvatarPath),
+          deleteDoc(userRef),
+        ]);
+
+        const { deleteObject } = await import('firebase/storage');
 
         if (avatarExists) {
           await deleteObject(userProfileAvatarRef);
         }
-
-        const userRef = doc(db, 'users', user.displayName);
-
-        await deleteDoc(userRef);
 
         onClose();
       },
@@ -89,9 +100,7 @@ export function Buttons({
           } catch (err) {
             const { FirebaseError } = await import('firebase/app');
 
-            // ver isso
-
-            if (!(err instanceof FirebaseError)) return;
+            if (!(err instanceof FirebaseError)) return unknownError();
 
             const { reauthenticationToasts } = await import(
               'utils/Toasts/reauthenticationToasts'
@@ -104,10 +113,7 @@ export function Buttons({
             const error = errors[err.code];
 
             if (!error) {
-              const { unknownErrorToast } = await import(
-                'utils/Toasts/unknownErrorToast'
-              );
-              unknownErrorToast();
+              unknownError();
 
               return;
             }
@@ -132,32 +138,29 @@ export function Buttons({
           } catch (err) {
             const { FirebaseError } = await import('firebase/app');
 
-            if (err instanceof FirebaseError) {
-              const errors: FormFirebaseError = {
-                'auth/wrong-password': {
-                  type: 'password',
-                  message: 'Senha incorreta',
-                },
-              };
+            if (!(err instanceof FirebaseError)) return unknownError();
 
-              const error = errors[err.code];
+            const errors: FormFirebaseError = {
+              'auth/wrong-password': {
+                type: 'password',
+                message: 'Senha incorreta',
+              },
+            };
 
-              if (!error) {
-                const { unknownErrorToast } = await import(
-                  'utils/Toasts/unknownErrorToast'
-                );
-                unknownErrorToast();
-              } else {
-                setError(error.type, {
-                  message: error.message,
-                });
-              }
+            const error = errors[err.code];
+
+            if (!error) {
+              unknownError();
+            } else {
+              setError(error.type, {
+                message: error.message,
+              });
             }
           }
         });
       },
     }),
-    [handleSubmit, onClose, setError, user?.displayName, user?.email]
+    [handleSubmit, onClose, setError, user]
   );
 
   const action = isLoggedInWithGoogle
