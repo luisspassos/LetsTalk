@@ -45,22 +45,23 @@ export function Buttons({
     () => ({
       constructor: async () => {
         const { deleteUser } = await import('firebase/auth');
-        const { auth, storage, db } = await import('services/firebase');
+        const { auth } = await import('services/firebase');
+        const currentUser = auth.currentUser;
+
+        if (!currentUser) return;
+
+        await deleteUser(currentUser);
+
         const { doc, deleteDoc } = await import('firebase/firestore');
+        const { db } = await import('services/firebase');
+
         const { ref, deleteObject } = await import('firebase/storage');
+        const { storage } = await import('services/firebase');
         const { checkIfFileExistsInStorage } = await import(
           'utils/checkIfTheFileExistsInStorage'
         );
 
-        const currentUser = auth.currentUser;
-
-        if (!currentUser || !user?.displayName) return;
-
-        deleteUser(currentUser);
-
-        const userRef = doc(db, 'users', user.displayName);
-
-        deleteDoc(userRef);
+        if (!user?.displayName) return;
 
         const userProfileAvatarPath = `usersProfileAvatar/${user.displayName}`;
 
@@ -71,8 +72,12 @@ export function Buttons({
         );
 
         if (avatarExists) {
-          deleteObject(userProfileAvatarRef);
+          await deleteObject(userProfileAvatarRef);
         }
+
+        const userRef = doc(db, 'users', user.displayName);
+
+        await deleteDoc(userRef);
 
         onClose();
       },
@@ -84,30 +89,32 @@ export function Buttons({
           } catch (err) {
             const { FirebaseError } = await import('firebase/app');
 
-            if (err instanceof FirebaseError) {
-              const { reauthenticationToasts } = await import(
-                'utils/Toasts/reauthenticationToasts'
+            // ver isso
+
+            if (!(err instanceof FirebaseError)) return;
+
+            const { reauthenticationToasts } = await import(
+              'utils/Toasts/reauthenticationToasts'
+            );
+
+            const errors: FirebaseErrorWithoutForm = {
+              'auth/requires-recent-login': reauthenticationToasts.error,
+            };
+
+            const error = errors[err.code];
+
+            if (!error) {
+              const { unknownErrorToast } = await import(
+                'utils/Toasts/unknownErrorToast'
               );
+              unknownErrorToast();
 
-              const errors: FirebaseErrorWithoutForm = {
-                'auth/requires-recent-login': reauthenticationToasts.error,
-              };
-
-              const error = errors[err.code];
-
-              if (!error) {
-                const { unknownErrorToast } = await import(
-                  'utils/Toasts/unknownErrorToast'
-                );
-                unknownErrorToast();
-
-                return;
-              }
-
-              error();
+              return;
             }
+
+            error();
           } finally {
-            // setIsLoading(false);
+            setIsLoading(false);
           }
         };
       },

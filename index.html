@@ -54,17 +54,12 @@
   </body>
 
   <script>
-    function a() {
-      throw 'usdasdasder';
-    }
-
-    function b() {
+    async function b() {
       try {
-        a();
-
-        console.log('Hello');
+        throw 'v';
+        throw 'a';
       } catch (e) {
-        console.log(typeof e);
+        console.log(e);
       }
     }
 
