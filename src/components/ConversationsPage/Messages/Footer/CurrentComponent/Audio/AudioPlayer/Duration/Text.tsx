@@ -1,9 +1,5 @@
-import {
-  Center,
-  ChakraProps,
-  Spinner,
-  Text as ChakraText,
-} from '@chakra-ui/react';
+import { Center, ChakraProps, Spinner } from '@chakra-ui/react';
+import { CurrentTime } from 'components/Audio/Duration/CurrentTime';
 import { useCurrentTime } from 'hooks/Audio/useCurrentTime';
 import { useEffect, useState } from 'react';
 import { formatAudioTime } from 'utils/formatAudioTime';
@@ -38,14 +34,13 @@ export function Text({ duration }: Props) {
     );
 
   return (
-    <ChakraText
+    <CurrentTime
       lineHeight='1'
-      as='time'
       textAlign='center'
       fontSize='0.9375rem'
       {...styles}
     >
       {time}
-    </ChakraText>
+    </CurrentTime>
   );
 }

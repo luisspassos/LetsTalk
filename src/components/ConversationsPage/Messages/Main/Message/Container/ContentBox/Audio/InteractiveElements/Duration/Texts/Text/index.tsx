@@ -1,12 +1,17 @@
-import { Text as ChakraText } from '@chakra-ui/react';
+import { ChakraProps, Text as ChakraText } from '@chakra-ui/react';
 
 type TextProps = {
   children: string;
 };
 
+export const styles: ChakraProps = {
+  lineHeight: 'short',
+  fontSize: 'small',
+};
+
 export function Text({ children }: TextProps) {
   return (
-    <ChakraText lineHeight='short' fontSize='small' as='time'>
+    <ChakraText {...styles} as='time'>
       {children}
     </ChakraText>
   );
