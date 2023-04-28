@@ -54,15 +54,8 @@
   </body>
 
   <script>
-    async function b() {
-      try {
-        throw 'v';
-        throw 'a';
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    b();
+    window.addEventListener('keydown', (e) => {
+      console.log(e.key);
+    });
   </script>
 </html>
