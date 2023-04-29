@@ -15,6 +15,8 @@ import { ProgressBar } from './ProgressBar';
 
 type MouseEvents = MouseEvent | ReactMouseEvent;
 
+type ResetAnimation = boolean;
+
 export type SliderProps = {
   duration: HTMLAudioElement['duration'];
   progressBarProps?: FlexProps;
@@ -34,7 +36,7 @@ export function Slider({
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const [resetAnimation, setResetAnimation] = useState(false);
+  const [resetAnimation, setResetAnimation] = useState<ResetAnimation>(false);
 
   const { audio } = useAudio();
   const { positionInPercentage, setPositionInPercentage, isHolding } =
@@ -78,31 +80,35 @@ export function Slider({
     [setPositionInPercentage]
   );
 
+  const setAudioCurrentTime = useCallback(() => {
+    const remainingDuration = (positionInPercentage * duration) / 100;
+
+    function activateAnimation() {
+      animationDuration.current = remainingDuration;
+
+      setResetAnimation(false);
+    }
+
+    function setNewAudioCurrentTime() {
+      const currentTime = duration - remainingDuration;
+
+      if (audio === null) return;
+
+      audio.element.currentTime = currentTime;
+    }
+
+    setNewAudioCurrentTime();
+    activateAnimation();
+  }, [audio, duration, positionInPercentage]);
+
   // set window events
   useEffect(() => {
-    function handleSetAudio() {
+    function handleSetAudioCurrentTime() {
       if (isHolding.current === false) return;
 
       isHolding.current = false;
 
-      const remainingDuration = (positionInPercentage * duration) / 100;
-
-      function activateAnimation() {
-        animationDuration.current = remainingDuration;
-
-        setResetAnimation(false);
-      }
-
-      function setNewAudioCurrentTime() {
-        const currentTime = duration - remainingDuration;
-
-        if (audio === null) return;
-
-        audio.element.currentTime = currentTime;
-      }
-
-      setNewAudioCurrentTime();
-      activateAnimation();
+      setAudioCurrentTime();
     }
 
     function handleMoveAudioProgress(e: MouseEvent | TouchEvent) {
@@ -116,7 +122,7 @@ export function Slider({
     const events = [
       windowHandler({
         type: 'mouseup',
-        func: handleSetAudio,
+        func: handleSetAudioCurrentTime,
       }),
       windowHandler({
         type: 'mousemove',
@@ -124,7 +130,7 @@ export function Slider({
       }),
       windowHandler({
         type: 'touchend',
-        func: handleSetAudio,
+        func: handleSetAudioCurrentTime,
       }),
       windowHandler({
         type: 'touchmove',
@@ -137,7 +143,7 @@ export function Slider({
     return () => {
       iterateWindowEvents('remove', events);
     };
-  }, [audio, duration, isHolding, positionInPercentage, setAudioProgress]);
+  }, [isHolding, setAudioCurrentTime, setAudioProgress]);
 
   function handleStartSettingAudio(e: ReactMouseEvent | ReactTouchEvent) {
     isHolding.current = true;

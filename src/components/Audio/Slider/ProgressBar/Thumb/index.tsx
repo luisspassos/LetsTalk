@@ -13,7 +13,7 @@ export function Thumb(props: ThumbProps) {
       pointerEvents='none'
       {...props}
     >
-      <Circle />
+      <Circle audioDuration={props.duration} />
     </AnimationBox>
   );
 }

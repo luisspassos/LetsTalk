@@ -1,25 +1,31 @@
 import { Box } from '@chakra-ui/react';
-import { useAudioPositionInPercentage } from 'contexts/Audio/AudioPositionInPercentage';
-import { KeyboardEvent } from 'react';
+import { KeyboardEvent, useEffect, useRef } from 'react';
+import { SharedProps } from '..';
 
-export function Circle() {
-  const { setPositionInPercentage } = useAudioPositionInPercentage();
+type CircleProps = {
+  audioDuration: SharedProps['duration'];
+};
+
+export function Circle({ audioDuration }: CircleProps) {
+  const continueEvent = useRef(false);
+
+  useEffect(() => {
+    if (continueEvent.current === false) return;
+
+    continueEvent.current = false;
+  }, []);
 
   function handleKeys(e: KeyboardEvent<HTMLDivElement>) {
     e.preventDefault();
-
-    const key = e.key;
 
     function increase() {}
 
     function decrease() {}
 
-    function setMax() {
-      console.log('here');
-      setPositionInPercentage(100);
+    function setMin() {
+      // setPositionInPercentage(100);
+      continueEvent.current = true;
     }
-
-    function setMin() {}
 
     const keyEvents = [
       {
@@ -31,20 +37,18 @@ export function Circle() {
         event: decrease,
       },
       {
-        keys: ['End'],
-        event: setMax,
-      },
-      {
         keys: ['Home'],
         event: setMin,
       },
     ];
 
+    const key = e.key;
+
     const keyEvent = keyEvents.find((e) => e.keys.includes(key));
 
     if (!keyEvent) return;
 
-    const event = keyEvent?.event;
+    const event = keyEvent.event;
 
     event();
   }

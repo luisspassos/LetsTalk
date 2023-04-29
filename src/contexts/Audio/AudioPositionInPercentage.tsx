@@ -31,8 +31,6 @@ export function AudioPositionInPercentageProvider({
   const [positionInPercentage, setPositionInPercentage] =
     useState(initialValue);
 
-  console.log(positionInPercentage);
-
   const isHolding = useRef(false);
 
   return (
