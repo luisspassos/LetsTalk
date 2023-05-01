@@ -7,10 +7,10 @@ export function Img() {
 
   return (
     <ChakraImg
-      w='602px'
-      h='400px'
+      htmlWidth='602px'
+      htmlHeight='400px'
       src={src}
-      alt='Pagína não encontrada'
+      alt='Página não encontrada'
       d={{ base: 'none', xl: 'block' }}
     />
   );
