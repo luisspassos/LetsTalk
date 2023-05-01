@@ -5,7 +5,6 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': ["babel-jest", { presets: ["next/babel"] }],
   },
   testEnvironment: 'jsdom',
-  collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.tsx',
     '!src/**/*.spec.tsx',
@@ -13,4 +12,5 @@ module.exports = {
     '!src/**/*_document.tsx',
   ],
   coverageReporters: ['lcov', 'json'],
+  moduleDirectories: ['node_modules', 'src']
 };
