@@ -9,5 +9,7 @@ type SignOutButtonProps = {
 export function SignOutButton({ Base }: SignOutButtonProps) {
   const { signOut } = useAuth();
 
-  return <Base onClick={signOut} icon={<ImExit />} aria-label='Sair' />;
+  return (
+    <Base onClick={signOut} icon={<ImExit />} aria-label='Sair da conta' />
+  );
 }
