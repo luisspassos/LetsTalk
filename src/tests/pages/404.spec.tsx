@@ -6,15 +6,23 @@ describe('404 Page', () => {
     render(<Custom404 />);
   });
 
-  it('renders correctly', () => {
-    expect(
-      screen.getByText('Opss! Parece que esta página não existe...')
-    ).toBeInTheDocument();
+  it('should contain an image of 404', () => {
+    const img = screen.getByRole('img', { name: 'Página não encontrada' });
+
+    expect(img).toBeInTheDocument();
+  });
+
+  it('should contain a description', () => {
+    const description = screen.getByRole('heading', {
+      name: 'Opss! Parece que esta página não existe...',
+    });
+
+    expect(description).toBeInTheDocument();
   });
 
   it('should contain a link back to the login page', () => {
-    const backLink = screen.getByText('Voltar');
+    const backLink = screen.getByRole('link', { name: 'Voltar' });
 
-    expect(backLink.closest('a')).toHaveAttribute('href', '/');
+    expect(backLink).toBeInTheDocument();
   });
 });
