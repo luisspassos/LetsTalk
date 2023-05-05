@@ -1,6 +1,7 @@
 import { ColorMode, useColorMode } from '@chakra-ui/react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { mocked } from 'jest-mock';
+import { getImg } from 'tests/test_utils/404Page/Img';
 import { Img } from '.';
 
 jest.mock('@chakra-ui/react', () => {
@@ -18,7 +19,7 @@ describe('Img component', () => {
   function renderImg() {
     render(<Img />);
 
-    const img = screen.getByAltText('Página não encontrada');
+    const { img } = getImg();
 
     return { img };
   }

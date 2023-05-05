@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { getImg } from 'tests/test_utils/404Page/Img';
 import Custom404 from '../../pages/404';
 
 describe('404 Page', () => {
@@ -7,7 +8,7 @@ describe('404 Page', () => {
   });
 
   it('should contain an image of 404', () => {
-    const img = screen.getByRole('img', { name: 'Página não encontrada' });
+    const { img } = getImg();
 
     expect(img).toBeInTheDocument();
   });
