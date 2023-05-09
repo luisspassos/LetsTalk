@@ -17,7 +17,7 @@ export function LastMessage({ text, containerWidth }: LastMessageProps) {
       isTruncated
       color={useColorModeValue('lastMessage.light', 'lastMessage.dark')}
     >
-      🤠🤡🤡🤠dsadasddasdasdsadasdas
+      {text}
     </Text>
   );
 }

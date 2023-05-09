@@ -31,7 +31,7 @@ export function NumberOfUnreadMessages({
       pos='relative'
       {...styles}
     >
-      2
+      {number}
     </Circle>
   );
 }

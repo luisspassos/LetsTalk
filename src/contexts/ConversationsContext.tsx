@@ -58,7 +58,51 @@ export function ConversationsProvider({
 
       const conversations = await getConversations(user?.uid);
 
-      setConversations(conversations);
+      const newConversations: Conversations = [
+        ...conversations,
+        {
+          name: 'Ana',
+          lastMessage: 'Tudo bem?',
+          photoURL:
+            'https://cdn.pixabay.com/photo/2019/12/10/13/31/woman-4685862_960_720.jpg',
+          uid: 'a',
+          updatedAt: '19:00',
+          username: 'Ana#2000',
+          isBlocked: false,
+        },
+        {
+          name: 'Lucas',
+          lastMessage: 'Ok',
+          photoURL:
+            'https://cdn.pixabay.com/photo/2016/10/06/05/19/couple-1718244_960_720.jpg',
+          uid: 'b',
+          updatedAt: '18:00',
+          username: 'Lucas#213',
+          isBlocked: false,
+        },
+        {
+          name: 'Pedro',
+          lastMessage: 'Estarei lá em 10 minutos',
+          photoURL:
+            'https://cdn.pixabay.com/photo/2017/08/01/01/33/beanie-2562646_960_720.jpg',
+          uid: 'c',
+          updatedAt: '17:00',
+          username: 'Pedro#99',
+          isBlocked: false,
+        },
+        {
+          name: 'Daniel',
+          lastMessage: 'Não sei 😓',
+          photoURL:
+            'https://cdn.pixabay.com/photo/2017/12/31/15/56/portrait-3052641_960_720.jpg',
+          uid: 'd',
+          updatedAt: '16:00',
+          username: 'Daniel#9843',
+          isBlocked: false,
+        },
+      ];
+
+      setConversations(newConversations);
     }
 
     fillConversations();

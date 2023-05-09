@@ -33,7 +33,7 @@ export function Virtualizer({ search, padding }: VirtualizerProps) {
 
   return (
     <>
-      {newFetchedConversations.map(
+      {conversations.data?.map(
         ({ lastMessage, name, photoURL, updatedAt, uid }, i) => (
           <Conversation
             padding={padding}

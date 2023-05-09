@@ -12,7 +12,7 @@ export function NumberData({ updatedAt, containerWidth }: NumberDataProps) {
   return (
     <VStack flexShrink={0} spacing='1%' h='100%' align='end'>
       <LastMessageTime containerWidth={containerWidth} text={updatedAt} />
-      <NumberOfUnreadMessages number={2} containerWidth={containerWidth} />
+      <NumberOfUnreadMessages number={1} containerWidth={containerWidth} />
     </VStack>
   );
 }

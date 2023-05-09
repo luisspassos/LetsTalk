@@ -11,7 +11,7 @@ export function Name({ text, containerWidth }: NameProps) {
 
   return (
     <Heading isTruncated fontSize={fontSize} w='90%' fontWeight={400} as='h3'>
-      luissssssssssssssssssssssssssssssssssssss
+      {text}
     </Heading>
   );
 }

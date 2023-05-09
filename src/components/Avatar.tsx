@@ -51,6 +51,7 @@ export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
       >
         <Image
           ref={ref}
+          objectFit='cover'
           onLoad={handleLoad}
           onError={handleError}
           src={avatar}

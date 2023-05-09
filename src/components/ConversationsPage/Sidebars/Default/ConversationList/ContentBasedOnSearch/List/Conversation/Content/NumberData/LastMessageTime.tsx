@@ -22,7 +22,7 @@ export function LastMessageTime({
       fontSize={fontSize}
       color={useColorModeValue('blackAlpha.800', 'whiteAlpha.700')}
     >
-      22/09/2024
+      {text}
     </Text>
   );
 }
