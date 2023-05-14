@@ -1,9 +1,7 @@
-import { BackLink } from '../components/BackLink';
 import { CenterForm } from '../components/Form/CenterForm';
 import { Box } from '@chakra-ui/react';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
+import { BackLink } from 'components/BackLink';
 import { Title } from 'components/ForgotMyPasswordPage/Form/Title';
 import { Form } from 'components/ForgotMyPasswordPage/Form';
 
@@ -22,11 +20,11 @@ export default function IForgotMyPassword() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  const redirectionToConversationsOrNot =
-    await redirectToConversationsPageOrNot(ctx);
+// export const getServerSideProps: GetServerSideProps = async (
+//   ctx: GetServerSidePropsContext
+// ) => {
+//   const redirectionToConversationsOrNot =
+//     await redirectToConversationsPageOrNot(ctx);
 
-  return redirectionToConversationsOrNot;
-};
+//   return redirectionToConversationsOrNot;
+// };
