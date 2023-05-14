@@ -1,6 +1,6 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { AudioContextsProvider } from 'components/Audio/AudioContextsProvider';
 import { Message } from 'components/ConversationsPage/Messages/Main';
-import { useInitializeAudio } from 'hooks/Audio/useInitializeAudio';
 import { Avatar } from './Avatar';
 import { InteractiveElements } from './InteractiveElements';
 
@@ -10,8 +10,6 @@ type AudioComponentProps = {
 };
 
 export function AudioComponent({ index, isContact }: AudioComponentProps) {
-  useInitializeAudio('horse.wav', index);
-
   return (
     <Flex
       color={useColorModeValue('blue.500', 'current')}
@@ -22,7 +20,9 @@ export function AudioComponent({ index, isContact }: AudioComponentProps) {
       gap='.9em'
     >
       <Avatar isContact={isContact} />
-      <InteractiveElements />
+      <AudioContextsProvider>
+        <InteractiveElements index={index} />
+      </AudioContextsProvider>
     </Flex>
   );
 }

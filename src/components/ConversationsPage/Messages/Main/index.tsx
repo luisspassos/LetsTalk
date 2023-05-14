@@ -11,7 +11,6 @@ import { useConversationPopover } from '../../../../contexts/ConversationPopover
 import { Message } from './Message';
 import { AudioComponent } from './Message/Container/ContentBox/Audio';
 import { styles as parentStyles } from '../index';
-import { AudioContextsProvider } from 'components/Audio/AudioContextsProvider';
 import { Text } from './Message/Container/ContentBox/Text';
 
 type DbMessageData = {
@@ -319,9 +318,7 @@ export function Main() {
         messageIndex={20}
         sentIn='20:00'
       >
-        <AudioContextsProvider>
-          <AudioComponent index={0} isContact={true} />
-        </AudioContextsProvider>
+        <AudioComponent index={0} isContact={true} />
       </Message>
       <Message
         maxW='350px'
@@ -330,9 +327,7 @@ export function Main() {
         messageIndex={20}
         sentIn='20:00'
       >
-        <AudioContextsProvider>
-          <AudioComponent index={1} isContact={false} />
-        </AudioContextsProvider>
+        <AudioComponent index={1} isContact={false} />
       </Message>
     </Box>
     // <ScrollableBoxOfVirtualizedItems
