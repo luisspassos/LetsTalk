@@ -1,11 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import Page from 'pages/esqueci-minha-senha';
+import { fakeAuth } from 'tests/test_utils/fakeAuth';
+import { get } from '../test_utils/esqueci-minha-senha/getComponents';
 
-jest.mock('services/firebase', () => {
-  return {
-    auth: 'fake-auth',
-  };
-});
+fakeAuth();
 
 describe('Forgot my password page', () => {
   beforeEach(() => {
@@ -21,11 +19,8 @@ describe('Forgot my password page', () => {
   });
 
   it('should render a form', () => {
-    const emailInput = screen.getByLabelText('Email', { selector: 'input' });
-
-    const sendButton = screen.getByRole('button', {
-      name: 'ENVIAR',
-    });
+    const emailInput = get.emailInput();
+    const sendButton = get.sendButton();
 
     expect(emailInput).toBeInTheDocument();
     expect(sendButton).toBeInTheDocument();
