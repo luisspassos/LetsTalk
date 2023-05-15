@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import Page from 'pages/esqueci-minha-senha';
-import { fakeAuth } from 'tests/test_utils/fakeAuth';
 import { get } from '../test_utils/esqueci-minha-senha/getComponents';
 
-fakeAuth();
+jest.mock('services/firebase');
 
 describe('Forgot my password page', () => {
   beforeEach(() => {
