@@ -1,15 +1,12 @@
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
-import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
 import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
 import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
 import { PageTitle } from '../components/PageTitle';
-import { ManEnteringImg } from 'components/LoginPage/ManEnteringImg';
-import { Form } from 'components/LoginPage/Form';
+import { Content } from 'components/LoginPage';
 
 type RouterQuery = {
   error: string;
@@ -132,12 +129,7 @@ const Login = () => {
   return (
     <>
       <PageTitle pageName='Login' />
-      <AuthPageWrapper>
-        <AuthContentPageWrapper gap='90px'>
-          <ManEnteringImg />
-          <Form />
-        </AuthContentPageWrapper>
-      </AuthPageWrapper>
+      <Content />
     </>
   );
 };
