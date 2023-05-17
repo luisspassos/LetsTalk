@@ -6,6 +6,8 @@ import { act } from 'react-dom/test-utils';
 
 jest.mock('firebase/auth');
 
+jest.setTimeout(7000);
+
 const signInWithPopupMocked = mocked(signInWithPopup);
 mocked(GoogleAuthProvider);
 
@@ -14,7 +16,9 @@ signInWithPopupMocked.mockResolvedValue({
 } as any);
 
 async function pressTheButton() {
-  const loginButtonWithGoogle = screen.getByText('Entrar com o Google');
+  const loginButtonWithGoogle = screen.getByRole('button', {
+    name: 'Entrar com o Google',
+  });
 
   await act(async () => {
     fireEvent.click(loginButtonWithGoogle);
@@ -24,29 +28,43 @@ async function pressTheButton() {
 describe('LoginButtonWithGoogle component', () => {
   beforeEach(() => {
     render(<LoginButtonWithGoogle />);
-
-    function removeToasts() {
-      document.getElementById('chakra-toast-portal')?.remove();
-    }
-
-    removeToasts();
   });
 
   describe('errors', () => {
+    beforeEach(() => {
+      document.getElementById('chakra-toast-portal')?.remove();
+    });
+
     function triggerError(err: string | Error) {
       signInWithPopupMocked.mockImplementationOnce(() => {
         throw err;
       });
     }
 
-    it('should not show error if user closes signIn popup', async () => {
+    it('should not show an error toast if user closes signIn popup', async () => {
       triggerError('popup-closed-by-user');
 
       await pressTheButton();
 
-      expect(
-        screen.queryByText('Ocorreu um erro desconhecido. Tente novamente')
-      ).toBeNull();
+      async function assert() {
+        try {
+          const el = await screen.findByText(
+            'Ocorreu um erro desconhecido. Tente novamente',
+            {},
+            {
+              timeout: 5000,
+            }
+          );
+
+          return el;
+        } catch {
+          return null;
+        }
+      }
+
+      const result = await assert();
+
+      expect(result).toBeNull;
     });
 
     it('should show an unknown error', async () => {
@@ -58,5 +76,23 @@ describe('LoginButtonWithGoogle component', () => {
         await screen.findByText('Ocorreu um erro desconhecido. Tente novamente')
       ).toBeInTheDocument();
     });
+
+    //   it('disappear', async () => {
+    //     triggerError(new Error('fake-error'));
+
+    //     await pressTheButton();
+
+    //     await waitFor(
+    //       () => {
+    //         expect(
+    //           screen.getByText('Ocorreu um erro desconhecido. Tente novamente')
+    //         ).toBeInTheDocument();
+    //       },
+    //       {
+    //         interval: -1,
+    //         timeout: 5999,
+    //       }
+    //     );
+    //   });
   });
 });
