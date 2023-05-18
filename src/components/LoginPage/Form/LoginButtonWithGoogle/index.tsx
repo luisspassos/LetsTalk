@@ -45,7 +45,7 @@ export function LoginButtonWithGoogle() {
       await router.push('/conversas');
     } catch (err) {
       const error = String(err);
-      if (error.includes('popup-closed-by-user')) return;
+      if (error === 'popup-closed-by-user') return;
 
       const { unknownErrorToast } = await import(
         'utils/Toasts/unknownErrorToast'

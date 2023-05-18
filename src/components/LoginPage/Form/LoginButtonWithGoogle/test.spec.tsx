@@ -1,19 +1,12 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { LoginButtonWithGoogle } from '.';
+import { screen, fireEvent, render } from '@testing-library/react';
 import { mocked } from 'jest-mock';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import { act } from 'react-dom/test-utils';
+import { LoginButtonWithGoogle } from '.';
 
 jest.mock('firebase/auth');
 
-jest.setTimeout(7000);
-
 const signInWithPopupMocked = mocked(signInWithPopup);
-mocked(GoogleAuthProvider);
-
-signInWithPopupMocked.mockResolvedValue({
-  user: 'fake-user',
-} as any);
 
 async function pressTheButton() {
   const loginButtonWithGoogle = screen.getByRole('button', {
@@ -31,68 +24,33 @@ describe('LoginButtonWithGoogle component', () => {
   });
 
   describe('errors', () => {
-    beforeEach(() => {
-      document.getElementById('chakra-toast-portal')?.remove();
-    });
-
-    function triggerError(err: string | Error) {
+    async function triggerError(err?: string) {
       signInWithPopupMocked.mockImplementationOnce(() => {
-        throw err;
+        throw err ?? 'error';
       });
-    }
-
-    it('should not show an error toast if user closes signIn popup', async () => {
-      triggerError('popup-closed-by-user');
 
       await pressTheButton();
+    }
 
-      async function assert() {
-        try {
-          const el = await screen.findByText(
-            'Ocorreu um erro desconhecido. Tente novamente',
-            {},
-            {
-              timeout: 5000,
-            }
-          );
+    // continue with this testing position to avoid bugs with toasts of ChakraUI
+    it('should not show an error if user closes signIn popup', async () => {
+      await triggerError('popup-closed-by-user');
 
-          return el;
-        } catch {
-          return null;
-        }
-      }
-
-      const result = await assert();
-
-      expect(result).toBeNull;
+      expect(document.body.textContent).toBe('Entrar com o Google');
     });
 
     it('should show an unknown error', async () => {
-      triggerError(new Error('fake-error'));
-
-      await pressTheButton();
+      await triggerError();
 
       expect(
-        await screen.findByText('Ocorreu um erro desconhecido. Tente novamente')
+        screen.getByText('Ocorreu um erro desconhecido. Tente novamente')
+      ).toBeInTheDocument();
+
+      await new Promise((r) => setTimeout(r, 5999));
+
+      expect(
+        screen.getByText('Ocorreu um erro desconhecido. Tente novamente')
       ).toBeInTheDocument();
     });
-
-    //   it('disappear', async () => {
-    //     triggerError(new Error('fake-error'));
-
-    //     await pressTheButton();
-
-    //     await waitFor(
-    //       () => {
-    //         expect(
-    //           screen.getByText('Ocorreu um erro desconhecido. Tente novamente')
-    //         ).toBeInTheDocument();
-    //       },
-    //       {
-    //         interval: -1,
-    //         timeout: 5999,
-    //       }
-    //     );
-    //   });
   });
 });
