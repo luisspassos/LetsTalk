@@ -1,10 +1,17 @@
-import { screen, fireEvent, render } from '@testing-library/react';
+import {
+  screen,
+  fireEvent,
+  render,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import { mocked } from 'jest-mock';
 import { signInWithPopup } from 'firebase/auth';
 import { act } from 'react-dom/test-utils';
 import { LoginButtonWithGoogle } from '.';
 
 jest.mock('firebase/auth');
+
+jest.setTimeout(8000);
 
 const signInWithPopupMocked = mocked(signInWithPopup);
 
@@ -33,24 +40,38 @@ describe('LoginButtonWithGoogle component', () => {
     }
 
     // continue with this testing position to avoid bugs with toasts of ChakraUI
+
     it('should not show an error if user closes signIn popup', async () => {
       await triggerError('popup-closed-by-user');
 
       expect(document.body.textContent).toBe('Entrar com o Google');
     });
 
-    it('should show an unknown error', async () => {
+    it('should show an unknown error and last 6 seconds', async () => {
       await triggerError();
 
-      expect(
-        screen.getByText('Ocorreu um erro desconhecido. Tente novamente')
-      ).toBeInTheDocument();
+      const start = performance.now();
 
-      await new Promise((r) => setTimeout(r, 5999));
+      await waitForElementToBeRemoved(
+        () =>
+          screen.queryAllByText(
+            'Ocorreu um erro desconhecido. Tente novamente'
+          ),
+        {
+          timeout: 8000,
+        }
+      );
+
+      const end = performance.now();
+
+      const errorDuration = end - start;
+
+      expect(errorDuration).toBeGreaterThanOrEqual(6500);
+      expect(errorDuration).toBeLessThanOrEqual(7500);
 
       expect(
-        screen.getByText('Ocorreu um erro desconhecido. Tente novamente')
-      ).toBeInTheDocument();
+        screen.queryByText('Ocorreu um erro desconhecido. Tente novamente')
+      ).toBeNull();
     });
   });
 });
