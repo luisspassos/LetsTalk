@@ -66,13 +66,15 @@ describe('LoginButtonWithGoogle component', () => {
 
       const end = performance.now();
 
-      const duration = end - start;
-
       expect(queryError()).toStrictEqual([]);
 
-      const errDuration = 6000 + 1052; // 6 seconds in milliseconds;
+      const duration = end - start;
 
-      expect(duration).toBe(errDuration);
+      const errDuration = 6000; // 6 seconds in milliseconds;
+      const extra = 1052;
+      const totalDuration = errDuration + extra;
+
+      expect(duration).toBe(totalDuration);
     });
   });
 });
