@@ -11,7 +11,7 @@ import { LoginButtonWithGoogle } from '.';
 
 jest.mock('firebase/auth');
 
-jest.setTimeout(8000);
+jest.useFakeTimers();
 
 const signInWithPopupMocked = mocked(signInWithPopup);
 
@@ -39,8 +39,6 @@ describe('LoginButtonWithGoogle component', () => {
       await pressTheButton();
     }
 
-    // continue with this testing position to avoid bugs with toasts of ChakraUI
-
     it('should not show an error if user closes signIn popup', async () => {
       await triggerError('popup-closed-by-user');
 
@@ -52,26 +50,29 @@ describe('LoginButtonWithGoogle component', () => {
 
       const start = performance.now();
 
-      await waitForElementToBeRemoved(
-        () =>
-          screen.queryAllByText(
-            'Ocorreu um erro desconhecido. Tente novamente'
-          ),
-        {
-          timeout: 8000,
-        }
-      );
+      await act(async () => {
+        jest.runAllTimers();
+      });
+
+      function queryError() {
+        const message = 'Ocorreu um erro desconhecido. Tente novamente';
+
+        return screen.queryAllByRole('alert', {
+          name: message,
+        });
+      }
+
+      await waitForElementToBeRemoved(() => queryError());
 
       const end = performance.now();
 
-      const errorDuration = end - start;
+      const duration = end - start;
 
-      expect(errorDuration).toBeGreaterThanOrEqual(6500);
-      expect(errorDuration).toBeLessThanOrEqual(7500);
+      expect(queryError()).toStrictEqual([]);
 
-      expect(
-        screen.queryByText('Ocorreu um erro desconhecido. Tente novamente')
-      ).toBeNull();
+      const errDuration = 6000 + 1052; // 6 seconds in milliseconds;
+
+      expect(duration).toBe(errDuration);
     });
   });
 });
