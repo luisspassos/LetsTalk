@@ -1,17 +1,9 @@
-import {
-  screen,
-  fireEvent,
-  render,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
+import { screen, fireEvent, render } from '@testing-library/react';
 import { mocked } from 'jest-mock';
 import { signInWithPopup } from 'firebase/auth';
 import { act } from 'react-dom/test-utils';
 import { LoginButtonWithGoogle } from '.';
-
-jest.mock('firebase/auth');
-
-jest.useFakeTimers();
+import { testUnknownError } from 'tests/utils/testUnknownError';
 
 const signInWithPopupMocked = mocked(signInWithPopup);
 
@@ -45,36 +37,6 @@ describe('LoginButtonWithGoogle component', () => {
       expect(document.body.textContent).toBe('Entrar com o Google');
     });
 
-    it('should show an unknown error and last 6 seconds', async () => {
-      await triggerError();
-
-      const start = performance.now();
-
-      await act(async () => {
-        jest.runAllTimers();
-      });
-
-      function queryError() {
-        const message = 'Ocorreu um erro desconhecido. Tente novamente';
-
-        return screen.queryAllByRole('alert', {
-          name: message,
-        });
-      }
-
-      await waitForElementToBeRemoved(() => queryError());
-
-      const end = performance.now();
-
-      expect(queryError()).toStrictEqual([]);
-
-      const duration = end - start;
-
-      const errDuration = 6000; // 6 seconds in milliseconds;
-      const extra = 1052;
-      const totalDuration = errDuration + extra;
-
-      expect(duration).toBe(totalDuration);
-    });
+    testUnknownError(triggerError);
   });
 });

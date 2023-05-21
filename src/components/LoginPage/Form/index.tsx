@@ -6,6 +6,7 @@ import router from 'next/router';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'utils/Toasts/toast';
+import { unknownErrorToast } from 'utils/Toasts/unknownErrorToast';
 import * as yup from 'yup';
 import { DividerOr } from './DividerOr';
 import { ForgotMyPasswordLink } from './ForgotMyPasswordLink';
@@ -82,30 +83,30 @@ export function Form() {
         } catch (err) {
           const { FirebaseError } = await import('firebase/app');
 
-          if (err instanceof FirebaseError) {
-            const errors: FormFirebaseError = {
-              'auth/user-not-found': {
-                type: 'email',
-                message: 'Este usuário não existe',
-              },
-              'auth/wrong-password': {
-                type: 'password',
-                message: 'Senha incorreta',
-              },
-            };
+          if (!(err instanceof FirebaseError)) return unknownErrorToast();
 
-            const error = errors[err.code];
+          const errors: FormFirebaseError = {
+            'auth/user-not-found': {
+              type: 'email',
+              message: 'Este usuário não existe',
+            },
+            'auth/wrong-password': {
+              type: 'password',
+              message: 'Senha incorreta',
+            },
+          };
 
-            if (!error) {
-              const { unknownErrorToast } = await import(
-                'utils/Toasts/unknownErrorToast'
-              );
-              unknownErrorToast();
-            } else {
-              setError(error.type, {
-                message: error.message,
-              });
-            }
+          const error = errors[err.code];
+
+          if (!error) {
+            const { unknownErrorToast } = await import(
+              'utils/Toasts/unknownErrorToast'
+            );
+            unknownErrorToast();
+          } else {
+            setError(error.type, {
+              message: error.message,
+            });
           }
         }
       }),
