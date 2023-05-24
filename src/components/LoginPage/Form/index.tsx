@@ -5,8 +5,8 @@ import { signInWithEmailAndPassword, useAuth } from 'contexts/AuthContext';
 import router from 'next/router';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { handleFormError } from 'utils/handleFormError';
 import { toast } from 'utils/Toasts/toast';
-import { unknownErrorToast } from 'utils/Toasts/unknownErrorToast';
 import * as yup from 'yup';
 import { DividerOr } from './DividerOr';
 import { ForgotMyPasswordLink } from './ForgotMyPasswordLink';
@@ -18,14 +18,6 @@ export type SignInFormData = {
   email: string;
   password: string;
 };
-
-type FormFirebaseError = Record<
-  string,
-  {
-    type: keyof SignInFormData;
-    message: string;
-  }
->;
 
 const signInFormSchema = yup.object().shape({
   email: yup
@@ -81,11 +73,7 @@ export function Form() {
 
           await router.push('/conversas');
         } catch (err) {
-          const { FirebaseError } = await import('firebase/app');
-
-          if (!(err instanceof FirebaseError)) return unknownErrorToast();
-
-          const errors: FormFirebaseError = {
+          await handleFormError<SignInFormData>(err, setError, {
             'auth/user-not-found': {
               type: 'email',
               message: 'Este usuário não existe',
@@ -94,20 +82,7 @@ export function Form() {
               type: 'password',
               message: 'Senha incorreta',
             },
-          };
-
-          const error = errors[err.code];
-
-          if (!error) {
-            const { unknownErrorToast } = await import(
-              'utils/Toasts/unknownErrorToast'
-            );
-            unknownErrorToast();
-          } else {
-            setError(error.type, {
-              message: error.message,
-            });
-          }
+          });
         }
       }),
     [handleSubmit, initializeUser, setError]

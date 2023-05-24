@@ -1,20 +1,17 @@
-import { screen, fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { mocked } from 'jest-mock';
 import { signInWithPopup } from 'firebase/auth';
-import { act } from 'react-dom/test-utils';
 import { LoginButtonWithGoogle } from '.';
 import { testUnknownError } from 'tests/utils/testUnknownError';
+import { getButton } from 'tests/utils/Button/getButton';
+import { clickButton } from 'tests/utils/Button/clickButton';
 
 const signInWithPopupMocked = mocked(signInWithPopup);
 
 async function pressTheButton() {
-  const loginButtonWithGoogle = screen.getByRole('button', {
-    name: 'Entrar com o Google',
-  });
+  const button = getButton('Entrar com o Google');
 
-  await act(async () => {
-    fireEvent.click(loginButtonWithGoogle);
-  });
+  await clickButton(button);
 }
 
 describe('LoginButtonWithGoogle component', () => {

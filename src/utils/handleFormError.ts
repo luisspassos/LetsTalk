@@ -1,19 +1,19 @@
 import { FirebaseError } from 'firebase/app';
-import { UseFormReturn } from 'react-hook-form';
+import { FieldValues, Path, UseFormSetError } from 'react-hook-form';
 import { unknownErrorToast } from 'utils/Toasts/unknownErrorToast';
 
-type FormFirebaseErrors<FormData> = Record<
+type FormFirebaseErrors<FormData extends FieldValues> = Record<
   string,
   {
-    type: keyof FormData;
+    type: Path<FormData>;
     message: string;
   }
 >;
 
-export async function handleFormError<FormData extends Record<string, string>>(
+export async function handleFormError<FormData extends FieldValues>(
   catchErr: unknown,
-  errors: FormFirebaseErrors<FormData>,
-  setError: UseFormReturn['setError']
+  setError: UseFormSetError<FormData>,
+  errors: FormFirebaseErrors<FormData>
 ) {
   if (!(catchErr instanceof FirebaseError)) return unknownErrorToast();
 
