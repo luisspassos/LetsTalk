@@ -1,55 +1,19 @@
 import { Form } from '.';
 import { testFormWithEmail } from 'tests/utils/testFormWithEmail';
-import { mocked } from 'jest-mock';
 import { sendEmailToRecoverPassword } from 'contexts/AuthContext';
-import {
-  ReducedParams,
-  testFirebaseError,
-} from 'tests/utils/testFormWithEmail/testFirebaseError';
-import { createFillOutFormAndPressTheButton } from 'tests/utils/testFormWithEmail/createFillOutFormAndPressTheButton';
 
 jest.mock('contexts/AuthContext');
 
-const sendEmailToRecoverPasswordMocked = mocked(sendEmailToRecoverPassword);
-
-// type FillOutFormAndPressTheButtonParams = {
-//   email: string;
-// };
-
-// async function fillOutFormAndPressTheButton(
-//   params?: FillOutFormAndPressTheButtonParams
-// ) {
-//   const emailInput = screen.getByLabelText('Email');
-//   const sendButton = getButton('ENVIAR');
-
-//   typeInEmailInput({
-//     input: emailInput,
-//     text: params?.email,
-//   });
-
-//   await clickButton(sendButton);
-// }
-
-const fillOutFormAndPressTheButton = createFillOutFormAndPressTheButton();
-
-async function newTestFirebaseError(rest: ReducedParams) {
-  await testFirebaseError({
-    mockedFunc: sendEmailToRecoverPasswordMocked,
-    fillOutFormAndPressTheButton,
-    ...rest,
-  });
-}
-
 testFormWithEmail({
-  name: 'Forgot my password form',
+  name: 'Forgot my password',
   Component: Form,
-  fillOutFormAndPressTheButton,
-  mockedFunc: sendEmailToRecoverPasswordMocked,
+  formInfo: { buttonName: 'ENVIAR' },
+  funcToBeMocked: sendEmailToRecoverPassword,
   tests: {
-    email: () => {
+    email: ({ testFirebaseError }) => {
       // eslint-disable-next-line jest/expect-expect
       it('should show an error message if the user is not found', async () => {
-        await newTestFirebaseError({
+        await testFirebaseError({
           errorCode: 'auth/user-not-found',
           expectedText: 'Este usuário não existe',
         });
@@ -57,7 +21,7 @@ testFormWithEmail({
 
       // eslint-disable-next-line jest/expect-expect
       it('should should show an error message if there are too many requests', async () => {
-        await newTestFirebaseError({
+        await testFirebaseError({
           errorCode: 'auth/too-many-requests',
           expectedText: 'Tente novamente mais tarde',
         });

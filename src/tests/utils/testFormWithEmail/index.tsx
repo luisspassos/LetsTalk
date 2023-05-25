@@ -1,10 +1,25 @@
 /* eslint-disable jest/valid-title */
 /* eslint-disable jest/no-export */
 import { render, screen } from '@testing-library/react';
+import { MockableFunction, mocked } from 'jest-mock';
 import { Component, MockedFunc } from 'utils/types';
 import { testUnknownError } from '../testUnknownError';
+import {
+  createFillOutFormAndPressTheButton,
+  Label,
+  Params as FormInfo,
+} from './createFillOutFormAndPressTheButton';
+import { ReducedParams, testFirebaseError } from './testFirebaseError';
 
-type TestBlock = () => void;
+type TestUtils<L extends Label> = {
+  mockedFunc: MockedFunc;
+  fillOutFormAndPressTheButton: ReturnType<
+    typeof createFillOutFormAndPressTheButton<L>
+  >['fillOutFormAndPressTheButton'];
+  testFirebaseError: (rest: ReducedParams) => Promise<void>;
+};
+
+type TestBlock<L extends Label> = (testUtils: TestUtils<L>) => void;
 
 export type fillOutFormAndPressTheButton = (
   obj?:
@@ -14,30 +29,49 @@ export type fillOutFormAndPressTheButton = (
     | undefined
 ) => Promise<void>;
 
-type TestFormParams = {
+type TestFormParams<L extends Label> = {
   name: string;
   Component: Component;
-  fillOutFormAndPressTheButton: fillOutFormAndPressTheButton;
   tests?: {
-    email?: TestBlock;
-    others?: TestBlock;
+    email?: TestBlock<L>;
+    others?: TestBlock<L>;
   };
-  mockedFunc: MockedFunc;
+  funcToBeMocked: MockableFunction;
+  formInfo: FormInfo<L>;
 };
 
-export function testFormWithEmail({
+export function testFormWithEmail<L extends Label>({
   name,
   Component,
-  fillOutFormAndPressTheButton,
   tests,
-  mockedFunc,
-}: TestFormParams) {
+  formInfo,
+  funcToBeMocked,
+}: TestFormParams<L>) {
+  const mockedFunc = mocked(funcToBeMocked);
+
+  const { fillOutFormAndPressTheButton } =
+    createFillOutFormAndPressTheButton(formInfo);
+
+  async function newTestFirebaseError(rest: ReducedParams) {
+    await testFirebaseError({
+      mockedFunc,
+      fillOutFormAndPressTheButton,
+      ...rest,
+    });
+  }
+
+  const testUtils: TestUtils<L> = {
+    mockedFunc,
+    fillOutFormAndPressTheButton,
+    testFirebaseError: newTestFirebaseError,
+  };
+
   describe(`${name} form`, () => {
     beforeEach(async () => {
       render(<Component />);
     });
 
-    describe('Email', () => {
+    function emailTests() {
       const patternTests = [
         {
           title: 'should be required',
@@ -55,14 +89,17 @@ export function testFormWithEmail({
         it(title, async () => {
           await fillOutFormAndPressTheButton({ email: emailValue });
 
-          expect(screen.getByText(errorMessage)).toBeInTheDocument();
+          expect(screen.getByText(errorMessage)).toBeVisible();
         });
       }
 
-      tests?.email && tests?.email();
-    });
+      tests?.email && tests?.email(testUtils);
+    }
 
-    tests?.others && tests.others();
+    // eslint-disable-next-line jest/valid-describe-callback
+    describe('Email', emailTests);
+
+    tests?.others && tests.others(testUtils);
 
     testUnknownError(async () => {
       mockedFunc.mockImplementationOnce(() => {
