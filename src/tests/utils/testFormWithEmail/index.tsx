@@ -1,33 +1,29 @@
 /* eslint-disable jest/valid-title */
 /* eslint-disable jest/no-export */
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { MockableFunction, mocked } from 'jest-mock';
 import { Component, MockedFunc } from 'utils/types';
 import { testUnknownError } from '../testUnknownError';
 import {
   createFillOutFormAndPressTheButton,
+  FillOutFormAndPressTheButton,
   Label,
   Params as FormInfo,
 } from './createFillOutFormAndPressTheButton';
-import { ReducedParams, testFirebaseError } from './testFirebaseError';
+import { formErrorExpect } from './formErrorExpect';
+import {
+  ReducedParams,
+  testFirebaseError,
+  TestFirebaseErrorReduced,
+} from './testFirebaseError';
 
 type TestUtils<L extends Label> = {
   mockedFunc: MockedFunc;
-  fillOutFormAndPressTheButton: ReturnType<
-    typeof createFillOutFormAndPressTheButton<L>
-  >['fillOutFormAndPressTheButton'];
-  testFirebaseError: (rest: ReducedParams) => Promise<void>;
+  fillOutFormAndPressTheButton: FillOutFormAndPressTheButton<L>;
+  testFirebaseError: (rest: ReducedParams<L>) => Promise<void>;
 };
 
 type TestBlock<L extends Label> = (testUtils: TestUtils<L>) => void;
-
-export type fillOutFormAndPressTheButton = (
-  obj?:
-    | {
-        email: string;
-      }
-    | undefined
-) => Promise<void>;
 
 type TestFormParams<L extends Label> = {
   name: string;
@@ -52,18 +48,20 @@ export function testFormWithEmail<L extends Label>({
   const { fillOutFormAndPressTheButton } =
     createFillOutFormAndPressTheButton(formInfo);
 
-  async function newTestFirebaseError(rest: ReducedParams) {
+  const testFirebaseErrorReduced: TestFirebaseErrorReduced<L> = async (
+    rest
+  ) => {
     await testFirebaseError({
       mockedFunc,
       fillOutFormAndPressTheButton,
       ...rest,
     });
-  }
+  };
 
   const testUtils: TestUtils<L> = {
     mockedFunc,
     fillOutFormAndPressTheButton,
-    testFirebaseError: newTestFirebaseError,
+    testFirebaseError: testFirebaseErrorReduced,
   };
 
   describe(`${name} form`, () => {
@@ -86,10 +84,11 @@ export function testFormWithEmail<L extends Label>({
       ];
 
       for (const { emailValue, errorMessage, title } of patternTests) {
+        // eslint-disable-next-line jest/expect-expect
         it(title, async () => {
-          await fillOutFormAndPressTheButton({ email: emailValue });
+          await fillOutFormAndPressTheButton({ Email: emailValue });
 
-          expect(screen.getByText(errorMessage)).toBeVisible();
+          formErrorExpect(errorMessage);
         });
       }
 

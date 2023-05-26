@@ -1,8 +1,13 @@
 import { Form } from '.';
 import { testFormWithEmail } from 'tests/utils/testFormWithEmail';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'contexts/AuthContext';
+import { userNotFound } from 'tests/utils/testFormWithEmail/testFirebaseError/tests/userNotFound';
+import { formErrorExpect } from 'tests/utils/testFormWithEmail/formErrorExpect';
 
-jest.mock('contexts/AuthContext');
+jest.mock('contexts/AuthContext', () => ({
+  ...jest.requireActual('contexts/AuthContext'),
+  signInWithEmailAndPassword: jest.fn(),
+}));
 
 testFormWithEmail({
   name: 'Login',
@@ -14,26 +19,23 @@ testFormWithEmail({
   funcToBeMocked: signInWithEmailAndPassword,
   tests: {
     email: ({ testFirebaseError }) => {
-      // eslint-disable-next-line jest/expect-expect
-      it('should show an error message if the user is not found', async () => {
-        await testFirebaseError({
-          errorCode: 'auth/user-not-found',
-          expectedText: 'Este usuário não existe',
-        });
-      });
-
-      // eslint-disable-next-line jest/expect-expect
-      it('should should show an error message if there are too many requests', async () => {
-        await testFirebaseError({
-          errorCode: 'auth/too-many-requests',
-          expectedText: 'Tente novamente mais tarde',
-        });
-      });
+      userNotFound({ testFirebaseError });
     },
-    others: ({ fillOutFormAndPressTheButton }) => {
+    others: ({ fillOutFormAndPressTheButton, testFirebaseError }) => {
       describe('Password', () => {
+        // eslint-disable-next-line jest/expect-expect
         it('should be required', async () => {
-          await fillOutFormAndPressTheButton({});
+          await fillOutFormAndPressTheButton({ Senha: '' });
+
+          formErrorExpect('Senha obrigatória');
+        });
+
+        // eslint-disable-next-line jest/expect-expect
+        it('should be correct', async () => {
+          await testFirebaseError({
+            errorCode: 'auth/wrong-password',
+            expectedText: 'Senha incorreta',
+          });
         });
       });
     },

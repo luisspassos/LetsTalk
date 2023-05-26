@@ -11,11 +11,15 @@ export type Params<L extends Label> = {
   buttonName: string;
 };
 
+export type FillOutFormAndPressTheButton<L extends Label> = ReturnType<
+  typeof createFillOutFormAndPressTheButton<L>
+>['fillOutFormAndPressTheButton'];
+
 export function createFillOutFormAndPressTheButton<L extends Label>({
   buttonName,
   inputs = [],
 }: Params<L>) {
-  const newInputs: Inputs<string>[] = [
+  const newInputs: Inputs<L | 'Email'>[] = [
     {
       label: 'Email',
       defaultValue: 'test@example.com',
@@ -41,7 +45,7 @@ export function createFillOutFormAndPressTheButton<L extends Label>({
         const { defaultValue, label } = newInputs[i];
         const formattedInput = formattedInputs[i];
 
-        const value = inputValues?.[label.toLowerCase()];
+        const value = inputValues?.[label];
 
         fireEvent.change(formattedInput, {
           target: { value: value ?? defaultValue },
