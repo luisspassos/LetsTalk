@@ -1,19 +1,23 @@
 describe('Login page', () => {
-  it('should render the components', () => {
+  beforeEach(() => {
     cy.visit('/');
+  });
 
-    cy.contains("Let's Talk");
+  it('sign up button should redirect to sign up page', () => {
+    cy.contains('Cadastre-se').click();
 
-    cy.contains('Entrar com o Google');
+    cy.get('button').contains('CADASTRAR');
+  });
 
-    cy.contains('Email').siblings('input');
+  it('forgot my password should redirect to forgot my password page', () => {
+    cy.contains('Esqueci minha senha').click();
 
-    cy.contains('Senha').siblings('input');
+    cy.get('h1').contains('Envie seu email para recuperar sua senha');
+  });
 
-    cy.contains('Esqueci minha senha');
+  it('should sign in with google', () => {
+    cy.contains('Entrar com o Google').click();
 
-    cy.contains('Entrar');
-
-    cy.contains('Cadastre-se');
+    cy.get('input').type('luis@gmail.com');
   });
 });
