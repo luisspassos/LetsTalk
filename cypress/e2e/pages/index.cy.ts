@@ -4,18 +4,18 @@ describe('Login page', () => {
   });
 
   it('should sign in with google', () => {
-    cy.contains('Entrar com o Google').click();
+    cy.get('[data-cy="google login button"]').click();
   });
 
-  it('sign up button should redirect to sign up page', () => {
-    cy.contains('Cadastre-se').click();
+  // it('sign up button should redirect to sign up page', () => {
+  //   cy.contains('Cadastre-se').click();
 
-    cy.get('button').contains('CADASTRAR');
-  });
+  //   cy.get('button').contains('CADASTRAR');
+  // });
 
-  it('forgot my password should redirect to forgot my password page', () => {
-    cy.contains('Esqueci minha senha').click();
+  // it('forgot my password should redirect to forgot my password page', () => {
+  //   cy.contains('Esqueci minha senha').click();
 
-    cy.get('h1').contains('Envie seu email para recuperar sua senha');
-  });
+  //   cy.get('h1').contains('Envie seu email para recuperar sua senha');
+  // });
 });

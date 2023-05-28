@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import { useAuth } from 'contexts/AuthContext';
+import { FirebaseError } from 'firebase/app';
 
 export function LoginButtonWithGoogle() {
   const [isLoading, setIsLoading] = useState(false);
@@ -44,12 +45,17 @@ export function LoginButtonWithGoogle() {
 
       await router.push('/conversas');
     } catch (err) {
-      const error = String(err);
-      if (error === 'popup-closed-by-user') return;
+      if (
+        err instanceof FirebaseError &&
+        err.code === 'auth/popup-closed-by-user'
+      ) {
+        return;
+      }
 
       const { unknownErrorToast } = await import(
         'utils/Toasts/unknownErrorToast'
       );
+
       unknownErrorToast();
     } finally {
       setIsLoading(false);
@@ -58,6 +64,7 @@ export function LoginButtonWithGoogle() {
 
   return (
     <Button
+      data-cy='google login button'
       minH='48px'
       h='auto'
       whiteSpace='initial'
