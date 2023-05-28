@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import nookies from 'nookies';
 import { auth as adminAuth } from 'services/firebaseAdmin';
 
-export async function redirectToUserIfNoUser(ctx: GetServerSidePropsContext) {
+export async function redirectToHomeIfNoUser(ctx: GetServerSidePropsContext) {
   try {
     const cookies = nookies.get(ctx);
     const user = await adminAuth.verifyIdToken(cookies.token);

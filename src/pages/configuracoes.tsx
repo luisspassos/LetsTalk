@@ -3,7 +3,7 @@ import { Loading } from 'components/ConfigurationsPage/Loading';
 import { Wrapper } from 'components/Sidebar/Wrapper';
 import { useOnAuthStateChanged } from 'hooks/useOnAuthStateChanged';
 import { GetServerSideProps } from 'next';
-import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
+import { redirectToHomeIfNoUser } from 'utils/redirectToHomeIfNoUser';
 
 export default function ConfigurationsPage() {
   useOnAuthStateChanged();
@@ -18,4 +18,4 @@ export default function ConfigurationsPage() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = redirectToUserIfNoUser;
+export const getServerSideProps: GetServerSideProps = redirectToHomeIfNoUser;

@@ -1,6 +1,4 @@
 import { Conversations } from 'components/ConversationsPage';
-import { GetServerSideProps } from 'next';
-import { redirectToUserIfNoUser } from 'utils/redirectToHomeIfNoUser';
 import { useOnAuthStateChanged } from 'hooks/useOnAuthStateChanged';
 import { useCheckIfUserHasBeenDeleted } from 'hooks/useCheckIfUserAccHasBeenDeleted';
 import { useHandleUserOnlineAt } from 'hooks/useHandleUserOnlineAt';
@@ -18,4 +16,4 @@ export default function ConversationsPage() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = redirectToUserIfNoUser;
+// export const getServerSideProps: GetServerSideProps = redirectToHomeIfNoUser;

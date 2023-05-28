@@ -1,10 +1,10 @@
 describe('Login page', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
+  beforeEach(() => {});
 
   it('should sign in with google', () => {
+    cy.loginByGoogleApi();
     cy.get('[data-cy="google login button"]').click();
+    cy.contains('Conversas');
   });
 
   // it('sign up button should redirect to sign up page', () => {
