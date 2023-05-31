@@ -2,7 +2,6 @@ describe('Login page', () => {
   beforeEach(() => {});
 
   it('should sign in with google', () => {
-    cy.loginByGoogleApi();
     cy.get('[data-cy="google login button"]').click();
     cy.contains('Conversas');
   });
