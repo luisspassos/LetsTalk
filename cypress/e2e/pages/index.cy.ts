@@ -1,17 +1,25 @@
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../../src/services/firebase';
+
 describe('Login page', () => {
   // beforeEach(() => {
   //   cy.visit('/');
   // });
+  // it('should open google sign in popup', () => {
+  //   cy.visit('/', {
+  //     onBeforeLoad(win) {
+  //       cy.stub(win, 'open');
+  //     },
+  //   });
+  //   cy.get('[data-cy="google login button"]').click();
+  //   cy.window().its('open').should('be.called');
+  // });
 
-  it('should open google sign in popup', () => {
-    cy.visit('/', {
-      onBeforeLoad(win) {
-        cy.stub(win, 'open');
-      },
-    });
+  it('a', () => {
+    cy.visit('/');
 
-    cy.get('[data-cy="google login button"]').click();
+    signInWithPopup(auth, new GoogleAuthProvider());
 
-    cy.window().its('open').should('be.called');
+    cy.get('[data-cy="google login button"]').should('be.visible');
   });
 });

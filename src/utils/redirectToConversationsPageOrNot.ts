@@ -23,6 +23,7 @@ export async function redirectToConversationsPageOrNot(
 
   try {
     const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+
     if (
       user.email_verified ||
       (user.firebase.sign_in_provider === 'google.com' &&
@@ -38,6 +39,8 @@ export async function redirectToConversationsPageOrNot(
 
     return props;
   } catch (err) {
+    console.log(err);
+
     return props;
   }
 }
