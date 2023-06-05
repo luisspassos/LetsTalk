@@ -23,6 +23,8 @@ export function LoginButtonWithGoogle() {
 
       const result = await signInWithPopup(auth, googleProvider);
 
+      console.log(result);
+
       const { user } = result;
 
       const { getAdditionalUserInfo } = await import('firebase/auth');

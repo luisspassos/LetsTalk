@@ -6,6 +6,12 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3000',
     setupNodeEvents(on, config) {
+      on('before:browser:launch', (_, launchOptions) => {
+        launchOptions.args.push('--enable-features=SharedArrayBuffer');
+
+        return launchOptions;
+      });
+
       return cypressFirebasePlugin(on, config, admin, {
         projectId: 'lets-talk-d08fa',
       });
