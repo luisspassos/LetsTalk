@@ -5,12 +5,12 @@ import { useState, useEffect, useRef } from 'react';
 import { useConversations } from '../../../../../../contexts/ConversationsContext';
 import { db } from '../../../../../../services/firebase';
 import { formatContactOnlineAt } from '../../../../../../utils/formatDate';
-import { OnlineAt } from '../../../../../../utils/types';
+import { OnlineAt as OnlineAtType } from '../../../../../../utils/types';
 
 type OnlineAtFormatted = string;
 
 type ContactDocumentData = {
-  onlineAt: OnlineAt;
+  onlineAt: OnlineAtType;
   uid: string;
 };
 

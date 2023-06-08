@@ -4,6 +4,8 @@ import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import { useAuth } from 'contexts/AuthContext';
 import { FirebaseError } from 'firebase/app';
+import * as firebaseAuth from 'firebase/auth';
+import { getValue } from './getValue';
 
 export function LoginButtonWithGoogle() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,15 +17,14 @@ export function LoginButtonWithGoogle() {
     try {
       setIsLoading(true);
 
-      const { GoogleAuthProvider, signInWithPopup } = await import(
-        'firebase/auth'
-      );
+      const value = getValue();
+
+      console.log(value);
+
       const { auth } = await import('services/firebase');
-      const googleProvider = new GoogleAuthProvider();
+      const googleProvider = new firebaseAuth.GoogleAuthProvider();
 
-      const result = await signInWithPopup(auth, googleProvider);
-
-      console.log(result);
+      const result = await firebaseAuth.signInWithPopup(auth, googleProvider);
 
       const { user } = result;
 
