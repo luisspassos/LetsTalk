@@ -1,13 +1,19 @@
 import { Button, Icon, Spinner, useColorModeValue } from '@chakra-ui/react';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import { useAuth } from 'contexts/AuthContext';
 import { FirebaseError } from 'firebase/app';
 import * as firebaseAuth from 'firebase/auth';
-import { getValue } from './getValue';
+import * as signInWithPopupMod from './getValue';
 
 export function LoginButtonWithGoogle() {
+  useEffect(() => {
+    if (window.Cypress) {
+      window.signInWithPopupMod = signInWithPopupMod;
+    }
+  }, []);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -17,14 +23,13 @@ export function LoginButtonWithGoogle() {
     try {
       setIsLoading(true);
 
-      const value = getValue();
-
-      console.log(value);
-
       const { auth } = await import('services/firebase');
       const googleProvider = new firebaseAuth.GoogleAuthProvider();
 
-      const result = await firebaseAuth.signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopupMod.signInWithPopup(
+        auth,
+        googleProvider
+      );
 
       const { user } = result;
 
@@ -48,6 +53,8 @@ export function LoginButtonWithGoogle() {
 
       await router.push('/conversas');
     } catch (err) {
+      console.log(err);
+
       if (
         err instanceof FirebaseError &&
         err.code === 'auth/popup-closed-by-user'
@@ -67,7 +74,7 @@ export function LoginButtonWithGoogle() {
 
   return (
     <Button
-      data-cy='google login button'
+      data-testid='google login button'
       minH='48px'
       h='auto'
       whiteSpace='initial'

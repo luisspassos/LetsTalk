@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
-import { Message } from '..';
+import { Message as MessageType } from '..';
 import { Container } from './Container';
 import { ChakraContentBoxProps } from './Container/ContentBox';
 import { SentIn } from './SentIn';
 import { Wrapper } from './Wrapper';
 
-type MessageInfo = Omit<Message, 'id' | 'message'>;
+type MessageInfo = Omit<MessageType, 'id' | 'message'>;
 
 type MessageProps = {
   children: ReactNode;

@@ -1,14 +1,40 @@
-import * as getValueMod from '../../../src/components/LoginPage/Form/LoginButtonWithGoogle/getValue';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../src/services/firebase';
 
 describe('Login page', () => {
-  it('a', () => {
-    cy.stub(getValueMod, 'getValue').returns('Hiiii');
-    cy.visit('/');
-    cy.get('[data-cy="google login button"]').click();
+  describe('sign in with google', () => {
+    function getButton() {
+      return cy.get('[data-testid="google login button"]');
+    }
 
-    // cy.stub(getValue, 'getValue').returns('Hi');
-    // cy.login('Cu5c1zjAschlRhzO6mUzPRbfUwv2');
-    // cy.visit('/');
-    // cy.get('[data-cy="google login button"]').click();
+    it('should open a login popup', () => {
+      cy.visit('/', {
+        onBeforeLoad(win) {
+          cy.stub(win, 'open');
+        },
+      });
+
+      getButton().click();
+
+      cy.window().its('open').should('be.called');
+    });
+
+    it('should go to the conversations page', () => {
+      cy.login('Cu5c1zjAschlRhzO6mUzPRbfUwv2');
+
+      cy.visit('/');
+
+      cy.window().then((win) => {
+        onAuthStateChanged(auth, (user) => {
+          cy.stub(win.signInWithPopupMod, 'signInWithPopup').resolves({
+            user,
+          });
+        });
+
+        getButton().click();
+
+        cy.get('Conversas').should('be.visible');
+      });
+    });
   });
 });

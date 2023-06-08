@@ -1,3 +1,3 @@
-export const getValue = () => {
-  return 'Hello world';
-};
+import { signInWithPopup as FirebaseSignInWithPopup } from 'firebase/auth';
+
+export const signInWithPopup = FirebaseSignInWithPopup;
