@@ -20,7 +20,7 @@ describe('Login page', () => {
     });
 
     it('should go to the conversations page', () => {
-      cy.login('Cu5c1zjAschlRhzO6mUzPRbfUwv2');
+      cy.login();
 
       cy.visit('/');
 
