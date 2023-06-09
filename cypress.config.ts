@@ -15,9 +15,7 @@ export default defineConfig({
         return launchOptions;
       });
 
-      return cypressFirebasePlugin(on, config, admin, {
-        projectId: 'lets-talk-d08fa',
-      });
+      return cypressFirebasePlugin(on, config, admin);
     },
   },
 });
