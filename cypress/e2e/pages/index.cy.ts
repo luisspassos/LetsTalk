@@ -19,17 +19,23 @@ describe('Login page', () => {
       cy.window().its('open').should('be.called');
     });
 
-    it('should go to the conversations page', () => {
+    it.only('should go to the conversations page', () => {
       cy.login();
 
       cy.visit('/');
 
       cy.window().then((win) => {
-        onAuthStateChanged(auth, (user) => {
-          cy.stub(win.signInWithPopupMod, 'signInWithPopup').resolves({
-            user,
+        function returnsANewUser() {
+          cy.stub(win.auth, 'getAdditionalUserInfo').returns({
+            isNewUser: true,
           });
-        });
+
+          onAuthStateChanged(auth, (user) => {
+            cy.stub(win.auth, 'signInWithPopup').resolves({ user });
+          });
+        }
+
+        returnsANewUser();
 
         getButton().click();
 

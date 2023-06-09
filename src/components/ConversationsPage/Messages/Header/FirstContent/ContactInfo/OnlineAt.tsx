@@ -46,11 +46,11 @@ export function OnlineAt() {
       return unsub;
     }
 
-    const unsub = getOnlineAt();
+    // const unsub = getOnlineAt();
 
-    return () => {
-      unsub && unsub();
-    };
+    // return () => {
+    //   unsub && unsub();
+    // };
   }, [currentConversation.data?.username]);
 
   const wrapperRef = useRef<HTMLDivElement>(null);

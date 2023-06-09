@@ -4,13 +4,21 @@ import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import { useAuth } from 'contexts/AuthContext';
 import { FirebaseError } from 'firebase/app';
-import * as firebaseAuth from 'firebase/auth';
-import * as signInWithPopupMod from './getValue';
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  getAdditionalUserInfo,
+} from 'firebase/auth';
+
+const authMethods = {
+  signInWithPopup,
+  getAdditionalUserInfo,
+}; // for cypress, use this object in this file for tests work
 
 export function LoginButtonWithGoogle() {
   useEffect(() => {
     if (window.Cypress) {
-      window.signInWithPopupMod = signInWithPopupMod;
+      window.auth = authMethods;
     }
   }, []);
 
@@ -24,20 +32,16 @@ export function LoginButtonWithGoogle() {
       setIsLoading(true);
 
       const { auth } = await import('services/firebase');
-      const googleProvider = new firebaseAuth.GoogleAuthProvider();
+      const googleProvider = new GoogleAuthProvider();
 
-      const result = await signInWithPopupMod.signInWithPopup(
-        auth,
-        googleProvider
-      );
+      const result = await authMethods.signInWithPopup(auth, googleProvider);
 
       const { user } = result;
 
-      const { getAdditionalUserInfo } = await import('firebase/auth');
-
-      const additionalUserInfo = getAdditionalUserInfo(result);
+      const additionalUserInfo = authMethods.getAdditionalUserInfo(result);
 
       if (additionalUserInfo?.isNewUser) {
+        console.log('here');
         const name = user.displayName ?? 'Usuário';
 
         const { setUsername, addUsernameInDb } = await import(
