@@ -4,7 +4,7 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyA7q_6LOt-v3QAbuiVYWa1qvDwJwN1v5x8',
   authDomain: 'lets-talk-d08fa.firebaseapp.com',
   projectId: 'lets-talk-d08fa',

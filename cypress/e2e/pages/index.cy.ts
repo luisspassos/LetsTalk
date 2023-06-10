@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../support/e2e';
+import { auth } from '../../../src/services/firebase';
 
 describe('Login page', () => {
   describe('sign in with google', () => {
@@ -31,8 +31,6 @@ describe('Login page', () => {
           });
 
           onAuthStateChanged(auth, (user) => {
-            console.log(user);
-
             cy.stub(win.auth, 'signInWithPopup').resolves({ user });
           });
         }
