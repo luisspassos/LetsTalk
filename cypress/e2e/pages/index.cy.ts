@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../../src/services/firebase';
+import { auth } from '../../support/e2e';
 
 describe('Login page', () => {
   describe('sign in with google', () => {
@@ -19,7 +19,7 @@ describe('Login page', () => {
       cy.window().its('open').should('be.called');
     });
 
-    it.only('should go to the conversations page', () => {
+    it('should go to the conversations page', () => {
       cy.login();
 
       cy.visit('/');
@@ -31,6 +31,8 @@ describe('Login page', () => {
           });
 
           onAuthStateChanged(auth, (user) => {
+            console.log(user);
+
             cy.stub(win.auth, 'signInWithPopup').resolves({ user });
           });
         }
