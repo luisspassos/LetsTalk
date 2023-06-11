@@ -1,10 +1,13 @@
-import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../../src/services/firebase';
+
+function getElement(element: string) {
+  return `[data-testid="${element}"]`;
+}
 
 describe('Login page', () => {
   describe('sign in with google', () => {
     function getButton() {
-      return cy.get('[data-testid="google login button"]');
+      return cy.get(getElement('google login button'));
     }
 
     it('should open a login popup', () => {
@@ -19,7 +22,7 @@ describe('Login page', () => {
       cy.window().its('open').should('be.called');
     });
 
-    it('should go to the conversations page', () => {
+    it.only('should go to the conversations page', () => {
       cy.login();
 
       cy.visit('/');
@@ -30,16 +33,25 @@ describe('Login page', () => {
             isNewUser: true,
           });
 
-          onAuthStateChanged(auth, (user) => {
-            cy.stub(win.auth, 'signInWithPopup').resolves({ user });
-          });
+          const user = auth.currentUser;
+
+          cy.stub(win.auth, 'signInWithPopup').resolves({ user });
         }
 
         returnsANewUser();
 
         getButton().click();
 
-        cy.get('Conversas').should('be.visible');
+        cy.url({ timeout: 10_000 /* milliseconds */ }).should(
+          'include',
+          '/conversas'
+        );
+
+        const user = auth.currentUser;
+
+        // if (user?.displayName === undefined || user.displayName === null) {
+        throw 'username has not been set';
+        // }
       });
     });
   });
