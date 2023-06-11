@@ -5,12 +5,12 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyA7q_6LOt-v3QAbuiVYWa1qvDwJwN1v5x8',
-  authDomain: 'lets-talk-d08fa.firebaseapp.com',
-  projectId: 'lets-talk-d08fa',
-  storageBucket: 'lets-talk-d08fa.appspot.com',
-  messagingSenderId: '1002492041049',
-  appId: '1:1002492041049:web:3c71534254126237445e48',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 if (!getApps().length) {
