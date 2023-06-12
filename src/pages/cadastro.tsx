@@ -2,7 +2,7 @@ import { Stack, useColorModeValue, Show } from '@chakra-ui/react';
 import { AuthPageWrapper } from '../components/Auth/AuthPageWrapper';
 import { AuthContentPageWrapper } from '../components/Auth/AuthContentPageWrapper';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
+import { redirectToConversationsPageIfThereIsUser } from '../utils/redirectToConversationsPageIfThereIsUser';
 import { PageTitle } from '../components/PageTitle';
 import { Form } from 'components/RegistrationPage/Form';
 import { Description } from 'components/RegistrationPage/Description';
@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
   const redirectionToConversationsOrNot =
-    await redirectToConversationsPageOrNot(ctx);
+    await redirectToConversationsPageIfThereIsUser(ctx);
 
   return redirectionToConversationsOrNot;
 };

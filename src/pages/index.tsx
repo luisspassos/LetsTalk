@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { auth } from '../services/firebase';
 import { applyActionCode } from 'firebase/auth';
 import { toast } from '../utils/Toasts/toast';
-import { redirectToConversationsPageOrNot } from '../utils/redirectToConversationsPageOrNot';
+import { redirectToConversationsPageIfThereIsUser } from '../utils/redirectToConversationsPageIfThereIsUser';
 import { PageTitle } from '../components/PageTitle';
 import { Content } from 'components/LoginPage';
 
@@ -141,7 +141,7 @@ export const getServerSideProps: GetServerSideProps = async (
     const { mode: action, oobCode } = ctx.query;
 
     const redirectionToConversationsOrNot =
-      await redirectToConversationsPageOrNot(ctx);
+      await redirectToConversationsPageIfThereIsUser(ctx);
 
     if (redirectionToConversationsOrNot.redirect) {
       return redirectionToConversationsOrNot;

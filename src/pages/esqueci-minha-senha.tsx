@@ -24,7 +24,7 @@ export default function IForgotMyPassword() {
 //   ctx: GetServerSidePropsContext
 // ) => {
 //   const redirectionToConversationsOrNot =
-//     await redirectToConversationsPageOrNot(ctx);
+//     await redirectToConversationsPageIfThereIsUser(ctx);
 
 //   return redirectionToConversationsOrNot;
 // };

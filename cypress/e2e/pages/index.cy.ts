@@ -25,11 +25,13 @@ describe('Login page', () => {
 
         if (user === null) throw 'there is no user';
 
-        updateProfile(user, {
+        await updateProfile(user, {
           displayName: null,
         });
+
+        console.log(auth.currentUser);
       });
-      cy.callFirestore('delete', 'users/Usuário#1');
+      cy.callFirestore('delete', 'users');
 
       cy.visit('/');
 
