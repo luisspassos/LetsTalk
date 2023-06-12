@@ -1,13 +1,10 @@
-import { auth } from '../../../src/services/firebase';
-
-function getElement(element: string) {
-  return `[data-testid="${element}"]`;
-}
+import { updateProfile } from 'firebase/auth';
+import { auth } from 'services/firebase';
 
 describe('Login page', () => {
   describe('sign in with google', () => {
     function getButton() {
-      return cy.get(getElement('google login button'));
+      return cy.getBySel('google login button');
     }
 
     it('should open a login popup', () => {
@@ -22,23 +19,24 @@ describe('Login page', () => {
       cy.window().its('open').should('be.called');
     });
 
-    it.only('should go to the conversations page', () => {
-      cy.login();
+    it('should go to the conversations page', () => {
+      cy.login().then(async () => {
+        const user = auth.currentUser;
+
+        if (user === null) throw 'there is no user';
+
+        updateProfile(user, {
+          displayName: null,
+        });
+      });
+      cy.callFirestore('delete', 'users/Usuário#1');
 
       cy.visit('/');
 
       cy.window().then((win) => {
-        function returnsANewUser() {
-          cy.stub(win.auth, 'getAdditionalUserInfo').returns({
-            isNewUser: true,
-          });
+        const user = auth.currentUser;
 
-          const user = auth.currentUser;
-
-          cy.stub(win.auth, 'signInWithPopup').resolves({ user });
-        }
-
-        returnsANewUser();
+        cy.stub(win.auth, 'signInWithPopup').resolves({ user });
 
         getButton().click();
 
@@ -47,11 +45,9 @@ describe('Login page', () => {
           '/conversas'
         );
 
-        const user = auth.currentUser;
+        cy.getBySel('go to settings page button').click();
 
-        // if (user?.displayName === undefined || user.displayName === null) {
-        throw 'username has not been set';
-        // }
+        cy.getBySel('username').should('have.text', 'Usuário#1');
       });
     });
   });

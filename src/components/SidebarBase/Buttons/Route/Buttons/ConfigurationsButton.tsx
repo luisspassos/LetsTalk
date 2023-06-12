@@ -11,6 +11,7 @@ export function ConfigurationsButton({ Base }: ConfigurationsButtonProps) {
       icon={{ default: BsGear, selected: BsGearFill }}
       page='configuracoes'
       aria-label='Configurações'
+      data-testid='go to settings page button'
     />
   );
 }

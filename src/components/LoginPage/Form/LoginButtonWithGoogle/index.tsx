@@ -4,19 +4,24 @@ import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import { useAuth } from 'contexts/AuthContext';
 import { FirebaseError } from 'firebase/app';
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  getAdditionalUserInfo,
-} from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 const authMethods = {
   signInWithPopup,
-  getAdditionalUserInfo,
 }; // for cypress, use this object in this file for tests work
+
+export type AuthMethods = typeof authMethods;
+
+declare global {
+  interface Window {
+    Cypress?: any;
+    auth?: typeof authMethods;
+  }
+}
 
 export function LoginButtonWithGoogle() {
   useEffect(() => {
+    // for tests
     if (window.Cypress) {
       window.auth = authMethods;
     }
@@ -38,21 +43,30 @@ export function LoginButtonWithGoogle() {
 
       const { user } = result;
 
-      const additionalUserInfo = authMethods.getAdditionalUserInfo(result);
+      const isNewUser = async () => {
+        if (user.displayName === null) return true;
 
-      if (additionalUserInfo?.isNewUser) {
-        console.log('here');
+        const { getDoc } = await import('firebase/firestore');
+        const { getUserRef } = await import('utils/getUserRef');
+
+        const { userRef } = await getUserRef(user.displayName);
+
+        const usernameSnap = await getDoc(userRef);
+
+        return usernameSnap.exists() ? false : true;
+      };
+
+      if (await isNewUser()) {
         const name = user.displayName ?? 'Usuário';
 
-        const { setUsername, addUsernameInDb } = await import(
+        const { setUsername, addUserInDb } = await import(
           'contexts/AuthContext'
         );
-
         const { username } = await setUsername({ user, name });
 
         initializeUser({ username, user });
 
-        await addUsernameInDb(username, user.uid);
+        await addUserInDb(username, user.uid);
       }
 
       await router.push('/conversas');

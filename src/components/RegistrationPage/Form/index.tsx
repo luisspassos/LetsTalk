@@ -2,7 +2,6 @@ import { Stack } from '@chakra-ui/react';
 import * as yup from 'yup';
 import { FormWrapper } from 'components/Form/FormWrapper';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { regexs } from 'utils/regexs';
 import { EmailInput } from './EmailInput';
@@ -64,58 +63,53 @@ export function Form() {
     resolver: yupResolver(registrationFormSchema),
   });
 
-  const handleRegister = useMemo(
-    () =>
-      handleSubmit(async ({ email, password, name }) => {
-        try {
-          const { auth } = await import('services/firebase');
-          const { createUserWithEmailAndPassword, sendEmailVerification } =
-            await import('firebase/auth');
+  const handleRegister = handleSubmit(async ({ email, password, name }) => {
+    try {
+      const { auth } = await import('services/firebase');
+      const { createUserWithEmailAndPassword, sendEmailVerification } =
+        await import('firebase/auth');
 
-          const { user } = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      await sendEmailVerification(user);
+
+      const { setUsername, addUserInDb } = await import('contexts/AuthContext');
+
+      const { username } = await setUsername({ user, name });
+
+      await addUserInDb(username, user.uid);
+
+      successToastWhenRegistering();
+    } catch (err) {
+      const { FirebaseError } = await import('firebase/app');
+
+      if (err instanceof FirebaseError) {
+        const errors: FormFirebaseError = {
+          'auth/email-already-in-use': {
+            type: 'email',
+            message: 'Este email já está sendo usado',
+          },
+        };
+
+        const error = errors[err.code];
+
+        if (!error) {
+          const { unknownErrorToast } = await import(
+            'utils/Toasts/unknownErrorToast'
           );
-
-          await sendEmailVerification(user);
-
-          const { setUsername, addUsernameInDb } = await import(
-            'contexts/AuthContext'
-          );
-
-          const { username } = await setUsername({ user, name });
-          await addUsernameInDb(username, user.uid);
-
-          successToastWhenRegistering();
-        } catch (err) {
-          const { FirebaseError } = await import('firebase/app');
-
-          if (err instanceof FirebaseError) {
-            const errors: FormFirebaseError = {
-              'auth/email-already-in-use': {
-                type: 'email',
-                message: 'Este email já está sendo usado',
-              },
-            };
-
-            const error = errors[err.code];
-
-            if (!error) {
-              const { unknownErrorToast } = await import(
-                'utils/Toasts/unknownErrorToast'
-              );
-              unknownErrorToast();
-            } else {
-              setError(error.type, {
-                message: error.message,
-              });
-            }
-          }
+          unknownErrorToast();
+        } else {
+          setError(error.type, {
+            message: error.message,
+          });
         }
-      }),
-    [handleSubmit, setError]
-  );
+      }
+    }
+  });
 
   return (
     <FormWrapper onSubmit={handleRegister}>

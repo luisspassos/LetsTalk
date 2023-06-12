@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "cypress": "cross-env GCLOUD_PROJECT=lets-talk-d08fa cypress open"
+    "cypress": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress open"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.6",

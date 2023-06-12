@@ -20,8 +20,6 @@ type SendEmailToRecoverPasswordData = {
   email: string;
 };
 
-type AddUsernameInDbFunc = (username: string, uid: string) => Promise<void>;
-
 type InitializeUser = (params: { username?: string; user: User }) => void;
 
 export type UserType =
@@ -91,16 +89,14 @@ export const getCurrentUserId = async () => {
   return id;
 };
 
-export const addUsernameInDb: AddUsernameInDbFunc = async (username, uid) => {
-  const { doc, getDoc, setDoc } = await import('firebase/firestore');
-  const { db } = await import('../services/firebase');
+export const addUserInDb = async (username: string, uid: string) => {
+  const { getUserRef } = await import('utils/getUserRef');
 
-  const usernameRef = doc(db, 'users', username);
-  const usernameSnap = await getDoc(usernameRef);
+  const { userRef } = await getUserRef(username);
 
-  if (usernameSnap.exists()) return;
+  const { setDoc } = await import('firebase/firestore');
 
-  await setDoc(usernameRef, {
+  await setDoc(userRef, {
     uid,
   });
 };

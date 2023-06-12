@@ -11,7 +11,7 @@ export function Username() {
   const { name, id = '' } = user.nameAndId;
 
   return (
-    <Stack minW={0} spacing={0}>
+    <Stack minW={0} spacing={0} data-testid='username'>
       <Name text={name} />
       <Id text={id} />
     </Stack>
