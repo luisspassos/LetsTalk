@@ -6,7 +6,7 @@ import admin from 'firebase-admin';
 
 export default defineConfig({
   e2e: {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3000/',
     // @ts-ignore: Property 'projectRoot' is optional in type 'ExtendedCypressConfig' but required in type 'PluginConfigOptions'.
     setupNodeEvents(on, config) {
       on('before:browser:launch', (_, launchOptions) => {
