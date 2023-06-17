@@ -25,7 +25,7 @@ export function Tooltip({
 
   const ariaLabel = copiedUsername
     ? 'Nome de usuário copiado!'
-    : `Copiar Nome de usuário. ${username}`;
+    : `Copiar nome de usuário. ${username}`;
 
   return (
     <ChakraTooltip
@@ -34,6 +34,7 @@ export function Tooltip({
       ariaLabel={ariaLabel}
       closeOnClick={false}
       onClose={() => setCopiedUsername(false)}
+      data-testid='copy username tooltip'
     >
       {children}
     </ChakraTooltip>

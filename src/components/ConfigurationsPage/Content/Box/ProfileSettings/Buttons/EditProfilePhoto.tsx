@@ -65,14 +65,14 @@ export function EditProfilePhoto() {
 
         await uploadBytes(usersProfileAvatarRef, file);
 
-        const photoUrl = await getDownloadURL(usersProfileAvatarRef);
+        const photoURL = await getDownloadURL(usersProfileAvatarRef);
 
         if (!user) return;
 
-        fillUser({ ...user, photoURL: photoUrl });
+        fillUser({ ...user, photoURL });
 
         await updateProfile(currentUser, {
-          photoURL: photoUrl,
+          photoURL,
         });
       } catch {
         const { unknownErrorToast } = await import(

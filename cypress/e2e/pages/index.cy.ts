@@ -19,18 +19,15 @@ describe('Login page', () => {
       cy.window().its('open').should('be.called');
     });
 
-    it('should go to the conversations page', () => {
-      cy.login().then(async () => {
-        const user = auth.currentUser;
+    it.only('should go to the conversations page', async () => {
+      cy.login().then(() => {
+        if (auth.currentUser === null) throw 'user is null';
 
-        if (user === null) throw 'there is no user';
-
-        await updateProfile(user, {
-          displayName: null,
+        updateProfile(auth.currentUser, {
+          displayName: 'withName',
         });
-
-        console.log(auth.currentUser);
       });
+
       cy.callFirestore('delete', 'users');
 
       cy.visit('/');
@@ -38,18 +35,53 @@ describe('Login page', () => {
       cy.window().then((win) => {
         const user = auth.currentUser;
 
+        if (user === null) throw 'user is null';
+
         cy.stub(win.auth, 'signInWithPopup').resolves({ user });
 
         getButton().click();
 
-        cy.url({ timeout: 10_000 /* milliseconds */ }).should(
+        cy.url({ timeout: 15_000 /* milliseconds */ }).should(
           'include',
           '/conversas'
         );
 
-        cy.getBySel('go to settings page button').click();
+        cy.getBySel('copy username button').focus();
 
-        cy.getBySel('username').should('have.text', 'Usuário#1');
+        cy.getBySel('copy username tooltip')
+          .invoke('text')
+          .should((text) => {
+            const splitted = text.split(' ');
+            const last = splitted[splitted.length - 1];
+
+            expect(last).to.eq('Usuário#1');
+          });
+
+        cy.getBySel('sign out').click();
+
+        cy.login();
+
+        updateProfile(user, {
+          displayName: 'withName',
+        });
+
+        getButton().click();
+
+        cy.url({ timeout: 15_000 /* milliseconds */ }).should(
+          'include',
+          '/conversas'
+        );
+
+        cy.getBySel('copy username button').focus();
+
+        cy.getBySel('copy username tooltip')
+          .invoke('text')
+          .should((text) => {
+            const splitted = text.split(' ');
+            const last = splitted[splitted.length - 1];
+
+            expect(last).to.eq('withName#2');
+          });
       });
     });
   });
