@@ -43,6 +43,8 @@ export function LoginButtonWithGoogle() {
 
       const { user } = result;
 
+      console.log(user.displayName);
+
       const isNewUser = async () => {
         if (user.displayName === null) return true;
 
@@ -71,7 +73,7 @@ export function LoginButtonWithGoogle() {
 
       await router.push('/conversas');
     } catch (err) {
-      console.log(err);
+      console.error(err);
 
       if (
         err instanceof FirebaseError &&

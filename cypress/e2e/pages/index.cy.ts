@@ -20,19 +20,27 @@ describe('Login page', () => {
     });
 
     it.only('login flow', () => {
-      const unsub = onAuthStateChanged(auth, (user) => {
-        if (user === null) return;
-
-        updateProfile(user, {
-          displayName: '',
-        });
-
-        unsub();
-      });
-
       cy.logout();
 
-      cy.login();
+      cy.login().then(() => {
+        return new Cypress.Promise((resolve, reject) => {
+          const unsub = onAuthStateChanged(auth, (user) => {
+            if (user === null) return;
+
+            updateProfile(user, {
+              displayName: '',
+            })
+              .then(() => {
+                resolve();
+              })
+              .catch(() => {
+                reject();
+              });
+
+            unsub();
+          });
+        });
+      });
 
       cy.callFirestore('delete', 'users');
 
@@ -69,17 +77,30 @@ describe('Login page', () => {
 
         cy.logout();
 
-        const unsub = onAuthStateChanged(auth, (user) => {
-          if (user === null) return;
+        cy.login().then(() => {
+          return new Cypress.Promise((resolve, reject) => {
+            const unsub = onAuthStateChanged(auth, (user) => {
+              if (user === null) return;
 
-          updateProfile(user, {
-            displayName: 'withName',
+              updateProfile(user, {
+                displayName: 'withName',
+              })
+                .then(() => {
+                  resolve();
+                })
+                .catch(() => {
+                  reject();
+                });
+
+              unsub();
+            });
           });
-
-          unsub();
         });
 
-        cy.login();
+        console.log(auth.currentUser?.displayName, 'cypress');
+        cy.stub(win.auth, 'signInWithPopup').resolves({
+          user: auth.currentUser,
+        });
 
         getButton().click();
 
@@ -98,38 +119,6 @@ describe('Login page', () => {
 
             expect(last).to.eq('withName#2');
           });
-
-        // const unsub = onAuthStateChanged(auth, (user) => {
-        //   if (user === null) return;
-
-        //   updateProfile(user, {
-        //     displayName: 'withName',
-        //   });
-
-        //   unsub();
-        // });
-
-        // cy.login();
-
-        // cy.wait(5000);
-
-        // getButton().click();
-
-        // cy.url({ timeout: 15_000 /* milliseconds */ }).should(
-        //   'include',
-        //   '/conversas'
-        // );
-
-        // cy.getBySel('copy username button').focus();
-
-        // cy.getBySel('copy username tooltip')
-        //   .invoke('text')
-        //   .should((text) => {
-        //     const splitted = text.split(' ');
-        //     const last = splitted[splitted.length - 1];
-
-        //     expect(last).to.eq('withName#2');
-        //   });
       });
     });
   });
