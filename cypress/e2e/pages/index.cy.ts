@@ -1,4 +1,4 @@
-import { onAuthStateChanged, updateProfile } from 'firebase/auth';
+import { onAuthStateChanged, updateProfile, User } from 'firebase/auth';
 import { auth } from 'services/firebase';
 
 describe('Login page', () => {
@@ -20,39 +20,36 @@ describe('Login page', () => {
     });
 
     it.only('login flow', () => {
-      cy.logout();
+      type CypressPromiseParams = Parameters<
+        ConstructorParameters<typeof Cypress.Promise>[0]
+      >;
 
-      cy.login().then(() => {
-        return new Cypress.Promise((resolve, reject) => {
-          const unsub = onAuthStateChanged(auth, (user) => {
-            if (user === null) return;
+      type UserAllReadyCallback = (
+        user: User,
+        ...promiseParams: CypressPromiseParams
+      ) => void;
 
-            updateProfile(user, {
-              displayName: '',
-            })
-              .then(() => {
-                resolve();
-              })
-              .catch(() => {
-                reject();
-              });
+      function login(userAllReadyCallback?: UserAllReadyCallback) {
+        cy.logout();
 
-            unsub();
+        cy.login().then(() => {
+          return new Cypress.Promise((...promiseParams) => {
+            const unsub = onAuthStateChanged(auth, (user) => {
+              if (user === null) return;
+
+              const [resolve] = promiseParams;
+
+              userAllReadyCallback
+                ? userAllReadyCallback(user, ...promiseParams)
+                : resolve();
+
+              unsub();
+            });
           });
         });
-      });
+      }
 
-      cy.callFirestore('delete', 'users');
-
-      cy.visit('/');
-
-      cy.window().then((win) => {
-        const user = auth.currentUser;
-
-        if (user === null) throw 'user is null';
-
-        cy.stub(win.auth, 'signInWithPopup').resolves({ user });
-
+      function verifyIfUserHasBeenAuthenticated() {
         getButton().click();
 
         cy.url({ timeout: 15_000 /* milliseconds */ }).should(
@@ -70,55 +67,35 @@ describe('Login page', () => {
 
             expect(last).to.eq('Usuário#1');
           });
+      }
+
+      login((user, resolve, reject) => {
+        updateProfile(user, {
+          displayName: '',
+        })
+          .then(resolve)
+          .catch(reject);
+      });
+
+      cy.callFirestore('delete', 'users');
+
+      cy.visit('/');
+
+      cy.window().then((win) => {
+        const user = auth.currentUser;
+
+        if (user === null) throw 'user is null';
+
+        cy.stub(win.auth, 'signInWithPopup').resolves({ user });
+
+        verifyIfUserHasBeenAuthenticated();
 
         cy.getBySel('sign out').click();
 
-        cy.url().should('eq', Cypress.config().baseUrl);
+        login();
 
-        cy.logout();
-
-        cy.login().then(() => {
-          return new Cypress.Promise((resolve, reject) => {
-            const unsub = onAuthStateChanged(auth, (user) => {
-              if (user === null) return;
-
-              updateProfile(user, {
-                displayName: 'withName',
-              })
-                .then(() => {
-                  resolve();
-                })
-                .catch(() => {
-                  reject();
-                });
-
-              unsub();
-            });
-          });
-        });
-
-        console.log(auth.currentUser?.displayName, 'cypress');
-        cy.stub(win.auth, 'signInWithPopup').resolves({
-          user: auth.currentUser,
-        });
-
-        getButton().click();
-
-        cy.url({ timeout: 15_000 /* milliseconds */ }).should(
-          'include',
-          '/conversas'
-        );
-
-        cy.getBySel('copy username button').focus();
-
-        cy.getBySel('copy username tooltip')
-          .invoke('text')
-          .should((text) => {
-            const splitted = text.split(' ');
-            const last = splitted[splitted.length - 1];
-
-            expect(last).to.eq('withName#2');
-          });
+        // verify if it doesn't recreate the user already created
+        verifyIfUserHasBeenAuthenticated();
       });
     });
   });

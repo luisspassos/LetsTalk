@@ -43,13 +43,13 @@ export function LoginButtonWithGoogle() {
 
       const { user } = result;
 
-      console.log(user.displayName);
-
       const isNewUser = async () => {
         if (user.displayName === null) return true;
 
-        const { getDoc } = await import('firebase/firestore');
-        const { getUserRef } = await import('utils/getUserRef');
+        const [{ getDoc }, { getUserRef }] = await Promise.all([
+          import('firebase/firestore'),
+          import('utils/getUserRef'),
+        ]);
 
         const { userRef } = await getUserRef(user.displayName);
 
