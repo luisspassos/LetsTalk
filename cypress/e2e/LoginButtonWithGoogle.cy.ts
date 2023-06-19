@@ -21,6 +21,8 @@ describe('Login button with Google', () => {
   function loginUser(name = '') {
     cy.logout();
 
+    cy.callFirestore('delete', 'users');
+
     cy.login().then(() => {
       return new Cypress.Promise(async (resolve, reject) => {
         const unsub = onAuthStateChanged(auth, (user) => {
@@ -36,8 +38,6 @@ describe('Login button with Google', () => {
         });
       });
     });
-
-    cy.callFirestore('delete', 'users');
   }
 
   function verifyIfUserHasBeenAuthenticated(
