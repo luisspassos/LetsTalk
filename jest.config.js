@@ -1,16 +1,33 @@
 module.exports = {
-  testPathIgnorePatterns: ['/node_modules/', './next/'],
-  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
+  preset: 'ts-jest',
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': ["babel-jest", { presets: ["next/babel"] }],
+    '^.+\\.(ts|tsx)?$': 'ts-jest',
+    "^.+\\.(js|jsx)$": "babel-jest",
   },
-  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
+  coverageProvider: 'v8',
   collectCoverageFrom: [
-    'src/**/*.tsx',
-    '!src/**/*.spec.tsx',
-    '!src/**/*_app.tsx',
-    '!src/**/*_document.tsx',
+    '**/*.{js,jsx,ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!<rootDir>/out/**',
+    '!<rootDir>/.next/**',
+    '!<rootDir>/*.config.js',
+    '!<rootDir>/coverage/**',
   ],
-  coverageReporters: ['lcov', 'json'],
-  moduleDirectories: ['node_modules', 'src']
-};
+  moduleNameMapper: {
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+
+    '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
+
+    '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/__mocks__/fileMock.js`,
+
+    '^@/components/(.*)$': '<rootDir>/components/$1',
+  },
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
+  testEnvironment: 'jsdom',
+  transformIgnorePatterns: [
+    '/node_modules/',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
+}
