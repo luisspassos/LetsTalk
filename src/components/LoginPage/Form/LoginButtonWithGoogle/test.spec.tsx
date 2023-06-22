@@ -1,12 +1,11 @@
 import { render } from '@testing-library/react';
 import { mocked } from 'jest-mock';
-import { signInWithPopup } from 'firebase/auth';
-import { LoginButtonWithGoogle } from '.';
+import { LoginButtonWithGoogle, authMethods } from '.';
 import { testUnknownError } from 'tests/utils/testUnknownError';
 import { getButton } from 'tests/utils/Button/getButton';
 import { clickButton } from 'tests/utils/Button/clickButton';
 
-const signInWithPopupMocked = mocked(signInWithPopup);
+const signInWithPopupMocked = mocked(authMethods.signInWithPopup);
 
 async function pressTheButton() {
   const button = getButton('Entrar com o Google');

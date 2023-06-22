@@ -6,7 +6,7 @@ import { useAuth } from 'contexts/AuthContext';
 import { FirebaseError } from 'firebase/app';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
-const authMethods = {
+export const authMethods = {
   signInWithPopup,
 }; // for cypress, use this object in this file for tests work
 

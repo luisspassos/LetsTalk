@@ -3,7 +3,6 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
     "^.+\\.(js|jsx)$": "babel-jest",
-
   },
   setupFilesAfterEnv: ['<rootDir>/src/tests/setupTests.ts'],
   coverageProvider: 'v8',
@@ -23,13 +22,12 @@ module.exports = {
 
     '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/__mocks__/fileMock.js`,
 
-    '^@/components/(.*)$': '<rootDir>/components/$1',
-    '^firebase\/auth$': require.resolve('firebase/auth')
+    'contexts/AuthContext': '<rootDir>/src/contexts/AuthContext.tsx',
+    // 'firebase/app': require.resolve('firebase/app'),
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   testEnvironment: 'jsdom',
   transformIgnorePatterns: [
-    // 'node_modules\/(?!(firebase\/auth))',
     '/node_modules/',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
