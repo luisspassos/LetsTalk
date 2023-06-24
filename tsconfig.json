@@ -16,8 +16,9 @@
     "incremental": true,
     "baseUrl": "./src",
     "checkJs": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "types": ["cypress"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "cypress", "./cypress.config.ts"]
+  "exclude": ["node_modules"]
 }

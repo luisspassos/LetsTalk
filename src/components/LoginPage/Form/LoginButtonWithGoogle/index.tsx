@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import { useAuth } from 'contexts/AuthContext';
-import { FirebaseError } from 'firebase/app';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 export const authMethods = {
@@ -75,12 +74,12 @@ export function LoginButtonWithGoogle() {
     } catch (err) {
       console.error(err);
 
-      if (
-        err instanceof FirebaseError &&
-        err.code === 'auth/popup-closed-by-user'
-      ) {
-        return;
-      }
+      // if (
+      //   err instanceof FirebaseError &&
+      //   err.code === 'auth/popup-closed-by-user'
+      // ) {
+      //   return;
+      // }
 
       const { unknownErrorToast } = await import(
         'utils/Toasts/unknownErrorToast'

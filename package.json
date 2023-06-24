@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "cy:open": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress open -b chrome --e2e",
+    "cy:open": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress open -b chrome",
     "cy:run": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress run -b chrome"
   },
   "dependencies": {
@@ -56,7 +56,7 @@
     "babel-loader": "^9.1.2",
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
-    "cypress": "12.14.0",
+    "cypress": "12.15.0",
     "cypress-firebase": "2.2.5",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.11.0",

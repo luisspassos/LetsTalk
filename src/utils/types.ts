@@ -1,5 +1,4 @@
 import { UserRecord } from 'firebase-admin/lib/auth/user-record';
-import { MockableFunction, MockedFunction } from 'jest-mock';
 import { UseFormRegister } from 'react-hook-form';
 import {
   FieldError,
@@ -48,9 +47,7 @@ export type ExcludeFromTuple<T extends readonly any[], E> = T extends [
 
 export type Component = () => JSX.Element;
 
-export type MockedFunc = MockedFunction<MockableFunction>;
-
-//
+// SpliceTuple
 
 type UndefIndex<T extends any[], I extends number> = {
   [P in keyof T]: P extends Exclude<keyof T, keyof any[]>
