@@ -1,4 +1,4 @@
-import { useColorMode, Img as ChakraImg } from '@chakra-ui/react';
+import { Img as ChakraImg, useColorMode } from '@chakra-ui/react';
 
 export function Img() {
   const { colorMode } = useColorMode();
