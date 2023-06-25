@@ -1,9 +1,10 @@
 import { Img as ChakraImg, useColorMode } from '@chakra-ui/react';
 
-Img.useColorMode = useColorMode;
+Img.useColorMode = useColorMode; // for tests
 
 export function Img() {
-  const { colorMode } = Img.useColorMode();
+  const { useColorMode } = Img;
+  const { colorMode } = useColorMode();
 
   const src = `/images/page_not_found/${colorMode}.svg`;
 
