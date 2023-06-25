@@ -7,7 +7,6 @@ export function Img() {
 
   return (
     <ChakraImg
-      data-testid='404 image'
       htmlWidth='602px'
       htmlHeight='400px'
       src={src}
