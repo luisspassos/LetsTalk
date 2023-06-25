@@ -14,7 +14,7 @@ type InputProps = {
   label: string;
   id: string;
   error?: FieldError;
-  inputProps?: ChakraInputProps;
+  inputProps?: ChakraInputProps & { 'data-testid'?: string };
   labelProps?: FormLabelProps;
   helperText?: string;
 };

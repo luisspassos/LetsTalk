@@ -13,6 +13,7 @@ export function Button({ text, ...rest }: ButtonProps) {
 
   return (
     <ChakraButton
+      data-testid='submit'
       transition='0.2s'
       _disabled={{
         bg: bg,

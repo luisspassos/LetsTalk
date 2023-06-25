@@ -7,6 +7,7 @@ export function EmailInput({ error, register }: EmailInputProps) {
   return (
     <Input
       inputProps={{
+        'data-testid': 'email',
         type: 'email',
         placeholder: 'Email...',
         autoComplete: 'email',
@@ -14,6 +15,7 @@ export function EmailInput({ error, register }: EmailInputProps) {
       }}
       id='email'
       label='Email'
+      data-testid='email'
       error={error}
     />
   );
