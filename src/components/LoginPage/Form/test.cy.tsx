@@ -1,4 +1,5 @@
 import { Form } from '.';
+import { testInvalidEmail } from '../../../../cypress/utils/testInvalidEmail';
 
 describe('Login form', () => {
   beforeEach(() => {
@@ -12,9 +13,5 @@ describe('Login form', () => {
     cy.contains('Senha obrigatória');
   });
 
-  it('should show an error message if email is not valid', () => {
-    cy.getBySel('email').type('email{enter}');
-
-    cy.contains('E-mail inválido');
-  });
+  testInvalidEmail();
 });

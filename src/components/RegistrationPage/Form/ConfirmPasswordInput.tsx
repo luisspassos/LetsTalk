@@ -12,6 +12,7 @@ export function ConfirmPasswordInput({
       label='Confirmar senha'
       id='confirmPassword'
       inputProps={{
+        'data-testid': 'password_confirmation',
         placeholder: 'Confirme sua senha...',
         autoComplete: 'new-password',
         type: 'password',

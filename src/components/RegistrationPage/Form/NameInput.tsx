@@ -9,6 +9,7 @@ export function NameInput({ error, register }: NameInputProps) {
       label='Nome'
       id='username'
       inputProps={{
+        'data-testid': 'name',
         placeholder: 'Nome...',
         autoComplete: 'username',
         ...register('name'),
