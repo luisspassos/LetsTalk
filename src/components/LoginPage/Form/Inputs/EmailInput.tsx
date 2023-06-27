@@ -15,7 +15,6 @@ export function EmailInput({ error, register }: EmailInputProps) {
       }}
       id='email'
       label='Email'
-      data-testid='email'
       error={error}
     />
   );

@@ -9,6 +9,7 @@ export function EmailInput({ register, error }: EmailInputProps) {
       label='Email'
       id='email'
       inputProps={{
+        'data-testid': 'email',
         type: 'email',
         placeholder: 'Email...',
         ...register('email'),
