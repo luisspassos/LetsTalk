@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormWrapper } from 'components/Form/FormWrapper';
+import { emailSchema } from 'components/Form/Input/Inputs/Email';
 import { sendEmailToRecoverPassword } from 'contexts/AuthContext';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -14,11 +15,7 @@ type EmailFormData = {
 };
 
 const emailFormSchema = yup.object().shape({
-  email: yup
-    .string()
-    .trim()
-    .required('E-mail obrigatório')
-    .email('E-mail inválido'),
+  email: emailSchema(),
 });
 
 export const successToastWhenSendingToEmailToChangePassword = () =>

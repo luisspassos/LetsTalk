@@ -9,7 +9,9 @@ import { ConfirmPasswordInput } from './ConfirmPasswordInput';
 import { Button } from 'components/Form/Button';
 import { toast } from 'utils/Toasts/toast';
 import { PasswordInput } from './PasswordInput';
-import { EmailInput } from 'components/Form/Input/Inputs/Email';
+import { EmailInput, emailSchema } from 'components/Form/Input/Inputs/Email';
+import { passwordSchema } from 'utils/formSchema';
+import { handleFormError } from 'utils/handleFormError';
 
 type RegistrationFormData = {
   name: string;
@@ -18,29 +20,14 @@ type RegistrationFormData = {
   password_confirmation: string;
 };
 
-type FormFirebaseError = Record<
-  string,
-  {
-    type: keyof RegistrationFormData;
-    message: string;
-  }
->;
-
 const registrationFormSchema = yup.object().shape({
   name: yup
     .string()
     .trim()
     .required('Nome obrigatório')
     .matches(regexs.cannotContainHashtag, 'O nome não pode conter #'),
-  email: yup
-    .string()
-    .trim()
-    .required('E-mail obrigatório')
-    .email('E-mail inválido'),
-  password: yup
-    .string()
-    .required('Senha obrigatória')
-    .min(6, 'No mínimo 6 caracteres'),
+  email: emailSchema(),
+  password: passwordSchema().min(6, 'No mínimo 6 caracteres'),
   password_confirmation: yup
     .string()
     .oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais'),
@@ -85,29 +72,12 @@ export function Form() {
 
       successToastWhenRegistering();
     } catch (err) {
-      const { FirebaseError } = await import('firebase/app');
-
-      if (err instanceof FirebaseError) {
-        const errors: FormFirebaseError = {
-          'auth/email-already-in-use': {
-            type: 'email',
-            message: 'Este email já está sendo usado',
-          },
-        };
-
-        const error = errors[err.code];
-
-        if (!error) {
-          const { unknownErrorToast } = await import(
-            'utils/Toasts/unknownErrorToast'
-          );
-          unknownErrorToast();
-        } else {
-          setError(error.type, {
-            message: error.message,
-          });
-        }
-      }
+      await handleFormError<RegistrationFormData>(err, setError, {
+        'auth/email-already-in-use': {
+          type: 'email',
+          message: 'Este email já está sendo usado',
+        },
+      });
     }
   });
 

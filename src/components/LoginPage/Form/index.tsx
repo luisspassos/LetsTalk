@@ -1,10 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'components/Form/Button';
 import { FormWrapper } from 'components/Form/FormWrapper';
+import { emailSchema } from 'components/Form/Input/Inputs/Email';
 import { signInWithEmailAndPassword, useAuth } from 'contexts/AuthContext';
 import router from 'next/router';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { passwordSchema } from 'utils/formSchema';
 import { handleFormError } from 'utils/handleFormError';
 import { toast } from 'utils/Toasts/toast';
 import * as yup from 'yup';
@@ -20,12 +22,8 @@ export type SignInFormData = {
 };
 
 const signInFormSchema = yup.object().shape({
-  email: yup
-    .string()
-    .trim()
-    .required('E-mail obrigatório')
-    .email('E-mail inválido'),
-  password: yup.string().required('Senha obrigatória'),
+  email: emailSchema(),
+  password: passwordSchema(),
 });
 
 const toasts = {

@@ -10,6 +10,11 @@ type FormFirebaseErrors<FormData extends FieldValues> = Record<
   }
 >;
 
+/**
+ * A function that displays a error message based on the error
+ *
+ */
+
 export async function handleFormError<FormData extends FieldValues>(
   catchErr: unknown,
   setError: UseFormSetError<FormData>,
