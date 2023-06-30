@@ -4,12 +4,12 @@ import { FormWrapper } from 'components/Form/FormWrapper';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { regexs } from 'utils/regexs';
-import { EmailInput } from './EmailInput';
 import { NameInput } from './NameInput';
-import { PasswordInput } from './PasswordInput';
 import { ConfirmPasswordInput } from './ConfirmPasswordInput';
 import { Button } from 'components/Form/Button';
 import { toast } from 'utils/Toasts/toast';
+import { PasswordInput } from './PasswordInput';
+import { EmailInput } from 'components/Form/Input/Inputs/Email';
 
 type RegistrationFormData = {
   name: string;
