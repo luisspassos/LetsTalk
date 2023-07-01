@@ -13,6 +13,23 @@ type FormFirebaseErrors<FormData extends FieldValues> = Record<
 /**
  * A function that displays a error message based on the error
  *
+ * @param catchErr the error from the catch block
+ * @param setError setError from react hook form
+ * @param errors An object that contains named erros
+ *
+ * @example
+ * ```
+ * try {
+ *  ...
+ * } catch (err) {
+ *   await handleFormError<FormData>(err, setError, {
+      'auth/user-not-found': { // name/code of the error 
+        type: 'email', // the input where the error will appear
+        message: 'Este usuário não existe' // error message,
+      },
+    });
+ * }
+ * ```
  */
 
 export async function handleFormError<FormData extends FieldValues>(
