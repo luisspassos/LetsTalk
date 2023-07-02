@@ -9,6 +9,10 @@ import { toast } from 'utils/Toasts/toast';
 import * as yup from 'yup';
 import { Button } from './Button';
 import { Inputs } from './Inputs';
+import {
+  passwordConfirmationSchema,
+  passwordSchema,
+} from 'components/Form/Input/Inputs/Password';
 
 type FormProps = {
   actionCode: ActionCode;
@@ -20,13 +24,8 @@ export type ChangePasswordFormData = {
 };
 
 const changePasswordFormSchema = yup.object().shape({
-  password: yup
-    .string()
-    .required('Senha obrigatória')
-    .min(6, 'No mínimo 6 caracteres'),
-  password_confirmation: yup
-    .string()
-    .oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais'),
+  password: passwordSchema(true),
+  password_confirmation: passwordConfirmationSchema(),
 });
 
 export const errorToastWhenChangingPassword = () => {

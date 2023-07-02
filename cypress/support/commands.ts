@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import { emailMessage } from 'components/Form/Input/Inputs/Email';
-import { passwordMessage } from 'utils/formSchema';
+import { passwordMessage } from 'components/Form/Input/Inputs/Password';
 
 Cypress.Commands.add('getBySel', (selector, ...args) => {
   return cy.get(`[data-testid="${selector}"]`, ...args);

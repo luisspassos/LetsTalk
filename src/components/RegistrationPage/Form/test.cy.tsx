@@ -1,4 +1,5 @@
 import { Form } from '.';
+import { testDifferentPasswords } from '../../../../cypress/utils/testDifferentPasswords';
 import { testInvalidEmail } from '../../../../cypress/utils/testInvalidEmail';
 
 describe('Registration form', () => {
@@ -6,7 +7,7 @@ describe('Registration form', () => {
     cy.mount(<Form />);
   });
 
-  it.only('should show error messages if inputs are empty', () => {
+  it('should show error messages if inputs are empty', () => {
     cy.getBySel('submit').click();
 
     cy.testEmailEmpty();
@@ -55,17 +56,5 @@ describe('Registration form', () => {
     cy.contains(message).should('not.exist');
   });
 
-  it('should show an error message if passwords are different', () => {
-    cy.getBySel('password').type('123456');
-    cy.getBySel('password_confirmation').as('confirm').type('different{enter}');
-
-    const message = 'ser iguais';
-
-    cy.contains(message);
-
-    cy.get('@confirm').clear();
-    cy.get('@confirm').type('123456{enter}');
-
-    cy.contains(message).should('not.exist');
-  });
+  testDifferentPasswords();
 });

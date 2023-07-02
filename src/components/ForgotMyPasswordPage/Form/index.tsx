@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormWrapper } from 'components/Form/FormWrapper';
-import { emailSchema } from 'components/Form/Input/Inputs/Email';
+import { EmailInput, emailSchema } from 'components/Form/Input/Inputs/Email';
 import { sendEmailToRecoverPassword } from 'contexts/AuthContext';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -8,7 +8,6 @@ import { handleFormError } from 'utils/handleFormError';
 import { toast } from 'utils/Toasts/toast';
 import * as yup from 'yup';
 import { Button } from './Button';
-import { Input } from './Input';
 
 type EmailFormData = {
   email: string;
@@ -60,7 +59,7 @@ export function Form() {
 
   return (
     <FormWrapper onSubmit={handleSendEmail}>
-      <Input error={errors.email} register={register} />
+      <EmailInput error={errors.email} register={register} />
       <Button isSubmitting={isSubmitting} />
     </FormWrapper>
   );

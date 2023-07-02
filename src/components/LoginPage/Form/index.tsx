@@ -6,7 +6,7 @@ import { signInWithEmailAndPassword, useAuth } from 'contexts/AuthContext';
 import router from 'next/router';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { passwordSchema } from 'utils/formSchema';
+import { passwordSchema } from 'components/Form/Input/Inputs/Password';
 import { handleFormError } from 'utils/handleFormError';
 import { toast } from 'utils/Toasts/toast';
 import * as yup from 'yup';

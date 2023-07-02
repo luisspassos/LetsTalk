@@ -10,7 +10,10 @@ import { Button } from 'components/Form/Button';
 import { toast } from 'utils/Toasts/toast';
 import { PasswordInput } from './PasswordInput';
 import { EmailInput, emailSchema } from 'components/Form/Input/Inputs/Email';
-import { passwordSchema } from 'utils/formSchema';
+import {
+  passwordConfirmationSchema,
+  passwordSchema,
+} from 'components/Form/Input/Inputs/Password';
 import { handleFormError } from 'utils/handleFormError';
 
 type RegistrationFormData = {
@@ -27,10 +30,8 @@ const registrationFormSchema = yup.object().shape({
     .required('Nome obrigatório')
     .matches(regexs.cannotContainHashtag, 'O nome não pode conter #'),
   email: emailSchema(),
-  password: passwordSchema().min(6, 'No mínimo 6 caracteres'),
-  password_confirmation: yup
-    .string()
-    .oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais'),
+  password: passwordSchema(true),
+  password_confirmation: passwordConfirmationSchema(),
 });
 
 export const successToastWhenRegistering = () =>

@@ -18,7 +18,7 @@ export function EmailInput({ error, register }: EmailInputProps) {
   return (
     <Input
       id='email'
-      label='email'
+      label='Email'
       error={error}
       inputProps={{
         'data-testid': 'email',

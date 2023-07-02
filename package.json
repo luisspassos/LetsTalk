@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "cy:open": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress open --browser chrome",
-    "cy:run": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress run -b chrome"
+    "cy:run": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress run"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.6",

@@ -16,6 +16,7 @@ export function ConfirmPasswordInput({
         ...register('password_confirmation'),
         type: 'password',
         placeholder: 'Confirme sua nova senha...',
+        'data-testid': 'password_confirmation',
       }}
     />
   );

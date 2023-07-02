@@ -13,6 +13,7 @@ export function PasswordInput({ error, register }: PasswordInputProps) {
         ...register('password'),
         placeholder: 'Coloque sua nova senha...',
         type: 'password',
+        'data-testid': 'password',
       }}
     />
   );
