@@ -1,7 +1,7 @@
 import { ModalInput } from 'components/Modal/ModalInput';
-import { InputProps } from 'utils/types';
+import { FormInputProps } from 'utils/types';
 
-type EmailInputProps = InputProps;
+type EmailInputProps = FormInputProps;
 
 export function EmailInput({ error, register }: EmailInputProps) {
   return (

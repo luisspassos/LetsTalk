@@ -1,7 +1,7 @@
 import { Input } from 'components/Form/Input';
-import { InputProps } from 'utils/types';
+import { FormInputProps } from 'utils/types';
 
-type ConfirmPasswordInputProps = InputProps;
+type ConfirmPasswordInputProps = FormInputProps;
 
 export function ConfirmPasswordInput({
   error,

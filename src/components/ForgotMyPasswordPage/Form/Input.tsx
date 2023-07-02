@@ -1,7 +1,7 @@
 import { Input as InputComponent } from 'components/Form/Input';
-import { InputProps as InputPropsType } from 'utils/types';
+import { FormInputProps } from 'utils/types';
 
-type InputProps = InputPropsType;
+type InputProps = FormInputProps;
 
 export function Input({ error, register }: InputProps) {
   return (

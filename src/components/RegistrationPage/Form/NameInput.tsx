@@ -1,7 +1,7 @@
 import { Input } from 'components/Form/Input';
-import { InputProps } from 'utils/types';
+import { FormInputProps } from 'utils/types';
 
-type NameInputProps = InputProps;
+type NameInputProps = FormInputProps;
 
 export function NameInput({ error, register }: NameInputProps) {
   return (

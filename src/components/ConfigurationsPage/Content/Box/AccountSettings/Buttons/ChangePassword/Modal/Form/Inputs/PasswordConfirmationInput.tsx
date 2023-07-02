@@ -1,7 +1,7 @@
 import { ModalInput } from 'components/Modal/ModalInput';
-import { InputProps } from 'utils/types';
+import { FormInputProps } from 'utils/types';
 
-type PasswordConfirmationInputProps = InputProps;
+type PasswordConfirmationInputProps = FormInputProps;
 
 export function PasswordConfirmationInput({
   error,

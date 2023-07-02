@@ -1,7 +1,7 @@
 import { ModalInput } from 'components/Modal/ModalInput';
-import { InputProps } from 'utils/types';
+import { FormInputProps } from 'utils/types';
 
-type UserInputProps = InputProps;
+type UserInputProps = FormInputProps;
 
 export function Input({ error, register }: UserInputProps) {
   return (

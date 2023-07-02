@@ -1,8 +1,8 @@
-import { InputProps } from 'utils/types';
+import { FormInputProps } from 'utils/types';
 import { Input } from '..';
 import * as yup from 'yup';
 
-type EmailInputProps = InputProps;
+type EmailInputProps = FormInputProps;
 
 export const emailMessage = {
   required: 'E-mail obrigatório',
