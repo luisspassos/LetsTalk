@@ -10,7 +10,7 @@ import { Label } from './Label';
 import { Input as InputComponent } from './Input';
 import { HelperText } from './HelperText';
 
-type InputProps = {
+export type InputProps = {
   label: string;
   id: string;
   error?: FieldError;

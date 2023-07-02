@@ -1,3 +1,8 @@
 import * as yup from 'yup';
 
-export const passwordSchema = () => yup.string().required('Senha obrigatória');
+export const passwordMessage = {
+  required: 'Senha obrigatória',
+};
+
+export const passwordSchema = () =>
+  yup.string().required(passwordMessage.required);

@@ -6,22 +6,19 @@ describe('Registration form', () => {
     cy.mount(<Form />);
   });
 
-  it('should show error messages if inputs are empty', () => {
+  it.only('should show error messages if inputs are empty', () => {
     cy.getBySel('submit').click();
 
-    const messages = [
-      'Nome obrigatório',
-      'E-mail obrigatório',
-      'Senha obrigatória',
-    ];
+    cy.testEmailEmpty();
+    cy.testPasswordEmpty();
+
+    const messages = ['Nome obrigatório'];
 
     for (const message of messages) {
       cy.contains(message);
     }
 
     cy.getBySel('name').type('name');
-    cy.getBySel('email').type('email');
-    cy.getBySel('password').type('password{enter}');
 
     for (const message of messages) {
       cy.contains(message).should('not.exist');

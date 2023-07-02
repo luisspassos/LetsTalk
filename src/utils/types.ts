@@ -21,7 +21,7 @@ export type ContactsResponse = UserRecord[];
 
 export type OnlineAt = number | 'now';
 
-export type InputProps = {
+export type FormInputProps = {
   register: UseFormRegister<any>;
   error: FieldError | undefined;
 };
@@ -32,7 +32,7 @@ export type Errors<T extends FieldValues> =
   UseFormReturn<T>['formState']['errors'];
 
 export type InputsProps<T extends FieldValues> = {
-  register: InputProps['register'];
+  register: FormInputProps['register'];
   errors: Errors<T>;
 };
 

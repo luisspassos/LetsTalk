@@ -4,8 +4,15 @@ import * as yup from 'yup';
 
 type EmailInputProps = InputProps;
 
+export const emailMessage = {
+  required: 'E-mail obrigatório',
+  invalid: 'E-mail inválido',
+};
+
+const { invalid, required } = emailMessage;
+
 export const emailSchema = () =>
-  yup.string().trim().required('E-mail obrigatório').email('E-mail inválido');
+  yup.string().trim().required(required).email(invalid);
 
 export function EmailInput({ error, register }: EmailInputProps) {
   return (

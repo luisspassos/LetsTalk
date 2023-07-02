@@ -5,7 +5,8 @@ type GetBySelArgs = import('../src/utils/types').SpliceTuple<CyGetArgs, 0>;
 declare namespace Cypress {
   interface Chainable {
     getBySel(selector: string, ...args: GetBySelArgs): Chainable<any>;
-    testInvalidEmail(): Chainable<any>;
+    testEmailEmpty(): Chainable<any>;
+    testPasswordEmpty(): Chainable<any>;
   }
 
   interface ApplicationWindow {

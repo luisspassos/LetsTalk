@@ -9,11 +9,8 @@ describe('Login form', () => {
   it('should show error messages if inputs are empty', () => {
     cy.getBySel('submit').click();
 
-    const messages = ['E-mail obrigatório', 'Senha obrigatória'];
-
-    for (const message of messages) {
-      cy.contains(message);
-    }
+    cy.testEmailEmpty();
+    cy.testPasswordEmpty();
   });
 
   testInvalidEmail();

@@ -1,20 +1,8 @@
-import { Input } from 'components/Form/Input';
-import { InputProps } from 'utils/types';
+import { FormInputProps } from 'utils/types';
+import { PasswordInput as Input } from 'components/Form/Input/Inputs/Password';
 
-type PasswordInputProps = InputProps;
+type PasswordInputProps = FormInputProps;
 
-export function PasswordInput({ error, register }: PasswordInputProps) {
-  return (
-    <Input
-      inputProps={{
-        placeholder: 'Senha...',
-        type: 'password',
-        autoComplete: 'current-password',
-        ...register('password'),
-      }}
-      id='password'
-      label='Senha'
-      error={error}
-    />
-  );
+export function PasswordInput(props: PasswordInputProps) {
+  return <Input {...props} inputProps={{ autoComplete: 'current-password' }} />;
 }
