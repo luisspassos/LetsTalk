@@ -4,9 +4,10 @@ import { Header } from './Header';
 
 type AuthPageWrapperProps = {
   children: ReactNode;
+  'data-testid'?: string;
 };
 
-export function AuthPageWrapper({ children }: AuthPageWrapperProps) {
+export function AuthPageWrapper({ children, ...rest }: AuthPageWrapperProps) {
   return (
     <Flex
       pb='20px'
@@ -15,6 +16,7 @@ export function AuthPageWrapper({ children }: AuthPageWrapperProps) {
       maxW={1400}
       h='100vh'
       direction='column'
+      {...rest}
     >
       <Header />
       {children}

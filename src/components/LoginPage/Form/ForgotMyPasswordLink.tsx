@@ -5,6 +5,7 @@ export function ForgotMyPasswordLink() {
   return (
     <NextLink href='/esqueci-minha-senha' passHref>
       <Link
+        data-testid='forgot password link'
         mt='6px'
         mb='12px'
         fontSize='15px'

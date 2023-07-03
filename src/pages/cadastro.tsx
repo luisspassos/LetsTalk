@@ -12,7 +12,7 @@ export default function Register() {
   return (
     <>
       <PageTitle pageName='Cadastro' />
-      <AuthPageWrapper>
+      <AuthPageWrapper data-testid='registration page'>
         <AuthContentPageWrapper gap='150px'>
           <Stack
             color={useColorModeValue('blue.900', 'gray.50')}
