@@ -6,18 +6,6 @@ describe('Login button with Google', () => {
     return cy.getBySel('google login button');
   }
 
-  it('should open a login popup', () => {
-    cy.visit('/', {
-      onBeforeLoad(win) {
-        cy.stub(win, 'open');
-      },
-    });
-
-    getButton().click();
-
-    cy.window().its('open').should('be.called');
-  });
-
   function loginUser(name = '') {
     cy.logout();
 

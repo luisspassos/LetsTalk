@@ -37,6 +37,11 @@ const toasts = {
   },
 };
 
+export const errorMessage = {
+  userNotFound: 'Este usuário não existe',
+  wrongPassword: 'Senha incorreta',
+};
+
 export function Form() {
   const {
     register,
@@ -74,11 +79,11 @@ export function Form() {
           await handleFormError<SignInFormData>(err, setError, {
             'auth/user-not-found': {
               type: 'email',
-              message: 'Este usuário não existe',
+              message: errorMessage.userNotFound,
             },
             'auth/wrong-password': {
               type: 'password',
-              message: 'Senha incorreta',
+              message: errorMessage.wrongPassword,
             },
           });
         }
