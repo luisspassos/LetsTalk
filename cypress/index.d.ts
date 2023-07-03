@@ -21,6 +21,8 @@ declare namespace Cypress {
      * ```
      */
     testLink(link: string): void;
+    testEmailEmpty(): void;
+    testPasswordEmpty(): void;
   }
 
   interface ApplicationWindow {
