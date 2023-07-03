@@ -12,7 +12,7 @@ export default function Custom404() {
         <Img />
         <Flex direction='column' gap='20px'>
           <Description />
-          <BackLink text='Voltar' route='/' />
+          <BackLink text='Voltar' />
         </Flex>
       </Flex>
     </>

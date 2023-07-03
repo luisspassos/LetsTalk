@@ -21,7 +21,7 @@ export default function ChangePassword({ actionCode }: ChangePasswordProps) {
         <Title />
         <Form actionCode={actionCode} />
 
-        <BackLink text='Voltar' route='/' mt='1rem' />
+        <BackLink text='Voltar' mt='1rem' />
       </CenterForm>
     </>
   );

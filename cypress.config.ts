@@ -6,6 +6,7 @@ import admin from 'firebase-admin';
 
 export default defineConfig({
   e2e: {
+    supportFile: 'cypress/support/e2e/index.ts',
     baseUrl: 'http://localhost:3000/',
     // @ts-ignore: Property 'projectRoot' is optional in type 'ExtendedCypressConfig' but required in type 'PluginConfigOptions'.
     setupNodeEvents(on, config) {
@@ -20,6 +21,7 @@ export default defineConfig({
   },
 
   component: {
+    supportFile: 'cypress/support/component/index.ts',
     devServer: {
       framework: 'next',
       bundler: 'webpack',

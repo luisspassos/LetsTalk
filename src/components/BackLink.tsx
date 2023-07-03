@@ -9,14 +9,15 @@ import {
 import { BiArrowBack } from 'react-icons/bi';
 
 type BackLinkProps = {
-  route: string;
+  route?: string;
   text: string;
 } & LinkProps;
 
-export function BackLink({ route, text, ...rest }: BackLinkProps) {
+export function BackLink({ route = '/', text, ...rest }: BackLinkProps) {
   return (
     <NextLink href={route} passHref>
       <Link
+        data-testid='login link'
         boxShadow={0}
         {...rest}
         color={useColorModeValue('gray.400', 'gray.200')}

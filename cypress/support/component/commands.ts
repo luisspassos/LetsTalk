@@ -3,10 +3,6 @@
 import { emailMessage } from 'components/Form/Input/Inputs/Email';
 import { passwordMessage } from 'components/Form/Input/Inputs/Password';
 
-Cypress.Commands.add('getBySel', (selector, ...args) => {
-  return cy.get(`[data-testid="${selector}"]`, ...args);
-});
-
 Cypress.Commands.add('testEmailEmpty', () => {
   cy.contains(emailMessage.required);
 

@@ -5,7 +5,7 @@ import { ManEnteringImg } from './ManEnteringImg';
 
 export function Content() {
   return (
-    <AuthPageWrapper>
+    <AuthPageWrapper data-testid='login page'>
       <AuthContentPageWrapper gap='90px'>
         <ManEnteringImg />
         <Form />

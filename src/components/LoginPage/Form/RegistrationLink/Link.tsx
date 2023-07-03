@@ -7,6 +7,7 @@ export function Link() {
       <ChakraLink
         color={useColorModeValue('blue.900', 'gray.50')}
         d='inline-block'
+        data-testid='registration link'
       >
         Cadastre-se!
       </ChakraLink>

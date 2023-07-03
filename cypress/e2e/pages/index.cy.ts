@@ -5,7 +5,11 @@ describe('Login page', () => {
     });
 
     it('forgot my password', () => {
-      cy.getBySel('forgot password link').click();
+      cy.testLink('forgot password');
+    });
+
+    it('registration', () => {
+      cy.testLink('registration');
     });
   });
 });
