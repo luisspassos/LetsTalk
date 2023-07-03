@@ -7,3 +7,5 @@ describe('404 Page', () => {
     cy.contains('Entrar com o Google');
   });
 });
+
+export {};

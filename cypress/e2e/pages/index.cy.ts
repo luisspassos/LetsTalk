@@ -13,3 +13,5 @@ describe('Login page', () => {
     });
   });
 });
+
+export {};

@@ -11,3 +11,5 @@ Cypress.Commands.add('testLink', (link) => {
 
   cy.getBySel(link + ' page').should('be.visible');
 });
+
+export {};

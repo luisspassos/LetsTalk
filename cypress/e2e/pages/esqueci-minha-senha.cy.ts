@@ -1,7 +1,7 @@
-describe('Registration page', () => {
+describe('Forgot my password page', () => {
   describe('links', () => {
     beforeEach(() => {
-      cy.visit('/cadastro');
+      cy.visit('/esqueci-minha-senha');
     });
 
     it('login', () => {
