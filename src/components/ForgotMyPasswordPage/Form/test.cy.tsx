@@ -1,4 +1,4 @@
-import { Form } from '.';
+import { errorMessage, Form } from '.';
 
 describe('Forgot my password form', () => {
   beforeEach(() => {
@@ -9,5 +9,11 @@ describe('Forgot my password form', () => {
     cy.getBySel('submit').click();
 
     cy.testEmailEmpty();
+  });
+
+  it('show show an error if user not found', () => {
+    cy.getBySel('email').type('userNotFound@email.com{enter}');
+
+    cy.contains(errorMessage.userNotFound);
   });
 });

@@ -1,4 +1,4 @@
-import { Form } from '.';
+import { errorMessage, Form } from '.';
 import { testDifferentPasswords } from '../../../../cypress/utils/testDifferentPasswords';
 import { testInvalidEmail } from '../../../../cypress/utils/testInvalidEmail';
 
@@ -58,12 +58,12 @@ describe('Registration form', () => {
 
   testDifferentPasswords();
 
-  it.only('should show an error if email is already in use', () => {
+  it('should show an error if email is already in use', () => {
     cy.getBySel('email').type('test@example.com');
     cy.getBySel('name').type('name');
     cy.getBySel('password').type('123456');
     cy.getBySel('password_confirmation').type('123456{enter}');
 
-    cy.contains('sendo usado');
+    cy.contains(errorMessage.emailAlreadyInUse);
   });
 });

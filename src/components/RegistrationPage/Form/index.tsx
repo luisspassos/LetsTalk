@@ -41,6 +41,10 @@ export const successToastWhenRegistering = () =>
     status: 'success',
   });
 
+export const errorMessage = {
+  emailAlreadyInUse: 'Este email já está sendo usado',
+};
+
 export function Form() {
   const {
     register,
