@@ -1,5 +1,6 @@
 import { errorMessage, Form } from '.';
 import { testInvalidEmail } from '../../../../cypress/utils/testInvalidEmail';
+import { testUnknownErrorFromAndNotFromFirebase } from '../../../../cypress/utils/testUnknownError';
 
 describe('Login form', () => {
   beforeEach(() => {
@@ -12,8 +13,6 @@ describe('Login form', () => {
     cy.testEmailEmpty();
     cy.testPasswordEmpty();
   });
-
-  testInvalidEmail();
 
   it('should show an error if user not found', () => {
     cy.getBySel('email').type('userNotFound@email.com');
@@ -29,16 +28,10 @@ describe('Login form', () => {
     cy.contains(errorMessage.wrongPassword);
   });
 
-  it.only('should show an unknown error', () => {
-    cy.window().then((win) => {
-      cy.stub(win.auth, 'signInWithEmailAndPassword').callsFake(() => {
-        throw 'err';
-      });
+  testInvalidEmail();
 
-      cy.getBySel('email').type(Cypress.env('email'));
-      cy.getBySel('password').type(Cypress.env('password') + '{enter}');
-
-      cy.get('div[id="unknown error"]').should('be.visible');
-    });
+  testUnknownErrorFromAndNotFromFirebase(() => {
+    cy.getBySel('email').type(Cypress.env('email'));
+    cy.getBySel('password').type(Cypress.env('password') + '{enter}');
   });
 });
