@@ -15,6 +15,7 @@ import { ForgotMyPasswordLink } from './ForgotMyPasswordLink';
 import { Inputs } from './Inputs';
 import { LoginButtonWithGoogle } from './LoginButtonWithGoogle';
 import { RegistrationLink } from './RegistrationLink';
+import { useCypress } from 'hooks/useCypress';
 
 export type SignInFormData = {
   email: string;
@@ -42,7 +43,15 @@ export const errorMessage = {
   wrongPassword: 'Senha incorreta',
 };
 
+const authMethods = {
+  signInWithEmailAndPassword,
+}; // use this object in this file for the tests work
+
+export type AuthMethods = typeof authMethods;
+
 export function Form() {
+  useCypress();
+
   const {
     register,
     handleSubmit,
@@ -58,9 +67,7 @@ export function Form() {
     () =>
       handleSubmit(async (data) => {
         try {
-          const loginResult = await signInWithEmailAndPassword(data);
-
-          const { user } = loginResult;
+          const { user } = await authMethods.signInWithEmailAndPassword(data);
 
           if (!user.emailVerified) {
             const { sendEmailVerification } = await import('firebase/auth');

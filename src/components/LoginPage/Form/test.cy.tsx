@@ -28,4 +28,17 @@ describe('Login form', () => {
 
     cy.contains(errorMessage.wrongPassword);
   });
+
+  it.only('should show an unknown error', () => {
+    cy.window().then((win) => {
+      cy.stub(win.auth, 'signInWithEmailAndPassword').callsFake(() => {
+        throw 'err';
+      });
+
+      cy.getBySel('email').type('email@example.com');
+      cy.getBySel('password').type('123456{enter}');
+
+      cy.get('div[id="unknown error"]').should('be.visible');
+    });
+  });
 });

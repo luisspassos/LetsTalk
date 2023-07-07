@@ -6,18 +6,11 @@ import { useAuth } from 'contexts/AuthContext';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 
-export const authMethods = {
+const authMethods = {
   signInWithPopup,
 }; // for cypress, use this object in this file for tests work
 
 export type AuthMethods = typeof authMethods;
-
-declare global {
-  interface Window {
-    Cypress?: any;
-    auth?: typeof authMethods;
-  }
-}
 
 export function LoginButtonWithGoogle() {
   useEffect(() => {

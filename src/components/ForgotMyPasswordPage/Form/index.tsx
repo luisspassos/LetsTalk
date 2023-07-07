@@ -26,7 +26,6 @@ export const successToastWhenSendingToEmailToChangePassword = () =>
 
 export const errorMessage = {
   userNotFound: 'Este usuário não existe',
-  tooManyRequests: 'Tente novamente mais tarde',
 };
 
 export function Form() {
@@ -51,10 +50,6 @@ export function Form() {
             'auth/user-not-found': {
               type: 'email',
               message: errorMessage.userNotFound,
-            },
-            'auth/too-many-requests': {
-              type: 'email',
-              message: errorMessage.tooManyRequests,
             },
           });
         }
