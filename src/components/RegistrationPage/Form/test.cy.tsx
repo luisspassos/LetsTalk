@@ -59,7 +59,7 @@ describe('Registration form', () => {
   testDifferentPasswords();
 
   it('should show an error if email is already in use', () => {
-    cy.getBySel('email').type('test@example.com');
+    cy.getBySel('email').type(Cypress.env('email'));
     cy.getBySel('name').type('name');
     cy.getBySel('password').type('123456');
     cy.getBySel('password_confirmation').type('123456{enter}');

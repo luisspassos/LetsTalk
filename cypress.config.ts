@@ -5,6 +5,10 @@ import { plugin as cypressFirebasePlugin } from 'cypress-firebase';
 import admin from 'firebase-admin';
 
 export default defineConfig({
+  env: {
+    email: 'test@example.com',
+    password: '123456',
+  },
   e2e: {
     baseUrl: 'http://localhost:3000/',
     // @ts-ignore: Property 'projectRoot' is optional in type 'ExtendedCypressConfig' but required in type 'PluginConfigOptions'.

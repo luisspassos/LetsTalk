@@ -25,8 +25,8 @@ describe('Login form', () => {
       unsub();
     });
 
-    cy.getBySel('email').type('test@example.com');
-    cy.getBySel('password').type('123456{enter}');
+    cy.getBySel('email').type(Cypress.env('email'));
+    cy.getBySel('password').type(Cypress.env('password') + '{enter}');
   });
 });
 

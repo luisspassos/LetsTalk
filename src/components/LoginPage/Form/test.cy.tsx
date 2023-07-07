@@ -23,7 +23,7 @@ describe('Login form', () => {
   });
 
   it('should show an error if password is incorrect', () => {
-    cy.getBySel('email').type('test@example.com');
+    cy.getBySel('email').type(Cypress.env('email'));
     cy.getBySel('password').type('wrongPassword{enter}');
 
     cy.contains(errorMessage.wrongPassword);
@@ -35,8 +35,8 @@ describe('Login form', () => {
         throw 'err';
       });
 
-      cy.getBySel('email').type('email@example.com');
-      cy.getBySel('password').type('123456{enter}');
+      cy.getBySel('email').type(Cypress.env('email'));
+      cy.getBySel('password').type(Cypress.env('password') + '{enter}');
 
       cy.get('div[id="unknown error"]').should('be.visible');
     });
