@@ -50,7 +50,7 @@ const authMethods = {
 export type AuthMethods = typeof authMethods;
 
 export function Form() {
-  useCypress();
+  useCypress('auth', authMethods);
 
   const {
     register,

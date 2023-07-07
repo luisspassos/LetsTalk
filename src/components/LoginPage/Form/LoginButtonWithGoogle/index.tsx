@@ -1,10 +1,11 @@
 import { Button, Icon, Spinner, useColorModeValue } from '@chakra-ui/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import { useAuth } from 'contexts/AuthContext';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
+import { useCypress } from 'hooks/useCypress';
 
 const authMethods = {
   signInWithPopup,
@@ -13,12 +14,7 @@ const authMethods = {
 export type AuthMethods = typeof authMethods;
 
 export function LoginButtonWithGoogle() {
-  useEffect(() => {
-    // for tests
-    if (window.Cypress) {
-      window.auth = authMethods;
-    }
-  }, []);
+  useCypress('auth', authMethods);
 
   const [isLoading, setIsLoading] = useState(false);
 
