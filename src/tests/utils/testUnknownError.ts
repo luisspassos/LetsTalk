@@ -1,10 +1,15 @@
 import { FirebaseError } from 'firebase/app';
 
 type SubmitForm = () => void;
+type FuncToBeStubbed = keyof Cypress.AUTWindow['auth'];
 
-function test(err: FirebaseError | string, submitForm: SubmitForm) {
+function test(
+  err: FirebaseError | string,
+  submitForm: SubmitForm,
+  funcToBeStubbed: FuncToBeStubbed
+) {
   cy.window().then((win) => {
-    cy.stub(win.auth, 'signInWithEmailAndPassword').callsFake(() => {
+    cy.stub(win.auth, funcToBeStubbed).callsFake(() => {
       throw err;
     });
 
@@ -27,9 +32,12 @@ function test(err: FirebaseError | string, submitForm: SubmitForm) {
  * ```
  */
 
-export function testUnknownError(submitForm: SubmitForm): void {
-  it('should show an unknown error', () => {
-    test('err', submitForm);
+export function testUnknownError(
+  submitForm: SubmitForm,
+  funcToBeStubbed: FuncToBeStubbed
+): void {
+  it.only('should show an unknown error', () => {
+    test('err', submitForm, funcToBeStubbed);
   });
 }
 
@@ -45,9 +53,12 @@ export function testUnknownError(submitForm: SubmitForm): void {
  * })
  * ```
  */
-export function testUnknownErrorFromFirebase(submitForm: SubmitForm) {
-  it('should show an unknown error from firebase', () => {
-    test(new FirebaseError('', ''), submitForm);
+export function testUnknownErrorFromFirebase(
+  submitForm: SubmitForm,
+  funcToBeStubbed: FuncToBeStubbed
+) {
+  it.only('should show an unknown error from firebase', () => {
+    test(new FirebaseError('', ''), submitForm, funcToBeStubbed);
   });
 }
 
@@ -64,7 +75,10 @@ export function testUnknownErrorFromFirebase(submitForm: SubmitForm) {
  * ```
  */
 
-export function testUnknownErrorFromAndNotFromFirebase(submitForm: SubmitForm) {
-  testUnknownError(submitForm);
-  testUnknownErrorFromFirebase(submitForm);
+export function testUnknownErrorFromAndNotFromFirebase(
+  submitForm: SubmitForm,
+  funcToBeStubbed: FuncToBeStubbed
+) {
+  testUnknownError(submitForm, funcToBeStubbed);
+  testUnknownErrorFromFirebase(submitForm, funcToBeStubbed);
 }

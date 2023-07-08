@@ -32,6 +32,8 @@ export default defineConfig({
   },
 
   component: {
+    indexHtmlFile: 'src/tests/support/component-index.html',
+    supportFile: 'src/tests/support/component.ts',
     devServer: {
       framework: 'next',
       bundler: 'webpack',

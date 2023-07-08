@@ -7,6 +7,10 @@ describe('Login form', () => {
     cy.mount(<Form />);
   });
 
+  afterEach(() => {
+    document.getElementById('chakra-toast-portal')?.remove();
+  });
+
   it('should show error messages if inputs are empty', () => {
     cy.getBySel('submit').click();
 
@@ -33,5 +37,5 @@ describe('Login form', () => {
   testUnknownErrorFromAndNotFromFirebase(() => {
     cy.getBySel('email').type(Cypress.env('email'));
     cy.getBySel('password').type(Cypress.env('password') + '{enter}');
-  });
+  }, 'signInWithEmailAndPassword');
 });

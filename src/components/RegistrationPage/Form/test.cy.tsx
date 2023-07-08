@@ -1,6 +1,7 @@
 import { errorMessage, Form } from '.';
 import { testDifferentPasswords } from 'tests/utils/testDifferentPasswords';
 import { testInvalidEmail } from 'tests/utils/testInvalidEmail';
+import { testUnknownErrorFromAndNotFromFirebase } from 'tests/utils/testUnknownError';
 
 describe('Registration form', () => {
   beforeEach(() => {
@@ -65,5 +66,12 @@ describe('Registration form', () => {
     cy.getBySel('password_confirmation').type('123456{enter}');
 
     cy.contains(errorMessage.emailAlreadyInUse);
+  });
+
+  testUnknownErrorFromAndNotFromFirebase(() => {
+    cy.getBySel('email').type(Cypress.env('email'));
+    cy.getBySel('name').type('name');
+    cy.getBySel('password').type('123456');
+    cy.getBySel('password_confirmation').type('123456{enter}');
   });
 });

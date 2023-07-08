@@ -1,3 +1,4 @@
+import { testUnknownErrorFromAndNotFromFirebase } from 'tests/utils/testUnknownError';
 import { errorMessage, Form } from '.';
 
 describe('Forgot my password form', () => {
@@ -15,5 +16,9 @@ describe('Forgot my password form', () => {
     cy.getBySel('email').type('userNotFound@email.com{enter}');
 
     cy.contains(errorMessage.userNotFound);
+  });
+
+  testUnknownErrorFromAndNotFromFirebase(() => {
+    cy.getBySel('email').type(Cypress.env('email') + '{enter}');
   });
 });
