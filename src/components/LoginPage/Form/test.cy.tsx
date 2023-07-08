@@ -1,6 +1,6 @@
 import { errorMessage, Form } from '.';
-import { testInvalidEmail } from '../../../../cypress/utils/testInvalidEmail';
-import { testUnknownErrorFromAndNotFromFirebase } from '../../../../cypress/utils/testUnknownError';
+import { testInvalidEmail } from 'tests/utils/testInvalidEmail';
+import { testUnknownErrorFromAndNotFromFirebase } from 'tests/utils/testUnknownError';
 
 describe('Login form', () => {
   beforeEach(() => {

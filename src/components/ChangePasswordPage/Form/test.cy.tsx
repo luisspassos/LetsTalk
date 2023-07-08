@@ -1,5 +1,5 @@
 import { Form } from '.';
-import { testDifferentPasswords } from '../../../../cypress/utils/testDifferentPasswords';
+import { testDifferentPasswords } from 'tests/utils/testDifferentPasswords';
 
 describe('Change password form', () => {
   beforeEach(() => {

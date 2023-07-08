@@ -1,6 +1,6 @@
 import { errorMessage, Form } from '.';
-import { testDifferentPasswords } from '../../../../cypress/utils/testDifferentPasswords';
-import { testInvalidEmail } from '../../../../cypress/utils/testInvalidEmail';
+import { testDifferentPasswords } from 'tests/utils/testDifferentPasswords';
+import { testInvalidEmail } from 'tests/utils/testInvalidEmail';
 
 describe('Registration form', () => {
   beforeEach(() => {
