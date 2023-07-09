@@ -1,14 +1,10 @@
 import { errorMessage, Form } from '.';
 import { testInvalidEmail } from 'tests/utils/testInvalidEmail';
-import { testUnknownErrorFromAndNotFromFirebase } from 'tests/utils/testUnknownError';
+import { testUnknownErrorFromAndNotFromFirebase } from 'tests/utils/unknownError/testUnknownErrorFromAndNotFromFirebase';
 
 describe('Login form', () => {
   beforeEach(() => {
     cy.mount(<Form />);
-  });
-
-  afterEach(() => {
-    document.getElementById('chakra-toast-portal')?.remove();
   });
 
   it('should show error messages if inputs are empty', () => {
@@ -37,5 +33,5 @@ describe('Login form', () => {
   testUnknownErrorFromAndNotFromFirebase(() => {
     cy.getBySel('email').type(Cypress.env('email'));
     cy.getBySel('password').type(Cypress.env('password') + '{enter}');
-  }, 'signInWithEmailAndPassword');
+  }, ['auth', 'signInWithEmailAndPassword']);
 });

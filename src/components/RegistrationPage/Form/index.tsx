@@ -15,6 +15,7 @@ import {
   passwordSchema,
 } from 'components/Form/Input/Inputs/Password';
 import { handleFormError } from 'utils/handleFormError';
+import { useCypress } from 'hooks/useCypress';
 
 type RegistrationFormData = {
   name: string;
@@ -46,6 +47,8 @@ export const errorMessage = {
 };
 
 export function Form() {
+  useCypress('auth');
+
   const {
     register,
     handleSubmit,

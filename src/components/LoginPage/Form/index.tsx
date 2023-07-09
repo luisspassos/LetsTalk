@@ -16,6 +16,7 @@ import { Inputs } from './Inputs';
 import { LoginButtonWithGoogle } from './LoginButtonWithGoogle';
 import { RegistrationLink } from './RegistrationLink';
 import { useCypress } from 'hooks/useCypress';
+import { cypressObject } from 'utils/cypressObject';
 
 export type SignInFormData = {
   email: string;
@@ -43,9 +44,7 @@ export const errorMessage = {
   wrongPassword: 'Senha incorreta',
 };
 
-const authMethods = {
-  signInWithEmailAndPassword,
-}; // use this object in this file for the tests work
+const authMethods = cypressObject({ signInWithEmailAndPassword });
 
 export type AuthMethods = typeof authMethods;
 
