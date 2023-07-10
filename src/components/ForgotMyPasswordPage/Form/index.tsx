@@ -2,8 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormWrapper } from 'components/Form/FormWrapper';
 import { EmailInput, emailSchema } from 'components/Form/Input/Inputs/Email';
 import { sendEmailToRecoverPassword } from 'contexts/AuthContext';
+import { useCypress } from 'hooks/useCypress';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { cypressObject } from 'utils/cypressObject';
 import { handleFormError } from 'utils/handleFormError';
 import { toast } from 'utils/Toasts/toast';
 import * as yup from 'yup';
@@ -28,7 +30,13 @@ export const errorMessage = {
   userNotFound: 'Este usuário não existe',
 };
 
+const authMethods = cypressObject({ sendEmailToRecoverPassword });
+
+export type AuthMethods = typeof authMethods;
+
 export function Form() {
+  useCypress('auth', authMethods);
+
   const {
     register,
     handleSubmit,
@@ -42,7 +50,7 @@ export function Form() {
     () =>
       handleSubmit(async (data) => {
         try {
-          await sendEmailToRecoverPassword(data);
+          await authMethods.sendEmailToRecoverPassword(data);
 
           successToastWhenSendingToEmailToChangePassword();
         } catch (err) {

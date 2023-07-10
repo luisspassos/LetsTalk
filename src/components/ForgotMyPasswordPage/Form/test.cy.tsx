@@ -1,4 +1,4 @@
-import { testUnknownErrorFromAndNotFromFirebase } from 'tests/utils/testUnknownError';
+import { testUnknownError } from 'tests/utils/error/unknownError/test';
 import { errorMessage, Form } from '.';
 
 describe('Forgot my password form', () => {
@@ -18,7 +18,10 @@ describe('Forgot my password form', () => {
     cy.contains(errorMessage.userNotFound);
   });
 
-  testUnknownErrorFromAndNotFromFirebase(() => {
-    cy.getBySel('email').type(Cypress.env('email') + '{enter}');
+  testUnknownError({
+    funcToBeStubbed: ['auth', 'sendEmailToRecoverPassword'],
+    submitForm: () => {
+      cy.getBySel('email').type(Cypress.env('email') + '{enter}');
+    },
   });
 });

@@ -1,4 +1,5 @@
 import { Flex, useColorModeValue } from '@chakra-ui/react';
+import { Contexts } from './Contexts';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { Main } from './Main';
@@ -19,8 +20,10 @@ export function Messages() {
       {...styles}
     >
       <Header />
-      <Main />
-      <Footer />
+      <Contexts>
+        <Main />
+        <Footer />
+      </Contexts>
     </Flex>
   );
 }

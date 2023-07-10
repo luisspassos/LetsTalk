@@ -13,6 +13,10 @@ import {
   passwordConfirmationSchema,
   passwordSchema,
 } from 'components/Form/Input/Inputs/Password';
+import { cypressObject } from 'utils/cypressObject';
+import { confirmPasswordReset } from 'firebase/auth';
+import { useCypress } from 'hooks/useCypress';
+import { UseToastOptions } from '@chakra-ui/react';
 
 type FormProps = {
   actionCode: ActionCode;
@@ -28,15 +32,32 @@ const changePasswordFormSchema = yup.object().shape({
   password_confirmation: passwordConfirmationSchema(),
 });
 
-export const errorToastWhenChangingPassword = () => {
-  toast({
+export const errorToastWhenChangingPassword = {
+  opts: {
     status: 'error',
     title: 'Ocorreu um erro ao mudar a senha',
     description: 'Tente reenviar o email para verificar a senha novamente',
-  });
+  } as UseToastOptions,
+  get display() {
+    return () => {
+      toast(this.opts);
+    };
+  },
 };
 
+errorToastWhenChangingPassword.opts = {
+  status: 'error',
+  title: 'Ocorreu um erro ao mudar a senha',
+  description: 'Tente reenviar o email para verificar a senha novamente',
+} as UseToastOptions;
+
+const authMethods = cypressObject({ confirmPasswordReset });
+
+export type AuthMethods = typeof authMethods;
+
 export function Form({ actionCode }: FormProps) {
+  useCypress('auth', authMethods);
+
   const {
     register,
     handleSubmit,
@@ -51,13 +72,11 @@ export function Form({ actionCode }: FormProps) {
     () =>
       handleSubmit(async ({ password }) => {
         try {
-          const { confirmPasswordReset } = await import('firebase/auth');
-
-          await confirmPasswordReset(auth, actionCode, password);
+          await authMethods.confirmPasswordReset(auth, actionCode, password);
 
           router.push('/?success=passwordreset');
         } catch {
-          errorToastWhenChangingPassword();
+          errorToastWhenChangingPassword.display();
         }
       }),
     [actionCode, handleSubmit, router]

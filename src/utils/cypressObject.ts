@@ -1,16 +1,26 @@
 /**
- * A function that returns
- * Uma função que retorna o objeto recebido para que os stubs do cypress funcionem. **Esse objeto precisa ser usado no seu arquivo com prioridade e deve ser enviado para o objeto window.**
+ * A function that returns the received object for cypress stubs to work. **This object needs to be used in the file with priority and must be sent to the window object. See the example below 👇**
  *
  * @example
  * ```
  * import { signInWithPassword } from 'auth';
  *
- * const authMethods = cypressObject({ login })
+ * const authMethods = cypressObject({ signInWithPassword })
  *
  * export function Component() {
- *   useEff
- * }
+ * 
+ *  useEffect(() => {
+      if (window.Cypress) {
+        window.auth = authMethods;
+      }
+    }, []); // You could use the useCypress hook to handle this easily.
+
+    function login() {
+      authMethods.signInWithPassword(...) // use the authMethods instead of the import from auth to make tests work
+    }
+
+}
+  ```
  */
 
 export function cypressObject<T extends object>(obj: T) {

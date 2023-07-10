@@ -1,6 +1,6 @@
 import { errorMessage, Form } from '.';
 import { testInvalidEmail } from 'tests/utils/testInvalidEmail';
-import { testUnknownErrorFromAndNotFromFirebase } from 'tests/utils/unknownError/testUnknownErrorFromAndNotFromFirebase';
+import { testUnknownError } from 'tests/utils/error/unknownError/test';
 
 describe('Login form', () => {
   beforeEach(() => {
@@ -30,8 +30,11 @@ describe('Login form', () => {
 
   testInvalidEmail();
 
-  testUnknownErrorFromAndNotFromFirebase(() => {
-    cy.getBySel('email').type(Cypress.env('email'));
-    cy.getBySel('password').type(Cypress.env('password') + '{enter}');
-  }, ['auth', 'signInWithEmailAndPassword']);
+  testUnknownError({
+    funcToBeStubbed: ['auth', 'signInWithEmailAndPassword'],
+    submitForm: () => {
+      cy.getBySel('email').type(Cypress.env('email'));
+      cy.getBySel('password').type(Cypress.env('password') + '{enter}');
+    },
+  });
 });

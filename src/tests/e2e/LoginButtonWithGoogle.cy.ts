@@ -12,7 +12,7 @@ describe('Login button with Google', () => {
     cy.callFirestore('delete', 'users');
 
     cy.login().then(() => {
-      return new Cypress.Promise(async (resolve, reject) => {
+      return new Cypress.Promise((resolve, reject) => {
         const unsub = onAuthStateChanged(auth, (user) => {
           if (user === null) return;
 

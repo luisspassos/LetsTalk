@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import * as LoginForm from 'components/LoginPage/Form';
 import * as LoginButtonWithGoogle from 'components/LoginPage/Form/LoginButtonWithGoogle';
+import * as RegistrationForm from 'components/RegistrationPage/Form';
+import * as ForgotMyPasswordForm from 'components/ForgotMyPasswordPage/Form';
+import * as ChangePasswordForm from 'components/ChangePasswordPage/Form';
 
 /**
  * A hook that adds a property to the window to be shared with Cypress and to be mocked
@@ -20,7 +23,7 @@ import * as LoginButtonWithGoogle from 'components/LoginPage/Form/LoginButtonWit
  *   useCypress('auth', authMethods)
  * }
  * 
- * // useCypres.ts
+ * // useCypress.ts
  * import * as GoogleButton from 'components/GoogleButton'
  * import * as LoginForm from 'components/LoginForm'
  * 
@@ -31,7 +34,7 @@ import * as LoginButtonWithGoogle from 'components/LoginPage/Form/LoginButtonWit
     }
   }
 
-  // cypress/index.d.ts
+  // tests/index.d.ts
   interface ApplicationWindow {
     auth: import('components/GoogleButton').AuthMethods &
       import('components/LoginForm').AuthMethods;
@@ -54,6 +57,11 @@ export const useCypress = <T extends keyof Window>(
 declare global {
   interface Window {
     Cypress?: any;
-    auth?: LoginButtonWithGoogle.AuthMethods | LoginForm.AuthMethods;
+    auth?:
+      | LoginButtonWithGoogle.AuthMethods
+      | LoginForm.AuthMethods
+      | RegistrationForm.AuthMethods
+      | ForgotMyPasswordForm.AuthMethods
+      | ChangePasswordForm.AuthMethods;
   }
 }

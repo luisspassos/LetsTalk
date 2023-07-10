@@ -29,5 +29,3 @@ describe('Login form', () => {
     cy.getBySel('password').type(Cypress.env('password') + '{enter}');
   });
 });
-
-export {};

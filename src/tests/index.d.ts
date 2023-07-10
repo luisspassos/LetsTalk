@@ -26,8 +26,10 @@ declare namespace Cypress {
   }
 
   interface ApplicationWindow {
-    auth:
-      | import('components/LoginPage/Form/LoginButtonWithGoogle').AuthMethods &
-          import('components/LoginPage/Form').AuthMethods;
+    auth: import('components/LoginPage/Form/LoginButtonWithGoogle').AuthMethods &
+      import('components/LoginPage/Form').AuthMethods &
+      import('components/RegistrationPage/Form').AuthMethods &
+      import('components/ForgotMyPasswordPage/Form').AuthMethods &
+      import('components/ChangePasswordPage/Form').AuthMethods;
   }
 }

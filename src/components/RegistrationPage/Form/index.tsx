@@ -16,6 +16,8 @@ import {
 } from 'components/Form/Input/Inputs/Password';
 import { handleFormError } from 'utils/handleFormError';
 import { useCypress } from 'hooks/useCypress';
+import { cypressObject } from 'utils/cypressObject';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 type RegistrationFormData = {
   name: string;
@@ -46,8 +48,12 @@ export const errorMessage = {
   emailAlreadyInUse: 'Este email já está sendo usado',
 };
 
+const authMethods = cypressObject({ createUserWithEmailAndPassword });
+
+export type AuthMethods = typeof authMethods;
+
 export function Form() {
-  useCypress('auth');
+  useCypress('auth', authMethods);
 
   const {
     register,
@@ -61,10 +67,9 @@ export function Form() {
   const handleRegister = handleSubmit(async ({ email, password, name }) => {
     try {
       const { auth } = await import('services/firebase');
-      const { createUserWithEmailAndPassword, sendEmailVerification } =
-        await import('firebase/auth');
+      const { sendEmailVerification } = await import('firebase/auth');
 
-      const { user } = await createUserWithEmailAndPassword(
+      const { user } = await authMethods.createUserWithEmailAndPassword(
         auth,
         email,
         password
