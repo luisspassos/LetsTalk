@@ -14,15 +14,20 @@ describe('Login form', () => {
 
     cy.callFirestore('set', `users/${username}`, {
       data: 'fake',
-    });
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (!user) return;
+    }).then(() => {
+      return new Cypress.Promise((resolve, reject) => {
+        const unsub = onAuthStateChanged(auth, (user) => {
+          if (user === null) return;
 
-      updateProfile(user, {
-        displayName: username,
+          updateProfile(user, {
+            displayName: username,
+          })
+            .then(resolve)
+            .catch(reject);
+
+          unsub();
+        });
       });
-
-      unsub();
     });
 
     cy.getBySel('email').type(Cypress.env('email'));

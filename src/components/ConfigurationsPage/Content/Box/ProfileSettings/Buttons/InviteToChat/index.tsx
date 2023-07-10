@@ -14,9 +14,9 @@ export const successToastWhenCopying = () =>
 
 export function InviteToChat() {
   const handleOpenModal = useCallback(() => {
-    const currentUrl = process.env.NEXT_PUBLIC_CURRENT_URL;
+    const currentUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL;
 
-    if (!currentUrl) return;
+    if (currentUrl === undefined) throw 'url does not exist';
 
     navigator.clipboard.writeText(currentUrl);
 

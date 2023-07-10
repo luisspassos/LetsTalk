@@ -1,23 +1,23 @@
 /// <reference types="cypress" />
 
-import { emailMessage } from 'components/Form/Input/Inputs/Email';
-import { passwordMessage } from 'components/Form/Input/Inputs/Password';
+// import { emailMessage } from 'components/Form/Input/Inputs/Email';
+// import { passwordMessage } from 'components/Form/Input/Inputs/Password';
 
-Cypress.Commands.add('testEmailEmpty', () => {
-  cy.contains(emailMessage.required);
+// Cypress.Commands.add('testEmailEmpty', () => {
+//   cy.contains(emailMessage.required);
 
-  cy.getBySel('email').type('email{enter}');
+//   cy.getBySel('email').type('email{enter}');
 
-  cy.contains(emailMessage.required).should('not.exist');
-});
+//   cy.contains(emailMessage.required).should('not.exist');
+// });
 
-Cypress.Commands.add('testPasswordEmpty', () => {
-  cy.contains(passwordMessage.required);
+// Cypress.Commands.add('testPasswordEmpty', () => {
+//   cy.contains(passwordMessage.required);
 
-  cy.getBySel('password').type('password{enter}');
+//   cy.getBySel('password').type('password{enter}');
 
-  cy.contains(passwordMessage.required).should('not.exist');
-});
+//   cy.contains(passwordMessage.required).should('not.exist');
+// });
 
 Cypress.Commands.add('getBySel', (selector, ...args) => {
   return cy.get(`[data-testid="${selector}"]`, ...args);
