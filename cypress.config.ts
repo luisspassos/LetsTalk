@@ -17,7 +17,7 @@ export default defineConfig({
   },
   e2e: {
     specPattern: 'src/tests/e2e/**/*.cy.{js,jsx,ts,tsx}',
-    supportFile: 'src/tests/support/e2e.ts',
+    supportFile: 'src/tests/support/e2e/index.ts',
     baseUrl: 'http://localhost:3000/',
     // @ts-ignore: Property 'projectRoot' is optional in type 'ExtendedCypressConfig' but required in type 'PluginConfigOptions'.
     setupNodeEvents(on, config) {
@@ -32,8 +32,8 @@ export default defineConfig({
   },
 
   component: {
-    indexHtmlFile: 'src/tests/support/component-index.html',
-    supportFile: 'src/tests/support/component.ts',
+    indexHtmlFile: 'src/tests/support/component/component-index.html',
+    supportFile: 'src/tests/support/component/index.ts',
     devServer: {
       framework: 'next',
       bundler: 'webpack',

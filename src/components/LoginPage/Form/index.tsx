@@ -82,6 +82,8 @@ export function Form() {
 
           await router.push('/conversas');
         } catch (err) {
+          console.log(err);
+
           await handleFormError<SignInFormData>(err, setError, {
             'auth/user-not-found': {
               type: 'email',
