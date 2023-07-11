@@ -1,5 +1,6 @@
 import { defineConfig } from 'cypress';
 import { plugin as cypressFirebasePlugin } from 'cypress-firebase';
+const ms = require('smtp-tester');
 
 // @ts-ignore: This module is declared with using 'export =', and can only be used with a default import when using the 'esModuleInterop' flag.
 import admin from 'firebase-admin';
@@ -21,6 +22,16 @@ export default defineConfig({
     baseUrl: 'http://localhost:3000/',
     // @ts-ignore: Property 'projectRoot' is optional in type 'ExtendedCypressConfig' but required in type 'PluginConfigOptions'.
     setupNodeEvents(on, config) {
+      const port = 7777;
+      const mailServer = ms.init(port);
+      console.log('mail server at port %d', port);
+
+      // process all emails
+      mailServer.bind((addr, id, email) => {
+        console.log('--- email ---');
+        console.log(addr, id, email);
+      });
+
       on('before:browser:launch', (_, launchOptions) => {
         launchOptions.args.push('--enable-features=SharedArrayBuffer');
 
