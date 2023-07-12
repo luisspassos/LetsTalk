@@ -1,7 +1,7 @@
-import { initializeApp, getApps } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { FirestoreSettings, initializeFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 export const firebaseConfig = {
@@ -18,8 +18,16 @@ if (!getApps().length) {
   initializeApp(firebaseConfig);
 }
 
+const shouldUseEmulator = window.location.hostname === 'localhost';
+
+const firestoreSettings: FirestoreSettings = {};
+
+if (window.Cypress) {
+  firestoreSettings.experimentalForceLongPolling = true;
+}
+
 const auth = getAuth();
-const db = getFirestore();
+const db = initializeFirestore(getApp(), firestoreSettings);
 const storage = getStorage();
 
 export { auth, db, storage };
