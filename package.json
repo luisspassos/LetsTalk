@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "emulators": "yarn firebase emulators:start",
     "cy:open": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress open --browser chrome",
     "cy:run": "cross-env GCLOUD_PROJECT=let-s-talk-tests cypress run",
     "cy:emulate": "cross-env FIREBASE_AUTH_EMULATOR_HOST=\"localhost:$(cat firebase.json | jq .emulators.auth.port)\" FIREBASE_DATABASE_EMULATOR_HOST=\"localhost:$(cat firebase.json | jq .emulators.database.port)\" FIRESTORE_EMULATOR_HOST=\"localhost:$(cat firebase.json | jq .emulators.firestore.port)\" yarn cy:open"
