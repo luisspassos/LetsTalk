@@ -35,6 +35,7 @@ const toasts = {
         status: 'warning',
         title: 'Seu email não foi verificado!',
         description: 'Enviamos um email de verificação para você.',
+        id: 'email warning',
       }),
   },
 };
