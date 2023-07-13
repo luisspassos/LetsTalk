@@ -1,7 +1,12 @@
-import { initializeApp, getApps } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
+import {
+  Firestore,
+  FirestoreSettings,
+  getFirestore,
+  initializeFirestore,
+} from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 export const firebaseConfig = {
@@ -18,8 +23,41 @@ if (!getApps().length) {
   initializeApp(firebaseConfig);
 }
 
+let shouldUseEmulator: boolean;
+
+if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+  shouldUseEmulator = true;
+} else {
+  shouldUseEmulator = false;
+}
+
+const firestoreSettings: FirestoreSettings = {};
+
+if (typeof window !== 'undefined' && window.Cypress) {
+  firestoreSettings.experimentalForceLongPolling = true;
+}
+
+let db: Firestore;
+
+// Emulate Firestore
+if (shouldUseEmulator) {
+  firestoreSettings.host = 'localhost:8080';
+  firestoreSettings.ssl = false;
+  console.debug(`Using Firestore emulator: ${firestoreSettings.host}`);
+
+  db = initializeFirestore(getApp(), firestoreSettings);
+} else {
+  db = getFirestore();
+}
+
+// Emulate Auth
 const auth = getAuth();
-const db = getFirestore();
+
+if (shouldUseEmulator) {
+  connectAuthEmulator(auth, 'http://localhost:9099/');
+  console.debug(`Using Auth emulator: http://localhost:9099/`);
+}
+
 const storage = getStorage();
 
 export { auth, db, storage };

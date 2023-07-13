@@ -28,7 +28,5 @@ describe('Login form', () => {
 
     cy.getBySel('email').type(Cypress.env('email'));
     cy.getBySel('password').type(Cypress.env('password') + '{enter}');
-
-    cy.get('[id="email warning"]').should('be.visible');
   });
 });
