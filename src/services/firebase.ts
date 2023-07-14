@@ -1,13 +1,12 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-
 import { connectAuthEmulator, getAuth } from 'firebase/auth';
 import {
-  Firestore,
+  connectFirestoreEmulator,
   FirestoreSettings,
-  getFirestore,
   initializeFirestore,
 } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+import { connectStorageEmulator, getStorage } from 'firebase/storage';
+import { emulators } from '../../firebase.json';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyD_ZtpvIiHDi7vLypRjMoC-HWf1cF6xkIw',
@@ -23,41 +22,25 @@ if (!getApps().length) {
   initializeApp(firebaseConfig);
 }
 
-let shouldUseEmulator: boolean;
-
-if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-  shouldUseEmulator = true;
-} else {
-  shouldUseEmulator = false;
-}
-
 const firestoreSettings: FirestoreSettings = {};
 
-if (typeof window !== 'undefined' && window.Cypress) {
+const isCypress = typeof window !== 'undefined' && window.Cypress;
+if (isCypress) {
   firestoreSettings.experimentalForceLongPolling = true;
 }
 
-let db: Firestore;
-
-// Emulate Firestore
-if (shouldUseEmulator) {
-  firestoreSettings.host = 'localhost:8080';
-  firestoreSettings.ssl = false;
-  console.debug(`Using Firestore emulator: ${firestoreSettings.host}`);
-
-  db = initializeFirestore(getApp(), firestoreSettings);
-} else {
-  db = getFirestore();
-}
-
-// Emulate Auth
 const auth = getAuth();
+const db = initializeFirestore(getApp(), firestoreSettings);
+const storage = getStorage();
+
+const shouldUseEmulator = ['test', 'development'].includes(
+  process.env.NODE_ENV
+);
 
 if (shouldUseEmulator) {
-  connectAuthEmulator(auth, 'http://localhost:9099/');
-  console.debug(`Using Auth emulator: http://localhost:9099/`);
+  connectAuthEmulator(auth, `http://localhost:${emulators.auth.port}/`);
+  connectFirestoreEmulator(db, 'localhost', emulators.firestore.port);
+  connectStorageEmulator(storage, 'localhost', emulators.storage.port);
 }
-
-const storage = getStorage();
 
 export { auth, db, storage };
