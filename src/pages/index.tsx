@@ -28,6 +28,7 @@ export const toasts = {
       toast({
         status: 'success',
         title: 'Email verificado com sucesso',
+        id: 'email verification success',
       }),
   },
   passwordReset: {

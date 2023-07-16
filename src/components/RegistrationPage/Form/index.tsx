@@ -66,8 +66,10 @@ export function Form() {
 
   const handleRegister = handleSubmit(async ({ email, password, name }) => {
     try {
-      const { auth } = await import('services/firebase');
-      const { sendEmailVerification } = await import('firebase/auth');
+      const [{ auth }, { sendEmailVerification }] = await Promise.all([
+        import('services/firebase'),
+        import('firebase/auth'),
+      ]);
 
       const { user } = await authMethods.createUserWithEmailAndPassword(
         auth,
@@ -75,9 +77,10 @@ export function Form() {
         password
       );
 
-      await sendEmailVerification(user);
-
-      const { setUsername, addUserInDb } = await import('contexts/AuthContext');
+      const [{ setUsername, addUserInDb }] = await Promise.all([
+        import('contexts/AuthContext'),
+        sendEmailVerification(user),
+      ]);
 
       const { username } = await setUsername({ user, name });
 

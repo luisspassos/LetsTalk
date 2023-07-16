@@ -14,7 +14,7 @@ import {
 } from 'services/firebase';
 import { emulators } from '../../../../firebase.json';
 
-firebase.initializeApp(firebaseConfig);
+export const myFirebase = firebase.initializeApp(firebaseConfig);
 
 if (shouldUseEmulator) {
   firebase.firestore().settings({
