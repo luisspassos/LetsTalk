@@ -33,14 +33,16 @@ const auth = getAuth();
 const db = initializeFirestore(getApp(), firestoreSettings);
 const storage = getStorage();
 
-const shouldUseEmulator = ['test', 'development'].includes(
+export const emulatorHost = 'localhost';
+
+export const shouldUseEmulator = ['test', 'development'].includes(
   process.env.NODE_ENV
 );
 
 if (shouldUseEmulator) {
-  connectAuthEmulator(auth, `http://localhost:${emulators.auth.port}/`);
-  connectFirestoreEmulator(db, 'localhost', emulators.firestore.port);
-  connectStorageEmulator(storage, 'localhost', emulators.storage.port);
+  connectAuthEmulator(auth, `http://${emulatorHost}:${emulators.auth.port}/`);
+  connectFirestoreEmulator(db, emulatorHost, emulators.firestore.port);
+  connectStorageEmulator(storage, emulatorHost, emulators.storage.port);
 }
 
 export { auth, db, storage };

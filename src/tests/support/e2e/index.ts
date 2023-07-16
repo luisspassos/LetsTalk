@@ -7,22 +7,22 @@ import 'firebase/compat/auth';
 import 'firebase/compat/database';
 import 'firebase/compat/firestore';
 import { attachCustomCommands } from 'cypress-firebase';
-import { firebaseConfig } from 'services/firebase';
+import {
+  emulatorHost,
+  firebaseConfig,
+  shouldUseEmulator,
+} from 'services/firebase';
+import { emulators } from '../../../../firebase.json';
 
 firebase.initializeApp(firebaseConfig);
 
-const firestoreEmulatorHost = Cypress.env('FIRESTORE_EMULATOR_HOST');
-if (firestoreEmulatorHost) {
+if (shouldUseEmulator) {
   firebase.firestore().settings({
-    host: firestoreEmulatorHost,
+    host: emulatorHost + ':' + emulators.firestore.port,
     ssl: false,
   });
-}
 
-const authEmulatorHost = Cypress.env('FIREBASE_AUTH_EMULATOR_HOST');
-if (authEmulatorHost) {
-  firebase.auth().useEmulator(`http://${authEmulatorHost}/`);
-  console.debug(`Using Auth emulator: http://${authEmulatorHost}/`);
+  firebase.auth().useEmulator(`http://${emulatorHost}:${emulators.auth.port}/`);
 }
 
 attachCustomCommands({ Cypress, cy, firebase });
