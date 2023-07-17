@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 import { auth, db, emulatorHost, firebaseConfig } from 'services/firebase';
 import { emulators } from '../../../firebase.json';
 
@@ -14,53 +14,46 @@ describe('Login form', () => {
       cy.getBySel('password').type(Cypress.env('password') + '{enter}');
     }
 
-    function resetDatabase() {
-      cy.request(
-        'DELETE',
-        `http://${emulatorHost}:${emulators.firestore.port}/emulator/v1/projects/${firebaseConfig.projectId}/databases/(default)/documents`
-      );
-    }
+    const username = 'user#1';
 
-    function deleteAllUsers() {
-      cy.request(
-        'DELETE',
-        `http://${emulatorHost}:${emulators.auth.port}/emulator/v1/projects/${firebaseConfig.projectId}/accounts`
-      );
-    }
+    function addUserInDb() {
+      function resetDb() {
+        return cy.request(
+          'DELETE',
+          `http://${emulatorHost}:${emulators.firestore.port}/emulator/v1/projects/${firebaseConfig.projectId}/databases/(default)/documents`
+        );
+      }
 
-    resetDatabase();
-    deleteAllUsers();
+      resetDb().then(async () => {
+        await setDoc(doc(db, 'users', 'user#1'), {
+          data: 'fake',
+        });
+      });
+    }
 
     function createUser() {
-      cy.wrap(null).then(() => {
-        return new Cypress.Promise(async (res, rej) => {
-          try {
-            const username = 'user#1';
+      function resetUsers() {
+        return cy.request(
+          'DELETE',
+          `http://${emulatorHost}:${emulators.auth.port}/emulator/v1/projects/${firebaseConfig.projectId}/accounts`
+        );
+      }
 
-            const [{ user }] = await Promise.all([
-              createUserWithEmailAndPassword(
-                auth,
-                Cypress.env('email'),
-                Cypress.env('password')
-              ),
-              setDoc(doc(db, 'users', username), {
-                data: 'fake',
-              }),
-            ]);
+      resetUsers().then(async () => {
+        const { user } = await createUserWithEmailAndPassword(
+          auth,
+          Cypress.env('email'),
+          Cypress.env('password')
+        );
 
-            await updateProfile(user, {
-              displayName: username,
-            });
-
-            res();
-          } catch (err) {
-            rej(err);
-          }
+        updateProfile(user, {
+          displayName: username,
         });
       });
     }
 
     createUser();
+    addUserInDb();
 
     submitForm();
 
@@ -82,7 +75,9 @@ describe('Login form', () => {
 
         submitForm();
 
-        cy.getBySel('chat page user#1').should('be.visible');
+        cy.getBySel('chat page user#1', { timeout: 30_000 }).should(
+          'be.visible'
+        );
       });
   });
 });

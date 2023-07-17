@@ -1,5 +1,4 @@
 import './commands';
-import 'services/firebase';
 
 // Uncaught Exceptions
 

@@ -1,6 +1,6 @@
 type CyGetArgs = Parameters<typeof cy.get>;
 
-type GetBySelArgs = import('../src/utils/types').SpliceTuple<CyGetArgs, 0>;
+type GetBySelArgs = import('utils/types').SpliceTuple<CyGetArgs, 0>;
 
 declare namespace Cypress {
   interface Chainable {
