@@ -1,6 +1,6 @@
-import { onAuthStateChanged, updateProfile } from 'firebase/auth';
-import { auth, emulatorHost, firebaseConfig } from 'services/firebase';
-import { myFirebase } from 'tests/support/e2e';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db, emulatorHost, firebaseConfig } from 'services/firebase';
 import { emulators } from '../../../firebase.json';
 
 describe('Login form', () => {
@@ -31,28 +31,36 @@ describe('Login form', () => {
     resetDatabase();
     deleteAllUsers();
 
-    myFirebase
-      .auth()
-      .createUserWithEmailAndPassword(
-        Cypress.env('email'),
-        Cypress.env('password')
-      );
+    function createUser() {
+      cy.wrap(null).then(() => {
+        return new Cypress.Promise(async (res, rej) => {
+          try {
+            const username = 'user#1';
 
-    const username = 'user#1';
+            const [{ user }] = await Promise.all([
+              createUserWithEmailAndPassword(
+                auth,
+                Cypress.env('email'),
+                Cypress.env('password')
+              ),
+              setDoc(doc(db, 'users', username), {
+                data: 'fake',
+              }),
+            ]);
 
-    myFirebase.firestore().collection('users').doc(username).set({
-      data: 'fake',
-    });
+            await updateProfile(user, {
+              displayName: username,
+            });
 
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user === null) return;
-
-      updateProfile(user, {
-        displayName: username,
+            res();
+          } catch (err) {
+            rej(err);
+          }
+        });
       });
+    }
 
-      unsub();
-    });
+    createUser();
 
     submitForm();
 
