@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+import '../sharedCommands';
 import { emailMessage } from 'components/Form/Input/Inputs/Email';
 import { passwordMessage } from 'components/Form/Input/Inputs/Password';
 

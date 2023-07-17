@@ -77,4 +77,18 @@ describe('Registration form', () => {
       cy.getBySel('password_confirmation').type('123456{enter}');
     },
   });
+
+  it.only('should register a user', () => {
+    cy.resetDb();
+    cy.resetUsers();
+
+    cy.getBySel('email').type(Cypress.env('email'));
+    cy.getBySel('name').type('user');
+    cy.getBySel('password').type(Cypress.env('password'));
+    cy.getBySel('password_confirmation').type(
+      Cypress.env('password') + '{enter}'
+    );
+
+    cy.get('[id="success"]').should('be.visible');
+  });
 });

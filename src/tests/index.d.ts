@@ -23,6 +23,9 @@ declare namespace Cypress {
     testLink(link: string): void;
     testEmailEmpty(): void;
     testPasswordEmpty(): void;
+    resetDb(): import('./support/sharedCommands').ResetDbReturn;
+    resetUsers(): import('./support/sharedCommands').ResetUsersReturn;
+    testIfEmailHasBeenVerifiedOnLoginPage(): Chainable<any>;
   }
 
   interface ApplicationWindow {

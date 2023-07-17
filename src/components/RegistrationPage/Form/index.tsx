@@ -42,6 +42,7 @@ export const successToastWhenRegistering = () =>
     title: 'Cadastrado com sucesso',
     description: 'Acesse seu email e verifique sua conta para fazer login',
     status: 'success',
+    id: 'success',
   });
 
 export const errorMessage = {
