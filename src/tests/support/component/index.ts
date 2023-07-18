@@ -20,6 +20,9 @@ import './commands';
 // require('./commands')
 
 import { mount } from 'cypress/react';
+import { createElement } from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
+import { theme } from 'styles/theme';
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
@@ -33,7 +36,9 @@ declare global {
   }
 }
 
-Cypress.Commands.add('mount', mount);
+Cypress.Commands.add('mount', (jsx, options) =>
+  mount(createElement(ChakraProvider, { theme }, jsx), options)
+);
 
 // Example use:
 // cy.mount(<MyComponent />)
