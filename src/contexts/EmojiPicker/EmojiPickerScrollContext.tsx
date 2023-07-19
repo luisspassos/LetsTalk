@@ -63,7 +63,11 @@ export function EmojiPickerScrollProvider({
     const categoryIndices: CategoryIndicies = [];
 
     function insertEmojisAndInsertCategoryIndices() {
-      function fillEmojiRows(emoji: EmojiType, rows: EmojiRow[]) {
+      function fillEmojiRows(
+        emoji: EmojiType,
+        rows: EmojiRow[],
+        testId?: string
+      ) {
         const getCurrentEmojiRow = () => {
           const index = rows.length - 1;
 
@@ -78,7 +82,11 @@ export function EmojiPickerScrollProvider({
 
         const rowToBeFilled = getCurrentEmojiRow();
 
-        rowToBeFilled.push(<Emoji key={emoji}>{emoji}</Emoji>);
+        rowToBeFilled.push(
+          <Emoji data-testid={testId} key={emoji}>
+            {emoji}
+          </Emoji>
+        );
       }
 
       function fillComponents(emojiRows: EmojiRow[]) {
@@ -99,8 +107,10 @@ export function EmojiPickerScrollProvider({
         return;
       }
 
-      for (const { name, emojis } of categories.data) {
-        const categoryTitle = <CategoryTitle text={name} />;
+      for (const { name, emojis, testId } of categories.data) {
+        const categoryTitle = (
+          <CategoryTitle text={name} data-testid={testId} />
+        );
 
         components.push(categoryTitle);
 
@@ -109,7 +119,10 @@ export function EmojiPickerScrollProvider({
         const emojiRows: EmojiRow[] = [[]];
 
         for (const emoji of emojis) {
-          fillEmojiRows(emoji, emojiRows);
+          const isLast = emojis.indexOf(emoji) === emojis.length - 1;
+          const emojiTestId = isLast ? `${testId} last` : undefined;
+
+          fillEmojiRows(emoji, emojiRows, emojiTestId);
         }
 
         fillComponents(emojiRows);

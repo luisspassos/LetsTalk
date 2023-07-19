@@ -12,7 +12,7 @@ import { emojiCategories } from '../../utils/emojiCategories';
 
 export type Emoji = string;
 
-type EmojiCategory = typeof emojiCategories[0];
+type EmojiCategory = (typeof emojiCategories)[number];
 
 type Category = Omit<EmojiCategory, 'emojis'> & {
   emojis: Emoji[];
@@ -29,10 +29,11 @@ type CategoriesContextType = {
   };
 };
 
-export const createRecentCategory = (emojis: Emoji[] = []) => ({
+export const createRecentCategory = (emojis: Emoji[] = []): Category => ({
   name: 'Recentes',
   icon: AiOutlineClockCircle,
   emojis,
+  testId: 'recent',
 });
 
 export const CategoriesContext = createContext({} as CategoriesContextType);

@@ -1,4 +1,9 @@
-import { MouseEvent as ReactMouseEvent, useState } from 'react';
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  MouseEvent as ReactMouseEvent,
+  useState,
+} from 'react';
 import {
   createRecentCategory,
   useCategories,
@@ -10,7 +15,10 @@ import { useColorModeValue } from '@chakra-ui/react';
 
 type EmojiProps = {
   children: string;
-};
+} & DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
 type MouseDownEvent = ReactMouseEvent<HTMLSpanElement, MouseEvent>;
 
@@ -18,7 +26,7 @@ function getValueWithMeasure(value: number) {
   return value + 'px';
 }
 
-export function Emoji({ children: emoji }: EmojiProps) {
+export function Emoji({ children: emoji, ...rest }: EmojiProps) {
   const { categories } = useCategories();
 
   const { emojiStyles } = useEmojiStyles();
@@ -130,6 +138,7 @@ export function Emoji({ children: emoji }: EmojiProps) {
       onMouseDown={handleDisableFocusOnClick}
       onMouseEnter={handleAddHover}
       onMouseOut={handleRemoveHover}
+      {...rest}
     >
       {emoji}
     </button>

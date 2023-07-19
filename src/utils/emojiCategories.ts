@@ -1,3 +1,4 @@
+import { IconType } from 'react-icons';
 import { AiOutlineCar } from 'react-icons/ai';
 import { BiFootball } from 'react-icons/bi';
 import { BsFlag } from 'react-icons/bs';
@@ -9,10 +10,23 @@ import {
 } from 'react-icons/md';
 import { RiBearSmileLine } from 'react-icons/ri';
 
-export const emojiCategories = [
+type EmojiCategory<T extends string> = {
+  name: string;
+  icon: IconType;
+  testId: T | 'recent';
+  emojis: {
+    name: string;
+    emoji: string;
+  }[];
+};
+
+const makeTestIdALiteralString = <T extends string>(o: EmojiCategory<T>[]) => o;
+
+export const emojiCategories = makeTestIdALiteralString([
   {
     name: 'Smileys e pessoas',
     icon: MdOutlineEmojiEmotions,
+    testId: 'people',
     emojis: [
       {
         emoji: '😀',
@@ -2116,6 +2130,7 @@ export const emojiCategories = [
   {
     name: 'Animais e natureza',
     icon: RiBearSmileLine,
+    testId: 'nature',
     emojis: [
       {
         emoji: '🐵',
@@ -2698,6 +2713,7 @@ export const emojiCategories = [
   {
     name: 'Comidas e bebidas',
     icon: IoFastFoodOutline,
+    testId: 'food',
     emojis: [
       {
         emoji: '🍇',
@@ -3232,6 +3248,7 @@ export const emojiCategories = [
   {
     name: 'Atividades',
     icon: BiFootball,
+    testId: 'activities',
     emojis: [
       {
         emoji: '🎃',
@@ -3582,6 +3599,7 @@ export const emojiCategories = [
   {
     name: 'Viagens e lugares',
     icon: AiOutlineCar,
+    testId: 'places',
     emojis: [
       {
         emoji: '🌍',
@@ -4460,6 +4478,7 @@ export const emojiCategories = [
   {
     name: 'Objetos',
     icon: MdOutlineEmojiObjects,
+    testId: 'object',
     emojis: [
       {
         emoji: '👓',
@@ -5486,6 +5505,7 @@ export const emojiCategories = [
   {
     name: 'Símbolos',
     icon: MdEmojiSymbols,
+    testId: 'symbol',
     emojis: [
       {
         emoji: '🏧',
@@ -6376,6 +6396,7 @@ export const emojiCategories = [
   {
     name: 'Bandeiras',
     icon: BsFlag,
+    testId: 'flag',
     emojis: [
       {
         emoji: '🏁',
@@ -7451,4 +7472,4 @@ export const emojiCategories = [
       },
     ],
   },
-];
+]);

@@ -18,6 +18,7 @@ export function SearchInput() {
       flexShrink={0}
       value={search}
       onChange={(e) => setSearch(e.target.value)}
+      data-testid='search'
     />
   );
 }

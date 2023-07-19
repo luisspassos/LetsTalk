@@ -18,7 +18,12 @@ export const ScrollableBoxOfVirtualizedItems = forwardRef<
   // chakra element isn't being used to perform the list
 
   return (
-    <div ref={ref} style={{ overflowY: 'auto', ...style }} {...rest}>
+    <div
+      data-testid='scroll'
+      ref={ref}
+      style={{ overflowY: 'auto', ...style }}
+      {...rest}
+    >
       {children}
     </div>
   );

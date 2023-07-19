@@ -1,10 +1,17 @@
 import { useColorModeValue } from '@chakra-ui/react';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
+
+type DefaultProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLHeadingElement>,
+  HTMLHeadingElement
+>;
 
 type CategoryTitleProps = {
   text: string;
-};
+  'data-testid': string;
+} & DefaultProps;
 
-export function CategoryTitle({ text }: CategoryTitleProps) {
+export function CategoryTitle({ text, ...props }: CategoryTitleProps) {
   return (
     // chakra element isn't being used to perform the list
 
@@ -18,6 +25,8 @@ export function CategoryTitle({ text }: CategoryTitleProps) {
         fontSize: '15px',
         margin: '6px 0',
       }}
+      {...props}
+      data-testid={`${props['data-testid']} title`}
     >
       {text}
     </h3>

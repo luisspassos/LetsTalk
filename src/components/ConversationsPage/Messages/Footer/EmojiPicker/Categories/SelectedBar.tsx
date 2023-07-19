@@ -20,12 +20,13 @@ export function SelectedBar() {
     // chakra element isn't being used to perform the list
 
     <div
+      data-testid='selected bar'
       style={{
         height: search ? '0px' : '4px',
         position: 'absolute',
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
-        transform: `translateX(${currentCategoryPosition * 100}%)`,
+        // transform: `translateX(${currentCategoryPosition * 100}%)`,
         transitionDuration: transitionDurationInSeconds,
         transitionProperty: selectedCategoryPosition.current
           ? 'height'

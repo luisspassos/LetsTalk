@@ -25,15 +25,13 @@ type ScrollToIndex = ReturnType<typeof useVirtual>['scrollToIndex'];
 type ButtonProps = {
   CategoryIcon: IconType;
   index: number;
-} & DefaultButtonProps;
+} & Omit<DefaultButtonProps, 'ref'>;
 
 type MemoButtonProps = {
-  CategoryIcon: IconType;
   categoryIndex: number;
-  index: number;
   selectedCategoryIndex: number;
   scrollToIndex: ScrollToIndex;
-} & DefaultButtonProps;
+} & ButtonProps;
 
 const transitionDuration = 200; // milliseconds;
 export const transitionDurationInSeconds = transitionDuration / 1000 + 's';
@@ -42,6 +40,7 @@ export function Button({
   index,
   CategoryIcon,
   'aria-label': ariaLabel,
+  ...rest
 }: ButtonProps) {
   const {
     virtualizer: { scrollToIndex },
@@ -63,6 +62,7 @@ export function Button({
       scrollToIndex={scrollToIndex}
       aria-label={ariaLabel}
       index={index}
+      {...rest}
     />
   );
 }
@@ -75,6 +75,7 @@ const MemoButton = memo(
     scrollToIndex,
     CategoryIcon,
     'aria-label': ariaLabel,
+    ...rest
   }: MemoButtonProps) => {
     const {
       searchedEmojis: { search, setSearch },
@@ -153,6 +154,7 @@ const MemoButton = memo(
         onClick={handleScrollToCategory}
         onFocus={handleAddFocus}
         onBlur={handleRemoveFocus}
+        {...rest}
       >
         <Icon IconComponent={CategoryIcon} index={index} />
       </button>

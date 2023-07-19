@@ -10,8 +10,14 @@ export function Categories() {
     <Box>
       <Flex align='start' justify='start' overflowX='auto' position='relative'>
         <SelectedBar />
-        {categories.data.map(({ icon, name }, i) => (
-          <Button index={i} CategoryIcon={icon} aria-label={name} key={name} />
+        {categories.data.map(({ icon, name, testId }, i) => (
+          <Button
+            data-testid={testId}
+            index={i}
+            CategoryIcon={icon}
+            aria-label={name}
+            key={name}
+          />
         ))}
       </Flex>
     </Box>

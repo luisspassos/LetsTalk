@@ -6,8 +6,6 @@ import { IconButton } from '../IconButton';
 export function EmojiButton() {
   const { isOpen, onToggle } = useToggleEmojiPicker();
 
-  console.log(useToggleEmojiPicker());
-
   return (
     <IconButton
       onClick={onToggle}

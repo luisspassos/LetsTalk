@@ -8,7 +8,7 @@ export function EmojiPicker() {
   const { isOpen } = useToggleEmojiPicker();
 
   return (
-    <Collapse in={isOpen} unmountOnExit>
+    <Collapse data-testid='picker' in={isOpen} unmountOnExit>
       <Divider />
       <Categories />
       <ChakraFlex h='300px' w='100%' direction='column'>
