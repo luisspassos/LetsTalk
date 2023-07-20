@@ -33,7 +33,7 @@ type MemoButtonProps = {
   scrollToIndex: ScrollToIndex;
 } & ButtonProps;
 
-const transitionDuration = 200; // milliseconds;
+export const transitionDuration = 200; // milliseconds;
 export const transitionDurationInSeconds = transitionDuration / 1000 + 's';
 
 export function Button({

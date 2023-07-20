@@ -89,11 +89,75 @@ describe('Emoji picker', () => {
         cy.getBySel(
           elementThatProvesThatTheTitleIsTheFirstVisibleElement
         ).should('not.exist');
-
-        cy.getBySel('selected bar').then((el) =>
-          console.log(el[0].getBoundingClientRect())
-        );
       });
     }
+  });
+
+  it.only('should move the bar to the selected category when clicking on it', () => {
+    cy.get('body').invoke(
+      'append',
+      Cypress.$(`
+      <style id="__cypress-animation-disabler">
+        *, *:before, *:after {
+          transition-property: none !important;
+          animation: none !important;
+        }
+      </style>
+    `)
+    );
+
+    const coordinates: number[] = [];
+
+    for (const { testId } of emojiCategories) {
+      cy.getBySel(testId).click();
+
+      const coordinate = {
+        value: 0,
+        repeated: 0, // sometimes, the coordinate repeat even the bar hasn't stopped moving, this property is used to verify if it has repeated too many time, if yes, its because the bar has stopped moving
+      };
+
+      cy.getBySel('selected bar').then((bar) => {
+        const el: HTMLDivElement = bar[0];
+
+        return new Cypress.Promise((res) => {
+          function addCoordinateToArray() {
+            const { x: newCoordinate } = el.getBoundingClientRect();
+
+            const tooManyTimes = 50;
+            const barStoppedMoving = coordinate.repeated === tooManyTimes;
+
+            if (barStoppedMoving) {
+              clearInterval(interval);
+              coordinates.push(coordinate.value);
+              res();
+
+              return;
+            }
+
+            const repeated = coordinate.value === newCoordinate;
+
+            if (repeated) {
+              coordinate.repeated = coordinate.repeated + 1;
+
+              return;
+            }
+
+            coordinate.value = newCoordinate;
+            coordinate.repeated = 0;
+          }
+
+          const interval = setInterval(addCoordinateToArray);
+        });
+      });
+    }
+
+    function makeSureTheBarMovesForEachCategory() {
+      const uniqueSet = new Set(coordinates);
+      const areCoordinatesUnique = uniqueSet.size === coordinates.length;
+
+      cy.wrap(areCoordinatesUnique).should('eq', true);
+    }
+
+    cy.then(makeSureTheBarMovesForEachCategory);
   });
 });

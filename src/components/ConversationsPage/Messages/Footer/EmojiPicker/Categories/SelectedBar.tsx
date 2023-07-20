@@ -26,7 +26,7 @@ export function SelectedBar() {
         position: 'absolute',
         bottom: 0,
         backgroundColor: 'var(--chakra-colors-gray-300)',
-        // transform: `translateX(${currentCategoryPosition * 100}%)`,
+        transform: `translateX(${currentCategoryPosition * 100}%)`,
         transitionDuration: transitionDurationInSeconds,
         transitionProperty: selectedCategoryPosition.current
           ? 'height'
