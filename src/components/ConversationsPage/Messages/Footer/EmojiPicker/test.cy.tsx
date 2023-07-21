@@ -33,6 +33,8 @@ describe('Emoji picker', () => {
   });
 
   it('should close the emoji picker', () => {
+    cy.getBySel('picker').should('be.visible');
+
     cy.get('@toggle').click();
 
     cy.getBySel('picker').should('not.exist');
@@ -81,7 +83,7 @@ describe('Emoji picker', () => {
       testId,
       elementThatProvesThatTheTitleIsTheFirstVisibleElement,
     } of data) {
-      it.only(`should scroll to ${testId}`, () => {
+      it(`should scroll to ${testId}`, () => {
         cy.getBySel(testId).click();
 
         cy.getBySel(`${testId} title`).should('be.visible');
@@ -93,44 +95,97 @@ describe('Emoji picker', () => {
     }
   });
 
-  it.only('should move the bar to the selected category when clicking on it', () => {
-    function skipCssDurations() {
-      cy.get('body').invoke(
-        'append',
-        Cypress.$(`
-      <style id="__cypress-animation-disabler">
-        *, *:before, *:after {
-          transition-property: none !important;
-          animation: none !important;
-        }
-      </style>
-    `)
-      );
-    }
+  describe.only('selected bar', () => {
+    beforeEach(() => {
+      function skipCssDurations() {
+        cy.get('body').invoke(
+          'append',
+          Cypress.$(`
+          <style id="__cypress-animation-disabler">
+            *, *:before, *:after {
+              transition-property: none !important;
+              animation: none !important;
+            }
+          </style>
+        `)
+        );
+      }
 
-    skipCssDurations();
+      skipCssDurations();
+    });
 
-    const coordinates: number[] = [];
+    type SelectedBar = HTMLDivElement;
+    type Coordinate = number;
+    type CypressBar = [SelectedBar];
 
-    for (const { testId } of emojiCategories) {
-      cy.getBySel(testId).click();
-
-      cy.getBySel('selected bar').then((bar) => {
-        const el: HTMLDivElement = bar[0];
-
-        const { x: coordinate } = el.getBoundingClientRect();
-
-        coordinates.push(coordinate);
-      });
-    }
-
-    function makeSureTheBarMovesForEachCategory() {
+    function makeSureTheBarMovesForEachCategory(coordinates: Coordinate[]) {
       const uniqueSet = new Set(coordinates);
       const areCoordinatesUnique = uniqueSet.size === coordinates.length;
 
       cy.wrap(areCoordinatesUnique).should('eq', true);
     }
 
-    cy.then(makeSureTheBarMovesForEachCategory);
+    function getCoordinate(el: SelectedBar) {
+      const { x } = el.getBoundingClientRect();
+
+      return x;
+    }
+
+    function addCoordinate(coordinates: Coordinate[], el: SelectedBar) {
+      function add() {
+        const coordinate = getCoordinate(el);
+
+        coordinates.push(coordinate);
+      }
+
+      function addAndScroll(scrollTo: Cypress.PositionType) {
+        add();
+
+        cy.getBySel('scroll').scrollTo(scrollTo, {
+          duration: 500,
+          easing: 'linear',
+        });
+      }
+
+      return { add, addAndScroll };
+    }
+
+    it('should move the bar to the selected category when clicking on it', () => {
+      const coordinates: Coordinate[] = [];
+
+      for (const { testId } of emojiCategories) {
+        cy.getBySel(testId).click();
+
+        cy.getBySel('selected bar').then((bar: CypressBar) => {
+          const el = bar[0];
+
+          const { add } = addCoordinate(coordinates, el);
+
+          add();
+        });
+      }
+
+      cy.then(() => makeSureTheBarMovesForEachCategory(coordinates));
+    });
+
+    it('should move the bar through the categories when scrolling', () => {
+      const coordinates: Coordinate[] = [];
+
+      cy.getBySel('selected bar').then((bar: CypressBar) => {
+        const el = bar[0];
+
+        const coordinate = addCoordinate(coordinates, el);
+
+        coordinate.addAndScroll('center');
+
+        cy.then(() => {
+          coordinate.addAndScroll('bottom');
+
+          cy.then(coordinate.add).then(() =>
+            makeSureTheBarMovesForEachCategory(coordinates)
+          );
+        });
+      });
+    });
   });
 });

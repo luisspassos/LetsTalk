@@ -62,6 +62,7 @@ const MemoIcon = memo(
           alignItems: 'center',
           justifyContent: 'center',
         }}
+        data-testid='category icon'
       >
         <IconComponent size='clamp(18px, 50%, 22px)' />
       </span>
