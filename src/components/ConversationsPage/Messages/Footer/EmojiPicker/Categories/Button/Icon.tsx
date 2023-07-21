@@ -11,26 +11,28 @@ import { transitionDurationInSeconds } from '.';
 type IconProps = {
   IconComponent: IconType;
   index: number;
+  testId: string;
 };
 
 type MemoIconProps = {
   currentCategoryPosition: EmojiPickerScrollContextType['currentCategoryPosition'];
 } & IconProps;
 
-export function Icon({ IconComponent, index }: IconProps) {
+export function Icon(props: IconProps) {
   const { currentCategoryPosition } = useEmojiPickerScroll();
 
   return (
-    <MemoIcon
-      index={index}
-      IconComponent={IconComponent}
-      currentCategoryPosition={currentCategoryPosition}
-    />
+    <MemoIcon currentCategoryPosition={currentCategoryPosition} {...props} />
   );
 }
 
 const MemoIcon = memo(
-  ({ index, IconComponent, currentCategoryPosition }: MemoIconProps) => {
+  ({
+    index,
+    IconComponent,
+    currentCategoryPosition,
+    testId,
+  }: MemoIconProps) => {
     const {
       searchedEmojis: { search },
     } = useSearchedEmojis();
@@ -62,7 +64,7 @@ const MemoIcon = memo(
           alignItems: 'center',
           justifyContent: 'center',
         }}
-        data-testid='category icon'
+        data-testid={`${testId} icon`}
       >
         <IconComponent size='clamp(18px, 50%, 22px)' />
       </span>

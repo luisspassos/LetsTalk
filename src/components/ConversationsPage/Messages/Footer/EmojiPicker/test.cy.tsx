@@ -95,7 +95,7 @@ describe('Emoji picker', () => {
     }
   });
 
-  describe.only('selected bar', () => {
+  describe.only('selected category', () => {
     beforeEach(() => {
       function skipCssDurations() {
         cy.get('body').invoke(
@@ -150,11 +150,26 @@ describe('Emoji picker', () => {
       return { add, addAndScroll };
     }
 
-    it('should move the bar to the selected category when clicking on it', () => {
+    it.only('should move the bar and add the focus color when clicking', () => {
       const coordinates: Coordinate[] = [];
 
-      for (const { testId } of emojiCategories) {
-        cy.getBySel(testId).click();
+      for (const { testId: currentTestId } of emojiCategories) {
+        cy.getBySel(currentTestId).click();
+
+        cy.getBySel(`${currentTestId} icon`).then(($i) => {
+          const cssProp = 'color';
+          const color: string = $i.css(cssProp);
+
+          for (const { testId } of emojiCategories) {
+            if (currentTestId === testId) continue;
+
+            cy.getBySel(`${testId} icon`).should(
+              'not.have.css',
+              cssProp,
+              color
+            );
+          }
+        });
 
         cy.getBySel('selected bar').then((bar: CypressBar) => {
           const el = bar[0];

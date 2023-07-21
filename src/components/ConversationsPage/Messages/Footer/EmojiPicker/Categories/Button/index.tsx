@@ -25,6 +25,7 @@ type ScrollToIndex = ReturnType<typeof useVirtual>['scrollToIndex'];
 type ButtonProps = {
   CategoryIcon: IconType;
   index: number;
+  'data-testid': string;
 } & Omit<DefaultButtonProps, 'ref'>;
 
 type MemoButtonProps = {
@@ -156,7 +157,11 @@ const MemoButton = memo(
         onBlur={handleRemoveFocus}
         {...rest}
       >
-        <Icon IconComponent={CategoryIcon} index={index} />
+        <Icon
+          testId={rest['data-testid']}
+          IconComponent={CategoryIcon}
+          index={index}
+        />
       </button>
     );
   }
