@@ -33,6 +33,7 @@ export function MessageInput({ setMessage, message }: MessageInputProps) {
       borderColor={useColorModeValue('blackAlpha.500', undefined)}
       bg={useColorModeValue('white', 'blackAlpha.500')}
       resize='none'
+      data-testid='message'
     />
   );
 }

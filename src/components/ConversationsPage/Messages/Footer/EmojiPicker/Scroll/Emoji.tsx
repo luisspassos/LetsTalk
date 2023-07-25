@@ -15,6 +15,7 @@ import { useColorModeValue } from '@chakra-ui/react';
 
 type EmojiProps = {
   children: string;
+  'data-testid'?: string;
 } & DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
@@ -26,7 +27,11 @@ function getValueWithMeasure(value: number) {
   return value + 'px';
 }
 
-export function Emoji({ children: emoji, ...rest }: EmojiProps) {
+export function Emoji({
+  children: emoji,
+  'data-testid': testId,
+  ...rest
+}: EmojiProps) {
   const { categories } = useCategories();
 
   const { emojiStyles } = useEmojiStyles();
@@ -138,6 +143,7 @@ export function Emoji({ children: emoji, ...rest }: EmojiProps) {
       onMouseDown={handleDisableFocusOnClick}
       onMouseEnter={handleAddHover}
       onMouseOut={handleRemoveHover}
+      data-testid={testId ?? 'emoji'}
       {...rest}
     >
       {emoji}

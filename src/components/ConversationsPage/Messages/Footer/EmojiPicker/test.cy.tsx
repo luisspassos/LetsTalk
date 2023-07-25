@@ -5,27 +5,94 @@ import { EmojiStylesProvider } from 'contexts/EmojiPicker/EmojiStylesContext';
 import { PositionSelectedFromEmojiPickerCategoriesProvider } from 'contexts/EmojiPicker/PositionSelectedFromEmojiPickerCategoriesContext';
 import { SearchedEmojisProvider } from 'contexts/EmojiPicker/SearchedEmojiContext';
 import { ToggleEmojiPickerProvider } from 'contexts/EmojiPicker/ToggleEmojiPickerContext';
+import { MessageInputRefProvider } from 'contexts/MessageInputRef';
 import { theme } from 'styles/theme';
 import { emojiCategories } from 'utils/emojiCategories';
 import { Footer } from '..';
+
+type SelectedBar = Element;
+type CypressSelectedBar = JQuery<SelectedBar>;
+type Icon = JQuery<Element>;
+type Message = JQuery<HTMLTextAreaElement>;
+
+function getIconCSSObjectsInString() {
+  const styles: string[] = [];
+
+  for (const { testId } of emojiCategories) {
+    cy.getBySel(`${testId} icon`).then(([el]: Icon) => {
+      const style = getComputedStyle(el);
+
+      styles.push(JSON.stringify(style));
+    });
+  }
+
+  return styles;
+}
+
+function checkIfOnlyOneCategoryHasFocusStyle() {
+  function hasOnlyOneDifferentValue<T>(arr: T[]): boolean {
+    if (!arr || arr.length < 2) {
+      return false;
+    }
+
+    // Find the most common element in the array
+    const countMap: Map<T, number> = new Map();
+    let mostCommonElement: T | undefined;
+    let mostCommonElementCount = 0;
+
+    arr.forEach((item) => {
+      const count = countMap.has(item) ? countMap.get(item)! + 1 : 1;
+      countMap.set(item, count);
+
+      if (count > mostCommonElementCount) {
+        mostCommonElement = item;
+        mostCommonElementCount = count;
+      }
+    });
+
+    // Count the occurrences of the most common element and the occurrences of other elements
+    let differentValueCount = 0;
+
+    for (const [key, value] of countMap) {
+      if (key !== mostCommonElement) {
+        differentValueCount += value;
+      }
+    }
+
+    // Check if the array has only one value different from the others
+    return (
+      mostCommonElementCount >= arr.length - 1 && differentValueCount === 1
+    );
+  }
+
+  const styles = getIconCSSObjectsInString();
+
+  return cy.then(() => {
+    const focusIsOnlyOnOne = hasOnlyOneDifferentValue(styles);
+
+    cy.wrap(focusIsOnlyOnOne).should('be.true');
+  });
+}
 
 describe('Emoji picker', () => {
   beforeEach(() => {
     cy.mount(
       <ChakraProvider theme={theme}>
-        <PositionSelectedFromEmojiPickerCategoriesProvider>
-          <SearchedEmojisProvider>
-            <EmojiStylesProvider>
-              <CategoriesProvider>
-                <ToggleEmojiPickerProvider>
-                  <EmojiPickerScrollProvider>
-                    <Footer />
-                  </EmojiPickerScrollProvider>
-                </ToggleEmojiPickerProvider>
-              </CategoriesProvider>
-            </EmojiStylesProvider>
-          </SearchedEmojisProvider>
-        </PositionSelectedFromEmojiPickerCategoriesProvider>
+        <MessageInputRefProvider>
+          <PositionSelectedFromEmojiPickerCategoriesProvider>
+            <SearchedEmojisProvider>
+              <EmojiStylesProvider>
+                <CategoriesProvider>
+                  <ToggleEmojiPickerProvider>
+                    <EmojiPickerScrollProvider>
+                      <Footer />
+                    </EmojiPickerScrollProvider>
+                  </ToggleEmojiPickerProvider>
+                </CategoriesProvider>
+              </EmojiStylesProvider>
+            </SearchedEmojisProvider>
+          </PositionSelectedFromEmojiPickerCategoriesProvider>
+        </MessageInputRefProvider>
       </ChakraProvider>
     );
 
@@ -49,7 +116,7 @@ describe('Emoji picker', () => {
     });
   });
 
-  describe('categories', () => {
+  describe.only('categories', () => {
     const data = emojiCategories.map(({ testId }, i) => {
       const common = {
         testId,
@@ -86,7 +153,7 @@ describe('Emoji picker', () => {
       it(`should scroll to ${testId}`, () => {
         cy.getBySel(testId).click();
 
-        cy.getBySel(`${testId} title`).should('be.visible');
+        cy.getBySel(`${testId} title`).as('title').should('be.visible');
 
         cy.getBySel(
           elementThatProvesThatTheTitleIsTheFirstVisibleElement
@@ -95,7 +162,7 @@ describe('Emoji picker', () => {
     }
   });
 
-  describe.only('selected category', () => {
+  describe('selected category', () => {
     beforeEach(() => {
       function skipCssDurations() {
         cy.get('body').invoke(
@@ -114,15 +181,13 @@ describe('Emoji picker', () => {
       skipCssDurations();
     });
 
-    type SelectedBar = HTMLDivElement;
     type Coordinate = number;
-    type CypressBar = [SelectedBar];
 
     function makeSureTheBarMovesForEachCategory(coordinates: Coordinate[]) {
       const uniqueSet = new Set(coordinates);
       const areCoordinatesUnique = uniqueSet.size === coordinates.length;
 
-      cy.wrap(areCoordinatesUnique).should('eq', true);
+      cy.wrap(areCoordinatesUnique).should('be.true');
     }
 
     function getCoordinate(el: SelectedBar) {
@@ -141,7 +206,7 @@ describe('Emoji picker', () => {
       function addAndScroll(scrollTo: Cypress.PositionType) {
         add();
 
-        cy.getBySel('scroll').scrollTo(scrollTo, {
+        return cy.getBySel('scroll').scrollTo(scrollTo, {
           duration: 500,
           easing: 'linear',
         });
@@ -150,57 +215,215 @@ describe('Emoji picker', () => {
       return { add, addAndScroll };
     }
 
-    it.only('should move the bar and add the focus color when clicking', () => {
+    it('should move the bar and add the focus style when clicking', () => {
       const coordinates: Coordinate[] = [];
 
       for (const { testId: currentTestId } of emojiCategories) {
         cy.getBySel(currentTestId).click();
 
-        cy.getBySel(`${currentTestId} icon`).then(($i) => {
-          const cssProp = 'color';
-          const color: string = $i.css(cssProp);
+        const checkIfTheFocusStyleHasBeenAdded = () => {
+          cy.getBySel(`${currentTestId} icon`).then(($i: Icon) => {
+            const [currentEl] = $i;
 
-          for (const { testId } of emojiCategories) {
-            if (currentTestId === testId) continue;
+            function compareCss([toBeCompared]: JQuery<Element>) {
+              const current = getComputedStyle(currentEl);
+              const compare = getComputedStyle(toBeCompared);
 
-            cy.getBySel(`${testId} icon`).should(
-              'not.have.css',
-              cssProp,
-              color
-            );
-          }
-        });
+              for (const key in current) {
+                const currentVal = current[key];
+                const compareVal = compare[key];
 
-        cy.getBySel('selected bar').then((bar: CypressBar) => {
-          const el = bar[0];
+                if (
+                  key === 'length' ||
+                  key === 'cssText' ||
+                  typeof key === 'function'
+                ) {
+                  continue;
+                }
 
-          const { add } = addCoordinate(coordinates, el);
+                const isDifferent = currentVal !== compareVal;
 
-          add();
-        });
+                if (isDifferent) {
+                  return true;
+                }
+              }
+
+              return false;
+            }
+
+            for (const { testId } of emojiCategories) {
+              const isCurrent = currentTestId === testId;
+
+              if (isCurrent) continue;
+
+              cy.getBySel(`${testId} icon`).then((icon: Icon) => {
+                const currentIconShouldBeTheOnlyOneWithFocusStyle =
+                  compareCss(icon);
+
+                cy.wrap(currentIconShouldBeTheOnlyOneWithFocusStyle).should(
+                  'be.true'
+                );
+              });
+            }
+          });
+        };
+
+        const addBarCoordinate = () => {
+          cy.getBySel('selected bar').then((bar: CypressSelectedBar) => {
+            const el = bar[0];
+
+            const { add } = addCoordinate(coordinates, el);
+
+            add();
+          });
+        };
+
+        addBarCoordinate();
+        checkIfTheFocusStyleHasBeenAdded();
       }
 
       cy.then(() => makeSureTheBarMovesForEachCategory(coordinates));
     });
 
-    it('should move the bar through the categories when scrolling', () => {
+    it('should move the bar through the categories and add the focus style when scrolling', () => {
       const coordinates: Coordinate[] = [];
 
-      cy.getBySel('selected bar').then((bar: CypressBar) => {
-        const el = bar[0];
+      cy.getBySel('selected bar').then((bar: CypressSelectedBar) => {
+        const [el] = bar;
 
         const coordinate = addCoordinate(coordinates, el);
 
+        checkIfOnlyOneCategoryHasFocusStyle();
+
         coordinate.addAndScroll('center');
 
-        cy.then(() => {
-          coordinate.addAndScroll('bottom');
+        checkIfOnlyOneCategoryHasFocusStyle().then(() => {
+          coordinate
+            .addAndScroll('bottom')
+            .then(coordinate.add)
+            .then(() => makeSureTheBarMovesForEachCategory(coordinates));
 
-          cy.then(coordinate.add).then(() =>
-            makeSureTheBarMovesForEachCategory(coordinates)
-          );
+          checkIfOnlyOneCategoryHasFocusStyle();
         });
       });
+    });
+  });
+
+  describe('search', () => {
+    it('should remove the selected bar', () => {
+      cy.getBySel('selected bar').then(([el]: CypressSelectedBar) => {
+        const getStyle = () => getComputedStyle(el);
+        const hidden = '0px';
+
+        function checkIfBarIsVisible() {
+          const { width, height } = getStyle();
+
+          cy.wrap(width).should('not.eq', hidden);
+          cy.wrap(height).should('not.eq', hidden);
+        }
+
+        function checkIfBarIsNotVisible() {
+          const { width, height } = getStyle();
+
+          const notExists = width === hidden || height === hidden;
+
+          cy.wrap(notExists).should('be.true');
+        }
+
+        checkIfBarIsVisible();
+
+        cy.getBySel('search').type('example');
+
+        cy.then(checkIfBarIsNotVisible);
+      });
+    });
+
+    it('should remove category focus style', () => {
+      checkIfOnlyOneCategoryHasFocusStyle();
+
+      cy.getBySel('search').type('example');
+
+      function checkIfTheresNoFocusStyle() {
+        const styles = getIconCSSObjectsInString();
+        const areEqual = styles.every((val, _, arr) => val === arr[0]);
+
+        cy.wrap(areEqual).should('be.true');
+      }
+
+      cy.then(checkIfTheresNoFocusStyle);
+    });
+  });
+
+  describe('emoji insertion', () => {
+    it('should insert', () => {
+      cy.getBySel('message').invoke('val').should('be.empty');
+
+      cy.getBySel('emoji').first().click();
+
+      cy.getBySel('message').invoke('val').should('not.be.empty');
+    });
+
+    it('should put the cursor on the right of the emoji', () => {
+      cy.getBySel('emoji').first().click();
+
+      cy.getBySel('message').then(([el]: Message) => {
+        cy.wrap(el.value.length === el.selectionStart).should('be.true');
+      });
+    });
+
+    it('should insert different emojis', () => {
+      cy.getBySel('emoji').first().click();
+
+      cy.getBySel('message')
+        .invoke('val')
+        .then((val: string) => {
+          cy.getBySel('message').clear();
+
+          cy.getBySel('emoji').last().click();
+
+          cy.getBySel('message').invoke('val').should('not.eq', val);
+        });
+    });
+
+    it('should insert the emoji in different parts', () => {
+      const text = 'example';
+
+      cy.getBySel('message').type(text);
+
+      // insert emoji after the text
+      cy.getBySel('emoji').first().click();
+
+      cy.getBySel('message').then(([el]: Message) => {
+        function insertEmojiOnTheInputStart() {
+          el.selectionEnd = 0;
+
+          cy.getBySel('emoji').first().click();
+        }
+
+        insertEmojiOnTheInputStart();
+
+        cy.getBySel('message')
+          .invoke('val')
+          .then((val: string) => {
+            const textIsOnTheMiddle =
+              !val.startsWith(text) && !val.endsWith(text);
+
+            cy.wrap(textIsOnTheMiddle).should('be.true');
+          });
+      });
+    });
+  });
+
+  describe('recent category', () => {
+    it('should go to the category', () => {
+      cy.getBySel('emoji').first().click();
+
+      cy.getBySel('recent').click();
+
+      cy.getBySel('recent title').as('title').should('be.visible');
+      cy.getBySel('search').should('not.exist');
+
+      // cy.get('@title').scrollIntoView({ offset: { top: 50, left: 0 } });
     });
   });
 });

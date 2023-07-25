@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .box {
+        width: 100vw;
+        height: 200vh;
+      }
+
+      .first {
+        background-color: red;
+      }
+
+      .second {
+        background-color: blue;
+      }
+
+      .third {
+        background-color: yellowgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box first"></div>
+    <div class="box second"></div>
+    <div class="box third"></div>
+  </body>
+  <script>
+    const third = document.querySelector('.third');
+
+    third.scrollIntoView({ block: 'nearest' });
+  </script>
+</html>
