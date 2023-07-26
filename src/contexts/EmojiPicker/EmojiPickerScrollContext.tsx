@@ -82,9 +82,11 @@ export function EmojiPickerScrollProvider({
 
         const rowToBeFilled = getCurrentEmojiRow();
 
+        const emojiString = typeof emoji === 'string' ? emoji : emoji.emoji;
+
         rowToBeFilled.push(
-          <Emoji data-testid={testId} key={emoji}>
-            {emoji}
+          <Emoji data-testid={testId} key={emojiString}>
+            {emojiString}
           </Emoji>
         );
       }

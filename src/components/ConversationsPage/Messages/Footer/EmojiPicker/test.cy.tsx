@@ -74,6 +74,27 @@ function checkIfOnlyOneCategoryHasFocusStyle() {
   });
 }
 
+function clickAndCheckIfCategoryIsShowingFully(
+  category: string,
+  elementThatProvesThatTheTitleIsTheFirstVisibleElement: string
+) {
+  cy.getBySel(category).click();
+
+  cy.getBySel(`${category} title`).should('be.visible');
+  cy.getBySel(elementThatProvesThatTheTitleIsTheFirstVisibleElement).should(
+    'not.exist'
+  );
+
+  cy.getBySel('scroll').then(([el]: JQuery<Element>) => {
+    // scroll 20px up
+    el.scrollBy(0, -20);
+
+    cy.getBySel(elementThatProvesThatTheTitleIsTheFirstVisibleElement).should(
+      'be.visible'
+    );
+  });
+}
+
 describe('Emoji picker', () => {
   beforeEach(() => {
     cy.mount(
@@ -116,7 +137,7 @@ describe('Emoji picker', () => {
     });
   });
 
-  describe.only('categories', () => {
+  describe('categories', () => {
     const data = emojiCategories.map(({ testId }, i) => {
       const common = {
         testId,
@@ -151,13 +172,10 @@ describe('Emoji picker', () => {
       elementThatProvesThatTheTitleIsTheFirstVisibleElement,
     } of data) {
       it(`should scroll to ${testId}`, () => {
-        cy.getBySel(testId).click();
-
-        cy.getBySel(`${testId} title`).as('title').should('be.visible');
-
-        cy.getBySel(
+        clickAndCheckIfCategoryIsShowingFully(
+          testId,
           elementThatProvesThatTheTitleIsTheFirstVisibleElement
-        ).should('not.exist');
+        );
       });
     }
   });
@@ -416,14 +434,33 @@ describe('Emoji picker', () => {
 
   describe('recent category', () => {
     it('should go to the category', () => {
-      cy.getBySel('emoji').first().click();
+      cy.getBySel('emoji').first().as('first').click();
 
-      cy.getBySel('recent').click();
+      clickAndCheckIfCategoryIsShowingFully('recent', 'search');
+    });
 
-      cy.getBySel('recent title').as('title').should('be.visible');
-      cy.getBySel('search').should('not.exist');
+    it.only('should put recently clicked emoji first in category', () => {
+      cy.getBySel('emoji')
+        .first()
+        .then((emoji: JQuery<HTMLElement>) => {
+          const text = emoji.text();
 
-      // cy.get('@title').scrollIntoView({ offset: { top: 50, left: 0 } });
+          const [el] = emoji;
+
+          el.click();
+
+          cy.getBySel('emoji')
+            .last()
+            .then((newEmoji: JQuery<HTMLElement>) => {
+              const newText = newEmoji.text();
+
+              const [el] = newEmoji;
+
+              el.click();
+
+              cy.wrap(text).should('not.eq', newText);
+            });
+        });
     });
   });
 });
