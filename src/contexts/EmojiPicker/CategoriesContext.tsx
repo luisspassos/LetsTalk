@@ -10,11 +10,7 @@ import {
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { emojiCategories } from '../../utils/emojiCategories';
 
-type EmojiType = string;
-
-export type EmojiObj = { emoji: EmojiType; testId: string };
-
-export type Emoji = EmojiType | EmojiObj;
+export type Emoji = string;
 
 type EmojiCategory = (typeof emojiCategories)[number];
 
@@ -33,9 +29,7 @@ type CategoriesContextType = {
   };
 };
 
-export const createRecentCategory = (
-  emojis: Category['emojis'] = []
-): Category => ({
+export const createRecentCategory = (emojis: Emoji[] = []): Category => ({
   name: 'Recentes',
   icon: AiOutlineClockCircle,
   emojis,
@@ -49,19 +43,17 @@ export function CategoriesProvider({ children }: CategoriesProviderProps) {
 
   useEffect(() => {
     function fillCategories() {
-      const newCategories: Category[] = emojiCategories.map(
-        ({ emojis, ...rest }) => ({
-          ...rest,
-          emojis: emojis.map(({ emoji }) => emoji),
-        })
-      );
+      const newCategories = emojiCategories.map(({ emojis, ...rest }) => ({
+        ...rest,
+        emojis: emojis.map(({ emoji }) => emoji),
+      }));
 
       function addRecentCategory() {
         const localStorageData = localStorage.getItem('recentlyUsedEmojis');
 
         if (!localStorageData) return;
 
-        const emojis: Category['emojis'] = JSON.parse(localStorageData);
+        const emojis: Emoji[] = JSON.parse(localStorageData);
 
         const category = createRecentCategory(emojis);
 

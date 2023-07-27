@@ -82,11 +82,9 @@ export function EmojiPickerScrollProvider({
 
         const rowToBeFilled = getCurrentEmojiRow();
 
-        const emojiString = typeof emoji === 'string' ? emoji : emoji.emoji;
-
         rowToBeFilled.push(
-          <Emoji data-testid={testId} key={emojiString}>
-            {emojiString}
+          <Emoji data-testid={testId} key={emoji}>
+            {emoji}
           </Emoji>
         );
       }
@@ -121,8 +119,18 @@ export function EmojiPickerScrollProvider({
         const emojiRows: EmojiRow[] = [[]];
 
         for (const emoji of emojis) {
+          const isRecentCategory = testId === 'recent';
           const isLast = emojis.indexOf(emoji) === emojis.length - 1;
-          const emojiTestId = isLast ? `${testId} last` : undefined;
+
+          let emojiTestId: string | undefined;
+
+          if (isRecentCategory) {
+            emojiTestId = `emoji ${testId}`;
+          } else {
+            if (isLast) {
+              emojiTestId = `${testId} last`;
+            }
+          }
 
           fillEmojiRows(emoji, emojiRows, emojiTestId);
         }

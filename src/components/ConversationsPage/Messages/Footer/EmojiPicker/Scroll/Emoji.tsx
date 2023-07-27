@@ -6,7 +6,6 @@ import {
 } from 'react';
 import {
   createRecentCategory,
-  EmojiObj,
   useCategories,
 } from 'contexts/EmojiPicker/CategoriesContext';
 import { useEmojiStyles } from 'contexts/EmojiPicker/EmojiStylesContext';
@@ -69,12 +68,7 @@ export function Emoji({
 
     const category = categoriesData[0];
 
-    const emojiObj: EmojiObj = {
-      emoji,
-      testId: 'recent emoji',
-    };
-
-    const emojiExists = category.emojis.some(({}) => {});
+    const emojiExists = category.emojis.includes(emoji);
 
     if (emojiExists) {
       // it will remove the existing emoji
@@ -87,7 +81,9 @@ export function Emoji({
 
       category.emojis = emojis;
     } else {
-      if (category.emojis.length === 25) {
+      const isFull = category.emojis.length === 25;
+
+      if (isFull) {
         category.emojis.pop();
       }
 

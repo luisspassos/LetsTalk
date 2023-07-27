@@ -14,6 +14,7 @@ type SelectedBar = Element;
 type CypressSelectedBar = JQuery<SelectedBar>;
 type Icon = JQuery<Element>;
 type Message = JQuery<HTMLTextAreaElement>;
+type Emoji = JQuery<HTMLElement>;
 
 function getIconCSSObjectsInString() {
   const styles: string[] = [];
@@ -370,6 +371,14 @@ describe('Emoji picker', () => {
 
       cy.then(checkIfTheresNoFocusStyle);
     });
+
+    it.only('should search emojis', () => {
+      cy.getBySel('emoji').then((emojis: Emoji[]) => {
+        const strings = emojis.map((emoji) => emoji[0].textContent);
+
+        console.log(strings);
+      });
+    });
   });
 
   describe('emoji insertion', () => {
@@ -439,28 +448,73 @@ describe('Emoji picker', () => {
       clickAndCheckIfCategoryIsShowingFully('recent', 'search');
     });
 
-    it.only('should put recently clicked emoji first in category', () => {
+    it('should put recently clicked emoji first in category', () => {
+      function getEmojiStringAndClick(emoji: Emoji) {
+        const text = emoji.text();
+
+        const [el] = emoji;
+
+        el.click();
+
+        return text;
+      }
+
       cy.getBySel('emoji')
         .first()
         .then((emoji: JQuery<HTMLElement>) => {
-          const text = emoji.text();
-
-          const [el] = emoji;
-
-          el.click();
+          const text = getEmojiStringAndClick(emoji);
 
           cy.getBySel('emoji')
             .last()
             .then((newEmoji: JQuery<HTMLElement>) => {
-              const newText = newEmoji.text();
+              const newText = getEmojiStringAndClick(newEmoji);
 
-              const [el] = newEmoji;
-
-              el.click();
-
+              // emojis should be different for the test to work correctly
               cy.wrap(text).should('not.eq', newText);
+
+              cy.getBySel('emoji recent')
+                .first()
+                .invoke('text')
+                .should('eq', newText);
+
+              cy.getBySel('emoji recent')
+                .last()
+                .invoke('text')
+                .should('eq', text);
             });
         });
+    });
+
+    it('should not repeat the emoji in the category', () => {
+      cy.getBySel('emoji').first().click();
+      cy.getBySel('emoji').first().click();
+
+      cy.getBySel('recent').click();
+
+      cy.getBySel('emoji recent').should('have.length', 1);
+    });
+
+    it('should add the category', () => {
+      cy.getBySel('recent').should('not.exist');
+      cy.getBySel('recent title').should('not.exist');
+
+      cy.getBySel('emoji').first().click();
+
+      cy.getBySel('recent').should('be.visible');
+    });
+
+    it('should stop inserting emojis when the category is full', () => {
+      const max = 25;
+
+      cy.getBySel('emoji').should('have.length.above', max);
+
+      for (let i = 0; i < max + 1; i++) {
+        cy.getBySel('emoji').eq(i).click();
+      }
+
+      cy.getBySel('recent').click();
+
+      cy.getBySel('emoji recent').should('have.length', max);
     });
   });
 });

@@ -35,6 +35,8 @@
     <div class="box third"></div>
   </body>
   <script>
-    [{ d: 1 }, {}].includes({ d: 1 });
+    const third = document.querySelector('.third');
+
+    third.scrollIntoView({ block: 'nearest' });
   </script>
 </html>
