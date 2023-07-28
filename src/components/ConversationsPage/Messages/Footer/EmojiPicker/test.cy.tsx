@@ -7,7 +7,6 @@ import { SearchedEmojisProvider } from 'contexts/EmojiPicker/SearchedEmojiContex
 import { ToggleEmojiPickerProvider } from 'contexts/EmojiPicker/ToggleEmojiPickerContext';
 import { MessageInputRefProvider } from 'contexts/MessageInputRef';
 import { theme } from 'styles/theme';
-import { emojiCategories } from 'utils/emojiCategories';
 import { Footer } from '..';
 
 type SelectedBar = Element;
@@ -20,11 +19,21 @@ type Message = JQuery<HTMLTextAreaElement>;
 type EmojiEl = HTMLElement;
 type Emoji = JQuery<EmojiEl>;
 
+const defaultCategories = [
+  'people',
+  'nature',
+  'food',
+  'activities',
+  'places',
+  'object',
+  'symbol',
+] as const;
+
 function getIconCSSObjectsInString() {
   const styles: string[] = [];
 
-  for (const { testId } of emojiCategories) {
-    cy.getBySel(`${testId} icon`).then(([el]: Icon) => {
+  for (const category of defaultCategories) {
+    cy.getBySel(`${category} icon`).then(([el]: Icon) => {
       const style = getComputedStyle(el);
 
       styles.push(JSON.stringify(style));
@@ -143,17 +152,17 @@ describe('Emoji picker', () => {
   });
 
   describe('categories', () => {
-    const data = emojiCategories.map(({ testId }, i) => {
+    const data = defaultCategories.map((category, i, arr) => {
       const common = {
-        testId,
+        category,
       };
 
       type Result = {
-        testId: string;
+        category: typeof category;
         elementThatProvesThatTheTitleIsTheFirstVisibleElement: string;
       };
 
-      if (testId === 'people') {
+      if (category === 'people') {
         const result: Result = {
           ...common,
           elementThatProvesThatTheTitleIsTheFirstVisibleElement: 'search',
@@ -162,23 +171,23 @@ describe('Emoji picker', () => {
         return result;
       }
 
-      const prevCategory = emojiCategories[i - 1];
+      const prevCategory = arr[i - 1];
 
       const result: Result = {
         ...common,
-        elementThatProvesThatTheTitleIsTheFirstVisibleElement: `${prevCategory?.testId} last`, // is the last emoji in the previous category
+        elementThatProvesThatTheTitleIsTheFirstVisibleElement: `${prevCategory} last`, // is the last emoji in the previous category
       };
 
       return result;
     });
 
     for (const {
-      testId,
+      category,
       elementThatProvesThatTheTitleIsTheFirstVisibleElement,
     } of data) {
-      it(`should scroll to ${testId}`, () => {
+      it(`should scroll to ${category}`, () => {
         clickAndCheckIfCategoryIsShowingFully(
-          testId,
+          category,
           elementThatProvesThatTheTitleIsTheFirstVisibleElement
         );
       });
@@ -241,11 +250,11 @@ describe('Emoji picker', () => {
     it('should move the bar and add the focus style when clicking', () => {
       const coordinates: Coordinate[] = [];
 
-      for (const { testId: currentTestId } of emojiCategories) {
-        cy.getBySel(currentTestId).click();
+      for (const currentCategory of defaultCategories) {
+        cy.getBySel(currentCategory).click();
 
         const checkIfTheFocusStyleHasBeenAdded = () => {
-          cy.getBySel(`${currentTestId} icon`).then(($i: Icon) => {
+          cy.getBySel(`${currentCategory} icon`).then(($i: Icon) => {
             const [currentEl] = $i;
 
             function compareCss([toBeCompared]: JQuery<Element>) {
@@ -274,12 +283,12 @@ describe('Emoji picker', () => {
               return false;
             }
 
-            for (const { testId } of emojiCategories) {
-              const isCurrent = currentTestId === testId;
+            for (const category of defaultCategories) {
+              const isCurrent = currentCategory === category;
 
               if (isCurrent) continue;
 
-              cy.getBySel(`${testId} icon`).then((icon: Icon) => {
+              cy.getBySel(`${category} icon`).then((icon: Icon) => {
                 const currentIconShouldBeTheOnlyOneWithFocusStyle =
                   compareCss(icon);
 
@@ -376,35 +385,59 @@ describe('Emoji picker', () => {
       cy.then(checkIfTheresNoFocusStyle);
     });
 
-    it.only('should search emojis', () => {
-      function getEmojiArrayInString(emojis: EmojiEl[]) {
-        const arr: string[] = [];
+    it('should search emojis with formatted search', () => {
+      // it will search for the emoji that has some letter missing. Then, it will search the letter and check if the emoji without it has been filtered out
+      cy.getBySel('emoji').each((emoji) => {
+        const name = emoji.data('name');
 
-        for (const emoji of emojis) {
-          if (emoji.textContent === null) throw 'emoji is missing';
+        if (name === undefined) throw 'name is missing';
 
-          arr.push(emoji.textContent);
+        function findLetterThatDoesNotExistInVisibleEmoji() {
+          const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+          const letter = alphabet.find((letter) => !name.includes(letter));
+
+          return letter;
         }
 
-        return JSON.stringify(arr);
-      }
+        const letter = findLetterThatDoesNotExistInVisibleEmoji();
 
-      cy.getBySel('emoji').then((emojis: EmojiEl[]) => {
-        const initialEmojis = getEmojiArrayInString(emojis);
+        // if the name has all letters, then try next
+        if (letter === undefined) return;
 
-        const search = 'z';
+        const checkIfLetterIsBeingFormattedAndIsSearchingCorrectly = (
+          accent: string
+        ) => {
+          const letterToTestFormatting = () => {
+            const baseLetterCodePoint = letter.charCodeAt(0);
+            const accentCodePoint = accent.charCodeAt(0);
 
-        cy.getBySel('search').type(search);
+            const accentedLetter = String.fromCharCode(
+              baseLetterCodePoint,
+              accentCodePoint
+            );
 
-        cy.getBySel('emoji').then((emojis: EmojiEl[]) => {
-          const searchedEmojis = getEmojiArrayInString(emojis);
+            // search should remove blank spaces, accents and upper case
+            return ' ' + accentedLetter.toUpperCase();
+          };
 
-          cy.wrap(initialEmojis).should('not.eq', searchedEmojis);
+          cy.getBySel('search').type(letterToTestFormatting());
 
           cy.getBySel('emoji').each((emoji) =>
-            cy.wrap(emoji).invoke('data', 'name').should('include', search)
+            cy.wrap(emoji).invoke('data', 'name').should('include', letter)
           );
-        });
+        };
+
+        const accents = ['\u0301' /* ´ */, '\u0302' /* ^ */];
+
+        for (const accent of accents) {
+          checkIfLetterIsBeingFormattedAndIsSearchingCorrectly(accent);
+
+          cy.getBySel('search').clear();
+        }
+
+        // stop loop
+        return false;
       });
     });
   });

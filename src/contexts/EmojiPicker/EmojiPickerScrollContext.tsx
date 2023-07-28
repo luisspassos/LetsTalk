@@ -13,7 +13,10 @@ import {
 import { useVirtual } from 'react-virtual';
 import { Emoji as EmojiType, useCategories } from './CategoriesContext';
 import { useEmojiStyles } from './EmojiStylesContext';
-import { useSearchedEmojis } from './SearchedEmojiContext';
+import {
+  formatValueForSearch,
+  useSearchedEmojis,
+} from './SearchedEmojiContext';
 
 type EmojiRow = JSX.Element[];
 
@@ -68,6 +71,7 @@ export function EmojiPickerScrollProvider({
         rows: EmojiRow[],
         testId?: string
       ) {
+
         const getCurrentEmojiRow = () => {
           const index = rows.length - 1;
 
@@ -85,7 +89,7 @@ export function EmojiPickerScrollProvider({
         rowToBeFilled.push(
           <Emoji
             data-testid={testId}
-            data-name={emoji.name}
+            data-name={formatValueForSearch(emoji.name)}
             key={emoji.emoji}
             emoji={emoji}
           />
