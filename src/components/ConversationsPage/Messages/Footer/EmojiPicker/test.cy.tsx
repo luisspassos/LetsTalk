@@ -27,6 +27,7 @@ const defaultCategories = [
   'places',
   'object',
   'symbol',
+  'flag',
 ] as const;
 
 function getIconCSSObjectsInString() {
@@ -219,7 +220,7 @@ describe('Emoji picker', () => {
       const uniqueSet = new Set(coordinates);
       const areCoordinatesUnique = uniqueSet.size === coordinates.length;
 
-      cy.wrap(areCoordinatesUnique).should('be.true');
+      return cy.wrap(areCoordinatesUnique).should('be.true');
     }
 
     function getCoordinate(el: SelectedBar) {
@@ -330,12 +331,11 @@ describe('Emoji picker', () => {
         coordinate.addAndScroll('center');
 
         checkIfOnlyOneCategoryHasFocusStyle().then(() => {
-          coordinate
-            .addAndScroll('bottom')
-            .then(coordinate.add)
-            .then(() => makeSureTheBarMovesForEachCategory(coordinates));
-
-          checkIfOnlyOneCategoryHasFocusStyle();
+          coordinate.addAndScroll('bottom').then(() => {
+            checkIfOnlyOneCategoryHasFocusStyle();
+            coordinate.add();
+            makeSureTheBarMovesForEachCategory(coordinates);
+          });
         });
       });
     });
