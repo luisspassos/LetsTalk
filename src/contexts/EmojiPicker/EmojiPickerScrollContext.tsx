@@ -11,7 +11,7 @@ import {
   useState,
 } from 'react';
 import { useVirtual } from 'react-virtual';
-import { useCategories, Emoji as EmojiType } from './CategoriesContext';
+import { Emoji as EmojiType, useCategories } from './CategoriesContext';
 import { useEmojiStyles } from './EmojiStylesContext';
 import { useSearchedEmojis } from './SearchedEmojiContext';
 
@@ -83,9 +83,12 @@ export function EmojiPickerScrollProvider({
         const rowToBeFilled = getCurrentEmojiRow();
 
         rowToBeFilled.push(
-          <Emoji data-testid={testId} key={emoji}>
-            {emoji}
-          </Emoji>
+          <Emoji
+            data-testid={testId}
+            data-name={emoji.name}
+            key={emoji.emoji}
+            emoji={emoji}
+          />
         );
       }
 

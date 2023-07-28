@@ -6,6 +6,7 @@ import {
 } from 'react';
 import {
   createRecentCategory,
+  Emoji as EmojiType,
   useCategories,
 } from 'contexts/EmojiPicker/CategoriesContext';
 import { useEmojiStyles } from 'contexts/EmojiPicker/EmojiStylesContext';
@@ -14,8 +15,8 @@ import { useSetMessageInputSize } from 'hooks/useSetMessageInputSize';
 import { useColorModeValue } from '@chakra-ui/react';
 
 type EmojiProps = {
-  children: string;
   'data-testid'?: string;
+  emoji: EmojiType;
 } & DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
@@ -27,11 +28,7 @@ function getValueWithMeasure(value: number) {
   return value + 'px';
 }
 
-export function Emoji({
-  children: emoji,
-  'data-testid': testId,
-  ...rest
-}: EmojiProps) {
+export function Emoji({ emoji, 'data-testid': testId, ...rest }: EmojiProps) {
   const { categories } = useCategories();
 
   const { emojiStyles } = useEmojiStyles();
@@ -68,12 +65,14 @@ export function Emoji({
 
     const category = categoriesData[0];
 
-    const emojiExists = category.emojis.includes(emoji);
+    const emojiExists = category.emojis.some(
+      ({ emoji: e }) => e === emoji.emoji
+    );
 
     if (emojiExists) {
       // it will remove the existing emoji
       const emojis = category.emojis.filter(
-        (categoryEmoji) => categoryEmoji !== emoji
+        ({ emoji: categoryEmoji }) => categoryEmoji !== emoji.emoji
       );
 
       // it will add the emoji in the first position
@@ -106,7 +105,7 @@ export function Emoji({
 
     if (start === undefined || end === undefined) return;
 
-    input?.setRangeText(emoji, start, end, 'end');
+    input?.setRangeText(emoji.emoji, start, end, 'end');
 
     setMessageInputSize();
   }
@@ -148,7 +147,7 @@ export function Emoji({
       data-testid={testId ?? 'emoji'}
       {...rest}
     >
-      {emoji}
+      {emoji.emoji}
     </button>
   );
 }

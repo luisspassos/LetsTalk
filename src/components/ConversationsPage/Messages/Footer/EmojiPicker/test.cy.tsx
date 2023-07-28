@@ -12,9 +12,13 @@ import { Footer } from '..';
 
 type SelectedBar = Element;
 type CypressSelectedBar = JQuery<SelectedBar>;
+
 type Icon = JQuery<Element>;
+
 type Message = JQuery<HTMLTextAreaElement>;
-type Emoji = JQuery<HTMLElement>;
+
+type EmojiEl = HTMLElement;
+type Emoji = JQuery<EmojiEl>;
 
 function getIconCSSObjectsInString() {
   const styles: string[] = [];
@@ -373,10 +377,34 @@ describe('Emoji picker', () => {
     });
 
     it.only('should search emojis', () => {
-      cy.getBySel('emoji').then((emojis: Emoji[]) => {
-        const strings = emojis.map((emoji) => emoji[0].textContent);
+      function getEmojiArrayInString(emojis: EmojiEl[]) {
+        const arr: string[] = [];
 
-        console.log(strings);
+        for (const emoji of emojis) {
+          if (emoji.textContent === null) throw 'emoji is missing';
+
+          arr.push(emoji.textContent);
+        }
+
+        return JSON.stringify(arr);
+      }
+
+      cy.getBySel('emoji').then((emojis: EmojiEl[]) => {
+        const initialEmojis = getEmojiArrayInString(emojis);
+
+        const search = 'z';
+
+        cy.getBySel('search').type(search);
+
+        cy.getBySel('emoji').then((emojis: EmojiEl[]) => {
+          const searchedEmojis = getEmojiArrayInString(emojis);
+
+          cy.wrap(initialEmojis).should('not.eq', searchedEmojis);
+
+          cy.getBySel('emoji').each((emoji) =>
+            cy.wrap(emoji).invoke('data', 'name').should('include', search)
+          );
+        });
       });
     });
   });

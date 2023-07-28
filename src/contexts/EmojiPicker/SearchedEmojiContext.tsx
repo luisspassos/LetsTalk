@@ -43,14 +43,12 @@ export function SearchedEmojisProvider({
 }: SearchedEmojisProviderProps) {
   const [search, setSearch] = useState<Search>('');
 
-  const searchedEmojis = emojis
-    .filter(({ name }) => {
-      const formattedName = formatValueForSearch(name);
-      const formattedSearch = formatValueForSearch(search);
+  const searchedEmojis = emojis.filter(({ name }) => {
+    const formattedName = formatValueForSearch(name);
+    const formattedSearch = formatValueForSearch(search);
 
-      return formattedName.includes(formattedSearch);
-    })
-    .map(({ emoji }) => emoji);
+    return formattedName.includes(formattedSearch);
+  });
 
   return (
     <SearchedEmojisContext.Provider

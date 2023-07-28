@@ -35,8 +35,12 @@
     <div class="box third"></div>
   </body>
   <script>
-    const third = document.querySelector('.third');
+    const word = 'strawberry';
 
-    third.scrollIntoView({ block: 'nearest' });
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+    const letter = alphabet.find((letter) => !word.includes(letter));
+
+    console.log(letter);
   </script>
 </html>
