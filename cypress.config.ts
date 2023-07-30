@@ -3,6 +3,7 @@ import { defineConfig } from 'cypress';
 // @ts-ignore: This module is declared with using 'export =', and can only be used with a default import when using the 'esModuleInterop' flag.
 
 export default defineConfig({
+  projectId: 'oxdvwr',
   videosFolder: 'src/tests/videos',
   supportFolder: 'src/tests/support',
   fixturesFolder: 'src/tests/fixtures',

@@ -1,6 +1,7 @@
 type CyGetArgs = Parameters<typeof cy.get>;
-
 type GetBySelArgs = import('utils/types').SpliceTuple<CyGetArgs, 0>;
+
+type MountReturn = Chainable<import('cypress/react').MountReturn>;
 
 declare namespace Cypress {
   interface Chainable {
@@ -26,6 +27,7 @@ declare namespace Cypress {
     resetDb(): import('./support/sharedCommands').ResetDbReturn;
     resetUsers(): import('./support/sharedCommands').ResetUsersReturn;
     testIfEmailHasBeenVerifiedOnLoginPage(): Chainable<any>;
+    mount: (jsx: import('react').ReactNode) => MountReturn;
   }
 
   interface ApplicationWindow {

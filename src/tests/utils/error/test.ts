@@ -1,4 +1,3 @@
-import { toast } from '@chakra-ui/react';
 import { FirebaseError } from 'firebase/app';
 import { base, Props as PropsBase, WinProp } from './base';
 
@@ -14,10 +13,6 @@ export type Props<WinPropT extends WinProp> = Omit<PropsBase<WinPropT>, 'err'>;
  */
 
 export function testError<WinPropT extends WinProp>(props: Props<WinPropT>) {
-  beforeEach(() => {
-    toast.closeAll();
-  });
-
   it.only('should show an unknown error', () => {
     base({
       err: 'error',

@@ -40,7 +40,9 @@ export const shouldUseEmulator = ['test', 'development'].includes(
 );
 
 if (shouldUseEmulator) {
-  connectAuthEmulator(auth, `http://${emulatorHost}:${emulators.auth.port}/`);
+  connectAuthEmulator(auth, `http://${emulatorHost}:${emulators.auth.port}/`, {
+    disableWarnings: true,
+  });
   connectFirestoreEmulator(db, emulatorHost, emulators.firestore.port);
   connectStorageEmulator(storage, emulatorHost, emulators.storage.port);
 }

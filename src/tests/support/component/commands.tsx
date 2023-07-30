@@ -3,6 +3,9 @@
 import '../sharedCommands';
 import { emailMessage } from 'components/Form/Input/Inputs/Email';
 import { passwordMessage } from 'components/Form/Input/Inputs/Password';
+import { ChakraProvider } from '@chakra-ui/react';
+import { theme } from 'styles/theme';
+import { mount } from 'cypress/react';
 
 Cypress.Commands.add('testEmailEmpty', () => {
   cy.contains(emailMessage.required);
@@ -18,4 +21,8 @@ Cypress.Commands.add('testPasswordEmpty', () => {
   cy.getBySel('password').type('password{enter}');
 
   cy.contains(passwordMessage.required).should('not.exist');
+});
+
+Cypress.Commands.add('mount', (jsx) => {
+  return mount(<ChakraProvider theme={theme}>{jsx}</ChakraProvider>);
 });

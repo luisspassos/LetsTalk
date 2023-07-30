@@ -1,39 +1,13 @@
-// ***********************************************************
-// This example support/component.ts is processed and
-// loaded automatically before your test files.
-//
-// This is a great place to put global configuration and
-// behavior that modifies Cypress.
-//
-// You can change the location of this file or turn off
-// automatically serving support files with the
-// 'supportFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/configuration
-// ***********************************************************
+import { toast } from '@chakra-ui/react';
+import './commands.tsx';
 
-// Import commands.js using ES2015 syntax:
-import './commands';
+beforeEach(() => {
+  function closeToasts() {
+    // the toasts persist between the tests, because of that we need to close them.
+    toast.closeAll();
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
-import { mount } from 'cypress/react';
-
-// Augment the Cypress namespace to include type definitions for
-// your custom command.
-// Alternatively, can be defined in cypress/support/component.d.ts
-// with a <reference path="./component" /> at the top of your spec.
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      mount: typeof mount;
-    }
+    cy.get('[role="listitem"]').should('not.exist');
   }
-}
 
-Cypress.Commands.add('mount', mount);
-
-// Example use:
-// cy.mount(<MyComponent />)
+  closeToasts();
+});
