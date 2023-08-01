@@ -1,4 +1,4 @@
-import { UseToastOptions } from '@chakra-ui/react';
+import { Spinner, UseToastOptions } from '@chakra-ui/react';
 import { useAudioRecording } from 'contexts/Audio/AudioRecordingContext';
 import { useEffect, useState } from 'react';
 import { AiFillAudio } from 'react-icons/ai';
@@ -67,15 +67,17 @@ export function RecordAudioButton({
 
         newMediaRecorder.start();
       } catch (e) {
-        const defaultProps: UseToastOptions = {
-          status: 'error',
+        const toast = async (opts: UseToastOptions) => {
+          const { toast: base } = await import('utils/Toasts/toast');
+
+          base({
+            status: 'error',
+            ...opts,
+          });
         };
 
         if (!(e instanceof Error)) {
-          const { toast } = await import('utils/Toasts/toast');
-
-          toast({
-            ...defaultProps,
+          await toast({
             description: errorMessages.UnknownError,
             id: 'unknown',
           });
@@ -95,25 +97,32 @@ export function RecordAudioButton({
 
         const error = errors[e.name] || errors.default;
 
-        const { toast } = await import('utils/Toasts/toast');
-
         const hasNoTitle = typeof error === 'string';
 
+        const testId = Object.entries(errors).find(
+          ([, value]) => JSON.stringify(value) === JSON.stringify(error)
+        );
+
+        if (testId === undefined) throw 'there is no test id';
+
+        const newToast: typeof toast = async (opts) => {
+          await toast({
+            id: testId[0],
+            ...opts,
+          });
+        };
+
         if (hasNoTitle) {
-          toast({
-            ...defaultProps,
+          await newToast({
             description: error,
-            id: e.name,
           });
 
           return;
         }
 
-        toast({
-          ...defaultProps,
+        await newToast({
           title: error.title,
           description: error.message,
-          id: e.name,
         });
       } finally {
         setIsLoading(false);
@@ -133,6 +142,14 @@ export function RecordAudioButton({
       icon={AiFillAudio}
       label='Gravar áudio'
       isLoading={isLoading}
+      spinner={
+        <Spinner
+          data-testid='loading'
+          color='currentColor'
+          width='1em'
+          height='1em'
+        />
+      }
       data-testid='record audio'
     />
   );

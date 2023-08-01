@@ -33,14 +33,11 @@
     <div class="box first"></div>
     <div class="box second"></div>
     <div class="box third"></div>
+    <button></button>
   </body>
   <script>
-    const word = 'strawberry';
+    const btn = document.querySelector('button');
 
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
-
-    const letter = alphabet.find((letter) => !word.includes(letter));
-
-    console.log(letter);
+    console.log(btn.disabled);
   </script>
 </html>

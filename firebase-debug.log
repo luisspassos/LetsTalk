@@ -1,222 +1,45 @@
-[debug] [2023-07-15T23:31:27.647Z] ----------------------------------------------------------------------
-[debug] [2023-07-15T23:31:27.654Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Luís\Documents\zzz\lets_talk\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
-[debug] [2023-07-15T23:31:27.655Z] CLI Version:   12.4.3
-[debug] [2023-07-15T23:31:27.655Z] Platform:      win32
-[debug] [2023-07-15T23:31:27.656Z] Node Version:  v20.4.0
-[debug] [2023-07-15T23:31:27.656Z] Time:          Sat Jul 15 2023 20:31:27 GMT-0300 (Horário Padrão de Brasília)
-[debug] [2023-07-15T23:31:27.656Z] ----------------------------------------------------------------------
+[debug] [2023-07-31T03:37:05.671Z] ----------------------------------------------------------------------
+[debug] [2023-07-31T03:37:05.681Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Luís\Documents\zzz\lets_talk\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2023-07-31T03:37:05.683Z] CLI Version:   12.4.3
+[debug] [2023-07-31T03:37:05.683Z] Platform:      win32
+[debug] [2023-07-31T03:37:05.684Z] Node Version:  v20.4.0
+[debug] [2023-07-31T03:37:05.684Z] Time:          Mon Jul 31 2023 00:37:05 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2023-07-31T03:37:05.684Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-07-15T23:31:27.963Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-07-15T23:31:27.964Z] > authorizing via signed-in user (luis.passos013@gmail.com)
-[debug] [2023-07-15T23:31:28.337Z] java version "20.0.1" 2023-04-18
+[debug] [2023-07-31T03:37:06.368Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-07-31T03:37:06.369Z] > authorizing via signed-in user (luis.passos013@gmail.com)
+[debug] [2023-07-31T03:37:07.026Z] java version "20.0.1" 2023-04-18
 
-[debug] [2023-07-15T23:31:28.338Z] Java(TM) SE Runtime Environment (build 20.0.1+9-29)
+[debug] [2023-07-31T03:37:07.028Z] Java(TM) SE Runtime Environment (build 20.0.1+9-29)
 Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
 
-[debug] [2023-07-15T23:31:28.368Z] Parsed Java major version: 20
-[info] i  emulators: Starting emulators: auth, firestore, database, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, database, storage"}}
-[debug] [2023-07-15T23:31:28.413Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-15T23:31:28.413Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-15T23:31:28.414Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-15T23:31:28.414Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-15T23:31:28.414Z] [database] Database Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-15T23:31:28.414Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-15T23:31:28.415Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[debug] [2023-07-15T23:31:28.811Z] [hub] writing locator at C:\Users\LUS~1\AppData\Local\Temp\hub-let-s-talk-tests.json
-[warn] !  firestore: Cloud Firestore Emulator does not support multiple databases yet. {"metadata":{"emulator":{"name":"firestore"},"message":"Cloud Firestore Emulator does not support multiple databases yet."}}
-[warn] !  firestore: Did not find a Cloud Firestore rules file specified in a firebase.json config file. {"metadata":{"emulator":{"name":"firestore"},"message":"Did not find a Cloud Firestore rules file specified in a firebase.json config file."}}
-[warn] !  firestore: The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"firestore"},"message":"The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
-[debug] [2023-07-15T23:31:29.144Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-15T23:31:29.145Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
-[debug] [2023-07-15T23:31:29.145Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","let-s-talk-tests","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"let-s-talk-tests\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
-[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
-[info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
-[debug] [2023-07-15T23:31:34.429Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/let-s-talk-tests [none]
-[debug] [2023-07-15T23:31:34.922Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/let-s-talk-tests 200
-[debug] [2023-07-15T23:31:34.922Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/let-s-talk-tests {"projectId":"let-s-talk-tests","projectNumber":"223757209084","displayName":"Let's Talk Dev","name":"projects/let-s-talk-tests","resources":{"hostingSite":"let-s-talk-tests","storageBucket":"let-s-talk-tests.appspot.com","locationId":"southamerica-east1"},"state":"ACTIVE","etag":"1_5da450f2-a2e4-47e9-a4e6-25f1001f7aec"}
-[debug] [2023-07-15T23:31:34.923Z] database rules config:  []
-[warn] !  database: Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"database"},"message":"Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
-[debug] [2023-07-15T23:31:34.930Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
-[debug] [2023-07-15T23:31:34.930Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-15T23:31:34.930Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
-[debug] [2023-07-15T23:31:34.930Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.11.2.jar","--host","127.0.0.1","--port",9000,"--single_project_mode","Warning"],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.11.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",9000,\"--single_project_mode\",\"Warning\"],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false}"}}
-[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
-[debug] [2023-07-15T23:31:52.434Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-07-15T23:31:54.273Z] Temp file directory for storage emulator: C:\Users\LUS~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\LUS~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
-[debug] [2023-07-15T23:31:54.311Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-15T23:31:54.311Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-07-15T23:31:54.311Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Luís\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
-[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2023-07-15T23:31:54.922Z] Web / API server started at 127.0.0.1:4000
- {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
-[debug] [2023-07-15T23:31:54.923Z] Web / API server started at ::1:4000
- {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
-[info] 
-┌─────────────────────────────────────────────────────────────┐
-│ ✔  All emulators ready! It is now safe to connect your app. │
-│ i  View Emulator UI at http://127.0.0.1:4000/               │
-└─────────────────────────────────────────────────────────────┘
-
-┌────────────────┬────────────────┬─────────────────────────────────┐
-│ Emulator       │ Host:Port      │ View in Emulator UI             │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Database       │ 127.0.0.1:9000 │ http://127.0.0.1:4000/database  │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
-└────────────────┴────────────────┴─────────────────────────────────┘
-  Emulator Hub running at 127.0.0.1:4400
-  Other reserved ports: 4500, 9150
-
-Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
- 
-[debug] [2023-07-16T18:56:46.170Z] ----------------------------------------------------------------------
-[debug] [2023-07-16T18:56:46.176Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Luís\Documents\zzz\lets_talk\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
-[debug] [2023-07-16T18:56:46.177Z] CLI Version:   12.4.3
-[debug] [2023-07-16T18:56:46.177Z] Platform:      win32
-[debug] [2023-07-16T18:56:46.178Z] Node Version:  v20.4.0
-[debug] [2023-07-16T18:56:46.178Z] Time:          Sun Jul 16 2023 15:56:46 GMT-0300 (Horário Padrão de Brasília)
-[debug] [2023-07-16T18:56:46.178Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2023-07-16T18:56:46.956Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-07-16T18:56:46.957Z] > authorizing via signed-in user (luis.passos013@gmail.com)
-[debug] [2023-07-16T18:56:48.003Z] java version "20.0.1" 2023-04-18
-
-[debug] [2023-07-16T18:56:48.005Z] Java(TM) SE Runtime Environment (build 20.0.1+9-29)
-Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
-
-[debug] [2023-07-16T18:56:48.197Z] Parsed Java major version: 20
-[info] i  emulators: Starting emulators: auth, firestore, database, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, database, storage"}}
-[debug] [2023-07-16T18:56:48.302Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-16T18:56:48.303Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-16T18:56:48.303Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-16T18:56:48.303Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-16T18:56:48.304Z] [database] Database Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-16T18:56:48.304Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-16T18:56:48.306Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[warn] !  emulators: It seems that you are running multiple instances of the emulator suite for project let-s-talk-tests. This may result in unexpected behavior. 
-[debug] [2023-07-16T18:56:48.680Z] [hub] writing locator at C:\Users\LUS~1\AppData\Local\Temp\hub-let-s-talk-tests.json
-[warn] !  firestore: Cloud Firestore Emulator does not support multiple databases yet. {"metadata":{"emulator":{"name":"firestore"},"message":"Cloud Firestore Emulator does not support multiple databases yet."}}
-[warn] !  firestore: Did not find a Cloud Firestore rules file specified in a firebase.json config file. {"metadata":{"emulator":{"name":"firestore"},"message":"Did not find a Cloud Firestore rules file specified in a firebase.json config file."}}
-[warn] !  firestore: The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"firestore"},"message":"The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
-[debug] [2023-07-16T18:56:48.826Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-16T18:56:48.827Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
-[debug] [2023-07-16T18:56:48.827Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","let-s-talk-tests","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"let-s-talk-tests\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
-[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
-[info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
-[debug] [2023-07-16T18:56:56.754Z] > refreshing access token with scopes: []
-[debug] [2023-07-16T18:56:56.762Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2023-07-16T18:56:56.763Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2023-07-16T18:56:57.073Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2023-07-16T18:56:57.073Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2023-07-16T18:56:57.108Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/let-s-talk-tests [none]
-[debug] [2023-07-16T18:56:57.610Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/let-s-talk-tests 200
-[debug] [2023-07-16T18:56:57.611Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/let-s-talk-tests {"projectId":"let-s-talk-tests","projectNumber":"223757209084","displayName":"Let's Talk Dev","name":"projects/let-s-talk-tests","resources":{"hostingSite":"let-s-talk-tests","storageBucket":"let-s-talk-tests.appspot.com","locationId":"southamerica-east1"},"state":"ACTIVE","etag":"1_5da450f2-a2e4-47e9-a4e6-25f1001f7aec"}
-[debug] [2023-07-16T18:56:57.611Z] database rules config:  []
-[warn] !  database: Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"database"},"message":"Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
-[debug] [2023-07-16T18:56:57.619Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
-[debug] [2023-07-16T18:56:57.620Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-16T18:56:57.620Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
-[debug] [2023-07-16T18:56:57.620Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.11.2.jar","--host","127.0.0.1","--port",9000,"--single_project_mode","Warning"],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.11.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",9000,\"--single_project_mode\",\"Warning\"],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false}"}}
-[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
-[debug] [2023-07-16T18:57:45.612Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-07-16T18:57:48.648Z] Temp file directory for storage emulator: C:\Users\LUS~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\LUS~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
-[debug] [2023-07-16T18:57:48.720Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-16T18:57:48.720Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-07-16T18:57:48.720Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Luís\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
-[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2023-07-16T18:57:49.908Z] Web / API server started at 127.0.0.1:4000
- {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
-[debug] [2023-07-16T18:57:49.909Z] Web / API server started at ::1:4000
- {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
-[info] 
-┌─────────────────────────────────────────────────────────────┐
-│ ✔  All emulators ready! It is now safe to connect your app. │
-│ i  View Emulator UI at http://127.0.0.1:4000/               │
-└─────────────────────────────────────────────────────────────┘
-
-┌────────────────┬────────────────┬─────────────────────────────────┐
-│ Emulator       │ Host:Port      │ View in Emulator UI             │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Database       │ 127.0.0.1:9000 │ http://127.0.0.1:4000/database  │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
-└────────────────┴────────────────┴─────────────────────────────────┘
-  Emulator Hub running at 127.0.0.1:4400
-  Other reserved ports: 4500, 9150
-
-Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
- 
-[info] i  To verify the email address pp.luisinho@gmail.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=Zg2-VWgdh2lWf_5bToqSXAnAtkUF1Q9pVlsTsS9glHgcJhq-vABm1U&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address pp.luisinho@gmail.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=Zg2-VWgdh2lWf_5bToqSXAnAtkUF1Q9pVlsTsS9glHgcJhq-vABm1U&apiKey=fake-api-key"}}
-[info] i  To verify the email address luisa@gmail.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=qI17HwiUpmgXhouWI8iQY97R8-orfNMr6bUqiT7MWBPQ0YzJE4-7lV&apiKey=fake-api-key&continueUrl=localhost%3A3000 {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address luisa@gmail.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=qI17HwiUpmgXhouWI8iQY97R8-orfNMr6bUqiT7MWBPQ0YzJE4-7lV&apiKey=fake-api-key&continueUrl=localhost%3A3000"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=yJHKFm0UyLHfGhyBLsAlowSRE8C_913hc5d0moyvIoq7JrNFzsJzjH&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=yJHKFm0UyLHfGhyBLsAlowSRE8C_913hc5d0moyvIoq7JrNFzsJzjH&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=Yt3oqYFhchGCydKDkTQCxwLTcK0tBFPolzRPwM9AAf5DbAENzCaGoO&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=Yt3oqYFhchGCydKDkTQCxwLTcK0tBFPolzRPwM9AAf5DbAENzCaGoO&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=SCFOdA_J67XWATw_YOEoyF_duTw_4QLOOi44osuv9kUMejloVsOxyf&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=SCFOdA_J67XWATw_YOEoyF_duTw_4QLOOi44osuv9kUMejloVsOxyf&apiKey=fake-api-key"}}
-[warn] !  Multiple projectIds are not recommended in single project mode. Requested project ID undefined, but the emulator is configured for let-s-talk-tests. To opt-out of single project mode add/set the '"singleProjectMode"' false' property in the firebase.json emulators config. {"metadata":{"emulator":{"name":"auth"},"message":"Multiple projectIds are not recommended in single project mode. Requested project ID undefined, but the emulator is configured for let-s-talk-tests. To opt-out of single project mode add/set the '\"singleProjectMode\"' false' property in the firebase.json emulators config."}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=bAhQLM2IL7iO5gfRx8YI2Or7pVC1IKmcbv4xVpPsBaJK-QwBHQcRSr&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=bAhQLM2IL7iO5gfRx8YI2Or7pVC1IKmcbv4xVpPsBaJK-QwBHQcRSr&apiKey=fake-api-key"}}
-[warn] !  Multiple projectIds are not recommended in single project mode. Requested project ID undefined, but the emulator is configured for let-s-talk-tests. To opt-out of single project mode add/set the '"singleProjectMode"' false' property in the firebase.json emulators config. {"metadata":{"emulator":{"name":"auth"},"message":"Multiple projectIds are not recommended in single project mode. Requested project ID undefined, but the emulator is configured for let-s-talk-tests. To opt-out of single project mode add/set the '\"singleProjectMode\"' false' property in the firebase.json emulators config."}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=APUCHgKmAm8M3p-MYRjIUJ0nVgpEVzoQ89KIt1hGSUC7tyj8-cK1ib&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=APUCHgKmAm8M3p-MYRjIUJ0nVgpEVzoQ89KIt1hGSUC7tyj8-cK1ib&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=3bR5h5zti7kuYZlkfhE-JhoBhmPOuSikB352tSOj7_QchBkLGZd5bY&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=3bR5h5zti7kuYZlkfhE-JhoBhmPOuSikB352tSOj7_QchBkLGZd5bY&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=G7hDAroAHr_YdcJwmtFu_S53-I7MYBMSLJIXhr-zy_1pL3nB3ltFYZ&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=G7hDAroAHr_YdcJwmtFu_S53-I7MYBMSLJIXhr-zy_1pL3nB3ltFYZ&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=ppdoprPGM98XpbDqSkOO0cTJJYGf8y4tw28yDwnoQPoRuIQ-sTEULr&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=ppdoprPGM98XpbDqSkOO0cTJJYGf8y4tw28yDwnoQPoRuIQ-sTEULr&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=rE5vOYP6Fq3euFl5g74e-uPRJOeArxHPn7qNGO8skg2jmETWvFCOjy&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=rE5vOYP6Fq3euFl5g74e-uPRJOeArxHPn7qNGO8skg2jmETWvFCOjy&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=06dF0v3zYOguJ0N_H_mH6b7fRICfoH4HL5BDv1gUPlcYZK-syoNbe9&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=06dF0v3zYOguJ0N_H_mH6b7fRICfoH4HL5BDv1gUPlcYZK-syoNbe9&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=cAw5xDwaKu4PTGjScE7sGgcAqpJVePvDWV1SmKUpghZhxXWfONAnlN&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=cAw5xDwaKu4PTGjScE7sGgcAqpJVePvDWV1SmKUpghZhxXWfONAnlN&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=wTYHhHwUocpsVbBUH2HCed2oYfjqbMDz48uQfx9HUooxbPUREqLkwp&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=wTYHhHwUocpsVbBUH2HCed2oYfjqbMDz48uQfx9HUooxbPUREqLkwp&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=V28uHbbelaAypyxfgbxmb8k46c-TticCwygQ9vVxcn0gFZSo4lXkkL&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=V28uHbbelaAypyxfgbxmb8k46c-TticCwygQ9vVxcn0gFZSo4lXkkL&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=lhnO7TJGBAM3CFy4izxRXDeY9lF58GyzX6HBREi2Y546vFu4xErl67&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=lhnO7TJGBAM3CFy4izxRXDeY9lF58GyzX6HBREi2Y546vFu4xErl67&apiKey=fake-api-key"}}
-[debug] [2023-07-17T18:14:15.996Z] ----------------------------------------------------------------------
-[debug] [2023-07-17T18:14:16.001Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Luís\Documents\zzz\lets_talk\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
-[debug] [2023-07-17T18:14:16.002Z] CLI Version:   12.4.3
-[debug] [2023-07-17T18:14:16.003Z] Platform:      win32
-[debug] [2023-07-17T18:14:16.003Z] Node Version:  v20.4.0
-[debug] [2023-07-17T18:14:16.004Z] Time:          Mon Jul 17 2023 15:14:16 GMT-0300 (Horário Padrão de Brasília)
-[debug] [2023-07-17T18:14:16.004Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2023-07-17T18:14:16.029Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2023-07-17T18:14:16.325Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-07-17T18:14:16.325Z] > authorizing via signed-in user (luis.passos013@gmail.com)
-[debug] [2023-07-17T18:14:16.758Z] java version "20.0.1" 2023-04-18
-
-[debug] [2023-07-17T18:14:16.760Z] Java(TM) SE Runtime Environment (build 20.0.1+9-29)
-Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
-
-[debug] [2023-07-17T18:14:16.785Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2023-07-17T18:14:16.785Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
-[debug] [2023-07-17T18:14:16.812Z] Parsed Java major version: 20
+[debug] [2023-07-31T03:37:07.057Z] Parsed Java major version: 20
 [info] i  emulators: Starting emulators: auth, firestore, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, storage"}}
-[debug] [2023-07-17T18:14:16.852Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-17T18:14:16.852Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-17T18:14:16.853Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-17T18:14:16.853Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-17T18:14:16.853Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-17T18:14:16.854Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-07-31T03:37:07.093Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-07-31T03:37:07.093Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-07-31T03:37:07.093Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-07-31T03:37:07.093Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-07-31T03:37:07.093Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-07-31T03:37:07.094Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8283}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
 [warn] !  emulators: It seems that you are running multiple instances of the emulator suite for project let-s-talk-tests. This may result in unexpected behavior. 
-[debug] [2023-07-17T18:14:17.017Z] [hub] writing locator at C:\Users\LUS~1\AppData\Local\Temp\hub-let-s-talk-tests.json
+[debug] [2023-07-31T03:37:07.415Z] [hub] writing locator at C:\Users\LUS~1\AppData\Local\Temp\hub-let-s-talk-tests.json
 [warn] !  firestore: Cloud Firestore Emulator does not support multiple databases yet. {"metadata":{"emulator":{"name":"firestore"},"message":"Cloud Firestore Emulator does not support multiple databases yet."}}
 [warn] !  firestore: Did not find a Cloud Firestore rules file specified in a firebase.json config file. {"metadata":{"emulator":{"name":"firestore"},"message":"Did not find a Cloud Firestore rules file specified in a firebase.json config file."}}
 [warn] !  firestore: The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"firestore"},"message":"The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
-[debug] [2023-07-17T18:14:17.041Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-17T18:14:17.041Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
-[debug] [2023-07-17T18:14:17.041Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","let-s-talk-tests","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"let-s-talk-tests\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[debug] [2023-07-31T03:37:07.451Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-07-31T03:37:07.451Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-07-31T03:37:07.451Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8283,"--websocket_port",9150,"--project_id","let-s-talk-tests","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8283,\"--websocket_port\",9150,\"--project_id\",\"let-s-talk-tests\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
 [info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
-[debug] [2023-07-17T18:14:45.745Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-07-17T18:14:49.493Z] Temp file directory for storage emulator: C:\Users\LUS~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\LUS~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
-[debug] [2023-07-17T18:14:49.540Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-17T18:14:49.541Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-07-17T18:14:49.541Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Luís\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[debug] [2023-07-31T03:37:30.648Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-07-31T03:37:32.670Z] Temp file directory for storage emulator: C:\Users\LUS~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\LUS~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[debug] [2023-07-31T03:37:32.716Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-07-31T03:37:32.716Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-07-31T03:37:32.716Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Luís\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2023-07-17T18:14:50.440Z] Web / API server started at 127.0.0.1:4000
+[debug] [2023-07-31T03:37:33.404Z] Web / API server started at 127.0.0.1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
-[debug] [2023-07-17T18:14:50.441Z] Web / API server started at ::1:4000
+[debug] [2023-07-31T03:37:33.405Z] Web / API server started at ::1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
 [info] 
 ┌─────────────────────────────────────────────────────────────┐
@@ -229,7 +52,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
 ├────────────────┼────────────────┼─────────────────────────────────┤
 │ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
 ├────────────────┼────────────────┼─────────────────────────────────┤
-│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+│ Firestore      │ 127.0.0.1:8283 │ http://127.0.0.1:4000/firestore │
 ├────────────────┼────────────────┼─────────────────────────────────┤
 │ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
 └────────────────┴────────────────┴─────────────────────────────────┘
@@ -238,85 +61,51 @@ Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=uJKC1E7r4FowLvdpzj2DdAjgDabeMTpSKzkGbmVBeMTrF-QpaTSsSN&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=uJKC1E7r4FowLvdpzj2DdAjgDabeMTpSKzkGbmVBeMTrF-QpaTSsSN&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=JXSFvuY5zn_9gMqFzMKz2ecSHuMm4Wv6yfqKICG0vTE4-Z9dR45ZOs&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=JXSFvuY5zn_9gMqFzMKz2ecSHuMm4Wv6yfqKICG0vTE4-Z9dR45ZOs&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=11hv_ahUhntYuEaTNOL0yVK6ABfb7bqcrXGFZybk5V1biIQV4EOrjJ&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=11hv_ahUhntYuEaTNOL0yVK6ABfb7bqcrXGFZybk5V1biIQV4EOrjJ&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=6nTSEJvTAmXiqarmKltWcd8Fj7M4nSgcWcs-n0OUkN8H7BMp45Wd_8&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=6nTSEJvTAmXiqarmKltWcd8Fj7M4nSgcWcs-n0OUkN8H7BMp45Wd_8&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=DYBHO3S8XVSBg9UK8N1w4bSNE_cXbSY_prQu-4bOr4zSJ7Skn9z7au&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=DYBHO3S8XVSBg9UK8N1w4bSNE_cXbSY_prQu-4bOr4zSJ7Skn9z7au&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=tweU5wCUTIW0aHRx_8cgyJNKhwqhhVnqUfPldeofm5WeKfcsAGqerA&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=tweU5wCUTIW0aHRx_8cgyJNKhwqhhVnqUfPldeofm5WeKfcsAGqerA&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=hTtYFNpfo1Hh4voTBlFnX7xYze41fHt9tUk7zLf5VtjEoQq-HSjF-w&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=hTtYFNpfo1Hh4voTBlFnX7xYze41fHt9tUk7zLf5VtjEoQq-HSjF-w&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=FJfh6wqGinqkBtuw2TMKxoFZg1e9y5tlGER8cw8QAC3jtKhXUFRC2U&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=FJfh6wqGinqkBtuw2TMKxoFZg1e9y5tlGER8cw8QAC3jtKhXUFRC2U&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=EyIihjg8YiHV_lErUYwhBs3PD2PEQ5LrrJGo4ewK1wHSo01jKxG3OV&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=EyIihjg8YiHV_lErUYwhBs3PD2PEQ5LrrJGo4ewK1wHSo01jKxG3OV&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=mv1h4eSN1e5IcMbYXtfCoNrKAJKs_vqWzIUeX9bzsYnxZMgyK6mgU9&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=mv1h4eSN1e5IcMbYXtfCoNrKAJKs_vqWzIUeX9bzsYnxZMgyK6mgU9&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=fB37a3XJh5Mc4qSoWMUmEHhIzgjIYt79U7Q2ZGpsEJaI2VQ2S2_tat&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=fB37a3XJh5Mc4qSoWMUmEHhIzgjIYt79U7Q2ZGpsEJaI2VQ2S2_tat&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=p1mHgyDpvynUrAPuzU4pqhwYpTbW71tMEEYUUINrjv1Y2vkMsO-jBA&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=p1mHgyDpvynUrAPuzU4pqhwYpTbW71tMEEYUUINrjv1Y2vkMsO-jBA&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=5KbHdkc9BaKQAcfxvOdXo99K8_Djb4aWAoFTnVu1SM9pLOgyQcnTbk&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=5KbHdkc9BaKQAcfxvOdXo99K8_Djb4aWAoFTnVu1SM9pLOgyQcnTbk&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=zsWUyUVbFKJtNZvrBQY1hkaXmeoewzlEV_lCwQQv_E4Ep4jEi0rgBF&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=zsWUyUVbFKJtNZvrBQY1hkaXmeoewzlEV_lCwQQv_E4Ep4jEi0rgBF&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=R6b87nKZT0JXodpUa73V1ONL8uDqzu5xOZklULueTNMKFCBkcgRJ6E&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=R6b87nKZT0JXodpUa73V1ONL8uDqzu5xOZklULueTNMKFCBkcgRJ6E&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=bq9H_1duvYxtPN0IIzhF9spR5Tcam0ZqQ3Ntdez-jx7--ttahvmP4V&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=bq9H_1duvYxtPN0IIzhF9spR5Tcam0ZqQ3Ntdez-jx7--ttahvmP4V&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=NK6FXGBpRFq6o8IaC0y7V92IPlRHXJu5oSfPV7HPH8vA_dHAqOH1wK&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=NK6FXGBpRFq6o8IaC0y7V92IPlRHXJu5oSfPV7HPH8vA_dHAqOH1wK&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=wAncYGkZdC_SOqA72NaCesBuD8hGL33apucFA9RnCfA78Fq4Of3l-i&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=wAncYGkZdC_SOqA72NaCesBuD8hGL33apucFA9RnCfA78Fq4Of3l-i&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=yYFhKkuS8xmW613N9RxMTzfjVhnrAJj9_Y2bt4vGyiSQpUhx6_72S8&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=yYFhKkuS8xmW613N9RxMTzfjVhnrAJj9_Y2bt4vGyiSQpUhx6_72S8&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=44Ogk0a4Bd-fs__oJZXCc7OJ3aCwQUjzcutOoZNtEe-uOqKzXfA0xA&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=44Ogk0a4Bd-fs__oJZXCc7OJ3aCwQUjzcutOoZNtEe-uOqKzXfA0xA&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=loOOchH6mlvuo4FM5XruSdeyXlB6UWrwWPgaXn_2ij2Pwm4yHX14YE&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=loOOchH6mlvuo4FM5XruSdeyXlB6UWrwWPgaXn_2ij2Pwm4yHX14YE&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=hUBm0dANbuAfDTcDUGkxzrxfH4YPmu97lsBCGkjYPpG9nmHiQcYu_0&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=hUBm0dANbuAfDTcDUGkxzrxfH4YPmu97lsBCGkjYPpG9nmHiQcYu_0&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=ElzWD6Dq-BhDDVIXCq22GrVygpDvMJu6x-nGgFAnl4xERXSQ--3gZK&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=ElzWD6Dq-BhDDVIXCq22GrVygpDvMJu6x-nGgFAnl4xERXSQ--3gZK&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=Yj4H-xMgstPlKldaHCqKrD937H3JHSfZRpBQlti1mW33gF4zY2zlEY&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=Yj4H-xMgstPlKldaHCqKrD937H3JHSfZRpBQlti1mW33gF4zY2zlEY&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=t0GgcUJQZVjeWycLpDgXNRoNerUuEsi4-sVBNRIAp3mw6QZnY_fubq&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=t0GgcUJQZVjeWycLpDgXNRoNerUuEsi4-sVBNRIAp3mw6QZnY_fubq&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=4YrhemdeyqHzANSYH_eS5usRLEn3eWQqGPLK4Z4lYB-oBaPk0gxMK6&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=4YrhemdeyqHzANSYH_eS5usRLEn3eWQqGPLK4Z4lYB-oBaPk0gxMK6&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=0ueskQla4NVcV6gQfwf1fmMhTeSQIj9naVC4GQh35Dm3Y3U1PYiJSx&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=0ueskQla4NVcV6gQfwf1fmMhTeSQIj9naVC4GQh35Dm3Y3U1PYiJSx&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=ST17bf9O1E_pILMxw3TonRO_qr896xlQJW2PK-R2cv62q_PqFDH1l-&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=ST17bf9O1E_pILMxw3TonRO_qr896xlQJW2PK-R2cv62q_PqFDH1l-&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=MvT_fyGFr5WH1rgrqZnOnlroGeoDofyLxkRm9n6yhAPgg2TMRa1sfw&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=MvT_fyGFr5WH1rgrqZnOnlroGeoDofyLxkRm9n6yhAPgg2TMRa1sfw&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=n5R7eIN7vNGl-9ViOewqpHF_DXSWDPyAFnUWnbarcP2foTAgad1mP9&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=n5R7eIN7vNGl-9ViOewqpHF_DXSWDPyAFnUWnbarcP2foTAgad1mP9&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=egbn7yuz4RbTECHRaHSYVRIdgcQFq_RKayvV7iZoDnSGi5BcFWES8F&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=egbn7yuz4RbTECHRaHSYVRIdgcQFq_RKayvV7iZoDnSGi5BcFWES8F&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=FL_W4mvUE-X7WXmzUUWU-mhxFnrK9EaDUxk8xOyZdYHEkc5XkW9aRC&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=FL_W4mvUE-X7WXmzUUWU-mhxFnrK9EaDUxk8xOyZdYHEkc5XkW9aRC&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=1upN3o9INkNp0wlsWMqbm8SRMkH_UN9_nZZNb9qCtZUdGAg4sJX_MN&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=1upN3o9INkNp0wlsWMqbm8SRMkH_UN9_nZZNb9qCtZUdGAg4sJX_MN&apiKey=fake-api-key"}}
-[info] i  To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=tTd-3tNnMRifhmE_y26VZMKSC8f82Z1_W9nQGnwvHKisi2Gs5L8k9S&apiKey=fake-api-key {"metadata":{"emulator":{"name":"auth"},"message":"To verify the email address test@example.com, follow this link: http://127.0.0.1:9099/emulator/action?mode=verifyEmail&lang=en&oobCode=tTd-3tNnMRifhmE_y26VZMKSC8f82Z1_W9nQGnwvHKisi2Gs5L8k9S&apiKey=fake-api-key"}}
-[debug] [2023-07-30T02:27:13.483Z] ----------------------------------------------------------------------
-[debug] [2023-07-30T02:27:13.487Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Luís\Documents\zzz\lets_talk\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
-[debug] [2023-07-30T02:27:13.488Z] CLI Version:   12.4.3
-[debug] [2023-07-30T02:27:13.488Z] Platform:      win32
-[debug] [2023-07-30T02:27:13.488Z] Node Version:  v20.4.0
-[debug] [2023-07-30T02:27:13.488Z] Time:          Sat Jul 29 2023 23:27:13 GMT-0300 (Horário Padrão de Brasília)
-[debug] [2023-07-30T02:27:13.488Z] ----------------------------------------------------------------------
+[debug] [2023-08-01T04:31:05.745Z] ----------------------------------------------------------------------
+[debug] [2023-08-01T04:31:05.751Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Luís\Documents\zzz\lets_talk\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2023-08-01T04:31:05.752Z] CLI Version:   12.4.3
+[debug] [2023-08-01T04:31:05.753Z] Platform:      win32
+[debug] [2023-08-01T04:31:05.753Z] Node Version:  v20.4.0
+[debug] [2023-08-01T04:31:05.753Z] Time:          Tue Aug 01 2023 01:31:05 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2023-08-01T04:31:05.753Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-07-30T02:27:13.504Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
-[debug] [2023-07-30T02:27:13.714Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-07-30T02:27:13.715Z] > authorizing via signed-in user (luis.passos013@gmail.com)
-[debug] [2023-07-30T02:27:14.040Z] java version "20.0.1" 2023-04-18
+[debug] [2023-08-01T04:31:05.774Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-08-01T04:31:05.979Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-01T04:31:05.980Z] > authorizing via signed-in user (luis.passos013@gmail.com)
+[debug] [2023-08-01T04:31:06.437Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-08-01T04:31:06.438Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2023-08-01T04:31:06.560Z] java version "20.0.1" 2023-04-18
 
-[debug] [2023-07-30T02:27:14.041Z] Java(TM) SE Runtime Environment (build 20.0.1+9-29)
+[debug] [2023-08-01T04:31:06.560Z] Java(TM) SE Runtime Environment (build 20.0.1+9-29)
 Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
 
-[debug] [2023-07-30T02:27:14.063Z] Parsed Java major version: 20
+[debug] [2023-08-01T04:31:06.576Z] Parsed Java major version: 20
 [info] i  emulators: Starting emulators: auth, firestore, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, storage"}}
-[debug] [2023-07-30T02:27:14.091Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-30T02:27:14.091Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-30T02:27:14.091Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-30T02:27:14.091Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-30T02:27:14.091Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-07-30T02:27:14.092Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-08-01T04:31:06.602Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T04:31:06.602Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T04:31:06.602Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T04:31:06.603Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T04:31:06.603Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T04:31:06.603Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8283}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
 [warn] !  emulators: It seems that you are running multiple instances of the emulator suite for project let-s-talk-tests. This may result in unexpected behavior. 
-[debug] [2023-07-30T02:27:14.219Z] [hub] writing locator at C:\Users\LUS~1\AppData\Local\Temp\hub-let-s-talk-tests.json
-[debug] [2023-07-30T02:27:14.228Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
-[debug] [2023-07-30T02:27:14.228Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2023-08-01T04:31:06.712Z] [hub] writing locator at C:\Users\LUS~1\AppData\Local\Temp\hub-let-s-talk-tests.json
 [warn] !  firestore: Cloud Firestore Emulator does not support multiple databases yet. {"metadata":{"emulator":{"name":"firestore"},"message":"Cloud Firestore Emulator does not support multiple databases yet."}}
 [warn] !  firestore: Did not find a Cloud Firestore rules file specified in a firebase.json config file. {"metadata":{"emulator":{"name":"firestore"},"message":"Did not find a Cloud Firestore rules file specified in a firebase.json config file."}}
 [warn] !  firestore: The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"firestore"},"message":"The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
-[debug] [2023-07-30T02:27:14.277Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-30T02:27:14.278Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
-[debug] [2023-07-30T02:27:14.278Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","let-s-talk-tests","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"let-s-talk-tests\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[debug] [2023-08-01T04:31:06.731Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-01T04:31:06.732Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-08-01T04:31:06.732Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8283,"--websocket_port",9150,"--project_id","let-s-talk-tests","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8283,\"--websocket_port\",9150,\"--project_id\",\"let-s-talk-tests\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
 [info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
-[debug] [2023-07-30T02:27:28.109Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-07-30T02:27:29.459Z] Temp file directory for storage emulator: C:\Users\LUS~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\LUS~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
-[debug] [2023-07-30T02:27:29.502Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-07-30T02:27:29.503Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-07-30T02:27:29.503Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Luís\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[debug] [2023-08-01T04:31:20.913Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-01T04:31:25.659Z] Temp file directory for storage emulator: C:\Users\LUS~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\LUS~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[debug] [2023-08-01T04:31:25.708Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-01T04:31:25.709Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-01T04:31:25.709Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Luís\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2023-07-30T02:27:29.939Z] Web / API server started at 127.0.0.1:4000
+[debug] [2023-08-01T04:31:26.287Z] Web / API server started at 127.0.0.1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
-[debug] [2023-07-30T02:27:29.940Z] Web / API server started at ::1:4000
+[debug] [2023-08-01T04:31:26.288Z] Web / API server started at ::1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
 [info] 
 ┌─────────────────────────────────────────────────────────────┐
@@ -329,7 +118,70 @@ Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
 ├────────────────┼────────────────┼─────────────────────────────────┤
 │ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
 ├────────────────┼────────────────┼─────────────────────────────────┤
-│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+│ Firestore      │ 127.0.0.1:8283 │ http://127.0.0.1:4000/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2023-08-01T22:33:24.175Z] ----------------------------------------------------------------------
+[debug] [2023-08-01T22:33:24.179Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Luís\Documents\zzz\lets_talk\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2023-08-01T22:33:24.179Z] CLI Version:   12.4.3
+[debug] [2023-08-01T22:33:24.179Z] Platform:      win32
+[debug] [2023-08-01T22:33:24.180Z] Node Version:  v20.4.0
+[debug] [2023-08-01T22:33:24.180Z] Time:          Tue Aug 01 2023 19:33:24 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2023-08-01T22:33:24.180Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-01T22:33:24.382Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-01T22:33:24.384Z] > authorizing via signed-in user (luis.passos013@gmail.com)
+[debug] [2023-08-01T22:33:24.696Z] java version "20.0.1" 2023-04-18
+
+[debug] [2023-08-01T22:33:24.697Z] Java(TM) SE Runtime Environment (build 20.0.1+9-29)
+Java HotSpot(TM) 64-Bit Server VM (build 20.0.1+9-29, mixed mode, sharing)
+
+[debug] [2023-08-01T22:33:24.723Z] Parsed Java major version: 20
+[info] i  emulators: Starting emulators: auth, firestore, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, storage"}}
+[debug] [2023-08-01T22:33:24.753Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T22:33:24.755Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T22:33:24.755Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T22:33:24.755Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T22:33:24.755Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-08-01T22:33:24.756Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8283}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[warn] !  emulators: It seems that you are running multiple instances of the emulator suite for project let-s-talk-tests. This may result in unexpected behavior. 
+[debug] [2023-08-01T22:33:24.867Z] [hub] writing locator at C:\Users\LUS~1\AppData\Local\Temp\hub-let-s-talk-tests.json
+[warn] !  firestore: Cloud Firestore Emulator does not support multiple databases yet. {"metadata":{"emulator":{"name":"firestore"},"message":"Cloud Firestore Emulator does not support multiple databases yet."}}
+[warn] !  firestore: Did not find a Cloud Firestore rules file specified in a firebase.json config file. {"metadata":{"emulator":{"name":"firestore"},"message":"Did not find a Cloud Firestore rules file specified in a firebase.json config file."}}
+[warn] !  firestore: The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"firestore"},"message":"The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
+[debug] [2023-08-01T22:33:24.899Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-01T22:33:24.900Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-08-01T22:33:24.900Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Luís\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.18.1.jar","--host","127.0.0.1","--port",8283,"--websocket_port",9150,"--project_id","let-s-talk-tests","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.18.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8283,\"--websocket_port\",9150,\"--project_id\",\"let-s-talk-tests\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2023-08-01T22:33:39.214Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-01T22:33:41.409Z] Temp file directory for storage emulator: C:\Users\LUS~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\LUS~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[debug] [2023-08-01T22:33:41.444Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-08-01T22:33:41.445Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-08-01T22:33:41.445Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Luís\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Luís\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2023-08-01T22:33:41.932Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2023-08-01T22:33:41.932Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8283 │ http://127.0.0.1:4000/firestore │
 ├────────────────┼────────────────┼─────────────────────────────────┤
 │ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
 └────────────────┴────────────────┴─────────────────────────────────┘

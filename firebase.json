@@ -5,7 +5,7 @@
   "emulators": {
     "singleProjectMode": true,
     "firestore": {
-      "port": 8080
+      "port": 8283
     },
     "auth": {
       "port": 9099
